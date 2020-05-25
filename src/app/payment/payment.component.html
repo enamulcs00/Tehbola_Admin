@@ -1,0 +1,181 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Payment</h1>
+                    <!-- <div class="right_side_buttons">
+                        <a (click)="goTomanageEarning()">Manage Earning</a> 
+                        <a (click)="goTorefund()">Refund</a> 
+                    </div> -->
+                </div>
+                <div class="outer_table">
+                <div class="search_fields">
+                    <div class="filters Booking_status">
+                        <label>Filter</label>
+                        <select>
+                            <option>All</option>
+                            <option>Name</option>
+                        </select>
+                    </div>
+                    <div class="search_inner_fiels">
+                        <div class="filters Booking_status">
+                            <label>Search</label>
+                            <div class="search_with_icons">
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" name="search" placeholder="">
+                                </mat-form-field>
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            
+                            <th>Vendor name </th>
+                            <th>Total payable amount </th>
+                            <th>Last paid amount</th>
+                            <th>Action</th>
+                           
+                        </tr>
+                        <tr>
+                            
+                            <td>John</td>
+                            <td>$20.00</td>
+                            <td>28-04-2020</td>
+                            <td class="Booking_status">
+                                <a class="accept_button" data-toggle="modal"
+                                data-target="#pay_now">Pay Now</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>John</td>
+                            <td>$20.00</td>
+                            <td>28-04-2020</td>
+                            <td class="Booking_status">
+                                <a class="accept_button" data-toggle="modal"
+                                data-target="#pay_now">Pay Now</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>John</td>
+                            <td>$20.00</td>
+                            <td>28-04-2020</td>
+                            <td class="Booking_status">
+                                <a class="accept_button" data-toggle="modal"
+                                data-target="#pay_now">Pay Now</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>John</td>
+                            <td>$20.00</td>
+                            <td>28-04-2020</td>
+                            <td class="Booking_status">
+                                <a class="accept_button" data-toggle="modal"
+                                data-target="#pay_now">Pay Now</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>John</td>
+                            <td>$20.00</td>
+                            <td>28-04-2020</td>
+                            <td class="Booking_status">
+                                <a class="accept_button" data-toggle="modal"
+                                data-target="#pay_now">Pay Now</a>
+                            </td>
+                        </tr>
+            
+                        <!-- <tr>
+                            <td>4</td>
+                            <td>Jhon</td>
+                            <td>Jhon@gmail.com</td>
+                            <td>12345678</td>
+                            <td class="Booking_status">
+                                <select>
+                                    <option value="">Gateway</option>
+                                    <option value="">Card</option>
+                                </select>
+                            </td>
+                            <td>1000$</td>
+                            <td>1000$</td>
+                        </tr> -->
+
+                    </table>
+                </div>
+                </div>
+                <!-----start pagination-->
+                <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+                </mat-paginator>
+                <!-----end pagination-->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal define loaction edit state  -->
+<!-- <div id="pay_now" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+    <div class="modal-content"> -->
+    <!-- <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div> -->
+    <!-- <div class="modal-body">
+    <h3>Payment Method</h3>
+    
+    <div class="row">
+    <div class="form-group">
+        <div class=" col-md-6">
+    <label for="title">Card Holder Name </label>
+    <div class="input-group">
+    <input class="form-control" type="text" value="" name="Name">
+    </div>
+    </div>
+    <div class=" col-md-6">
+        <label for="title">Card Number </label>
+        <div class="input-group">
+        <input class="form-control" type="text" value="" name="Name">
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <div class=" col-md-6">
+        <label for="title">Expiration (mm/yy) 
+        </label>
+        <div class="input-group">
+        <input class="form-control" type="text" value="" name="Name">
+        </div>
+        </div>
+        <div class=" col-md-6">
+            <label for="title">Security Code </label>
+            <div class="input-group">
+            <input class="form-control" type="text" value="" name="Name">
+            </div>
+            </div>
+        </div>
+        </div>
+    
+
+    <div class="model_buttons">
+    <button class="mat-raised-button mat-primary mr-3">
+    Save
+    </button>
+    <button class="mat-raised-button mat-warn" data-dismiss="modal">Close</button>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div> -->
+    <!--Modal define loaction edit state -->

@@ -1,0 +1,101 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Edit User</h1>
+                    <a (click)="goTomanageUser()">Back To List</a>
+                </div>
+                <!-----start input fields------>
+                <div class="add_user_list">
+                    <ul>
+                        <li>
+                            <label>User Name<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="" name="name" value="Rohit" disabled name="name">
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>User Address<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="" name="name" value="Lorem ipsum" disabled name="name">
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>User Email<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="" name="name" value="rohit@gmail.com" disabled name="name">
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>User Phone number <span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="" name="name" value="0987654321" disabled name="name">
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>Status<span class="red">*</span></label>
+                            <mat-form-field>
+                                <mat-select>
+                                    <mat-option *ngFor="let Ready of pick" [value]="Ready.value">
+                                        {{Ready.viewValue}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>Number of Order <span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="" name="name" value="50" disabled name="name">
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>Completed Order <span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="" name="name" value="20" disabled name="name">
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>Rejected Order <span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="" name="name" value="40" disabled name="name">
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>Total amount paid <span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="" name="name" value="$200" disabled name="name">
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>Last order at
+                                <span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="" name="name" value="28-05-2020" disabled name="name">
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>Last product purchased
+                                <span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="" name="name" value="28-04-2020" disabled name="name">
+                            </mat-form-field>
+                        </li>
+                    </ul>
+                    <div class="update_button">
+                        <button mat-button>
+                            Update
+                        </button>
+                        <button mat-button class="cancel_button">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+                <!-----End input fields------>
+       
+            </div>
+        </div>
+    </div>
+</div>

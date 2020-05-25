@@ -1,0 +1,178 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Vendor Management</h1>
+                    <div class="top_subheading_add">
+                        <a (click)="goToaddVender()"><span>+</span>Add Vendor</a>
+                    </div>
+                </div>
+                <div class="outer_table">
+                <div class="search_fields">
+                    <div class="filters Booking_status">
+                        <label>Filter</label>
+                        <select>
+                            <option>All</option>
+                            <option>Name</option>
+                        </select>
+                    </div>
+                    <div class="search_inner_fiels">
+                        <div class="filters Booking_status">
+                            <label>Search</label>
+                            <div class="search_with_icons">
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" name="search" placeholder="">
+                                </mat-form-field>
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                           
+                            <th>Vendor Name</th>
+                            <th>Vendor Address</th>
+                            <th>Vendor Phone Number </th>
+                            <th>Vendor Email ID</th>
+                            <th>Category and Sub Category Allocated</th>
+                            <th>Status </th>
+                            <th>Vendor SKUN Number</th>
+                            <th>Vendor Product List</th>
+                            <th>Total number of order</th>
+                            <th>Total revenue generated</th>
+                           
+                            <!-- <th class="action_bx">Action</th> -->
+                        </tr>
+                        <tr>
+                        
+                            <td>John</td>
+                            <td>lorem ipsum lorem ipsum</td>
+                            <td>9087654321</td>
+                            <td>john@gmail.com</td>
+                            <td>Lorem</td>
+                            <td>
+
+                                <select>
+                                    <option>Pending</option>
+                                    <option>Active </option>
+                                    <option>Inactive </option>
+                                </select>
+                                </td>
+                            <td>52623</td>
+                            <td class="Booking_status"  (click)="goToproduct()">
+                                <a  class="accept_button">View List</a></td>
+                            <td>50</td>
+                            <td>$69</td>
+                            <!-- <td>
+                                <div class="action">
+                                    <ul>
+                                        <li class="show" (click)="goToviewVendor()"><i class="fa fa-eye"></i></li>
+                                        <li class="edit" (click)="goToeditVendor()"><i class="fa fa-pencil fa-fw"></i></li>
+                                        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
+                                    </ul>
+                                </div>
+                            </td> -->
+                        </tr>
+                        <tr>
+                        
+                            <td>pankaj</td>
+                            <td>lorem ipsum lorem ipsum</td>
+                            <td>9087654321</td>
+                            <td>john@gmail.com</td>
+                            <td>Lorem</td>
+                            <td>
+
+                                <select>
+                                    <option>Pending</option>
+                                    <option>Active </option>
+                                    <option>Inactive </option>
+                                </select>
+                                </td>
+                            <td>52623</td>
+                            <td class="Booking_status" (click)="goToproduct()">
+                                <a  class="accept_button">View List</a></td>
+                            <td>50</td>
+                            <td>$60</td>
+                        </tr>
+                        <tr>
+                        
+                            <td>priya</td>
+                            <td>lorem ipsum lorem ipsum</td>
+                            <td>9087654321</td>
+                            <td>john@gmail.com</td>
+                            <td>Lorem</td>
+                            <td>
+
+                                <select>
+                                    <option>Pending</option>
+                                    <option>Active </option>
+                                    <option>Inactive </option>
+                                </select>
+                                </td>
+                            <td>52623</td>
+                            <td class="Booking_status"  (click)="goToproduct()">
+                                <a  class="accept_button">View List</a></td>
+                            <td>50</td>
+                            <td>$70</td>
+                        </tr>
+                        <tr>
+                        
+                            <td>Lorem</td>
+                            <td>lorem ipsum lorem ipsum</td>
+                            <td>9087654321</td>
+                            <td>john@gmail.com</td>
+                            <td>Lorem</td>
+                            <td>
+
+                                <select>
+                                    <option>Pending</option>
+                                    <option>Active </option>
+                                    <option>Inactive </option>
+                                </select>
+                                </td>
+                            <td>52623</td>
+                            <td class="Booking_status"  (click)="goToproduct()">
+                                <a  class="accept_button">View List</a></td>
+                            <td>50</td>
+                            <td>$90</td>
+                        </tr>
+                        <tr>
+                        
+                            <td>Lorem</td>
+                            <td>lorem ipsum lorem ipsum</td>
+                            <td>9087654321</td>
+                            <td>john@gmail.com</td>
+                            <td>Lorem</td>
+                            <td>
+
+                                <select>
+                                    <option>Pending</option>
+                                    <option>Active </option>
+                                    <option>Inactive </option>
+                                </select>
+                                </td>
+                            <td>52623</td>
+                            <td class="Booking_status"  (click)="goToproduct()">
+                                <a  class="accept_button">View List</a></td>
+                            <td>50</td>
+                            <td>$80</td>
+                        </tr>
+                       
+                    </table>
+                </div>
+                </div>
+                <!-----start pagination-->
+                <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+                </mat-paginator>
+                <!-----end pagination-->
+
+            </div>
+        </div>
+    </div>
+</div>

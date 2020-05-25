@@ -1,0 +1,324 @@
+<div id="wrapper">
+
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Dashboard</h1>
+                </div>
+                <div class="inner_data">
+                    <div class="dashboard_boxs">
+                        <div class="card border-left-primary shadow">
+                            <div class="card-body" (click)="goTosalesgraph()">
+                                <div class="left_card">
+                                    <div class="left_heading">
+                                        <h3> Sales</h3>
+                                    </div>
+                                    <div class="bottom_numbers">
+                                        <p>40,000</p>
+                                    </div>
+                                </div>
+                                <div class="right_card">
+                                    <i class="fa fa-user fa-2x"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card border-left-success shadow">
+                            <div class="card-body">
+                                <div class="left_card">
+                                    <div class="left_heading">
+                                        <h3>Vendors</h3>
+                                    </div>
+                                    <div class="bottom_numbers">
+                                        <p>215,000</p>
+                                    </div>
+                                </div>
+                                <div class="right_card">
+                                    <i class="fa fa-product-hunt fa-2x" aria-hidden="true"></i>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card border-left-info shadow">
+                            <div class="card-body"  (click)="goToreveuegraph()">
+                                <div class="left_card">
+                                    <div class="left_heading">
+                                        <h3>Revenue</h3>
+                                    </div>
+                                    <div class="bottom_numbers">
+                                        <p>215,000</p>
+                                    </div>
+                                </div>
+                                <div class="right_card">
+                                    <i class="fa fa-line-chart fa-2x"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                
+
+                    </div>
+                </div>
+                <div class="charts">
+                    <ul>
+                        <li>
+                            <div class="chart_title">
+                                <p>Sales</p>
+                                <div class="filters Booking_status">
+                                    <label>Filter</label>
+                                    <select>
+                                        <option>Daily</option>
+                                        <option>Weekly</option>
+                                        <option>Monthly</option>
+                                        <option>Yearly</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="user_charts">
+                                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                                    [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend"
+                                    [chartType]="barChartType">
+                                </canvas>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="chart_title">
+                                <p>Vendors</p>
+                                <div class="filters Booking_status">
+                                    <label>Filter</label>
+                                    <select>
+                                        <option>Daily</option>
+                                        <option>Weekly</option>
+                                        <option>Monthly</option>
+                                        <option>Yearly</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="user_charts">
+                                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                                    [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend"
+                                    [chartType]="barChartType">
+                                </canvas>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="chart_title">
+                                <p>Revenue</p>
+                                <div class="filters Booking_status">
+                                    <label>Filter</label>
+                                    <select>
+                                        <option>Daily</option>
+                                        <option>Weekly</option>
+                                        <option>Monthly</option>
+                                        <option>Yearly</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="user_charts">
+                                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                                    [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend"
+                                    [chartType]="barChartType">
+                                </canvas>
+                            </div>
+                        </li>
+                        <!-- <li>
+                            <div class="chart_title">
+                                <p>Current Order listing</p>
+                            </div>
+                            <div class="user_charts">
+                                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                                    [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend"
+                                    [chartType]="barChartType">
+                                </canvas>
+                            </div>
+                        </li> -->
+                    </ul>
+                </div>
+
+                <div class="current_Admins">
+                    <div class="sub_heading">
+                        <h1>Current Sales </h1>
+                        <!-- <div class="top_subheading_add">
+                            <a (click)="goToaddinventory()"><span>+</span>Add Inventory</a>
+                        </div> -->
+                    </div>
+                    <div class="outer_table">
+                        <div class="search_fields">
+                            <div class="filters Booking_status">
+                                <label>Filter</label>
+                                <select>
+                                    <option>Product Name</option>
+                                    <option>Order Id</option>
+                                </select>
+                            </div>
+                            <div class="search_inner_fiels">
+                                <div class="filters Booking_status">
+                                    <label>Search</label>
+                                    <div class="search_with_icons">
+                                        <mat-form-field [floatLabel]="'never'">
+                                            <input matInput type="text" name="search" placeholder="">
+                                        </mat-form-field>
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table>
+                                <tr>
+                                    <th>Order Id</th>
+                                    <th>Product Name</th>
+                                    <th>Product sub category</th>
+                                    <th>Product category</th>
+                                    <th>SKUN number</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>User name</th>
+                                    <th>User Address</th>
+                                    <th>Order Date</th>
+                                    <th>Delivery Date</th>
+                                    <th>Status</th>
+                                    <th class="action_bx">Action</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>ABC</td>
+                                    <td>Industry</td>
+                                    <td>Food Industry</td>
+                                    <td>13143543</td>
+                                    <td>20 piece</td>
+                                    <td>$800</td>
+                                    <td>John</td>
+                                    <td>Lorem ipsum</td>
+                                    <td>28-05-2020</td>
+                                    <td>01-06-2020</td>
+                                    <td>
+
+                                        <select>
+                                            <option>Pending</option>
+                                            <option>Confirmed</option>
+                                            <option>cancelled</option>
+                                        </select>
+                                        </td>
+                                
+                                        <td>
+                                            <div class="action">
+                                                <ul>
+                                                    <li class="show" (click)="goToviewOrder()"><i class="fa fa-eye"></i></li>
+                                                    <li class="edit" (click)="goToeditOrder()"><i class="fa fa-pencil fa-fw"></i></li>
+                                                    <!-- <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li> -->
+                                                </ul>
+                                            </div>
+                                        </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Lorem</td>
+                                    <td>Industry</td>
+                                    <td>Food Industry</td>
+                                    <td>13143543</td>
+                                    <td>20 piece</td>
+                                    <td>$800</td>
+                                    <td>John</td>
+                                    <td>Lorem ipsum</td>
+                                    <td>28-05-2020</td>
+                                    <td>01-06-2020</td>
+                                    <td>
+
+                                        <select>
+                                            <option>Pending</option>
+                                            <option>Confirmed</option>
+                                            <option>cancelled</option>
+                                        </select>
+                                        </td>
+                                
+                                        <td>
+                                            <div class="action">
+                                                <ul>
+                                                    <li class="show" (click)="goToviewOrder()"><i class="fa fa-eye"></i></li>
+                                                    <li class="edit" (click)="goToeditOrder()"><i class="fa fa-pencil fa-fw"></i></li>
+                                                    <!-- <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li> -->
+                                                </ul>
+                                            </div>
+                                        </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>ABC</td>
+                                    <td>Industry</td>
+                                    <td>Food Industry</td>
+                                    <td>13143543</td>
+                                    <td>20 piece</td>
+                                    <td>$800</td>
+                                    <td>John</td>
+                                    <td>Lorem ipsum</td>
+                                    <td>28-05-2020</td>
+                                    <td>01-06-2020</td>
+                                    <td>
+
+                                        <select>
+                                            <option>Pending</option>
+                                            <option>Confirmed</option>
+                                            <option>cancelled</option>
+                                        </select>
+                                        </td>
+                                
+                                        <td>
+                                            <div class="action">
+                                                <ul>
+                                                    <li class="show" (click)="goToviewOrder()"><i class="fa fa-eye"></i></li>
+                                                    <li class="edit" (click)="goToeditOrder()"><i class="fa fa-pencil fa-fw"></i></li>
+                                                    <!-- <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li> -->
+                                                </ul>
+                                            </div>
+                                        </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>ABC</td>
+                                    <td>Industry</td>
+                                    <td>Food Industry</td>
+                                    <td>13143543</td>
+                                    <td>20 piece</td>
+                                    <td>$800</td>
+                                    <td>John</td>
+                                    <td>Lorem ipsum</td>
+                                    <td>28-05-2020</td>
+                                    <td>01-06-2020</td>
+                                    <td>
+                                        <select>
+                                            <option>Pending</option>
+                                            <option>Confirmed</option>
+                                            <option>cancelled</option>
+                                        </select>
+                                        </td>
+                                
+                                        <td>
+                                            <div class="action">
+                                                <ul>
+                                                    <li class="show" (click)="goToviewOrder()"><i class="fa fa-eye"></i></li>
+                                                    <li class="edit" (click)="goToeditOrder()"><i class="fa fa-pencil fa-fw"></i></li>
+                                                    <!-- <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li> -->
+                                                </ul>
+                                            </div>
+                                        </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!-----start pagination-->
+                    <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+                    </mat-paginator>
+                    <!-----end pagination-->
+    
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

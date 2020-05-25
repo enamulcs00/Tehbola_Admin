@@ -1,0 +1,108 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Add Discount</h1>
+                    <a (click)="goToofferdeals()">Back To List</a>
+                </div>
+                <!-----start input fields------>
+                <div class="add_user_list">
+                    <ul>
+                        <li>
+                            <label>Select Category<span class="red">*</span></label>
+                            <mat-form-field>
+                                <mat-select>
+                                    <mat-option *ngFor="let Ready of pick" [value]="Ready.value">
+                                        {{Ready.viewValue}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>Select Sub Category<span class="red">*</span></label>
+                            <mat-form-field>
+                                <mat-select>
+                                    <mat-option *ngFor="let Ready of pick" [value]="Ready.value">
+                                        {{Ready.viewValue}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>Select Vendor<span class="red">*</span></label>
+                            <mat-form-field>
+                                <mat-select>
+                                    <mat-option *ngFor="let Ready of pick" [value]="Ready.value">
+                                        {{Ready.viewValue}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label> Discount <span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="" name="name">
+                            </mat-form-field>
+                        </li>
+                        <!-- <li>
+                            <label>Timeline for Discount<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="date" placeholder="" name="name">
+                            </mat-form-field>
+                        </li> -->
+                        <li>
+                            <label>Start Date <span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="date" placeholder="" name="name">
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>End Date <span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="date" placeholder="" name="name">
+                            </mat-form-field>
+                        </li>
+                        <li class="banner_image">
+                            <label>Add Banner image</label>
+                            <div class="product_image_upload">
+                                <input type='file' (change)="readUrl($event)" placeholder="choosefile"
+                                    class="images_uploader">
+                                <span>Choose File</span>
+                            </div>
+                            <!-- <div class="show_product_imges">
+                                <span>
+                                    <figure>
+                                        <img src="../../assets/images/makeup.png" alt="">
+                                    </figure>
+                                </span>
+                                <span>
+                                    <figure>
+                                        <img src="../../assets/images/makeup.png" alt="">
+                                    </figure>
+                                </span>
+
+
+                            </div> -->
+                        </li>
+
+                       
+                    </ul>
+                    <div class="update_button">
+                        <button mat-button>
+                            <span><i class="fa fa-window-restore"></i>
+                            </span>
+                            Add
+                        </button>
+                    </div>
+                </div>
+
+               
+                <!-----End input fields------>
+                
+            </div>
+        </div>
+    </div>
+</div>

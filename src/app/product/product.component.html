@@ -1,0 +1,165 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Walmart Products</h1>
+                    <div class="right_side_buttons">
+                        
+                        <a (click)="goTovenderManagement()">Back To List</a> 
+                    </div>
+                </div>
+                <div class="outer_table">
+                <div class="search_fields">
+                    <div class="filters Booking_status">
+                        <label>Filter</label>
+                        <select>
+                            <option>Product Name</option>
+                            <option>Order Id</option>
+                        </select>
+                    </div>
+                    <div class="search_inner_fiels">
+                        <div class="filters Booking_status">
+                            <label>Search</label>
+                            <div class="search_with_icons">
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" name="search" placeholder="">
+                                </mat-form-field>
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Product Image</th>
+                            <th>Product Name</th>
+                            <th>Product Sub Category</th>
+                            <th>Product Category</th>
+                            <th>Product SKUN number</th>
+                            <th>Product Quantity</th>
+                            <th>Product Minimum quantity</th>
+                            <th>Product Cost</th>
+                            <th>Product Description</th>
+                            <!-- <th class="action_bx">Action</th> -->
+                        </tr>
+
+                        <tr>
+                            <td>1</td>
+                            <td class="product_img">
+                                <figure>
+                                    <img src="../../assets/images/makeup.png" alt="">
+                                </figure>
+                            </td>
+                            <td>Test</td>
+                            <td>Lorem</td>
+                            <td>Lorem ipsum</td>
+                            <td>45454</td>
+                            <td>10 piece</td>
+                            <td>20 piece</td>
+                            <td>$500</td>
+                            <td>--------</td>
+                            <!-- <td>
+                                <div class="action">
+                                    <ul>
+                                        <li class="show" (click)="goToviewProduct()"><i class="fa fa-eye"></i></li>
+                                        <li class="edit" (click)="goToeditProduct()"><i class="fa fa-pencil fa-fw"></i></li>
+                                        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
+                                    </ul>
+                                </div>
+                            </td> -->
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td class="product_img">
+                                <figure>
+                                    <img src="../../assets/images/makeup.png" alt="">
+                                </figure>
+                            </td>
+                            <td>Test</td>
+                            <td>Lorem</td>
+                            <td>Lorem ipsum</td>
+                            <td>45454</td>
+                            <td>10 piece</td>
+                            <td>20 piece</td>
+                            <td>$500</td>
+                            <td>--------</td>
+                            <!-- <td>
+                                <div class="action">
+                                    <ul>
+                                        <li class="show" (click)="goToviewProduct()"><i class="fa fa-eye"></i></li>
+                                        <li class="edit" (click)="goToeditProduct()"><i class="fa fa-pencil fa-fw"></i></li>
+                                        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
+                                    </ul>
+                                </div>
+                            </td> -->
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td class="product_img">
+                                <figure>
+                                    <img src="../../assets/images/makeup.png" alt="">
+                                </figure>
+                            </td>
+                            <td>Test</td>
+                            <td>Lorem</td>
+                            <td>Lorem ipsum</td>
+                            <td>45454</td>
+                            <td>10 piece</td>
+                            <td>20 piece</td>
+                            <td>$500</td>
+                            <td>--------</td>
+                            <!-- <td>
+                                <div class="action">
+                                    <ul>
+                                        <li class="show" (click)="goToviewProduct()"><i class="fa fa-eye"></i></li>
+                                        <li class="edit" (click)="goToeditProduct()"><i class="fa fa-pencil fa-fw"></i></li>
+                                        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
+                                    </ul>
+                                </div>
+                            </td> -->
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td class="product_img">
+                                <figure>
+                                    <img src="../../assets/images/makeup.png" alt="">
+                                </figure>
+                            </td>
+                            <td>Test</td>
+                            <td>Lorem</td>
+                            <td>Lorem ipsum</td>
+                            <td>45454</td>
+                            <td>10 piece</td>
+                            <td>20 piece</td>
+                            <td>$500</td>
+                            <td>--------</td>
+                            <!-- <td>
+                                <div class="action">
+                                    <ul>
+                                        <li class="show" (click)="goToviewProduct()"><i class="fa fa-eye"></i></li>
+                                        <li class="edit" (click)="goToeditProduct()"><i class="fa fa-pencil fa-fw"></i></li>
+                                        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
+                                    </ul>
+                                </div>
+                            </td> -->
+                        </tr>
+
+
+                    </table>
+                </div>
+                </div>
+                <!-----start pagination-->
+                <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+                </mat-paginator>
+                <!-----end pagination-->
+
+            </div>
+        </div>
+    </div>
+</div>

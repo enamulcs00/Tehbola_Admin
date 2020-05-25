@@ -1,0 +1,44 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>View Vendor</h1>
+                    <a (click)="goTovendermanagement()">Back To List</a>
+                </div>
+                <!-----start input fields------>
+                <div class="add_user_list">
+                    <ul>
+                        <li>
+                            <label>Vendor Name<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="" disabled name="name" value="John">
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>Email Id<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="email" placeholder="" disabled name="name" value="john@gmail.com">
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>Vendor Contact<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="" disabled name="name" value="9087654321">
+                            </mat-form-field>
+                        </li>
+                        
+                        <li>
+                            <label>Vendor Address<span class="red">*</span></label>
+                            <mat-form-field class="example-full-width" class="textarea_kandil">
+                                <textarea matInput placeholder="" disabled value="Mohali, Punjab"></textarea>
+                            </mat-form-field>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

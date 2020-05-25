@@ -1,0 +1,130 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Inventory Management</h1>
+                </div>
+                <div class="search_fields">
+                    <div class="filters Booking_status">
+                        <label>Filter</label>
+                        <select>
+                            <option>All</option>
+                            <option>Name</option>
+                        </select>
+                    </div>
+                    <div class="search_inner_fiels">
+                        <div class="filters Booking_status">
+                            <label>Search</label>
+                            <div class="search_with_icons">
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" name="search" placeholder="">
+                                </mat-form-field>
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <th>Product Id</th>
+                            <th>Product Name</th>
+                            <th>Product Cost</th>
+                            <th>Required quantity</th>
+                            <th>Current quantity</th>
+                            <th class="action_bx">Action</th>
+                        </tr>
+
+                        <tr>
+                            <td>1</td>
+                            <td>Test</td>
+                            <td class="product_cost">10$</td>
+                            <td class="product_quanity">10 piece</td>
+                            <td>20 piece</td>
+                            <td>
+                                <div class="action">
+                                    <ul>
+                                        <li class="show" (click)="goToviewinventory()"><i class="fa fa-eye"></i></li>
+                                        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Test</td>
+                            <td class="product_cost">10$</td>
+                            <td class="product_quanity">10 piece</td>
+                            <td>20 piece</td>
+                            <td>
+                                <div class="action">
+                                    <ul>
+                                        <li class="show" (click)="goToviewinventory()"><i class="fa fa-eye"></i></li>
+                                        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Test</td>
+                            <td class="product_cost">10$</td>
+                            <td class="product_quanity">10 piece</td>
+                            <td>20 piece</td>
+                            <td>
+                                <div class="action">
+                                    <ul>
+                                        <li class="show" (click)="goToviewinventory()"><i class="fa fa-eye"></i></li>
+                                        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Test</td>
+                            <td class="product_cost">10$</td>
+                            <td class="product_quanity">10 piece</td>
+                            <td>20 piece</td>
+                            <td>
+                                <div class="action">
+                                    <ul>
+                                        <li class="show" (click)="goToviewinventory()"><i class="fa fa-eye"></i></li>
+                                        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Test</td>
+                            <td class="product_cost">10$</td>
+                            <td class="product_quanity">10 piece</td>
+                            <td>20 piece</td>
+                            <td>
+                                <div class="action">
+                                    <ul>
+                                        <li class="show" (click)="goToviewinventory()"><i class="fa fa-eye"></i></li>
+                                        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+
+
+
+                    </table>
+                </div>
+                <!-----start pagination-->
+                <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+                </mat-paginator>
+                <!-----end pagination-->
+
+            </div>
+        </div>
+    </div>
+</div>
