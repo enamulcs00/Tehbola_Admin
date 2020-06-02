@@ -69,6 +69,12 @@ import { SalesgraphComponent } from './salesgraph/salesgraph.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
+import { VendorSalesReportComponent } from './vendor-sales-report/vendor-sales-report.component';
+import { ReportGraphComponent } from './report-graph/report-graph.component';
+import { TermofuseComponent } from './termofuse/termofuse.component';
+import { TermofsalesComponent } from './termofsales/termofsales.component';
+import { ConsumerprivacypolicyComponent } from './consumerprivacypolicy/consumerprivacypolicy.component';
+import { WarrantypolicyComponent } from './warrantypolicy/warrantypolicy.component';
 
 @NgModule({
   declarations: [
@@ -134,7 +140,13 @@ import { EditprofileComponent } from './editprofile/editprofile.component';
    PrivacypolicyComponent,
    ReturnpolicyComponent,
    VentorTComponent,
-   EditprofileComponent
+   EditprofileComponent,
+   VendorSalesReportComponent,
+   ReportGraphComponent,
+   TermofuseComponent,
+   TermofsalesComponent,
+   ConsumerprivacypolicyComponent,
+   WarrantypolicyComponent
       
   ],
   imports: [

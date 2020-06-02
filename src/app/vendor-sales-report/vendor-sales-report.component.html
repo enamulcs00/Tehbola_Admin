@@ -1,0 +1,124 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Vendor Sales Report</h1>
+                    <div class="top_subheading_add">
+                        <a (click)="goToreportGraph()">View Report Graph</a>
+                    </div>
+                </div>
+                <div class="outer_table">
+                <div class="search_fields">
+                    <div class="filters Booking_status">
+                        <label>Filter</label>
+                        <select>
+                            <option>All</option>
+                            <option>Name</option>
+                        </select>
+                    </div>
+                    <div class="search_inner_fiels">
+                        <div class="filters Booking_status">
+                            <label>Search</label>
+                            <div class="search_with_icons">
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" name="search" placeholder="">
+                                </mat-form-field>
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                           
+                            <th>Vendor Id</th>
+                            <th>Vendor Name</th>
+                            <th>Vendor Address</th>
+                            <th>Vendor Phone Number </th>
+                            <th>Vendor Email ID</th>
+                            <th>Vendor Product List</th>
+                            <th>Price</th>
+                        </tr>
+                        <tr>
+                        
+                            <td>1</td>
+                            <td>John</td>
+                            <td>lorem ipsum lorem ipsum</td>
+                            <td>9087654321</td>
+                            <td>john@gmail.com</td>
+                            <td class="Booking_status"  (click)="goToproduct()">
+                                <a  class="accept_button">View List</a></td>
+                            <td>$69</td>
+                        </tr>
+                        <tr>
+                        
+                            <td>2</td>
+                            <td>John</td>
+                            <td>lorem ipsum lorem ipsum</td>
+                            <td>9087654321</td>
+                            <td>john@gmail.com</td>
+                            <td class="Booking_status"  (click)="goToproduct()">
+                                <a  class="accept_button">View List</a></td>
+                            <td>$69</td>
+                        </tr>
+                        <tr>
+                        
+                            <td>3</td>
+                            <td>John</td>
+                            <td>lorem ipsum lorem ipsum</td>
+                            <td>9087654321</td>
+                            <td>john@gmail.com</td>
+                            <td class="Booking_status"  (click)="goToproduct()">
+                                <a  class="accept_button">View List</a></td>
+                            <td>$69</td>
+                        </tr>
+                        <tr>
+                        
+                            <td>4</td>
+                            <td>John</td>
+                            <td>lorem ipsum lorem ipsum</td>
+                            <td>9087654321</td>
+                            <td>john@gmail.com</td>
+                            <td class="Booking_status"  (click)="goToproduct()">
+                                <a  class="accept_button">View List</a></td>
+                            <td>$69</td>
+                        </tr>
+                        <tr>
+                        
+                            <td>5</td>
+                            <td>John</td>
+                            <td>lorem ipsum lorem ipsum</td>
+                            <td>9087654321</td>
+                            <td>john@gmail.com</td>
+                            <td class="Booking_status"  (click)="goToproduct()">
+                                <a  class="accept_button">View List</a></td>
+                            <td>$69</td>
+                        </tr>
+                        <tr>
+                        
+                            <td>6</td>
+                            <td>John</td>
+                            <td>lorem ipsum lorem ipsum</td>
+                            <td>9087654321</td>
+                            <td>john@gmail.com</td>
+                            <td class="Booking_status"  (click)="goToproduct()">
+                                <a  class="accept_button">View List</a></td>
+                            <td>$69</td>
+                        </tr>
+                    </table>
+                </div>
+                </div>
+                <!-----start pagination-->
+                <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+                </mat-paginator>
+                <!-----end pagination-->
+
+            </div>
+        </div>
+    </div>
+</div>

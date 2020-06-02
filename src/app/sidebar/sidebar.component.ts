@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as js from '../../assets/js/custom';
 import { Router } from '@angular/router';
+import { throwMatDuplicatedDrawerError } from '@angular/material';
 declare var $: any;
 @Component({
   selector: 'app-sidebar',
@@ -114,16 +115,29 @@ export class SidebarComponent implements OnInit {
   goTocontactus(){
     this.router.navigate(['contactus'])
   }  
-  goToprivacypolicy(){
+  /*goToprivacypolicy(){
     this.router.navigate(['privacypolicy'])
-  }  
+  }  */
   goToreturnpolicy(){
     this.router.navigate(['returnpolicy'])
   }  
   goToventorT(){
     this.router.navigate(['ventorT'])
   }  
-
-  
+  goTovendorSalesReport(){
+    this.router.navigate(['vendorSalesReport'])
+  }
+  goTotermofuse(){
+    this.router.navigate(['termofuse'])
+  }
+  goTotermofsales(){
+    this.router.navigate(['termofsales'])
+  }
+  goToconsumerprivacypolicy(){
+    this.router.navigate(['consumerprivacypolicy'])
+  }
+  goTowarrantypolicy(){
+    this.router.navigate(['warrantypolicy'])
+  }
 }
 

@@ -61,6 +61,12 @@ import { SalesgraphComponent } from './salesgraph/salesgraph.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
+import { VendorSalesReportComponent } from './vendor-sales-report/vendor-sales-report.component';
+import { ReportGraphComponent } from './report-graph/report-graph.component';
+import { TermofuseComponent } from './termofuse/termofuse.component';
+import { TermofsalesComponent } from './termofsales/termofsales.component';
+import { ConsumerprivacypolicyComponent } from './consumerprivacypolicy/consumerprivacypolicy.component';
+import { WarrantypolicyComponent } from './warrantypolicy/warrantypolicy.component';
 
 const routes: Routes = [
   {
@@ -319,12 +325,35 @@ const routes: Routes = [
     path: 'editprofile',
     component: EditprofileComponent
   },
+  {
+    path: 'vendorSalesReport',
+    component: VendorSalesReportComponent
 
+  },
+  {
+    path: 'reportGraph',
+    component: ReportGraphComponent
 
+  },
+  {
+    path: 'termofuse',
+    component: TermofuseComponent
 
-
-
-
+  },
+  {
+    path: 'termofsales',
+    component: TermofsalesComponent
+  },
+  {
+    path: 'consumerprivacypolicy',
+    component: ConsumerprivacypolicyComponent
+  
+},
+{
+  path: 'warrantypolicy',
+  component: WarrantypolicyComponent
+  
+},
 
 ];
 

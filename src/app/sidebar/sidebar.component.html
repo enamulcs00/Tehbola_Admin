@@ -36,6 +36,11 @@
             Hc
         </a>
     </li>
+    <li rel="core6" class="nav_item">
+        <a class="nav-link">
+            Cr
+        </a>
+    </li>
 
     
 </ul>
@@ -79,6 +84,9 @@
         <ul>
             <li (click)="goTosalesreport()">Report of sales</li>
              <li (click)="goTorevenuereport()">Report of Revenue</li>
+             <li (click)="goTovendorSalesReport()">Vendor Sales Report</li>
+
+             
 
       </ul>
     </div>
@@ -90,12 +98,21 @@
                
         <li (click)="goTotermcondition()">Terms and Conditions</li>       
    <li (click)="goTocontactus()">Contact Us</li>
-   <li (click)="goToprivacypolicy()">Privacy Policy </li>
+   <!--<li (click)="goToprivacypolicy()">Privacy Policy </li>-->
    <li (click)="goToreturnpolicy()">Return  Policy </li>
    <li (click)="goToventorT()">Vendor Terms and Condition </li>
 
 
         
+        </ul>
+    </div>
+    <div id="core6" class="core">
+        <h3>Consumers Rights</h3>
+        <ul>
+            <li (click)="goTotermofuse()">Terms Of Use</li>       
+            <li (click)="goTotermofsales()">Terms Of Sales</li>
+            <li (click)="goToconsumerprivacypolicy()">Privacy Policy </li>
+            <li (click)="goTowarrantypolicy()">Warranty Policy </li>
         </ul>
     </div>
 </div>
