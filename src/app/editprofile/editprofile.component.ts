@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/services/api.service';
 import { ActivatedRoute } from '@angular/router';
+import { UrlService } from 'src/services/url.service';
 
 @Component({
   selector: 'app-editprofile',
@@ -13,7 +14,7 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
   //Add 'implements AfterViewInit' to the class.
 
 
-
+  imagePath:any
   updateProfileForm: FormGroup
   imageFile: any;
   sub: any;
@@ -25,16 +26,18 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
   address: any;
   countryCode: any;
   phone: any;
+  showProfilePic
 
-
-  constructor(private fb: FormBuilder, private apiService: ApiService, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private apiService: ApiService, private route: ActivatedRoute,private urlService:UrlService) {
     this.sub = this.route
       .queryParams
       .subscribe(params => {
         // Defaults to 0 if no query param provided.
         this.id = params['id'];
       });
+ 
 
+      this.imagePath=this.urlService.imageUrl;
 
     this.apiService.getProfile().subscribe((res) => {
       console.log(res.data)
@@ -45,7 +48,8 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
       this.address = this.profileData.address
       this.countryCode = this.profileData.countryCode
       this.phone = this.profileData.phone
-      this.imagePreview = this.profileData.profilePic
+      this.showProfilePic = this.profileData.profilePic
+
     });
 
   }
@@ -56,7 +60,7 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
   ngOnInit() {
 
     this.updateProfileForm = this.fb.group({
-      firstName: [this.firstname, Validators.required],
+      firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       address: ['', Validators.required],
       countryCode: ['', Validators.required],
@@ -86,12 +90,8 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
     this.updateProfileForm.controls['address'].setValue(this.address)
     this.updateProfileForm.controls['countryCode'].setValue(this.countryCode)
     this.updateProfileForm.controls['phone'].setValue(this.phone)
-    this.updateProfileForm.controls['profilePic1'].setValue(this.imagePreview)
-    var reader = new FileReader();
-    reader.readAsDataURL(this.imagePreview);
-    reader.onload = (event: any) => {
-      this.imagePreview = event.target.result;
-    }
+    this.updateProfileForm.controls['profilePic1'].setValue(this.showProfilePic)
+    
   }
 
   async profilePic(event) {
@@ -108,7 +108,7 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
   }
 
   submit() {
-
+debugger
     this.submitted = true
 
     if (this.submitted && this.updateProfileForm.valid) {

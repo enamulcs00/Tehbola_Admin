@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit,  } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/services/api.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
@@ -24,8 +24,7 @@ export class CategoryComponent implements OnInit {
   image: any;
   imageUrl: any
 
-  //@ViewChild('categoryImage', { static: true }) categoryImageComp: ElementRef
-
+  
 
 
 

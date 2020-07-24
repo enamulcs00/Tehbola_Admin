@@ -15,7 +15,7 @@
                             <li>
                                 <label>First Name</label>
                                 <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="text" placeholder="" [(ngModel)]="firstName"
+                                    <input matInput type="text" placeholder=""
                                         formControlName="firstName" name="firstName">
                                 </mat-form-field>
                                 <div *ngIf="submitted && f.firstName.errors" class="custom-invalid">
@@ -46,7 +46,7 @@
                             <li>
                                 <label>Phone Number</label>
                                 <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="text" placeholder="country code" id="firstInput"
+                                    <input matInput type="text" placeholder="" id="firstInput"
                                         formControlName="countryCode" name="countryCode">
                                     <input matInput type="text" placeholder="" id="secondInput" formControlName="phone"
                                         name="phone">
@@ -87,9 +87,9 @@
                                     name="profilePic1">
 
                                 <div class="user_img">
-                                    <figure *ngIf="imageFile">
+                                    <figure >
                                         <img style="height: 100px;width: 100px; margin-top: 10px; margin-left: 10px;"
-                                            [src]="imagePreview" />
+                                            [src]="imagePreview != null ? imagePreview: imagePath+showProfilePic" />
                                     </figure>
                                     <div *ngIf="submitted && f.profilePic1.errors" class="custom-invalid">
                                         <div *ngIf="f.profilePic1.errors.required">
