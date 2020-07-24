@@ -25,11 +25,7 @@
 .country_name a {
     padding-left: 18px;
 }
-.country_name {
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
+
 .actions {
     padding-top: 8px;
 }
@@ -100,3 +96,24 @@
         padding: 3px 12px;
       
     }
+    .invalid-feedback {
+        display: block;
+        width: 100%;
+        margin-top: 0.14rem;
+        margin-left: 0.6rem;
+        font-size: 95%;
+        color: #f55353;
+      }
+      .country_name figure{width: 50px;height: 50px;margin-right: 15px;}
+      .country_name figure img{width: 100%;height: 100%;object-fit: cover;}
+      .country_name {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .mobille_list ul li span.sub_category_image figure{width: 50px;height: 50px;margin-right: 15px;}
+    .mobille_list ul li span.sub_category_image figure img{width: 100%;height: 100%;object-fit: cover;}
+   .mobille_list ul li{display: flex;align-items: center;    margin-bottom: 20px;}
+      

@@ -1,8 +1,8 @@
-import {DragDropModule} from '@angular/cdk/drag-drop';
-import {ScrollingModule} from '@angular/cdk/scrolling';
-import {CdkTableModule} from '@angular/cdk/table';
-import {CdkTreeModule} from '@angular/cdk/tree';
-import {NgModule} from '@angular/core';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { CdkTableModule } from '@angular/cdk/table';
+import { CdkTreeModule } from '@angular/cdk/tree';
+import { NgModule } from '@angular/core';
 import {
   MatAutocompleteModule,
   MatBadgeModule,
@@ -84,4 +84,4 @@ import {
     ScrollingModule,
   ]
 })
-export class MaterialModule {}
+export class MaterialModule { }

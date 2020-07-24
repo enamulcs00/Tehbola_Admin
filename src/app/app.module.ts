@@ -52,7 +52,7 @@ import { EditdiscountComponent } from './editdiscount/editdiscount.component';
 import { OfferdealsComponent } from './offerdeals/offerdeals.component';
 import { AddoffersComponent } from './addoffers/addoffers.component';
 import { NotificationComponent } from './notification/notification.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SubcategoryComponent } from './subcategory/subcategory.component';
 import { EditsubcategoryComponent } from './editsubcategory/editsubcategory.component';
 import { ViewsubcategoryComponent } from './viewsubcategory/viewsubcategory.component';
@@ -75,6 +75,11 @@ import { TermofuseComponent } from './termofuse/termofuse.component';
 import { TermofsalesComponent } from './termofsales/termofsales.component';
 import { ConsumerprivacypolicyComponent } from './consumerprivacypolicy/consumerprivacypolicy.component';
 import { WarrantypolicyComponent } from './warrantypolicy/warrantypolicy.component';
+import { ToastrModule } from "ng6-toastr-notifications";
+import { HttpClientModule } from '@angular/common/http'
+import { DatePipe } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { DeliveryAddressComponent } from './delivery-address/delivery-address.component';
 
 @NgModule({
   declarations: [
@@ -129,35 +134,41 @@ import { WarrantypolicyComponent } from './warrantypolicy/warrantypolicy.compone
     SalesgraphComponent,
     ProfileComponent,
     ChangepasswordComponent,
-   AboutComponent,
-   FaqComponent,
-   SubcategoryComponent,
-   EditsubcategoryComponent,
-   ViewsubcategoryComponent,
-   AddsubcategoryComponent,
-   TermconditionComponent,
-   ContactusComponent,
-   PrivacypolicyComponent,
-   ReturnpolicyComponent,
-   VentorTComponent,
-   EditprofileComponent,
-   VendorSalesReportComponent,
-   ReportGraphComponent,
-   TermofuseComponent,
-   TermofsalesComponent,
-   ConsumerprivacypolicyComponent,
-   WarrantypolicyComponent
-      
+    AboutComponent,
+    FaqComponent,
+    SubcategoryComponent,
+    EditsubcategoryComponent,
+    ViewsubcategoryComponent,
+    AddsubcategoryComponent,
+    TermconditionComponent,
+    ContactusComponent,
+    PrivacypolicyComponent,
+    ReturnpolicyComponent,
+    VentorTComponent,
+    EditprofileComponent,
+    VendorSalesReportComponent,
+    ReportGraphComponent,
+    TermofuseComponent,
+    TermofsalesComponent,
+    ConsumerprivacypolicyComponent,
+    WarrantypolicyComponent,
+    DeliveryAddressComponent,
+
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ChartsModule, CKEditorModule,FormsModule,
-   
+    HttpClientModule,
+    ChartsModule, CKEditorModule, FormsModule, ReactiveFormsModule,
+    ToastrModule.forRoot(),
+
+
+
   ],
-  providers: [],
+  providers: [DatePipe, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

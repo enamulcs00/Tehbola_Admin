@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { ApiService } from 'src/services/api.service';
+import { CommonService } from 'src/services/common.service';
+import { Router } from '@angular/router';
+import { MustMatch } from 'src/services/mustMatch';
 
 @Component({
   selector: 'app-changepassword',
@@ -6,10 +11,39 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./changepassword.component.scss']
 })
 export class ChangepasswordComponent implements OnInit {
+  submitted: boolean = false;
+  changePassForm: FormGroup
+  constructor(private formBuilder: FormBuilder,
+    private apiService: ApiService,
+    private commService: CommonService,
+    private router: Router) {
 
-  constructor() { }
 
+
+  }
   ngOnInit() {
+
+    this.changePassForm = this.formBuilder.group({
+      oldPassword: new FormControl("", [Validators.required, Validators.minLength(8), Validators.maxLength(25)]),
+      newPassword: new FormControl("", [Validators.required, Validators.minLength(8), Validators.maxLength(25)]),
+      confirmPassword: new FormControl("", [Validators.required]),
+    }, {
+      validator: MustMatch('newPassword', 'confirmPassword')
+    });
+
+
   }
 
+  get f() { return this.changePassForm.controls; }
+  onChangePassword() {
+
+    this.submitted = true;
+    if (this.changePassForm.valid && this.submitted) {
+      this.apiService.changePassword(this.changePassForm.value).subscribe(res => {
+        this.commService.successToast(res.message);
+        this.router.navigateByUrl("dashboard");
+      });
+    }
+
+  }
 }

@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, } from '@angular/core';
 import { Router } from '@angular/router';
+import { CommonService } from 'src/services/common.service';
+import { ApiService } from 'src/services/api.service';
+import { PageEvent, MatPaginator } from '@angular/material/paginator';
+import { promise } from 'protractor';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-manage-user',
@@ -7,22 +12,241 @@ import { Router } from '@angular/router';
   styleUrls: ['./manage-user.component.scss']
 })
 export class ManageUserComponent implements OnInit {
-
-  constructor(private router: Router) { }
+  length = 100;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageEvent: PageEvent;
+  filterBy: string = '';
+  search: string;
+  userList: any
+  flagData: any;
+  constructor(private router: Router,
+    private apiService: ApiService,
+    private commonService: CommonService) { }
 
   ngOnInit() {
+    this.ShowAllUser()
+
+  }
+  body: {}
+  flag: boolean = false
+  filterSelected(e) {
+
+    if (this.filterBy) {
+      this.flag = true
+    }
+    else {
+      this.flag = false
+    }
+    console.log(e.target.value);
+
+    this.filterBy = e.target.value
+
+    this.apiService.getAllUser(1, this.pageSize, "", this.filterBy).subscribe((res) => {
+      if (res.success) {
+        if (res.data.length > 0) {
+          this.flagData = false
+          this.userList = res.data;
+          console.log(this.userList);
+        } else {
+          this.flagData = true
+        }
+
+      }
+    })
+  }
+
+
+  changeUserStatus(id, status) {
+
+
+
+    let temp = id
+    for (let i = 0; i <= this.userList.length; i++) {
+      if (this.userList[i]._id == temp) {
+        if (status == 1) {
+          this.body = {
+            "model": "User",
+            "id": temp,
+            "status": 0
+          }
+        } else {
+          this.body = {
+            "model": "User",
+            "id": temp,
+            "status": 1
+          }
+        }
+        console.log(this.body)
+        this.apiService.changeUserStatus(this.body).subscribe((res) => {
+          console.log(res)
+          this.ShowAllUser();
+        });
+      }
+
+    }
+
+
+
+  }
+  flagSearch: boolean = true
+  searchMethod() {
+    this.flagSearch = false
+    // console.log(this.search);
+    this.apiService.getAllUser(1, this.pageSize, this.search, this.filterBy).subscribe((res) => {
+      if (res.success) {
+        if (res.data.length > 0) {
+          this.flagData = false
+          this.userList = res.data;
+          console.log(this.userList);
+        } else {
+          this.flagData = true
+        }
+      }
+    })
+
+  }
+
+  clearSearch() {
+
+    this.flagSearch = true
+    this.search = ''
+    this.apiService.getAllUser(1, this.pageSize, this.search, this.filterBy).subscribe((res) => {
+      if (res.success) {
+        if (res.data.length > 0) {
+          this.flagData = false
+          this.userList = res.data;
+          console.log(this.userList);
+        } else {
+          this.flagData = true
+        }
+      }
+    });
+  }
+
+
+
+  UserListAfterPageSizeChanged(e): any {
+    //console.log(e);
+    this.apiService.getAllUser(1, e.pageSize, "", this.filterBy).subscribe((res) => {
+      if (res.success) {
+        if (res.data.length > 0) {
+          this.flagData = false
+          this.userList = res.data;
+          console.log(this.userList);
+        } else {
+          this.flagData = true
+        }
+      }
+    })
+  }
+
+
+  ShowAllUser() {
+    //Calling method from service which will call api for data
+    this.apiService.getAllUser(1, this.pageSize, '', this.filterBy).subscribe(res => {
+      if (res.success) {
+        if (res.data.length > 0) {
+          this.flagData = false
+          this.userList = res.data;
+          console.log(this.userList);
+        } else {
+          this.flagData = true
+        }
+
+      }
+    })
+
   }
   goToadduser() {
     this.router.navigate(['adduser'])
   };
-  goTobookingRequestHistory(){
-    this.router.navigate(['bookingRequestHistory'])
+  goTobookingRequestHistory(i) {
+    let id: any
+    let name: string
+    // console.log(i);
+    for (let j = 0; j <= this.userList.length; j++) {
+      if (i == j) {
+        // console.log(this.userList[j]._id);
+        id = this.userList[j]._id;
+        name = this.userList[j].firstName;
+
+      }
+    }
+    this.router.navigate(['bookingRequestHistory'], { queryParams: { "id": id, "name": name } })
   };
-  goToviewUser(){
+  goToviewUser() {
     this.router.navigate(['viewUser'])
   };
-  goToeditUser(){
-    this.router.navigate(['editUser'])
-  };
-  
+
+  goToUserAddress(id) {
+    this.router.navigate(['deliveryAddress'], { queryParams: { "id": id } })
+  }
+  goToeditUser(i) {
+    let id: any
+    // console.log(i);
+    for (let j = 0; j <= this.userList.length; j++) {
+      if (i == j) {
+        // console.log(this.userList[j]._id);
+        id = this.userList[j]._id
+
+      }
+    }
+    this.router.navigate(['editUser'], { queryParams: { "id": id } })
+  }
+
+  async deleteUser(i) {
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this Category!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085D6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+
+      allowOutsideClick: true
+    }).then(result => {
+      if (result.value) {
+        console.log(i)
+        let id: any
+        for (let j = 0; j <= this.userList.length; j++) {
+          if (i == j) {
+            id = this.userList[j]._id
+          }
+        }
+        const data = {
+          "id": id,
+          "model": "User"
+        }
+        this.apiService.delete(data)
+
+        this.deleteFromList(i)
+      } else {
+        console.log("cancellled")
+      }
+
+    });
+
+
+  }
+  deleteFromList(i) {
+    setTimeout(() => {
+      let temp = this.apiService.flagDelete;
+      if (temp == true) {
+        // this.userList.splice(i, 1);
+        // console.log(this.userList)
+        alert("deleted")
+        this.ShowAllUser();
+      }
+      else {
+        console.log("error")
+      }
+    }, 2000);
+
+
+  }
+
+
 }

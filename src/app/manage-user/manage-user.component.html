@@ -1,231 +1,121 @@
 <div id="wrapper">
-<app-navbar></app-navbar>
-<div id="content-wrapper" class="">
-<div id="content">
-<app-sidebar></app-sidebar>
-<div class="container-fluid">
-<div class="sub_heading">
-<h1>User Management</h1>
-<!-- <div class="top_subheading_add">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>User Management</h1>
+                    <!-- <div class="top_subheading_add">
 <a (click)="goToadduser()"><span>+</span>Add User</a>
 </div> -->
-</div>
-<div class="outer_table">
-<div class="search_fields">
-<div class="filters Booking_status">
-<label>Filter</label>
-<select>
-<option>UserName</option>
-<option>Id</option>
-</select>
-</div>
-<div class="search_inner_fiels">
-<div class="filters Booking_status">
-<label>Search</label>
-<div class="search_with_icons">
-<mat-form-field [floatLabel]="'never'">
-<input matInput type="text" name="search" placeholder="">
-</mat-form-field>
-<i class="fa fa-search" aria-hidden="true"></i>
-</div>
-</div>
-
-</div>
-</div>
-<div class="table-responsive">
-<table>
-<tr>
-
-<th>User Name</th>
-<th>User Address </th>
-<th>User Email </th>
-<th>User Phone number</th>
-<th>Status</th>
-<th>Number of Order</th>
-<th>Completed Order</th>
-<th>Rejected Order</th>
-<th>Total Amount Paid</th>
-<th>Last order at</th>
-<th>Last product purchased</th>
-<th class="action_bx">Action</th>
-</tr>
-<tr>
-
-<td>Rohit</td>
-<td>Lorem ipsum</td>
-<td>rohit@gmail.com</td>
-<td>0987654321</td>
-<td>Active
-<!-- <div class="enable_disable">
-<mat-slide-toggle></mat-slide-toggle>
-</div> -->
-</td>
-<td>80</td>
-<td>70</td>
-<td>40</td>
-<td>$200</td>
-<td>28-05-2019</td>
-<td>Lorem ipsum</td>
-<!-- <td><a class="request_hisrty" (click)="goTobookingRequestHistory()"><i class="fa fa-eye"></i></a></td> -->
-<td>
-<div class="action">
-<ul>
-<li class="show" (click)="goTobookingRequestHistory()"><i class="fa fa-eye"></i></li>
-<li class="edit" (click)="goToeditUser()"><i class="fa fa-pencil fa-fw"></i></li>
-<li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
-</ul>
-</div>
-</td>
-</tr>
-<tr>
-
-    <td>Rohit</td>
-    <td>Lorem ipsum</td>
-    <td>rohit@gmail.com</td>
-    <td>0987654321</td>
-    <td>Inactive
-    <!-- <div class="enable_disable">
-    <mat-slide-toggle></mat-slide-toggle>
-    </div> -->
-    </td>
-    <td>80</td>
-    <td>70</td>
-    <td>40</td>
-    <td>$200</td>
-    <td>28-05-2019</td>
-    <td>Lorem ipsum</td>
-    <!-- <td><a class="request_hisrty" (click)="goTobookingRequestHistory()"><i class="fa fa-eye"></i></a></td> -->
-    <td>
-    <div class="action">
-    <ul>
-    <li class="show" (click)="goTobookingRequestHistory()"><i class="fa fa-eye"></i></li>
-    <li class="edit" (click)="goToeditUser()"><i class="fa fa-pencil fa-fw"></i></li>
-    <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
-    </ul>
-    </div>
-    </td>
-    </tr>
-    <tr>
-
-        <td>Rohit</td>
-        <td>Lorem ipsum</td>
-        <td>rohit@gmail.com</td>
-        <td>0987654321</td>
-        <td>Active
-        <!-- <div class="enable_disable">
-        <mat-slide-toggle></mat-slide-toggle>
-        </div> -->
-        </td>
-        <td>80</td>
-        <td>70</td>
-        <td>40</td>
-        <td>$200</td>
-        <td>28-05-2019</td>
-        <td>Lorem ipsum</td>
-        <!-- <td><a class="request_hisrty" (click)="goTobookingRequestHistory()"><i class="fa fa-eye"></i></a></td> -->
-        <td>
-        <div class="action">
-        <ul>
-        <li class="show" (click)="goTobookingRequestHistory()"><i class="fa fa-eye"></i></li>
-        <li class="edit" (click)="goToeditUser()"><i class="fa fa-pencil fa-fw"></i></li>
-        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
-        </ul>
-        </div>
-        </td>
-        </tr>
-        <tr>
-
-            <td>Rohit</td>
-            <td>Lorem ipsum</td>
-            <td>rohit@gmail.com</td>
-            <td>0987654321</td>
-            <td>Inactive
-            <!-- <div class="enable_disable">
-            <mat-slide-toggle></mat-slide-toggle>
-            </div> -->
-            </td>
-            <td>80</td>
-            <td>70</td>
-            <td>40</td>
-            <td>$200</td>
-            <td>28-05-2019</td>
-            <td>Lorem ipsum</td>
-            <!-- <td><a class="request_hisrty" (click)="goTobookingRequestHistory()"><i class="fa fa-eye"></i></a></td> -->
-            <td>
-            <div class="action">
-            <ul>
-            <li class="show" (click)="goTobookingRequestHistory()"><i class="fa fa-eye"></i></li>
-            <li class="edit" (click)="goToeditUser()"><i class="fa fa-pencil fa-fw"></i></li>
-            <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
-            </ul>
-            </div>
-            </td>
-            </tr>
-            <tr>
-
-                <td>Rohit</td>
-                <td>Lorem ipsum</td>
-                <td>rohit@gmail.com</td>
-                <td>0987654321</td>
-                <td>Active
-                <!-- <div class="enable_disable">
-                <mat-slide-toggle></mat-slide-toggle>
-                </div> -->
-                </td>
-                <td>80</td>
-                <td>70</td>
-                <td>40</td>
-                <td>$200</td>
-                <td>28-05-2019</td>
-                <td>Lorem ipsum</td>
-                <!-- <td><a class="request_hisrty" (click)="goTobookingRequestHistory()"><i class="fa fa-eye"></i></a></td> -->
-                <td>
-                <div class="action">
-                <ul>
-                <li class="show" (click)="goTobookingRequestHistory()"><i class="fa fa-eye"></i></li>
-                <li class="edit" (click)="goToeditUser()"><i class="fa fa-pencil fa-fw"></i></li>
-                <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
-                </ul>
                 </div>
-                </td>
-                </tr>
-                <tr>
+                <div class="outer_table">
+                    <div class="search_fields">
+                        <div class="filters Booking_status">
+                            <label>Filter</label>
+                            <select [(ngModel)]="filterBy" (change)="filterSelected($event)">
+                                <option *ngIf="flag==true" value="">Remove Filter</option>
+                                <option *ngIf="flag==false" value=""></option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                                <!-- <option value="lastName"></option> -->
+                            </select>
+                        </div>
+                        <div class="search_inner_fiels">
+                            <div class="filters Booking_status">
+                                <label>Search</label>
+                                <div class="search_with_icons">
+                                    <mat-form-field [floatLabel]="'never'">
+                                        <input matInput type="text" [(ngModel)]="search" placeholder="">
+                                    </mat-form-field>
+                                    <i *ngIf="flagSearch==true" class="fa fa-search" aria-hidden="true"
+                                        (click)="searchMethod()"></i>
+                                    <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
+                                        (click)="clearSearch()"></i>
+                                </div>
+                            </div>
 
-                    <td>Rohit</td>
-                    <td>Lorem ipsum</td>
-                    <td>rohit@gmail.com</td>
-                    <td>0987654321</td>
-                    <td>Active
-                    <!-- <div class="enable_disable">
-                    <mat-slide-toggle></mat-slide-toggle>
-                    </div> -->
-                    </td>
-                    <td>80</td>
-                    <td>70</td>
-                    <td>40</td>
-                    <td>$200</td>
-                    <td>28-05-2019</td>
-                    <td>Lorem ipsum</td>
-                    <!-- <td><a class="request_hisrty" (click)="goTobookingRequestHistory()"><i class="fa fa-eye"></i></a></td> -->
-                    <td>
-                    <div class="action">
-                    <ul>
-                    <li class="show" (click)="goTobookingRequestHistory()"><i class="fa fa-eye"></i></li>
-                    <li class="edit" (click)="goToeditUser()"><i class="fa fa-pencil fa-fw"></i></li>
-                    <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
-                    </ul>
+                        </div>
                     </div>
-                    </td>
-                    </tr>
-</table>
-</div>
-</div>
-<!-----start pagination-->
-<mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
-</mat-paginator>
-<!-----end pagination-->
+                    <div class="table-responsive">
+                        <div *ngIf="flagData==true">
+                            <h1>No Data Found</h1>
+                        </div>
+                        <div *ngIf="flagData==false">
+                            <table>
+                                <tr>
+                                    <th>Sr.no</th>
+                                    <th> Name</th>
+                                    <th> Email </th>
+                                    <th> Phone number</th>
+                                    <th>Status</th>
+                                    <th>Number of Order</th>
+                                    <th>Completed Order</th>
+                                    <th>Rejected Order</th>
+                                    <th>Total Amount Paid</th>
+                                    <th> Address </th>
+                                    <th>Last order date and time</th>
+                                    <th>Last product purchased</th>
+                                    <th class="action_bx">Action</th>
+                                </tr>
+                                <tr *ngFor="let item of userList; index as i ">
+                                    <td>{{i+1}}</td>
+                                    <td>{{item.firstName}} {{item.lastName}}</td>
 
-</div>
-</div>
-</div>
+                                    <td>{{item.email}}</td>
+                                    <td>{{item.countryCode}}-{{item.phone}}</td>
+                                    <td>
+                                        <div class="enable_disable">
+                                            <mat-slide-toggle (change)="changeUserStatus(item._id,item.status)"
+                                                [checked]="item.status=='1'? true:false"></mat-slide-toggle>
+                                        </div>
+                                    </td>
+                                    <td>{{item.totalOrders}}</td>
+                                    <td>{{item.completedOrders}}</td>
+                                    <td>{{item.rejectedOrders}}</td>
+                                    <td>{{item.totalPaid}}</td>
+                                    <td>
+                                        <div class="top_subheading_add">
+                                            <button class="accept_button "
+                                                (click)="goToUserAddress(item._id)"><span></span>User
+                                                Address</button>
+                                        </div>
+                                    </td>
+                                    <td>{{item.lastOrderAt | date}}</td>
+                                    <td>{{item?.lastOrder?.productId?.name}}</td>
+                                    <!-- <td><a class="request_hisrty" (click)="goTobookingRequestHistory()"><i class="fa fa-eye"></i></a></td> -->
+                                    <td>
+                                        <div class="action">
+                                            <ul>
+                                                <li class="show" (click)="goTobookingRequestHistory(i)"><i
+                                                        class="fa fa-eye"></i></li>
+                                                <li class="edit" (click)="goToeditUser(i)"><i
+                                                        class="fa fa-pencil fa-fw"></i>
+                                                </li>
+                                                <li class="delete" (click)="deleteUser(i)"><i
+                                                        class="fa fa-trash-o fa-fw"></i></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </table>
+
+                            <!-----start pagination-->
+                            <mat-paginator #paginator [length]="length" [pageSize]="pageSize"
+                                [pageSizeOptions]="pageSizeOptions"
+                                (page)="pageEvent = UserListAfterPageSizeChanged($event)">
+                            </mat-paginator>
+                            <!-----end pagination-->
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
 </div>

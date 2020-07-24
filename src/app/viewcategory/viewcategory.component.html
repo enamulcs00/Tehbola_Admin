@@ -1,65 +1,49 @@
 <div id="wrapper">
     <app-navbar></app-navbar>
-    <div id="content-wrapper" class="">
+    <div id="content-wrapper">
         <div id="content">
             <app-sidebar></app-sidebar>
             <div class="container-fluid">
                 <div class="sub_heading">
-                    <h1>Edit Category</h1>
+                    <h1>All Category</h1>
                     <div class="top_subheading_add">
-                  <a (click)="goTocategory()">Back To List</a>
+                        <a (click)="goToVendorList()">Go To Vendor</a>
                     </div>
                 </div>
-                <div class="flex_subcategory">
-               <div class="add_user_list">
-                    <ul>
-                        <li>
-                            <label>Category Name<span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" disabled placeholder="Category Name" name="name" value="Test">
-                            </mat-form-field>
-                        </li>
-                        <li class="Booking_status">
-                            <label>SubCategory<span class="red">*</span></label>
-                             <select disabled>
-                            <option>ABC</option>
-                            <option>CDE</option>
-                        </select>
-                       
-                        </li>
-                         <li> 
-                             <div class="edit_cateimage_box">
-                        <div class="border">
-                            <figure class="ipload_img_vehicle">
-                            <!-- <img src="../../images/ga"> -->
-                            </figure>
-                            <h5>Upload Category Image</h5>
-                            <input type="file" id="file-input" disabled class="upload_file">
-                        </div>
-                        <div class="added_images">
-                            <div class="show_product_imges">
-                                <span>
-                                    <figure>
-                                        <img src="../../assets/images/makeup.png" alt="">
-                                    </figure>
-                                </span>
-                                <span>
-                                    <figure>
-                                        <img src="../../assets/images/makeup.png" alt="">
-                                    </figure>
-                                </span>
-
-
-                            </div>
-                        </div>
+                <div>
+                    <div *ngIf="flagData==true">
+                        <h1>No Data Found</h1>
                     </div>
-                        </li>
-                       
-                        </ul>
-                        </div>
-                       
+                    <div *ngIf="flagData==false" class="card">
+
+
+                        <table>
+                            <tr>
+                                <th>Sr.no</th>
+                                <th>Category Name</th>
+                                <th>Category Arbic Name</th>
+                                <th>Category Image</th>
+                                <th>View Subcategory</th>
+                            </tr>
+                            <tr *ngFor="let item of categoryList;index as i">
+                                <td>{{i+1}}</td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.name_ar}}</td>
+                                <td>
+                                    <figure><img width="200" src={{imagePath+item.image}}></figure><br>
+                                </td>
+                                <td style="text-align: center;"><a class="edit" style="float:none;"
+                                        (click)="goToSubcategory(item._id, item.name)"><i
+                                            class="fa fa-eye fa-fw"></i></a></td>
+                            </tr>
+                        </table>
+
+
+
+
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 </div>

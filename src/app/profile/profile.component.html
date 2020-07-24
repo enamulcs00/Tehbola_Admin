@@ -5,57 +5,70 @@
             <app-sidebar></app-sidebar>
             <div class="container-fluid">
                 <div class="sub_heading">
-                    <h1>Admin Profile</h1>
+                    <h1>{{profileData.firstName}} Profile</h1>
                 </div>
-              
+
                 <div class="add_business_detail">
                     <div id="exTab1">
                         <div class="businiess_outer">
-                        <div class="profile_image_detail">
-<figure><img src="assets/images/profile_image.png"></figure>
-<h2>Lorem Ipsum</h2>
-<div class="follow_all">
-    <ul>
-        <li><a (click)="goToeditprofile()">Edit Profile</a></li>
-    </ul>
-</div>
-<div class="social_icon">
-<ul>
-    <li><a href="javascript:void(0)"><img src="../../assets/images/facebook.png"></a></li>
-    <li><a href="javascript:void(0)"><img src="../../assets/images/twitter.png"></a></li>
-    <li><a href="javascript:void(0)"><img src="../../assets/images/instagram.png"></a></li>
-    <li><a href="javascript:void(0)"><img src="../../assets/images/linkedin.png"></a></li>
+                            <div class="profile_image_detail">
+                                <figure><img style="border-radius: 50%; height: 120px; width: 120px;"
+                                        src={{imageUrl+profileData.profilePic}}>
+                                </figure>
+                                <h2>{{profileData.firstName}} {{profileData.lastName}}</h2>
+                                <div class="follow_all">
+                                    <ul>
+                                        <li><a (click)="goToeditprofile(profileData._id)">Edit Profile</a></li>
+                                    </ul>
+                                </div>
+                                <!-- <div class="social_icon">
+                                    <ul>
+                                        <li><a href="javascript:void(0)" href={{profileData?.facebookLink}}><img
+                                                    src="../../assets/images/facebook.png"></a></li>
+                                        <li><a href="javascript:void(0)" href={{profileData?.twitterLink}}><img
+                                                    src="../../assets/images/twitter.png"></a>
+                                        </li>
+                                        <li><a href="javascript:void(0)" href={{profileData?.instagramLink}}><img
+                                                    src="../../assets/images/instagram.png"></a></li>
+                                        <li><a href="javascript:void(0)" href={{profileData?.linkedinLink}}><img
+                                                    src="../../assets/images/linkedin.png"></a></li>
 
 
-</ul>
-</div>
-<div class="apple_store_link">
-    <ul>
-        <li><a href="javascript:void(0)"><img src="../../assets/images/apple-store.png"></a></li>
-        <li><a href="javascript:void(0)"><img src="../../assets/images/google-play.png"></a></li>
+                                    </ul>
+                                </div> -->
+                                <!-- <div class="apple_store_link">
+                                    <ul>
+                                        <li><a href="javascript:void(0)" href={{profileData?.appleStoreLink}}><img
+                                                    src="../../assets/images/apple-store.png"></a></li>
+                                        <li><a href="javascript:void(0)" href={{profileData?.playStoreLink}}><img
+                                                    src="../../assets/images/google-play.png"></a></li>
 
-    </ul>
-</div>
+                                    </ul>
+                                </div> -->
+
+                            </div>
 
                         </div>
-                
-                            </div>
-                                    <div class="tab-content clearfix">
-                                      <div class="tab-pane active" id="1a">
-                                        <div class="personal_deatil">
-                                            <ul>
-                                            <li><strong>Full Name :</strong> Alison</li>
-                                            <li><strong>Phone Number :</strong> 9876543321</li>
-                                            <li><strong>Email :</strong> admin@gmail:com</li>
-                                            <li><strong>Location :</strong> 35, Street, London</li>
-                                                                                 </ul>
-                                            
-                                             </div>
-                                      </div>
-                                       </div>
-                          </div>
+                        <div class="tab-content clearfix">
+                            <div class="tab-pane active" id="1a">
+                                <div class="personal_deatil">
+                                    <ul>
+                                        <li><strong>Full Name :</strong>{{profileData.firstName}}
+                                            {{profileData.lastName}} </li>
+                                        <li><strong>Phone Number
+                                                :</strong>{{profileData.countryCode}}-{{profileData.phone}}</li>
+                                        <li><strong>Email :</strong> {{profileData.email}}</li>
+                                        <li><strong>Location :</strong>
+                                            {{profileData.address}}
+                                        </li>
+                                    </ul>
 
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                </div>
 
 
 

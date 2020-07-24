@@ -67,12 +67,20 @@ import { TermofuseComponent } from './termofuse/termofuse.component';
 import { TermofsalesComponent } from './termofsales/termofsales.component';
 import { ConsumerprivacypolicyComponent } from './consumerprivacypolicy/consumerprivacypolicy.component';
 import { WarrantypolicyComponent } from './warrantypolicy/warrantypolicy.component';
+import { AuthGuard } from 'src/services/auth.guard';
+import { DeliveryAddressComponent } from './delivery-address/delivery-address.component';
 
 const routes: Routes = [
+  // {
+  //   path: '',
+  //   pathMatch: 'full',
+  //   component: LoginComponent
+  // },
+
   {
-    path: '',
-    pathMatch: 'full',
-    component: LoginComponent
+    path: "",
+    redirectTo: "/login",
+    pathMatch: "full",
   },
   {
     path: 'login',
@@ -84,11 +92,13 @@ const routes: Routes = [
   },
   {
     path: 'resetPassword',
-    component: ResetPasswordComponent
+    component: ResetPasswordComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'sidebar',
@@ -96,264 +106,329 @@ const routes: Routes = [
   },
   {
     path: 'navbar',
-    component: NavbarComponent
+    component: NavbarComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'manageUser',
-    component: ManageUserComponent
+    component: ManageUserComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'adduser',
-    component: AdduserComponent
+    component: AdduserComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'product',
-    component: ProductComponent
+    component: ProductComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'addproduct',
-    component: AddproductComponent
+    component: AddproductComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'addinventory',
-    component: AddinventoryComponent
+    component: AddinventoryComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'ordermanagement',
-    component: OrdermanagementComponent
+    component: OrdermanagementComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'addordermanagement',
-    component: AddordermanagementComponent
+    component: AddordermanagementComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'payment',
-    component: PaymentComponent
+    component: PaymentComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'reportpage',
-    component: ReportpageComponent
+    component: ReportpageComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'inventryManagement',
-    component: InventryManagementComponent
+    component: InventryManagementComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'viewinventory',
-    component: ViewinventoryComponent
+    component: ViewinventoryComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'manageEarning',
-    component: ManageEarningComponent
+    component: ManageEarningComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'refund',
-    component: RefundComponent
+    component: RefundComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'manageReviews',
-    component: ManageReviewsComponent
+    component: ManageReviewsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'venderManagement',
-    component: VenderManagementComponent
+    component: VenderManagementComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'addVender',
-    component: AddVenderComponent
+    component: AddVenderComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'bookingRequestHistory',
-    component: BookingRequestHistoryComponent
+    component: BookingRequestHistoryComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'viewUser',
-    component: ViewUserComponent
+    component: ViewUserComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'editUser',
-    component: EditUserComponent
+    component: EditUserComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'editProduct',
-    component: EditProductComponent
+    component: EditProductComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'viewProduct',
-    component: ViewProductComponent
+    component: ViewProductComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'editOrder',
-    component: EditOrderComponent
+    component: EditOrderComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'viewOrder',
-    component: ViewOrderComponent
+    component: ViewOrderComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'viewVendor',
-    component: ViewVendorComponent
+    component: ViewVendorComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'editVendor',
-    component: EditVendorComponent
+    component: EditVendorComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'category',
-    component: CategoryComponent
+    component: CategoryComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'deals',
-    component: DealsComponent
+    component: DealsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'banner',
-    component: BannerComponent
+    component: BannerComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'editcategory',
-    component: EditcategoryComponent
+    component: EditcategoryComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'addcategory',
-    component: AddcategoryComponent
+    component: AddcategoryComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'viewcategory',
-    component: ViewcategoryComponent
+    component: ViewcategoryComponent,
+    canActivate: [AuthGuard]
   },
-    {
+  {
     path: 'cms',
-    component: CmsComponent
+    component: CmsComponent,
+    canActivate: [AuthGuard]
   },
-      {
+  {
     path: 'about',
-    component: AboutComponent
-  },
-     {
-    path: 'faq',
-    component: FaqComponent
+    component: AboutComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'faq',
-    component: FaqComponent
+    component: FaqComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'subcategory',
-    component: SubcategoryComponent
+    component: SubcategoryComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'editsubcategory',
-    component: EditsubcategoryComponent
+    component: EditsubcategoryComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'viewsubcategory',
-    component: ViewsubcategoryComponent
+    component: ViewsubcategoryComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'addsubcategory',
-    component: AddsubcategoryComponent
+    component: AddsubcategoryComponent,
+    canActivate: [AuthGuard]
   },
 
   {
     path: 'viewdiscount',
-    component: ViewdiscountComponent
+    component: ViewdiscountComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'editdiscount',
-    component: EditdiscountComponent
+    component: EditdiscountComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'offerdeals',
-    component: OfferdealsComponent
+    component: OfferdealsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'addoffers',
-    component: AddoffersComponent
+    component: AddoffersComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'notification',
-    component: NotificationComponent
+    component: NotificationComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'termcondition',
-    component: TermconditionComponent
+    component: TermconditionComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'contactus',
-    component: ContactusComponent
+    component: ContactusComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'privacypolicy',
-    component: PrivacypolicyComponent
+    component: PrivacypolicyComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'returnpolicy',
-    component: ReturnpolicyComponent
+    component: ReturnpolicyComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'ventorT',
-    component: VentorTComponent
+    component: VentorTComponent,
+    canActivate: [AuthGuard]
   },
 
 
   {
     path: 'salesreport',
-    component: SalesreportComponent
+    component: SalesreportComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'revenuereport',
-    component: RevenuereportComponent
+    component: RevenuereportComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'reveuegraph',
-    component: ReveuegraphComponent
+    component: ReveuegraphComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'salesgraph',
-    component: SalesgraphComponent
+    component: SalesgraphComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'changepassword',
-    component: ChangepasswordComponent
+    component: ChangepasswordComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'editprofile',
-    component: EditprofileComponent
+    component: EditprofileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'vendorSalesReport',
-    component: VendorSalesReportComponent
+    component: VendorSalesReportComponent,
+    canActivate: [AuthGuard]
 
   },
   {
     path: 'reportGraph',
-    component: ReportGraphComponent
+    component: ReportGraphComponent,
+    canActivate: [AuthGuard]
 
   },
   {
     path: 'termofuse',
-    component: TermofuseComponent
+    component: TermofuseComponent,
+    canActivate: [AuthGuard]
 
   },
   {
     path: 'termofsales',
-    component: TermofsalesComponent
+    component: TermofsalesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'consumerprivacypolicy',
-    component: ConsumerprivacypolicyComponent
-  
-},
-{
-  path: 'warrantypolicy',
-  component: WarrantypolicyComponent
-  
-},
+    component: ConsumerprivacypolicyComponent,
+    canActivate: [AuthGuard]
+
+  },
+  {
+    path: 'warrantypolicy',
+    component: WarrantypolicyComponent,
+    canActivate: [AuthGuard]
+
+  },
+  {
+    path: 'deliveryAddress',
+    component: DeliveryAddressComponent,
+    canActivate: [AuthGuard]
+
+  },
+
 
 ];
 

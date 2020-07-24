@@ -1,247 +1,325 @@
 <div id="wrapper">
-<app-navbar></app-navbar>
-<div id="content-wrapper" class="">
-<div id="content">
-<app-sidebar></app-sidebar>
-<div class="container-fluid">
-<div class="sub_heading">
-<h1>Category</h1>
-<!-- <div class="top_subheading_add">
-<a (click)="goTosubcategory()"><span>+</span>Sub Category</a>
-<a (click)="goToaddcategory()"><span>+</span>Add Category</a>
-</div> -->
-</div>
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Category</h1>
+                    <!-- <div class="top_subheading_add">
+                   <a (click)="goTosubcategory()"><span>+</span>Sub Category</a>
+                   <a (click)="goToaddcategory()"><span>+</span>Add Category</a>
+                   </div> -->
+                </div>
+                <div class="content_sec_comman">
+                    <div class="content_wrap">
+                        <div class="outer_loaction">
+                            <div class="location_name">
+                                <!-- <h3>Electronics</h3> -->
+                                <!-- <p><i class="fa fa-compress" aria-hidden="true"></i></p> -->
+                            </div>
+
+                            <div class="add_location_name">
+                                <a href="javascript:;" class="button-border add_state" data-toggle="modal"
+                                    data-target="#Add_State">
+                                    <i class="fa fa-plus"></i> Add Category</a>
+                            </div>
+
+                            <div class="state-list button-border" *ngFor="let category of categories; let i=index">
+                                <div class="state">
+                                    <div class="country_name">
+                                        <figure><img src={{imageUrl+category.image}}></figure>
+                                        <span>
+                                            <b>{{ i+1 }}. {{ category.name }} </b>
+                                        </span>
+
+                                        <a href="javascript:;" data-toggle="modal" data-target="#Add_State_delete">
+                                            <i class="fa fa-edit" (click)="editCategory(category._id)"></i>
+                                        </a>
+
+                                        <!-- <a href="javascript:;" data-toggle="modal" data-target="#Add_city">
+                                            <i class="fa fa-plus"></i>
+                                        </a> -->
+                                        <a href="javascript:;">
+                                            <i class="fa fa-trash" (click)="deleteCategory(category._id)"></i>
+                                        </a>
 
 
-<div class="content_sec_comman">
-<div class="content_wrap">
-<div class="outer_loaction">
-<div class="location_name">
-<h3>Electronics</h3>
-<p><i class="fa fa-compress" aria-hidden="true"></i></p>
-</div>
+                                        <a href="javascript:;">
+                                            <i class="fa fa-compress" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                    <div class="mobille_list">
+                                        <ul>
+                                            <li *ngFor="let subcategory of category.subCatList; let j=index ">
+                                                <span class="sub_category_image">
+                                                    <figure><img src={{imageUrl+subcategory.image}}></figure>
+                                                </span> <span>{{j+1}}. {{subcategory.name}}</span>
 
-<div class="add_location_name">
-<a href="javascript:;" class="button-border add_state" data-toggle="modal"
-data-target="#Add_State">
-<i class="fa fa-plus"></i> Add Category</a>
-</div>
+                                                <a style="margin-left: 50px;" href="javascript:;">
+                                                    <i class="fa fa-trash"
+                                                        (click)="deleteSubcategory(subcategory._id)"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="state-list state-list-li">
 
-<div class="state-list button-border">
-<div class="state">
-<div class="country_name">
-<span>
-<b>1. Mobiles </b>
-</span>
+                                        <div class="actions">
+                                            <a href="javascript:;" class="button-pad add_city" data-toggle="modal"
+                                                data-target="#Add_city" (click)="onAddSubCategoryBtn(category._id)">
+                                                <i class="fa fa-plus"></i>
+                                                Add New Sub Category </a>
+                                        </div>
+                                    </div>
+                                    <!-- state-list-->
+                                </div>
+                                <!--state-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<a href="javascript:;" data-toggle="modal" data-target="#Add_State_delete">
-<i class="fa fa-edit"></i>
-</a>
+                <!-----start pagination-->
 
-<a href="javascript:;" data-toggle="modal" data-target="#Add_city">
-<i class="fa fa-plus"></i>
-</a>
-<a href="javascript:;">
-    <i class="fa fa-trash"></i>
-    </a>
-
-<a href="javascript:;">
-<i class="fa fa-compress" aria-hidden="true"></i>
-</a>
-
-</div>
-
-<div class="mobille_list">
-<ul>
-<li>
-Lorem Ipsim
-</li>
-<li>
-Lorem Ipsim
-</li>
-<li>
-Lorem Ipsim
-</li>
-
-
-
-</ul>
-
-
-</div>
-<div class="state-list state-list-li">
-
-<div class="actions">
-<a href="javascript:;" class="button-pad add_city" data-toggle="modal"
-data-target="#Add_city">
-<i class="fa fa-plus"></i>
-Add New Category </a>
-</div>
-
-</div>
-
-<!-- state-list-->
-
-</div>
-<!--state-->
-</div>
-
-</div>
-
-
-
-
-
-
-
-</div>
-</div>
-
-
-
-
-
-
-
-
-<!-----start pagination-->
-
-<!-----end pagination-->
-</div>
-</div>
-</div>
+                <!-----end pagination-->
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Modal define loaction add state  -->
 <div id="Add_State" class="modal fade" role="dialog">
-<div class="modal-dialog">
-<div class="modal-content">
-<!-- <div class="modal-header">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div> -->
-<div class="modal-body">
-<h3> Add Category</h3>
+            <div class="modal-body">
+                <h3> Add Category</h3>
+                <form [formGroup]="addCategoryForm">
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="title">Name of the Category</label>
+                            <div class="input-group">
+                                <input class="form-control" type="text" value="" name="Name" formControlName="name">
+                            </div>
+                            <div *ngIf="submitted && addCategoryForm.controls.name.errors" class="invalid-feedback">
+                                <div *ngIf="addCategoryForm.controls.name.errors.required">
+                                    Category Name is required.
+                                </div>
+                                <div *ngIf="addCategoryForm.controls.name.errors.pattern">
+                                    Category Name is not valid.
+                                </div>
+                                <div *ngIf="addCategoryForm.controls.name.errors.maxlength">
+                                    Category Name can be max 20 characters long.
+                                </div>
+                            </div>
+                        </div>
 
-<div class="row">
-<div class="form-group col-md-12">
-<label for="title">Name of the Category</label>
-<div class="input-group">
-<input class="form-control" type="text" value="" name="Name">
-</div>
-</div>
+                        <div class="form-group col-md-12">
+                            <label for="title">Arabic Name of the Category</label>
+                            <div class="input-group">
+                                <input class="form-control" type="text" value="" name="Name" formControlName="name_ar">
+                            </div>
+                            <div *ngIf="submitted && addCategoryForm.controls.name_ar.errors" class="invalid-feedback">
+                                <div *ngIf="addCategoryForm.controls.name_ar.errors.required">
+                                    Category arabic name is required.
+                                </div>
+                                <div *ngIf="addCategoryForm.controls.name_ar.errors.pattern">
+                                    Category arabic name is not valid.
+                                </div>
+                                <div *ngIf="addCategoryForm.controls.name_ar.errors.maxlength">
+                                    Category arabic name can be max 20 characters long.
+                                </div>
+                            </div>
+                        </div>
 
-<div class="form-group col-md-12">
-    <label for="title">Add Image</label>
-    <div class="input-group">
-    <input class="form-control file" type="file" value="" name="">
+                        <div class="form-group col-md-12">
+                            <label for="title">Add Image</label>
+                            <div class="user_img">
+                                <figure *ngIf="categoryImage">
+                                    <img style="height: 50px;width: 50px" [src]="categoryImage" />
+                                </figure>
+                            </div>
+                            <div class="input-group">
+                                <input class="form-control file" #categoryImage type="file" accept="image/*"
+                                    (change)="profilePic($event)" name="image">
+                            </div>
+                            <div *ngIf="submitted && !image" class="invalid-feedback">
+                                Image is required.
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="model_buttons">
+                    <button class="mat-raised-button mat-primary mr-3" data-dismiss="modal" (click)="onAddCategory()">
+                        Save
+                    </button>
+                    <button class="mat-raised-button mat-warn" (click)="cancelClicked()"
+                        data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
-    </div>
-</div>
-
-<div class="model_buttons">
-<button class="mat-raised-button mat-primary mr-3">
-Save
-</button>
-<button class="mat-raised-button mat-warn" data-dismiss="modal">Close</button>
-</div>
-</div>
-</div>
-</div>
 </div>
 <!--Modal define loaction add state -->
 
 <!-- Modal define loaction edit state  -->
 <div id="Add_State_delete" class="modal fade" role="dialog">
-<div class="modal-dialog">
-<div class="modal-content">
-<!-- <div class="modal-header">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div> -->
-<div class="modal-body">
-<h3>  Add Sub Category</h3>
+            <div class="modal-body">
+                <h3> Edit Category</h3>
+                <form [formGroup]="editCategoryForm">
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="title">Name of the Category</label>
+                            <div class="input-group">
+                                <input class="form-control" type="text" value="" name="Name" formControlName="name">
+                            </div>
+                            <div *ngIf="submitted && editCategoryForm.controls.name.errors" class="invalid-feedback">
+                                <div *ngIf="editCategoryForm.controls.name.errors.required">
+                                    Category Name is required.
+                                </div>
+                                <div *ngIf="editCategoryForm.controls.name.errors.pattern">
+                                    Category Name is not valid.
+                                </div>
+                                <div *ngIf="editCategoryForm.controls.name.errors.maxlength">
+                                    Category Name can be max 20 characters long.
+                                </div>
+                            </div>
+                        </div>
 
-<div class="row">
-<div class="form-group col-md-12">
-<label for="title">Name of the Category</label>
-<div class="input-group">
-<input class="form-control" type="text" value="" name="Name">
-</div>
-</div>
-<div class="form-group col-md-12">
-<label for="title">Select Category</label>
-<div class="input-group">
-<select class="form-control">
-<option>Lorem ipsum</option>
-<option>Lorem ipsum</option>
-<option>Lorem ipsum</option>
-</select>
-</div>
-</div>
+                        <div class="form-group col-md-12">
+                            <label for="title">Arabic Name of the Category</label>
+                            <div class="input-group">
+                                <input class="form-control" type="text" value="" name="Name" formControlName="name_ar">
+                            </div>
+                            <div *ngIf="submitted && editCategoryForm.controls.name_ar.errors" class="invalid-feedback">
+                                <div *ngIf="editCategoryForm.controls.name_ar.errors.required">
+                                    Category arabic name is required.
+                                </div>
+                                <div *ngIf="editCategoryForm.controls.name_ar.errors.pattern">
+                                    Category arabic name is not valid.
+                                </div>
+                                <div *ngIf="editCategoryForm.controls.name_ar.errors.maxlength">
+                                    Category arabic name can be max 20 characters long.
+                                </div>
+                            </div>
+                        </div>
 
-    <div class="form-group col-md-12">
-    <label for="title">Add Image</label>
-    <div class="input-group">
-    <input class="form-control file" type="file" value="" name="">
+                        <div class="form-group col-md-12">
+                            <label for="title">Add Image</label>
+                            <div class="user_img">
+                                <figure *ngIf="image">
+                                    <img style="height: 50px;width: 50px" [src]="image" />
+                                </figure>
+                            </div>
+                            <div class="input-group">
+                                <input class="form-control file" id="editCategoryImage" type="file" accept="image/*"
+                                    (change)="profilePic($event)" name="image" formControlName="image">
+                            </div>
+                            <div *ngIf="submitted && !image" class="invalid-feedback">
+                                Image is required.
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="model_buttons">
+                    <button class="mat-raised-button mat-primary mr-3" data-dismiss="modal"
+                        (click)="onUpdateCategory()">
+                        Update
+                    </button>
+                    <button class="mat-raised-button mat-warn" (click)="cancelClicked()"
+                        data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
-    </div>
-    
-</div>
-
-<div class="model_buttons">
-<button class="mat-raised-button mat-primary mr-3">
-Save
-</button>
-<button class="mat-raised-button mat-warn" data-dismiss="modal">Close</button>
-</div>
-</div>
-</div>
-</div>
 </div>
 <!--Modal define loaction edit state -->
 
 <!-- Modal define loaction edit state  -->
 <div id="Add_city" class="modal fade" role="dialog">
-<div class="modal-dialog">
-<div class="modal-content">
-<!-- <div class="modal-header">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div> -->
-<div class="modal-body">
-<h3>Add New Category</h3>
+            <div class="modal-body">
+                <h3>Add New SubCategory</h3>
+                <form [formGroup]="addSubcategoryForm">
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="title">Name of the SubCategory</label>
+                            <div class="input-group">
+                                <input class="form-control" type="text" value="" name="Name" formControlName="name">
+                            </div>
+                            <div *ngIf="submitted && addSubcategoryForm.controls.name.errors" class="invalid-feedback">
+                                <div *ngIf="addSubcategoryForm.controls.name.errors.required">
+                                    SubCategory Name is required.
+                                </div>
+                                <div *ngIf="addSubcategoryForm.controls.name.errors.pattern">
+                                    SubCategory Name is not valid.
+                                </div>
+                                <div *ngIf="addSubcategoryForm.controls.name.errors.maxlength">
+                                    SubCategory Name can be max 20 characters long.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-<div class="row">
-<div class="form-group col-md-12">
-<label for="title">Name of the Category</label>
-<div class="input-group">
-<input class="form-control" type="text" value="" name="Name">
-</div>
-</div>
-</div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="title">Arabic Name of the SubCategory</label>
+                            <div class="input-group">
+                                <input class="form-control" type="text" value="" name="SubCategory Type"
+                                    formControlName="name_ar">
+                            </div>
+                            <div *ngIf="submitted && addSubcategoryForm.controls.name_ar.errors"
+                                class="invalid-feedback">
+                                <div *ngIf="addSubcategoryForm.controls.name_ar.errors.required">
+                                    SubCategory Name is required.
+                                </div>
+                                <div *ngIf="addSubcategoryForm.controls.name_ar.errors.maxlength">
+                                    SubCategory Name can be max 20 characters long.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="title">Add Image</label>
+                            <div class="user_img">
+                                <figure *ngIf="subCategoryImage">
+                                    <img style="height: 50px;width: 50px" [src]="subCategoryImage" />
+                                </figure>
+                            </div>
+                            <div class="input-group">
+                                <input class="form-control file" id="subcategoryImage" type="file" accept="image/*"
+                                    (change)="subCategoryPic($event)" name="image" formControlName="image">
+                            </div>
+                            <div *ngIf="submitted && !subCategoryImage" class="invalid-feedback">
+                                Image is required.
+                            </div>
+                        </div>
+                    </div>
 
-<div class="row">
-<div class="form-group col-md-12">
-<label for="title">Category Type</label>
-<div class="input-group">
-<input class="form-control" type="text" value="" name="Category Type">
-</div>
-</div>
-</div>
-<div class="row">
-    <div class="form-group col-md-12">
-    <label for="title">Add Image</label>
-    <div class="input-group">
-    <input class="form-control file" type="file" value="" name="">
+                </form>
+                <div class="model_buttons">
+                    <button class="mat-raised-button mat-primary mr-3" data-dismiss="modal"
+                        (click)="onAddSubCategory()">
+                        Save
+                    </button>
+                    <button class="mat-raised-button mat-warn" (click)="cancelClicked()"
+                        data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
-    </div>
-    </div>
-<div class="model_buttons">
-<button class="mat-raised-button mat-primary mr-3">
-Save
-</button>
-<button class="mat-raised-button mat-warn" data-dismiss="modal">Close</button>
-</div>
-</div>
-</div>
-</div>
 </div>
 <!--Modal define loaction edit state -->

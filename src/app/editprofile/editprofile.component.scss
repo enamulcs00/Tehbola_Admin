@@ -10,3 +10,20 @@
     font-size: 14px;
     line-height: 18px;
 }
+
+
+#firstInput {
+  width: 20%;
+  display: inline-block;
+  float: left;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+#secondInput {
+  width: 80%;
+  display: inline-block;
+  float: left;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-left:0px;
+}
