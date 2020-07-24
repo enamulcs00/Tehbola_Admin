@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/services/api.service';
 import { ActivatedRoute } from '@angular/router';
@@ -8,7 +8,11 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './editprofile.component.html',
   styleUrls: ['./editprofile.component.scss']
 })
-export class EditprofileComponent implements OnInit {
+export class EditprofileComponent implements OnInit, AfterViewInit {
+  //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+  //Add 'implements AfterViewInit' to the class.
+
+
 
   updateProfileForm: FormGroup
   imageFile: any;
@@ -31,17 +35,18 @@ export class EditprofileComponent implements OnInit {
         this.id = params['id'];
       });
 
+
     this.apiService.getProfile().subscribe((res) => {
       console.log(res.data)
       this.profileData = res.data
 
+      this.firstname = this.profileData.firstName
+      this.lastName = this.profileData.lastName
+      this.address = this.profileData.address
+      this.countryCode = this.profileData.countryCode
+      this.phone = this.profileData.phone
+      this.imagePreview = this.profileData.profilePic
     });
-
-
-
-
-
-
 
   }
 
@@ -51,7 +56,7 @@ export class EditprofileComponent implements OnInit {
   ngOnInit() {
 
     this.updateProfileForm = this.fb.group({
-      firstName: ['', Validators.required],
+      firstName: [this.firstname, Validators.required],
       lastName: ['', Validators.required],
       address: ['', Validators.required],
       countryCode: ['', Validators.required],
@@ -60,8 +65,12 @@ export class EditprofileComponent implements OnInit {
       profilePic: []
     });
 
-    this.setValue()
 
+
+  }
+  ngAfterViewInit(): void {
+
+    this.setValue()
   }
 
   get f() {
@@ -69,21 +78,20 @@ export class EditprofileComponent implements OnInit {
   }
 
   setValue() {
-    debugger
-    this.firstname = this.profileData.firstName
-    this.lastName = this.profileData.lastName
-    this.address = this.profileData.addressℹ
-    this.countryCode = this.profileData.countryCode
-    this.phone = this.profileData.phone
-    this.imagePreview = this.profileData.profilePic
 
-    this.updateProfileForm.get('firstName').patchValue(this.firstname)
-    this.updateProfileForm.get('lastName').patchValue(this.lastName)
-    this.updateProfileForm.get('address').patchValue(this.address)
-    this.updateProfileForm.get('countryCode').patchValue(this.countryCode)
-    this.updateProfileForm.get('phone').patchValue(this.phone)
-    this.updateProfileForm.get('profilePic1').patchValue(this.imagePreview)
 
+
+    this.updateProfileForm.controls['firstName'].setValue(this.firstname)
+    this.updateProfileForm.controls['lastName'].setValue(this.lastName)
+    this.updateProfileForm.controls['address'].setValue(this.address)
+    this.updateProfileForm.controls['countryCode'].setValue(this.countryCode)
+    this.updateProfileForm.controls['phone'].setValue(this.phone)
+    this.updateProfileForm.controls['profilePic1'].setValue(this.imagePreview)
+    var reader = new FileReader();
+    reader.readAsDataURL(this.imagePreview);
+    reader.onload = (event: any) => {
+      this.imagePreview = event.target.result;
+    }
   }
 
   async profilePic(event) {
