@@ -678,7 +678,7 @@ if (typeof jQuery === 'undefined') {
     this.isShown = null
     this.originalBodyPad = null
     this.scrollbarWidth = 0
-    this.ignoreBackdropClick = false
+    this.ignoreBackdropClick = true
     this.fixedContent = '.navbar-fixed-top, .navbar-fixed-bottom'
 
     if (this.options.remote) {

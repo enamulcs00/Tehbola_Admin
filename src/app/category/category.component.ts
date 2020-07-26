@@ -1,4 +1,4 @@
-import { Component, OnInit,  } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/services/api.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
@@ -23,8 +23,10 @@ export class CategoryComponent implements OnInit {
   id: any;
   image: any;
   imageUrl: any
+  flagImage: boolean;
+  previewImage: any;
 
-  
+
 
 
 
@@ -32,11 +34,12 @@ export class CategoryComponent implements OnInit {
     private apiService: ApiService,
     private commonService: CommonService,
     private formBuilder: FormBuilder, private serverUrl: UrlService) {
+    this.imageUrl = this.serverUrl.imageUrl
+
     this.getAllCategories();
   }
 
   ngOnInit() {
-    this.imageUrl = this.serverUrl.imageUrl
     this.addCategoryForm = this.formBuilder.group({
       name: new FormControl("", [Validators.required, Validators.maxLength(20), Validators.pattern(".*\\S.*[a-zA-z0-9 ]")]),
       name_ar: new FormControl("", [Validators.required, Validators.maxLength(20)]),
@@ -70,21 +73,25 @@ export class CategoryComponent implements OnInit {
   goToeditcategory() {
     this.router.navigate(['editcategory'])
   }
-  //   goTosubcategory() {
-  //   this.router.navigate(['/subcategory'])
-  // }
+
+
   async profilePic(event) {
+    
     if (event.target.files && event.target.files[0]) {
       this.imageFile = event.target.files[0];
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (event: any) => {
         if (this.id) {
-          this.image = event.target.result;
+          this.flagImage = true;
+          this.previewImage = event.target.result;
+          this.editCategoryForm.controls['image'].patchValue(this.imageFile);
         } else {
           this.categoryImage = event.target.result;
+          this.addCategoryForm.controls['image'].patchValue(this.categoryImage);
+
         }
-        this.addCategoryForm.controls['image'].setValue(this.categoryImage);
+
       };
     }
   }
@@ -95,7 +102,7 @@ export class CategoryComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (event: any) => {
         this.subCategoryImage = event.target.result;
-        this.addSubcategoryForm.controls['image'].setValue(this.imageFile);
+        this.addSubcategoryForm.controls['image'].patchValue(this.imageFile);
       };
 
     }
@@ -103,8 +110,11 @@ export class CategoryComponent implements OnInit {
   onAddCategory() {
     this.submitted = true;
     if (this.submitted && this.addCategoryForm.valid) {
-      const data = this.addCategoryForm.value;
-      data['img'] = this.imageFile;
+      const data = new FormData();
+      data.append('name', this.addCategoryForm.get('name').value);
+      data.append('name_ar', this.addCategoryForm.get('name').value);
+      data.append('image', this.imageFile, this.imageFile.name);
+
       this.apiService.addCategory(data).subscribe(res => {
         if (res) {
           this.getAllCategories();
@@ -112,8 +122,7 @@ export class CategoryComponent implements OnInit {
           this.submitted = false;
           this.addCategoryForm.reset();
           this.imageFile = null;
-          //this.categoryImage = null
-          //  this.image = null;
+
           this.categoryImage = null
 
 
@@ -123,21 +132,29 @@ export class CategoryComponent implements OnInit {
     }
   }
 
-
   onUpdateCategory() {
     this.submitted = true;
+    console.log(this.imageFile);
     if (this.submitted && this.editCategoryForm.valid) {
-      const data = this.editCategoryForm.value;
-      data['img'] = this.imageFile;
-      data['id'] = this.id;
-      console.log(data);
+      console.log(this.editCategoryForm.value)
+      const data = new FormData();
+      data.append('id', this.id)
+      data.append('name', this.editCategoryForm.get('name').value);
+      data.append('name_ar', this.editCategoryForm.get('name_ar').value);
+      data.append('image', this.imageFile, this.imageFile.name);
+      console.log(" form data");
+      data.forEach((value, key) => {
+        console.log(key + " " + value)
+      });
       this.apiService.editCategory(data).subscribe(res => {
         if (res) {
+          this.previewImage = null
           this.getAllCategories();
           this.commonService.successToast(res.message);
           this.submitted = false;
           this.editCategoryForm.reset();
           this.image = null;
+
           this.imageFile = null
         }
       });
@@ -148,9 +165,11 @@ export class CategoryComponent implements OnInit {
 
     this.submitted = true;
     if (this.submitted && this.addSubcategoryForm.valid) {
-      const data = this.addSubcategoryForm.value;
-      data['img'] = this.imageFile;
-      data['parentId'] = this.id;
+      const data = new FormData();
+      data.append('parentId', this.id)
+      data.append('name', this.addSubcategoryForm.get('name').value);
+      data.append('name_ar', this.addSubcategoryForm.get('name_ar').value);
+      data.append('image', this.imageFile, this.imageFile.name);
       this.apiService.addSubCategory(data).subscribe(res => {
         if (res) {
           this.getAllCategories();
@@ -166,18 +185,29 @@ export class CategoryComponent implements OnInit {
   }
 
   viewCategory(id) {
-    this.apiService.viewCategory(id).subscribe(res => {
-      this.editCategoryForm.patchValue(res.data);
-      this.image = res.data.image;
-      this.imageFile = res.data.image;
-      //console.log(this.image);
 
+    this.apiService.viewCategory(id).subscribe((res) => {
+      if (res.data) {
+        console.log(res)
+        this.editCategoryForm.controls['name'].setValue(res.data.name);
+
+        this.editCategoryForm.controls['name_ar'].setValue(res.data.name_ar);
+        //  this.editCategoryForm.controls['image'].setValue(res.data.image)
+        this.flagImage = false;
+        let data = res.data
+        this.image = data.image
+        //this.imageFile =data.image;
+        console.log(this.image);
+
+      }
     })
 
+    console.log(this.image)
   }
   editCategory(id) {
     this.id = id;
     this.viewCategory(id);
+
   }
 
   result: any

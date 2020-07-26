@@ -315,12 +315,7 @@ export class ApiService {
       );
   }
 
-  addCategory(category) {
-    const data: FormData = new FormData();
-    data.append('name', category.name);
-    data.append('name_ar', category.name_ar);
-    data.append('image', category.img);
-
+  addCategory(data) {
     return this.http
       .post<any>(this.apiEndPoints.addCategories, data, this.getHeaders())
       .pipe(
@@ -328,12 +323,12 @@ export class ApiService {
       );
   }
 
-  editCategory(category) {
-    const data: FormData = new FormData();
-    data.append('id', category.id);
-    data.append('name', category.name);
-    data.append('name_ar', category.name_ar);
-    data.append('image', category.img);
+  editCategory(data) {
+    // const data: FormData = new FormData();
+    // data.append('id', category.id);
+    // data.append('name', category.name);
+    // data.append('name_ar', category.name_ar);
+    // data.append('image', category.img);
 
     return this.http
       .put<any>(this.apiEndPoints.viewCategory, data, this.getHeaders())
@@ -352,13 +347,7 @@ export class ApiService {
 
 
   //Sub Category
-  addSubCategory(subCat) {
-    const data: FormData = new FormData();
-    data.append('parentId', subCat.parentId);
-    data.append('name', subCat.name);
-    data.append('name_ar', subCat.name_ar);
-    data.append('image', subCat.img);
-
+  addSubCategory(data) {
     return this.http
       .post<any>(this.apiEndPoints.addSubCategory, data, this.getHeaders())
       .pipe(
