@@ -49,15 +49,49 @@
                                 <th>Offer Details</th>
                                 <th class="action_bx">Action</th>
                             </tr>
-                            <tr *ngFor="let item of bannerList; let index as i">
-                                <td>141</td>
+                            <tr *ngFor="let item of bannerList; index as i">
+                                <td>{{i+1}}</td>
                                 <!-- <td>Lorem</td>
                                 <td>Lorem ipsum</td> -->
                                 <td>{{item.name}}</td>
                                 <td>{{item.discount}}%</td>
                                 <td>{{item.startDate | date}}</td>
                                 <td>{{item.endDate | date}}</td>
-                                <td><a><i class="fa fa-eye"></i></a></td>
+                                <td><a href="javascript:void(0)" class="button-pad add_city" data-toggle="modal"
+                                        data-target="#Add_city"><i class="fa fa-eye"></i></a>
+                                    <div>
+
+                                        <!-- Modal define loaction edit state  -->
+                                        <div id="Add_city" class="modal fade" role="dialog">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+          
+                                                    <div class="modal-body">
+                                                        <h3>{{item.offer.type}}</h3>
+                                                        <table>
+                                                            <tr>
+                                                                <th>Sr.no</th>
+                                                                <th>Image</th>
+                                                                <th>Category</th>
+                                                              
+                                                            </tr>
+                                                            <tr *ngFor="let unit of item.offer.list; index as i">
+
+                                                                <td>{{i+1}}</td>
+                                                                
+                                                                <td><figure><img src="imagePath+unit.image"></figure></td>
+                                                                <td>{{unit.name}}</td>
+                                                                
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </td>
+
                                 <td>
                                     <div class="action">
                                         <ul>

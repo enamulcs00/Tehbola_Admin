@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/services/api.service';
 import { PageEvent } from '@angular/material/paginator';
+import { UrlService } from 'src/services/url.service';
 
 @Component({
   selector: 'app-offerdeals',
@@ -18,7 +19,11 @@ export class OfferdealsComponent implements OnInit {
   search: string = '';
   flagData: boolean
   bannerList: any
-  constructor(private router: Router, private apiServce: ApiService) { }
+  imagePath:any
+  constructor(private router: Router, private apiServce: ApiService,private urlService:UrlService) { 
+this.imagePath=this.urlService.imageUrl;
+
+  }
 
   ngOnInit() {
     this.getAllDiscount()
