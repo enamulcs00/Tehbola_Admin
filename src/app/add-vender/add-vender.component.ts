@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiService } from 'src/services/api.service';
+import { CommonService } from 'src/services/common.service';
 interface Ready {
   value: string;
   viewValue: string;
@@ -14,12 +15,12 @@ interface Ready {
 export class AddVenderComponent implements OnInit {
   addVendorForm: FormGroup
   submitted: boolean;
-  constructor(private router: Router, private fb: FormBuilder, private apiService: ApiService) { }
+  constructor(private router: Router, private commonService: CommonService, private fb: FormBuilder, private apiService: ApiService) { }
   selectedFile: File
   ngOnInit() {
     this.addVendorForm = this.fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(25)]],
-      lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(25)]],
+      firstName: ['', [Validators.required, Validators.maxLength(25)]],
+      lastName: ['', [Validators.required, Validators.maxLength(25)]],
       email: ['', [Validators.required, Validators.email]],
       countryCode: ['', Validators.required],
       phone: ['', [Validators.required]],
@@ -94,6 +95,10 @@ export class AddVenderComponent implements OnInit {
       this.apiService.addVendor(data).subscribe((res) => {
         if (res) {
           console.log(res)
+
+          if (res.success) {
+            this.commonService.successToast("Edit Succesfully")
+          }
           this.router.navigate(['venderManagement'])
         }
       });

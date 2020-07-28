@@ -48,7 +48,7 @@ export class CategoryComponent implements OnInit {
     this.editCategoryForm = this.formBuilder.group({
       name: new FormControl("", [Validators.required, Validators.maxLength(20), Validators.pattern(".*\\S.*[a-zA-z0-9 ]")]),
       name_ar: new FormControl("", [Validators.required, Validators.maxLength(20)]),
-      image: new FormControl("", [Validators.required]),
+      image: new FormControl(""),
     });
     this.addSubcategoryForm = this.formBuilder.group({
       name: new FormControl("", [Validators.required, Validators.maxLength(20), Validators.pattern(".*\\S.*[a-zA-z0-9 ]")]),
@@ -74,9 +74,10 @@ export class CategoryComponent implements OnInit {
     this.router.navigate(['editcategory'])
   }
 
-
+  picUploader: boolean;
   async profilePic(event) {
-    
+    debugger
+    this.picUploader = true
     if (event.target.files && event.target.files[0]) {
       this.imageFile = event.target.files[0];
       var reader = new FileReader();
@@ -85,10 +86,10 @@ export class CategoryComponent implements OnInit {
         if (this.id) {
           this.flagImage = true;
           this.previewImage = event.target.result;
-          this.editCategoryForm.controls['image'].patchValue(this.imageFile);
+          this.editCategoryForm.controls['image'].setValue(this.imageFile);
         } else {
           this.categoryImage = event.target.result;
-          this.addCategoryForm.controls['image'].patchValue(this.categoryImage);
+          this.addCategoryForm.controls['image'].setValue(this.categoryImage);
 
         }
 
@@ -133,6 +134,8 @@ export class CategoryComponent implements OnInit {
   }
 
   onUpdateCategory() {
+    debugger
+
     this.submitted = true;
     console.log(this.imageFile);
     if (this.submitted && this.editCategoryForm.valid) {
@@ -141,7 +144,10 @@ export class CategoryComponent implements OnInit {
       data.append('id', this.id)
       data.append('name', this.editCategoryForm.get('name').value);
       data.append('name_ar', this.editCategoryForm.get('name_ar').value);
-      data.append('image', this.imageFile, this.imageFile.name);
+      if (this.picUploader == true) {
+        data.append('image', this.imageFile, this.imageFile.name);
+
+      }
       console.log(" form data");
       data.forEach((value, key) => {
         console.log(key + " " + value)
@@ -184,19 +190,24 @@ export class CategoryComponent implements OnInit {
     }
   }
 
-  viewCategory(id) {
+  imageName: string
 
+  viewCategory(id) {
+    this.picUploader = false
+    debugger
     this.apiService.viewCategory(id).subscribe((res) => {
       if (res.data) {
+        this.flagImage = false;
         console.log(res)
         this.editCategoryForm.controls['name'].setValue(res.data.name);
 
         this.editCategoryForm.controls['name_ar'].setValue(res.data.name_ar);
-        //  this.editCategoryForm.controls['image'].setValue(res.data.image)
-        this.flagImage = false;
+        //  this.editCategoryForm.controls['image'].patchValue(res.data.image)
+
         let data = res.data
         this.image = data.image
-        //this.imageFile =data.image;
+        this.imageFile = data.image;
+        this.imageName = data.image.name
         console.log(this.image);
 
       }
@@ -270,7 +281,7 @@ export class CategoryComponent implements OnInit {
 
         this.apiService.delete(data);
 
-        this.deleteFromList(id)
+        this.deleteSubCategoryFromList(id)
 
       } else {
         console.log("cancelled");
@@ -278,6 +289,26 @@ export class CategoryComponent implements OnInit {
     });
   }
 
+  deleteSubCategoryFromList(id) {
+    setTimeout(() => {
+      let temp = this.apiService.flagDelete;
+      if (temp == true) {
+        // this.categories.splice(i, 1);
+        this.getAllCategories()
+        console.log(this.categories)
+        if (this.result) {
+          this.commonService.successToast("Sub Cateogry Deleted");
+          console.log("service is not called")
+        }
+      }
+      else {
+        console.log("error");
+        this.commonService.errorToast("Error Occured")
+      }
+    }, 2000);
+
+
+  }
 
 
   deleteFromList(i) {

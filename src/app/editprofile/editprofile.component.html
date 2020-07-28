@@ -15,12 +15,15 @@
                             <li>
                                 <label>First Name</label>
                                 <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="text" placeholder=""
-                                        formControlName="firstName" name="firstName">
+                                    <input matInput type="text" placeholder="" formControlName="firstName"
+                                        name="firstName">
                                 </mat-form-field>
                                 <div *ngIf="submitted && f.firstName.errors" class="custom-invalid">
                                     <div *ngIf="f.firstName.errors.required">
                                         First Name is required.
+                                    </div>
+                                    <div *ngIf="f.firstName.errors.maxlength">
+                                        First Name should not be more than 25 characters.
                                     </div>
 
 
@@ -38,6 +41,9 @@
                                         Last Name is required.
                                     </div>
 
+                                    <div *ngIf="f.lastName.errors.maxlength">
+                                        Last Name should not be more than 25 characters.
+                                    </div>
 
 
                                 </div>
@@ -45,19 +51,28 @@
 
                             <li>
                                 <label>Phone Number</label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="text" placeholder="" id="firstInput"
-                                        formControlName="countryCode" name="countryCode">
-                                    <input matInput type="text" placeholder="" id="secondInput" formControlName="phone"
-                                        name="phone">
-                                </mat-form-field>
-                                <div *ngIf="submitted && f.phone.errors" class="custom-invalid">
-                                    <div *ngIf="f.phone.errors.required">
-                                        Phone is required.
-                                    </div>
+                                <div class="cardList">
+                                    <mat-form-field style="width: 20%;" [floatLabel]="'never'">
+                                        <input matInput type="number" min="0" id="firstInput"
+                                            formControlName="countryCode" name="countryCode">
+                                        <div *ngIf="submitted && f.countryCode.errors" class="custom-invalid">
+                                            <div *ngIf="f.countryCode.errors.required">
+                                                Country Code is required.
+                                            </div>
 
+                                        </div>
 
+                                    </mat-form-field>
+                                    <mat-form-field style="width: 80%;" [floatLabel]="'never'">
+                                        <input matInput type="number" min="0" placeholder="" id="secondInput"
+                                            formControlName="phone" name="phone">
 
+                                        <div *ngIf="submitted && f.phone.errors" class="custom-invalid">
+                                            <div *ngIf="f.phone.errors.required">
+                                                Phone is required.
+                                            </div>
+                                        </div>
+                                    </mat-form-field>
                                 </div>
                             </li>
                             <!-- <li>
@@ -87,7 +102,7 @@
                                     name="profilePic1">
 
                                 <div class="user_img">
-                                    <figure >
+                                    <figure>
                                         <img style="height: 100px;width: 100px; margin-top: 10px; margin-left: 10px;"
                                             [src]="imagePreview != null ? imagePreview: imagePath+showProfilePic" />
                                     </figure>

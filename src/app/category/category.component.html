@@ -20,8 +20,8 @@
                             </div>
 
                             <div class="add_location_name">
-                                <a href="javascript:;"  class="button-border add_state" data-toggle="modal"
-                                    data-target="#Add_State" >
+                                <a href="javascript:;" class="button-border add_state" data-toggle="modal"
+                                    data-target="#Add_State">
                                     <i class="fa fa-plus"></i> Add Category</a>
                             </div>
 
@@ -112,7 +112,7 @@
                                     Category Name is not valid.
                                 </div>
                                 <div *ngIf="addCategoryForm.controls.name.errors.maxlength">
-                                    Category Name can be max 20 characters long.
+                                    Category Name should be max 25 characters long.
                                 </div>
                             </div>
                         </div>
@@ -120,7 +120,8 @@
                         <div class="form-group col-md-12">
                             <label for="title">Arabic Name of the Category</label>
                             <div class="input-group">
-                                <input class="form-control" type="text" value="" name="name_ar" formControlName="name_ar">
+                                <input class="form-control" type="text" value="" name="name_ar"
+                                    formControlName="name_ar">
                             </div>
                             <div *ngIf="submitted && addCategoryForm.controls.name_ar.errors" class="invalid-feedback">
                                 <div *ngIf="addCategoryForm.controls.name_ar.errors.required">
@@ -130,7 +131,7 @@
                                     Category arabic name is not valid.
                                 </div>
                                 <div *ngIf="addCategoryForm.controls.name_ar.errors.maxlength">
-                                    Category arabic name can be max 20 characters long.
+                                    Category arabic name should be max 25 characters long.
                                 </div>
                             </div>
                         </div>
@@ -139,12 +140,12 @@
                             <label for="title">Add Image</label>
                             <div class="user_img">
                                 <figure *ngIf="categoryImage">
-                                    <img style="height: 50px;width: 50px" [src]="categoryImage"/>
+                                    <img style="height: 50px;width: 50px" [src]="categoryImage" />
                                 </figure>
                             </div>
                             <div class="input-group">
-                                <input class="form-control file"  type="file" accept="image/*"
-                                    (change)="profilePic($event)" formControlName="image"  name="image">
+                                <input class="form-control file" type="file" accept="image/*"
+                                    (change)="profilePic($event)" formControlName="image" name="image">
                             </div>
                             <div *ngIf="submitted && !image" class="invalid-feedback">
                                 Image is required.
@@ -153,7 +154,7 @@
                     </div>
                 </form>
                 <div class="model_buttons">
-                    <button class="mat-raised-button mat-primary mr-3" data-dismiss="modal"  (click)="onAddCategory()">
+                    <button class="mat-raised-button mat-primary mr-3" data-dismiss="modal" (click)="onAddCategory()">
                         Save
                     </button>
                     <button class="mat-raised-button mat-warn" (click)="cancelClicked()"
@@ -189,7 +190,7 @@
                                     Category Name is not valid.
                                 </div>
                                 <div *ngIf="editCategoryForm.controls.name.errors.maxlength">
-                                    Category Name can be max 20 characters long.
+                                    Category Name should be max 25 characters long.
                                 </div>
                             </div>
                         </div>
@@ -197,7 +198,8 @@
                         <div class="form-group col-md-12">
                             <label for="title">Arabic Name of the Category</label>
                             <div class="input-group">
-                                <input class="form-control" type="text" value="" name="name_ar" formControlName="name_ar">
+                                <input class="form-control" type="text" value="" name="name_ar"
+                                    formControlName="name_ar">
                             </div>
                             <div *ngIf="submitted && editCategoryForm.controls.name_ar.errors" class="invalid-feedback">
                                 <div *ngIf="editCategoryForm.controls.name_ar.errors.required">
@@ -207,7 +209,7 @@
                                     Category arabic name is not valid.
                                 </div>
                                 <div *ngIf="editCategoryForm.controls.name_ar.errors.maxlength">
-                                    Category arabic name can be max 20 characters long.
+                                    Category arabic name should be max 25 characters long.
                                 </div>
                             </div>
                         </div>
@@ -224,7 +226,7 @@
                             </div>
                             <div class="input-group">
                                 <input class="form-control file" id="editCategoryImage" type="file" accept="image/*"
-                                    (change)="profilePic($event)" name="imageFile"  formControlName="image">
+                                    (change)="profilePic($event)" name="imageFile" formControlName="image">
                             </div>
                             <div *ngIf="submitted && !image" class="invalid-feedback">
                                 Image is required.
@@ -233,7 +235,7 @@
                     </div>
                 </form>
                 <div class="model_buttons">
-                    <button class="mat-raised-button mat-primary mr-3" data-dismiss="modal" 
+                    <button class="mat-raised-button mat-primary mr-3" data-dismiss="modal"
                         (click)="onUpdateCategory()">
                         Update
                     </button>
@@ -314,7 +316,7 @@
 
                 </form>
                 <div class="model_buttons">
-                    <button class="mat-raised-button mat-primary mr-3"  data-dismiss="modal"
+                    <button class="mat-raised-button mat-primary mr-3" data-dismiss="modal"
                         (click)="onAddSubCategory()">
                         Save
                     </button>

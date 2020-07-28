@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/services/api.service';
 import { NgForOf } from '@angular/common';
 import { DatePipe } from '@angular/common';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CommonService } from 'src/services/common.service';
 
 declare var $: any;
 interface Ready {
@@ -28,11 +30,33 @@ export class EditUserComponent implements OnInit {
   completedOrder: string;
   rejectedOrder: string;
   totalAmountPaid: string;
+  editUserForm: FormGroup
+  submitted: boolean;
 
-  constructor(private router: Router, private route: ActivatedRoute, private apiService: ApiService,
+  constructor(private router: Router, private fb: FormBuilder, private commonService: CommonService, private route: ActivatedRoute, private apiService: ApiService,
     private datePipe: DatePipe) {
 
+    this.editUserForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      UserEmail: ['', [Validators.required, Validators.email]],
+      userCountryCode: ['', Validators.required],
+      UserPhoneNumber: ['', Validators.required],
+      numberOfOrder: ['', Validators.required],
+      completedOrder: ['', Validators.required],
+      rejectedOrder: ['', Validators.required],
+      totalAmountPaid: ['', Validators.required],
 
+
+
+    })
+
+
+  }
+
+
+  get f() {
+    return this.editUserForm.controls;
   }
 
   ngOnInit() {
@@ -43,15 +67,27 @@ export class EditUserComponent implements OnInit {
         this.id = params['id'];
       });
 
+
+
     this.apiService.viewUser(this.id).subscribe((res) => {
       if (res.success) {
         console.log(res.data);
-        this.firstName = res.data.firstName;
-        this.lastName = res.data.lastName;
-        this.userCountryCode = res.data.countryCode;
-        this.UserEmail = res.data.email;
-        this.UserPhoneNumber = res.data.phone;
-        this.status = res.data.status;
+        this.editUserForm.controls['firstName'].setValue(res.data.firstName);
+
+        this.editUserForm.controls['lastName'].setValue(res.data.lastName);
+        this.editUserForm.controls['UserEmail'].setValue(res.data.email);
+        this.editUserForm.controls['userCountryCode'].setValue(res.data.countryCode);
+        this.editUserForm.controls['UserPhoneNumber'].setValue(res.data.phone);
+        this.editUserForm.controls['numberOfOrder'].setValue(res.data.totalOrders);
+        this.editUserForm.controls['completedOrder'].setValue(res.data.completedOrders);
+        this.editUserForm.controls['rejectedOrder'].setValue(res.data.rejectedOrders);
+        this.editUserForm.controls['totalAmountPaid'].setValue(res.data.totalPaid);
+        // this.firstName = res.data.firstName;
+        // this.lastName = res.data.lastName;
+        // this.userCountryCode = res.data.countryCode;
+        // this.UserEmail = res.data.email;
+        // this.UserPhoneNumber = res.data.phone;
+        //this.status = res.data.status;
         this.numberOfOrder = res.data.totalOrders;
         this.completedOrder = res.data.completedOrders;
         this.rejectedOrder = res.data.rejectedOrders;
@@ -71,7 +107,8 @@ export class EditUserComponent implements OnInit {
 
 
   updateUser() {
-
+    let userUpdate = {}
+    this.submitted = true
     console.log(this.id)
     let temp: number
     if (this.status == "active") {
@@ -79,22 +116,53 @@ export class EditUserComponent implements OnInit {
     } else {
       temp = 0
     }
-    let userUpdate = {
-      id: this.id,
-      firstName: this.firstName,
-      lastName: this.lastName,
-      email: this.UserEmail,
-      phone: this.UserPhoneNumber,
-      status: temp,
-      totalOrders: this.numberOfOrder,
-      completedOrders: this.completedOrder,
-      rejectedOrders: this.rejectedOrder,
-      totalPaid: this.totalAmountPaid,
+
+    if (this.submitted && this.editUserForm.valid) {
+      let userUpdate = {
+        id: this.id,
+        firstName: this.editUserForm.get('firstName').value,
+        lastName: this.editUserForm.get('lastName').value,
+        email: this.editUserForm.get('UserEmail').value,
+        countryCode: this.editUserForm.get('userCountryCode').value,
+        phone: this.editUserForm.get('UserPhoneNumber').value,
+        totalOrders: this.editUserForm.get('numberOfOrder').value,
+        completedOrders: this.editUserForm.get('completedOrder').value,
+        rejectedOrders: this.editUserForm.get('rejectedOrder').value,
+        totalPaid: this.editUserForm.get('totalAmountPaid').value,
+
+      }
+      this.apiService.editUser(userUpdate).subscribe((res) => {
+        console.log(res);
+        if (res.success) {
+          this.commonService.successToast(res.message)
+        } else {
+          this.commonService.errorToast(res.message)
+        }
+        this.goTomanageUser()
+      });
+
+    } else {
+      console.log("form is invalid")
     }
-    this.apiService.editUser(userUpdate).subscribe((res) => {
-      console.log(res);
-      this.goTomanageUser()
-    });
+
+
+
+
+
+
+    // let userUpdate = {
+    //   id: this.id,
+    //   firstName: this.firstName,
+    //   lastName: this.lastName,
+    //   email: this.UserEmail,
+    //   phone: this.UserPhoneNumber,
+    //   status: temp,
+    //   totalOrders: this.numberOfOrder,
+    //   completedOrders: this.completedOrder,
+    //   rejectedOrders: this.rejectedOrder,
+    //   totalPaid: this.totalAmountPaid,
+    // }
+
   }
   goTomanageUser() {
     this.router.navigate(['/manageUser'])

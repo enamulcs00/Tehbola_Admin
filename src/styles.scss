@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 
 * {margin:0;padding:0;outline:none !important;}
-body{overflow: hidden;font-family: 'Montserrat', sans-serif;}
+body{overflow: hidden;font-family: 'Montserrat', sans-serif;font-size: 1.5rem !important;}
 .conta_iner {width:1170px;margin:0 auto;}
 h1, h2, h3, h4, h5, h6,p {margin:0;}
 a, a:hover, a:focus {text-decoration:none !important;cursor:pointer;}
@@ -44,7 +44,10 @@ th.profile_bx {width:7%;}
 .action ul li {cursor:pointer;width:fit-content;}
 /**login page css**/.login_div {height:100vh;display:flex;align-items:center;justify-content:center;background-color:#ffcb08;}
 .logininner form {display:flex;align-items:center;justify-content:center;flex-direction:column;background-color:#fff;width:50%;margin:5rem auto 0;padding:30px;}
-.logo {text-align:center;}
+.logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
 .login_div .sub_main_heading {text-align:center;}
 .input_divs {width:100%;}
 .login_div .mat-form-field {width:100%;}
@@ -62,7 +65,7 @@ button.mat-button.mat-button-base {background-color:#feee00;padding:12px 30px;li
 .logininner .sub_main_heading {text-align:center;margin-bottom:25px;}
 .sub_heading {margin-bottom:2rem;padding-bottom:18px;display:flex;align-items:center;justify-content:space-between;}
 .container-fluid {
-padding: 32px 28px 187px 90px;
+padding: 32px 28px 187px 90px !important;
 height: 800px;
 overflow-y: scroll;
 }

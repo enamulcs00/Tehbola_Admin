@@ -26,7 +26,7 @@ export class ChangepasswordComponent implements OnInit {
     this.changePassForm = this.formBuilder.group({
       oldPassword: new FormControl("", [Validators.required, Validators.minLength(8), Validators.maxLength(25)]),
       newPassword: new FormControl("", [Validators.required, Validators.minLength(8), Validators.maxLength(25)]),
-      confirmPassword: new FormControl("", [Validators.required]),
+      confirmPassword: new FormControl("", [Validators.required, Validators.minLength(8), Validators.maxLength(25)]),
     }, {
       validator: MustMatch('newPassword', 'confirmPassword')
     });
@@ -37,12 +37,21 @@ export class ChangepasswordComponent implements OnInit {
   get f() { return this.changePassForm.controls; }
   onChangePassword() {
 
+
     this.submitted = true;
     if (this.changePassForm.valid && this.submitted) {
       this.apiService.changePassword(this.changePassForm.value).subscribe(res => {
-        this.commService.successToast(res.message);
-        this.router.navigateByUrl("dashboard");
+        if (res.success) {
+          this.commService.successToast(res.message);
+          this.router.navigateByUrl("dashboard");
+        } else {
+          this.commService.errorToast(res.message)
+        }
       });
+    } else {
+      console.log(
+        "invalid"
+      )
     }
 
   }

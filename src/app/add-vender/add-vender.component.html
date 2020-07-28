@@ -22,11 +22,9 @@
                                     <div *ngIf="f.firstName.errors.required">
                                         First Name is required.
                                     </div>
-                                    <div *ngIf="f.firstName.errors.minLength">
-                                        First Name should be more than 3.
-                                    </div>
-                                    <div *ngIf="f.firstName.errors.maxLength">
-                                        First Name can't be more than 25.
+
+                                    <div *ngIf="f.firstName.errors.maxlength">
+                                        First Name should not be more than 25.
                                     </div>
 
 
@@ -42,11 +40,9 @@
                                     <div *ngIf="f.lastName.errors.required">
                                         Last Name is required.
                                     </div>
-                                    <div *ngIf="f.lastName.errors.minLength">
-                                        Last Name should be more than 3 .
-                                    </div>
-                                    <div *ngIf="f.lastName.errors.maxLength">
-                                        Last Name can't exced from 25.
+
+                                    <div *ngIf="f.lastName.errors.maxlength">
+                                        Last Name should not be more than 25.
                                     </div>
 
 
@@ -62,7 +58,7 @@
                                         Email is required.
                                     </div>
                                     <div *ngIf="f.email.errors.email">
-                                        Valid Email is required.
+                                        Email you entered is not valid, please type in a valid email address.
                                     </div>
 
 
@@ -87,28 +83,30 @@
                             </li> -->
                             <li>
                                 <label>Vendor Contact Number<span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="text" placeholder="country code" id="firstInput"
-                                        formControlName="countryCode" name="countryCode">
+                                <div class="cardList">
+                                    <mat-form-field style="width: 20%;" [floatLabel]="'never'">
+                                        <input matInput type="number" min="0" id="firstInput"
+                                            formControlName="countryCode" name="countryCode">
+                                        <div *ngIf="submitted && f.countryCode.errors" class="custom-invalid">
+                                            <div *ngIf="f.countryCode.errors.required">
+                                                Country Code is required.
+                                            </div>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
 
-
-                                    <input matInput type="text" placeholder="Phone Number" id="secondInput"
-                                        formControlName="phone" name="phone">
-                                </mat-form-field>
-                                <div class="row">
-                                    <div *ngIf="submitted && f.countryCode.errors" class="custom-invalid">
-                                        <div *ngIf="f.countryCode.errors.required">
-                                            Country Code is required.
                                         </div>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
 
-                                    </div>
-                                    <div *ngIf="submitted && f.phone.errors" class="custom-invalid">
-                                        <div *ngIf="f.phone.errors.required">
-                                            Phone Number is required.
+
+                                    </mat-form-field>
+
+                                    <mat-form-field style="width: 80%;" [floatLabel]="'never'">
+                                        <input matInput type="number" min="0" id="secondInput" formControlName="phone"
+                                            name="phone">
+                                        <div *ngIf="submitted && f.phone.errors" class="custom-invalid">
+                                            <div *ngIf="f.phone.errors.required">
+                                                Phone Number is required.
+                                            </div>
                                         </div>
-                                    </div>
-
+                                    </mat-form-field>
                                 </div>
                             </li>
                             <li>
@@ -120,8 +118,8 @@
                                     <div *ngIf="f.address.errors.required">
                                         Address is required.
                                     </div>
-                                    <div *ngIf="f.address.errors.maxLength">
-                                        Address can't be more than 200.
+                                    <div *ngIf="f.address.errors.maxlength">
+                                        Address should not be more than 200.
                                     </div>
 
 
@@ -136,8 +134,8 @@
                                     <div *ngIf="f.city.errors.required">
                                         City is required.
                                     </div>
-                                    <div *ngIf="f.city.errors.maxLength">
-                                        City can't be more than 50.
+                                    <div *ngIf="f.city.errors.maxlength">
+                                        City should not be more than 50.
                                     </div>
 
                                 </div>
@@ -151,8 +149,8 @@
                                     <div *ngIf="f.state.errors.required">
                                         State is required.
                                     </div>
-                                    <div *ngIf="f.state.errors.maxLength">
-                                        State can't be more than 50.
+                                    <div *ngIf="f.state.errors.maxlength">
+                                        State should not be more than 50.
                                     </div>
 
                                 </div>
@@ -166,11 +164,11 @@
                                     <div *ngIf="f.country.errors.required">
                                         Country is required.
                                     </div>
-                                    <div *ngIf="f.country.errors.minLength">
+                                    <div *ngIf="f.country.errors.minlength">
                                         Country should be more than 2.
                                     </div>
-                                    <div *ngIf="f.country.errors.maxLength">
-                                        Country can't be more than 50.
+                                    <div *ngIf="f.country.errors.maxlength">
+                                        Country should not be more than 50.
                                     </div>
 
 
@@ -181,7 +179,7 @@
                             <li>
                                 <label>Vendor VatNumber<span class="red">*</span></label>
                                 <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="number" placeholder="" formControlName="vatNumber"
+                                    <input matInput type="number" placeholder="" min="0" formControlName="vatNumber"
                                         name="vatNumber">
                                 </mat-form-field>
                                 <div *ngIf="submitted && f.vatNumber.errors" class="custom-invalid">
@@ -195,7 +193,7 @@
                             <li>
                                 <label>Vendor BRN Number<span class="red">*</span></label>
                                 <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="number" placeholder="" formControlName="brnNumber"
+                                    <input matInput type="number" placeholder="" min="0" formControlName="brnNumber"
                                         name="brnNumber">
                                 </mat-form-field>
                                 <div *ngIf="submitted && f.brnNumber.errors" class="custom-invalid">
@@ -209,14 +207,14 @@
                             <li>
                                 <label>Company Name <span class="red">*</span></label>
                                 <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="text" placeholder="" formControlName="company" name="company">
+                                    <input matInput type="text" formControlName="company" name="company">
                                 </mat-form-field>
                                 <div *ngIf="submitted && f.company.errors" class="custom-invalid">
                                     <div *ngIf="f.company.errors.required">
                                         Company is required.
                                     </div>
                                     <div *ngIf="f.company.errors.maxLength">
-                                        Company can not exced to 50.
+                                        Company should not be more than 50.
                                     </div>
 
 

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/services/api.service';
 import { ActivatedRoute } from '@angular/router';
 import { UrlService } from 'src/services/url.service';
+import { CommonService } from 'src/services/common.service';
 
 @Component({
   selector: 'app-editprofile',
@@ -14,7 +15,7 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
   //Add 'implements AfterViewInit' to the class.
 
 
-  imagePath:any
+  imagePath: any
   updateProfileForm: FormGroup
   imageFile: any;
   sub: any;
@@ -28,16 +29,16 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
   phone: any;
   showProfilePic
 
-  constructor(private fb: FormBuilder, private apiService: ApiService, private route: ActivatedRoute,private urlService:UrlService) {
+  constructor(private fb: FormBuilder, private commonService: CommonService, private apiService: ApiService, private route: ActivatedRoute, private urlService: UrlService) {
     this.sub = this.route
       .queryParams
       .subscribe(params => {
         // Defaults to 0 if no query param provided.
         this.id = params['id'];
       });
- 
 
-      this.imagePath=this.urlService.imageUrl;
+
+    this.imagePath = this.urlService.imageUrl;
 
     this.apiService.getProfile().subscribe((res) => {
       console.log(res.data)
@@ -60,12 +61,12 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
   ngOnInit() {
 
     this.updateProfileForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstName: ['', [Validators.required, Validators.maxLength(25)]],
+      lastName: ['', [Validators.required, Validators.maxLength(25)]],
       address: ['', Validators.required],
       countryCode: ['', Validators.required],
       phone: ['', Validators.required],
-      profilePic1: ['', Validators.required],
+      profilePic1: ['',],
       profilePic: []
     });
 
@@ -91,10 +92,12 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
     this.updateProfileForm.controls['countryCode'].setValue(this.countryCode)
     this.updateProfileForm.controls['phone'].setValue(this.phone)
     this.updateProfileForm.controls['profilePic1'].setValue(this.showProfilePic)
-    
+
   }
 
+  picUploader: boolean
   async profilePic(event) {
+    this.picUploader = true
     if (event.target.files && event.target.files[0]) {
       this.imageFile = event.target.files[0];
       var reader = new FileReader();
@@ -108,7 +111,8 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
   }
 
   submit() {
-debugger
+
+
     this.submitted = true
 
     if (this.submitted && this.updateProfileForm.valid) {
@@ -116,18 +120,25 @@ debugger
       const data = new FormData();
 
 
-
+      if (this.picUploader === true) {
+        data.append('profilePic', this.imageFile, this.imageFile.name)
+      }
       data.append('firstName', this.updateProfileForm.get('firstName').value),
         data.append('lastName', this.updateProfileForm.get('lastName').value),
         data.append('email', this.profileData.email),
         data.append('address', this.updateProfileForm.get('address').value),
         data.append('countryCode', this.updateProfileForm.get('countryCode').value),
         data.append('phone', this.updateProfileForm.get('phone').value),
-        data.append('profilePic', this.imageFile, this.imageFile.name)
 
-      this.apiService.updateProfile(data).subscribe((res) => {
-        console.log(res)
-      });
+        this.apiService.updateProfile(data).subscribe((res) => {
+          console.log(res);
+          if (res.success) {
+            this.commonService.successToast(res.message)
+          } else {
+            this.commonService.errorToast(res.message)
+          }
+
+        });
     } else {
       console.log("invalid")
 
