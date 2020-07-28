@@ -38,24 +38,26 @@
                     <div *ngIf="flagData==false" class="table-responsive">
                         <table>
                             <tr>
-                                <th>Discount ID</th>
-                                <th>Category</th>
+                                <th>Sr No</th>
+                                <!-- <th>Category</th>
                                 <th>Sub Category
-                                </th>
+                                </th> -->
                                 <th>Product</th>
                                 <th>Discount</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
+                                <th>Offer Details</th>
                                 <th class="action_bx">Action</th>
                             </tr>
-                            <tr *ngFor="let item of bannerList">
+                            <tr *ngFor="let item of bannerList; let index as i">
                                 <td>141</td>
-                                <td>Lorem</td>
-                                <td>Lorem ipsum</td>
+                                <!-- <td>Lorem</td>
+                                <td>Lorem ipsum</td> -->
                                 <td>{{item.name}}</td>
                                 <td>{{item.discount}}%</td>
                                 <td>{{item.startDate | date}}</td>
                                 <td>{{item.endDate | date}}</td>
+                                <td><a><i class="fa fa-eye"></i></a></td>
                                 <td>
                                     <div class="action">
                                         <ul>
