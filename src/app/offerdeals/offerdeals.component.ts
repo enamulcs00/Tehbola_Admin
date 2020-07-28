@@ -15,7 +15,7 @@ export class OfferdealsComponent implements OnInit {
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pageEvent: PageEvent;
   filterBy: string = '';
-  search: string;
+  search: string = '';
   flagData: boolean
   bannerList: any
   constructor(private router: Router, private apiServce: ApiService) { }
@@ -25,7 +25,7 @@ export class OfferdealsComponent implements OnInit {
   }
 
   getAllDiscount() {
-
+    debugger
     this.apiServce.getAllDiscount(this.page, this.pageSize, this.filterBy, this.search).subscribe((res) => {
       if (res) {
         if (res.data.length > 0) {
@@ -38,7 +38,6 @@ export class OfferdealsComponent implements OnInit {
       };
 
     })
-
 
   }
   goToaddoffers() {
