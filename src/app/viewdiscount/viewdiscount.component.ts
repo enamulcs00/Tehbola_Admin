@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/services/api.service';
+import { UrlService } from 'src/services/url.service';
 
 interface Ready {
   value: string;
@@ -22,7 +23,11 @@ export class ViewdiscountComponent implements OnInit {
   id: any;
 
   bannerDetails: any
-  constructor(private router: Router, private route: ActivatedRoute, private apiService: ApiService) { }
+  imagePath:any;
+  constructor(private router: Router, private route: ActivatedRoute, private apiService: ApiService, private urlService:UrlService) {
+
+    this.imagePath=this.urlService.imageUrl;
+   }
 
   ngOnInit() {
     this.sub = this.route
@@ -36,7 +41,7 @@ export class ViewdiscountComponent implements OnInit {
 
   }
   getDiscount(id) {
-    debugger
+    
     this.apiService.getDisountDetails(id).subscribe((res) => {
       if (res.success) {
         console.log(res.data);
@@ -44,7 +49,13 @@ export class ViewdiscountComponent implements OnInit {
           'name': res.data.name,
           'name_ar': res.data.name_ar,
           'categoryName': res.data.offer.list.name,
-          'type': res.data.type
+          'type': res.data.type,
+          'discount':res.data.discount+"%",
+          'startDate':res.data.startDate,
+          'endDate':res.data.endDate,
+          'image':res.data.image
+
+
         }
 
       }

@@ -17,9 +17,11 @@ export class OfferdealsComponent implements OnInit {
   pageEvent: PageEvent;
   filterBy: string = '';
   search: string = '';
-  flagData: boolean
-  bannerList: any
-  imagePath: any
+  flagData: boolean;
+  bannerList: any;
+  imagePath: any;
+  getDesc;
+  modalData:any
   constructor(private router: Router, private apiService: ApiService, private urlService: UrlService) {
     this.imagePath = this.urlService.imageUrl;
 
@@ -30,7 +32,7 @@ export class OfferdealsComponent implements OnInit {
   }
 
   getAllDiscount() {
-    debugger
+    
     this.apiService.getAllDiscount(this.page, this.pageSize, this.filterBy, this.search).subscribe((res) => {
       if (res) {
         if (res.data.length > 0) {
@@ -46,6 +48,13 @@ export class OfferdealsComponent implements OnInit {
 
   }
 
+  getDAta(elm) {
+    let listdata; 
+    this.getDesc = this.bannerList.filter(data => data._id == elm);
+    listdata = this.getDesc[0].offer.list;
+    this.modalData=listdata;
+     console.log(listdata);
+  }
 
 
   flag = false
@@ -76,7 +85,7 @@ export class OfferdealsComponent implements OnInit {
     this.router.navigate(['addoffers'])
   }
   goToviewdiscount(id) {
-    debugger
+    
     this.router.navigate(['viewdiscount'], { queryParams: { "id": id } })
   }
   goToeditdiscount() {
