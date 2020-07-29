@@ -12,27 +12,51 @@
                 <div class="add_user_list">
                     <ul>
                         <li>
-                            <label>Select Category<span class="red">*</span></label>
+                            <label>Name<span class="red">*</span></label>
                             <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name" disabled name="name" Value="Lorem ipsum">
+                                <input matInput type="text" placeholder="" value="{{bannerDetails.name}}" name="name"
+                                    disabled name="name">
                             </mat-form-field>
                         </li>
                         <li>
-                            <label>Select Sub Category<span class="red">*</span></label>
+                            <label>Name_ar<span class="red">*</span></label>
                             <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name" disabled name="name" Value="Lorem ipsum">
+                                <input matInput type="text" placeholder="" name="name" disabled name="name"
+                                    Value="Lorem ipsum">
                             </mat-form-field>
                         </li>
                         <li>
-                            <label>Select Vendor<span class="red">*</span></label>
+                            <label>Category<span class="red">*</span></label>
                             <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name" disabled name="name" Value="Lorem ipsum">
+                                <input matInput type="text" value="{{bannerDetails.categoryName}}" placeholder=""
+                                    name="name" disabled name="name">
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>Type<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" value="{{bannerDetails.type}}" placeholder="" name="name"
+                                    disabled name="name">
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>Category<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="" name="name" disabled name="name"
+                                    Value="Lorem ipsum">
+                            </mat-form-field>
+                        </li>
+                        <li>
+                            <label>Vendor<span class="red">*</span></label>
+                            <mat-form-field [floatLabel]="'never'">
+                                <input matInput type="text" placeholder="" name="name" disabled name="name"
+                                    Value="Lorem ipsum">
                             </mat-form-field>
                         </li>
                         <li>
                             <label> Discount <span class="red">*</span></label>
                             <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name" value="20%" disabled name="name"> 
+                                <input matInput type="text" placeholder="" name="name" value="20%" disabled name="name">
                             </mat-form-field>
                         </li>
                         <!-- <li>
@@ -44,20 +68,21 @@
                         <li>
                             <label> Start Date<span class="red">*</span></label>
                             <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name" value="28-05-2020" disabled name="name">
+                                <input matInput type="text" placeholder="" name="name" value="28-05-2020" disabled
+                                    name="name">
                             </mat-form-field>
                         </li>
                         <li>
                             <label> End Date<span class="red">*</span></label>
                             <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name" value="22-05-2020" disabled name="name">
+                                <input matInput type="text" placeholder="" name="name" value="22-05-2020" disabled
+                                    name="name">
                             </mat-form-field>
                         </li>
                         <li class="banner_image">
                             <label>Add Banner image</label>
                             <div class="product_image_upload">
-                                <input type='file' placeholder="choosefile"
-                                    class="images_uploader">
+                                <input type='file' placeholder="choosefile" class="images_uploader">
                                 <span>Choose File</span>
                             </div>
                             <!-- <div class="show_product_imges">
@@ -75,7 +100,7 @@
 
                             </div> -->
                         </li>
-                       
+
                     </ul>
                     <!-- <div class="update_button">
                         <button mat-button>
@@ -86,11 +111,10 @@
                     </div> -->
                 </div>
 
-               
+
                 <!-----End input fields------>
-                
+
             </div>
         </div>
     </div>
 </div>
-

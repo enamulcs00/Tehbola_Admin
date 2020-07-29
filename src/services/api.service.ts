@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { HttpRequest } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/internal/operators';
 import { Router } from '@angular/router';
-import { of } from 'rxjs';
+import { of, pipe } from 'rxjs';
 
 @Injectable({
   providedIn: "root",
@@ -55,12 +55,18 @@ export class ApiService {
       //Vendor Management
       getAllVendor: 'admin/getVendors',
       getVendorProducts: 'admin/vendorProducts',
+
       addVendor: 'admin/vendor',
       vendorsCategory: 'admin/getVendorCategories',
       vendorSubcategory: 'admin/getVendorSubCategories',
 
       //Banner(Discount)
-      getAllBanner: 'admin/banner'
+      getAllBanner: 'admin/banner',
+      getAllCategoriesforDiscount: 'admin/getAllCategories',
+      getVendorListByCat: 'admin/getVendorsByCat',
+      getProductByVendor: 'admin/getProductsByCatOrVendor',
+      addBanner: 'admin/banner',
+      viewBanner: 'admin/viewBanner'
     }
     for (let key in this.apiEndPoints) {
       this.apiEndPoints[key] = this.BASE_URL + this.apiEndPoints[key];
@@ -208,6 +214,25 @@ export class ApiService {
       );
   }
 
+  getProductByVendor(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.getProductByVendor, body, this.getHeaders())
+      .pipe(
+        catchError(this.handleError<any>('get product by vendor')))
+
+  }
+
+  addBanner(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.addBanner, body, this.getHeaders()).
+      pipe(
+        catchError(this.handleError<any>("add bannner")))
+  }
+
+
+  getDisountDetails(id): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.viewBanner}?id=${id}`, this.getHeaders()).
+      pipe(
+        catchError(this.handleError<any>('get discount details')))
+  }
 
   getAllUser(page, count, search, filter) {
 
@@ -280,6 +305,12 @@ export class ApiService {
 
   }
 
+  getVendorListbyCat(body) {
+    return this.http.post<any>(this.apiEndPoints.getVendorListByCat, body, this.getHeaders())
+      .pipe(
+        catchError(this.handleError<any>("list of vendor by category and sub-category")))
+  }
+
   viewUser(id) {
     return this.http.get<any>(`${this.apiEndPoints.getUser}?id=${id}`,
       this.getHeaders()).
@@ -314,6 +345,13 @@ export class ApiService {
         catchError(this.handleError<any>('All Product'))
       );
   }
+
+  getAllCategoriesForDiscount(parentId): Observable<any> {
+
+    return this.http.get<any>(`${this.apiEndPoints.getAllCategoriesforDiscount}?parentId=${parentId}`, this.getHeaders()).pipe(catchError(this.handleError("get all category for discount")))
+
+  }
+
 
   addCategory(data) {
     return this.http

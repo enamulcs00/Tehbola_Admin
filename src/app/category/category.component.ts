@@ -76,7 +76,7 @@ export class CategoryComponent implements OnInit {
 
   picUploader: boolean;
   async profilePic(event) {
-    debugger
+
     this.picUploader = true
     if (event.target.files && event.target.files[0]) {
       this.imageFile = event.target.files[0];

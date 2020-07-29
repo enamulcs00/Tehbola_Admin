@@ -14,9 +14,11 @@
                     <div class="search_fields">
                         <div class="filters Booking_status">
                             <label>Filter</label>
-                            <select>
-                                <option>All</option>
-                                <option>Name</option>
+                            <select [(ngModel)]="filterBy" (change)="filterSelected($event)">
+                                <option *ngIf="flag==true" value="">Remove Filter</option>
+                                <option *ngIf="flag==false" value=""></option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
                             </select>
                         </div>
                         <div class="search_inner_fiels">
@@ -44,6 +46,7 @@
                                 </th> -->
                                 <th>Product</th>
                                 <th>Discount</th>
+                                <th>Status</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Offer Details</th>
@@ -55,6 +58,7 @@
                                 <td>Lorem ipsum</td> -->
                                 <td>{{item.name}}</td>
                                 <td>{{item.discount}}%</td>
+                                <td>{{item.status==0?"Inactive":"Active"}}</td>
                                 <td>{{item.startDate | date}}</td>
                                 <td>{{item.endDate | date}}</td>
                                 <td><a href="javascript:void(0)" class="button-pad add_city" data-toggle="modal"
@@ -65,23 +69,26 @@
                                         <div id="Add_city" class="modal fade" role="dialog">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
-          
+
                                                     <div class="modal-body">
                                                         <h3>{{item.offer.type}}</h3>
                                                         <table>
                                                             <tr>
                                                                 <th>Sr.no</th>
                                                                 <th>Image</th>
-                                                                <th>Category</th>
-                                                              
+                                                                <th>Category/sub category</th>
+
                                                             </tr>
-                                                            <tr *ngFor="let unit of item.offer.list; index as i">
+                                                            <tr *ngFor="let unit of item.offer['list']; index as i">
 
                                                                 <td>{{i+1}}</td>
-                                                                
-                                                                <td><figure><img src="imagePath+unit.image"></figure></td>
+
+                                                                <td>
+                                                                    <figure><img src="{{imagePath+unit.image}}">
+                                                                    </figure>
+                                                                </td>
                                                                 <td>{{unit.name}}</td>
-                                                                
+
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -95,7 +102,8 @@
                                 <td>
                                     <div class="action">
                                         <ul>
-                                            <li class="show" (click)="goToviewdiscount()"><i class="fa fa-eye"></i></li>
+                                            <li class="show" (click)="goToviewdiscount(item._id)"><i
+                                                    class="fa fa-eye"></i></li>
                                             <li class="edit" (click)="goToeditdiscount()"><i
                                                     class="fa fa-pencil fa-fw"></i></li>
                                             <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>

@@ -80,6 +80,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { DatePipe } from '@angular/common';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { DeliveryAddressComponent } from './delivery-address/delivery-address.component';
+import * as moment from 'moment';
 
 @NgModule({
   declarations: [

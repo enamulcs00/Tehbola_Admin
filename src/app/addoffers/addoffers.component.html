@@ -8,100 +8,183 @@
                     <h1>Add Discount</h1>
                     <a (click)="goToofferdeals()">Back To List</a>
                 </div>
-                <!-----start input fields------>
-                <div class="add_user_list">
-                    <ul>
-                        <li>
-                            <label>Select Category<span class="red">*</span></label>
-                            <mat-form-field>
-                                <mat-select>
-                                    <mat-option *ngFor="let Ready of pick" [value]="Ready.value">
-                                        {{Ready.viewValue}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </li>
-                        <li>
-                            <label>Select Sub Category<span class="red">*</span></label>
-                            <mat-form-field>
-                                <mat-select>
-                                    <mat-option *ngFor="let Ready of pick" [value]="Ready.value">
-                                        {{Ready.viewValue}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </li>
-                        <li>
-                            <label>Select Vendor<span class="red">*</span></label>
-                            <mat-form-field>
-                                <mat-select>
-                                    <mat-option *ngFor="let Ready of pick" [value]="Ready.value">
-                                        {{Ready.viewValue}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </li>
-                        <li>
-                            <label> Discount <span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name">
-                            </mat-form-field>
-                        </li>
-                        <!-- <li>
+                <form [formGroup]="addDiscountForm">
+                    <!-----start input fields------>
+                    <div class="add_user_list">
+                        <div>
+                            <fieldset>
+                                Category
+                                <input type="radio" formControlName="dicountOn" name="dicountOn"
+                                    (click)="setradio('category')" value="category">
+                                &nbsp;&nbsp;
+                                Sub-category
+                                <input type="radio" formControlName="dicountOn" name="dicountOn"
+                                    (click)="setradio('subcategory')" value="subCategory">&nbsp;&nbsp;
+                                Vendor
+                                <input type="radio" formControlName="dicountOn" name="dicountOn"
+                                    (click)="setradio('vendor')" value="vendor">&nbsp;&nbsp;
+                                Product
+                                <input type="radio" formControlName="dicountOn" name="dicountOn"
+                                    (click)="setradio('product')" value="product">&nbsp;&nbsp;
+                            </fieldset>
+                            <mat-error *ngIf="addDiscountForm.controls['dicountOn'].hasError('required')">
+                                Offer type is <strong>required</strong>
+                            </mat-error>
+                        </div>
+                        <ul>
+                            <li *ngIf="showCategory">
+                                <label>Select Category<span class="red">*</span></label>
+                                <mat-form-field>
+                                    <mat-select (selectionChange)="categorySelected($event.value)">
+                                        <input matInput placeholder="Seaarch Category"
+                                            (keyup)="onKey($event.target.value)">
+                                        <mat-option>None</mat-option>
+                                        <mat-option *ngFor="let body of categoryList" [value]="body.id">{{body.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </li>
+                            <li *ngIf="showSubcategory">
+                                <label>Select Sub Category<span class="red">*</span></label>
+                                <mat-form-field>
+                                    <mat-select (selectionChange)="subCategorySelected($event.value)">
+                                        <input matInput placeholder="Search Sub-Category"
+                                            (keyup)="onKey($event.target.value)">
+                                        <mat-option>None</mat-option>
+                                        <mat-option *ngFor="let body of subCategoryList" [value]="body.id">{{body.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </li>
+                            <li *ngIf="showVendor">
+                                <label>Select Vendor<span class="red">*</span></label>
+                                <mat-form-field>
+                                    <mat-select (selectionChange)="vendorSelected($event.value)">
+                                        <input matInput placeholder="Search Vendor"
+                                            (keyup)="onKey($event.target.value)">
+                                        <mat-option>None</mat-option>
+                                        <mat-option *ngFor="let body of vendorList" [value]="body.id">
+                                            {{body.firstname}} {{body.lastname}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </li>
+                            <li *ngIf="showProduct">
+                                <label>Select Product<span class="red">*</span></label>
+                                <mat-form-field>
+                                    <mat-select (selectionChange)="productSelected($event.value)">
+                                        <input matInput placeholder="Search Product"
+                                            (keyup)="onKey($event.target.value)">
+                                        <mat-option>None</mat-option>
+                                        <mat-option *ngFor="let body of productList" [value]="body.id">{{body.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <label> Name <span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput formControlName="name" type="text" placeholder="" name="name">
+                                    <mat-error *ngIf="addDiscountForm.controls['name'].hasError('required')">
+                                        Name is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <label> Arbic Name </label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput formControlName="name_ar" type="text" placeholder="" name="name_ar">
+                                    <mat-error *ngIf="addDiscountForm.controls['name_ar'].hasError('required')">
+                                        Arbic Name is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <label> Discount <span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput formControlName="disount" min="0" max="100" type="number"
+                                        placeholder="" name="name">
+                                    <mat-error *ngIf="addDiscountForm.controls['disount'].hasError('required')">
+                                        Discount percentage is <strong>required</strong>
+                                    </mat-error>
+                                    <mat-error *ngIf="addDiscountForm.controls['disount'].hasError('min')">
+                                        Discount percentage should not be <strong>less than zero</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+                            <!-- <li>
                             <label>Timeline for Discount<span class="red">*</span></label>
                             <mat-form-field [floatLabel]="'never'">
                                 <input matInput type="date" placeholder="" name="name">
                             </mat-form-field>
                         </li> -->
-                        <li>
-                            <label>Start Date <span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="date" placeholder="" name="name">
-                            </mat-form-field>
-                        </li>
-                        <li>
-                            <label>End Date <span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="date" placeholder="" name="name">
-                            </mat-form-field>
-                        </li>
-                        <li class="banner_image">
-                            <label>Add Banner image</label>
-                            <div class="product_image_upload">
-                                <input type='file'  placeholder="choosefile"
-                                    class="images_uploader">
-                                <span>Choose File</span>
-                            </div>
-                            <!-- <div class="show_product_imges">
-                                <span>
-                                    <figure>
-                                        <img src="../../assets/images/makeup.png" alt="">
-                                    </figure>
+                            <li>
+                                <label>Start Date <span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput formControlName="startDate" type="date" placeholder="" name="name">
+                                    <mat-error *ngIf="addDiscountForm.controls['startDate'].hasError('required')">
+                                        Start Date is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <label>End Date <span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput formControlName="endDate" type="date" placeholder="" name="name">
+                                    <mat-error *ngIf="addDiscountForm.controls['endDate'].hasError('required')">
+                                        End Date is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <label>Select Type<span class="red">*</span></label>
+                                <mat-form-field>
+                                    <mat-select formControlName="type" (selectionChange)="typeSelected($event.value)">
+                                        <input matInput placeholder="Search Product"
+                                            (keyup)="onKey($event.target.value)">
+                                        <mat-option>None</mat-option>
+                                        <mat-option *ngFor="let ready of type" [value]="ready.value">{{ready.viewValue}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="addDiscountForm.controls['type'].hasError('required')">
+                                        Offer Type is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+                            <li class="banner_image">
+                                <label>Add Banner image</label>
+                                <div class="product_image_upload">
+                                    <input type='file' (change)="bannerImageEvent($event)" accept="image/*"
+                                        formControlName="bannerImage" placeholder="choosefile" class="images_uploader">
+                                    <div class="user_img">
+                                        <figure *ngIf="previewImage">
+                                            <img style="height: 50px;width: 50px" [src]="previewImage" />
+                                        </figure>
+                                    </div>
+                                    <span>Choose File</span>
+                                    <mat-error *ngIf="addDiscountForm.controls['bannerImage'].hasError('required')">
+                                        Banner Image is <strong>required</strong>
+                                    </mat-error>
+
+                                </div>
+
+                            </li>
+
+
+
+                        </ul>
+                        <div class="update_button">
+                            <button mat-button (click)="checkBanner()">
+                                <span><i class="fa fa-window-restore"></i>
                                 </span>
-                                <span>
-                                    <figure>
-                                        <img src="../../assets/images/makeup.png" alt="">
-                                    </figure>
-                                </span>
-
-
-                            </div> -->
-                        </li>
-
-                       
-                    </ul>
-                    <div class="update_button">
-                        <button mat-button>
-                            <span><i class="fa fa-window-restore"></i>
-                            </span>
-                            Add
-                        </button>
+                                Add
+                            </button>
+                        </div>
                     </div>
-                </div>
 
-               
+                </form>
                 <!-----End input fields------>
-                
+
             </div>
         </div>
     </div>

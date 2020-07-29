@@ -12,23 +12,25 @@ export class CommonService {
   // https://appgrowthcompany.com:3000/
   //http://192.168.1.98:3000
   constructor(
-   // private spinner: NgxSpinnerService,
+    // private spinner: NgxSpinnerService,
     private toaster: ToastrManager,
     // private api: ApiService,
     private http: HttpClient
   ) { }
-//   showSpinner() {
-//     this.spinner.show();
-//   }
-//   hideSpinner() {
-//     this.spinner.hide();
-//   }
+  //   showSpinner() {
+  //     this.spinner.show();
+  //   }
+  //   hideSpinner() {
+  //     this.spinner.hide();
+  //   }
   successToast(message) {
     this.toaster.successToastr(message, "", {
       maxShown: 1
     });
   }
   errorToast(message) {
-    this.toaster.errorToastr(message);
+    this.toaster.errorToastr(message, "", {
+      maxShown: 1
+    });
   }
 }

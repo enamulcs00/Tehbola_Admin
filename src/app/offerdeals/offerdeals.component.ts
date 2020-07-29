@@ -19,9 +19,9 @@ export class OfferdealsComponent implements OnInit {
   search: string = '';
   flagData: boolean
   bannerList: any
-  imagePath:any
-  constructor(private router: Router, private apiServce: ApiService,private urlService:UrlService) { 
-this.imagePath=this.urlService.imageUrl;
+  imagePath: any
+  constructor(private router: Router, private apiService: ApiService, private urlService: UrlService) {
+    this.imagePath = this.urlService.imageUrl;
 
   }
 
@@ -31,7 +31,7 @@ this.imagePath=this.urlService.imageUrl;
 
   getAllDiscount() {
     debugger
-    this.apiServce.getAllDiscount(this.page, this.pageSize, this.filterBy, this.search).subscribe((res) => {
+    this.apiService.getAllDiscount(this.page, this.pageSize, this.filterBy, this.search).subscribe((res) => {
       if (res) {
         if (res.data.length > 0) {
           this.flagData = false
@@ -45,11 +45,39 @@ this.imagePath=this.urlService.imageUrl;
     })
 
   }
+
+
+
+  flag = false
+  filterSelected(e) {
+    if (this.filterBy) {
+      this.flag = true
+    }
+    else {
+      this.flag = false
+
+    }
+    console.log(e.target.value);
+    this.filterBy = e.target.value;
+    this.apiService.getAllDiscount(this.page, this.pageSize, this.filterBy, this.search).subscribe((res) => {
+      if (res) {
+        if (res.data.length > 0) {
+          this.flagData = false
+          this.bannerList = res.data
+          console.log(this.bannerList)
+        } else {
+          this.flagData = true
+        }
+      };
+    });
+
+  }
   goToaddoffers() {
     this.router.navigate(['addoffers'])
   }
-  goToviewdiscount() {
-    this.router.navigate(['viewdiscount'])
+  goToviewdiscount(id) {
+    debugger
+    this.router.navigate(['viewdiscount'], { queryParams: { "id": id } })
   }
   goToeditdiscount() {
     this.router.navigate(['editdiscount'])
