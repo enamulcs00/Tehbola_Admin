@@ -27,14 +27,14 @@
                                 <input type="radio" formControlName="dicountOn" name="dicountOn"
                                     (click)="setradio('product')" value="product">&nbsp;&nbsp;
                             </fieldset>
-                            <mat-error *ngIf="addDiscountForm.controls['dicountOn'].hasError('required')">
+                            <mat-error *ngIf="submitted && addDiscountForm.controls['dicountOn'].hasError('required')">
                                 Offer type is <strong>required</strong>
                             </mat-error>
                         </div>
                         <ul>
                             <li *ngIf="showCategory">
                                 <label>Select Category<span class="red">*</span></label>
-                                <mat-form-field>
+                                <mat-form-field *ngIf="singleCategorySelection">
                                     <mat-select (selectionChange)="categorySelected($event.value)">
                                         <input matInput placeholder="Seaarch Category"
                                             (keyup)="onKey($event.target.value)">
@@ -43,10 +43,15 @@
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
+                                <ng-multiselect-dropdown *ngIf="!singleCategorySelection" [placeholder]=""
+                                    [data]="categoryList" [(ngModel)]="selectedCategoryItem"
+                                    [ngModelOptions]="{standalone: true}" [settings]="categoryDropDownSettings"
+                                    (onSelect)="onCategorySelect($event)" (onSelectAll)="onSelectAll($event)">
+                                </ng-multiselect-dropdown>
                             </li>
                             <li *ngIf="showSubcategory">
                                 <label>Select Sub Category<span class="red">*</span></label>
-                                <mat-form-field>
+                                <mat-form-field *ngIf="singleSubCategorySelection">
                                     <mat-select (selectionChange)="subCategorySelected($event.value)">
                                         <input matInput placeholder="Search Sub-Category"
                                             (keyup)="onKey($event.target.value)">
@@ -55,23 +60,33 @@
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
+                                <ng-multiselect-dropdown *ngIf="!singleSubCategorySelection" [placeholder]=""
+                                    [(ngModel)]="selectedSubcategoryItem" [ngModelOptions]="{standalone: true}"
+                                    [settings]="subcategoryDropDownSettings" [data]="subCategoryList"
+                                    (onSelect)="onSubcategorySelect($event)" (onSelectAll)="onSelectAll($event)">
+                                </ng-multiselect-dropdown>
                             </li>
                             <li *ngIf="showVendor">
                                 <label>Select Vendor<span class="red">*</span></label>
-                                <mat-form-field>
+                                <mat-form-field *ngIf="singleVendorSelection">
                                     <mat-select (selectionChange)="vendorSelected($event.value)">
                                         <input matInput placeholder="Search Vendor"
                                             (keyup)="onKey($event.target.value)">
                                         <mat-option>None</mat-option>
                                         <mat-option *ngFor="let body of vendorList" [value]="body.id">
-                                            {{body.firstname}} {{body.lastname}}
+                                            {{body.name}}
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
+                                <ng-multiselect-dropdown *ngIf="!singleVendorSelection" [placeholder]=""
+                                    [(ngModel)]="selectedVendorItem" [ngModelOptions]="{standalone: true}"
+                                    [settings]="vendorDropDownSettings" [data]="vendorList"
+                                    (onSelect)="onVendorSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                </ng-multiselect-dropdown>
                             </li>
                             <li *ngIf="showProduct">
                                 <label>Select Product<span class="red">*</span></label>
-                                <mat-form-field>
+                                <mat-form-field *ngIf="singleProductSelection">
                                     <mat-select (selectionChange)="productSelected($event.value)">
                                         <input matInput placeholder="Search Product"
                                             (keyup)="onKey($event.target.value)">
@@ -80,6 +95,11 @@
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
+                                <ng-multiselect-dropdown *ngIf="!singleProductSelection" [placeholder]=""
+                                    [(ngModel)]="selectedProductItem" [ngModelOptions]="{standalone: true}"
+                                    [settings]="productDropDownSettings" [data]="productList"
+                                    (onSelect)="onProductSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                </ng-multiselect-dropdown>
                             </li>
                             <li>
                                 <label> Name <span class="red">*</span></label>
@@ -156,16 +176,18 @@
                                 <div class="product_image_upload">
                                     <input type='file' (change)="bannerImageEvent($event)" accept="image/*"
                                         formControlName="bannerImage" placeholder="choosefile" class="images_uploader">
-                                    <div class="user_img">
-                                        <figure *ngIf="previewImage">
-                                            <img style="height: 50px;width: 50px" [src]="previewImage" />
-                                        </figure>
-                                    </div>
+
                                     <span>Choose File</span>
-                                    <mat-error *ngIf="addDiscountForm.controls['bannerImage'].hasError('required')">
+                                    <mat-error
+                                        *ngIf="submitted &&  addDiscountForm.controls['bannerImage'].hasError('required')">
                                         Banner Image is <strong>required</strong>
                                     </mat-error>
 
+                                </div>
+                                <div class="user_img">
+                                    <figure *ngIf="previewImage">
+                                        <img style="height: 100px;width: 100px" [src]="previewImage" />
+                                    </figure>
                                 </div>
 
                             </li>

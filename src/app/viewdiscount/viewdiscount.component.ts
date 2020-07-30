@@ -23,11 +23,11 @@ export class ViewdiscountComponent implements OnInit {
   id: any;
 
   bannerDetails: any
-  imagePath:any;
-  constructor(private router: Router, private route: ActivatedRoute, private apiService: ApiService, private urlService:UrlService) {
+  imagePath: any;
+  constructor(private router: Router, private route: ActivatedRoute, private apiService: ApiService, private urlService: UrlService) {
 
-    this.imagePath=this.urlService.imageUrl;
-   }
+    this.imagePath = this.urlService.imageUrl;
+  }
 
   ngOnInit() {
     this.sub = this.route
@@ -41,7 +41,7 @@ export class ViewdiscountComponent implements OnInit {
 
   }
   getDiscount(id) {
-    
+
     this.apiService.getDisountDetails(id).subscribe((res) => {
       if (res.success) {
         console.log(res.data);
@@ -50,11 +50,11 @@ export class ViewdiscountComponent implements OnInit {
           'name_ar': res.data.name_ar,
           'categoryName': res.data.offer.list.name,
           'type': res.data.type,
-          'discount':res.data.discount+"%",
-          'startDate':res.data.startDate,
-          'endDate':res.data.endDate,
-          'image':res.data.image
-
+          'discount': res.data.discount + "%",
+          'startDate': res.data.startDate,
+          'endDate': res.data.endDate,
+          'image': res.data.image,
+          'status': res.data.status
 
         }
 

@@ -155,7 +155,7 @@ export class ApiService {
   data: any
   delete(body) {
     // this.flagDelete = false;
-
+    debugger
     this.deleteData(this.apiEndPoints.delete, body)
       .then(data => {
         of(data).subscribe((res) => {
@@ -414,7 +414,7 @@ export class ApiService {
   }
 
 
-  getAllDiscount(page, pageSize, filterBy, search) {
+  getAllDiscount(page, pageSize, search, filterBy) {
     return this.http.get<any>(`${this.apiEndPoints.getAllBanner}?page=${page}&count=${pageSize}&search=${search}&filter=${filterBy}`, this.getHeaders())
       .pipe(
         catchError(this.handleError<any>("get discount(banner)"))

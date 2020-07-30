@@ -85,10 +85,9 @@ export class ManageUserComponent implements OnInit {
       }
 
     }
-
-
-
   }
+
+
   flagSearch: boolean = true
   searchMethod() {
     this.flagSearch = false
@@ -199,7 +198,7 @@ export class ManageUserComponent implements OnInit {
 
     Swal.fire({
       title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this Category!",
+      text: "Once deleted, you will not be able to recover this User!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085D6",
@@ -237,7 +236,8 @@ export class ManageUserComponent implements OnInit {
       if (temp == true) {
         // this.userList.splice(i, 1);
         // console.log(this.userList)
-        alert("deleted")
+        // alert("deleted")
+        this.commonService.successToast('User deleted');
         this.ShowAllUser();
       }
       else {

@@ -81,6 +81,7 @@ import { DatePipe } from '@angular/common';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { DeliveryAddressComponent } from './delivery-address/delivery-address.component';
 import * as moment from 'moment';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -165,6 +166,7 @@ import * as moment from 'moment';
     HttpClientModule,
     ChartsModule, CKEditorModule, FormsModule, ReactiveFormsModule,
     ToastrModule.forRoot(),
+    NgMultiSelectDropDownModule.forRoot()
 
 
 
