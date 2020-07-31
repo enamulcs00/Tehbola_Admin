@@ -376,7 +376,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked {
 
     console.log("vendor:", e)
     this.selectedVendor = e
-   // this.getAllProduct()
+    // this.getAllProduct()
   }
 
   getAllProduct() {

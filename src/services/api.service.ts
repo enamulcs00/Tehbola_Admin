@@ -346,7 +346,7 @@ export class ApiService {
       );
   }
 
-  getAllCategoriesForDiscount(parentId): Observable<any> {
+  getAllCategoriesForDiscount(parentId) {
 
     return this.http.get<any>(`${this.apiEndPoints.getAllCategoriesforDiscount}?parentId=${parentId}`, this.getHeaders()).pipe(catchError(this.handleError("get all category for discount")))
 

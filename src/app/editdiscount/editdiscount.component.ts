@@ -17,7 +17,7 @@ interface Ready {
   templateUrl: './editdiscount.component.html',
   styleUrls: ['./editdiscount.component.scss']
 })
-export class EditdiscountComponent implements OnInit ,AfterViewInit {
+export class EditdiscountComponent implements OnInit {
 
   editDiscountForm: FormGroup;
   pick: Ready[] = [
@@ -49,10 +49,10 @@ export class EditdiscountComponent implements OnInit ,AfterViewInit {
   subcategoryDropDownSettings: IDropdownSettings = {};
   vendorDropDownSettings: IDropdownSettings = {};
   productDropDownSettings: IDropdownSettings = {};
-  singleCategorySelection:boolean;
-  singleSubCategorySelection:boolean
-  singleVendorSelection:boolean;
-  singleProductSelection:boolean;
+  singleCategorySelection: boolean;
+  singleSubCategorySelection: boolean
+  singleVendorSelection: boolean;
+  singleProductSelection: boolean;
   selectedCategoryItem: any;
   selectedSubcategoryItem: any;
   selectedVendorItem: any;
@@ -65,13 +65,13 @@ export class EditdiscountComponent implements OnInit ,AfterViewInit {
     private urlService: UrlService
   ) {
     this.imageUrl = this.urlService.imageUrl;
-   //  this.getAllCategory()
+    this.getAllCategory()
   }
 
 
 
   setradio(e: string) {
-    debugger
+
     this.singleCategorySelection = true;
     this.singleSubCategorySelection = true;
     this.singleVendorSelection = true;
@@ -79,7 +79,7 @@ export class EditdiscountComponent implements OnInit ,AfterViewInit {
     switch (e) {
       case "category":
         this.dicountOn = 'category'
-        this.singleCategorySelection=false
+        this.singleCategorySelection = false
         this.showCategory = true;
         this.showSubcategory = false;
         this.showVendor = false;
@@ -88,16 +88,16 @@ export class EditdiscountComponent implements OnInit ,AfterViewInit {
         break;
       case "subCategory":
         this.dicountOn = 'subCategory';
-        this.singleSubCategorySelection=false
+        this.singleSubCategorySelection = false
         this.showCategory = true;
         this.showSubcategory = true;
         this.showVendor = false;
         this.showProduct = false
         console.log("subCategory");
         break;
-      case "vendor":
-        this.dicountOn = 'vendor'
-        this.singleVendorSelection=false
+      case "seller":
+        this.dicountOn = 'seller'
+        this.singleVendorSelection = false
         this.showCategory = true;
         this.showSubcategory = true;
         this.showVendor = true;
@@ -106,7 +106,7 @@ export class EditdiscountComponent implements OnInit ,AfterViewInit {
         break;
       case "product":
         this.dicountOn = 'product'
-        this.singleProductSelection=false;
+        this.singleProductSelection = false;
         this.showCategory = true;
         this.showSubcategory = true;
         this.showVendor = false;
@@ -117,20 +117,20 @@ export class EditdiscountComponent implements OnInit ,AfterViewInit {
   }
 
   onKeyInCategory(value) {
-   // this.selectedItem = [];
+    // this.selectedItem = [];
     this.selectedCategory = this.searchCategory(value).toString();
   }
 
   onKeyInSubCategory(value) {
-  //  this.selectedItem = [];
+    //  this.selectedItem = [];
     this.selectedSubCategory = this.searchSubcategory(value).toString();
   }
   onKeyInVendor(value) {
-   // this.selectedItem = [];
+    // this.selectedItem = [];
     this.selectedVendor = this.searchVendor(value).toString();
   }
   onKeyInProduct(value) {
-  //  this.selectedItem = [];
+    //  this.selectedItem = [];
     this.selectedProduct = this.searchProduct(value).toString();
   }
 
@@ -161,7 +161,7 @@ export class EditdiscountComponent implements OnInit ,AfterViewInit {
         this.id = params['id'];
       });
     this.getDiscount(this.id);
-    this.getAllCategory()
+
 
 
     this.editDiscountForm = this.fb.group({
@@ -169,17 +169,15 @@ export class EditdiscountComponent implements OnInit ,AfterViewInit {
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
       type: ['', Validators.required],
-      dicountOn:['',],
+      dicountOn: ['',],
       name: ['', [Validators.required, Validators.maxLength(25)]],
       name_ar: ['',],
-      bannerImage: ['', Validators.required]
+      bannerImage: ['',]
     })
 
-  }
 
-  ngAfterViewInit(){
 
-    
+
     this.categoryDropDownSettings = {
 
       singleSelection: this.singleCategorySelection,
@@ -263,7 +261,7 @@ export class EditdiscountComponent implements OnInit ,AfterViewInit {
     if (index < 0) this.selectedSubcategoryItem.push(item)
   }
 
-  
+
   onVendorSelect(item: any) {
     const index = this.selectedVendorItem.findIndex(o => o._id.toString() == item.id.toString());
     if (index < 0) this.selectedVendorItem.push(item)
@@ -280,51 +278,53 @@ export class EditdiscountComponent implements OnInit ,AfterViewInit {
     }
   }
 
-  
+
 
 
   getDiscount(id) {
-    debugger
+
     this.apiService.getDisountDetails(id).subscribe(res => {
       if (res.success) {
         this.discountDetails = res.data;
         console.log(this.discountDetails);
         // this.editDiscountForm.controls['dicountOn'].setValue(this.discountDetails.onModel);
-        if(this.discountDetails.offer.type==="category"){
-         let lookForCategory=[]
-          for(let i=0;i<this.discountDetails.offer.list.length;i++){
-             lookForCategory.push(this.discountDetails.offer.list[i].id)
-           
-          }
-          this.lookUpForCategory(lookForCategory);
-        }
-        if(this.discountDetails.offer.type==="subCategory"){
-          let lookForSubCategory=[]
-          for(let i=0;i<this.discountDetails.offer.list.length;i++){
-            lookForSubCategory.push(this.discountDetails.offer.list[i].id)
-           
-          }
-          this.lookUpForSubCategory(lookForSubCategory,this.discountDetails.category);
-        }
-        if(this.discountDetails.offer.type==="seller"){
-          let lookForVendor=[]
-          for(let i=0;i<this.discountDetails.offer.list.length;i++){
-            lookForVendor.push(this.discountDetails.offer.list[i].id)
-           
+        if (this.discountDetails.offer.type === "category") {
+          let lookForCategory = []
+          for (let i = 0; i < this.discountDetails.offer.list.length; i++) {
+            lookForCategory.push(this.discountDetails.offer.list[i].id)
+
           }
 
-          this.lookUpForVendor(lookForVendor);
+          this.lookUpForCategory(lookForCategory);
         }
-        if(this.discountDetails.offer.type==="seller"){
-          let lookForProduct=[]
-          for(let i=0;i<this.discountDetails.offer.list.length;i++){
-            lookForProduct.push(this.discountDetails.offer.list[i].id)
-           
+        if (this.discountDetails.offer.type === "subCategory") {
+          let lookForSubCategory = []
+          for (let i = 0; i < this.discountDetails.offer.list.length; i++) {
+            lookForSubCategory.push(this.discountDetails.offer.list[i].id)
+
           }
-          this.lookUpForProduct(lookForProduct);
+          this.lookUpForSubCategory(lookForSubCategory, this.discountDetails.category);
         }
-        
-        
+        if (this.discountDetails.offer.type === "seller") {
+          let lookForVendor = []
+          for (let i = 0; i < this.discountDetails.offer.list.length; i++) {
+            lookForVendor.push(this.discountDetails.offer.list[i]._id)
+
+          }
+
+          this.lookUpForVendor(lookForVendor, this.discountDetails.subCategory.id, this.discountDetails.category.id);
+        }
+        if (this.discountDetails.offer.type === "product") {
+          let lookForProduct = []
+          for (let i = 0; i < this.discountDetails.offer.list.length; i++) {
+            lookForProduct.push(this.discountDetails.offer.list[i].id)
+
+          }
+          this.lookUpForProduct(lookForProduct, this.discountDetails.subCategory.id, this.discountDetails.category.id);
+
+        }
+
+
 
 
 
@@ -345,26 +345,64 @@ export class EditdiscountComponent implements OnInit ,AfterViewInit {
 
   }
 
-  lookUpForCategory(l){
-    console.log(l)
+  lookUpForCategory(selectedList) {
+
+    console.log(selectedList)
+    let temp = []
+
+    for (let i = 0; i < this.categoryList.length; i++) {
+      for (let j = 0; j < selectedList.length; j++) {
+        if (selectedList[j] === this.categoryList[i].id) {
+          let body = {
+            'id': this.categoryList[i].id,
+            'name': this.categoryList[i].name,
+          }
+          temp.push(body);
+        }
+
+      }
+
+
+    }
+    this.selectedCategoryItem = temp;
   }
 
-  lookUpForSubCategory(ls,la){
-  
-    console.log(la)
+  categoryId: any
+  selectedSubcategoryList: any
+  lookUpForSubCategory(ls, la) {
+
+    this.selectedSubcategoryList = ls
+    this.categoryId = la.id
+    this.getAllSubcategory(this.categoryId);
+
+
+
   }
-  lookUpForVendor(ls){
+  subCategoryId: any
+  selectedVendorList: any
+  lookUpForVendor(ls, subcategoryId, categoryId) {
     console.log(ls);
+    this.selectedVendorList = ls
+    this.categoryId = categoryId;
+    this.subCategoryId = subcategoryId;
+    this.getAllSubcategory(categoryId)
+    this.getAllVendor();
 
   }
-  lookUpForProduct(ls){
-console.log(ls)
+  selectedProductList: any
+  lookUpForProduct(ls, subcategoryId, categoryId) {
+    console.log(ls)
+    this.selectedProductList = ls;
+    this.categoryId = categoryId;
+    this.subCategoryId = subcategoryId;
+    this.getAllSubcategory(categoryId)
+    this.getAllProduct();
   }
 
   getAllCategory() {
-    debugger
+
     this.categoryList = []
-    let temp=[]
+    let temp = []
     this.apiService.getAllCategoriesForDiscount(this.parentId).subscribe(res => {
       if (res.success) {
         // console.log(res)
@@ -379,7 +417,7 @@ console.log(ls)
           }
         }
       }
-      this.categoryList=temp
+      this.categoryList = temp
 
     });
   }
@@ -392,29 +430,50 @@ console.log(ls)
   }
 
   getAllSubcategory(id) {
-    let temp=[]
+    let temp = []
     this.subCategoryList = []
-    if (this.selectedCategory) {
-      this.apiService.getAllCategoriesForDiscount(id).subscribe(res => {
-        if (res.success) {
-          //  console.log(res)
-          if (res.data) {
-            for (let i = 0; i < res.data.length; i++) {
-              let body = {
-                'id': res.data[i].id,
-                'name': res.data[i].name
-              }
-              temp.push(body);
 
+    this.apiService.getAllCategoriesForDiscount(id).subscribe(res => {
+      if (res.success) {
+        //  console.log(res)
+        if (res.data) {
+          for (let i = 0; i < res.data.length; i++) {
+            let body = {
+              'id': res.data[i].id,
+              'name': res.data[i].name
             }
+            temp.push(body);
+
           }
         }
-        this.subCategoryList= temp
-      });
-    } else {
-      this.commonService.errorToast("Please Select a category.");
+      }
+      this.subCategoryList = temp
 
-    }
+      if (this.categoryId) {
+        let temp1 = []
+
+        for (let i = 0; i < this.subCategoryList.length; i++) {
+          for (let j = 0; j < this.selectedSubcategoryList.length; j++) {
+            if (this.selectedSubcategoryList[j] === this.subCategoryList[i].id) {
+              let body = {
+                'id': this.subCategoryList[i].id,
+                'name': this.subCategoryList[i].name,
+              }
+              temp1.push(body);
+            }
+
+          }
+
+
+        }
+        this.selectedSubcategoryItem = temp1;
+      }
+
+
+
+
+    });
+
 
   }
 
@@ -426,38 +485,66 @@ console.log(ls)
       this.getAllVendor();
     } else {
       this.getAllProduct()
-    }  }
+    }
+  }
 
 
   getAllVendor() {
     this.vendorList = []
-    let temp=[]
+    let body: any
+    let temp = []
     if (this.selectedSubCategory) {
-      let body = {
+      body = {
         'categories': [this.selectedCategory],
         'subCategories': [this.selectedSubCategory]
       }
+    }
+    if (this.subCategoryId) {
+      body = {
+        'categories': [this.categoryId],
+        'subCategories': [this.subCategoryId]
+      }
+    }
 
-      this.apiService.getVendorListbyCat(body).subscribe(res => {
+    this.apiService.getVendorListbyCat(body).subscribe(res => {
 
-        if (res.success) {
-          // console.log(res)
-          if (res.data) {
-            for (let i = 0; i < res.data.length; i++) {
-              let body = {
-                'id': res.data[i]._id,
-                'firstname': res.data[i].firstName,
-                'lastname': res.data[i].lastName
-              }
-              temp.push(body)
+      if (res.success) {
+        // console.log(res)
+        if (res.data) {
+          for (let i = 0; i < res.data.length; i++) {
+            let body = {
+              'id': res.data[i]._id,
+              'name': res.data[i].firstName + res.data[i].lastName,
+
             }
+            temp.push(body)
           }
         }
-        this.vendorList= temp;
-      });
-    } else {
-      this.commonService.errorToast("Please Select a sub category first")
-    }
+      }
+      this.vendorList = temp;
+      if (this.subCategoryId) {
+        let temp1 = []
+
+        for (let i = 0; i < this.vendorList.length; i++) {
+          for (let j = 0; j < this.selectedVendorList.length; j++) {
+            if (this.selectedVendorList[j] === this.vendorList[i].id) {
+              let body = {
+                'id': this.vendorList[i].id,
+                'name': this.vendorList[i].name,
+              }
+              temp1.push(body);
+            }
+
+          }
+
+
+        }
+        this.selectedVendorItem = temp1;
+
+      }
+    });
+
+
   }
 
   selectedVendor = ''
@@ -465,40 +552,68 @@ console.log(ls)
 
     console.log("vendor:", e)
     this.selectedVendor = e
-   // this.getAllProduct()
+    // this.getAllProduct()
   }
 
   getAllProduct() {
+    let body: any
     this.productList = [];
-    let temp=[]
-    if (this.selectedVendor) {
-      let body = {
+    let temp = []
+    if (this.selectedSubCategory) {
+      body = {
         'categories': [this.selectedCategory],
         'subCategories': [this.selectedSubCategory],
-        
+
       }
-
-      this.apiService.getProductByVendor(body).subscribe(res => {
-
-        if (res.success) {
-          if (res.data) {
-            for (let i = 0; i < res.data.length; i++) {
-              let body = {
-                'id': res.data[i].id,
-                'name': res.data[i].name,
-
-              }
-             temp.push(body)
-            }
-          }
-        }
-        this.productList=temp
-      });
-    } else {
-      this.commonService.errorToast("PLease select a vendor First")
+    }
+    if (this.subCategoryId) {
+      body = {
+        'categories': [this.categoryId],
+        'subCategories': [this.subCategoryId]
+      }
     }
 
+    this.apiService.getProductByVendor(body).subscribe(res => {
+
+      if (res.success) {
+        if (res.data) {
+          for (let i = 0; i < res.data.length; i++) {
+            let body = {
+              'id': res.data[i].id,
+              'name': res.data[i].name,
+
+            }
+            temp.push(body)
+          }
+        }
+      }
+      this.productList = temp
+      if (this.subCategoryId) {
+        let temp1 = []
+
+        for (let i = 0; i < this.productList.length; i++) {
+          for (let j = 0; j < this.selectedProductList.length; j++) {
+            if (this.selectedProductList[j] === this.productList[i].id) {
+              let body = {
+                'id': this.productList[i].id,
+                'name': this.productList[i].name,
+              }
+              temp1.push(body);
+            }
+
+          }
+
+
+        }
+        this.selectedProductItem = temp1;
+
+      }
+
+
+    });
   }
+
+
   productSelected(id) {
     console.log("product:", id);
     this.selectedProduct = id;
@@ -511,7 +626,7 @@ console.log(ls)
     debugger
     this.submitted = true
     console.log(this.editDiscountForm);
-    let checkOffer = this.editDiscountForm.controls['dicountOn'].value;
+    let checkOffer = this.dicountOn;
     if (checkOffer == "category") {
       if (this.submitted && this.editDiscountForm.valid) {
 
@@ -523,7 +638,8 @@ console.log(ls)
             selectedCategory.push(this.selectedCategoryItem[i].id)
           }
           this.typeCategory(checkOffer, selectedCategory);
-        }      }
+        }
+      }
     }
 
     if (checkOffer == 'subCategory') {
@@ -540,7 +656,7 @@ console.log(ls)
       }
 
     }
-    if (checkOffer == 'vendor') {
+    if (checkOffer == 'seller') {
       if (this.submitted && this.editDiscountForm.valid) {
         if (this.selectedItem.length > 0) {
           this.typeVendor(checkOffer, this.selectedItem);
@@ -596,7 +712,7 @@ console.log(ls)
   }
 
 
-  typeSubcategory(checkOffer,selectedSubcategoryItem) {
+  typeSubcategory(checkOffer, selectedSubcategoryItem) {
 
     let startDate = moment().toISOString(this.editDiscountForm.controls['startDate'].value);
     let endDate = moment().toISOString(this.editDiscountForm.controls['endDate'].value)
@@ -617,7 +733,7 @@ console.log(ls)
 
     this.editbanner(body);
   }
-  typeVendor(checkOffer,selectedVendorItem) {
+  typeVendor(checkOffer, selectedVendorItem) {
 
     let startDate = moment().toISOString(this.editDiscountForm.controls['startDate'].value);
     let endDate = moment().toISOString(this.editDiscountForm.controls['endDate'].value)
@@ -639,7 +755,7 @@ console.log(ls)
 
     this.editbanner(body);
   }
-  typeProduct(checkOffer,selectedItem) {
+  typeProduct(checkOffer, selectedItem) {
 
     let startDate = moment().toISOString(this.editDiscountForm.controls['startDate'].value);
     let endDate = moment().toISOString(this.editDiscountForm.controls['endDate'].value)

@@ -22,7 +22,7 @@
                                     name="dicountOn" (click)="setradio('subCategory')" value="subCategory">&nbsp;&nbsp;
                                 Vendor
                                 <input type="radio" [ngModel]="dicountOn" [ngModelOptions]="{standalone: true}"
-                                    name="dicountOn" (click)="setradio('vendor')" value="vendor">&nbsp;&nbsp;
+                                    name="dicountOn" (click)="setradio('seller')" value="seller">&nbsp;&nbsp;
                                 Product
                                 <input type="radio" [ngModel]="dicountOn" [ngModelOptions]="{standalone: true}"
                                     name="dicountOn" (click)="setradio('product')" value="product">&nbsp;&nbsp;
@@ -35,7 +35,8 @@
                             <li *ngIf="showCategory">
                                 <label>Select Category<span class="red">*</span></label>
                                 <mat-form-field *ngIf="singleCategorySelection">
-                                    <mat-select (selectionChange)="categorySelected($event.value)">
+                                    <mat-select [ngModel]="categoryId" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="categorySelected($event.value)">
                                         <input matInput placeholder="Seaarch Category"
                                             (keyup)="onKey($event.target.value)">
                                         <mat-option>None</mat-option>
@@ -52,7 +53,8 @@
                             <li *ngIf="showSubcategory">
                                 <label>Select Sub Category<span class="red">*</span></label>
                                 <mat-form-field *ngIf="singleSubCategorySelection">
-                                    <mat-select (selectionChange)="subCategorySelected($event.value)">
+                                    <mat-select [ngModel]="subCategoryId" [ngModelOptions]="{standalone: true}"
+                                        (selectionChange)="subCategorySelected($event.value)">
                                         <input matInput placeholder="Search Sub-Category"
                                             (keyup)="onKey($event.target.value)">
                                         <mat-option>None</mat-option>
