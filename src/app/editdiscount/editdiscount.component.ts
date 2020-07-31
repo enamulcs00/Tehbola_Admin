@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/services/api.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommonService } from 'src/services/common.service';
 import * as moment from 'moment';
 import { UrlService } from 'src/services/url.service';
+import { IDropdownSettings, } from 'ng-multiselect-dropdown';
+import { debug } from 'console';
+
 interface Ready {
   value: string;
   viewValue: string;
@@ -14,7 +17,7 @@ interface Ready {
   templateUrl: './editdiscount.component.html',
   styleUrls: ['./editdiscount.component.scss']
 })
-export class EditdiscountComponent implements OnInit {
+export class EditdiscountComponent implements OnInit ,AfterViewInit {
 
   editDiscountForm: FormGroup;
   pick: Ready[] = [
@@ -42,6 +45,18 @@ export class EditdiscountComponent implements OnInit {
   previewImage: any;
   dicountOn: any;
   imageUrl: any
+  categoryDropDownSettings: IDropdownSettings = {};
+  subcategoryDropDownSettings: IDropdownSettings = {};
+  vendorDropDownSettings: IDropdownSettings = {};
+  productDropDownSettings: IDropdownSettings = {};
+  singleCategorySelection:boolean;
+  singleSubCategorySelection:boolean
+  singleVendorSelection:boolean;
+  singleProductSelection:boolean;
+  selectedCategoryItem: any;
+  selectedSubcategoryItem: any;
+  selectedVendorItem: any;
+  selectedProductItem: any;
   constructor(private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -50,32 +65,39 @@ export class EditdiscountComponent implements OnInit {
     private urlService: UrlService
   ) {
     this.imageUrl = this.urlService.imageUrl;
-    // this.getAllCategory()
+   //  this.getAllCategory()
   }
 
 
 
   setradio(e: string) {
     debugger
+    this.singleCategorySelection = true;
+    this.singleSubCategorySelection = true;
+    this.singleVendorSelection = true;
+    this.singleProductSelection = true;
     switch (e) {
       case "category":
-        this.dicountOn = "category"
+        this.dicountOn = 'category'
+        this.singleCategorySelection=false
         this.showCategory = true;
         this.showSubcategory = false;
         this.showVendor = false;
         this.showProduct = false
         console.log("category");
         break;
-      case "subcategory":
-        this.dicountOn = "subcategory"
+      case "subCategory":
+        this.dicountOn = 'subCategory';
+        this.singleSubCategorySelection=false
         this.showCategory = true;
         this.showSubcategory = true;
         this.showVendor = false;
         this.showProduct = false
-        console.log("subcategory");
+        console.log("subCategory");
         break;
       case "vendor":
-        this.dicountOn = "vendor"
+        this.dicountOn = 'vendor'
+        this.singleVendorSelection=false
         this.showCategory = true;
         this.showSubcategory = true;
         this.showVendor = true;
@@ -83,10 +105,11 @@ export class EditdiscountComponent implements OnInit {
         console.log("vendor");
         break;
       case "product":
-        this.dicountOn = "product"
+        this.dicountOn = 'product'
+        this.singleProductSelection=false;
         this.showCategory = true;
         this.showSubcategory = true;
-        this.showVendor = true;
+        this.showVendor = false;
         this.showProduct = true
         console.log("product");
         break;
@@ -94,21 +117,21 @@ export class EditdiscountComponent implements OnInit {
   }
 
   onKeyInCategory(value) {
-    this.selectedItem = [];
-    this.selectedItem = this.searchCategory(value);
+   // this.selectedItem = [];
+    this.selectedCategory = this.searchCategory(value).toString();
   }
 
   onKeyInSubCategory(value) {
-    this.selectedItem = [];
-    this.selectedItem = this.searchSubcategory(value);
+  //  this.selectedItem = [];
+    this.selectedSubCategory = this.searchSubcategory(value).toString();
   }
   onKeyInVendor(value) {
-    this.selectedItem = [];
-    this.selectedItem = this.searchVendor(value);
+   // this.selectedItem = [];
+    this.selectedVendor = this.searchVendor(value).toString();
   }
   onKeyInProduct(value) {
-    this.selectedItem = [];
-    this.selectedItem = this.searchProduct(value);
+  //  this.selectedItem = [];
+    this.selectedProduct = this.searchProduct(value).toString();
   }
 
 
@@ -146,11 +169,62 @@ export class EditdiscountComponent implements OnInit {
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
       type: ['', Validators.required],
-
+      dicountOn:['',],
       name: ['', [Validators.required, Validators.maxLength(25)]],
       name_ar: ['',],
       bannerImage: ['', Validators.required]
     })
+
+  }
+
+  ngAfterViewInit(){
+
+    
+    this.categoryDropDownSettings = {
+
+      singleSelection: this.singleCategorySelection,
+      idField: 'id',
+      textField: 'name',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 10,
+      allowSearchFilter: true
+    }
+
+    this.subcategoryDropDownSettings = {
+
+      singleSelection: this.singleSubCategorySelection,
+      idField: 'id',
+      textField: 'name',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 10,
+      allowSearchFilter: true
+    }
+
+    this.vendorDropDownSettings = {
+
+      singleSelection: this.singleVendorSelection,
+      idField: 'id',
+      textField: 'name',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 10,
+      allowSearchFilter: true
+    }
+
+    this.productDropDownSettings = {
+
+      singleSelection: this.singleProductSelection,
+      idField: 'id',
+      textField: 'name',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 10,
+      allowSearchFilter: true
+    }
+
+
 
   }
 
@@ -177,6 +251,38 @@ export class EditdiscountComponent implements OnInit {
     }
   }
 
+  onCategorySelect(item: any) {
+    console.log(item.id);
+    const index = this.selectedCategoryItem.findIndex(o => o._id.toString() == item.id.toString());
+    if (index < 0) this.selectedCategoryItem.push(item);
+
+  }
+
+  onSubcategorySelect(item: any) {
+    const index = this.selectedSubcategoryItem.findIndex(o => o._id.toString() == item.id.toString());
+    if (index < 0) this.selectedSubcategoryItem.push(item)
+  }
+
+  
+  onVendorSelect(item: any) {
+    const index = this.selectedVendorItem.findIndex(o => o._id.toString() == item.id.toString());
+    if (index < 0) this.selectedVendorItem.push(item)
+  }
+
+  onProductSelect(item: any) {
+    const index = this.selectedProductItem.findIndex(o => o._id.toString() == item.id.toString());
+    if (index < 0) this.selectedProductItem.push(item)
+  }
+  onSelectAll(items: any) {
+    console.log(items)
+    for (let i = 0; i < items.length; i++) {
+      this.selectedItem.push(items.id)
+    }
+  }
+
+  
+
+
   getDiscount(id) {
     debugger
     this.apiService.getDisountDetails(id).subscribe(res => {
@@ -184,6 +290,43 @@ export class EditdiscountComponent implements OnInit {
         this.discountDetails = res.data;
         console.log(this.discountDetails);
         // this.editDiscountForm.controls['dicountOn'].setValue(this.discountDetails.onModel);
+        if(this.discountDetails.offer.type==="category"){
+         let lookForCategory=[]
+          for(let i=0;i<this.discountDetails.offer.list.length;i++){
+             lookForCategory.push(this.discountDetails.offer.list[i].id)
+           
+          }
+          this.lookUpForCategory(lookForCategory);
+        }
+        if(this.discountDetails.offer.type==="subCategory"){
+          let lookForSubCategory=[]
+          for(let i=0;i<this.discountDetails.offer.list.length;i++){
+            lookForSubCategory.push(this.discountDetails.offer.list[i].id)
+           
+          }
+          this.lookUpForSubCategory(lookForSubCategory,this.discountDetails.category);
+        }
+        if(this.discountDetails.offer.type==="seller"){
+          let lookForVendor=[]
+          for(let i=0;i<this.discountDetails.offer.list.length;i++){
+            lookForVendor.push(this.discountDetails.offer.list[i].id)
+           
+          }
+
+          this.lookUpForVendor(lookForVendor);
+        }
+        if(this.discountDetails.offer.type==="seller"){
+          let lookForProduct=[]
+          for(let i=0;i<this.discountDetails.offer.list.length;i++){
+            lookForProduct.push(this.discountDetails.offer.list[i].id)
+           
+          }
+          this.lookUpForProduct(lookForProduct);
+        }
+        
+        
+
+
 
         this.editDiscountForm.controls['endDate'].setValue(this.discountDetails.endDate);
         this.editDiscountForm.controls['type'].setValue(this.discountDetails.type);
@@ -202,25 +345,43 @@ export class EditdiscountComponent implements OnInit {
 
   }
 
+  lookUpForCategory(l){
+    console.log(l)
+  }
+
+  lookUpForSubCategory(ls,la){
+  
+    console.log(la)
+  }
+  lookUpForVendor(ls){
+    console.log(ls);
+
+  }
+  lookUpForProduct(ls){
+console.log(ls)
+  }
+
   getAllCategory() {
-
+    debugger
     this.categoryList = []
-
+    let temp=[]
     this.apiService.getAllCategoriesForDiscount(this.parentId).subscribe(res => {
       if (res.success) {
         // console.log(res)
         if (res.data) {
-          for (let i = 0; i <= res.data.length; i++) {
+          for (let i = 0; i < res.data.length; i++) {
             let body = {
               'id': res.data[i].id,
               'name': res.data[i].name
             }
-            this.categoryList.push(body);
+            temp.push(body);
 
           }
         }
       }
-    })
+      this.categoryList=temp
+
+    });
   }
 
   selectedCategory = ''
@@ -231,22 +392,24 @@ export class EditdiscountComponent implements OnInit {
   }
 
   getAllSubcategory(id) {
-
+    let temp=[]
     this.subCategoryList = []
     if (this.selectedCategory) {
       this.apiService.getAllCategoriesForDiscount(id).subscribe(res => {
         if (res.success) {
           //  console.log(res)
           if (res.data) {
-            for (let i = 0; i <= res.data.length; i++) {
+            for (let i = 0; i < res.data.length; i++) {
               let body = {
                 'id': res.data[i].id,
                 'name': res.data[i].name
               }
-              this.subCategoryList.push(body)
+              temp.push(body);
+
             }
           }
         }
+        this.subCategoryList= temp
       });
     } else {
       this.commonService.errorToast("Please Select a category.");
@@ -259,12 +422,16 @@ export class EditdiscountComponent implements OnInit {
   subCategorySelected(id) {
     console.log("subcategory:", id)
     this.selectedSubCategory = id
-    this.getAllVendor();
-  }
+    if (this.showVendor) {
+      this.getAllVendor();
+    } else {
+      this.getAllProduct()
+    }  }
 
 
   getAllVendor() {
     this.vendorList = []
+    let temp=[]
     if (this.selectedSubCategory) {
       let body = {
         'categories': [this.selectedCategory],
@@ -276,16 +443,17 @@ export class EditdiscountComponent implements OnInit {
         if (res.success) {
           // console.log(res)
           if (res.data) {
-            for (let i = 0; i <= res.data.length; i++) {
+            for (let i = 0; i < res.data.length; i++) {
               let body = {
                 'id': res.data[i]._id,
                 'firstname': res.data[i].firstName,
                 'lastname': res.data[i].lastName
               }
-              this.vendorList.push(body)
+              temp.push(body)
             }
           }
         }
+        this.vendorList= temp;
       });
     } else {
       this.commonService.errorToast("Please Select a sub category first")
@@ -297,32 +465,34 @@ export class EditdiscountComponent implements OnInit {
 
     console.log("vendor:", e)
     this.selectedVendor = e
-    this.getAllProduct()
+   // this.getAllProduct()
   }
 
   getAllProduct() {
     this.productList = [];
+    let temp=[]
     if (this.selectedVendor) {
       let body = {
         'categories': [this.selectedCategory],
         'subCategories': [this.selectedSubCategory],
-        'vendors': [this.selectedVendor]
+        
       }
 
       this.apiService.getProductByVendor(body).subscribe(res => {
 
         if (res.success) {
           if (res.data) {
-            for (let i = 0; i <= res.data.length; i++) {
+            for (let i = 0; i < res.data.length; i++) {
               let body = {
                 'id': res.data[i].id,
                 'name': res.data[i].name,
 
               }
-              this.productList.push(body)
+             temp.push(body)
             }
           }
         }
+        this.productList=temp
       });
     } else {
       this.commonService.errorToast("PLease select a vendor First")
@@ -345,26 +515,57 @@ export class EditdiscountComponent implements OnInit {
     if (checkOffer == "category") {
       if (this.submitted && this.editDiscountForm.valid) {
 
-
-        this.typeCategory(checkOffer);
-      }
+        if (this.selectedItem.length > 0) {
+          this.typeCategory(checkOffer, this.selectedItem);
+        } else {
+          let selectedCategory = []
+          for (let i = 0; i < this.selectedCategoryItem.length; i++) {
+            selectedCategory.push(this.selectedCategoryItem[i].id)
+          }
+          this.typeCategory(checkOffer, selectedCategory);
+        }      }
     }
 
     if (checkOffer == 'subCategory') {
       if (this.submitted && this.editDiscountForm.valid) {
-        this.typeSubcategory(checkOffer)
+        if (this.selectedItem.length > 0) {
+          this.typeSubcategory(checkOffer, this.selectedItem);
+        } else {
+          let selectedSubCategory = [];
+          for (let i = 0; i < this.selectedSubcategoryItem.length; i++) {
+            selectedSubCategory.push(this.selectedSubcategoryItem[i].id)
+          }
+          this.typeSubcategory(checkOffer, selectedSubCategory);
+        }
       }
 
     }
     if (checkOffer == 'vendor') {
       if (this.submitted && this.editDiscountForm.valid) {
-        this.typeVendor(checkOffer);
+        if (this.selectedItem.length > 0) {
+          this.typeVendor(checkOffer, this.selectedItem);
+        } else {
+          let selectedVendor = [];
+          for (let i = 0; i < this.selectedVendorItem.length; i++) {
+            selectedVendor.push(this.selectedVendorItem[i].id)
+          }
+
+          this.typeVendor(checkOffer, selectedVendor);
+        }
       }
 
     }
     if (checkOffer == 'product') {
       if (this.submitted && this.editDiscountForm.valid) {
-        this.typeProduct(checkOffer);
+        if (this.selectedItem.length > 0) {
+          this.typeProduct(checkOffer, this.selectedItem);
+        } else {
+          let selectedProduct = [];
+          for (let i = 0; i < this.selectedProductItem.length; i++) {
+            selectedProduct.push(this.selectedProductItem[i].id)
+          }
+          this.typeProduct(checkOffer, selectedProduct);
+        }
       }
 
     }
@@ -372,12 +573,12 @@ export class EditdiscountComponent implements OnInit {
 
   }
 
-  typeCategory(checkOffer) {
+  typeCategory(checkOffer, selectedCategoryItem) {
 
     let startDate = moment().toISOString(this.editDiscountForm.controls['startDate'].value);
     let endDate = moment().toISOString(this.editDiscountForm.controls['endDate'].value)
     let offer = {
-      'list': [this.selectedCategory], 'type': checkOffer
+      'list': selectedCategoryItem, 'type': checkOffer
     }
 
     const body = new FormData();
@@ -395,15 +596,16 @@ export class EditdiscountComponent implements OnInit {
   }
 
 
-  typeSubcategory(checkOffer) {
+  typeSubcategory(checkOffer,selectedSubcategoryItem) {
 
     let startDate = moment().toISOString(this.editDiscountForm.controls['startDate'].value);
     let endDate = moment().toISOString(this.editDiscountForm.controls['endDate'].value)
     let offer = {
-      'list': [this.selectedSubCategory], 'type': checkOffer
+      'list': selectedSubcategoryItem, 'type': checkOffer
     }
 
     const body = new FormData();
+    body.append('category', this.selectedCategory)
     body.append('name', this.editDiscountForm.controls['name'].value);
     body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
     body.append('image', this.imageFile, this.imageFile.name);
@@ -415,15 +617,17 @@ export class EditdiscountComponent implements OnInit {
 
     this.editbanner(body);
   }
-  typeVendor(checkOffer) {
+  typeVendor(checkOffer,selectedVendorItem) {
 
     let startDate = moment().toISOString(this.editDiscountForm.controls['startDate'].value);
     let endDate = moment().toISOString(this.editDiscountForm.controls['endDate'].value)
     let offer = {
-      'list': [this.selectedVendor], 'type': checkOffer
+      'list': selectedVendorItem, 'type': 'seller'
     }
 
     const body = new FormData();
+    body.append('category', this.selectedCategory);
+    body.append('subCategory', this.selectedSubCategory);
     body.append('name', this.editDiscountForm.controls['name'].value);
     body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
     body.append('image', this.imageFile, this.imageFile.name);
@@ -435,15 +639,17 @@ export class EditdiscountComponent implements OnInit {
 
     this.editbanner(body);
   }
-  typeProduct(checkOffer) {
+  typeProduct(checkOffer,selectedItem) {
 
     let startDate = moment().toISOString(this.editDiscountForm.controls['startDate'].value);
     let endDate = moment().toISOString(this.editDiscountForm.controls['endDate'].value)
     let offer = {
-      'list': [this.selectedProduct], 'type': checkOffer
+      'list': selectedItem, 'type': checkOffer
     }
 
     const body = new FormData();
+    body.append('category', this.selectedCategory);
+    body.append('subCategory', this.selectedSubCategory);
     body.append('name', this.editDiscountForm.controls['name'].value);
     body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
     body.append('image', this.imageFile, this.imageFile.name);

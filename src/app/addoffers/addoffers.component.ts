@@ -236,12 +236,12 @@ export class AddoffersComponent implements OnInit, AfterContentChecked {
   }
 
   onVendorSelect(item: any) {
-    const index = this.selectedSubcategoryItem.findIndex(o => o._id.toString() == item.id.toString());
+    const index = this.selectedVendorItem.findIndex(o => o._id.toString() == item.id.toString());
     if (index < 0) this.selectedVendorItem.push(item)
   }
 
   onProductSelect(item: any) {
-    const index = this.selectedSubcategoryItem.findIndex(o => o._id.toString() == item.id.toString());
+    const index = this.selectedProductItem.findIndex(o => o._id.toString() == item.id.toString());
     if (index < 0) this.selectedProductItem.push(item)
   }
   onSelectAll(items: any) {
@@ -376,7 +376,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked {
 
     console.log("vendor:", e)
     this.selectedVendor = e
-    this.getAllProduct()
+   // this.getAllProduct()
   }
 
   getAllProduct() {
