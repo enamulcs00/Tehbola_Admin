@@ -17,6 +17,8 @@ export class NavbarComponent implements OnInit {
   imagePath: any
   profileData: any
 
+
+
   constructor(private router: Router, private apiService: ApiService, private urlService: UrlService) { }
   pick: Ready[] = [
     { value: '10 Min-0', viewValue: 'Arabic' },
@@ -24,14 +26,14 @@ export class NavbarComponent implements OnInit {
   ];
   ngOnInit() {
     this.imagePath = this.urlService.imageUrl;
-
+    
     this.apiService.getProfile().subscribe((res) => {
       console.log(res)
       this.profileData = res.data
 
     })
 
-
+  
   }
 
   getProfile() {

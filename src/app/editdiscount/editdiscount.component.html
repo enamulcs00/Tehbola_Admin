@@ -159,15 +159,16 @@
                                 <div class="product_image_upload">
                                     <input type='file' (change)="bannerImageEvent($event)" accept="image/*"
                                         formControlName="bannerImage" placeholder="choosefile" class="images_uploader">
+                                  
+                                    <span>Choose File</span>
                                     <div class="user_img">
-                                        <figure *ngIf="flagImage==false">
-                                            <img style="height: 50px;width: 50px" [src]="imageUrl+previewImage" />
+                                        <figure class="figure" *ngIf="flagImage==false">
+                                            <img style="width: 200px" [src]="imageUrl+previewImage" />
                                         </figure>
-                                        <figure *ngIf="flagImage==true">
-                                            <img style="height: 50px;width: 50px" [src]="previewImage" />
+                                        <figure class="figure" *ngIf="flagImage==true">
+                                            <img style="width: 200px" [src]="previewImage" />
                                         </figure>
                                     </div>
-                                    <span>Choose File</span>
                                     <!-- <mat-error
                                         *ngIf="submitted && editDiscountForm.controls['bannerImage'].hasError('required')">
                                         Banner Image is <strong>required</strong>

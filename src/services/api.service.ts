@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { HttpRequest } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/internal/operators';
 import { Router } from '@angular/router';
-import { of, pipe } from 'rxjs';
+import { of, pipe, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: "root",
@@ -16,6 +16,7 @@ export class ApiService {
   BASE_URL: any = this.url.SERVER_URL + '/api/';
   apiEndPoints: any;
   countryCode: any;
+  userData= new Subject<any>()
 
   constructor(
     private http: HttpClient,
@@ -227,6 +228,11 @@ export class ApiService {
         catchError(this.handleError<any>("add bannner")))
   }
 
+  updateBanner(body): Observable<any> {
+    return this.http.put<any>(this.apiEndPoints.addBanner, body, this.getHeaders()).
+      pipe(
+        catchError(this.handleError<any>("add bannner")))
+  }
 
   getDisountDetails(id): Observable<any> {
     return this.http.get<any>(`${this.apiEndPoints.viewBanner}?id=${id}`, this.getHeaders()).

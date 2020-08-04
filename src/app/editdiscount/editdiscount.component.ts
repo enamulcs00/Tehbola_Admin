@@ -6,7 +6,7 @@ import { CommonService } from 'src/services/common.service';
 import * as moment from 'moment';
 import { UrlService } from 'src/services/url.service';
 import { IDropdownSettings, } from 'ng-multiselect-dropdown';
-import { debug } from 'console';
+
 
 interface Ready {
   value: string;
@@ -20,12 +20,7 @@ interface Ready {
 export class EditdiscountComponent implements OnInit {
 
   editDiscountForm: FormGroup;
-  pick: Ready[] = [
-    { value: 'Lorem ipsum', viewValue: 'Lorem ipsum' },
-    { value: 'Lorem ipsum', viewValue: 'Lorem ipsum' },
-    { value: 'Lorem ipsum', viewValue: 'Lorem ipsum' },
-    { value: 'Lorem ipsum', viewValue: 'Lorem ipsum' }
-  ];
+ 
   sub: any;
   id: any;
   showCategory: boolean;
@@ -33,7 +28,7 @@ export class EditdiscountComponent implements OnInit {
   showVendor: boolean;
   showProduct: boolean;
   discountDetails: any;
-  selectedItem: any[];
+  selectedItem=[];
   categoryList: any[];
   parentId = ''
   subCategoryList: any[];
@@ -117,20 +112,20 @@ export class EditdiscountComponent implements OnInit {
   }
 
   onKeyInCategory(value) {
-    // this.selectedItem = [];
+     this.selectedItem = [];
     this.selectedCategory = this.searchCategory(value).toString();
   }
 
   onKeyInSubCategory(value) {
-    //  this.selectedItem = [];
+      this.selectedItem = [];
     this.selectedSubCategory = this.searchSubcategory(value).toString();
   }
   onKeyInVendor(value) {
-    // this.selectedItem = [];
+     this.selectedItem = [];
     this.selectedVendor = this.searchVendor(value).toString();
   }
   onKeyInProduct(value) {
-    //  this.selectedItem = [];
+      this.selectedItem = [];
     this.selectedProduct = this.searchProduct(value).toString();
   }
 
@@ -272,9 +267,10 @@ export class EditdiscountComponent implements OnInit {
     if (index < 0) this.selectedProductItem.push(item)
   }
   onSelectAll(items: any) {
+    debugger
     console.log(items)
     for (let i = 0; i < items.length; i++) {
-      this.selectedItem.push(items.id)
+      this.selectedItem.push(items[i].id)
     }
   }
 
@@ -282,7 +278,7 @@ export class EditdiscountComponent implements OnInit {
 
 
   getDiscount(id) {
-
+    debugger
     this.apiService.getDisountDetails(id).subscribe(res => {
       if (res.success) {
         this.discountDetails = res.data;
@@ -328,16 +324,17 @@ export class EditdiscountComponent implements OnInit {
 
 
 
-        this.editDiscountForm.controls['endDate'].setValue(this.discountDetails.endDate);
+        this.editDiscountForm.controls['endDate'].setValue(moment(this.discountDetails.endDate).format("YYYY-MM-DD"));
         this.editDiscountForm.controls['type'].setValue(this.discountDetails.type);
-        this.editDiscountForm.controls['startDate'].setValue(this.discountDetails.startDate);
-        this.editDiscountForm.controls['disount'].setValue(this.discountDetails.discount);
+        this.editDiscountForm.controls['startDate'].setValue(moment(this.discountDetails.startDate).format("YYYY-MM-DD") );
+        this.editDiscountForm.controls['disount'].setValue( this.discountDetails.discount);
         this.editDiscountForm.controls['name_ar'].setValue(this.discountDetails.name_ar);
         this.editDiscountForm.controls['name'].setValue(this.discountDetails.name);
         // this.editDiscountForm.controls['dicountOn'].setValue(this.discountDetails.onModel);
         // this.editDiscountForm.controls['dicountOn'].setValue(this.discountDetails.onModel);
         this.setradio(this.discountDetails.offer.type);
-        this.previewImage = this.discountDetails.image
+        this.previewImage = this.discountDetails.image;
+        this.imageFile =this.discountDetails.image;
       }
     })
 
@@ -374,7 +371,7 @@ export class EditdiscountComponent implements OnInit {
     this.selectedSubcategoryList = ls
     this.categoryId = la.id
     this.getAllSubcategory(this.categoryId);
-
+    this.selectedCategory=la
 
 
   }
@@ -387,6 +384,8 @@ export class EditdiscountComponent implements OnInit {
     this.subCategoryId = subcategoryId;
     this.getAllSubcategory(categoryId)
     this.getAllVendor();
+    this.selectedCategory=categoryId;
+    this.selectedSubCategory=subcategoryId
 
   }
   selectedProductList: any
@@ -397,6 +396,8 @@ export class EditdiscountComponent implements OnInit {
     this.subCategoryId = subcategoryId;
     this.getAllSubcategory(categoryId)
     this.getAllProduct();
+    this.selectedCategory=categoryId;
+    this.selectedSubCategory=subcategoryId;
   }
 
   getAllCategory() {
@@ -698,10 +699,14 @@ export class EditdiscountComponent implements OnInit {
     }
 
     const body = new FormData();
+    body.append('id',this.id);
     body.append('name', this.editDiscountForm.controls['name'].value);
     body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
-    body.append('image', this.imageFile, this.imageFile.name);
-    body.append('type', this.editDiscountForm.controls['type'].value);
+    if(this.flagImage){
+      body.append('image', this.imageFile, this.imageFile.name);
+
+    }
+        body.append('type', this.editDiscountForm.controls['type'].value);
     body.append('discount', this.editDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
     body.append('startDate', startDate);
@@ -721,10 +726,14 @@ export class EditdiscountComponent implements OnInit {
     }
 
     const body = new FormData();
+    body.append('id',this.id);
     body.append('category', this.selectedCategory)
     body.append('name', this.editDiscountForm.controls['name'].value);
     body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
-    body.append('image', this.imageFile, this.imageFile.name);
+    if(this.flagImage){
+      body.append('image', this.imageFile, this.imageFile.name);
+
+    }
     body.append('type', this.editDiscountForm.controls['type'].value);
     body.append('discount', this.editDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
@@ -742,11 +751,15 @@ export class EditdiscountComponent implements OnInit {
     }
 
     const body = new FormData();
+    body.append('id',this.id);
     body.append('category', this.selectedCategory);
     body.append('subCategory', this.selectedSubCategory);
     body.append('name', this.editDiscountForm.controls['name'].value);
     body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
-    body.append('image', this.imageFile, this.imageFile.name);
+    if(this.flagImage){
+      body.append('image', this.imageFile, this.imageFile.name);
+
+    }
     body.append('type', this.editDiscountForm.controls['type'].value);
     body.append('discount', this.editDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
@@ -764,11 +777,15 @@ export class EditdiscountComponent implements OnInit {
     }
 
     const body = new FormData();
+    body.append('id',this.id);
     body.append('category', this.selectedCategory);
     body.append('subCategory', this.selectedSubCategory);
     body.append('name', this.editDiscountForm.controls['name'].value);
     body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
-    body.append('image', this.imageFile, this.imageFile.name);
+    if(this.flagImage){
+      body.append('image', this.imageFile, this.imageFile.name);
+
+    }
     body.append('type', this.editDiscountForm.controls['type'].value);
     body.append('discount', this.editDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
@@ -781,17 +798,19 @@ export class EditdiscountComponent implements OnInit {
 
 
   editbanner(body) {
+    
     //  console.log(body)
     body.forEach((value, key) => {
       console.log(key + " " + value)
     });
 
-    // this.apiService.addBanner(body).subscribe(res => {
-    //   console.log(res)
-    //   if (res.success) {
-    //     this.router.navigateByUrl('offerdeals');
-    //   }
-    // })
+    this.apiService.updateBanner(body).subscribe(res => {
+      console.log(res)
+      if (res.success) {
+        this.commonService.successToast("Updated Successfully")
+        this.router.navigateByUrl('offerdeals');
+      }
+    })
 
 
   }
