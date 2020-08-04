@@ -103,7 +103,7 @@
                             </table>
 
                             <!-----start pagination-->
-                            <mat-paginator #paginator [length]="length" [pageSize]="pageSize"
+                            <mat-paginator #paginator [length]="length" [pageIndex]="page" [pageSize]="pageSize"
                                 [pageSizeOptions]="pageSizeOptions"
                                 (page)="pageEvent = UserListAfterPageSizeChanged($event)">
                             </mat-paginator>

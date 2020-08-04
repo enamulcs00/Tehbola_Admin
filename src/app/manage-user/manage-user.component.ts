@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 export class ManageUserComponent implements OnInit {
   length = 100;
   pageSize = 10;
+  page = 1
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pageEvent: PageEvent;
   filterBy: string = '';
@@ -43,7 +44,7 @@ export class ManageUserComponent implements OnInit {
 
     this.filterBy = e.target.value
 
-    this.apiService.getAllUser(1, this.pageSize, "", this.filterBy).subscribe((res) => {
+    this.apiService.getAllUser(this.page, this.pageSize, "", this.filterBy).subscribe((res) => {
       if (res.success) {
         if (res.data.length > 0) {
           this.flagData = false
@@ -93,7 +94,7 @@ export class ManageUserComponent implements OnInit {
   searchMethod() {
     this.flagSearch = false
     // console.log(this.search);
-    this.apiService.getAllUser(1, this.pageSize, this.search, this.filterBy).subscribe((res) => {
+    this.apiService.getAllUser(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
       if (res.success) {
         if (res.data.length > 0) {
           this.flagData = false
@@ -111,7 +112,7 @@ export class ManageUserComponent implements OnInit {
 
     this.flagSearch = true
     this.search = ''
-    this.apiService.getAllUser(1, this.pageSize, this.search, this.filterBy).subscribe((res) => {
+    this.apiService.getAllUser(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
       if (res.success) {
         if (res.data.length > 0) {
           this.flagData = false
@@ -128,7 +129,9 @@ export class ManageUserComponent implements OnInit {
 
   UserListAfterPageSizeChanged(e): any {
     //console.log(e);
-    this.apiService.getAllUser(1, e.pageSize, "", this.filterBy).subscribe((res) => {
+    debugger
+    this.page = e.pageindex;
+    this.apiService.getAllUser(this.page, e.pageSize, "", this.filterBy).subscribe((res) => {
       if (res.success) {
         if (res.data.length > 0) {
           this.flagData = false
@@ -144,7 +147,7 @@ export class ManageUserComponent implements OnInit {
 
   ShowAllUser() {
     //Calling method from service which will call api for data
-    this.apiService.getAllUser(1, this.pageSize, '', this.filterBy).subscribe(res => {
+    this.apiService.getAllUser(this.page, this.pageSize, '', this.filterBy).subscribe(res => {
       if (res.success) {
         if (res.data.length > 0) {
           this.flagData = false

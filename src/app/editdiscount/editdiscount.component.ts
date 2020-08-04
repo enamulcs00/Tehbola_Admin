@@ -1,11 +1,14 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ApiService } from 'src/services/api.service';
+
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { CommonService } from 'src/services/common.service';
+
 import * as moment from 'moment';
-import { UrlService } from 'src/services/url.service';
+
 import { IDropdownSettings, } from 'ng-multiselect-dropdown';
+import { ApiService } from 'src/services/api.service';
+import { CommonService } from 'src/services/common.service';
+import { UrlService } from 'src/services/url.service';
 
 
 interface Ready {
@@ -20,7 +23,7 @@ interface Ready {
 export class EditdiscountComponent implements OnInit {
 
   editDiscountForm: FormGroup;
- 
+
   sub: any;
   id: any;
   showCategory: boolean;
@@ -28,7 +31,7 @@ export class EditdiscountComponent implements OnInit {
   showVendor: boolean;
   showProduct: boolean;
   discountDetails: any;
-  selectedItem=[];
+  selectedItem = [];
   categoryList: any[];
   parentId = ''
   subCategoryList: any[];
@@ -112,20 +115,20 @@ export class EditdiscountComponent implements OnInit {
   }
 
   onKeyInCategory(value) {
-     this.selectedItem = [];
+    this.selectedItem = [];
     this.selectedCategory = this.searchCategory(value).toString();
   }
 
   onKeyInSubCategory(value) {
-      this.selectedItem = [];
+    this.selectedItem = [];
     this.selectedSubCategory = this.searchSubcategory(value).toString();
   }
   onKeyInVendor(value) {
-     this.selectedItem = [];
+    this.selectedItem = [];
     this.selectedVendor = this.searchVendor(value).toString();
   }
   onKeyInProduct(value) {
-      this.selectedItem = [];
+    this.selectedItem = [];
     this.selectedProduct = this.searchProduct(value).toString();
   }
 
@@ -326,15 +329,15 @@ export class EditdiscountComponent implements OnInit {
 
         this.editDiscountForm.controls['endDate'].setValue(moment(this.discountDetails.endDate).format("YYYY-MM-DD"));
         this.editDiscountForm.controls['type'].setValue(this.discountDetails.type);
-        this.editDiscountForm.controls['startDate'].setValue(moment(this.discountDetails.startDate).format("YYYY-MM-DD") );
-        this.editDiscountForm.controls['disount'].setValue( this.discountDetails.discount);
+        this.editDiscountForm.controls['startDate'].setValue(moment(this.discountDetails.startDate).format("YYYY-MM-DD"));
+        this.editDiscountForm.controls['disount'].setValue(this.discountDetails.discount);
         this.editDiscountForm.controls['name_ar'].setValue(this.discountDetails.name_ar);
         this.editDiscountForm.controls['name'].setValue(this.discountDetails.name);
         // this.editDiscountForm.controls['dicountOn'].setValue(this.discountDetails.onModel);
         // this.editDiscountForm.controls['dicountOn'].setValue(this.discountDetails.onModel);
         this.setradio(this.discountDetails.offer.type);
         this.previewImage = this.discountDetails.image;
-        this.imageFile =this.discountDetails.image;
+        this.imageFile = this.discountDetails.image;
       }
     })
 
@@ -371,7 +374,7 @@ export class EditdiscountComponent implements OnInit {
     this.selectedSubcategoryList = ls
     this.categoryId = la.id
     this.getAllSubcategory(this.categoryId);
-    this.selectedCategory=la
+    this.selectedCategory = la
 
 
   }
@@ -384,8 +387,8 @@ export class EditdiscountComponent implements OnInit {
     this.subCategoryId = subcategoryId;
     this.getAllSubcategory(categoryId)
     this.getAllVendor();
-    this.selectedCategory=categoryId;
-    this.selectedSubCategory=subcategoryId
+    this.selectedCategory = categoryId;
+    this.selectedSubCategory = subcategoryId
 
   }
   selectedProductList: any
@@ -396,8 +399,8 @@ export class EditdiscountComponent implements OnInit {
     this.subCategoryId = subcategoryId;
     this.getAllSubcategory(categoryId)
     this.getAllProduct();
-    this.selectedCategory=categoryId;
-    this.selectedSubCategory=subcategoryId;
+    this.selectedCategory = categoryId;
+    this.selectedSubCategory = subcategoryId;
   }
 
   getAllCategory() {
@@ -699,14 +702,14 @@ export class EditdiscountComponent implements OnInit {
     }
 
     const body = new FormData();
-    body.append('id',this.id);
+    body.append('id', this.id);
     body.append('name', this.editDiscountForm.controls['name'].value);
     body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
-    if(this.flagImage){
+    if (this.flagImage) {
       body.append('image', this.imageFile, this.imageFile.name);
 
     }
-        body.append('type', this.editDiscountForm.controls['type'].value);
+    body.append('type', this.editDiscountForm.controls['type'].value);
     body.append('discount', this.editDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
     body.append('startDate', startDate);
@@ -726,11 +729,11 @@ export class EditdiscountComponent implements OnInit {
     }
 
     const body = new FormData();
-    body.append('id',this.id);
+    body.append('id', this.id);
     body.append('category', this.selectedCategory)
     body.append('name', this.editDiscountForm.controls['name'].value);
     body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
-    if(this.flagImage){
+    if (this.flagImage) {
       body.append('image', this.imageFile, this.imageFile.name);
 
     }
@@ -751,12 +754,12 @@ export class EditdiscountComponent implements OnInit {
     }
 
     const body = new FormData();
-    body.append('id',this.id);
+    body.append('id', this.id);
     body.append('category', this.selectedCategory);
     body.append('subCategory', this.selectedSubCategory);
     body.append('name', this.editDiscountForm.controls['name'].value);
     body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
-    if(this.flagImage){
+    if (this.flagImage) {
       body.append('image', this.imageFile, this.imageFile.name);
 
     }
@@ -777,12 +780,12 @@ export class EditdiscountComponent implements OnInit {
     }
 
     const body = new FormData();
-    body.append('id',this.id);
+    body.append('id', this.id);
     body.append('category', this.selectedCategory);
     body.append('subCategory', this.selectedSubCategory);
     body.append('name', this.editDiscountForm.controls['name'].value);
     body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
-    if(this.flagImage){
+    if (this.flagImage) {
       body.append('image', this.imageFile, this.imageFile.name);
 
     }
@@ -798,7 +801,7 @@ export class EditdiscountComponent implements OnInit {
 
 
   editbanner(body) {
-    
+
     //  console.log(body)
     body.forEach((value, key) => {
       console.log(key + " " + value)

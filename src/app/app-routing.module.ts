@@ -67,8 +67,9 @@ import { TermofuseComponent } from './termofuse/termofuse.component';
 import { TermofsalesComponent } from './termofsales/termofsales.component';
 import { ConsumerprivacypolicyComponent } from './consumerprivacypolicy/consumerprivacypolicy.component';
 import { WarrantypolicyComponent } from './warrantypolicy/warrantypolicy.component';
-import { AuthGuard } from 'src/services/auth.guard';
+
 import { DeliveryAddressComponent } from './delivery-address/delivery-address.component';
+import { AuthGuard } from 'src/services/auth.guard';
 
 const routes: Routes = [
   // {

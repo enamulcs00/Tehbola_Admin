@@ -21,64 +21,66 @@
                         <li>
                             <label>Name_ar<span class="red">*</span></label>
                             <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" value="{{bannerDetails.name_ar}}" placeholder=""  disabled name="name"
-                                   >
+                                <input matInput type="text" value="{{bannerDetails.name_ar}}" placeholder="" disabled
+                                    name="name">
                             </mat-form-field>
                         </li>
-                        <li>
+                        <!-- <li>
                             <label>Category<span class="red">*</span></label>
                             <mat-form-field [floatLabel]="'never'">
                                 <input matInput type="text" value="{{bannerDetails.categoryName}}" placeholder=""
                                     name="name" disabled name="name">
                             </mat-form-field>
-                        </li>
+                        </li> -->
                         <li>
                             <label>Type<span class="red">*</span></label>
                             <mat-form-field [floatLabel]="'never'">
                                 <input matInput type="text" value="{{bannerDetails.type}}" placeholder="" name="name"
-                                    disabled >
+                                    disabled>
                             </mat-form-field>
                         </li>
-                        <li>
+                        <!-- <li>
                             <label>Category<span class="red">*</span></label>
                             <mat-form-field [floatLabel]="'never'">
                                 <input matInput type="text" placeholder="" name="name" disabled name="name"
                                     value="">
                             </mat-form-field>
-                        </li>
-                        
+                        </li> -->
+
                         <li>
                             <label> Discount <span class="red">*</span></label>
                             <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name" value="{{bannerDetails.discount}}" disabled name="name">
+                                <input matInput type="text" placeholder="" name="name"
+                                    value="{{bannerDetails.discount}}" disabled name="name">
                             </mat-form-field>
                         </li>
-                        
+
                         <li>
                             <label> Start Date<span class="red">*</span></label>
                             <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name" value="{{bannerDetails.startDate | date}}" disabled
-                                    name="name">
+                                <input matInput type="text" placeholder="" name="name"
+                                    value="{{bannerDetails.startDate | date}}" disabled name="name">
                             </mat-form-field>
                         </li>
                         <li>
                             <label> End Date<span class="red">*</span></label>
                             <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name" value="{{bannerDetails.endDate | date}}" disabled
-                                    name="name">
+                                <input matInput type="text" placeholder="" name="name"
+                                    value="{{bannerDetails.endDate | date}}" disabled name="name">
                             </mat-form-field>
                         </li>
                         <li class="banner_image">
                             <label> Banner image</label>
-                            
-                             <div class="show_product_imges">
+
+                            <div class="show_product_imges">
                                 <span>
                                     <figure>
-                                        <img src="{{imagePath+bannerDetails.image}}" width="200px" height="200px" alt="">
+                                        <img src="{{imagePath+bannerDetails.image}}" width="200px" height="200px"
+                                            alt="">
                                     </figure>
                                 </span>
                             </div>
-                               <!-- <span>
+                            <!-- <span>
                                     <figure>
                                         <img src="../../assets/images/makeup.png" alt="">
                                     </figure>

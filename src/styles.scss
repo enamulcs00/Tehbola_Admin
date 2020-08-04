@@ -76,6 +76,12 @@ overflow-y: scroll;
 table th:first-child {
     width: 65px !important;
 }
+
+.custom-invalid{
+        color: red;
+        display: block;
+
+}
 button.cancel_button.mat-button {
     background-color: #f00;
     color: #fff !important;

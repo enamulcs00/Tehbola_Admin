@@ -48,7 +48,7 @@ export class ViewdiscountComponent implements OnInit {
         this.bannerDetails = {
           'name': res.data.name,
           'name_ar': res.data.name_ar,
-          'categoryName': res.data.offer.list.name,
+          //'categoryName': res.data.offer.list.name,
           'type': res.data.type,
           'discount': res.data.discount + "%",
           'startDate': res.data.startDate,

@@ -37,7 +37,7 @@
                                 <mat-form-field *ngIf="singleCategorySelection">
                                     <mat-select (selectionChange)="categorySelected($event.value)">
                                         <input matInput placeholder="Seaarch Category"
-                                            (keyup)="onKey($event.target.value)">
+                                            (keyup)="onKeyInCategory($event.target.value)">
                                         <mat-option>None</mat-option>
                                         <mat-option *ngFor="let body of categoryList" [value]="body.id">{{body.name}}
                                         </mat-option>
@@ -54,7 +54,7 @@
                                 <mat-form-field *ngIf="singleSubCategorySelection">
                                     <mat-select (selectionChange)="subCategorySelected($event.value)">
                                         <input matInput placeholder="Search Sub-Category"
-                                            (keyup)="onKey($event.target.value)">
+                                            (keyup)="onKeyInSubCategory($event.target.value)">
                                         <mat-option>None</mat-option>
                                         <mat-option *ngFor="let body of subCategoryList" [value]="body.id">{{body.name}}
                                         </mat-option>
@@ -71,7 +71,7 @@
                                 <mat-form-field *ngIf="singleVendorSelection">
                                     <mat-select (selectionChange)="vendorSelected($event.value)">
                                         <input matInput placeholder="Search Vendor"
-                                            (keyup)="onKey($event.target.value)">
+                                            (keyup)="onKeyInVendor($event.target.value)">
                                         <mat-option>None</mat-option>
                                         <mat-option *ngFor="let body of vendorList" [value]="body.id">
                                             {{body.name}}
@@ -89,7 +89,7 @@
                                 <mat-form-field *ngIf="singleProductSelection">
                                     <mat-select (selectionChange)="productSelected($event.value)">
                                         <input matInput placeholder="Search Product"
-                                            (keyup)="onKey($event.target.value)">
+                                            (keyup)="onKeyInProduct($event.target.value)">
                                         <mat-option>None</mat-option>
                                         <mat-option *ngFor="let body of productList" [value]="body.id">{{body.name}}
                                         </mat-option>
@@ -159,9 +159,8 @@
                             <li>
                                 <label>Select Type<span class="red">*</span></label>
                                 <mat-form-field>
-                                    <mat-select formControlName="type" (selectionChange)="typeSelected($event.value)">
-                                        <input matInput placeholder="Search Product"
-                                            (keyup)="onKey($event.target.value)">
+                                    <mat-select formControlName="type">
+                                        <input matInput placeholder="Search Product">
                                         <mat-option>None</mat-option>
                                         <mat-option *ngFor="let ready of type" [value]="ready.value">{{ready.viewValue}}
                                         </mat-option>
