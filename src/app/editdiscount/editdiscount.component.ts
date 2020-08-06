@@ -55,6 +55,8 @@ export class EditdiscountComponent implements OnInit {
   selectedSubcategoryItem: any;
   selectedVendorItem: any;
   selectedProductItem: any;
+  today: string;
+  endTommorow: string;
   constructor(private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -160,6 +162,13 @@ export class EditdiscountComponent implements OnInit {
       });
     this.getDiscount(this.id);
 
+    this.today = moment(new Date()).format('YYYY-MM-DD');
+    let currentDate = new Date().getDate();
+    let currentMonth = new Date().getMonth();
+    let year = new Date().getFullYear();
+    //console.log(new Date(year, currentMonth, currentDate + 1))
+
+    this.endTommorow = moment(new Date(year, currentMonth, currentDate + 1)).format('YYYY-MM-DD');
 
 
     this.editDiscountForm = this.fb.group({

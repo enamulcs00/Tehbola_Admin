@@ -97,6 +97,7 @@
 								</div>
 								<div *ngIf="flagData==true">
 									<h1>No Data Found</h1>
+
 								</div>
 								<div *ngIf="flagData==false" class="table-responsive">
 									<table>
@@ -119,7 +120,8 @@
 											<!-- <th class="action_bx">Action</th> -->
 										</tr>
 										<tr *ngFor="let item of orderHistoryList;   index as i ">
-											<td>{{i+1}}</td>
+											<td *ngIf="flagUserList==false">{{i+1}}</td>
+											<td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
 											<td>{{item.orderId}}</td>
 											<td>{{item.productId.name}}</td>
 											<td>{{item.productId.category.name}}</td>

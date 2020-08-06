@@ -60,7 +60,9 @@
                                     <th class="action_bx">Action</th>
                                 </tr>
                                 <tr *ngFor="let item of userList; index as i ">
-                                    <td>{{i+1}}</td>
+
+                                    <td *ngIf="flagNumber==true">{{srNo+i+1}}</td>
+                                    <td *ngIf="flagNumber==false">{{i+1}}</td>
                                     <td>{{item.firstName}} {{item.lastName}}</td>
 
                                     <td>{{item.email}}</td>
@@ -102,14 +104,13 @@
 
                             </table>
 
-                            <!-----start pagination-->
-                            <mat-paginator #paginator [length]="length" [pageIndex]="page" [pageSize]="pageSize"
-                                [pageSizeOptions]="pageSizeOptions"
-                                (page)="pageEvent = UserListAfterPageSizeChanged($event)">
-                            </mat-paginator>
-                            <!-----end pagination-->
                         </div>
-
+                        <!-----start pagination-->
+                        <mat-paginator [length]="length" [pageIndex]="page" [pageSize]="pageSize"
+                            [pageSizeOptions]="pageSizeOptions"
+                            (page)="pageEvent = UserListAfterPageSizeChanged($event)">
+                        </mat-paginator>
+                        <!-----end pagination-->
                     </div>
 
                 </div>

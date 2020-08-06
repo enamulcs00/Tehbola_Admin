@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/services/api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-delivery-address',
@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class DeliveryAddressComponent implements OnInit {
   sub: any;
   id: any
-  constructor(private apiService: ApiService, private route: ActivatedRoute) { }
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) { }
   addressList: any
   address1: any;
   city: any;
@@ -93,7 +93,9 @@ export class DeliveryAddressComponent implements OnInit {
 
 
 
-
+  goTomanageUser() {
+    this.router.navigate(['manageUser']);
+  }
 
 
 

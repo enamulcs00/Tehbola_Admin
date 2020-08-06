@@ -124,7 +124,8 @@
                             <li>
                                 <label>Start Date <span class="red">*</span></label>
                                 <mat-form-field [floatLabel]="'never'">
-                                    <input matInput formControlName="startDate" type="date" placeholder="" name="name">
+                                    <input matInput formControlName="startDate" type="date" [min]="today" placeholder=""
+                                        name="name">
                                     <mat-error *ngIf="editDiscountForm.controls['startDate'].hasError('required')">
                                         Start Date is <strong>required</strong>
                                     </mat-error>
@@ -133,7 +134,8 @@
                             <li>
                                 <label>End Date <span class="red">*</span></label>
                                 <mat-form-field [floatLabel]="'never'">
-                                    <input matInput formControlName="endDate" type="date" placeholder="" name="name">
+                                    <input matInput formControlName="endDate" type="date" [min]="endTommorow"
+                                        placeholder="" name="name">
                                     <mat-error *ngIf="editDiscountForm.controls['endDate'].hasError('required')">
                                         End Date is <strong>required</strong>
                                     </mat-error>

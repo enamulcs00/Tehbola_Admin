@@ -21,6 +21,9 @@ export class BookingRequestHistoryComponent implements OnInit {
   optionList = ['New', 'Accepted', 'Canceled', 'Rejected', 'Packing', 'Shipped', 'Delivered', 'UnWant', 'Picking', 'Rescheduled', 'pickedShipping', 'Picked', 'PickedDelivered'];
   filter: string = ""
   search: string = ""
+  page: number = 1;
+  flagUserList: boolean = false;
+  srNo: number;
   constructor(private router: Router, private route: ActivatedRoute, private apiService: ApiService) { }
 
   ngOnInit() {
@@ -40,7 +43,7 @@ export class BookingRequestHistoryComponent implements OnInit {
 
 
   getbookingHistory() {
-    this.apiService.viewPurchaseHistory(1, this.pageSize, this.id, this.filter, this.search).subscribe((res) => {
+    this.apiService.viewPurchaseHistory(this.page, this.pageSize, this.id, this.filter, this.search).subscribe((res) => {
       if (res.status) {
         if (res.data.length > 0) {
 
@@ -69,7 +72,7 @@ export class BookingRequestHistoryComponent implements OnInit {
     console.log(e.target.value)
     this.filter = e.target.value;
 
-    this.apiService.viewPurchaseHistory(1, this.pageSize, this.id, this.filter, this.search).subscribe((res) => {
+    this.apiService.viewPurchaseHistory(this.page, this.pageSize, this.id, this.filter, this.search).subscribe((res) => {
       if (res.status) {
 
         if (res.data.length > 0) {
@@ -89,7 +92,24 @@ export class BookingRequestHistoryComponent implements OnInit {
 
   orderHistoryListAfterPageSizeChanged(e): any {
     console.log(e);
-    this.apiService.viewPurchaseHistory(1, e.pageSize, this.id, this.filter, this.search).subscribe((res) => {
+    if (e.pageIndex == 0) {
+      this.page = 1;
+      // this.page = e.pageIndex;
+      //  this.srNo = e.pageIndex * e.pageSize
+      this.flagUserList = false
+    } else {
+      if (e.previousPageIndex < e.pageIndex) {
+        this.page = e.pageIndex + 1;
+        this.srNo = e.pageIndex * e.pageSize
+        this.flagUserList = true
+      } else {
+        this.page = e.pageIndex;
+        this.srNo = e.pageIndex * e.pageSize
+        this.flagUserList = true
+      }
+
+    }
+    this.apiService.viewPurchaseHistory(this.page, e.pageSize, this.id, this.filter, this.search).subscribe((res) => {
       if (res.status) {
         if (res.data.length > 0) {
 
@@ -107,7 +127,7 @@ export class BookingRequestHistoryComponent implements OnInit {
   flagSearch: boolean = true
   searchSubmit() {
     this.flagSearch = false
-    this.apiService.viewPurchaseHistory(1, this.pageSize, this.id, this.filter, this.search).subscribe((res) => {
+    this.apiService.viewPurchaseHistory(this.page, this.pageSize, this.id, this.filter, this.search).subscribe((res) => {
       if (res.status) {
 
         if (res.data.length > 0) {
@@ -127,7 +147,7 @@ export class BookingRequestHistoryComponent implements OnInit {
   clearSearch() {
     this.search = ''
     this.flagSearch = true
-    this.apiService.viewPurchaseHistory(1, this.pageSize, this.id, this.filter, this.search).subscribe((res) => {
+    this.apiService.viewPurchaseHistory(this.page, this.pageSize, this.id, this.filter, this.search).subscribe((res) => {
       if (res.status) {
         if (res.data.length > 0) {
 

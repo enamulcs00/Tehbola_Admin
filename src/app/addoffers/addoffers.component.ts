@@ -1,10 +1,12 @@
-import { Component, OnInit, AfterViewInit, AfterContentChecked, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, AfterContentChecked, ChangeDetectionStrategy, SimpleChanges, AfterViewChecked } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/services/api.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommonService } from 'src/services/common.service';
 import * as moment from 'moment';
 import { IDropdownSettings, } from 'ng-multiselect-dropdown';
+import { GreaterDateMatch } from 'src/services/greatDateValidator';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 interface Ready {
   value: string;
   viewValue: string;
@@ -15,7 +17,7 @@ interface Ready {
   templateUrl: './addoffers.component.html',
   styleUrls: ['./addoffers.component.scss']
 })
-export class AddoffersComponent implements OnInit, AfterContentChecked {
+export class AddoffersComponent implements OnInit, AfterContentChecked, AfterViewChecked {
 
 
   showCategory: boolean
@@ -53,6 +55,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked {
     //this.getAllCategory()
 
     this.getAllCategory();
+
   }
 
 
@@ -142,25 +145,59 @@ export class AddoffersComponent implements OnInit, AfterContentChecked {
     let filter = value.toLowerCase();
     return this.productList.filter(option => option.toLowerCase().startsWith(filter));
   }
-
+  today
+  endTommorow
   ngOnInit() {
+    debugger
+
+    this.today = moment(new Date()).format('YYYY-MM-DD');
+    let currentDate = new Date().getDate();
+    let currentMonth = new Date().getMonth();
+    let year = new Date().getFullYear();
+    //console.log(new Date(year, currentMonth, currentDate + 1))
 
 
     this.addDiscountForm = this.fb.group({
-      disount: ['', [Validators.required, Validators.min(0)]],
+      disount: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
       type: ['', Validators.required],
-      dicountOn: ['', Validators.required],
+      dicountOn: ['category', Validators.required],
       name: ['', [Validators.required, Validators.maxLength(25)]],
-      name_ar: ['',],
+      name_ar: ['', Validators.required],
       bannerImage: ['', Validators.required]
-    })
+    },
+      // {
+      // validator: GreaterDateMatch('startDate', 'EndDate')
+
+      // }
+    )
 
 
   }
+  ngAfterViewChecked(): void {
+
+    let done = moment(this.addDiscountForm.controls['startDate'].value)
+    let today = done.date();
+    let thisMonth = done.month();
+    let thisYear = done.year()
+    let temp = new Date(thisYear, thisMonth, today + 1)
+    this.endTommorow = moment(temp).format('YYYY-MM-DD')
+
+  }
+
+  // addEvent(event: MatDatepickerInputEvent<Date>) {
+  //   console.log(event)
+  //   let temp = moment(event.value).toDate();
+  //   let date = temp.getDate()
+  //   let mindate = date + 1
+  //   this.endTommorow = new Date(temp.getFullYear() + temp.getMonth() + mindate);
+  //   console.log(this.endTommorow)
+  // }
+
 
   ngAfterContentChecked() {
+
 
     this.categoryDropDownSettings = {
 
@@ -278,7 +315,10 @@ export class AddoffersComponent implements OnInit, AfterContentChecked {
             temp.push(body);
 
           }
+          this.addDiscountForm.controls['disount'].setValue('category');
 
+          this.setradio('category')
+          this.addDiscountForm.controls['disountOn'].setValue('category');
         }
       }
     });
@@ -424,15 +464,21 @@ export class AddoffersComponent implements OnInit, AfterContentChecked {
     console.log(this.addDiscountForm);
     let checkOffer = this.addDiscountForm.controls['dicountOn'].value;
     if (checkOffer == "category") {
+
       if (this.submitted && this.addDiscountForm.valid) {
         if (this.selectedItem.length > 0) {
           this.typeCategory(checkOffer, this.selectedItem);
         } else {
-          let selectedCategory = []
-          for (let i = 0; i < this.selectedCategoryItem.length; i++) {
-            selectedCategory.push(this.selectedCategoryItem[i].id)
+          if (this.selectedCategoryItem.length > 0) {
+            let selectedCategory = []
+            for (let i = 0; i < this.selectedCategoryItem.length; i++) {
+              selectedCategory.push(this.selectedCategoryItem[i].id)
+            }
+            this.typeCategory(checkOffer, selectedCategory);
+          } else {
+            this.commonService.errorToast("Please Select a category ")
           }
-          this.typeCategory(checkOffer, selectedCategory);
+
         }
       }
     }
@@ -487,9 +533,10 @@ export class AddoffersComponent implements OnInit, AfterContentChecked {
 
 
   typeCategory(checkOffer, selectedCategoryItem) {
+    debugger
 
-    let startDate = moment().toISOString(this.addDiscountForm.controls['startDate'].value);
-    let endDate = moment().toISOString(this.addDiscountForm.controls['endDate'].value)
+    let startDate = moment(this.addDiscountForm.controls['startDate'].value).toLocaleString();
+    let endDate = moment(this.addDiscountForm.controls['endDate'].value).toLocaleString()
     let offer = {
       'list': selectedCategoryItem, 'type': checkOffer
     }
@@ -501,8 +548,8 @@ export class AddoffersComponent implements OnInit, AfterContentChecked {
     body.append('type', this.addDiscountForm.controls['type'].value);
     body.append('discount', this.addDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
-    body.append('startDate', startDate);
-    body.append('endDate', endDate)
+    body.append('startDate', JSON.stringify(startDate));
+    body.append('endDate', JSON.stringify(endDate))
 
 
     this.addbanner(body);

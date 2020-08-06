@@ -56,7 +56,8 @@
                                 <th class="action_bx">Action</th>
                             </tr>
                             <tr *ngFor="let item of bannerList; index as i">
-                                <td>{{i+1}}</td>
+                                <td *ngIf="flagUserList==false">{{i+1}}</td>
+                                <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
                                 <!-- <td>Lorem</td>
                                 <td>Lorem ipsum</td> -->
                                 <td>{{item.name}}</td>
@@ -82,23 +83,25 @@
 
                                                     <div class="modal-body">
 
-                                                        <table>
+                                                        <table *ngIf="modalData">
                                                             <tr>
 
                                                                 <th>Name</th>
                                                                 <th>Arbic Name</th>
-                                                                <th>Category</th>
-                                                                <th>Sub Category</th>
+                                                                <th>type</th>
+
                                                             </tr>
-                                                            <tr *ngFor="let item of modalData">
+
+                                                            <tr *ngFor="let item of modalData.list">
                                                                 <td>
                                                                     {{item.name}}
                                                                 </td>
                                                                 <td>{{item.name_ar}}</td>
-                                                                <!-- <td>{{item.}}</td> -->
-                                                                <!-- <td>{{item.name_ar}}</td> -->
+                                                                <td>{{modalData.type}}</td>
+
 
                                                             </tr>
+
                                                         </table>
                                                     </div>
                                                 </div>

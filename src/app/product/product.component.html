@@ -59,7 +59,8 @@
                             </tr>
 
                             <tr *ngFor="let product of productList;  let i = index">
-                                <td>{{ i+1 }}</td>
+                                <td *ngIf="flagUserList==false">{{i+1}}</td>
+                                <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
                                 <td class="product_img">
                                     <figure>
                                         <img *ngIf="!product.category.image" src="../../assets/images/makeup.png"

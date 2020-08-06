@@ -27,6 +27,9 @@ export class ProductComponent implements OnInit {
   categoryId = '';
   subCategory = '';
   flagData: boolean = false;
+  page: number = 1;
+  flagUserList: boolean = false;
+  srNo: number;
   constructor(private router: Router,
     private apiService: ApiService,
     private route: ActivatedRoute,
@@ -68,13 +71,14 @@ export class ProductComponent implements OnInit {
     console.log(e.target.value);
     this.filterBy = e.target.value;
 
-    this.apiService.getVendorProduct(this.id, 1, this.pageSize, this.search, this.filterBy, this.categoryId, this.subCategory).
+    this.apiService.getVendorProduct(this.id, this.page, this.pageSize, this.search, this.filterBy, this.categoryId, this.subCategory).
       subscribe(res => {
         if (res.data.length > 0) {
           this.flagData = false;
           this.productList = res.data;
+          this.length = res.total
           console.log(res.data);
-          this.productList = res.data
+          // this.productList = res.data
         } else {
           this.flagData = true;
         }
@@ -82,13 +86,14 @@ export class ProductComponent implements OnInit {
   }
 
   getAllProducts() {
-    this.apiService.getVendorProduct(this.id, 1, this.pageSize, this.search, this.filterBy, this.categoryId, this.subCategory)
+    this.apiService.getVendorProduct(this.id, this.page, this.pageSize, this.search, this.filterBy, this.categoryId, this.subCategory)
       .subscribe(res => {
         if (res.data.length > 0) {
           this.flagData = false;
           this.productList = res.data;
           console.log(res.data);
-          this.productList = res.data
+          this.length = res.total
+          // this.productList = res.data
         } else {
           this.flagData = true;
         }
@@ -99,12 +104,14 @@ export class ProductComponent implements OnInit {
   flagSearch: boolean = true
   searchMethod() {
     this.flagSearch = false
-    this.apiService.getVendorProduct(this.id, 1, this.pageSize, this.search, this.filterBy, this.categoryId, this.subCategory).subscribe(res => {
+    this.apiService.getVendorProduct(this.id, this.page, this.pageSize, this.search, this.filterBy, this.categoryId, this.subCategory).subscribe(res => {
       if (res.data.length > 0) {
         this.flagData = false;
         this.productList = res.data;
+        this.length = res.total
         console.log(res.data);
-        this.productList = res.data
+        this.length = res.total
+        // this.productList = res.data
       } else {
         this.flagData = true;
       }
@@ -115,12 +122,13 @@ export class ProductComponent implements OnInit {
   clearSearch() {
     this.flagSearch = true
     this.search = ''
-    this.apiService.getVendorProduct(this.id, 1, this.pageSize, this.search, this.filterBy, this.categoryId, this.subCategory).subscribe(res => {
+    this.apiService.getVendorProduct(this.id, this.page, this.pageSize, this.search, this.filterBy, this.categoryId, this.subCategory).subscribe(res => {
       if (res.data.length > 0) {
         this.flagData = false;
         this.productList = res.data;
         console.log(res.data);
-        this.productList = res.data
+        this.length = res.total
+        // this.productList = res.data
       } else {
         this.flagData = true;
       }
@@ -159,12 +167,33 @@ export class ProductComponent implements OnInit {
 
 
   vendorProductListAfterPageSizeChanged(e): any {
-    this.apiService.getVendorProduct(this.id, 1, e.pageSize, this.search, this.filterBy, this.categoryId, this.subCategory).subscribe(res => {
+    if (e.pageIndex == 0) {
+      this.page = 1;
+      // this.page = e.pageIndex;
+      //  this.srNo = e.pageIndex * e.pageSize
+      this.flagUserList = false
+    } else {
+      if (e.previousPageIndex < e.pageIndex) {
+        this.page = e.pageIndex + 1;
+        this.srNo = e.pageIndex * e.pageSize
+        this.flagUserList = true
+      } else {
+        this.page = e.pageIndex;
+        this.srNo = e.pageIndex * e.pageSize
+        this.flagUserList = true
+      }
+
+    }
+
+
+
+    this.apiService.getVendorProduct(this.id, this.page, e.pageSize, this.search, this.filterBy, this.categoryId, this.subCategory).subscribe(res => {
       if (res.data.length > 0) {
         this.flagData = false;
         this.productList = res.data;
         console.log(res.data);
-        this.productList = res.data
+        this.length = res.total
+        // this.productList = res.data
       } else {
         this.flagData = true;
       }

@@ -13,6 +13,7 @@ export class VenderManagementComponent implements OnInit {
 
   length = 100;
   pageSize = 10;
+  page = 1
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pageEvent: PageEvent;
   filterBy = '';
@@ -20,6 +21,8 @@ export class VenderManagementComponent implements OnInit {
   vendorList: any;
   status: any
   selectOption: string
+  flagUserList: boolean = false;
+  srNo: number = 1;
   constructor(private router: Router, private apiService: ApiService) { }
 
   ngOnInit() {
@@ -37,21 +40,23 @@ export class VenderManagementComponent implements OnInit {
     }
     console.log(e.target.value);
     this.filterBy = e.target.value;
-    this.apiService.getVendorList(1, this.pageSize, this.filterBy, this.search).subscribe((res) => {
+    this.apiService.getVendorList(this.page, this.pageSize, this.filterBy, this.search).subscribe((res) => {
       if (res.success) {
         console.log(res);
         this.vendorList = res.data;
+        this.length = res.total;
       }
     });
   }
 
 
   showVendorList() {
-    console.log("inside getvendor")
-    this.apiService.getVendorList(1, this.pageSize, this.filterBy, this.search).subscribe((res) => {
+    console.log("inside get vendor")
+    this.apiService.getVendorList(this.page, this.pageSize, this.filterBy, this.search).subscribe((res) => {
       if (res.success) {
         console.log(res);
         this.vendorList = res.data;
+        this.length = res.total;
       }
     });
 
@@ -59,10 +64,28 @@ export class VenderManagementComponent implements OnInit {
   }
   vendorListAfterPageSizeChanged(e): any {
     console.log(e);
-    this.apiService.getVendorList(1, e.pageSize, this.filterBy, this.search).subscribe((res) => {
+    if (e.pageIndex == 0) {
+      this.page = 1;
+      // this.page = e.pageIndex;
+      //  this.srNo = e.pageIndex * e.pageSize
+      this.flagUserList = false
+    } else {
+      if (e.previousPageIndex < e.pageIndex) {
+        this.page = e.pageIndex + 1;
+        this.srNo = e.pageIndex * e.pageSize
+        this.flagUserList = true
+      } else {
+        this.page = e.pageIndex;
+        this.srNo = e.pageIndex * e.pageSize
+        this.flagUserList = true
+      }
+
+    }
+    this.apiService.getVendorList(this.page, e.pageSize, this.filterBy, this.search).subscribe((res) => {
       if (res.success) {
         this.vendorList = res.data;
         console.log(this.vendorList);
+        this.length = res.total;
       }
     })
   }
@@ -72,10 +95,11 @@ export class VenderManagementComponent implements OnInit {
   searchMethod() {
     this.flagSearch = false
     console.log(this.search);
-    this.apiService.getVendorList(1, this.pageSize, this.filterBy, this.search).subscribe((res) => {
+    this.apiService.getVendorList(this.page, this.pageSize, this.filterBy, this.search).subscribe((res) => {
       if (res.success) {
         this.vendorList = res.data;
         console.log(this.vendorList);
+        this.length = res.total;
       }
     })
 
@@ -84,10 +108,11 @@ export class VenderManagementComponent implements OnInit {
   clearSearch() {
     this.flagSearch = true
     this.search = ''
-    this.apiService.getVendorList(1, this.pageSize, this.filterBy, this.search).subscribe((res) => {
+    this.apiService.getVendorList(this.page, this.pageSize, this.filterBy, this.search).subscribe((res) => {
       if (res.success) {
         this.vendorList = res.data;
         console.log(this.vendorList);
+        this.length = res.total;
       }
     })
 
@@ -132,8 +157,7 @@ export class VenderManagementComponent implements OnInit {
     setTimeout(() => {
       let temp = this.apiService.flagDelete;
       if (temp == true) {
-        this.vendorList.splice(i, 1);
-        console.log(this.vendorList)
+        this.showVendorList()
       }
       else {
         console.log("error")

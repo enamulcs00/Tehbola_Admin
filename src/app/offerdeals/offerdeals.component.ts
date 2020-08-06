@@ -24,6 +24,9 @@ export class OfferdealsComponent implements OnInit {
   imagePath: any;
   getDesc;
   modalData: any
+  srNo: number = 1;
+  flagUserList: boolean = false;
+  length: number = 100;
   constructor(private router: Router, private apiService: ApiService, private urlService: UrlService, private commonService: CommonService) {
     this.imagePath = this.urlService.imageUrl;
 
@@ -34,12 +37,13 @@ export class OfferdealsComponent implements OnInit {
   }
 
   getAllDiscount() {
-
+    debugger
     this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
       if (res) {
         if (res.data.length > 0) {
           this.flagData = false
           this.bannerList = res.data
+          this.length = res.total
           console.log(this.bannerList)
         } else {
           this.flagData = true
@@ -53,7 +57,7 @@ export class OfferdealsComponent implements OnInit {
   getDAta(elm) {
     let listdata;
     this.getDesc = this.bannerList.filter(data => data._id == elm);
-    listdata = this.getDesc[0].offer.list;
+    listdata = this.getDesc[0].offer;
     this.modalData = listdata;
     console.log(listdata);
   }
@@ -75,6 +79,7 @@ export class OfferdealsComponent implements OnInit {
         if (res.data.length > 0) {
           this.flagData = false
           this.bannerList = res.data
+          this.length = res.total
           console.log(this.bannerList)
         } else {
           this.flagData = true
@@ -88,11 +93,31 @@ export class OfferdealsComponent implements OnInit {
 
   discountListAfterPageSizeChanged(e): any {
     //console.log(e);
-    this.apiService.getAllDiscount(1, e.pageSize, this.search, this.filterBy).subscribe((res) => {
+    debugger
+    if (e.pageIndex == 0) {
+      this.page = 1;
+      // this.page = e.pageIndex;
+      //  this.srNo = e.pageIndex * e.pageSize
+      this.flagUserList = false
+    } else {
+      if (e.previousPageIndex < e.pageIndex) {
+        this.page = e.pageIndex + 1;
+        this.srNo = e.pageIndex * e.pageSize
+        this.flagUserList = true
+      } else {
+        this.page = e.pageIndex;
+        this.srNo = e.pageIndex * e.pageSize
+        this.flagUserList = true
+      }
+
+    }
+
+    this.apiService.getAllDiscount(this.page, e.pageSize, this.search, this.filterBy).subscribe((res) => {
       if (res.success) {
         if (res.data.length > 0) {
           this.flagData = false
           this.bannerList = res.data;
+          this.length = res.total
           console.log(this.bannerList);
         } else {
           this.flagData = true
@@ -112,6 +137,7 @@ export class OfferdealsComponent implements OnInit {
         if (res.data.length > 0) {
           this.flagData = false
           this.bannerList = res.data;
+          this.length = res.total
           console.log(this.bannerList);
         } else {
           this.flagData = true
@@ -131,6 +157,7 @@ export class OfferdealsComponent implements OnInit {
         if (res.data.length > 0) {
           this.flagData = false
           this.bannerList = res.data;
+          this.length = res.total
           console.log(this.bannerList);
         } else {
           this.flagData = true
@@ -214,7 +241,7 @@ export class OfferdealsComponent implements OnInit {
         // this.userList.splice(i, 1);
         // console.log(this.userList)
         // alert("deleted")
-        this.commonService.successToast('User deleted');
+        this.commonService.successToast('Discount deleted');
         this.getAllDiscount();
       }
       else {

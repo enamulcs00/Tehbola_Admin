@@ -15,7 +15,7 @@
                             <fieldset>
                                 Category
                                 <input type="radio" formControlName="dicountOn" name="dicountOn"
-                                    (click)="setradio('category')" value="category">
+                                    (click)="setradio('category')" value="category" [checked]="true">
                                 &nbsp;&nbsp;
                                 Sub-category
                                 <input type="radio" formControlName="dicountOn" name="dicountOn"
@@ -105,18 +105,20 @@
                                 <label> Name <span class="red">*</span></label>
                                 <mat-form-field [floatLabel]="'never'">
                                     <input matInput formControlName="name" type="text" placeholder="" name="name">
-                                    <mat-error *ngIf="addDiscountForm.controls['name'].hasError('required')">
+                                    <div class="custom-invalid"
+                                        *ngIf=" submitted && addDiscountForm.controls['name'].hasError('required')">
                                         Name is <strong>required</strong>
-                                    </mat-error>
+                                    </div>
                                 </mat-form-field>
                             </li>
                             <li>
                                 <label> Arbic Name </label>
                                 <mat-form-field [floatLabel]="'never'">
                                     <input matInput formControlName="name_ar" type="text" placeholder="" name="name_ar">
-                                    <mat-error *ngIf="addDiscountForm.controls['name_ar'].hasError('required')">
+                                    <div class="custom-invalid"
+                                        *ngIf=" submitted && addDiscountForm.controls['name_ar'].hasError('required')">
                                         Arbic Name is <strong>required</strong>
-                                    </mat-error>
+                                    </div>
                                 </mat-form-field>
                             </li>
                             <li>
@@ -124,12 +126,14 @@
                                 <mat-form-field [floatLabel]="'never'">
                                     <input matInput formControlName="disount" min="0" max="100" type="number"
                                         placeholder="" name="name">
-                                    <mat-error *ngIf="addDiscountForm.controls['disount'].hasError('required')">
+                                    <div class="custom-invalid"
+                                        *ngIf=" submitted && addDiscountForm.controls['disount'].hasError('required')">
                                         Discount percentage is <strong>required</strong>
-                                    </mat-error>
-                                    <mat-error *ngIf="addDiscountForm.controls['disount'].hasError('min')">
+                                    </div>
+                                    <div class="custom-invalid"
+                                        *ngIf=" submitted && addDiscountForm.controls['disount'].hasError('min')">
                                         Discount percentage should not be <strong>less than zero</strong>
-                                    </mat-error>
+                                    </div>
                                 </mat-form-field>
                             </li>
                             <!-- <li>
@@ -141,19 +145,30 @@
                             <li>
                                 <label>Start Date <span class="red">*</span></label>
                                 <mat-form-field [floatLabel]="'never'">
-                                    <input matInput formControlName="startDate" type="date" placeholder="" name="name">
-                                    <mat-error *ngIf="addDiscountForm.controls['startDate'].hasError('required')">
+                                    <input matInput formControlName="startDate" type="date" [min]="today" placeholder=""
+                                        name="name">
+
+
+                                    <div class="custom-invalid"
+                                        *ngIf=" submitted && addDiscountForm.controls['startDate'].hasError('required')">
                                         Start Date is <strong>required</strong>
-                                    </mat-error>
+                                    </div>
                                 </mat-form-field>
                             </li>
                             <li>
                                 <label>End Date <span class="red">*</span></label>
                                 <mat-form-field [floatLabel]="'never'">
-                                    <input matInput formControlName="endDate" type="date" placeholder="" name="name">
-                                    <mat-error *ngIf="addDiscountForm.controls['endDate'].hasError('required')">
+                                    <input matInput formControlName="endDate" type="date" [min]="endTommorow"
+                                        placeholder="" name="name">
+                                    <div class="custom-invalid"
+                                        *ngIf=" submitted && addDiscountForm.controls['endDate'].hasError('required')">
                                         End Date is <strong>required</strong>
-                                    </mat-error>
+                                    </div>
+                                    <!-- <div class="custom-invalid"
+                                        *ngIf=" submitted && addDiscountForm.controls['endDate'].hasError('dateGreater') && !addDiscountForm.controls['endDate'].hasError('required')">
+                                        End Date is <strong>required</strong>
+                                    </div> -->
+
                                 </mat-form-field>
                             </li>
                             <li>
@@ -165,9 +180,10 @@
                                         <mat-option *ngFor="let ready of type" [value]="ready.value">{{ready.viewValue}}
                                         </mat-option>
                                     </mat-select>
-                                    <mat-error *ngIf="addDiscountForm.controls['type'].hasError('required')">
+                                    <div class="custom-invalid"
+                                        *ngIf=" submitted && addDiscountForm.controls['type'].hasError('required')">
                                         Offer Type is <strong>required</strong>
-                                    </mat-error>
+                                    </div>
                                 </mat-form-field>
                             </li>
                             <li class="banner_image">
@@ -177,15 +193,15 @@
                                         formControlName="bannerImage" placeholder="choosefile" class="images_uploader">
 
                                     <span>Choose File</span>
-                                    <mat-error
+                                    <div class="custom-invalid"
                                         *ngIf="submitted &&  addDiscountForm.controls['bannerImage'].hasError('required')">
                                         Banner Image is <strong>required</strong>
-                                    </mat-error>
+                                    </div>
 
                                 </div>
                                 <div class="user_img">
                                     <figure class="figure" *ngIf="previewImage">
-                                        <img width="500px" height="200px" [src]="previewImage" />
+                                        <img [src]="previewImage" />
                                     </figure>
                                 </div>
 

@@ -6,10 +6,13 @@
             <div class="container-fluid">
                 <div class="sub_heading">
                     <h1>Addresses</h1>
+                    <a (click)="goTomanageUser()">Back To List</a>
                 </div>
 
                 <div col-lg-12 *ngIf="flagData==false">
                     <h1>No Data Found</h1>
+
+
                 </div>
                 <div class="row" *ngIf="flagData==true">
                     <div class="col-lg-6">
