@@ -25,15 +25,13 @@ export class NavbarComponent implements OnInit {
     { value: '10 Min-1', viewValue: 'English' },
   ];
   ngOnInit() {
+
     this.imagePath = this.urlService.imageUrl;
-    
-    this.apiService.getProfile().subscribe((res) => {
-      console.log(res)
-      this.profileData = res.data
 
-    })
 
-  
+    this.profileData = JSON.parse(this.apiService.getUser());
+
+
   }
 
   getProfile() {

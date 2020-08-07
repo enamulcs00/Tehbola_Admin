@@ -4,6 +4,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { ApiService } from 'src/services/api.service';
 import { query } from '@angular/animations';
 import Swal from "sweetalert2";
+import { CommonService } from 'src/services/common.service';
 @Component({
   selector: 'app-vender-management',
   templateUrl: './vender-management.component.html',
@@ -23,7 +24,7 @@ export class VenderManagementComponent implements OnInit {
   selectOption: string
   flagUserList: boolean = false;
   srNo: number = 1;
-  constructor(private router: Router, private apiService: ApiService) { }
+  constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) { }
 
   ngOnInit() {
     this.showVendorList();
@@ -143,8 +144,9 @@ export class VenderManagementComponent implements OnInit {
           "id": id,
           "model": "User"
         }
-        this.apiService.delete(data);
-        this.deleteFromList(i)
+        this.apiService.delete(data).then(res => {
+          this.deleteFromList(i)
+        });
       }
       else {
         console.log("cancelled");
@@ -154,15 +156,16 @@ export class VenderManagementComponent implements OnInit {
 
   }
   deleteFromList(i) {
-    setTimeout(() => {
-      let temp = this.apiService.flagDelete;
-      if (temp == true) {
-        this.showVendorList()
-      }
-      else {
-        console.log("error")
-      }
-    }, 1000);
+    // setTimeout(() => {
+    //   let temp = this.apiService.flagDelete;
+    //   if (temp == true) {
+    this.showVendorList()
+    this.commonService.successToast("Vendor Deleted")
+    //   }
+    //   else {
+    //     console.log("error")
+    //   }
+    // }, 1000);
 
 
   }

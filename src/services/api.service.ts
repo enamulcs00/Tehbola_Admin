@@ -16,7 +16,7 @@ export class ApiService {
   BASE_URL: any = this.url.SERVER_URL + '/api/';
   apiEndPoints: any;
   countryCode: any;
-  userData= new Subject<any>()
+  userData = new Subject<any>()
 
   constructor(
     private http: HttpClient,
@@ -101,6 +101,14 @@ export class ApiService {
       );
   }
 
+  setUserDetails(body) {
+    localStorage.setItem('User', body);
+  }
+
+  getUserDetails() {
+    let data = localStorage.getItem('User')
+    return data
+  }
 
   singOut(): Observable<any> {
     return this.http
@@ -154,21 +162,30 @@ export class ApiService {
 
   flagDelete: boolean
   data: any
-  delete(body) {
+  async delete(body) {
     // this.flagDelete = false;
     debugger
-    this.deleteData(this.apiEndPoints.delete, body)
+    await this.deleteData(this.apiEndPoints.delete, body)
       .then(data => {
-        of(data).subscribe((res) => {
-          if (res.success == true) {
-            //  console.log(res)
-            this.flagDelete = true;
-            // alert(this.flagDelete) 
-          } else {
-            this.flagDelete == false
-            // alert(this.flagDelete)
-          }
-        }); // JSON data parsed by `data.json()` call
+        if (data.success) {
+          console.log("passed")
+          this.flagDelete = true;
+          this.data = data
+        } else {
+          console.log("Failed")
+          this.flagDelete == false
+        }
+
+        // of(data).subscribe((res) => {
+        //   if (res.success == true) {
+        //     //  console.log(res)
+        //     this.flagDelete = true;
+        //     // alert(this.flagDelete) 
+        //   } else {
+        //     this.flagDelete == false
+        //     // alert(this.flagDelete)
+        //   }
+        // }); // JSON data parsed by `data.json()` call
       });
 
 
@@ -182,6 +199,9 @@ export class ApiService {
     localStorage.setItem("Rupee_Admin", user);
   }
 
+  getUser() {
+    return localStorage.getItem('Rupee_Admin')
+  }
 
   sendToken(token: string) {
     localStorage.setItem("token", token);

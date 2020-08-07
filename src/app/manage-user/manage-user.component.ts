@@ -250,9 +250,10 @@ export class ManageUserComponent implements OnInit {
           "id": id,
           "model": "User"
         }
-        this.apiService.delete(data)
+        this.apiService.delete(data).then(res => {
 
-        this.deleteFromList(i)
+          this.deleteFromList(i)
+        });
       } else {
         console.log("cancellled")
       }
@@ -262,19 +263,20 @@ export class ManageUserComponent implements OnInit {
 
   }
   deleteFromList(i) {
-    setTimeout(() => {
-      let temp = this.apiService.flagDelete;
-      if (temp == true) {
-        // this.userList.splice(i, 1);
-        // console.log(this.userList)
-        // alert("deleted")
-        this.commonService.successToast('User deleted');
-        this.ShowAllUser();
-      }
-      else {
-        console.log("error")
-      }
-    }, 2000);
+    this.commonService.successToast('User deleted');
+    this.ShowAllUser();
+    // setTimeout(() => {
+    //   let temp = this.apiService.flagDelete;
+    //   if (temp == true) {
+    //     // this.userList.splice(i, 1);
+    //     // console.log(this.userList)
+    //     // alert("deleted")
+
+    //   }
+    //   else {
+    //     console.log("error")
+    //   }
+    // }, 1000);
 
 
   }

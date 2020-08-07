@@ -82,27 +82,34 @@
                                                 <div class="modal-content">
 
                                                     <div class="modal-body">
+                                                        <div *ngIf="modalData">
+                                                            <table>
+                                                                <tr>
 
-                                                        <table *ngIf="modalData">
-                                                            <tr>
+                                                                    <th>Name</th>
+                                                                    <th *ngIf="modalData.type!=='seller'">Arbic Name
+                                                                    </th>
+                                                                    <th *ngIf="modalData.type==='seller'"> Email</th>
+                                                                    <th>type</th>
 
-                                                                <th>Name</th>
-                                                                <th>Arbic Name</th>
-                                                                <th>type</th>
+                                                                </tr>
 
-                                                            </tr>
+                                                                <tr *ngFor="let item of modalData.list">
+                                                                    <td *ngIf="item.name">
+                                                                        {{item.name}}
+                                                                    </td>
+                                                                    <td *ngIf="item.firstName">
+                                                                        {{item.firstName}} {{item.lastName}}
+                                                                    </td>
+                                                                    <td *ngIf="item.name_ar">{{item.name_ar}}</td>
+                                                                    <td *ngIf="item.email">{{item.email}}</td>
+                                                                    <td>{{modalData.type}}</td>
 
-                                                            <tr *ngFor="let item of modalData.list">
-                                                                <td>
-                                                                    {{item.name}}
-                                                                </td>
-                                                                <td>{{item.name_ar}}</td>
-                                                                <td>{{modalData.type}}</td>
 
+                                                                </tr>
 
-                                                            </tr>
-
-                                                        </table>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

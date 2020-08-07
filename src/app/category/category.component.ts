@@ -242,9 +242,11 @@ export class CategoryComponent implements OnInit {
           "id": id,
           "model": "Category"
         }
-        this.apiService.delete(data);
+        this.apiService.delete(data).then(res => {
 
-        this.deleteFromList(id)
+          this.deleteFromList(id)
+        }
+        )
 
       } else {
         console.log("cancelled");
@@ -279,9 +281,10 @@ export class CategoryComponent implements OnInit {
         console.log(data)
 
 
-        this.apiService.delete(data);
+        this.apiService.delete(data).then(res => {
 
-        this.deleteSubCategoryFromList(id)
+          this.deleteSubCategoryFromList(id)
+        });
 
       } else {
         console.log("cancelled");
@@ -290,44 +293,47 @@ export class CategoryComponent implements OnInit {
   }
 
   deleteSubCategoryFromList(id) {
-    setTimeout(() => {
-      let temp = this.apiService.flagDelete;
-      if (temp == true) {
-        // this.categories.splice(i, 1);
-        this.getAllCategories()
-        console.log(this.categories)
-        if (this.result) {
-          this.commonService.successToast("Sub Cateogry Deleted");
-          console.log("service is not called")
-        }
-      }
-      else {
-        console.log("error");
-        this.commonService.errorToast("Error Occured")
-      }
-    }, 2000);
+    // setTimeout(() => {
+    //   let temp = this.apiService.flagDelete;
+    //   if (temp == true) {
+    //     // this.categories.splice(i, 1);
+    this.getAllCategories()
+    this.commonService.successToast("Sub Cateogry Deleted");
+    //     console.log(this.categories)
+    //     if (this.result) {
+
+    //       console.log("service is not called")
+    //     }
+    //   }
+    //   else {
+    //     console.log("error");
+    //     this.commonService.errorToast("Error Occured")
+    //   }
+    // }, 2000);
 
 
   }
 
 
   deleteFromList(i) {
-    setTimeout(() => {
-      let temp = this.apiService.flagDelete;
-      if (temp == true) {
-        // this.categories.splice(i, 1);
-        this.getAllCategories()
-        console.log(this.categories)
-        if (this.result) {
-          this.commonService.successToast("Cateogry Deleted");
-          console.log("service is not called")
-        }
-      }
-      else {
-        console.log("error");
-        this.commonService.errorToast("Error Occured")
-      }
-    }, 2000);
+    // alert("ok")
+    // setTimeout(() => {
+    //   let temp = this.apiService.flagDelete;
+    //   if (temp == true) {
+    //     // this.categories.splice(i, 1);
+    this.getAllCategories()
+    this.commonService.successToast("Cateogry Deleted");
+    console.log(this.categories)
+    //     if (this.result) {
+
+    //       console.log("service is not called")
+    //     }
+    //   }
+    //   else {
+    //     console.log("error");
+    //     this.commonService.errorToast("Error Occured")
+    //   }
+    // }, 2000);
 
 
   }

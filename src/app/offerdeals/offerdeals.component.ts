@@ -37,12 +37,13 @@ export class OfferdealsComponent implements OnInit {
   }
 
   getAllDiscount() {
-    debugger
+
     this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
       if (res) {
         if (res.data.length > 0) {
           this.flagData = false
           this.bannerList = res.data
+
           this.length = res.total
           console.log(this.bannerList)
         } else {
@@ -93,7 +94,7 @@ export class OfferdealsComponent implements OnInit {
 
   discountListAfterPageSizeChanged(e): any {
     //console.log(e);
-    debugger
+
     if (e.pageIndex == 0) {
       this.page = 1;
       // this.page = e.pageIndex;
@@ -129,7 +130,7 @@ export class OfferdealsComponent implements OnInit {
 
   flagSearch: boolean = true
   searchMethod() {
-    debugger
+
     this.flagSearch = false
     // console.log(this.search);
     this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
@@ -222,9 +223,14 @@ export class OfferdealsComponent implements OnInit {
           "id": id,
           "model": "Banner"
         }
-        this.apiService.delete(data)
+        this.apiService.delete(data).then(res => {
 
-        this.deleteFromList()
+          this.deleteFromList()
+
+        }
+        )
+
+
       } else {
         console.log("cancellled")
       }
@@ -235,19 +241,20 @@ export class OfferdealsComponent implements OnInit {
   }
 
   deleteFromList() {
-    setTimeout(() => {
-      let temp = this.apiService.flagDelete;
-      if (temp == true) {
-        // this.userList.splice(i, 1);
-        // console.log(this.userList)
-        // alert("deleted")
-        this.commonService.successToast('Discount deleted');
-        this.getAllDiscount();
-      }
-      else {
-        console.log("error")
-      }
-    }, 2000);
+    debugger
+    // setTimeout(() => {
+    //   let temp = this.apiService.flagDelete;
+    //   if (temp == true) {
+    //     // this.userList.splice(i, 1);
+    //     // console.log(this.userList)
+    //     // alert("deleted")
+    this.commonService.successToast('Discount deleted');
+    this.getAllDiscount();
+    // }
+    //   else {
+    //     console.log("error")
+    //   }
+    // }, 2000);
 
 
   }
