@@ -78,7 +78,6 @@ import { WarrantypolicyComponent } from './warrantypolicy/warrantypolicy.compone
 import { ToastrModule } from "ng6-toastr-notifications";
 import { HttpClientModule } from '@angular/common/http'
 import { DatePipe } from '@angular/common';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { DeliveryAddressComponent } from './delivery-address/delivery-address.component';
 import * as moment from 'moment';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
@@ -171,7 +170,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
   ],
-  providers: [DatePipe, { provide: LocationStrategy, useClass: HashLocationStrategy }],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

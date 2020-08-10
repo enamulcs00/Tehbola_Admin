@@ -137,7 +137,7 @@ export class ManageUserComponent implements OnInit {
 
   UserListAfterPageSizeChanged(e): any {
     //console.log(e);
-    debugger
+
     if (e.pageIndex == 0) {
       this.page = 1;
       // this.page = e.pageIndex;
@@ -171,7 +171,7 @@ export class ManageUserComponent implements OnInit {
 
 
   ShowAllUser() {
-    debugger
+
     //Calling method from service which will call api for data
     this.apiService.getAllUser(this.page, this.pageSize, this.search, this.filterBy).subscribe(res => {
       if (res.success) {

@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['dashboard']);
   }
   onLogin() {
-    debugger
+
     this.submitted = true;
     if (this.loginForm.valid && this.submitted) {
       const data = this.loginForm.value;
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
         if (res.success) {
           this.router.navigate(['dashboard']);
           this.commonService.successToast(res.message);
-          this.apiService.setUser(JSON.stringify(res.data));
+          this.apiService.setUser(JSON.stringify(res));
           this.apiService.sendToken(res.data.accessToken);
 
 

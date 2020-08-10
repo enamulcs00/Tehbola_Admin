@@ -71,7 +71,7 @@ export class AddVenderComponent implements OnInit {
 
 
   addVendor() {
-
+    debugger
     this.submitted = true
     if (this.submitted && this.addVendorForm.valid) {
       const data = new FormData();
@@ -97,14 +97,23 @@ export class AddVenderComponent implements OnInit {
           console.log(res)
 
           if (res.success) {
-            this.commonService.successToast("Edit Succesfully")
+            this.commonService.successToast("Added Succesfully")
+            this.router.navigate(['venderManagement'])
+            this.addVendorForm.reset
           }
-          this.router.navigate(['venderManagement'])
+          else {
+            if (res.message) {
+              this.commonService.errorToast(res.message)
+            }
+
+          }
+
         }
+
       });
     } else {
 
-      this.addVendorForm.reset
+
     }
 
 

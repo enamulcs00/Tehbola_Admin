@@ -163,12 +163,12 @@ export class EditdiscountComponent implements OnInit {
     this.getDiscount(this.id);
 
     this.today = moment(new Date()).format('YYYY-MM-DD');
-    let currentDate = new Date().getDate();
-    let currentMonth = new Date().getMonth();
-    let year = new Date().getFullYear();
-    //console.log(new Date(year, currentMonth, currentDate + 1))
+    // let currentDate = new Date().getDate();
+    // let currentMonth = new Date().getMonth();
+    // let year = new Date().getFullYear();
+    // //console.log(new Date(year, currentMonth, currentDate + 1))
 
-    this.endTommorow = moment(new Date(year, currentMonth, currentDate + 1)).format('YYYY-MM-DD');
+    // this.endTommorow = moment(new Date(year, currentMonth, currentDate + 1)).format('YYYY-MM-DD');
 
 
     this.editDiscountForm = this.fb.group({
@@ -230,6 +230,19 @@ export class EditdiscountComponent implements OnInit {
     }
 
 
+
+  }
+
+  ngAfterViewChecked(): void {
+    //Called after every check of the component's view. Applies to components only.
+    //Add 'implements AfterViewChecked' to the class.
+
+    let done = moment(this.editDiscountForm.controls['startDate'].value)
+    let today = done.date();
+    let thisMonth = done.month();
+    let thisYear = done.year()
+    let temp = new Date(thisYear, thisMonth, today + 1)
+    this.endTommorow = moment(temp).format('YYYY-MM-DD')
 
   }
 
@@ -704,8 +717,8 @@ export class EditdiscountComponent implements OnInit {
 
   typeCategory(checkOffer, selectedCategoryItem) {
 
-    let startDate = moment().toISOString(this.editDiscountForm.controls['startDate'].value);
-    let endDate = moment().toISOString(this.editDiscountForm.controls['endDate'].value)
+    let startDate = moment(this.editDiscountForm.controls['startDate'].value).toLocaleString();
+    let endDate = moment(this.editDiscountForm.controls['endDate'].value).toLocaleString();
     let offer = {
       'list': selectedCategoryItem, 'type': checkOffer
     }
@@ -721,8 +734,8 @@ export class EditdiscountComponent implements OnInit {
     body.append('type', this.editDiscountForm.controls['type'].value);
     body.append('discount', this.editDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
-    body.append('startDate', startDate);
-    body.append('endDate', endDate)
+    body.append('startDate', JSON.stringify(startDate));
+    body.append('endDate', JSON.stringify(endDate));
 
 
     this.editbanner(body);
@@ -731,8 +744,9 @@ export class EditdiscountComponent implements OnInit {
 
   typeSubcategory(checkOffer, selectedSubcategoryItem) {
 
-    let startDate = moment().toISOString(this.editDiscountForm.controls['startDate'].value);
-    let endDate = moment().toISOString(this.editDiscountForm.controls['endDate'].value)
+
+    let startDate = moment(this.editDiscountForm.controls['startDate'].value).toLocaleString();
+    let endDate = moment(this.editDiscountForm.controls['endDate'].value).toLocaleString();
     let offer = {
       'list': selectedSubcategoryItem, 'type': checkOffer
     }
@@ -749,15 +763,16 @@ export class EditdiscountComponent implements OnInit {
     body.append('type', this.editDiscountForm.controls['type'].value);
     body.append('discount', this.editDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
-    body.append('startDate', startDate);
-    body.append('endDate', endDate);
+    body.append('startDate', JSON.stringify(startDate));
+    body.append('endDate', JSON.stringify(endDate));
 
     this.editbanner(body);
   }
   typeVendor(checkOffer, selectedVendorItem) {
 
-    let startDate = moment().toISOString(this.editDiscountForm.controls['startDate'].value);
-    let endDate = moment().toISOString(this.editDiscountForm.controls['endDate'].value)
+
+    let startDate = moment(this.editDiscountForm.controls['startDate'].value).toLocaleString();
+    let endDate = moment(this.editDiscountForm.controls['endDate'].value).toLocaleString();
     let offer = {
       'list': selectedVendorItem, 'type': 'seller'
     }
@@ -775,15 +790,16 @@ export class EditdiscountComponent implements OnInit {
     body.append('type', this.editDiscountForm.controls['type'].value);
     body.append('discount', this.editDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
-    body.append('startDate', startDate);
-    body.append('endDate', endDate);
+    body.append('startDate', JSON.stringify(startDate));
+    body.append('endDate', JSON.stringify(endDate));
 
     this.editbanner(body);
   }
   typeProduct(checkOffer, selectedItem) {
 
-    let startDate = moment().toISOString(this.editDiscountForm.controls['startDate'].value);
-    let endDate = moment().toISOString(this.editDiscountForm.controls['endDate'].value)
+
+    let startDate = moment(this.editDiscountForm.controls['startDate'].value).toLocaleString();
+    let endDate = moment(this.editDiscountForm.controls['endDate'].value).toLocaleString();
     let offer = {
       'list': selectedItem, 'type': checkOffer
     }
@@ -801,8 +817,8 @@ export class EditdiscountComponent implements OnInit {
     body.append('type', this.editDiscountForm.controls['type'].value);
     body.append('discount', this.editDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
-    body.append('startDate', startDate);
-    body.append('endDate', endDate);
+    body.append('startDate', JSON.stringify(startDate));
+    body.append('endDate', JSON.stringify(endDate));
 
     this.editbanner(body);
   }

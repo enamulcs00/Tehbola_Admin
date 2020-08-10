@@ -134,7 +134,7 @@ export class CategoryComponent implements OnInit {
   }
 
   onUpdateCategory() {
-    debugger
+
 
     this.submitted = true;
     console.log(this.imageFile);
@@ -194,7 +194,7 @@ export class CategoryComponent implements OnInit {
 
   viewCategory(id) {
     this.picUploader = false
-    debugger
+
     this.apiService.viewCategory(id).subscribe((res) => {
       if (res.data) {
         this.flagImage = false;

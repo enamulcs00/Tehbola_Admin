@@ -148,7 +148,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   today
   endTommorow
   ngOnInit() {
-    debugger
+
 
     this.today = moment(new Date()).format('YYYY-MM-DD');
     let currentDate = new Date().getDate();
@@ -282,9 +282,10 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
     if (index < 0) this.selectedProductItem.push(item)
   }
   onSelectAll(items: any) {
+
     console.log(items)
     for (let i = 0; i < items.length; i++) {
-      this.selectedItem.push(items.id)
+      this.selectedItem.push(items[i].id)
     }
   }
   type: Ready[] = [
@@ -379,7 +380,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   }
 
   getAllVendor() {
-    debugger
+
     this.vendorList = []
     let temp = []
     if (this.selectedSubCategory) {
@@ -420,7 +421,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   }
 
   getAllProduct() {
-    debugger
+
     this.productList = [];
     let temp = []
     if (this.selectedSubCategory) {
@@ -459,7 +460,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   }
 
   checkBanner() {
-    debugger
+
     this.submitted = true
     console.log(this.addDiscountForm);
     let checkOffer = this.addDiscountForm.controls['dicountOn'].value;
@@ -533,7 +534,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
 
 
   typeCategory(checkOffer, selectedCategoryItem) {
-    debugger
+
 
     let startDate = moment(this.addDiscountForm.controls['startDate'].value).toLocaleString();
     let endDate = moment(this.addDiscountForm.controls['endDate'].value).toLocaleString()
@@ -558,8 +559,8 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
 
   typeSubcategory(checkOffer, selectedSubcategoryItem) {
 
-    let startDate = moment().toISOString(this.addDiscountForm.controls['startDate'].value);
-    let endDate = moment().toISOString(this.addDiscountForm.controls['endDate'].value)
+    let startDate = moment(this.addDiscountForm.controls['startDate'].value).toLocaleString();
+    let endDate = moment(this.addDiscountForm.controls['endDate'].value).toLocaleString();
     let offer = {
       'list': selectedSubcategoryItem, 'type': checkOffer
     }
@@ -572,15 +573,15 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
     body.append('type', this.addDiscountForm.controls['type'].value);
     body.append('discount', this.addDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
-    body.append('startDate', startDate);
-    body.append('endDate', endDate);
+    body.append('startDate', JSON.stringify(startDate));
+    body.append('endDate', JSON.stringify(endDate));
 
     this.addbanner(body);
   }
   typeVendor(checkOffer, selectedVendorItem) {
 
-    let startDate = moment().toISOString(this.addDiscountForm.controls['startDate'].value);
-    let endDate = moment().toISOString(this.addDiscountForm.controls['endDate'].value)
+    let startDate = moment(this.addDiscountForm.controls['startDate'].value).toLocaleString();
+    let endDate = moment(this.addDiscountForm.controls['endDate'].value).toLocaleString();
     let offer = {
       'list': selectedVendorItem, 'type': 'seller'
     }
@@ -594,15 +595,15 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
     body.append('type', this.addDiscountForm.controls['type'].value);
     body.append('discount', this.addDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
-    body.append('startDate', startDate);
-    body.append('endDate', endDate);
+    body.append('startDate', JSON.stringify(startDate));
+    body.append('endDate', JSON.stringify(endDate));
 
     this.addbanner(body);
   }
   typeProduct(checkOffer, selectedItem) {
 
-    let startDate = moment().toISOString(this.addDiscountForm.controls['startDate'].value);
-    let endDate = moment().toISOString(this.addDiscountForm.controls['endDate'].value)
+    let startDate = moment(this.addDiscountForm.controls['startDate'].value).toLocaleString();
+    let endDate = moment(this.addDiscountForm.controls['endDate'].value).toLocaleString();
     let offer = {
       'list': selectedItem, 'type': checkOffer
     }
@@ -616,8 +617,8 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
     body.append('type', this.addDiscountForm.controls['type'].value);
     body.append('discount', this.addDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
-    body.append('startDate', startDate);
-    body.append('endDate', endDate);
+    body.append('startDate', JSON.stringify(startDate));
+    body.append('endDate', JSON.stringify(endDate));
 
     this.addbanner(body);
   }
