@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
-declare var $: any; 
+import { chartData } from '../chartData';
+declare var $: any;
 
 @Component({
   selector: 'app-salesgraph',
   templateUrl: './salesgraph.component.html',
   styleUrls: ['./salesgraph.component.scss']
 })
-export class SalesgraphComponent implements OnInit {
+export class SalesgraphComponent implements OnInit, AfterViewInit {
 
+  //data: chartData
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
@@ -31,10 +33,26 @@ export class SalesgraphComponent implements OnInit {
     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
     { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
   ];
-  constructor() { }
+  data: { barChartOptions: ChartOptions; barChartLabels: Label[]; barChartType: ChartType; barChartLegend: boolean; barChartPlugins: (typeof pluginDataLabels)[]; barChartData: ChartDataSets[]; };
+  constructor() {
+    this.data
+      = {
+      'barChartOptions': this.barChartOptions,
+      'barChartLabels': this.barChartLabels,
+      'barChartType': this.barChartType,
+      'barChartLegend': this.barChartLegend,
+      'barChartPlugins': this.barChartPlugins,
+      'barChartData': this.barChartData
+
+    }
+    console.log("From sales", this.data);
+  }
+  ngAfterViewInit(): void {
+
+  }
 
   ngOnInit() {
-     // // This is the dataSource of the chart
+    // // This is the dataSource of the chart
     // this.dataSource = {
     //   chart: {},
     //   caption: {
@@ -96,6 +114,6 @@ export class SalesgraphComponent implements OnInit {
       (Math.random() * 100),
       40];
     this.barChartData[0].data = data;
-    }
+  }
 
 }

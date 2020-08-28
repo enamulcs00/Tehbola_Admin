@@ -128,7 +128,7 @@ export class VenderManagementComponent implements OnInit {
       confirmButtonColor: "#3085D6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes",
-
+      cancelButtonText: "Cancel",
       allowOutsideClick: true
     }).then(result => {
       if (result.value) {

@@ -34,6 +34,13 @@ export class NavbarComponent implements OnInit {
 
   }
 
+
+  filterSelected(e) {
+
+
+    console.log(e.target.value)
+  }
+
   getProfile() {
     this
   }

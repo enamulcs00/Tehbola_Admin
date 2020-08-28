@@ -5,7 +5,7 @@
             <app-sidebar></app-sidebar>
             <div class="container-fluid">
                 <div class="sub_heading">
-                    <h1>{{profileData.firstName}} Profile</h1>
+                    <h1>{{profileData?.firstName}}'s Profile</h1>
                 </div>
 
                 <div class="add_business_detail">
@@ -13,9 +13,9 @@
                         <div class="businiess_outer">
                             <div class="profile_image_detail">
                                 <figure><img style="border-radius: 50%; height: 120px; width: 120px;"
-                                        src={{imageUrl+profileData.profilePic}}>
+                                        src={{imageUrl+profileData?.profilePic}}>
                                 </figure>
-                                <h2>{{profileData.firstName}} {{profileData.lastName}}</h2>
+                                <h2>{{profileData?.firstName}} {{profileData?.lastName}}</h2>
                                 <div class="follow_all">
                                     <ul>
                                         <li><a (click)="goToeditprofile(profileData._id)">Edit Profile</a></li>
@@ -53,26 +53,20 @@
                             <div class="tab-pane active" id="1a">
                                 <div class="personal_deatil">
                                     <ul>
-                                        <li><strong>Full Name :</strong>{{profileData.firstName}}
-                                            {{profileData.lastName}} </li>
+                                        <li><strong>Full Name :</strong>{{profileData?.firstName}}
+                                            {{profileData?.lastName}} </li>
                                         <li><strong>Phone Number
-                                                :</strong>{{profileData.countryCode}}-{{profileData.phone}}</li>
-                                        <li><strong>Email :</strong> {{profileData.email}}</li>
+                                                :</strong>{{profileData?.countryCode}}-{{profileData?.phone}}</li>
+                                        <li><strong>Email :</strong> {{profileData?.email}}</li>
                                         <li><strong>Location :</strong>
-                                            {{profileData.address}}
+                                            {{profileData?.address}}
                                         </li>
                                     </ul>
-
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
-
-
-
-
             </div>
         </div>
     </div>

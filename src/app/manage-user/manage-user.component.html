@@ -63,20 +63,20 @@
 
                                     <td *ngIf="flagNumber==true">{{srNo+i+1}}</td>
                                     <td *ngIf="flagNumber==false">{{i+1}}</td>
-                                    <td>{{item.firstName}} {{item.lastName}}</td>
+                                    <td>{{item?.firstName}} {{item?.lastName}}</td>
 
-                                    <td>{{item.email}}</td>
-                                    <td>{{item.countryCode}}-{{item.phone}}</td>
+                                    <td>{{item?.email}}</td>
+                                    <td>{{item?.countryCode}}-{{item?.phone}}</td>
                                     <td>
                                         <div class="enable_disable">
                                             <mat-slide-toggle (change)="changeUserStatus(item._id,item.status)"
                                                 [checked]="item.status=='1'? true:false"></mat-slide-toggle>
                                         </div>
                                     </td>
-                                    <td>{{item.totalOrders}}</td>
-                                    <td>{{item.completedOrders}}</td>
-                                    <td>{{item.rejectedOrders}}</td>
-                                    <td>{{item.totalPaid}}</td>
+                                    <td>{{item?.totalOrders}}</td>
+                                    <td>{{item?.completedOrders}}</td>
+                                    <td>{{item?.rejectedOrders}}</td>
+                                    <td>{{item?.totalPaid}}</td>
                                     <td>
                                         <div class="top_subheading_add">
                                             <button class="accept_button "
@@ -84,7 +84,7 @@
                                                 Address</button>
                                         </div>
                                     </td>
-                                    <td>{{item.lastOrderAt | date}}</td>
+                                    <td>{{item?.lastOrderAt | date}}</td>
                                     <td>{{item?.lastOrder?.productId?.name}}</td>
                                     <!-- <td><a class="request_hisrty" (click)="goTobookingRequestHistory()"><i class="fa fa-eye"></i></a></td> -->
                                     <td>

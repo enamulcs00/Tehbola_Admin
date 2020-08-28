@@ -8,107 +8,113 @@
                     <h1>Manage Reviews</h1>
                 </div>
                 <div class="outer_table">
-                <div class="search_fields">
-                    <div class="filters Booking_status">
-                        <label>Filter</label>
-                        <select>
-                            <option>All</option>
-                            <option>Name</option>
-                        </select>
-                    </div>
-                    <div class="search_inner_fiels">
+                    <div class="search_fields">
                         <div class="filters Booking_status">
-                            <label>Search</label>
-                            <div class="search_with_icons">
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="text" name="search" placeholder="">
-                                </mat-form-field>
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </div>
+                            <label>Filter</label>
+                            <select [(ngModel)]="filterBy" (change)="filterSelected($event)">
+                                <option *ngIf="flag==true" value="">Remove Filter</option>
+                                <!-- <option *ngIf="flag==false" value=""></option> -->
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
                         </div>
-                        
+                        <div class="search_inner_fiels">
+                            <div class="filters Booking_status">
+                                <label>Search</label>
+                                <div class="search_with_icons">
+                                    <mat-form-field [floatLabel]="'never'">
+                                        <input matInput type="text" [(ngModel)]="search" placeholder="">
+                                    </mat-form-field>
+                                    <i *ngIf="flagSearch==true" class="fa fa-search" aria-hidden="true"
+                                        (click)="searchMethod()"></i>
+                                    <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
+                                        (click)="clearSearch()"></i>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
-                <div class="table-responsive">
-                    <table>
-                        <tr>
-                            
-                            <th>User Name</th>
-                            <th>User Email</th>
-                            <th>Review </th>
-                            <th>Product Name</th>
-                            <th>Vendor name</th>
-                            <th>Action</th>
-                        </tr>
-                        <tr>
-                            
-                            <td>John</td>
-                            <td>John@gmail.com</td>
-                          
-                            <td>4.5</td>
-                            <td>Lorem</td>
-                            <td>XYZ</td>
-                            <td>
-                                <div class="action">
-                                    <ul>
-                                        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                           
-                            <td>John</td>
-                            <td>John@gmail.com</td>
-                          
-                            <td>4.5</td>
-                            <td>Lorem</td>
-                            <td>XYZ</td>
-                            <td>
-                                <div class="action">
-                                    <ul>
-                                        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            
-                            <td>John</td>
-                            <td>John@gmail.com</td>
-                         
-                            <td>4.5</td>
-                            <td>Lorem</td>
-                            <td>XYZ</td>
-                            <td>
-                                <div class="action">
-                                    <ul>
-                                        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                           
-                            <td>John</td>
-                            <td>John@gmail.com</td>
-                           
-                            <td>4.5</td>
-                            <td>Lorem</td>
-                            <td>XYZ</td>
-                            <td>
-                                <div class="action">
-                                    <ul>
-                                        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+                    <div class="table-responsive">
+                        <table>
+                            <tr>
+
+                                <th>User Name</th>
+                                <th>User Email</th>
+                                <th>Review </th>
+                                <th>Product Name</th>
+                                <th>Vendor name</th>
+                                <th>Action</th>
+                            </tr>
+                            <tr>
+
+                                <td>John</td>
+                                <td>John@gmail.com</td>
+
+                                <td>4.5</td>
+                                <td>Lorem</td>
+                                <td>XYZ</td>
+                                <td>
+                                    <div class="action">
+                                        <ul>
+                                            <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>John</td>
+                                <td>John@gmail.com</td>
+
+                                <td>4.5</td>
+                                <td>Lorem</td>
+                                <td>XYZ</td>
+                                <td>
+                                    <div class="action">
+                                        <ul>
+                                            <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>John</td>
+                                <td>John@gmail.com</td>
+
+                                <td>4.5</td>
+                                <td>Lorem</td>
+                                <td>XYZ</td>
+                                <td>
+                                    <div class="action">
+                                        <ul>
+                                            <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td>John</td>
+                                <td>John@gmail.com</td>
+
+                                <td>4.5</td>
+                                <td>Lorem</td>
+                                <td>XYZ</td>
+                                <td>
+                                    <div class="action">
+                                        <ul>
+                                            <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
                 <!-----start pagination-->
-                <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+                <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                    (page)="pageEvent = reviewListAfterPageSizeChanged($event)">
                 </mat-paginator>
                 <!-----end pagination-->
 

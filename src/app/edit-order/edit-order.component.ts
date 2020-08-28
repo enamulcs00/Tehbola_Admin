@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 interface Food {
   value: string;
   viewValue: string;
@@ -27,6 +28,7 @@ export class EditOrderComponent implements OnInit {
     { value: '3 Days', viewValue: '3 Days' }
   ]; name = 'Angular 4';
   url: any;
+  editOrderFormGroup: FormGroup
   readUrl(event: any) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
@@ -38,9 +40,24 @@ export class EditOrderComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]);
     }
   }
-  constructor(private router: Router) { }
+  constructor(private router: Router, private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.editOrderFormGroup = this.fb.group({
+      orderId: [''],
+      productName: [''],
+      category: [''],
+      subCategory: [''],
+      isbnNumber: [''],
+      skuNumber: [''],
+      qunatity: [''],
+      price: [''],
+      userName: [''],
+      userAddess: [],
+      orderDate: [''],
+      deliveryDate: [''],
+      status: ['']
+    })
   }
   goToordermanagement() {
     this.router.navigate(['/ordermanagement'])

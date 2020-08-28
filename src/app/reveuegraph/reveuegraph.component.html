@@ -1,4 +1,3 @@
-
 <div id="wrapper">
     <app-navbar></app-navbar>
     <div id="content-wrapper" class="">
@@ -7,8 +6,8 @@
             <div class="container-fluid">
                 <div class="sub_heading">
                     <h1>Revenue Graph</h1>
-               </div>
-                
+                </div>
+
                 <div class="charts">
                     <ul>
                         <li>
@@ -25,15 +24,16 @@
                                 </div>
                             </div>
                             <div class="user_charts">
-                                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                                <app-graph [chartData]="data"></app-graph>
+                                <!-- <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
                                     [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend"
                                     [chartType]="barChartType">
-                                </canvas>
+                                </canvas> -->
                             </div>
-                        </li>                     
+                        </li>
                     </ul>
                 </div>
-             
+
 
             </div>
         </div>

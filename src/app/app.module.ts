@@ -76,12 +76,20 @@ import { TermofsalesComponent } from './termofsales/termofsales.component';
 import { ConsumerprivacypolicyComponent } from './consumerprivacypolicy/consumerprivacypolicy.component';
 import { WarrantypolicyComponent } from './warrantypolicy/warrantypolicy.component';
 import { ToastrModule } from "ng6-toastr-notifications";
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HttpClient } from '@angular/common/http'
 import { DatePipe } from '@angular/common';
 import { DeliveryAddressComponent } from './delivery-address/delivery-address.component';
 import * as moment from 'moment';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { GraphComponent } from './graph/graph.component';
+// import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+// import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+
+
+// export function HttpLoaderFactory(http: HttpClient) {
+//   return new TranslateHttpLoader(http);
+// }
 @NgModule({
   declarations: [
     AppComponent,
@@ -154,6 +162,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     ConsumerprivacypolicyComponent,
     WarrantypolicyComponent,
     DeliveryAddressComponent,
+    GraphComponent,
 
 
   ],
@@ -165,12 +174,21 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     HttpClientModule,
     ChartsModule, CKEditorModule, FormsModule, ReactiveFormsModule,
     ToastrModule.forRoot(),
-    NgMultiSelectDropDownModule.forRoot()
-
+    NgMultiSelectDropDownModule.forRoot(),
+    // TranslateModule.forRoot({
+    //   loader: {
+    //     provide: TranslateLoader,
+    //     useFactory: HttpLoaderFactory,
+    //     deps: [HttpClient]
+    //   }
+    // })
 
 
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+
+}

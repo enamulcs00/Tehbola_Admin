@@ -70,6 +70,7 @@ import { WarrantypolicyComponent } from './warrantypolicy/warrantypolicy.compone
 
 import { DeliveryAddressComponent } from './delivery-address/delivery-address.component';
 import { AuthGuard } from 'src/services/auth.guard';
+import { GraphComponent } from './graph/graph.component';
 
 const routes: Routes = [
   // {
@@ -428,7 +429,13 @@ const routes: Routes = [
     component: DeliveryAddressComponent,
     canActivate: [AuthGuard]
 
-  },
+  }, {
+    path: 'graph',
+    component: GraphComponent,
+    canActivate: [AuthGuard]
+
+
+  }
 
 
 ];

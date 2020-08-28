@@ -23,6 +23,7 @@ export class OfferdealsComponent implements OnInit {
   bannerList: any;
   imagePath: any;
   getDesc;
+
   modalData: any
   srNo: number = 1;
   flagUserList: boolean = false;

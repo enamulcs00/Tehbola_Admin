@@ -1,82 +1,87 @@
 <div id="wrapper">
-<app-navbar></app-navbar>
-<div id="content-wrapper" class="">
-<div id="content">
-<app-sidebar></app-sidebar>
-<div class="container-fluid">
-<div class="sub_heading">
-<h1>Report of sales</h1>
-<div class="top_subheading_add">
-<a (click)="goTosalesgraph()">View Sales Graph</a>
-</div>
-</div>
-<div class="tab-content">
-<div id="allOrders" class="tab-pane fade in active">
-<div class="inner_content">
-<div class="outer_table">
-<div class="search_fields">
-<div class="filters Booking_status">
-<label>Filter</label>
-<select>
-<option>All</option>
-<option>Name</option>
-</select>
-</div>
-<div class="search_inner_fiels">
-<div class="filters Booking_status">
-<label>Search</label>
-<div class="search_with_icons">
-<mat-form-field [floatLabel]="'never'">
-<input matInput type="text" name="search" placeholder="">
-</mat-form-field>
-<i class="fa fa-search" aria-hidden="true"></i>
-</div>
-</div>
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Report of sales</h1>
+                    <div class="top_subheading_add">
+                        <a (click)="goTosalesgraph()">View Sales Graph</a>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <div id="allOrders" class="tab-pane fade in active">
+                        <div class="inner_content">
+                            <div class="outer_table">
+                                <div class="search_fields">
+                                    <div class="filters Booking_status">
+                                        <label>Filter</label>
+                                        <select [(ngModel)]="filterBy" (change)="filterSelected($event)">
+                                            <option *ngIf="flag==true" value="">Remove Filter</option>
+                                            <!-- <option *ngIf="flag==false" value=""></option> -->
+                                            <option value="active">Active</option>
+                                            <option value="inactive">Inactive</option>
+                                        </select>
+                                    </div>
+                                    <div class="search_inner_fiels">
+                                        <div class="filters Booking_status">
+                                            <label>Search</label>
+                                            <div class="search_with_icons">
+                                                <mat-form-field [floatLabel]="'never'">
+                                                    <input matInput type="text" [(ngModel)]="search" placeholder="">
+                                                </mat-form-field>
+                                                <i *ngIf="flagSearch==true" class="fa fa-search" aria-hidden="true"
+                                                    (click)="searchMethod()"></i>
+                                                <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
+                                                    (click)="clearSearch()"></i>
+                                            </div>
+                                        </div>
 
-</div>
-</div>
-<div class="table-responsive">
-<table>
-<tr>
-<th>Order Id</th>
-<th>Product Name</th>
-<th>Product category</th>
-<th>Product sub category</th>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table>
+                                        <tr>
+                                            <th>Order Id</th>
+                                            <th>Product Name</th>
+                                            <th>Product category</th>
+                                            <th>Product sub category</th>
 
-<th>SKU number</th>
-<th>ISBN number</th>
-<th>Quantity</th>
-<th>Price</th>
-<th>User name</th>
-<th>User Address</th>
-<th>Order Date</th>
-<th>Delivery Date</th>
-<th>Status</th>
-<!-- <th class="action_bx">Action</th> -->
-</tr>
-<tr>
-<td>1</td>
-<td>ABC</td>
-<td>Food Industry</td>
-<td>Industry</td>
+                                            <th>SKU number</th>
+                                            <th>ISBN number</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                            <th>User name</th>
+                                            <th>User Address</th>
+                                            <th>Order Date</th>
+                                            <th>Delivery Date</th>
+                                            <th>Status</th>
+                                            <!-- <th class="action_bx">Action</th> -->
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>ABC</td>
+                                            <td>Food Industry</td>
+                                            <td>Industry</td>
 
-<td>13143543</td>
-<td>45345</td>
-<td>20 piece</td>
-<td>$800</td>
-<td>John</td>
-<td>Lorem ipsum</td>
-<td>28-05-2020</td>
-<td>01-06-2020</td>
-<td>
-    <select>
-        <option>Pending</option>
-        <option>Confirmed</option>
-        <option>cancelled</option>
-    </select>
-</td>
+                                            <td>13143543</td>
+                                            <td>45345</td>
+                                            <td>20 piece</td>
+                                            <td>$800</td>
+                                            <td>John</td>
+                                            <td>Lorem ipsum</td>
+                                            <td>28-05-2020</td>
+                                            <td>01-06-2020</td>
+                                            <td>
+                                                <select>
+                                                    <option>Pending</option>
+                                                    <option>Confirmed</option>
+                                                    <option>cancelled</option>
+                                                </select>
+                                            </td>
 
-<!-- <td>
+                                            <!-- <td>
 <div class="action">
 <ul>
 <li class="show" (click)="goTosalesgraph()"><i class="fa fa-eye"></i></li>
@@ -84,30 +89,30 @@
 </ul>
 </div>
 </td> -->
-</tr>
-<tr>
-<td>2</td>
-<td>Lorem</td>
-<td>Food Industry</td>
-<td>Industry</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Lorem</td>
+                                            <td>Food Industry</td>
+                                            <td>Industry</td>
 
-<td>13143543</td>
-<td>5566456</td>
-<td>20 piece</td>
-<td>$800</td>
-<td>John</td>
-<td>Lorem ipsum</td>
-<td>28-05-2020</td>
-<td>01-06-2020</td>
-<td>
-    <select>
-        <option>Pending</option>
-        <option>Confirmed</option>
-        <option>cancelled</option>
-    </select>
-</td>
+                                            <td>13143543</td>
+                                            <td>5566456</td>
+                                            <td>20 piece</td>
+                                            <td>$800</td>
+                                            <td>John</td>
+                                            <td>Lorem ipsum</td>
+                                            <td>28-05-2020</td>
+                                            <td>01-06-2020</td>
+                                            <td>
+                                                <select>
+                                                    <option>Pending</option>
+                                                    <option>Confirmed</option>
+                                                    <option>cancelled</option>
+                                                </select>
+                                            </td>
 
-<!-- <td>
+                                            <!-- <td>
 <div class="action">
 <ul>
 <li class="show" (click)="goTosalesgraph()"><i class="fa fa-eye"></i></li>
@@ -115,30 +120,30 @@
 </ul>
 </div>
 </td> -->
-</tr>
-<tr>
-<td>1</td>
-<td>ABC</td>
-<td>Food Industry</td>
-<td>Industry</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>ABC</td>
+                                            <td>Food Industry</td>
+                                            <td>Industry</td>
 
-<td>13143543</td>
-<td>45345345</td>
-<td>20 piece</td>
-<td>$800</td>
-<td>John</td>
-<td>Lorem ipsum</td>
-<td>28-05-2020</td>
-<td>01-06-2020</td>
-<td>
-    <select>
-        <option>Pending</option>
-        <option>Confirmed</option>
-        <option>cancelled</option>
-    </select>
-</td>
+                                            <td>13143543</td>
+                                            <td>45345345</td>
+                                            <td>20 piece</td>
+                                            <td>$800</td>
+                                            <td>John</td>
+                                            <td>Lorem ipsum</td>
+                                            <td>28-05-2020</td>
+                                            <td>01-06-2020</td>
+                                            <td>
+                                                <select>
+                                                    <option>Pending</option>
+                                                    <option>Confirmed</option>
+                                                    <option>cancelled</option>
+                                                </select>
+                                            </td>
 
-<!-- <td>
+                                            <!-- <td>
 <div class="action">
 <ul>
 <li class="show" (click)="goTosalesgraph()"><i class="fa fa-eye"></i></li>
@@ -146,30 +151,30 @@
 </ul>
 </div>
 </td> -->
-</tr>
-<tr>
-<td>1</td>
-<td>ABC</td>
-<td>Food Industry</td>
-<td>Industry</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>ABC</td>
+                                            <td>Food Industry</td>
+                                            <td>Industry</td>
 
-<td>13143543</td>
-<td>4334534</td>
-<td>20 piece</td>
-<td>$800</td>
-<td>John</td>
-<td>Lorem ipsum</td>
-<td>28-05-2020</td>
-<td>01-06-2020</td>
-<td>
-    <select>
-        <option>Pending</option>
-        <option>Confirmed</option>
-        <option>cancelled</option>
-    </select>
-</td>
+                                            <td>13143543</td>
+                                            <td>4334534</td>
+                                            <td>20 piece</td>
+                                            <td>$800</td>
+                                            <td>John</td>
+                                            <td>Lorem ipsum</td>
+                                            <td>28-05-2020</td>
+                                            <td>01-06-2020</td>
+                                            <td>
+                                                <select>
+                                                    <option>Pending</option>
+                                                    <option>Confirmed</option>
+                                                    <option>cancelled</option>
+                                                </select>
+                                            </td>
 
-<!-- <td>
+                                            <!-- <td>
 <div class="action">
 <ul>
 <li class="show" (click)="goTosalesgraph()"><i class="fa fa-eye"></i></li>
@@ -177,20 +182,20 @@
 </ul>
 </div>
 </td> -->
-</tr>
-</table>
-</div>
-</div>
-<!-----start pagination-->
-<mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
-</mat-paginator>
-<!-----end pagination-->
-</div>
-</div>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-----start pagination-->
+                            <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                                (page)="pageEvent = salesReportListAfterPageSizeChanged($event)">
+                            </mat-paginator>
+                            <!-----end pagination-->
+                        </div>
+                    </div>
 
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-

@@ -60,19 +60,19 @@
                                 <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
                                 <!-- <td>Lorem</td>
                                 <td>Lorem ipsum</td> -->
-                                <td>{{item.name}}</td>
-                                <td>{{item.discount}}%</td>
+                                <td>{{item?.name}}</td>
+                                <td>{{item?.discount}}%</td>
                                 <td>
                                     <div class="enable_disable">
-                                        <mat-slide-toggle (change)="changeDiscountStatus(item._id,item.status)"
+                                        <mat-slide-toggle (change)="changeDiscountStatus(item._id,item?.status)"
                                             [checked]="item.status=='1'? true:false">
                                         </mat-slide-toggle>
                                     </div>
                                 </td>
-                                <td>{{item.startDate | date}}</td>
-                                <td>{{item.endDate | date}}</td>
+                                <td>{{item?.startDate | date}}</td>
+                                <td>{{item?.endDate | date}}</td>
                                 <td><a href="javascript:void(0)" class="button-pad add_city show" data-toggle="modal"
-                                        data-target="#Add_city" (click)="getDAta(item._id)"><i
+                                        data-target="#Add_city" (click)="getDAta(item._id)"><i style="color: #696969;"
                                             class="fa fa-eye"></i></a>
                                     <div>
 
@@ -96,14 +96,14 @@
 
                                                                 <tr *ngFor="let item of modalData.list">
                                                                     <td *ngIf="item.name">
-                                                                        {{item.name}}
+                                                                        {{item?.name}}
                                                                     </td>
                                                                     <td *ngIf="item.firstName">
-                                                                        {{item.firstName}} {{item.lastName}}
+                                                                        {{item?.firstName}} {{item?.lastName}}
                                                                     </td>
-                                                                    <td *ngIf="item.name_ar">{{item.name_ar}}</td>
-                                                                    <td *ngIf="item.email">{{item.email}}</td>
-                                                                    <td>{{modalData.type}}</td>
+                                                                    <td *ngIf="item.name_ar">{{item?.name_ar}}</td>
+                                                                    <td *ngIf="item.email">{{item?.email}}</td>
+                                                                    <td>{{modalData?.type}}</td>
 
 
                                                                 </tr>
@@ -136,7 +136,7 @@
                     </div>
                 </div>
                 <!-----start pagination-->
-                <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"
+                <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
                     (page)="pageEvent = discountListAfterPageSizeChanged($event)">
                 </mat-paginator>
                 <!-----end pagination-->

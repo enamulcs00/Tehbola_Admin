@@ -13,7 +13,7 @@
                     <form [formGroup]="addVendorForm">
                         <ul>
                             <li>
-                                <label>Vendor First Name<span class="red">*</span></label>
+                                <label>First Name<span class="red">*</span></label>
                                 <mat-form-field [floatLabel]="'never'">
                                     <input matInput type="text" placeholder="" formControlName="firstName"
                                         name="firstName">
@@ -31,7 +31,7 @@
                                 </div>
                             </li>
                             <li>
-                                <label>Vendor Last Name<span class="red">*</span></label>
+                                <label>Last Name<span class="red">*</span></label>
                                 <mat-form-field [floatLabel]="'never'">
                                     <input matInput type="text" placeholder="" formControlName="lastName"
                                         name="lastName">
@@ -49,7 +49,7 @@
                                 </div>
                             </li>
                             <li>
-                                <label>Vendor Email ID<span class="red">*</span></label>
+                                <label>Email ID<span class="red">*</span></label>
                                 <mat-form-field [floatLabel]="'never'">
                                     <input matInput type="email" placeholder="" formControlName="email" name="email">
                                 </mat-form-field>
@@ -82,7 +82,7 @@
                                 </div>
                             </li> -->
                             <li>
-                                <label>Vendor Contact Number<span class="red">*</span></label>
+                                <label>Contact Number<span class="red">*</span></label>
                                 <div class="cardList">
                                     <mat-form-field style="width: 20%;" [floatLabel]="'never'">
                                         <input matInput type="number" min="0" id="firstInput"
@@ -110,7 +110,7 @@
                                 </div>
                             </li>
                             <li>
-                                <label>Vendor Address<span class="red">*</span></label>
+                                <label>Address<span class="red">*</span></label>
                                 <mat-form-field [floatLabel]="'never'">
                                     <input matInput type="text" placeholder="" formControlName="address" name="address">
                                 </mat-form-field>
@@ -126,7 +126,7 @@
                                 </div>
                             </li>
                             <li>
-                                <label>Vendor City<span class="red">*</span></label>
+                                <label>City<span class="red">*</span></label>
                                 <mat-form-field [floatLabel]="'never'">
                                     <input matInput type="text" placeholder="" formControlName="city" name="city">
                                 </mat-form-field>
@@ -141,7 +141,7 @@
                                 </div>
                             </li>
                             <li>
-                                <label>Vendor State<span class="red">*</span></label>
+                                <label>State<span class="red">*</span></label>
                                 <mat-form-field [floatLabel]="'never'">
                                     <input matInput type="text" placeholder="" formControlName="state" name="state">
                                 </mat-form-field>
@@ -156,7 +156,7 @@
                                 </div>
                             </li>
                             <li>
-                                <label>Vendor Country<span class="red">*</span></label>
+                                <label>Country<span class="red">*</span></label>
                                 <mat-form-field [floatLabel]="'never'">
                                     <input matInput type="text" placeholder="" formControlName="country" name="country">
                                 </mat-form-field>
@@ -177,7 +177,7 @@
 
 
                             <li>
-                                <label>Vendor VatNumber<span class="red">*</span></label>
+                                <label>VatNumber<span class="red">*</span></label>
                                 <mat-form-field [floatLabel]="'never'">
                                     <input matInput type="number" placeholder="" min="0" formControlName="vatNumber"
                                         name="vatNumber">
@@ -191,7 +191,7 @@
                                 </div>
                             </li>
                             <li>
-                                <label>Vendor BRN Number<span class="red">*</span></label>
+                                <label>BRN Number<span class="red">*</span></label>
                                 <mat-form-field [floatLabel]="'never'">
                                     <input matInput type="number" placeholder="" min="0" formControlName="brnNumber"
                                         name="brnNumber">
@@ -205,7 +205,7 @@
                                 </div>
                             </li>
                             <li>
-                                <label>Company Name <span class="red">*</span></label>
+                                <label>Name <span class="red">*</span></label>
                                 <mat-form-field [floatLabel]="'never'">
                                     <input matInput type="text" formControlName="company" name="company">
                                 </mat-form-field>
@@ -224,8 +224,10 @@
                             </li>
                             <li class="input_file">
                                 <label>Contract <span class="red">*</span></label>
-                                <input type="file" placeholder="" accept="image/*" id="file"
-                                    (change)="onFileChange($event) " formControlName="vendorFile" name="documentOne">
+
+                                <input type="file" placeholder="Add Contract" id="file" (change)="onFileChange($event) "
+                                    formControlName="vendorFile" name="documentOne">
+
 
                                 <div *ngIf="submitted && f.vendorFile.errors" class="custom-invalid">
                                     <div *ngIf="f.vendorFile.errors.required">
