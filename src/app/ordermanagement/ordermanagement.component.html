@@ -20,8 +20,12 @@
                                         <select [(ngModel)]="filterBy" (change)="filterSelected($event)">
                                             <option *ngIf="flag==true" value="">Remove Filter</option>
                                             <option *ngIf="flag==false" value=""></option>
-                                            <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option>
+                                            <option *ngFor="let item of filterList" value="{{item.value}}">
+                                                {{item.viewValue}}
+                                            </option>
+                                            <!-- <option value="active">Active</option>
+                                            <option value="inactive">Inactive</option> -->
+                                            <!-- <option value="lastName"></option> -->
                                         </select>
                                     </div>
                                     <div class="search_inner_fiels">
@@ -74,10 +78,14 @@
                                             <td>01-06-2020</td>
                                             <td>
 
-                                                <select [(ngModel)]="status" (change)="statusChnaged($event)">
-                                                    <option value="pending">Pending</option>
-                                                    <option value="confirmed">Confirmed</option>
-                                                    <option value="cancelled">cancelled</option>
+                                                <select [(ngModel)]="status"
+                                                    (change)="statusChanged($event.target.value)">
+                                                    <option *ngFor="let item of filterList" value="{{item.value}}">
+                                                        {{item.viewValue}}
+                                                    </option>
+                                                    <!-- <option>Pending</option>
+                                                    <option>Confirmed</option>
+                                                    <option>cancelled</option> -->
                                                 </select>
                                             </td>
 
@@ -198,8 +206,8 @@
                                 </div>
                             </div>
                             <!-----start pagination-->
-                            <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-                                (page)="pageEvent = salesListAfterPageSizeChanged($event)">
+                            <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
+                                (page)="pageEvent = productListAfterPageSizeChanged($event)">
                             </mat-paginator>
                             <!-----end pagination-->
                         </div>

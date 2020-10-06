@@ -67,7 +67,12 @@ export class ApiService {
       getVendorListByCat: 'admin/getVendorsByCat',
       getProductByVendor: 'admin/getProductsByCatOrVendor',
       addBanner: 'admin/banner',
-      viewBanner: 'admin/viewBanner'
+      viewBanner: 'admin/viewBanner',
+
+      //Sales Module Routes
+      salesList: 'admin/sales',
+      processOrder: 'admin/processOrder',
+      getSale: 'admin/viewSales',
     }
     for (let key in this.apiEndPoints) {
       this.apiEndPoints[key] = this.BASE_URL + this.apiEndPoints[key];
@@ -164,7 +169,7 @@ export class ApiService {
   data: any
   async delete(body) {
     // this.flagDelete = false;
-    debugger
+
     await this.deleteData(this.apiEndPoints.delete, body)
       .then(data => {
         if (data.success) {
@@ -445,6 +450,21 @@ export class ApiService {
       .pipe(
         catchError(this.handleError<any>("get discount(banner)"))
       )
+  }
+
+  //Sales Module
+  getSaleList(page, pageSize, search, filterBy): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.salesList}?page=${page}&count=${pageSize}&filter=${filterBy}&search=${search}`, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  updateStatus(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.processOrder, body, this.getHeaders()).pipe(catchError(this.handleError))
+  }
+
+  getSale(id): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.getSale}?id=${id}`, this.getHeaders()).pipe(catchError(this.handleError))
+
+
   }
 
 

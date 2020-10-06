@@ -187,8 +187,8 @@
                                 </div>
                             </div>
                             <!-----start pagination-->
-                            <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-                                (page)="pageEvent = salesReportListAfterPageSizeChanged($event)">
+                            <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
+                                (page)="pageEvent = productListAfterPageSizeChanged($event)">
                             </mat-paginator>
                             <!-----end pagination-->
                         </div>

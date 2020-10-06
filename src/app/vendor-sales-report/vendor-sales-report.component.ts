@@ -12,7 +12,10 @@ export class VendorSalesReportComponent implements OnInit {
   page: any;
   search: string;
   filterBy: any;
+  // page = 1;
   length = 100;
+  pageSize = 10;
+
   pageSizeOptions = [5, 10, 25, 100]
   constructor(private router: Router) { }
 

@@ -13,12 +13,17 @@ export class ManageReviewsComponent implements OnInit {
   srNo: number;
   length = 100
   pageSizeOptions = [5, 10, 25, 100]
+  pageSize: any;
 
   constructor() { }
 
   ngOnInit() {
+    this.getReview(this.page, this.pageSize, this.search, this.filterBy)
   }
 
+  getReview(page, pageSize, search, filterBy) {
+
+  }
   flag = false
   filterSelected(e) {
     if (this.filterBy) {
@@ -30,38 +35,14 @@ export class ManageReviewsComponent implements OnInit {
     }
     console.log(e.target.value);
     this.filterBy = e.target.value;
-    // this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
-    //   if (res) {
-    //     if (res.data.length > 0) {
-    //       this.flagData = false
-    //       this.bannerList = res.data
-    //       this.length = res.total
-    //       console.log(this.bannerList)
-    //     } else {
-    //       this.flagData = true
-    //     }
-    //   };
-    // });
-
+    this.getReview(this.page, this.pageSize, this.search, this.filterBy)
   }
 
   flagSearch: boolean = true
   searchMethod() {
 
     this.flagSearch = false
-    // console.log(this.search);
-    // this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
-    //   if (res.success) {
-    //     if (res.data.length > 0) {
-    //       this.flagData = false
-    //       this.bannerList = res.data;
-    //       this.length = res.total
-    //       console.log(this.bannerList);
-    //     } else {
-    //       this.flagData = true
-    //     }
-    //   }
-    // })
+    this.getReview(this.page, this.pageSize, this.search, this.filterBy)
 
   }
 
@@ -70,18 +51,7 @@ export class ManageReviewsComponent implements OnInit {
 
     this.flagSearch = true
     this.search = ''
-    // this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
-    //   if (res.success) {
-    //     if (res.data.length > 0) {
-    //       this.flagData = false
-    //       this.bannerList = res.data;
-    //       this.length = res.total
-    //       console.log(this.bannerList);
-    //     } else {
-    //       this.flagData = true
-    //     }
-    //   }
-    // });
+    this.getReview(this.page, this.pageSize, this.search, this.filterBy)
   }
 
   statusChnaged(e) {
@@ -109,18 +79,7 @@ export class ManageReviewsComponent implements OnInit {
 
     }
 
-    // this.apiService.getAllDiscount(this.page, e.pageSize, this.search, this.filterBy).subscribe((res) => {
-    //   if (res.success) {
-    //     if (res.data.length > 0) {
-    //       this.flagData = false
-    //       this.bannerList = res.data;
-    //       this.length = res.total
-    //       console.log(this.bannerList);
-    //     } else {
-    //       this.flagData = true
-    //     }
-    //   }
-    // });
+    this.getReview(this.page, this.pageSize, this.search, this.filterBy)
   }
 
 
