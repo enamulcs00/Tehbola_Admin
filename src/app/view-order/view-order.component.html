@@ -10,90 +10,131 @@
                 </div>
                 <!-----start input fields------>
                 <div class="add_user_list">
-                    <ul>
-                        <li>
-                            <label>Order ID<span class="red">*</span></label>
+                    <form [formGroup]="editSaleForm">
+                        <ul>
+                            <li>
+                                <label>Order ID<span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" placeholder="" formControlName="orderID" name="name"
+                                        readonly name="name">
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <label>Product Name<span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" placeholder="" name="name" formControlName="productName"
+                                        readonly name="name">
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <label>Product Category<span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" placeholder="" name="name" readonly name="name"
+                                        formControlName="productCategory">
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <label>Product Sub Category<span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" placeholder="" name="name" readonly name="name"
+                                        formControlName="productSubcategory">
+                                </mat-form-field>
+                            </li>
+
+                            <li>
+                                <label> SKU number <span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" placeholder="" name="name" formControlName="sku"
+                                        readonly>
+                                </mat-form-field>
+                            </li>
+                            <!-- <li>
+                            <label> ISBN number <span class="red">*</span></label>
                             <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name" value="ABC" disabled name="name">
+                                <input matInput type="text" placeholder="" name="name" value="12345" readonly name="name">
                             </mat-form-field>
-                        </li>
-                        <li>
-                            <label>Product Name<span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name" value="ABC" disabled name="name">
-                            </mat-form-field>
-                        </li>
-                        <li>
-                            <label>Product Category<span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name" disabled name="name" Value="Lorem ipsum">
-                            </mat-form-field>
-                        </li>
-                        <li>
-                            <label>Product Sub Category<span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name" disabled name="name" Value="Lorem ipsum">
-                            </mat-form-field>
-                        </li>
-                   
-                        <li>
-                            <label> ISBN  Number <span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name" value="25252" disabled name="name">
-                            </mat-form-field>
-                        </li>
-                        <li>
-                            <label> SKU  Number <span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name" value="25252" disabled name="name">
-                            </mat-form-field>
-                        </li>
-                        <li>
-                            <label> Quantity <span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name" value="30" disabled name="name">
-                            </mat-form-field>
-                        </li>
-                        <li>
-                            <label> Price <span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name" value="800" disabled name="name">
-                            </mat-form-field>
-                        </li>
-                     
-                        <li>
-                            <label>User name<span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name" value="John" disabled name="name">
-                            </mat-form-field>
-                        </li>
-                        <li>
-                            <label>User Address <span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name" value="lorem ipsum" disabled name="name">
-                            </mat-form-field>
-                        </li>
-                        <li>
-                            <label>Order Date<span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="date" placeholder="" name="name" value="20-05-2020" disabled name="name">
-                            </mat-form-field>
-                        </li>
-                        <li>
-                            <label>Delivery Date<span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="date" placeholder="" name="name" value="20-05-2020" disabled name="name">
-                            </mat-form-field>
-                        </li>
-                        <li>
+                        </li> -->
+                            <li>
+                                <label> Quantity <span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" placeholder="" name="name" formControlName="quantity"
+                                        readonly name="name">
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <label> Price <span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" placeholder="" name="name" formControlName="price"
+                                        readonly name="name">
+                                </mat-form-field>
+                            </li>
+
+                            <li>
+                                <label>User name<span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" placeholder="" readonly name="name"
+                                        formControlName="userName" name="name">
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <label> Address 1 <span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" placeholder="" readonly name="name"
+                                        formControlName="userAddress1" name="name">
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <label> Address 2 <span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" placeholder="" readonly name="name"
+                                        formControlName="userAddress2" name="name">
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <label> City <span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" placeholder="" readonly name="name"
+                                        formControlName="userCity" name="name">
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <label> State <span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" placeholder="" name="name" readonly
+                                        formControlName="userState" name="name">
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <label> Postal Code <span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" placeholder="" readonly name="name"
+                                        formControlName="userPostalCode" name="name">
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <label>Order Date<span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" placeholder="" name="name" formControlName="orderDate"
+                                        readonly>
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <label>Delivery Date<span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" placeholder="" readonly name="name"
+                                        formControlName="deliveryDate">
+                                </mat-form-field>
+                            </li>
+                            <!-- <li>
                             <label>Status<span class="red">*</span></label>
                             <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name" value="pending" disabled name="name">
+                                <input matInput type="text" placeholder="" name="name" value="pending" readonly name="name">
                             </mat-form-field>
-                        </li>
-                      
+                        </li> -->
 
-                    </ul>
+
+                        </ul>
+                    </form>
                     <!-- <div class="update_button">
                         <button mat-button>
                             Update
@@ -104,9 +145,9 @@
                     </div> -->
                 </div>
 
-               
+
                 <!-----End input fields------>
-                
+
             </div>
         </div>
     </div>

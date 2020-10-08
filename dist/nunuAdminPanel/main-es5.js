@@ -1,3 +1,11 @@
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["main"], {
   /***/
   "./$$_lazy_route_resource lazy recursive":
@@ -349,7 +357,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>About</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <!-- <a (click)=\"goToaddcategory()\"><span>+</span>Add Category</a> -->\r\n                        <!-- <a class=\"add_excelsheet\">Import excel sheet</a> -->\r\n                    </div>\r\n                </div>\r\n             \r\n                 <form role=\"form\" #myForm=\"ngForm\" accept-charset=\"UTF-8\" novalidate>\r\n<div class=\"form-group has-feedback\" \r\n      [ngClass]=\"{ 'has-error': myckeditor.invalid && myckeditor.touched }\">\r\n\t<ckeditor [(ngModel)]=\"mycontent\" \r\n            #myckeditor=\"ngModel\"\r\n            name=\"myckeditor\"\r\n            required\r\n            [config]=\"ckeConfig\" \r\n            debounce=\"500\" \r\n            (paste)=\"onPaste($event)\"\r\n            (change)=\"onChange($event)\">\r\n\t</ckeditor>\r\n  <div *ngIf=\"myckeditor.invalid && myckeditor.touched\" class=\"help-block\">Required field.</div>\r\n</div>\r\n<button [disabled]=\"myForm.invalid\" class=\"btn btn-primary\">Save</button>\r\n</form>\r\n  </div>\r\n        </div>\r\n    </div>\r\n   \r\n</div>\r\n";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>About</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <!-- <a (click)=\"goToaddcategory()\"><span>+</span>Add Category</a> -->\r\n                        <!-- <a class=\"add_excelsheet\">Import excel sheet</a> -->\r\n                    </div>\r\n                </div>\r\n\r\n                <form role=\"form\" #myForm=\"ngForm\" accept-charset=\"UTF-8\" novalidate>\r\n                    <div class=\"form-group has-feedback\"\r\n                        [ngClass]=\"{ 'has-error': myckeditor.invalid && myckeditor.touched }\">\r\n                        <ckeditor [(ngModel)]=\"mycontent\" #myckeditor=\"ngModel\" name=\"myckeditor\" required\r\n                            [config]=\"ckeConfig\" debounce=\"500\" (paste)=\"onPaste($event)\" (change)=\"onChange($event)\">\r\n                        </ckeditor>\r\n                        <div *ngIf=\"myckeditor.invalid && myckeditor.touched\" class=\"help-block\">Required field.</div>\r\n                    </div>\r\n                    <button [disabled]=\"myForm.invalid\" class=\"btn btn-primary\"\r\n                        (click)=\"updateTermAndCondition()\">Save</button>\r\n                </form>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</div>";
     /***/
   },
 
@@ -369,7 +377,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Add Vendor</h1>\r\n                    <a (click)=\"goTovendermanagement()\">Back To List</a>\r\n                </div>\r\n                <!-----start input fields------>\r\n                <div class=\"add_user_list\">\r\n                    <form [formGroup]=\"addVendorForm\">\r\n                        <ul>\r\n                            <li>\r\n                                <label>Vendor First Name<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" formControlName=\"firstName\"\r\n                                        name=\"firstName\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.firstName.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.firstName.errors.required\">\r\n                                        First Name is required.\r\n                                    </div>\r\n\r\n                                    <div *ngIf=\"f.firstName.errors.maxlength\">\r\n                                        First Name should not be more than 25.\r\n                                    </div>\r\n\r\n\r\n                                </div>\r\n                            </li>\r\n                            <li>\r\n                                <label>Vendor Last Name<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" formControlName=\"lastName\"\r\n                                        name=\"lastName\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.lastName.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.lastName.errors.required\">\r\n                                        Last Name is required.\r\n                                    </div>\r\n\r\n                                    <div *ngIf=\"f.lastName.errors.maxlength\">\r\n                                        Last Name should not be more than 25.\r\n                                    </div>\r\n\r\n\r\n                                </div>\r\n                            </li>\r\n                            <li>\r\n                                <label>Vendor Email ID<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"email\" placeholder=\"\" formControlName=\"email\" name=\"email\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.email.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.email.errors.required\">\r\n                                        Email is required.\r\n                                    </div>\r\n                                    <div *ngIf=\"f.email.errors.email\">\r\n                                        Email you entered is not valid, please type in a valid email address.\r\n                                    </div>\r\n\r\n\r\n                                </div>\r\n                            </li>\r\n                            <!-- <li>\r\n\r\n\r\n\r\n                                <label>Vendor Country Code<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" ng-intl-tel-input\r\n                                        formControlName=\"countryCode\" name=\"countryCode\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.countryCode.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.countryCode.errors.required\">\r\n                                        Confirm Password is required.\r\n                                    </div>\r\n\r\n\r\n                                </div>\r\n                            </li> -->\r\n                            <li>\r\n                                <label>Vendor Contact Number<span class=\"red\">*</span></label>\r\n                                <div class=\"cardList\">\r\n                                    <mat-form-field style=\"width: 20%;\" [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"number\" min=\"0\" id=\"firstInput\"\r\n                                            formControlName=\"countryCode\" name=\"countryCode\">\r\n                                        <div *ngIf=\"submitted && f.countryCode.errors\" class=\"custom-invalid\">\r\n                                            <div *ngIf=\"f.countryCode.errors.required\">\r\n                                                Country Code is required.\r\n                                            </div>\r\n                                            &nbsp;&nbsp;&nbsp;&nbsp;\r\n\r\n                                        </div>\r\n\r\n\r\n                                    </mat-form-field>\r\n\r\n                                    <mat-form-field style=\"width: 80%;\" [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"number\" min=\"0\" id=\"secondInput\" formControlName=\"phone\"\r\n                                            name=\"phone\">\r\n                                        <div *ngIf=\"submitted && f.phone.errors\" class=\"custom-invalid\">\r\n                                            <div *ngIf=\"f.phone.errors.required\">\r\n                                                Phone Number is required.\r\n                                            </div>\r\n                                        </div>\r\n                                    </mat-form-field>\r\n                                </div>\r\n                            </li>\r\n                            <li>\r\n                                <label>Vendor Address<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" formControlName=\"address\" name=\"address\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.address.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.address.errors.required\">\r\n                                        Address is required.\r\n                                    </div>\r\n                                    <div *ngIf=\"f.address.errors.maxlength\">\r\n                                        Address should not be more than 200.\r\n                                    </div>\r\n\r\n\r\n                                </div>\r\n                            </li>\r\n                            <li>\r\n                                <label>Vendor City<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" formControlName=\"city\" name=\"city\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.city.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.city.errors.required\">\r\n                                        City is required.\r\n                                    </div>\r\n                                    <div *ngIf=\"f.city.errors.maxlength\">\r\n                                        City should not be more than 50.\r\n                                    </div>\r\n\r\n                                </div>\r\n                            </li>\r\n                            <li>\r\n                                <label>Vendor State<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" formControlName=\"state\" name=\"state\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.state.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.state.errors.required\">\r\n                                        State is required.\r\n                                    </div>\r\n                                    <div *ngIf=\"f.state.errors.maxlength\">\r\n                                        State should not be more than 50.\r\n                                    </div>\r\n\r\n                                </div>\r\n                            </li>\r\n                            <li>\r\n                                <label>Vendor Country<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" formControlName=\"country\" name=\"country\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.country.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.country.errors.required\">\r\n                                        Country is required.\r\n                                    </div>\r\n                                    <div *ngIf=\"f.country.errors.minlength\">\r\n                                        Country should be more than 2.\r\n                                    </div>\r\n                                    <div *ngIf=\"f.country.errors.maxlength\">\r\n                                        Country should not be more than 50.\r\n                                    </div>\r\n\r\n\r\n                                </div>\r\n                            </li>\r\n\r\n\r\n                            <li>\r\n                                <label>Vendor VatNumber<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"number\" placeholder=\"\" min=\"0\" formControlName=\"vatNumber\"\r\n                                        name=\"vatNumber\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.vatNumber.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.vatNumber.errors.required\">\r\n                                        Vat number is required.\r\n                                    </div>\r\n\r\n\r\n                                </div>\r\n                            </li>\r\n                            <li>\r\n                                <label>Vendor BRN Number<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"number\" placeholder=\"\" min=\"0\" formControlName=\"brnNumber\"\r\n                                        name=\"brnNumber\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.brnNumber.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.brnNumber.errors.required\">\r\n                                        BRN number is required.\r\n                                    </div>\r\n\r\n\r\n                                </div>\r\n                            </li>\r\n                            <li>\r\n                                <label>Company Name <span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" formControlName=\"company\" name=\"company\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.company.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.company.errors.required\">\r\n                                        Company is required.\r\n                                    </div>\r\n                                    <div *ngIf=\"f.company.errors.maxLength\">\r\n                                        Company should not be more than 50.\r\n                                    </div>\r\n\r\n\r\n\r\n                                </div>\r\n\r\n                            </li>\r\n                            <li class=\"input_file\">\r\n                                <label>Contract <span class=\"red\">*</span></label>\r\n                                <input type=\"file\" placeholder=\"\" accept=\"image/*\" id=\"file\"\r\n                                    (change)=\"onFileChange($event) \" formControlName=\"vendorFile\" name=\"documentOne\">\r\n\r\n                                <div *ngIf=\"submitted && f.vendorFile.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.vendorFile.errors.required\">\r\n                                        Contract is required.\r\n                                    </div>\r\n\r\n                                </div>\r\n                            </li>\r\n\r\n\r\n\r\n                            <!-- <li>\r\n                            <label>Status<span class=\"red\">*</span></label>\r\n                            <mat-form-field>\r\n                                <mat-select>\r\n                                    <mat-option *ngFor=\"let Ready of pick\" [value]=\"Ready.value\">\r\n                                        {{Ready.viewValue}}\r\n                                    </mat-option>\r\n                                </mat-select>\r\n                            </mat-form-field>\r\n                        </li> -->\r\n\r\n\r\n\r\n                        </ul>\r\n                        <div class=\"update_button\">\r\n                            <button mat-button (click)=\"addVendor()\">\r\n                                <span><i class=\"fa fa-window-restore\"></i>\r\n                                </span>\r\n                                Add\r\n                            </button>\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n                <!-----End input fields------>\r\n\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Add Vendor</h1>\r\n                    <a (click)=\"goTovendermanagement()\">Back To List</a>\r\n                </div>\r\n                <!-----start input fields------>\r\n                <div class=\"add_user_list\">\r\n                    <form [formGroup]=\"addVendorForm\">\r\n                        <ul>\r\n                            <li>\r\n                                <label>First Name<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" formControlName=\"firstName\"\r\n                                        name=\"firstName\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.firstName.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.firstName.errors.required\">\r\n                                        First Name is required.\r\n                                    </div>\r\n\r\n                                    <div *ngIf=\"f.firstName.errors.maxlength\">\r\n                                        First Name should not be more than 25.\r\n                                    </div>\r\n\r\n\r\n                                </div>\r\n                            </li>\r\n                            <li>\r\n                                <label>Last Name<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" formControlName=\"lastName\"\r\n                                        name=\"lastName\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.lastName.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.lastName.errors.required\">\r\n                                        Last Name is required.\r\n                                    </div>\r\n\r\n                                    <div *ngIf=\"f.lastName.errors.maxlength\">\r\n                                        Last Name should not be more than 25.\r\n                                    </div>\r\n\r\n\r\n                                </div>\r\n                            </li>\r\n                            <li>\r\n                                <label>Email ID<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"email\" placeholder=\"\" formControlName=\"email\" name=\"email\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.email.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.email.errors.required\">\r\n                                        Email is required.\r\n                                    </div>\r\n                                    <div *ngIf=\"f.email.errors.email\">\r\n                                        Email you entered is not valid, please type in a valid email address.\r\n                                    </div>\r\n\r\n\r\n                                </div>\r\n                            </li>\r\n                            <!-- <li>\r\n\r\n\r\n\r\n                                <label>Vendor Country Code<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" ng-intl-tel-input\r\n                                        formControlName=\"countryCode\" name=\"countryCode\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.countryCode.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.countryCode.errors.required\">\r\n                                        Confirm Password is required.\r\n                                    </div>\r\n\r\n\r\n                                </div>\r\n                            </li> -->\r\n                            <li>\r\n                                <label>Contact Number<span class=\"red\">*</span></label>\r\n                                <div class=\"cardList\">\r\n                                    <mat-form-field style=\"width: 20%;\" [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"number\" min=\"0\" id=\"firstInput\"\r\n                                            formControlName=\"countryCode\" name=\"countryCode\">\r\n                                        <div *ngIf=\"submitted && f.countryCode.errors\" class=\"custom-invalid\">\r\n                                            <div *ngIf=\"f.countryCode.errors.required\">\r\n                                                Country Code is required.\r\n                                            </div>\r\n                                            &nbsp;&nbsp;&nbsp;&nbsp;\r\n\r\n                                        </div>\r\n\r\n\r\n                                    </mat-form-field>\r\n\r\n                                    <mat-form-field style=\"width: 80%;\" [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"number\" min=\"0\" id=\"secondInput\" formControlName=\"phone\"\r\n                                            name=\"phone\">\r\n                                        <div *ngIf=\"submitted && f.phone.errors\" class=\"custom-invalid\">\r\n                                            <div *ngIf=\"f.phone.errors.required\">\r\n                                                Phone Number is required.\r\n                                            </div>\r\n                                        </div>\r\n                                    </mat-form-field>\r\n                                </div>\r\n                            </li>\r\n                            <li>\r\n                                <label>Address<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" formControlName=\"address\" name=\"address\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.address.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.address.errors.required\">\r\n                                        Address is required.\r\n                                    </div>\r\n                                    <div *ngIf=\"f.address.errors.maxlength\">\r\n                                        Address should not be more than 200.\r\n                                    </div>\r\n\r\n\r\n                                </div>\r\n                            </li>\r\n                            <li>\r\n                                <label>City<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" formControlName=\"city\" name=\"city\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.city.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.city.errors.required\">\r\n                                        City is required.\r\n                                    </div>\r\n                                    <div *ngIf=\"f.city.errors.maxlength\">\r\n                                        City should not be more than 50.\r\n                                    </div>\r\n\r\n                                </div>\r\n                            </li>\r\n                            <li>\r\n                                <label>State<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" formControlName=\"state\" name=\"state\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.state.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.state.errors.required\">\r\n                                        State is required.\r\n                                    </div>\r\n                                    <div *ngIf=\"f.state.errors.maxlength\">\r\n                                        State should not be more than 50.\r\n                                    </div>\r\n\r\n                                </div>\r\n                            </li>\r\n                            <li>\r\n                                <label>Country<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" formControlName=\"country\" name=\"country\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.country.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.country.errors.required\">\r\n                                        Country is required.\r\n                                    </div>\r\n                                    <div *ngIf=\"f.country.errors.minlength\">\r\n                                        Country should be more than 2.\r\n                                    </div>\r\n                                    <div *ngIf=\"f.country.errors.maxlength\">\r\n                                        Country should not be more than 50.\r\n                                    </div>\r\n\r\n\r\n                                </div>\r\n                            </li>\r\n\r\n\r\n                            <li>\r\n                                <label>VatNumber<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"number\" placeholder=\"\" min=\"0\" formControlName=\"vatNumber\"\r\n                                        name=\"vatNumber\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.vatNumber.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.vatNumber.errors.required\">\r\n                                        Vat number is required.\r\n                                    </div>\r\n\r\n\r\n                                </div>\r\n                            </li>\r\n                            <li>\r\n                                <label>BRN Number<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"number\" placeholder=\"\" min=\"0\" formControlName=\"brnNumber\"\r\n                                        name=\"brnNumber\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.brnNumber.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.brnNumber.errors.required\">\r\n                                        BRN number is required.\r\n                                    </div>\r\n\r\n\r\n                                </div>\r\n                            </li>\r\n                            <li>\r\n                                <label>Name <span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" formControlName=\"company\" name=\"company\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.company.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.company.errors.required\">\r\n                                        Company is required.\r\n                                    </div>\r\n                                    <div *ngIf=\"f.company.errors.maxLength\">\r\n                                        Company should not be more than 50.\r\n                                    </div>\r\n\r\n\r\n\r\n                                </div>\r\n\r\n                            </li>\r\n                            <li class=\"input_file\">\r\n                                <label>Contract <span class=\"red\">*</span></label>\r\n\r\n                                <input type=\"file\" placeholder=\"Add Contract\" id=\"file\" (change)=\"onFileChange($event) \"\r\n                                    formControlName=\"vendorFile\" name=\"documentOne\">\r\n\r\n\r\n                                <div *ngIf=\"submitted && f.vendorFile.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.vendorFile.errors.required\">\r\n                                        Contract is required.\r\n                                    </div>\r\n\r\n                                </div>\r\n                            </li>\r\n\r\n\r\n\r\n                            <!-- <li>\r\n                            <label>Status<span class=\"red\">*</span></label>\r\n                            <mat-form-field>\r\n                                <mat-select>\r\n                                    <mat-option *ngFor=\"let Ready of pick\" [value]=\"Ready.value\">\r\n                                        {{Ready.viewValue}}\r\n                                    </mat-option>\r\n                                </mat-select>\r\n                            </mat-form-field>\r\n                        </li> -->\r\n\r\n\r\n\r\n                        </ul>\r\n                        <div class=\"update_button\">\r\n                            <button mat-button (click)=\"addVendor()\">\r\n                                <span><i class=\"fa fa-window-restore\"></i>\r\n                                </span>\r\n                                Add\r\n                            </button>\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n                <!-----End input fields------>\r\n\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -429,7 +437,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Add Discount</h1>\r\n                    <a (click)=\"goToofferdeals()\">Back To List</a>\r\n                </div>\r\n                <form [formGroup]=\"addDiscountForm\">\r\n                    <!-----start input fields------>\r\n                    <div class=\"add_user_list\">\r\n                        <div>\r\n                            <fieldset>\r\n                                Category\r\n                                <input type=\"radio\" formControlName=\"dicountOn\" name=\"dicountOn\"\r\n                                    (click)=\"setradio('category')\" value=\"category\" [checked]=\"true\">\r\n                                &nbsp;&nbsp;\r\n                                Sub-category\r\n                                <input type=\"radio\" formControlName=\"dicountOn\" name=\"dicountOn\"\r\n                                    (click)=\"setradio('subcategory')\" value=\"subCategory\">&nbsp;&nbsp;\r\n                                Vendor\r\n                                <input type=\"radio\" formControlName=\"dicountOn\" name=\"dicountOn\"\r\n                                    (click)=\"setradio('vendor')\" value=\"vendor\">&nbsp;&nbsp;\r\n                                Product\r\n                                <input type=\"radio\" formControlName=\"dicountOn\" name=\"dicountOn\"\r\n                                    (click)=\"setradio('product')\" value=\"product\">&nbsp;&nbsp;\r\n                            </fieldset>\r\n                            <mat-error *ngIf=\"submitted && addDiscountForm.controls['dicountOn'].hasError('required')\">\r\n                                Offer type is <strong>required</strong>\r\n                            </mat-error>\r\n                        </div>\r\n                        <ul>\r\n                            <li *ngIf=\"showCategory\">\r\n                                <label>Select Category<span class=\"red\">*</span></label>\r\n                                <mat-form-field *ngIf=\"singleCategorySelection\">\r\n                                    <mat-select (selectionChange)=\"categorySelected($event.value)\">\r\n                                        <input matInput placeholder=\"Seaarch Category\"\r\n                                            (keyup)=\"onKeyInCategory($event.target.value)\">\r\n                                        <mat-option>None</mat-option>\r\n                                        <mat-option *ngFor=\"let body of categoryList\" [value]=\"body.id\">{{body.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                </mat-form-field>\r\n                                <ng-multiselect-dropdown *ngIf=\"!singleCategorySelection\" [placeholder]=\"\"\r\n                                    [data]=\"categoryList\" [(ngModel)]=\"selectedCategoryItem\"\r\n                                    [ngModelOptions]=\"{standalone: true}\" [settings]=\"categoryDropDownSettings\"\r\n                                    (onSelect)=\"onCategorySelect($event)\" (onSelectAll)=\"onSelectAll($event)\">\r\n                                </ng-multiselect-dropdown>\r\n                            </li>\r\n                            <li *ngIf=\"showSubcategory\">\r\n                                <label>Select Sub Category<span class=\"red\">*</span></label>\r\n                                <mat-form-field *ngIf=\"singleSubCategorySelection\">\r\n                                    <mat-select (selectionChange)=\"subCategorySelected($event.value)\">\r\n                                        <input matInput placeholder=\"Search Sub-Category\"\r\n                                            (keyup)=\"onKeyInSubCategory($event.target.value)\">\r\n                                        <mat-option>None</mat-option>\r\n                                        <mat-option *ngFor=\"let body of subCategoryList\" [value]=\"body.id\">{{body.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                </mat-form-field>\r\n                                <ng-multiselect-dropdown *ngIf=\"!singleSubCategorySelection\" [placeholder]=\"\"\r\n                                    [(ngModel)]=\"selectedSubcategoryItem\" [ngModelOptions]=\"{standalone: true}\"\r\n                                    [settings]=\"subcategoryDropDownSettings\" [data]=\"subCategoryList\"\r\n                                    (onSelect)=\"onSubcategorySelect($event)\" (onSelectAll)=\"onSelectAll($event)\">\r\n                                </ng-multiselect-dropdown>\r\n                            </li>\r\n                            <li *ngIf=\"showVendor\">\r\n                                <label>Select Vendor<span class=\"red\">*</span></label>\r\n                                <mat-form-field *ngIf=\"singleVendorSelection\">\r\n                                    <mat-select (selectionChange)=\"vendorSelected($event.value)\">\r\n                                        <input matInput placeholder=\"Search Vendor\"\r\n                                            (keyup)=\"onKeyInVendor($event.target.value)\">\r\n                                        <mat-option>None</mat-option>\r\n                                        <mat-option *ngFor=\"let body of vendorList\" [value]=\"body.id\">\r\n                                            {{body.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                </mat-form-field>\r\n                                <ng-multiselect-dropdown *ngIf=\"!singleVendorSelection\" [placeholder]=\"\"\r\n                                    [(ngModel)]=\"selectedVendorItem\" [ngModelOptions]=\"{standalone: true}\"\r\n                                    [settings]=\"vendorDropDownSettings\" [data]=\"vendorList\"\r\n                                    (onSelect)=\"onVendorSelect($event)\" (onSelectAll)=\"onSelectAll($event)\">\r\n                                </ng-multiselect-dropdown>\r\n                            </li>\r\n                            <li *ngIf=\"showProduct\">\r\n                                <label>Select Product<span class=\"red\">*</span></label>\r\n                                <mat-form-field *ngIf=\"singleProductSelection\">\r\n                                    <mat-select (selectionChange)=\"productSelected($event.value)\">\r\n                                        <input matInput placeholder=\"Search Product\"\r\n                                            (keyup)=\"onKeyInProduct($event.target.value)\">\r\n                                        <mat-option>None</mat-option>\r\n                                        <mat-option *ngFor=\"let body of productList\" [value]=\"body.id\">{{body.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                </mat-form-field>\r\n                                <ng-multiselect-dropdown *ngIf=\"!singleProductSelection\" [placeholder]=\"\"\r\n                                    [(ngModel)]=\"selectedProductItem\" [ngModelOptions]=\"{standalone: true}\"\r\n                                    [settings]=\"productDropDownSettings\" [data]=\"productList\"\r\n                                    (onSelect)=\"onProductSelect($event)\" (onSelectAll)=\"onSelectAll($event)\">\r\n                                </ng-multiselect-dropdown>\r\n                            </li>\r\n                            <li>\r\n                                <label> Name <span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput formControlName=\"name\" type=\"text\" placeholder=\"\" name=\"name\">\r\n                                    <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && addDiscountForm.controls['name'].hasError('required')\">\r\n                                        Name is <strong>required</strong>\r\n                                    </div>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <label> Arbic Name </label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput formControlName=\"name_ar\" type=\"text\" placeholder=\"\" name=\"name_ar\">\r\n                                    <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && addDiscountForm.controls['name_ar'].hasError('required')\">\r\n                                        Arbic Name is <strong>required</strong>\r\n                                    </div>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <label> Discount <span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput formControlName=\"disount\" min=\"0\" max=\"100\" type=\"number\"\r\n                                        placeholder=\"\" name=\"name\">\r\n                                    <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && addDiscountForm.controls['disount'].hasError('required')\">\r\n                                        Discount percentage is <strong>required</strong>\r\n                                    </div>\r\n                                    <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && addDiscountForm.controls['disount'].hasError('min')\">\r\n                                        Discount percentage should not be <strong>less than zero</strong>\r\n                                    </div>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <!-- <li>\r\n                            <label>Timeline for Discount<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"date\" placeholder=\"\" name=\"name\">\r\n                            </mat-form-field>\r\n                        </li> -->\r\n                            <li>\r\n                                <label>Start Date <span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput formControlName=\"startDate\" type=\"date\" [min]=\"today\" placeholder=\"\"\r\n                                        name=\"name\">\r\n\r\n\r\n                                    <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && addDiscountForm.controls['startDate'].hasError('required')\">\r\n                                        Start Date is <strong>required</strong>\r\n                                    </div>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <label>End Date <span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput formControlName=\"endDate\" type=\"date\" [min]=\"endTommorow\"\r\n                                        placeholder=\"\" name=\"name\">\r\n                                    <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && addDiscountForm.controls['endDate'].hasError('required')\">\r\n                                        End Date is <strong>required</strong>\r\n                                    </div>\r\n                                    <!-- <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && addDiscountForm.controls['endDate'].hasError('dateGreater') && !addDiscountForm.controls['endDate'].hasError('required')\">\r\n                                        End Date is <strong>required</strong>\r\n                                    </div> -->\r\n\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <label>Select Type<span class=\"red\">*</span></label>\r\n                                <mat-form-field>\r\n                                    <mat-select formControlName=\"type\">\r\n                                        <input matInput placeholder=\"Search Product\">\r\n                                        <mat-option>None</mat-option>\r\n                                        <mat-option *ngFor=\"let ready of type\" [value]=\"ready.value\">{{ready.viewValue}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                    <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && addDiscountForm.controls['type'].hasError('required')\">\r\n                                        Offer Type is <strong>required</strong>\r\n                                    </div>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li class=\"banner_image\">\r\n                                <label>Add Banner image</label>\r\n                                <div class=\"product_image_upload\">\r\n                                    <input type='file' (change)=\"bannerImageEvent($event)\" accept=\"image/*\"\r\n                                        formControlName=\"bannerImage\" placeholder=\"choosefile\" class=\"images_uploader\">\r\n\r\n                                    <span>Choose File</span>\r\n                                    <div class=\"custom-invalid\"\r\n                                        *ngIf=\"submitted &&  addDiscountForm.controls['bannerImage'].hasError('required')\">\r\n                                        Banner Image is <strong>required</strong>\r\n                                    </div>\r\n\r\n                                </div>\r\n                                <div class=\"user_img\">\r\n                                    <figure class=\"figure\" *ngIf=\"previewImage\">\r\n                                        <img [src]=\"previewImage\" />\r\n                                    </figure>\r\n                                </div>\r\n\r\n                            </li>\r\n\r\n\r\n\r\n                        </ul>\r\n                        <div class=\"update_button\">\r\n                            <button mat-button (click)=\"checkBanner()\">\r\n                                <span><i class=\"fa fa-window-restore\"></i>\r\n                                </span>\r\n                                Add\r\n                            </button>\r\n                        </div>\r\n                    </div>\r\n\r\n                </form>\r\n                <!-----End input fields------>\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Add Discount</h1>\r\n                    <a (click)=\"goToofferdeals()\">Back To List</a>\r\n                </div>\r\n                <form [formGroup]=\"addDiscountForm\">\r\n                    <!-----start input fields------>\r\n                    <div class=\"add_user_list\">\r\n                        <div>\r\n                            <fieldset>\r\n                                Category\r\n                                <input type=\"radio\" formControlName=\"dicountOn\" name=\"dicountOn\"\r\n                                    (click)=\"setradio('category')\" value=\"category\" [checked]=\"true\">\r\n                                &nbsp;&nbsp;\r\n                                Sub-category\r\n                                <input type=\"radio\" formControlName=\"dicountOn\" name=\"dicountOn\"\r\n                                    (click)=\"setradio('subcategory')\" value=\"subCategory\">&nbsp;&nbsp;\r\n                                Vendor\r\n                                <input type=\"radio\" formControlName=\"dicountOn\" name=\"dicountOn\"\r\n                                    (click)=\"setradio('vendor')\" value=\"vendor\">&nbsp;&nbsp;\r\n                                Product\r\n                                <input type=\"radio\" formControlName=\"dicountOn\" name=\"dicountOn\"\r\n                                    (click)=\"setradio('product')\" value=\"product\">&nbsp;&nbsp;\r\n                            </fieldset>\r\n                            <mat-error *ngIf=\"submitted && addDiscountForm.controls['dicountOn'].hasError('required')\">\r\n                                Offer type is <strong>required</strong>\r\n                            </mat-error>\r\n                        </div>\r\n                        <ul>\r\n                            <li *ngIf=\"showCategory\">\r\n                                <label>Select Category<span class=\"red\">*</span></label>\r\n                                <mat-form-field *ngIf=\"singleCategorySelection\">\r\n                                    <mat-select (selectionChange)=\"categorySelected($event.value)\">\r\n                                        <input matInput placeholder=\"Seaarch Category\"\r\n                                            (keyup)=\"onKeyInCategory($event.target.value)\">\r\n                                        <mat-option>None</mat-option>\r\n                                        <mat-option *ngFor=\"let body of categoryList\" [value]=\"body.id\">{{body.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                </mat-form-field>\r\n                                <ng-multiselect-dropdown *ngIf=\"!singleCategorySelection\" [placeholder]=\"\"\r\n                                    [data]=\"categoryList\" [(ngModel)]=\"selectedCategoryItem\"\r\n                                    [ngModelOptions]=\"{standalone: true}\" [settings]=\"categoryDropDownSettings\"\r\n                                    (onSelect)=\"onCategorySelect($event)\" (onSelectAll)=\"onSelectAll($event)\">\r\n                                </ng-multiselect-dropdown>\r\n                            </li>\r\n                            <li *ngIf=\"showSubcategory\">\r\n                                <label>Select Sub Category<span class=\"red\">*</span></label>\r\n                                <mat-form-field *ngIf=\"singleSubCategorySelection\">\r\n                                    <mat-select (selectionChange)=\"subCategorySelected($event.value)\">\r\n                                        <input matInput placeholder=\"Search Sub-Category\"\r\n                                            (keyup)=\"onKeyInSubCategory($event.target.value)\">\r\n                                        <mat-option>None</mat-option>\r\n                                        <mat-option *ngFor=\"let body of subCategoryList\" [value]=\"body.id\">{{body.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                </mat-form-field>\r\n                                <ng-multiselect-dropdown *ngIf=\"!singleSubCategorySelection\" [placeholder]=\"\"\r\n                                    [(ngModel)]=\"selectedSubcategoryItem\" [ngModelOptions]=\"{standalone: true}\"\r\n                                    [settings]=\"subcategoryDropDownSettings\" [data]=\"subCategoryList\"\r\n                                    (onSelect)=\"onSubcategorySelect($event)\" (onSelectAll)=\"onSelectAll($event)\">\r\n                                </ng-multiselect-dropdown>\r\n                            </li>\r\n                            <li *ngIf=\"showVendor\">\r\n                                <label>Select Vendor<span class=\"red\">*</span></label>\r\n                                <mat-form-field *ngIf=\"singleVendorSelection\">\r\n                                    <mat-select (selectionChange)=\"vendorSelected($event.value)\">\r\n                                        <input matInput placeholder=\"Search Vendor\"\r\n                                            (keyup)=\"onKeyInVendor($event.target.value)\">\r\n                                        <mat-option>None</mat-option>\r\n                                        <mat-option *ngFor=\"let body of vendorList\" [value]=\"body.id\">\r\n                                            {{body.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                </mat-form-field>\r\n                                <ng-multiselect-dropdown *ngIf=\"!singleVendorSelection\" [placeholder]=\"\"\r\n                                    [(ngModel)]=\"selectedVendorItem\" [ngModelOptions]=\"{standalone: true}\"\r\n                                    [settings]=\"vendorDropDownSettings\" [data]=\"vendorList\"\r\n                                    (onSelect)=\"onVendorSelect($event)\" (onSelectAll)=\"onSelectAll($event)\">\r\n                                </ng-multiselect-dropdown>\r\n                            </li>\r\n                            <li *ngIf=\"showProduct\">\r\n                                <label>Select Product<span class=\"red\">*</span></label>\r\n                                <mat-form-field *ngIf=\"singleProductSelection\">\r\n                                    <mat-select (selectionChange)=\"productSelected($event.value)\">\r\n                                        <input matInput placeholder=\"Search Product\"\r\n                                            (keyup)=\"onKeyInProduct($event.target.value)\">\r\n                                        <mat-option>None</mat-option>\r\n                                        <mat-option *ngFor=\"let body of productList\" [value]=\"body.id\">{{body.name}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                </mat-form-field>\r\n                                <ng-multiselect-dropdown *ngIf=\"!singleProductSelection\" [placeholder]=\"\"\r\n                                    [(ngModel)]=\"selectedProductItem\" [ngModelOptions]=\"{standalone: true}\"\r\n                                    [settings]=\"productDropDownSettings\" [data]=\"productList\"\r\n                                    (onSelect)=\"onProductSelect($event)\" (onSelectAll)=\"onSelectAll($event)\">\r\n                                </ng-multiselect-dropdown>\r\n                            </li>\r\n                            <li>\r\n                                <label> Name <span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput formControlName=\"name\" type=\"text\" placeholder=\"\" name=\"name\">\r\n                                    <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && addDiscountForm.controls['name'].hasError('required')\">\r\n                                        Name is <strong>required</strong>\r\n                                    </div>\r\n                                    <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && addDiscountForm.controls['name'].hasError('maxLength')\">\r\n                                        Max length should not be more than <strong>25 character</strong>\r\n                                    </div>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <label> Arbic Name </label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput formControlName=\"name_ar\" type=\"text\" placeholder=\"\" name=\"name_ar\">\r\n                                    <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && addDiscountForm.controls['name_ar'].hasError('required')\">\r\n                                        Arbic Name is <strong>required</strong>\r\n                                    </div>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <label> Discount <span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput formControlName=\"disount\" min=\"0\" max=\"100\" type=\"number\"\r\n                                        placeholder=\"\" name=\"name\">\r\n                                    <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && addDiscountForm.controls['disount'].hasError('required')\">\r\n                                        Discount percentage is <strong>required</strong>\r\n                                    </div>\r\n                                    <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && addDiscountForm.controls['disount'].hasError('min')\">\r\n                                        Discount percentage should not be <strong>less than zero</strong>\r\n                                    </div>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <!-- <li>\r\n                            <label>Timeline for Discount<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"date\" placeholder=\"\" name=\"name\">\r\n                            </mat-form-field>\r\n                        </li> -->\r\n                            <li>\r\n                                <label>Start Date <span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput formControlName=\"startDate\" type=\"date\" [min]=\"today\" placeholder=\"\"\r\n                                        name=\"name\">\r\n\r\n\r\n                                    <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && addDiscountForm.controls['startDate'].hasError('required')\">\r\n                                        Start Date is <strong>required</strong>\r\n                                    </div>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <label>End Date <span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput formControlName=\"endDate\" type=\"date\" [min]=\"endTommorow\"\r\n                                        placeholder=\"\" name=\"name\">\r\n                                    <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && addDiscountForm.controls['endDate'].hasError('required')\">\r\n                                        End Date is <strong>required</strong>\r\n                                    </div>\r\n                                    <!-- <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && addDiscountForm.controls['endDate'].hasError('dateGreater') && !addDiscountForm.controls['endDate'].hasError('required')\">\r\n                                        End Date is <strong>required</strong>\r\n                                    </div> -->\r\n\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <label>Select Type<span class=\"red\">*</span></label>\r\n                                <mat-form-field>\r\n                                    <mat-select formControlName=\"type\">\r\n                                        <input matInput placeholder=\"Search Product\">\r\n                                        <mat-option>None</mat-option>\r\n                                        <mat-option *ngFor=\"let ready of type\" [value]=\"ready.value\">{{ready.viewValue}}\r\n                                        </mat-option>\r\n                                    </mat-select>\r\n                                    <div class=\"custom-invalid\"\r\n                                        *ngIf=\" submitted && addDiscountForm.controls['type'].hasError('required')\">\r\n                                        Deal Type is <strong>required</strong>\r\n                                    </div>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li class=\"banner_image\">\r\n                                <label>Add Banner image</label>\r\n                                <div class=\"product_image_upload\">\r\n                                    <input type='file' (change)=\"bannerImageEvent($event)\" accept=\"image/*\"\r\n                                        formControlName=\"bannerImage\" placeholder=\"choosefile\" class=\"images_uploader\">\r\n\r\n                                    <span>Choose File</span>\r\n                                    <div class=\"custom-invalid\"\r\n                                        *ngIf=\"submitted &&  addDiscountForm.controls['bannerImage'].hasError('required')\">\r\n                                        Banner Image is <strong>required</strong>\r\n                                    </div>\r\n\r\n                                </div>\r\n                                <div class=\"user_img\">\r\n                                    <figure class=\"figure\" *ngIf=\"previewImage\">\r\n                                        <img [src]=\"previewImage\" />\r\n                                    </figure>\r\n                                </div>\r\n\r\n                            </li>\r\n\r\n\r\n\r\n                        </ul>\r\n                        <div class=\"update_button\">\r\n                            <button mat-button (click)=\"checkBanner()\">\r\n                                <span><i class=\"fa fa-window-restore\"></i>\r\n                                </span>\r\n                                Add\r\n                            </button>\r\n                        </div>\r\n                    </div>\r\n\r\n                </form>\r\n                <!-----End input fields------>\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -649,7 +657,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Privacy Policy</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <!-- <a (click)=\"goToaddcategory()\"><span>+</span>Add Category</a> -->\r\n                        <!-- <a class=\"add_excelsheet\">Import excel sheet</a> -->\r\n                    </div>\r\n                </div>\r\n             \r\n                 <form role=\"form\" #myForm=\"ngForm\" accept-charset=\"UTF-8\" novalidate>\r\n<div class=\"form-group has-feedback\" \r\n      [ngClass]=\"{ 'has-error': myckeditor.invalid && myckeditor.touched }\">\r\n\t<ckeditor [(ngModel)]=\"mycontent\" \r\n            #myckeditor=\"ngModel\"\r\n            name=\"myckeditor\"\r\n            required\r\n            [config]=\"ckeConfig\" \r\n            debounce=\"500\" \r\n            (paste)=\"onPaste($event)\"\r\n            (change)=\"onChange($event)\">\r\n\t</ckeditor>\r\n  <div *ngIf=\"myckeditor.invalid && myckeditor.touched\" class=\"help-block\">Required field.</div>\r\n</div>\r\n<button [disabled]=\"myForm.invalid\" class=\"btn btn-primary\">Save</button>\r\n</form>\r\n  </div>\r\n        </div>\r\n    </div>\r\n   \r\n</div>\r\n\r\n\r\n\r\n";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Privacy Policy</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <!-- <a (click)=\"goToaddcategory()\"><span>+</span>Add Category</a> -->\r\n                        <!-- <a class=\"add_excelsheet\">Import excel sheet</a> -->\r\n                    </div>\r\n                </div>\r\n\r\n                <form role=\"form\" #myForm=\"ngForm\" accept-charset=\"UTF-8\" novalidate>\r\n                    <div class=\"form-group has-feedback\"\r\n                        [ngClass]=\"{ 'has-error': myckeditor.invalid && myckeditor.touched }\">\r\n                        <ckeditor [(ngModel)]=\"mycontent\" #myckeditor=\"ngModel\" name=\"myckeditor\" required\r\n                            [config]=\"ckeConfig\" debounce=\"500\" (paste)=\"onPaste($event)\" (change)=\"onChange($event)\">\r\n                        </ckeditor>\r\n                        <div *ngIf=\"myckeditor.invalid && myckeditor.touched\" class=\"help-block\">Required field.</div>\r\n                    </div>\r\n                    <button [disabled]=\"myForm.invalid\" class=\"btn btn-primary\"\r\n                        (click)=\"updateTermAndCondition()\">Save</button>\r\n                </form>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</div>";
     /***/
   },
 
@@ -669,7 +677,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Contact Us</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <!-- <a (click)=\"goToaddcategory()\"><span>+</span>Add Category</a> -->\r\n                        <!-- <a class=\"add_excelsheet\">Import excel sheet</a> -->\r\n                    </div>\r\n                </div>\r\n             \r\n                 <form role=\"form\" #myForm=\"ngForm\" accept-charset=\"UTF-8\" novalidate>\r\n<div class=\"form-group has-feedback\" \r\n      [ngClass]=\"{ 'has-error': myckeditor.invalid && myckeditor.touched }\">\r\n\t<ckeditor [(ngModel)]=\"mycontent\" \r\n            #myckeditor=\"ngModel\"\r\n            name=\"myckeditor\"\r\n            required\r\n            [config]=\"ckeConfig\" \r\n            debounce=\"500\" \r\n            (paste)=\"onPaste($event)\"\r\n            (change)=\"onChange($event)\">\r\n\t</ckeditor>\r\n  <div *ngIf=\"myckeditor.invalid && myckeditor.touched\" class=\"help-block\">Required field.</div>\r\n</div>\r\n<button [disabled]=\"myForm.invalid\" class=\"btn btn-primary\">Save</button>\r\n</form>\r\n  </div>\r\n        </div>\r\n    </div>\r\n   \r\n</div>\r\n\r\n\r\n";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Contact Us</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <!-- <a (click)=\"goToaddcategory()\"><span>+</span>Add Category</a> -->\r\n                        <!-- <a class=\"add_excelsheet\">Import excel sheet</a> -->\r\n                    </div>\r\n                </div>\r\n\r\n                <form role=\"form\" #myForm=\"ngForm\" accept-charset=\"UTF-8\" novalidate>\r\n                    <div class=\"form-group has-feedback\"\r\n                        [ngClass]=\"{ 'has-error': myckeditor.invalid && myckeditor.touched }\">\r\n                        <ckeditor [(ngModel)]=\"mycontent\" #myckeditor=\"ngModel\" name=\"myckeditor\" required\r\n                            [config]=\"ckeConfig\" debounce=\"500\" (paste)=\"onPaste($event)\" (change)=\"onChange($event)\">\r\n                        </ckeditor>\r\n                        <div *ngIf=\"myckeditor.invalid && myckeditor.touched\" class=\"help-block\">Required field.</div>\r\n                    </div>\r\n                    <button [disabled]=\"myForm.invalid\" class=\"btn btn-primary\"\r\n                        (click)=\"updateTermAndCondition()\">Save</button>\r\n                </form>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</div>";
     /***/
   },
 
@@ -689,7 +697,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Dashboard</h1>\r\n                </div>\r\n                <div class=\"inner_data\">\r\n                    <div class=\"dashboard_boxs\">\r\n                        <div class=\"card border-left-primary shadow\">\r\n                            <div class=\"card-body\" (click)=\"goTosalesgraph()\">\r\n                                <div class=\"left_card\">\r\n                                    <div class=\"left_heading\">\r\n                                        <h3> Sales</h3>\r\n                                    </div>\r\n                                    <div class=\"bottom_numbers\">\r\n                                        <p>40,000</p>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"right_card\">\r\n                                    <i class=\"fa fa-user fa-2x\"></i>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n\r\n                        <div class=\"card border-left-success shadow\">\r\n                            <div class=\"card-body\">\r\n                                <div class=\"left_card\">\r\n                                    <div class=\"left_heading\">\r\n                                        <h3>Vendors</h3>\r\n                                    </div>\r\n                                    <div class=\"bottom_numbers\">\r\n                                        <p>215,000</p>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"right_card\">\r\n                                    <i class=\"fa fa-product-hunt fa-2x\" aria-hidden=\"true\"></i>\r\n\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"card border-left-info shadow\">\r\n                            <div class=\"card-body\"  (click)=\"goToreveuegraph()\">\r\n                                <div class=\"left_card\">\r\n                                    <div class=\"left_heading\">\r\n                                        <h3>Revenue</h3>\r\n                                    </div>\r\n                                    <div class=\"bottom_numbers\">\r\n                                        <p>215,000</p>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"right_card\">\r\n                                    <i class=\"fa fa-line-chart fa-2x\"></i>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n\r\n                \r\n\r\n                    </div>\r\n                </div>\r\n                <div class=\"charts\">\r\n                    <ul>\r\n                        <li>\r\n                            <div class=\"chart_title\">\r\n                                <p>Sales</p>\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Filter</label>\r\n                                    <select>\r\n                                        <option>Daily</option>\r\n                                        <option>Weekly</option>\r\n                                        <option>Monthly</option>\r\n                                        <option>Yearly</option>\r\n                                    </select>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"user_charts\">\r\n                                <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\"\r\n                                    [options]=\"barChartOptions\" [plugins]=\"barChartPlugins\" [legend]=\"barChartLegend\"\r\n                                    [chartType]=\"barChartType\">\r\n                                </canvas>\r\n                            </div>\r\n                        </li>\r\n\r\n                        <li>\r\n                            <div class=\"chart_title\">\r\n                                <p>Vendors</p>\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Filter</label>\r\n                                    <select>\r\n                                        <option>Daily</option>\r\n                                        <option>Weekly</option>\r\n                                        <option>Monthly</option>\r\n                                        <option>Yearly</option>\r\n                                    </select>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"user_charts\">\r\n                                <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\"\r\n                                    [options]=\"barChartOptions\" [plugins]=\"barChartPlugins\" [legend]=\"barChartLegend\"\r\n                                    [chartType]=\"barChartType\">\r\n                                </canvas>\r\n                            </div>\r\n                        </li>\r\n                        <li>\r\n                            <div class=\"chart_title\">\r\n                                <p>Revenue</p>\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Filter</label>\r\n                                    <select>\r\n                                        <option>Daily</option>\r\n                                        <option>Weekly</option>\r\n                                        <option>Monthly</option>\r\n                                        <option>Yearly</option>\r\n                                    </select>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"user_charts\">\r\n                                <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\"\r\n                                    [options]=\"barChartOptions\" [plugins]=\"barChartPlugins\" [legend]=\"barChartLegend\"\r\n                                    [chartType]=\"barChartType\">\r\n                                </canvas>\r\n                            </div>\r\n                        </li>\r\n                        <!-- <li>\r\n                            <div class=\"chart_title\">\r\n                                <p>Current Order listing</p>\r\n                            </div>\r\n                            <div class=\"user_charts\">\r\n                                <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\"\r\n                                    [options]=\"barChartOptions\" [plugins]=\"barChartPlugins\" [legend]=\"barChartLegend\"\r\n                                    [chartType]=\"barChartType\">\r\n                                </canvas>\r\n                            </div>\r\n                        </li> -->\r\n                    </ul>\r\n                </div>\r\n\r\n                <div class=\"current_Admins\">\r\n                    <div class=\"sub_heading\">\r\n                        <h1>Current Sales </h1>\r\n                        <!-- <div class=\"top_subheading_add\">\r\n                            <a (click)=\"goToaddinventory()\"><span>+</span>Add Inventory</a>\r\n                        </div> -->\r\n                    </div>\r\n                    <div class=\"outer_table\">\r\n                        <div class=\"search_fields\">\r\n                            <div class=\"filters Booking_status\">\r\n                                <label>Filter</label>\r\n                                <select>\r\n                                    <option>Product Name</option>\r\n                                    <option>Order Id</option>\r\n                                </select>\r\n                            </div>\r\n                            <div class=\"search_inner_fiels\">\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Search</label>\r\n                                    <div class=\"search_with_icons\">\r\n                                        <mat-form-field [floatLabel]=\"'never'\">\r\n                                            <input matInput type=\"text\" name=\"search\" placeholder=\"\">\r\n                                        </mat-form-field>\r\n                                        <i class=\"fa fa-search\" aria-hidden=\"true\"></i>\r\n                                    </div>\r\n                                </div>\r\n                                \r\n                            </div>\r\n                        </div>\r\n                        <div class=\"table-responsive\">\r\n                            <table>\r\n                                <tr>\r\n                                    <th>Order Id</th>\r\n                                    <th>Product Name</th>\r\n                                    <th>Product category</th>\r\n                                    <th>Product sub category</th>\r\n                                    \r\n                                    <th>ISBN Number</th>\r\n                                    <th>SKU Number</th>\r\n                                    <th>Quantity</th>\r\n                                    <th>Price</th>\r\n                                    <th>User name</th>\r\n                                    <th>User Address</th>\r\n                                    <th>Order Date</th>\r\n                                    <th>Delivery Date</th>\r\n                                    <th>Status</th>\r\n                                    <th class=\"action_bx\">Action</th>\r\n                                </tr>\r\n                                <tr>\r\n                                    <td>1</td>\r\n                                    <td>ABC</td>\r\n                                    <td>Food Industry</td>\r\n                                    <td>Industry</td>\r\n                                   <td>764765454</td>\r\n                                    <td>13143543</td>\r\n                                    <td>20 piece</td>\r\n                                    <td>$800</td>\r\n                                    <td>John</td>\r\n                                    <td>Lorem ipsum</td>\r\n                                    <td>28-05-2020</td>\r\n                                    <td>01-06-2020</td>\r\n                                    <td>\r\n\r\n                                        <select>\r\n                                            <option>Pending</option>\r\n                                            <option>Confirmed</option>\r\n                                            <option>cancelled</option>\r\n                                        </select>\r\n                                        </td>\r\n                                \r\n                                        <td>\r\n                                            <div class=\"action\">\r\n                                                <ul>\r\n                                                    <li class=\"show\" (click)=\"goToviewOrder()\"><i class=\"fa fa-eye\"></i></li>\r\n                                                    <li class=\"edit\" (click)=\"goToeditOrder()\"><i class=\"fa fa-pencil fa-fw\"></i></li>\r\n                                                    <!-- <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li> -->\r\n                                                </ul>\r\n                                            </div>\r\n                                        </td>\r\n                                </tr>\r\n                                <tr>\r\n                                    <td>2</td>\r\n                                    <td>Lorem</td>\r\n                                    <td>Food Industry</td>\r\n                                    <td>Industry</td>\r\n                                    <td>764765454</td>\r\n                                    <td>13143543</td>\r\n                                    <td>20 piece</td>\r\n                                    <td>$800</td>\r\n                                    <td>John</td>\r\n                                    <td>Lorem ipsum</td>\r\n                                    <td>28-05-2020</td>\r\n                                    <td>01-06-2020</td>\r\n                                    <td>\r\n\r\n                                        <select>\r\n                                            <option>Pending</option>\r\n                                            <option>Confirmed</option>\r\n                                            <option>cancelled</option>\r\n                                        </select>\r\n                                        </td>\r\n                                \r\n                                        <td>\r\n                                            <div class=\"action\">\r\n                                                <ul>\r\n                                                    <li class=\"show\" (click)=\"goToviewOrder()\"><i class=\"fa fa-eye\"></i></li>\r\n                                                    <li class=\"edit\" (click)=\"goToeditOrder()\"><i class=\"fa fa-pencil fa-fw\"></i></li>\r\n                                                    <!-- <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li> -->\r\n                                                </ul>\r\n                                            </div>\r\n                                        </td>\r\n                                </tr>\r\n                                <tr>\r\n                                    <td>3</td>\r\n                                    <td>ABC</td>\r\n                                    <td>Food Industry</td>\r\n                                    <td>Industry</td>\r\n                                    <td>764765454</td>\r\n                                    <td>13143543</td>\r\n                                    <td>20 piece</td>\r\n                                    <td>$800</td>\r\n                                    <td>John</td>\r\n                                    <td>Lorem ipsum</td>\r\n                                    <td>28-05-2020</td>\r\n                                    <td>01-06-2020</td>\r\n                                    <td>\r\n\r\n                                        <select>\r\n                                            <option>Pending</option>\r\n                                            <option>Confirmed</option>\r\n                                            <option>cancelled</option>\r\n                                        </select>\r\n                                        </td>\r\n                                \r\n                                        <td>\r\n                                            <div class=\"action\">\r\n                                                <ul>\r\n                                                    <li class=\"show\" (click)=\"goToviewOrder()\"><i class=\"fa fa-eye\"></i></li>\r\n                                                    <li class=\"edit\" (click)=\"goToeditOrder()\"><i class=\"fa fa-pencil fa-fw\"></i></li>\r\n                                                    <!-- <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li> -->\r\n                                                </ul>\r\n                                            </div>\r\n                                        </td>\r\n                                </tr>\r\n                                <tr>\r\n                                    <td>4</td>\r\n                                    <td>ABC</td>\r\n                                    <td>Food Industry</td>\r\n                                    <td>Industry</td>\r\n                                    <td>764765454</td>\r\n                                    <td>13143543</td>\r\n                                    <td>20 piece</td>\r\n                                    <td>$800</td>\r\n                                    <td>John</td>\r\n                                    <td>Lorem ipsum</td>\r\n                                    <td>28-05-2020</td>\r\n                                    <td>01-06-2020</td>\r\n                                    <td>\r\n                                        <select>\r\n                                            <option>Pending</option>\r\n                                            <option>Confirmed</option>\r\n                                            <option>cancelled</option>\r\n                                        </select>\r\n                                        </td>\r\n                                \r\n                                        <td>\r\n                                            <div class=\"action\">\r\n                                                <ul>\r\n                                                    <li class=\"show\" (click)=\"goToviewOrder()\"><i class=\"fa fa-eye\"></i></li>\r\n                                                    <li class=\"edit\" (click)=\"goToeditOrder()\"><i class=\"fa fa-pencil fa-fw\"></i></li>\r\n                                                    <!-- <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li> -->\r\n                                                </ul>\r\n                                            </div>\r\n                                        </td>\r\n                                </tr>\r\n                            </table>\r\n                        </div>\r\n                    </div>\r\n                    <!-----start pagination-->\r\n                    <mat-paginator [length]=\"100\" [pageSize]=\"10\" [pageSizeOptions]=\"[5, 10, 25, 100]\">\r\n                    </mat-paginator>\r\n                    <!-----end pagination-->\r\n    \r\n                </div>\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Dashboard</h1>\r\n                </div>\r\n                <div class=\"inner_data\">\r\n                    <div class=\"dashboard_boxs\">\r\n                        <div class=\"card border-left-primary shadow\">\r\n                            <div class=\"card-body\" (click)=\"goTosalesgraph()\">\r\n                                <div class=\"left_card\">\r\n                                    <div class=\"left_heading\">\r\n                                        <h3> Sales</h3>\r\n                                    </div>\r\n                                    <div class=\"bottom_numbers\">\r\n                                        <p>40,000</p>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"right_card\">\r\n                                    <i class=\"fa fa-user fa-2x\"></i>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n\r\n                        <div class=\"card border-left-success shadow\">\r\n                            <div class=\"card-body\">\r\n                                <div class=\"left_card\">\r\n                                    <div class=\"left_heading\">\r\n                                        <h3>Vendors</h3>\r\n                                    </div>\r\n                                    <div class=\"bottom_numbers\">\r\n                                        <p>215,000</p>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"right_card\">\r\n                                    <i class=\"fa fa-product-hunt fa-2x\" aria-hidden=\"true\"></i>\r\n\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"card border-left-info shadow\">\r\n                            <div class=\"card-body\" (click)=\"goToreveuegraph()\">\r\n                                <div class=\"left_card\">\r\n                                    <div class=\"left_heading\">\r\n                                        <h3>Revenue</h3>\r\n                                    </div>\r\n                                    <div class=\"bottom_numbers\">\r\n                                        <p>215,000</p>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"right_card\">\r\n                                    <i class=\"fa fa-line-chart fa-2x\"></i>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n\r\n\r\n\r\n                    </div>\r\n                </div>\r\n                <div class=\"charts\">\r\n                    <ul>\r\n                        <li>\r\n                            <div class=\"chart_title\">\r\n                                <p>Sales</p>\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Filter</label>\r\n                                    <select>\r\n                                        <!-- <option>Daily</option> -->\r\n                                        <option>Weekly</option>\r\n                                        <option>Monthly</option>\r\n                                        <option>Yearly</option>\r\n                                    </select>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"user_charts\">\r\n                                <!-- <app-graph></app-graph> -->\r\n                                <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\"\r\n                                    [options]=\"barChartOptions\" [plugins]=\"barChartPlugins\" [legend]=\"barChartLegend\"\r\n                                    [chartType]=\"barChartType\">\r\n                                </canvas>\r\n                            </div>\r\n                        </li>\r\n\r\n                        <li>\r\n                            <div class=\"chart_title\">\r\n                                <p>Vendors</p>\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Filter</label>\r\n                                    <select>\r\n                                        <!-- <option>Daily</option> -->\r\n                                        <option>Weekly</option>\r\n                                        <option>Monthly</option>\r\n                                        <option>Yearly</option>\r\n                                    </select>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"user_charts\">\r\n                                <!-- <app-graph></app-graph> -->\r\n                                <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\"\r\n                                    [options]=\"barChartOptions\" [plugins]=\"barChartPlugins\" [legend]=\"barChartLegend\"\r\n                                    [chartType]=\"barChartType\">\r\n                                </canvas>\r\n                            </div>\r\n                        </li>\r\n                        <li>\r\n                            <div class=\"chart_title\">\r\n                                <p>Revenue</p>\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Filter</label>\r\n                                    <select>\r\n                                        <!-- <option>Daily</option> -->\r\n                                        <option>Weekly</option>\r\n                                        <option>Monthly</option>\r\n                                        <option>Yearly</option>\r\n                                    </select>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"user_charts\">\r\n\r\n                                <!-- <app-graph></app-graph> -->\r\n                                <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\"\r\n                                    [options]=\"barChartOptions\" [plugins]=\"barChartPlugins\" [legend]=\"barChartLegend\"\r\n                                    [chartType]=\"barChartType\">\r\n                                </canvas>\r\n                            </div>\r\n                        </li>\r\n                        <!-- <li>\r\n                            <div class=\"chart_title\">\r\n                                <p>Current Order listing</p>\r\n                            </div>\r\n                            <div class=\"user_charts\">\r\n                                <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\"\r\n                                    [options]=\"barChartOptions\" [plugins]=\"barChartPlugins\" [legend]=\"barChartLegend\"\r\n                                    [chartType]=\"barChartType\">\r\n                                </canvas>\r\n                            </div>\r\n                        </li> -->\r\n                    </ul>\r\n                </div>\r\n\r\n                <div class=\"current_Admins\">\r\n                    <div class=\"sub_heading\">\r\n                        <h1>Current Sales </h1>\r\n                        <!-- <div class=\"top_subheading_add\">\r\n                            <a (click)=\"goToaddinventory()\"><span>+</span>Add Inventory</a>\r\n                        </div> -->\r\n                    </div>\r\n                    <div class=\"outer_table\">\r\n                        <div class=\"search_fields\">\r\n                            <div class=\"filters Booking_status\">\r\n                                <label>Filter</label>\r\n                                <select [(ngModel)]=\"filterBy\" (change)=\"filterSelected($event)\">\r\n                                    <option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n                                    <option *ngIf=\"flag==false\" value=\"\"></option>\r\n                                    <option>Product Name </option>\r\n                                    <option>Order Id </option>\r\n\r\n                                    <!-- <option value=\"active\">Active</option>\r\n                                            <option value=\"inactive\">Inactive</option> -->\r\n                                    <!-- <option value=\"lastName\"></option> -->\r\n                                </select>\r\n                            </div>\r\n                            <div class=\"search_inner_fiels\">\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Search</label>\r\n                                    <div class=\"search_with_icons\">\r\n                                        <mat-form-field [floatLabel]=\"'never'\">\r\n                                            <input matInput type=\"text\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                        </mat-form-field>\r\n                                        <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                            (click)=\"searchMethod()\"></i>\r\n                                        <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                            (click)=\"clearSearch()\"></i>\r\n                                    </div>\r\n                                </div>\r\n\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"table-responsive\">\r\n                            <table>\r\n                                <tr>\r\n                                    <th>Sr no</th>\r\n                                    <th>Product Name</th>\r\n                                    <th>Product category</th>\r\n                                    <th>Product sub category</th>\r\n\r\n                                    <th>ISBN Number</th>\r\n                                    <th>SKU Number</th>\r\n                                    <th>Quantity</th>\r\n                                    <th>Price</th>\r\n                                    <th>User name</th>\r\n                                    <th>User Address</th>\r\n                                    <th>Order Date</th>\r\n                                    <th>Delivery Date</th>\r\n                                    <th>Status</th>\r\n                                    <th class=\"action_bx\">Action</th>\r\n                                </tr>\r\n                                <tr>\r\n                                    <td>1</td>\r\n                                    <td>ABC</td>\r\n                                    <td>Food Industry</td>\r\n                                    <td>Industry</td>\r\n                                    <td>764765454</td>\r\n                                    <td>13143543</td>\r\n                                    <td>20 piece</td>\r\n                                    <td>$800</td>\r\n                                    <td>John</td>\r\n                                    <td>Lorem ipsum</td>\r\n                                    <td>28-05-2020</td>\r\n                                    <td>01-06-2020</td>\r\n                                    <td>\r\n\r\n                                        <select>\r\n                                            <option>Pending</option>\r\n                                            <option>Confirmed</option>\r\n                                            <option>cancelled</option>\r\n                                        </select>\r\n                                    </td>\r\n\r\n                                    <td>\r\n                                        <div class=\"action\">\r\n                                            <ul>\r\n                                                <li class=\"show\" (click)=\"goToviewOrder()\"><i class=\"fa fa-eye\"></i>\r\n                                                </li>\r\n                                                <li class=\"edit\" (click)=\"goToeditOrder()\"><i\r\n                                                        class=\"fa fa-pencil fa-fw\"></i></li>\r\n                                                <!-- <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li> -->\r\n                                            </ul>\r\n                                        </div>\r\n                                    </td>\r\n                                </tr>\r\n                                <tr>\r\n                                    <td>2</td>\r\n                                    <td>Lorem</td>\r\n                                    <td>Food Industry</td>\r\n                                    <td>Industry</td>\r\n                                    <td>764765454</td>\r\n                                    <td>13143543</td>\r\n                                    <td>20 piece</td>\r\n                                    <td>$800</td>\r\n                                    <td>John</td>\r\n                                    <td>Lorem ipsum</td>\r\n                                    <td>28-05-2020</td>\r\n                                    <td>01-06-2020</td>\r\n                                    <td>\r\n\r\n                                        <select>\r\n                                            <option>Pending</option>\r\n                                            <option>Confirmed</option>\r\n                                            <option>cancelled</option>\r\n                                        </select>\r\n                                    </td>\r\n\r\n                                    <td>\r\n                                        <div class=\"action\">\r\n                                            <ul>\r\n                                                <li class=\"show\" (click)=\"goToviewOrder()\"><i class=\"fa fa-eye\"></i>\r\n                                                </li>\r\n                                                <li class=\"edit\" (click)=\"goToeditOrder()\"><i\r\n                                                        class=\"fa fa-pencil fa-fw\"></i></li>\r\n                                                <!-- <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li> -->\r\n                                            </ul>\r\n                                        </div>\r\n                                    </td>\r\n                                </tr>\r\n                                <tr>\r\n                                    <td>3</td>\r\n                                    <td>ABC</td>\r\n                                    <td>Food Industry</td>\r\n                                    <td>Industry</td>\r\n                                    <td>764765454</td>\r\n                                    <td>13143543</td>\r\n                                    <td>20 piece</td>\r\n                                    <td>$800</td>\r\n                                    <td>John</td>\r\n                                    <td>Lorem ipsum</td>\r\n                                    <td>28-05-2020</td>\r\n                                    <td>01-06-2020</td>\r\n                                    <td>\r\n\r\n                                        <select>\r\n                                            <option>Pending</option>\r\n                                            <option>Confirmed</option>\r\n                                            <option>cancelled</option>\r\n                                        </select>\r\n                                    </td>\r\n\r\n                                    <td>\r\n                                        <div class=\"action\">\r\n                                            <ul>\r\n                                                <li class=\"show\" (click)=\"goToviewOrder()\"><i class=\"fa fa-eye\"></i>\r\n                                                </li>\r\n                                                <li class=\"edit\" (click)=\"goToeditOrder()\"><i\r\n                                                        class=\"fa fa-pencil fa-fw\"></i></li>\r\n                                                <!-- <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li> -->\r\n                                            </ul>\r\n                                        </div>\r\n                                    </td>\r\n                                </tr>\r\n                                <tr>\r\n                                    <td>4</td>\r\n                                    <td>ABC</td>\r\n                                    <td>Food Industry</td>\r\n                                    <td>Industry</td>\r\n                                    <td>764765454</td>\r\n                                    <td>13143543</td>\r\n                                    <td>20 piece</td>\r\n                                    <td>$800</td>\r\n                                    <td>John</td>\r\n                                    <td>Lorem ipsum</td>\r\n                                    <td>28-05-2020</td>\r\n                                    <td>01-06-2020</td>\r\n                                    <td>\r\n                                        <select>\r\n                                            <option>Pending</option>\r\n                                            <option>Confirmed</option>\r\n                                            <option>cancelled</option>\r\n                                        </select>\r\n                                    </td>\r\n\r\n                                    <td>\r\n                                        <div class=\"action\">\r\n                                            <ul>\r\n                                                <li class=\"show\" (click)=\"goToviewOrder()\"><i class=\"fa fa-eye\"></i>\r\n                                                </li>\r\n                                                <li class=\"edit\" (click)=\"goToeditOrder()\"><i\r\n                                                        class=\"fa fa-pencil fa-fw\"></i></li>\r\n                                                <!-- <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li> -->\r\n                                            </ul>\r\n                                        </div>\r\n                                    </td>\r\n                                </tr>\r\n                            </table>\r\n                        </div>\r\n                    </div>\r\n                    <!-----start pagination-->\r\n                    <mat-paginator [length]=\"length\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"[5, 10, 25, 100]\"\r\n                        (page)=\"pageEvent = productListAfterPageSizeChanged($event)\">\r\n                    </mat-paginator>\r\n                    <!-----end pagination-->\r\n\r\n                </div>\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -749,7 +757,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Edit Sale</h1>\r\n                    <a (click)=\"goToordermanagement()\">Back To List</a>\r\n                </div>\r\n                <!-----start input fields------>\r\n                <div class=\"add_user_list\">\r\n                    <ul>\r\n                        <li>\r\n                            <label>Order ID<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\" value=\"ABC\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>Product Name<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\" value=\"ABC\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>Product Category<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\" disabled name=\"name\" Value=\"Lorem ipsum\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>Product Sub Category<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\" disabled name=\"name\" Value=\"Lorem ipsum\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                    \r\n                        <li>\r\n                            <label> ISBN  Number <span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\" value=\"25252\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label> SKU  Number <span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\" value=\"25252\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label> Quantity <span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\" value=\"30\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label> Price <span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\" value=\"800\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                     \r\n                        <li>\r\n                            <label>User name<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\" value=\"John\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>User Address <span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\" value=\"lorem ipsum\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>Order Date<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"date\" placeholder=\"\" name=\"name\" value=\"20-05-2020\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>Delivery Date<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"date\" placeholder=\"\" name=\"name\" value=\"20-05-2020\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>Status<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\" value=\"pending\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                      \r\n\r\n                    </ul>\r\n                    <div class=\"update_button\">\r\n                        <button mat-button>\r\n                            Update\r\n                        </button>\r\n                        <button mat-button class=\"cancel_button\">\r\n                            Cancel\r\n                        </button>\r\n                    </div>\r\n                </div>\r\n\r\n               \r\n                <!-----End input fields------>\r\n                \r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Edit Sale</h1>\r\n                    <a (click)=\"goToordermanagement()\">Back To List</a>\r\n                </div>\r\n                <!-----start input fields------>\r\n                <div class=\"add_user_list\">\r\n                    <ul>\r\n                        <li>\r\n                            <label>Order ID<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" formControlName=\"orderId\" placeholder=\"\" name=\"name\"\r\n                                    value=\"ABC\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>Product Name<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" formControlName=\"productName\" placeholder=\"\" name=\"name\"\r\n                                    value=\"ABC\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>Product Category<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" formControlName=\"category\" name=\"name\"\r\n                                    disabled name=\"name\" Value=\"Lorem ipsum\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>Product Sub Category<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" formControlName=\"subCategory\" placeholder=\"\" name=\"name\"\r\n                                    disabled name=\"name\" Value=\"Lorem ipsum\">\r\n                            </mat-form-field>\r\n                        </li>\r\n\r\n                        <li>\r\n                            <label> ISBN Number <span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" formControlName=\"isbnNumber\" placeholder=\"\" name=\"name\"\r\n                                    value=\"25252\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label> SKU Number <span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" formControlName=\"skuNumber\" placeholder=\"\" name=\"name\"\r\n                                    value=\"25252\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label> Quantity <span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" formControlName=\"qunatity\" placeholder=\"\" name=\"name\"\r\n                                    value=\"30\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label> Price <span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" formControlName=\"price\" placeholder=\"\" name=\"name\"\r\n                                    value=\"800\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n\r\n                        <li>\r\n                            <label>User name<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" formControlName=\"userName\" name=\"name\"\r\n                                    value=\"John\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>User Address <span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" formControlName=\"userAddess\" name=\"name\"\r\n                                    value=\"lorem ipsum\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>Order Date<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"date\" placeholder=\"\" formControlName=\"orderDate\" name=\"name\"\r\n                                    value=\"20-05-2020\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>Delivery Date<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"date\" placeholder=\"\" formControlName=\"deliveryDate\" name=\"name\"\r\n                                    value=\"20-05-2020\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>Status<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" formControlName=\"status\" name=\"name\"\r\n                                    value=\"pending\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n\r\n\r\n                    </ul>\r\n                    <div class=\"update_button\">\r\n                        <button mat-button>\r\n                            Update\r\n                        </button>\r\n                        <button mat-button class=\"cancel_button\">\r\n                            Cancel\r\n                        </button>\r\n                    </div>\r\n                </div>\r\n\r\n\r\n                <!-----End input fields------>\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -869,7 +877,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Edit Profile</h1>\r\n\r\n                </div>\r\n                <!-----start input fields------>\r\n                <form [formGroup]=\"updateProfileForm\">\r\n                    <div class=\"add_user_list\">\r\n                        <ul>\r\n                            <li>\r\n                                <label>First Name</label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" formControlName=\"firstName\"\r\n                                        name=\"firstName\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.firstName.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.firstName.errors.required\">\r\n                                        First Name is required.\r\n                                    </div>\r\n                                    <div *ngIf=\"f.firstName.errors.maxlength\">\r\n                                        First Name should not be more than 25 characters.\r\n                                    </div>\r\n\r\n\r\n\r\n                                </div>\r\n                            </li>\r\n                            <li>\r\n                                <label>Last Name</label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" formControlName=\"lastName\"\r\n                                        name=\"lastName\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.lastName.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.lastName.errors.required\">\r\n                                        Last Name is required.\r\n                                    </div>\r\n\r\n                                    <div *ngIf=\"f.lastName.errors.maxlength\">\r\n                                        Last Name should not be more than 25 characters.\r\n                                    </div>\r\n\r\n\r\n                                </div>\r\n                            </li>\r\n\r\n                            <li>\r\n                                <label>Phone Number</label>\r\n                                <div class=\"cardList\">\r\n                                    <mat-form-field style=\"width: 20%;\" [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"number\" min=\"0\" id=\"firstInput\"\r\n                                            formControlName=\"countryCode\" name=\"countryCode\">\r\n                                        <div *ngIf=\"submitted && f.countryCode.errors\" class=\"custom-invalid\">\r\n                                            <div *ngIf=\"f.countryCode.errors.required\">\r\n                                                Country Code is required.\r\n                                            </div>\r\n\r\n                                        </div>\r\n\r\n                                    </mat-form-field>\r\n                                    <mat-form-field style=\"width: 80%;\" [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"number\" min=\"0\" placeholder=\"\" id=\"secondInput\"\r\n                                            formControlName=\"phone\" name=\"phone\">\r\n\r\n                                        <div *ngIf=\"submitted && f.phone.errors\" class=\"custom-invalid\">\r\n                                            <div *ngIf=\"f.phone.errors.required\">\r\n                                                Phone is required.\r\n                                            </div>\r\n                                        </div>\r\n                                    </mat-form-field>\r\n                                </div>\r\n                            </li>\r\n                            <!-- <li>\r\n                                <label>Email</label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" formControlName=\"email\" name=\"email\">\r\n                                </mat-form-field>\r\n                            </li> -->\r\n                            <li>\r\n                                <label>Location</label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" formControlName=\"address\" name=\"address\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.address.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.address.errors.required\">\r\n                                        Address is required.\r\n                                    </div>\r\n\r\n\r\n\r\n                                </div>\r\n                            </li>\r\n                            <li>\r\n                                <label>Profile Picture</label>\r\n\r\n                                <input type=\"file\" placeholder=\"\" (change)=\"profilePic($event)\" accept=\"image/*\"\r\n                                    name=\"profilePic1\">\r\n\r\n                                <div class=\"user_img\">\r\n                                    <figure>\r\n                                        <img style=\"height: 100px;width: 100px; margin-top: 10px; margin-left: 10px;\"\r\n                                            [src]=\"imagePreview != null ? imagePreview: imagePath+showProfilePic\" />\r\n                                    </figure>\r\n                                    <div *ngIf=\"submitted && f.profilePic1.errors\" class=\"custom-invalid\">\r\n                                        <div *ngIf=\"f.profilePic1.errors.required\">\r\n                                            profile Picture is required.\r\n                                        </div>git stau\r\n\r\n                                    </div>\r\n                                </div>\r\n\r\n\r\n                            </li>\r\n\r\n                            <!-- <li class=\"social_links_name\"> Social Links Information</li>\r\n\r\n                        <li>\r\n                            <label>Facebook</label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>Twitter</label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>Instagram</label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>LinkedIn</label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\">\r\n                            </mat-form-field>\r\n                        </li> -->\r\n\r\n                            <!-- <li class=\"social_links_name\"> App Store Links</li>\r\n\r\n                        <li>\r\n                            <label>App Store Link</label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>Google Play Link</label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\">\r\n                            </mat-form-field>\r\n                        </li> -->\r\n\r\n\r\n\r\n\r\n\r\n\r\n                        </ul>\r\n                        <div class=\"update_button\">\r\n                            <button mat-button (click)=\"submit()\">\r\n\r\n                                Update\r\n                            </button>\r\n                        </div>\r\n                    </div>\r\n                </form>\r\n\r\n                <!-----End input fields------>\r\n\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Edit Profile</h1>\r\n\r\n                </div>\r\n                <!-----start input fields------>\r\n                <form [formGroup]=\"updateProfileForm\">\r\n                    <div class=\"add_user_list\">\r\n                        <ul>\r\n                            <li>\r\n                                <label>First Name</label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" formControlName=\"firstName\"\r\n                                        name=\"firstName\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.firstName.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.firstName.errors.required\">\r\n                                        First Name is required.\r\n                                    </div>\r\n                                    <div *ngIf=\"f.firstName.errors.maxlength\">\r\n                                        First Name should not be more than 25 characters.\r\n                                    </div>\r\n\r\n\r\n\r\n                                </div>\r\n                            </li>\r\n                            <li>\r\n                                <label>Last Name</label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" formControlName=\"lastName\"\r\n                                        name=\"lastName\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.lastName.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.lastName.errors.required\">\r\n                                        Last Name is required.\r\n                                    </div>\r\n\r\n                                    <div *ngIf=\"f.lastName.errors.maxlength\">\r\n                                        Last Name should not be more than 25 characters.\r\n                                    </div>\r\n\r\n\r\n                                </div>\r\n                            </li>\r\n\r\n                            <li>\r\n                                <label>Phone Number</label>\r\n                                <div class=\"cardList\">\r\n                                    <mat-form-field style=\"width: 20%;\" [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"number\" min=\"0\" id=\"firstInput\"\r\n                                            formControlName=\"countryCode\" name=\"countryCode\">\r\n                                        <div *ngIf=\"submitted && f.countryCode.errors\" class=\"custom-invalid\">\r\n                                            <div *ngIf=\"f.countryCode.errors.required\">\r\n                                                Country Code is required.\r\n                                            </div>\r\n\r\n                                        </div>\r\n\r\n                                    </mat-form-field>\r\n                                    <mat-form-field style=\"width: 80%;\" [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"number\" min=\"0\" placeholder=\"\" id=\"secondInput\"\r\n                                            formControlName=\"phone\" name=\"phone\">\r\n\r\n                                        <div *ngIf=\"submitted && f.phone.errors\" class=\"custom-invalid\">\r\n                                            <div *ngIf=\"f.phone.errors.required\">\r\n                                                Phone Number is required.\r\n                                            </div>\r\n                                        </div>\r\n                                    </mat-form-field>\r\n                                </div>\r\n                            </li>\r\n                            <!-- <li>\r\n                                <label>Email</label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" formControlName=\"email\" name=\"email\">\r\n                                </mat-form-field>\r\n                            </li> -->\r\n                            <li>\r\n                                <label>Location</label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" formControlName=\"address\" name=\"address\">\r\n                                </mat-form-field>\r\n                                <div *ngIf=\"submitted && f.address.errors\" class=\"custom-invalid\">\r\n                                    <div *ngIf=\"f.address.errors.required\">\r\n                                        Address is required.\r\n                                    </div>\r\n\r\n\r\n\r\n                                </div>\r\n                            </li>\r\n                            <li>\r\n                                <label>Profile Picture</label>\r\n\r\n                                <input type=\"file\" placeholder=\"\" (change)=\"profilePic($event)\" accept=\"image/*\"\r\n                                    name=\"profilePic1\">\r\n\r\n                                <div class=\"user_img\">\r\n                                    <figure>\r\n                                        <img style=\"height: 100px;width: 100px; margin-top: 10px; margin-left: 10px;\"\r\n                                            [src]=\"imagePreview != null ? imagePreview: imagePath+showProfilePic\" />\r\n                                    </figure>\r\n                                    <div *ngIf=\"submitted && f.profilePic1.errors\" class=\"custom-invalid\">\r\n                                        <div *ngIf=\"f.profilePic1.errors.required\">\r\n                                            profile Picture is required.\r\n                                        </div>\r\n\r\n                                    </div>\r\n                                </div>\r\n\r\n\r\n                            </li>\r\n\r\n                            <!-- <li class=\"social_links_name\"> Social Links Information</li>\r\n\r\n                        <li>\r\n                            <label>Facebook</label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>Twitter</label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>Instagram</label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>LinkedIn</label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\">\r\n                            </mat-form-field>\r\n                        </li> -->\r\n\r\n                            <!-- <li class=\"social_links_name\"> App Store Links</li>\r\n\r\n                        <li>\r\n                            <label>App Store Link</label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>Google Play Link</label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\">\r\n                            </mat-form-field>\r\n                        </li> -->\r\n\r\n\r\n\r\n\r\n\r\n\r\n                        </ul>\r\n                        <div class=\"update_button\">\r\n                            <button mat-button (click)=\"submit()\">\r\n\r\n                                Update\r\n                            </button>\r\n                        </div>\r\n                    </div>\r\n                </form>\r\n\r\n                <!-----End input fields------>\r\n\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -930,6 +938,26 @@
 
 
     __webpack_exports__["default"] = "<div class=\"login_div\">\r\n    <div class=\"conta_iner\">\r\n        <div class=\"logininner\">\r\n\r\n            <form [formGroup]=forgetPasswordForm (ngSubmit)=goToLogin()>\r\n                <div class=\"logo\">\r\n\r\n                    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"197.459\" height=\"60.406\"\r\n                        viewBox=\"0 0 197.459 60.406\">\r\n                        <g id=\"Group_58938\" data-name=\"Group 58938\" transform=\"translate(-89 -358.274)\">\r\n                            <g id=\"Group_58920\" data-name=\"Group 58920\" transform=\"translate(89 358.274)\">\r\n                                <path id=\"Path_26541\" data-name=\"Path 26541\"\r\n                                    d=\"M302.5,436.42h12.807l16.716,25.414V436.42H344.95v45.244H332.023L315.4,457.29v24.374H302.5Z\"\r\n                                    transform=\"translate(-302.5 -436.42)\" fill=\"#1c1c20\" />\r\n                                <path id=\"Path_26542\" data-name=\"Path 26542\"\r\n                                    d=\"M434.578,436.62h13.687v26.449a22.331,22.331,0,0,1-1.225,7.428,16.093,16.093,0,0,1-3.844,6.114,15.329,15.329,0,0,1-5.494,3.674,27.621,27.621,0,0,1-9.6,1.485,59.835,59.835,0,0,1-7.068-.455,18.491,18.491,0,0,1-6.4-1.8,16.105,16.105,0,0,1-4.709-3.829A14.052,14.052,0,0,1,407,470.572a26.416,26.416,0,0,1-1.27-7.5V436.62h13.687V463.7a7.722,7.722,0,0,0,2.015,5.674,8.67,8.67,0,0,0,11.142.025,7.7,7.7,0,0,0,2.015-5.7V436.62Z\"\r\n                                    transform=\"translate(-354.127 -436.52)\" fill=\"#1c1c20\" />\r\n                                <path id=\"Path_26543\" data-name=\"Path 26543\"\r\n                                    d=\"M509.18,436.82h12.807L538.7,462.034V436.82H551.63v45.044H538.7L522.082,457.49v24.374h-12.9Z\"\r\n                                    transform=\"translate(-405.864 -436.62)\" fill=\"#1c1c20\" />\r\n                                <path id=\"Path_26544\" data-name=\"Path 26544\"\r\n                                    d=\"M641.258,436.62h13.687v26.449a22.331,22.331,0,0,1-1.225,7.428,16.092,16.092,0,0,1-3.844,6.114,15.329,15.329,0,0,1-5.494,3.674,27.621,27.621,0,0,1-9.6,1.485,59.834,59.834,0,0,1-7.068-.455,18.491,18.491,0,0,1-6.4-1.8,16.105,16.105,0,0,1-4.709-3.829,14.052,14.052,0,0,1-2.924-5.114,26.418,26.418,0,0,1-1.27-7.5V436.62H626.1V463.7a7.722,7.722,0,0,0,2.015,5.674,8.67,8.67,0,0,0,11.142.025,7.7,7.7,0,0,0,2.015-5.7V436.62Z\"\r\n                                    transform=\"translate(-457.492 -436.52)\" fill=\"#1c1c20\" />\r\n                            </g>\r\n                            <g id=\"Group_58921\" data-name=\"Group 58921\" transform=\"translate(214.346 408.572)\">\r\n                                <path id=\"Path_26545\" data-name=\"Path 26545\"\r\n                                    d=\"M553.25,543.848l1.22-.105a2.639,2.639,0,0,0,.4,1.2,2.209,2.209,0,0,0,.98.76,3.7,3.7,0,0,0,1.5.29,3.6,3.6,0,0,0,1.3-.22,1.754,1.754,0,0,0,.84-.6,1.392,1.392,0,0,0,.275-.835,1.272,1.272,0,0,0-.265-.8,1.966,1.966,0,0,0-.88-.575,17.448,17.448,0,0,0-1.74-.475,8.959,8.959,0,0,1-1.885-.61,2.6,2.6,0,0,1-1.04-.91,2.208,2.208,0,0,1-.345-1.215,2.46,2.46,0,0,1,.42-1.38,2.585,2.585,0,0,1,1.225-.975,4.677,4.677,0,0,1,1.79-.335,4.864,4.864,0,0,1,1.915.35,2.762,2.762,0,0,1,1.275,1.03,3.009,3.009,0,0,1,.48,1.54l-1.24.095a2,2,0,0,0-.675-1.4,2.629,2.629,0,0,0-1.7-.475,2.752,2.752,0,0,0-1.71.43,1.289,1.289,0,0,0-.535,1.035,1.1,1.1,0,0,0,.38.865,5.153,5.153,0,0,0,1.95.695,12.78,12.78,0,0,1,2.159.625,2.946,2.946,0,0,1,1.26.995,2.428,2.428,0,0,1,.4,1.39,2.678,2.678,0,0,1-.445,1.47,2.949,2.949,0,0,1-1.28,1.07,4.464,4.464,0,0,1-1.88.385,5.646,5.646,0,0,1-2.219-.385,3.117,3.117,0,0,1-1.4-1.16A3.346,3.346,0,0,1,553.25,543.848Z\"\r\n                                    transform=\"translate(-553.25 -537.05)\" fill=\"#ff960b\" />\r\n                                <path id=\"Path_26546\" data-name=\"Path 26546\"\r\n                                    d=\"M587.444,547.148V538.54H584.23v-1.15h7.738v1.15h-3.229v8.608Z\"\r\n                                    transform=\"translate(-568.744 -537.215)\" fill=\"#ff960b\" />\r\n                                <path id=\"Path_26547\" data-name=\"Path 26547\"\r\n                                    d=\"M614.44,542.219a5.3,5.3,0,0,1,1.3-3.8,4.445,4.445,0,0,1,3.369-1.375,4.665,4.665,0,0,1,2.434.645,4.206,4.206,0,0,1,1.655,1.8,5.846,5.846,0,0,1,.57,2.619,5.734,5.734,0,0,1-.6,2.654,4.082,4.082,0,0,1-1.7,1.775,4.885,4.885,0,0,1-2.369.6,4.609,4.609,0,0,1-2.464-.665,4.289,4.289,0,0,1-1.645-1.82A5.531,5.531,0,0,1,614.44,542.219Zm1.33.02a3.9,3.9,0,0,0,.95,2.779,3.309,3.309,0,0,0,4.779-.01,4.141,4.141,0,0,0,.94-2.909,4.963,4.963,0,0,0-.4-2.08,3.1,3.1,0,0,0-1.18-1.38,3.205,3.205,0,0,0-1.74-.49,3.312,3.312,0,0,0-2.359.94A4.236,4.236,0,0,0,615.77,542.239Z\"\r\n                                    transform=\"translate(-583.852 -537.04)\" fill=\"#ff960b\" />\r\n                                <path id=\"Path_26548\" data-name=\"Path 26548\"\r\n                                    d=\"M649.85,547.143V537.38h4.329a5.772,5.772,0,0,1,1.984.265,2.151,2.151,0,0,1,1.085.93,2.779,2.779,0,0,1,.4,1.47,2.443,2.443,0,0,1-.675,1.75,3.413,3.413,0,0,1-2.079.9,3.472,3.472,0,0,1,.78.485,6.659,6.659,0,0,1,1.07,1.3l1.7,2.654h-1.625l-1.29-2.029c-.38-.585-.69-1.035-.93-1.345a3.069,3.069,0,0,0-.655-.655,1.973,1.973,0,0,0-.59-.26,3.994,3.994,0,0,0-.72-.045h-1.5v4.334h-1.29Zm1.29-5.454h2.774a4.092,4.092,0,0,0,1.385-.185,1.482,1.482,0,0,0,.76-.585,1.572,1.572,0,0,0,.26-.875,1.466,1.466,0,0,0-.5-1.14,2.367,2.367,0,0,0-1.59-.445h-3.089v3.229Z\"\r\n                                    transform=\"translate(-601.561 -537.21)\" fill=\"#ff960b\" />\r\n                                <path id=\"Path_26549\" data-name=\"Path 26549\"\r\n                                    d=\"M682.93,547.143V537.38h7.058v1.15h-5.764v2.989h5.4v1.145h-5.4v3.324h5.994v1.15H682.93Z\"\r\n                                    transform=\"translate(-618.105 -537.21)\" fill=\"#ff960b\" />\r\n                            </g>\r\n                        </g>\r\n                    </svg>\r\n\r\n                </div>\r\n                <div class=\"sub_main_heading\">\r\n                    <h2>Forgot Password</h2>\r\n                </div>\r\n                <div class=\"input_divs\">\r\n                    <mat-form-field [floatLabel]=\"'never'\">\r\n                        <input matInput formControlName=\"email\" type=\"email\" name=\"email\" placeholder=\"Email\">\r\n                        <div *ngIf=\"submitted && f.email.errors\" class=\"custom-invalid\">\r\n                            <div *ngIf=\"f.email.errors.required\">\r\n                                EmailId is required.\r\n                            </div>\r\n                            <div *ngIf=\"f.email.errors.email\">\r\n                                Please enter a valid email id.\r\n                            </div>\r\n\r\n                        </div>\r\n\r\n                    </mat-form-field>\r\n                </div>\r\n                <div class=\"input_divs input_button\">\r\n                    <a><button mat-button type=\"submit\"> Submit</button></a>\r\n                </div>\r\n            </form>\r\n        </div>\r\n    </div>\r\n</div>";
+    /***/
+  },
+
+  /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/graph/graph.component.html":
+  /*!**********************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/graph/graph.component.html ***!
+    \**********************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppGraphGraphComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "<div *ngIf=\"chartData\">\n    <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\" [options]=\"barChartOptions\"\n        [plugins]=\"barChartPlugins\" [legend]=\"barChartLegend\" [chartType]=\"barChartType\">\n    </canvas>\n</div>";
     /***/
   },
 
@@ -1009,7 +1037,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Manage Reviews</h1>\r\n                </div>\r\n                <div class=\"outer_table\">\r\n                <div class=\"search_fields\">\r\n                    <div class=\"filters Booking_status\">\r\n                        <label>Filter</label>\r\n                        <select>\r\n                            <option>All</option>\r\n                            <option>Name</option>\r\n                        </select>\r\n                    </div>\r\n                    <div class=\"search_inner_fiels\">\r\n                        <div class=\"filters Booking_status\">\r\n                            <label>Search</label>\r\n                            <div class=\"search_with_icons\">\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" name=\"search\" placeholder=\"\">\r\n                                </mat-form-field>\r\n                                <i class=\"fa fa-search\" aria-hidden=\"true\"></i>\r\n                            </div>\r\n                        </div>\r\n                        \r\n                    </div>\r\n                </div>\r\n                <div class=\"table-responsive\">\r\n                    <table>\r\n                        <tr>\r\n                            \r\n                            <th>User Name</th>\r\n                            <th>User Email</th>\r\n                            <th>Review </th>\r\n                            <th>Product Name</th>\r\n                            <th>Vendor name</th>\r\n                            <th>Action</th>\r\n                        </tr>\r\n                        <tr>\r\n                            \r\n                            <td>John</td>\r\n                            <td>John@gmail.com</td>\r\n                          \r\n                            <td>4.5</td>\r\n                            <td>Lorem</td>\r\n                            <td>XYZ</td>\r\n                            <td>\r\n                                <div class=\"action\">\r\n                                    <ul>\r\n                                        <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li>\r\n                                    </ul>\r\n                                </div>\r\n                            </td>\r\n                        </tr>\r\n                        <tr>\r\n                           \r\n                            <td>John</td>\r\n                            <td>John@gmail.com</td>\r\n                          \r\n                            <td>4.5</td>\r\n                            <td>Lorem</td>\r\n                            <td>XYZ</td>\r\n                            <td>\r\n                                <div class=\"action\">\r\n                                    <ul>\r\n                                        <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li>\r\n                                    </ul>\r\n                                </div>\r\n                            </td>\r\n                        </tr>\r\n                        <tr>\r\n                            \r\n                            <td>John</td>\r\n                            <td>John@gmail.com</td>\r\n                         \r\n                            <td>4.5</td>\r\n                            <td>Lorem</td>\r\n                            <td>XYZ</td>\r\n                            <td>\r\n                                <div class=\"action\">\r\n                                    <ul>\r\n                                        <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li>\r\n                                    </ul>\r\n                                </div>\r\n                            </td>\r\n                        </tr>\r\n                        <tr>\r\n                           \r\n                            <td>John</td>\r\n                            <td>John@gmail.com</td>\r\n                           \r\n                            <td>4.5</td>\r\n                            <td>Lorem</td>\r\n                            <td>XYZ</td>\r\n                            <td>\r\n                                <div class=\"action\">\r\n                                    <ul>\r\n                                        <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li>\r\n                                    </ul>\r\n                                </div>\r\n                            </td>\r\n                        </tr>\r\n                    </table>\r\n                </div>\r\n                </div>\r\n                <!-----start pagination-->\r\n                <mat-paginator [length]=\"100\" [pageSize]=\"10\" [pageSizeOptions]=\"[5, 10, 25, 100]\">\r\n                </mat-paginator>\r\n                <!-----end pagination-->\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Manage Reviews</h1>\r\n                </div>\r\n                <div class=\"outer_table\">\r\n                    <div class=\"search_fields\">\r\n                        <div class=\"filters Booking_status\">\r\n                            <label>Filter</label>\r\n                            <select [(ngModel)]=\"filterBy\" (change)=\"filterSelected($event)\">\r\n                                <option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n                                <!-- <option *ngIf=\"flag==false\" value=\"\"></option> -->\r\n                                <option value=\"active\">Active</option>\r\n                                <option value=\"inactive\">Inactive</option>\r\n                            </select>\r\n                        </div>\r\n                        <div class=\"search_inner_fiels\">\r\n                            <div class=\"filters Booking_status\">\r\n                                <label>Search</label>\r\n                                <div class=\"search_with_icons\">\r\n                                    <mat-form-field [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"text\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                    </mat-form-field>\r\n                                    <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                        (click)=\"searchMethod()\"></i>\r\n                                    <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                        (click)=\"clearSearch()\"></i>\r\n                                </div>\r\n                            </div>\r\n\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-responsive\">\r\n                        <table>\r\n                            <tr>\r\n\r\n                                <th>User Name</th>\r\n                                <th>User Email</th>\r\n                                <th>Rating </th>\r\n                                <th>Review </th>\r\n                                <th>Product Name</th>\r\n                                <th>Vendor name</th>\r\n                                <th>Action</th>\r\n                            </tr>\r\n                            <tr *ngFor=\"let item of reviewList; let i=index\">\r\n\r\n                                <td>{{item.userId.firstName}} {{item.userId.lastName}}</td>\r\n                                <td>{{item.userId.email}}</td>\r\n\r\n                                <td>{{item.rating}}</td>\r\n                                <td>{{item.review}}</td>\r\n                                <td>{{item.productId.name}}</td>\r\n                                <td>{{item.productId.seller.firstName}} {{item.productId.seller.lastName}}</td>\r\n                                <td>\r\n                                    <div class=\"action\">\r\n                                        <ul>\r\n                                            <li class=\"delete\"><a (click)=\"deleteReview(item._id)\"><i\r\n                                                        class=\"fa fa-trash-o fa-fw\"></i></a></li>\r\n                                        </ul>\r\n                                    </div>\r\n                                </td>\r\n                            </tr>\r\n\r\n\r\n\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n                <!-----start pagination-->\r\n                <mat-paginator [length]=\"length\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"pageSizeOptions\"\r\n                    (page)=\"pageEvent = reviewListAfterPageSizeChanged($event)\">\r\n                </mat-paginator>\r\n                <!-----end pagination-->\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -1029,7 +1057,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>User Management</h1>\r\n                    <!-- <div class=\"top_subheading_add\">\r\n<a (click)=\"goToadduser()\"><span>+</span>Add User</a>\r\n</div> -->\r\n                </div>\r\n                <div class=\"outer_table\">\r\n                    <div class=\"search_fields\">\r\n                        <div class=\"filters Booking_status\">\r\n                            <label>Filter</label>\r\n                            <select [(ngModel)]=\"filterBy\" (change)=\"filterSelected($event)\">\r\n                                <option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n                                <option *ngIf=\"flag==false\" value=\"\"></option>\r\n                                <option value=\"active\">Active</option>\r\n                                <option value=\"inactive\">Inactive</option>\r\n                                <!-- <option value=\"lastName\"></option> -->\r\n                            </select>\r\n                        </div>\r\n                        <div class=\"search_inner_fiels\">\r\n                            <div class=\"filters Booking_status\">\r\n                                <label>Search</label>\r\n                                <div class=\"search_with_icons\">\r\n                                    <mat-form-field [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"text\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                    </mat-form-field>\r\n                                    <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                        (click)=\"searchMethod()\"></i>\r\n                                    <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                        (click)=\"clearSearch()\"></i>\r\n                                </div>\r\n                            </div>\r\n\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-responsive\">\r\n                        <div *ngIf=\"flagData==true\">\r\n                            <h1>No Data Found</h1>\r\n                        </div>\r\n                        <div *ngIf=\"flagData==false\">\r\n                            <table>\r\n                                <tr>\r\n                                    <th>Sr.no</th>\r\n                                    <th> Name</th>\r\n                                    <th> Email </th>\r\n                                    <th> Phone number</th>\r\n                                    <th>Status</th>\r\n                                    <th>Number of Order</th>\r\n                                    <th>Completed Order</th>\r\n                                    <th>Rejected Order</th>\r\n                                    <th>Total Amount Paid</th>\r\n                                    <th> Address </th>\r\n                                    <th>Last order date and time</th>\r\n                                    <th>Last product purchased</th>\r\n                                    <th class=\"action_bx\">Action</th>\r\n                                </tr>\r\n                                <tr *ngFor=\"let item of userList; index as i \">\r\n\r\n                                    <td *ngIf=\"flagNumber==true\">{{srNo+i+1}}</td>\r\n                                    <td *ngIf=\"flagNumber==false\">{{i+1}}</td>\r\n                                    <td>{{item.firstName}} {{item.lastName}}</td>\r\n\r\n                                    <td>{{item.email}}</td>\r\n                                    <td>{{item.countryCode}}-{{item.phone}}</td>\r\n                                    <td>\r\n                                        <div class=\"enable_disable\">\r\n                                            <mat-slide-toggle (change)=\"changeUserStatus(item._id,item.status)\"\r\n                                                [checked]=\"item.status=='1'? true:false\"></mat-slide-toggle>\r\n                                        </div>\r\n                                    </td>\r\n                                    <td>{{item.totalOrders}}</td>\r\n                                    <td>{{item.completedOrders}}</td>\r\n                                    <td>{{item.rejectedOrders}}</td>\r\n                                    <td>{{item.totalPaid}}</td>\r\n                                    <td>\r\n                                        <div class=\"top_subheading_add\">\r\n                                            <button class=\"accept_button \"\r\n                                                (click)=\"goToUserAddress(item._id)\"><span></span>User\r\n                                                Address</button>\r\n                                        </div>\r\n                                    </td>\r\n                                    <td>{{item.lastOrderAt | date}}</td>\r\n                                    <td>{{item?.lastOrder?.productId?.name}}</td>\r\n                                    <!-- <td><a class=\"request_hisrty\" (click)=\"goTobookingRequestHistory()\"><i class=\"fa fa-eye\"></i></a></td> -->\r\n                                    <td>\r\n                                        <div class=\"action\">\r\n                                            <ul>\r\n                                                <li class=\"show\" (click)=\"goTobookingRequestHistory(i)\"><i\r\n                                                        class=\"fa fa-eye\"></i></li>\r\n                                                <li class=\"edit\" (click)=\"goToeditUser(i)\"><i\r\n                                                        class=\"fa fa-pencil fa-fw\"></i>\r\n                                                </li>\r\n                                                <li class=\"delete\" (click)=\"deleteUser(i)\"><i\r\n                                                        class=\"fa fa-trash-o fa-fw\"></i></li>\r\n                                            </ul>\r\n                                        </div>\r\n                                    </td>\r\n                                </tr>\r\n\r\n                            </table>\r\n\r\n                        </div>\r\n                        <!-----start pagination-->\r\n                        <mat-paginator [length]=\"length\" [pageIndex]=\"page\" [pageSize]=\"pageSize\"\r\n                            [pageSizeOptions]=\"pageSizeOptions\"\r\n                            (page)=\"pageEvent = UserListAfterPageSizeChanged($event)\">\r\n                        </mat-paginator>\r\n                        <!-----end pagination-->\r\n                    </div>\r\n\r\n                </div>\r\n\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>User Management</h1>\r\n                    <!-- <div class=\"top_subheading_add\">\r\n<a (click)=\"goToadduser()\"><span>+</span>Add User</a>\r\n</div> -->\r\n                </div>\r\n                <div class=\"outer_table\">\r\n                    <div class=\"search_fields\">\r\n                        <div class=\"filters Booking_status\">\r\n                            <label>Filter</label>\r\n                            <select [(ngModel)]=\"filterBy\" (change)=\"filterSelected($event)\">\r\n                                <option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n                                <option *ngIf=\"flag==false\" value=\"\"></option>\r\n                                <option value=\"active\">Active</option>\r\n                                <option value=\"inactive\">Inactive</option>\r\n                                <!-- <option value=\"lastName\"></option> -->\r\n                            </select>\r\n                        </div>\r\n                        <div class=\"search_inner_fiels\">\r\n                            <div class=\"filters Booking_status\">\r\n                                <label>Search</label>\r\n                                <div class=\"search_with_icons\">\r\n                                    <mat-form-field [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"text\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                    </mat-form-field>\r\n                                    <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                        (click)=\"searchMethod()\"></i>\r\n                                    <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                        (click)=\"clearSearch()\"></i>\r\n                                </div>\r\n                            </div>\r\n\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-responsive\">\r\n                        <div *ngIf=\"flagData==true\">\r\n                            <h1>No Data Found</h1>\r\n                        </div>\r\n                        <div *ngIf=\"flagData==false\">\r\n                            <table>\r\n                                <tr>\r\n                                    <th>Sr.no</th>\r\n                                    <th> Name</th>\r\n                                    <th> Email </th>\r\n                                    <th> Phone number</th>\r\n                                    <th>Status</th>\r\n                                    <th>Number of Order</th>\r\n                                    <th>Completed Order</th>\r\n                                    <th>Rejected Order</th>\r\n                                    <th>Total Amount Paid</th>\r\n                                    <th> Address </th>\r\n                                    <th>Last order date and time</th>\r\n                                    <th>Last product purchased</th>\r\n                                    <th class=\"action_bx\">Action</th>\r\n                                </tr>\r\n                                <tr *ngFor=\"let item of userList; index as i \">\r\n\r\n                                    <td *ngIf=\"flagNumber==true\">{{srNo+i+1}}</td>\r\n                                    <td *ngIf=\"flagNumber==false\">{{i+1}}</td>\r\n                                    <td>{{item?.firstName}} {{item?.lastName}}</td>\r\n\r\n                                    <td>{{item?.email}}</td>\r\n                                    <td>{{item?.countryCode}}-{{item?.phone}}</td>\r\n                                    <td>\r\n                                        <div class=\"enable_disable\">\r\n                                            <mat-slide-toggle (change)=\"changeUserStatus(item._id,item.status)\"\r\n                                                [checked]=\"item.status=='1'? true:false\"></mat-slide-toggle>\r\n                                        </div>\r\n                                    </td>\r\n                                    <td>{{item?.totalOrders}}</td>\r\n                                    <td>{{item?.completedOrders}}</td>\r\n                                    <td>{{item?.rejectedOrders}}</td>\r\n                                    <td>{{item?.totalPaid}}</td>\r\n                                    <td>\r\n                                        <div class=\"top_subheading_add\">\r\n                                            <button class=\"accept_button \"\r\n                                                (click)=\"goToUserAddress(item._id)\"><span></span>User\r\n                                                Address</button>\r\n                                        </div>\r\n                                    </td>\r\n                                    <td>{{item?.lastOrderAt | date}}</td>\r\n                                    <td>{{item?.lastOrder?.productId?.name}}</td>\r\n                                    <!-- <td><a class=\"request_hisrty\" (click)=\"goTobookingRequestHistory()\"><i class=\"fa fa-eye\"></i></a></td> -->\r\n                                    <td>\r\n                                        <div class=\"action\">\r\n                                            <ul>\r\n                                                <li class=\"show\" (click)=\"goTobookingRequestHistory(i)\"><i\r\n                                                        class=\"fa fa-eye\"></i></li>\r\n                                                <li class=\"edit\" (click)=\"goToeditUser(i)\"><i\r\n                                                        class=\"fa fa-pencil fa-fw\"></i>\r\n                                                </li>\r\n                                                <li class=\"delete\" (click)=\"deleteUser(i)\"><i\r\n                                                        class=\"fa fa-trash-o fa-fw\"></i></li>\r\n                                            </ul>\r\n                                        </div>\r\n                                    </td>\r\n                                </tr>\r\n\r\n                            </table>\r\n\r\n                        </div>\r\n                        <!-----start pagination-->\r\n                        <mat-paginator [length]=\"length\" [pageIndex]=\"page\" [pageSize]=\"pageSize\"\r\n                            [pageSizeOptions]=\"pageSizeOptions\"\r\n                            (page)=\"pageEvent = UserListAfterPageSizeChanged($event)\">\r\n                        </mat-paginator>\r\n                        <!-----end pagination-->\r\n                    </div>\r\n\r\n                </div>\r\n\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -1069,7 +1097,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<!-- Topbar -->\r\n<nav class=\"navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow\">\r\n\r\n    <!-- Sidebar Toggle (Topbar) -->\r\n    <div class=\"company_logo\">\r\n\r\n        <a [routerLink]=\"['/dashboard']\" routerLinkActive=\"router-link-active\">\r\n\r\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"130.459\" height=\"40.406\" viewBox=\"0 0 197.459 60.406\">\r\n                <g id=\"Group_58938\" data-name=\"Group 58938\" transform=\"translate(-89 -358.274)\">\r\n                    <g id=\"Group_58920\" data-name=\"Group 58920\" transform=\"translate(89 358.274)\">\r\n                        <path id=\"Path_26541\" data-name=\"Path 26541\"\r\n                            d=\"M302.5,436.42h12.807l16.716,25.414V436.42H344.95v45.244H332.023L315.4,457.29v24.374H302.5Z\"\r\n                            transform=\"translate(-302.5 -436.42)\" fill=\"#1c1c20\" />\r\n                        <path id=\"Path_26542\" data-name=\"Path 26542\"\r\n                            d=\"M434.578,436.62h13.687v26.449a22.331,22.331,0,0,1-1.225,7.428,16.093,16.093,0,0,1-3.844,6.114,15.329,15.329,0,0,1-5.494,3.674,27.621,27.621,0,0,1-9.6,1.485,59.835,59.835,0,0,1-7.068-.455,18.491,18.491,0,0,1-6.4-1.8,16.105,16.105,0,0,1-4.709-3.829A14.052,14.052,0,0,1,407,470.572a26.416,26.416,0,0,1-1.27-7.5V436.62h13.687V463.7a7.722,7.722,0,0,0,2.015,5.674,8.67,8.67,0,0,0,11.142.025,7.7,7.7,0,0,0,2.015-5.7V436.62Z\"\r\n                            transform=\"translate(-354.127 -436.52)\" fill=\"#1c1c20\" />\r\n                        <path id=\"Path_26543\" data-name=\"Path 26543\"\r\n                            d=\"M509.18,436.82h12.807L538.7,462.034V436.82H551.63v45.044H538.7L522.082,457.49v24.374h-12.9Z\"\r\n                            transform=\"translate(-405.864 -436.62)\" fill=\"#1c1c20\" />\r\n                        <path id=\"Path_26544\" data-name=\"Path 26544\"\r\n                            d=\"M641.258,436.62h13.687v26.449a22.331,22.331,0,0,1-1.225,7.428,16.092,16.092,0,0,1-3.844,6.114,15.329,15.329,0,0,1-5.494,3.674,27.621,27.621,0,0,1-9.6,1.485,59.834,59.834,0,0,1-7.068-.455,18.491,18.491,0,0,1-6.4-1.8,16.105,16.105,0,0,1-4.709-3.829,14.052,14.052,0,0,1-2.924-5.114,26.418,26.418,0,0,1-1.27-7.5V436.62H626.1V463.7a7.722,7.722,0,0,0,2.015,5.674,8.67,8.67,0,0,0,11.142.025,7.7,7.7,0,0,0,2.015-5.7V436.62Z\"\r\n                            transform=\"translate(-457.492 -436.52)\" fill=\"#1c1c20\" />\r\n                    </g>\r\n                    <g id=\"Group_58921\" data-name=\"Group 58921\" transform=\"translate(214.346 408.572)\">\r\n                        <path id=\"Path_26545\" data-name=\"Path 26545\"\r\n                            d=\"M553.25,543.848l1.22-.105a2.639,2.639,0,0,0,.4,1.2,2.209,2.209,0,0,0,.98.76,3.7,3.7,0,0,0,1.5.29,3.6,3.6,0,0,0,1.3-.22,1.754,1.754,0,0,0,.84-.6,1.392,1.392,0,0,0,.275-.835,1.272,1.272,0,0,0-.265-.8,1.966,1.966,0,0,0-.88-.575,17.448,17.448,0,0,0-1.74-.475,8.959,8.959,0,0,1-1.885-.61,2.6,2.6,0,0,1-1.04-.91,2.208,2.208,0,0,1-.345-1.215,2.46,2.46,0,0,1,.42-1.38,2.585,2.585,0,0,1,1.225-.975,4.677,4.677,0,0,1,1.79-.335,4.864,4.864,0,0,1,1.915.35,2.762,2.762,0,0,1,1.275,1.03,3.009,3.009,0,0,1,.48,1.54l-1.24.095a2,2,0,0,0-.675-1.4,2.629,2.629,0,0,0-1.7-.475,2.752,2.752,0,0,0-1.71.43,1.289,1.289,0,0,0-.535,1.035,1.1,1.1,0,0,0,.38.865,5.153,5.153,0,0,0,1.95.695,12.78,12.78,0,0,1,2.159.625,2.946,2.946,0,0,1,1.26.995,2.428,2.428,0,0,1,.4,1.39,2.678,2.678,0,0,1-.445,1.47,2.949,2.949,0,0,1-1.28,1.07,4.464,4.464,0,0,1-1.88.385,5.646,5.646,0,0,1-2.219-.385,3.117,3.117,0,0,1-1.4-1.16A3.346,3.346,0,0,1,553.25,543.848Z\"\r\n                            transform=\"translate(-553.25 -537.05)\" fill=\"#ff960b\" />\r\n                        <path id=\"Path_26546\" data-name=\"Path 26546\"\r\n                            d=\"M587.444,547.148V538.54H584.23v-1.15h7.738v1.15h-3.229v8.608Z\"\r\n                            transform=\"translate(-568.744 -537.215)\" fill=\"#ff960b\" />\r\n                        <path id=\"Path_26547\" data-name=\"Path 26547\"\r\n                            d=\"M614.44,542.219a5.3,5.3,0,0,1,1.3-3.8,4.445,4.445,0,0,1,3.369-1.375,4.665,4.665,0,0,1,2.434.645,4.206,4.206,0,0,1,1.655,1.8,5.846,5.846,0,0,1,.57,2.619,5.734,5.734,0,0,1-.6,2.654,4.082,4.082,0,0,1-1.7,1.775,4.885,4.885,0,0,1-2.369.6,4.609,4.609,0,0,1-2.464-.665,4.289,4.289,0,0,1-1.645-1.82A5.531,5.531,0,0,1,614.44,542.219Zm1.33.02a3.9,3.9,0,0,0,.95,2.779,3.309,3.309,0,0,0,4.779-.01,4.141,4.141,0,0,0,.94-2.909,4.963,4.963,0,0,0-.4-2.08,3.1,3.1,0,0,0-1.18-1.38,3.205,3.205,0,0,0-1.74-.49,3.312,3.312,0,0,0-2.359.94A4.236,4.236,0,0,0,615.77,542.239Z\"\r\n                            transform=\"translate(-583.852 -537.04)\" fill=\"#ff960b\" />\r\n                        <path id=\"Path_26548\" data-name=\"Path 26548\"\r\n                            d=\"M649.85,547.143V537.38h4.329a5.772,5.772,0,0,1,1.984.265,2.151,2.151,0,0,1,1.085.93,2.779,2.779,0,0,1,.4,1.47,2.443,2.443,0,0,1-.675,1.75,3.413,3.413,0,0,1-2.079.9,3.472,3.472,0,0,1,.78.485,6.659,6.659,0,0,1,1.07,1.3l1.7,2.654h-1.625l-1.29-2.029c-.38-.585-.69-1.035-.93-1.345a3.069,3.069,0,0,0-.655-.655,1.973,1.973,0,0,0-.59-.26,3.994,3.994,0,0,0-.72-.045h-1.5v4.334h-1.29Zm1.29-5.454h2.774a4.092,4.092,0,0,0,1.385-.185,1.482,1.482,0,0,0,.76-.585,1.572,1.572,0,0,0,.26-.875,1.466,1.466,0,0,0-.5-1.14,2.367,2.367,0,0,0-1.59-.445h-3.089v3.229Z\"\r\n                            transform=\"translate(-601.561 -537.21)\" fill=\"#ff960b\" />\r\n                        <path id=\"Path_26549\" data-name=\"Path 26549\"\r\n                            d=\"M682.93,547.143V537.38h7.058v1.15h-5.764v2.989h5.4v1.145h-5.4v3.324h5.994v1.15H682.93Z\"\r\n                            transform=\"translate(-618.105 -537.21)\" fill=\"#ff960b\" />\r\n                    </g>\r\n                </g>\r\n            </svg>\r\n\r\n\r\n        </a>\r\n\r\n    </div>\r\n    <!-- Topbar Navbar -->\r\n    <ul class=\"navbar-nav ml-auto\">\r\n        <li class=\"nav-item dropdown no-arrow d-sm-none\">\r\n            <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"searchDropdown\" role=\"button\" data-toggle=\"dropdown\"\r\n                aria-haspopup=\"true\" aria-expanded=\"false\">\r\n                <i class=\"fa fa-search fa-fw\"></i>\r\n            </a>\r\n            <!-- Dropdown - Messages -->\r\n            <div class=\"dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in\"\r\n                aria-labelledby=\"searchDropdown\">\r\n                <form class=\"form-inline mr-auto w-100 navbar-search\">\r\n                    <div class=\"input-group\">\r\n                        <input type=\"text\" class=\"form-control bg-light border-0 small\" placeholder=\"Search for...\"\r\n                            aria-label=\"Search\" aria-describedby=\"basic-addon2\">\r\n                        <div class=\"input-group-append\">\r\n                            <button class=\"btn btn-primary\" type=\"button\">\r\n                                <i class=\"fa fa-search fa-sm\"></i>\r\n                            </button>\r\n                        </div>\r\n                    </div>\r\n                </form>\r\n            </div>\r\n        </li>\r\n\r\n        <!-- Nav Item - Alerts -->\r\n        <li class=\"nav-item dropdown no-arrow mx-1 notification_nav\">\r\n            <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"alertsDropdown\" role=\"button\" data-toggle=\"dropdown\"\r\n                aria-haspopup=\"true\" aria-expanded=\"false\">\r\n                <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"166.938\" height=\"217.193\" viewBox=\"0 0 166.938 217.193\">\r\n                    <g id=\"Group_4\" data-name=\"Group 4\" transform=\"translate(-359.225 -371.33)\">\r\n                        <path id=\"Path_10\" data-name=\"Path 10\"\r\n                            d=\"M523.663,554.665H361.725c.274-4.4,5.752-11.571,9.687-12.647a8.3,8.3,0,0,1,2.144-.089q38.033,0,76.063,0c.718,0,1.438.023,2.154-.022,2.588-.16,4.272-1.785,4.34-4.155a4.3,4.3,0,0,0-4.026-4.495,18.47,18.47,0,0,0-2.366-.059q-36.093,0-72.185,0h-2.912c0-.781,0-1.464,0-2.146,0-21.691-.241-43.386.078-65.073.386-26.268,11.965-46.6,34.948-59.271,22.023-12.141,44.677-11.583,66.473,1.171,17.5,10.242,28.014,25.766,31.754,45.7a74.236,74.236,0,0,1,1.114,13.275q.16,34.152.007,68.3c-.012,3.21,1.1,5.174,4.074,6.545C518.58,544.238,522.045,548.627,523.663,554.665Zm-55.146-21.448a4.408,4.408,0,0,0-4.4,4.142,4.336,4.336,0,0,0,4.2,4.533,4.415,4.415,0,0,0,4.445-4.108A4.544,4.544,0,0,0,468.517,533.217Z\"\r\n                            fill=\"#ffcb08\" stroke=\"#1c1c20\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\r\n                            stroke-width=\"5\" stroke-dasharray=\"620\" />\r\n                        <path id=\"Path_11\" data-name=\"Path 11\"\r\n                            d=\"M422.038,561.609c5.555,0,11.181,0,16.807,0,7.259,0,14.518.018,21.776-.032,1.774-.012,2.726.41,2.8,2.472a21.216,21.216,0,0,1-13.454,20.583,20.754,20.754,0,0,1-23.646-6.442A21.522,21.522,0,0,1,422.038,561.609Z\"\r\n                            fill=\"#ffcb08\" stroke=\"#1c1c20\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\r\n                            stroke-width=\"5\" stroke-dasharray=\"200\" />\r\n                        <path id=\"Path_12\" data-name=\"Path 12\"\r\n                            d=\"M456.193,390.272H429.027c-.64-5.573.832-10.272,5.4-13.571a13.093,13.093,0,0,1,15.041-.792C454.86,378.99,456.574,383.981,456.193,390.272Z\"\r\n                            fill=\"#ffcb08\" stroke=\"#1c1c20\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\r\n                            stroke-width=\"5\" stroke-dasharray=\"200\" />\r\n                    </g>\r\n                </svg>\r\n\r\n                <!-- Counter - Alerts -->\r\n                <span class=\"badge badge-danger badge-counter\">3+</span>\r\n            </a>\r\n            <!-- Dropdown - Alerts -->\r\n            <div class=\"dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in alert_center\"\r\n                aria-labelledby=\"alertsDropdown\">\r\n                <h6 class=\"dropdown-header\">\r\n                    Notification\r\n                </h6>\r\n                <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">\r\n                    <div class=\"mr-3\">\r\n                        <div class=\"icon-circle\">\r\n                            <i class=\"material-icons\">info_outline</i>\r\n                        </div>\r\n                    </div>\r\n                    <div>\r\n                        <div class=\"small text-gray-500\">December 12, 2019</div>\r\n                        <span class=\"notification_list\">New Product Added by Vendor</span>\r\n                    </div>\r\n                </a>\r\n                <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">\r\n                    <div class=\"mr-3\">\r\n                        <div class=\"icon-circle\">\r\n                            <i class=\"material-icons\">check</i>\r\n                        </div>\r\n                    </div>\r\n                    <div>\r\n                        <div class=\"small text-gray-500\">December 7, 2019</div>\r\n                        <span class=\"notification_list\">$290.29 has been deposited into your account!</span>\r\n                    </div>\r\n                </a>\r\n                <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">\r\n                    <div class=\"mr-3\">\r\n                        <div class=\"icon-circle\">\r\n                            <i class=\"material-icons\">update</i>\r\n                        </div>\r\n                    </div>\r\n                    <div>\r\n                        <div class=\"small text-gray-500\">December 2, 2019</div>\r\n                        <span class=\"notification_list\"> Vendor Profile is Updated</span>\r\n                    </div>\r\n                </a>\r\n                <a class=\"dropdown-item text-center small text-gray-500\" (click)=\"goTonotification()\">Show All\r\n                    Notification</a>\r\n            </div>\r\n        </li>\r\n\r\n        <!-- Nav Item - Messages -->\r\n        <!-- <li class=\"nav-item dropdown no-arrow mx-1 message_topnav\">\r\n            <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"messagesDropdown\" role=\"button\" data-toggle=\"dropdown\"\r\n                aria-haspopup=\"true\" aria-expanded=\"false\">\r\n                <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"205.647\" height=\"176.004\" viewBox=\"0 0 205.647 176.004\">\r\n                    <g id=\"Group_5\" data-name=\"Group 5\" transform=\"translate(-755.15 -407.5)\">\r\n                        <path id=\"Path_13\" data-name=\"Path 13\"\r\n                            d=\"M781.577,519.447c-13.888-.027-23.912-10.036-23.919-23.915q-.017-30.794,0-61.588c.009-13.842,10.1-23.936,23.928-23.938q58.324-.011,116.65,0a23.19,23.19,0,0,1,23.667,23.587q.034,31.1-.017,62.2a25.332,25.332,0,0,1-.511,5.26c-2.372,11-11.591,18.364-23.035,18.385-18.9.034-37.795-.034-56.692.076a11.183,11.183,0,0,0-5.951,1.509c-9.148,6.238-18.115,12.741-27.147,19.149q-7.813,5.543-15.639,11.07c-1.582,1.119-3.3,1.761-5.131.754-1.747-.96-2.165-2.631-2.073-4.539.142-2.987.241-5.978.259-8.968.039-6.243.012-12.487.012-19.039C784.682,519.448,783.13,519.451,781.577,519.447ZM899.2,435.5h-119m0,30h119m-119,30h79\"\r\n                            fill=\"#ffcb08\" stroke=\"#1c1c20\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\r\n                            stroke-width=\"5\" stroke-dasharray=\"450\" />\r\n                        <path id=\"Path_14\" data-name=\"Path 14\"\r\n                            d=\"M934.435,554.306a65.05,65.05,0,0,0,8-.6,19.354,19.354,0,0,0,15.8-19.126q.114-26-.008-52.009a19.57,19.57,0,0,0-19.689-19.516c-2.7-.026-5.4,0-8.332,0v2.391c0,10.2.023,20.4-.005,30.594a31.484,31.484,0,0,1-31.829,31.812q-27.842.023-55.681-.026a9.066,9.066,0,0,0-5.8,1.844c-4.68,3.49-9.505,6.786-14.446,10.284,2.473,6.925,7.157,11.394,14.257,13.192a23.481,23.481,0,0,0,5.656.534q22.64.062,45.279,0a10.792,10.792,0,0,1,6.627,2.132q16.7,12.039,33.5,23.952c2.737,1.951,5.274,1.583,6.51-1.025a6.928,6.928,0,0,0,.5-2.957c-.071-6.594-.21-13.187-.324-19.781C934.427,555.471,934.435,554.941,934.435,554.306Z\"\r\n                            fill=\"#ffcb08\" stroke=\"#1c1c20\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\r\n                            stroke-width=\"5\" stroke-dasharray=\"360\" />\r\n                    </g>\r\n                </svg>\r\n\r\n               \r\n                <span class=\"badge badge-danger badge-counter\">7</span>\r\n            </a>\r\n           \r\n            <div class=\"dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in message_center\"\r\n                aria-labelledby=\"messagesDropdown\">\r\n                <h6 class=\"dropdown-header\">\r\n                    Message Center\r\n                </h6>\r\n                <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">\r\n                    <div class=\"dropdown-list-image mr-3\">\r\n                        <img class=\"rounded-circle\" src=\"https://source.unsplash.com/fn_BT9fwg_E/60x60\" alt=\"\">\r\n                        <div class=\"status-indicator bg-success\"></div>\r\n                    </div>\r\n                    <div class=\"font-weight-bold\">\r\n                        <div class=\"text-truncate\">Hi there! I am wondering if you can help me with a problem I've been\r\n                            having.</div>\r\n                        <div class=\"small text-gray-500\">Emily Fowler · 58m</div>\r\n                    </div>\r\n                </a>\r\n                <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">\r\n                    <div class=\"dropdown-list-image mr-3\">\r\n                        <img class=\"rounded-circle\" src=\"https://source.unsplash.com/AU4VPcFN4LE/60x60\" alt=\"\">\r\n                        <div class=\"status-indicator\"></div>\r\n                    </div>\r\n                    <div>\r\n                        <div class=\"text-truncate\">I have the photos that you ordered last month, how would you like\r\n                            them sent to you?</div>\r\n                        <div class=\"small text-gray-500\">Jae Chun · 1d</div>\r\n                    </div>\r\n                </a>\r\n                <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">\r\n                    <div class=\"dropdown-list-image mr-3\">\r\n                        <img class=\"rounded-circle\" src=\"https://source.unsplash.com/CS2uCrpNzJY/60x60\" alt=\"\">\r\n                        <div class=\"status-indicator bg-warning\"></div>\r\n                    </div>\r\n                    <div>\r\n                        <div class=\"text-truncate\">Last month's report looks great, I am very happy with the progress so\r\n                            far, keep up the good work!</div>\r\n                        <div class=\"small text-gray-500\">Morgan Alvarez · 2d</div>\r\n                    </div>\r\n                </a>\r\n                <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">\r\n                    <div class=\"dropdown-list-image mr-3\">\r\n                        <img class=\"rounded-circle\" src=\"https://source.unsplash.com/Mv9hjnEUHR4/60x60\" alt=\"\">\r\n                        <div class=\"status-indicator bg-success\"></div>\r\n                    </div>\r\n                    <div>\r\n                        <div class=\"text-truncate\">Am I a good boy? The reason I ask is because someone told me that\r\n                            people say this to all dogs, even if they aren't good...</div>\r\n                        <div class=\"small text-gray-500\">Chicken the Dog · 2w</div>\r\n                    </div>\r\n                </a>\r\n                <a class=\"dropdown-item text-center small text-gray-500\" href=\"#\">Read More Messages</a>\r\n            </div>\r\n        </li> -->\r\n\r\n        <div class=\"topbar-divider d-none d-sm-block\"></div>\r\n        <!-- Nav Item - User Information -->\r\n        <li *ngIf=\"profileData.data\" class=\"nav-item dropdown no-arrow\">\r\n            <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"userDropdown\" role=\"button\" data-toggle=\"dropdown\"\r\n                aria-haspopup=\"true\" aria-expanded=\"false\">\r\n                <span class=\"mr-2 d-none d-lg-inline text-gray-600 small\">{{profileData.data.firstName}}\r\n                    {{profileData.data.lastName}}</span>\r\n                <img class=\"img-profile rounded-circle\" src={{imagePath+profileData.data.profilePic}}>\r\n            </a>\r\n            <!-- Dropdown - User Information -->\r\n            <div class=\"dropdown-menu dropdown-menu-right shadow animated--grow-in top_header_profile\"\r\n                aria-labelledby=\"userDropdown\">\r\n                <a class=\"dropdown-item\" (click)=\"goToprofile()\">\r\n                    <i class=\"fa fa-user fa-sm fa-fw mr-2 text-gray-400\"></i>\r\n                    Profile\r\n                </a>\r\n                <a class=\"dropdown-item\" (click)=\"goTochangepassword()\">\r\n                    <i class=\"fa fa-lock fa-sm fa-fw mr-2 text-gray-400\"></i>\r\n                    Change Password\r\n                </a>\r\n                <!-- <a class=\"dropdown-item\" href=\"#\">\r\n                    <i class=\"fa fa-list fa-sm fa-fw mr-2 text-gray-400\"></i>\r\n                    Activity Log\r\n                </a> -->\r\n                <div class=\"dropdown-divider\"></div>\r\n                <a class=\"dropdown-item\" href=\"#\" data-toggle=\"modal\" data-target=\"#logoutModal\" (click)=\"goTologin()\">\r\n                    <i class=\"fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400\"></i>\r\n                    Logout\r\n                </a>\r\n            </div>\r\n        </li>\r\n        <!-- <li class=\"nav-item dropdown no-arrow\">\r\n            <a class=\"nav-link dropdown-toggle language_box\" href=\"#\" id=\"userDropdown\" role=\"button\"\r\n                data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\r\n                <svg xmlns=\"http://www.w3.org/2000/svg\" id=\"flag-icon-css-ae\" viewBox=\"0 0 640 480\">\r\n                    <path fill=\"#00732f\" d=\"M0 0h640v160H0z\" />\r\n                    <path fill=\"#fff\" d=\"M0 160h640v160H0z\" />\r\n                    <path d=\"M0 320h640v160H0z\" />\r\n                    <path fill=\"red\" d=\"M0 0h220v480H0z\" />\r\n                </svg>\r\n                <span class=\"mr-2 d-none d-lg-inline text-gray-600 small\">UAE</span>\r\n            </a>\r\n            \r\n            <div class=\"dropdown-menu dropdown-menu-right shadow animated--grow-in top_header_profile\"\r\n                aria-labelledby=\"userDropdown\">\r\n                <a class=\"dropdown-item language_dropdown\">\r\n                    <svg xmlns=\"http://www.w3.org/2000/svg\" id=\"flag-icon-css-ae\" viewBox=\"0 0 640 480\"\r\n                        style=\"width:20px;margin-right: 7px;\">\r\n                        <path fill=\"#00732f\" d=\"M0 0h640v160H0z\" />\r\n                        <path fill=\"#fff\" d=\"M0 160h640v160H0z\" />\r\n                        <path d=\"M0 320h640v160H0z\" />\r\n                        <path fill=\"red\" d=\"M0 0h220v480H0z\" />\r\n                    </svg>\r\n                    UAE\r\n                </a>\r\n\r\n            </div>\r\n        </li> -->\r\n    </ul>\r\n</nav>\r\n<!-- End of Topbar -->";
+    __webpack_exports__["default"] = "<!-- Topbar -->\r\n<nav class=\"navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow\">\r\n\r\n    <!-- Sidebar Toggle (Topbar) -->\r\n    <div class=\"company_logo\">\r\n\r\n        <a [routerLink]=\"['/dashboard']\" routerLinkActive=\"router-link-active\">\r\n\r\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"130.459\" height=\"40.406\" viewBox=\"0 0 197.459 60.406\">\r\n                <g id=\"Group_58938\" data-name=\"Group 58938\" transform=\"translate(-89 -358.274)\">\r\n                    <g id=\"Group_58920\" data-name=\"Group 58920\" transform=\"translate(89 358.274)\">\r\n                        <path id=\"Path_26541\" data-name=\"Path 26541\"\r\n                            d=\"M302.5,436.42h12.807l16.716,25.414V436.42H344.95v45.244H332.023L315.4,457.29v24.374H302.5Z\"\r\n                            transform=\"translate(-302.5 -436.42)\" fill=\"#1c1c20\" />\r\n                        <path id=\"Path_26542\" data-name=\"Path 26542\"\r\n                            d=\"M434.578,436.62h13.687v26.449a22.331,22.331,0,0,1-1.225,7.428,16.093,16.093,0,0,1-3.844,6.114,15.329,15.329,0,0,1-5.494,3.674,27.621,27.621,0,0,1-9.6,1.485,59.835,59.835,0,0,1-7.068-.455,18.491,18.491,0,0,1-6.4-1.8,16.105,16.105,0,0,1-4.709-3.829A14.052,14.052,0,0,1,407,470.572a26.416,26.416,0,0,1-1.27-7.5V436.62h13.687V463.7a7.722,7.722,0,0,0,2.015,5.674,8.67,8.67,0,0,0,11.142.025,7.7,7.7,0,0,0,2.015-5.7V436.62Z\"\r\n                            transform=\"translate(-354.127 -436.52)\" fill=\"#1c1c20\" />\r\n                        <path id=\"Path_26543\" data-name=\"Path 26543\"\r\n                            d=\"M509.18,436.82h12.807L538.7,462.034V436.82H551.63v45.044H538.7L522.082,457.49v24.374h-12.9Z\"\r\n                            transform=\"translate(-405.864 -436.62)\" fill=\"#1c1c20\" />\r\n                        <path id=\"Path_26544\" data-name=\"Path 26544\"\r\n                            d=\"M641.258,436.62h13.687v26.449a22.331,22.331,0,0,1-1.225,7.428,16.092,16.092,0,0,1-3.844,6.114,15.329,15.329,0,0,1-5.494,3.674,27.621,27.621,0,0,1-9.6,1.485,59.834,59.834,0,0,1-7.068-.455,18.491,18.491,0,0,1-6.4-1.8,16.105,16.105,0,0,1-4.709-3.829,14.052,14.052,0,0,1-2.924-5.114,26.418,26.418,0,0,1-1.27-7.5V436.62H626.1V463.7a7.722,7.722,0,0,0,2.015,5.674,8.67,8.67,0,0,0,11.142.025,7.7,7.7,0,0,0,2.015-5.7V436.62Z\"\r\n                            transform=\"translate(-457.492 -436.52)\" fill=\"#1c1c20\" />\r\n                    </g>\r\n                    <g id=\"Group_58921\" data-name=\"Group 58921\" transform=\"translate(214.346 408.572)\">\r\n                        <path id=\"Path_26545\" data-name=\"Path 26545\"\r\n                            d=\"M553.25,543.848l1.22-.105a2.639,2.639,0,0,0,.4,1.2,2.209,2.209,0,0,0,.98.76,3.7,3.7,0,0,0,1.5.29,3.6,3.6,0,0,0,1.3-.22,1.754,1.754,0,0,0,.84-.6,1.392,1.392,0,0,0,.275-.835,1.272,1.272,0,0,0-.265-.8,1.966,1.966,0,0,0-.88-.575,17.448,17.448,0,0,0-1.74-.475,8.959,8.959,0,0,1-1.885-.61,2.6,2.6,0,0,1-1.04-.91,2.208,2.208,0,0,1-.345-1.215,2.46,2.46,0,0,1,.42-1.38,2.585,2.585,0,0,1,1.225-.975,4.677,4.677,0,0,1,1.79-.335,4.864,4.864,0,0,1,1.915.35,2.762,2.762,0,0,1,1.275,1.03,3.009,3.009,0,0,1,.48,1.54l-1.24.095a2,2,0,0,0-.675-1.4,2.629,2.629,0,0,0-1.7-.475,2.752,2.752,0,0,0-1.71.43,1.289,1.289,0,0,0-.535,1.035,1.1,1.1,0,0,0,.38.865,5.153,5.153,0,0,0,1.95.695,12.78,12.78,0,0,1,2.159.625,2.946,2.946,0,0,1,1.26.995,2.428,2.428,0,0,1,.4,1.39,2.678,2.678,0,0,1-.445,1.47,2.949,2.949,0,0,1-1.28,1.07,4.464,4.464,0,0,1-1.88.385,5.646,5.646,0,0,1-2.219-.385,3.117,3.117,0,0,1-1.4-1.16A3.346,3.346,0,0,1,553.25,543.848Z\"\r\n                            transform=\"translate(-553.25 -537.05)\" fill=\"#ff960b\" />\r\n                        <path id=\"Path_26546\" data-name=\"Path 26546\"\r\n                            d=\"M587.444,547.148V538.54H584.23v-1.15h7.738v1.15h-3.229v8.608Z\"\r\n                            transform=\"translate(-568.744 -537.215)\" fill=\"#ff960b\" />\r\n                        <path id=\"Path_26547\" data-name=\"Path 26547\"\r\n                            d=\"M614.44,542.219a5.3,5.3,0,0,1,1.3-3.8,4.445,4.445,0,0,1,3.369-1.375,4.665,4.665,0,0,1,2.434.645,4.206,4.206,0,0,1,1.655,1.8,5.846,5.846,0,0,1,.57,2.619,5.734,5.734,0,0,1-.6,2.654,4.082,4.082,0,0,1-1.7,1.775,4.885,4.885,0,0,1-2.369.6,4.609,4.609,0,0,1-2.464-.665,4.289,4.289,0,0,1-1.645-1.82A5.531,5.531,0,0,1,614.44,542.219Zm1.33.02a3.9,3.9,0,0,0,.95,2.779,3.309,3.309,0,0,0,4.779-.01,4.141,4.141,0,0,0,.94-2.909,4.963,4.963,0,0,0-.4-2.08,3.1,3.1,0,0,0-1.18-1.38,3.205,3.205,0,0,0-1.74-.49,3.312,3.312,0,0,0-2.359.94A4.236,4.236,0,0,0,615.77,542.239Z\"\r\n                            transform=\"translate(-583.852 -537.04)\" fill=\"#ff960b\" />\r\n                        <path id=\"Path_26548\" data-name=\"Path 26548\"\r\n                            d=\"M649.85,547.143V537.38h4.329a5.772,5.772,0,0,1,1.984.265,2.151,2.151,0,0,1,1.085.93,2.779,2.779,0,0,1,.4,1.47,2.443,2.443,0,0,1-.675,1.75,3.413,3.413,0,0,1-2.079.9,3.472,3.472,0,0,1,.78.485,6.659,6.659,0,0,1,1.07,1.3l1.7,2.654h-1.625l-1.29-2.029c-.38-.585-.69-1.035-.93-1.345a3.069,3.069,0,0,0-.655-.655,1.973,1.973,0,0,0-.59-.26,3.994,3.994,0,0,0-.72-.045h-1.5v4.334h-1.29Zm1.29-5.454h2.774a4.092,4.092,0,0,0,1.385-.185,1.482,1.482,0,0,0,.76-.585,1.572,1.572,0,0,0,.26-.875,1.466,1.466,0,0,0-.5-1.14,2.367,2.367,0,0,0-1.59-.445h-3.089v3.229Z\"\r\n                            transform=\"translate(-601.561 -537.21)\" fill=\"#ff960b\" />\r\n                        <path id=\"Path_26549\" data-name=\"Path 26549\"\r\n                            d=\"M682.93,547.143V537.38h7.058v1.15h-5.764v2.989h5.4v1.145h-5.4v3.324h5.994v1.15H682.93Z\"\r\n                            transform=\"translate(-618.105 -537.21)\" fill=\"#ff960b\" />\r\n                    </g>\r\n                </g>\r\n            </svg>\r\n\r\n\r\n        </a>\r\n\r\n    </div>\r\n    <!-- Topbar Navbar -->\r\n    <ul class=\"navbar-nav ml-auto\">\r\n        <li class=\"nav-item dropdown no-arrow d-sm-none\">\r\n            <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"searchDropdown\" role=\"button\" data-toggle=\"dropdown\"\r\n                aria-haspopup=\"true\" aria-expanded=\"false\">\r\n                <i class=\"fa fa-search fa-fw\"></i>\r\n            </a>\r\n            <!-- Dropdown - Messages -->\r\n            <div class=\"dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in\"\r\n                aria-labelledby=\"searchDropdown\">\r\n                <form class=\"form-inline mr-auto w-100 navbar-search\">\r\n                    <div class=\"input-group\">\r\n                        <input type=\"text\" class=\"form-control bg-light border-0 small\" placeholder=\"Search for...\"\r\n                            aria-label=\"Search\" aria-describedby=\"basic-addon2\">\r\n                        <div class=\"input-group-append\">\r\n                            <button class=\"btn btn-primary\" type=\"button\">\r\n                                <i class=\"fa fa-search fa-sm\"></i>\r\n                            </button>\r\n                        </div>\r\n                    </div>\r\n                </form>\r\n            </div>\r\n        </li>\r\n        <!-- <li class=\"filters \"><select [(ngModel)]=\"language\" (change)=\"filterSelected($event)\">\r\n                <option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n                <option *ngIf=\"flag==false\" value=\"\"></option>\r\n                <option value=\"en\" selected>English</option>\r\n                <option value=\"ar\">Arabic</option>\r\n               \r\n            </select></li> -->\r\n        <!-- Nav Item - Alerts -->\r\n        <li class=\"nav-item dropdown no-arrow mx-1 notification_nav\">\r\n            <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"alertsDropdown\" role=\"button\" data-toggle=\"dropdown\"\r\n                aria-haspopup=\"true\" aria-expanded=\"false\">\r\n                <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"166.938\" height=\"217.193\" viewBox=\"0 0 166.938 217.193\">\r\n                    <g id=\"Group_4\" data-name=\"Group 4\" transform=\"translate(-359.225 -371.33)\">\r\n                        <path id=\"Path_10\" data-name=\"Path 10\"\r\n                            d=\"M523.663,554.665H361.725c.274-4.4,5.752-11.571,9.687-12.647a8.3,8.3,0,0,1,2.144-.089q38.033,0,76.063,0c.718,0,1.438.023,2.154-.022,2.588-.16,4.272-1.785,4.34-4.155a4.3,4.3,0,0,0-4.026-4.495,18.47,18.47,0,0,0-2.366-.059q-36.093,0-72.185,0h-2.912c0-.781,0-1.464,0-2.146,0-21.691-.241-43.386.078-65.073.386-26.268,11.965-46.6,34.948-59.271,22.023-12.141,44.677-11.583,66.473,1.171,17.5,10.242,28.014,25.766,31.754,45.7a74.236,74.236,0,0,1,1.114,13.275q.16,34.152.007,68.3c-.012,3.21,1.1,5.174,4.074,6.545C518.58,544.238,522.045,548.627,523.663,554.665Zm-55.146-21.448a4.408,4.408,0,0,0-4.4,4.142,4.336,4.336,0,0,0,4.2,4.533,4.415,4.415,0,0,0,4.445-4.108A4.544,4.544,0,0,0,468.517,533.217Z\"\r\n                            fill=\"#ffcb08\" stroke=\"#1c1c20\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\r\n                            stroke-width=\"5\" stroke-dasharray=\"620\" />\r\n                        <path id=\"Path_11\" data-name=\"Path 11\"\r\n                            d=\"M422.038,561.609c5.555,0,11.181,0,16.807,0,7.259,0,14.518.018,21.776-.032,1.774-.012,2.726.41,2.8,2.472a21.216,21.216,0,0,1-13.454,20.583,20.754,20.754,0,0,1-23.646-6.442A21.522,21.522,0,0,1,422.038,561.609Z\"\r\n                            fill=\"#ffcb08\" stroke=\"#1c1c20\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\r\n                            stroke-width=\"5\" stroke-dasharray=\"200\" />\r\n                        <path id=\"Path_12\" data-name=\"Path 12\"\r\n                            d=\"M456.193,390.272H429.027c-.64-5.573.832-10.272,5.4-13.571a13.093,13.093,0,0,1,15.041-.792C454.86,378.99,456.574,383.981,456.193,390.272Z\"\r\n                            fill=\"#ffcb08\" stroke=\"#1c1c20\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\r\n                            stroke-width=\"5\" stroke-dasharray=\"200\" />\r\n                    </g>\r\n                </svg>\r\n\r\n                <!-- Counter - Alerts -->\r\n                <span class=\"badge badge-danger badge-counter\">3+</span>\r\n            </a>\r\n            <!-- Dropdown - Alerts -->\r\n            <div class=\"dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in alert_center\"\r\n                aria-labelledby=\"alertsDropdown\">\r\n                <h6 class=\"dropdown-header\">\r\n                    Notification\r\n                </h6>\r\n                <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">\r\n                    <div class=\"mr-3\">\r\n                        <div class=\"icon-circle\">\r\n                            <i class=\"material-icons\">info_outline</i>\r\n                        </div>\r\n                    </div>\r\n                    <div>\r\n                        <div class=\"small text-gray-500\">December 12, 2019</div>\r\n                        <span class=\"notification_list\">New Product Added by Vendor</span>\r\n                    </div>\r\n                </a>\r\n                <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">\r\n                    <div class=\"mr-3\">\r\n                        <div class=\"icon-circle\">\r\n                            <i class=\"material-icons\">check</i>\r\n                        </div>\r\n                    </div>\r\n                    <div>\r\n                        <div class=\"small text-gray-500\">December 7, 2019</div>\r\n                        <span class=\"notification_list\">$290.29 has been deposited into your account!</span>\r\n                    </div>\r\n                </a>\r\n                <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">\r\n                    <div class=\"mr-3\">\r\n                        <div class=\"icon-circle\">\r\n                            <i class=\"material-icons\">update</i>\r\n                        </div>\r\n                    </div>\r\n                    <div>\r\n                        <div class=\"small text-gray-500\">December 2, 2019</div>\r\n                        <span class=\"notification_list\"> Vendor Profile is Updated</span>\r\n                    </div>\r\n                </a>\r\n                <a class=\"dropdown-item text-center small text-gray-500\" (click)=\"goTonotification()\">Show All\r\n                    Notification</a>\r\n            </div>\r\n        </li>\r\n\r\n        <!-- Nav Item - Messages -->\r\n        <!-- <li class=\"nav-item dropdown no-arrow mx-1 message_topnav\">\r\n            <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"messagesDropdown\" role=\"button\" data-toggle=\"dropdown\"\r\n                aria-haspopup=\"true\" aria-expanded=\"false\">\r\n                <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"205.647\" height=\"176.004\" viewBox=\"0 0 205.647 176.004\">\r\n                    <g id=\"Group_5\" data-name=\"Group 5\" transform=\"translate(-755.15 -407.5)\">\r\n                        <path id=\"Path_13\" data-name=\"Path 13\"\r\n                            d=\"M781.577,519.447c-13.888-.027-23.912-10.036-23.919-23.915q-.017-30.794,0-61.588c.009-13.842,10.1-23.936,23.928-23.938q58.324-.011,116.65,0a23.19,23.19,0,0,1,23.667,23.587q.034,31.1-.017,62.2a25.332,25.332,0,0,1-.511,5.26c-2.372,11-11.591,18.364-23.035,18.385-18.9.034-37.795-.034-56.692.076a11.183,11.183,0,0,0-5.951,1.509c-9.148,6.238-18.115,12.741-27.147,19.149q-7.813,5.543-15.639,11.07c-1.582,1.119-3.3,1.761-5.131.754-1.747-.96-2.165-2.631-2.073-4.539.142-2.987.241-5.978.259-8.968.039-6.243.012-12.487.012-19.039C784.682,519.448,783.13,519.451,781.577,519.447ZM899.2,435.5h-119m0,30h119m-119,30h79\"\r\n                            fill=\"#ffcb08\" stroke=\"#1c1c20\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\r\n                            stroke-width=\"5\" stroke-dasharray=\"450\" />\r\n                        <path id=\"Path_14\" data-name=\"Path 14\"\r\n                            d=\"M934.435,554.306a65.05,65.05,0,0,0,8-.6,19.354,19.354,0,0,0,15.8-19.126q.114-26-.008-52.009a19.57,19.57,0,0,0-19.689-19.516c-2.7-.026-5.4,0-8.332,0v2.391c0,10.2.023,20.4-.005,30.594a31.484,31.484,0,0,1-31.829,31.812q-27.842.023-55.681-.026a9.066,9.066,0,0,0-5.8,1.844c-4.68,3.49-9.505,6.786-14.446,10.284,2.473,6.925,7.157,11.394,14.257,13.192a23.481,23.481,0,0,0,5.656.534q22.64.062,45.279,0a10.792,10.792,0,0,1,6.627,2.132q16.7,12.039,33.5,23.952c2.737,1.951,5.274,1.583,6.51-1.025a6.928,6.928,0,0,0,.5-2.957c-.071-6.594-.21-13.187-.324-19.781C934.427,555.471,934.435,554.941,934.435,554.306Z\"\r\n                            fill=\"#ffcb08\" stroke=\"#1c1c20\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\r\n                            stroke-width=\"5\" stroke-dasharray=\"360\" />\r\n                    </g>\r\n                </svg>\r\n\r\n               \r\n                <span class=\"badge badge-danger badge-counter\">7</span>\r\n            </a>\r\n           \r\n            <div class=\"dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in message_center\"\r\n                aria-labelledby=\"messagesDropdown\">\r\n                <h6 class=\"dropdown-header\">\r\n                    Message Center\r\n                </h6>\r\n                <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">\r\n                    <div class=\"dropdown-list-image mr-3\">\r\n                        <img class=\"rounded-circle\" src=\"https://source.unsplash.com/fn_BT9fwg_E/60x60\" alt=\"\">\r\n                        <div class=\"status-indicator bg-success\"></div>\r\n                    </div>\r\n                    <div class=\"font-weight-bold\">\r\n                        <div class=\"text-truncate\">Hi there! I am wondering if you can help me with a problem I've been\r\n                            having.</div>\r\n                        <div class=\"small text-gray-500\">Emily Fowler · 58m</div>\r\n                    </div>\r\n                </a>\r\n                <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">\r\n                    <div class=\"dropdown-list-image mr-3\">\r\n                        <img class=\"rounded-circle\" src=\"https://source.unsplash.com/AU4VPcFN4LE/60x60\" alt=\"\">\r\n                        <div class=\"status-indicator\"></div>\r\n                    </div>\r\n                    <div>\r\n                        <div class=\"text-truncate\">I have the photos that you ordered last month, how would you like\r\n                            them sent to you?</div>\r\n                        <div class=\"small text-gray-500\">Jae Chun · 1d</div>\r\n                    </div>\r\n                </a>\r\n                <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">\r\n                    <div class=\"dropdown-list-image mr-3\">\r\n                        <img class=\"rounded-circle\" src=\"https://source.unsplash.com/CS2uCrpNzJY/60x60\" alt=\"\">\r\n                        <div class=\"status-indicator bg-warning\"></div>\r\n                    </div>\r\n                    <div>\r\n                        <div class=\"text-truncate\">Last month's report looks great, I am very happy with the progress so\r\n                            far, keep up the good work!</div>\r\n                        <div class=\"small text-gray-500\">Morgan Alvarez · 2d</div>\r\n                    </div>\r\n                </a>\r\n                <a class=\"dropdown-item d-flex align-items-center\" href=\"#\">\r\n                    <div class=\"dropdown-list-image mr-3\">\r\n                        <img class=\"rounded-circle\" src=\"https://source.unsplash.com/Mv9hjnEUHR4/60x60\" alt=\"\">\r\n                        <div class=\"status-indicator bg-success\"></div>\r\n                    </div>\r\n                    <div>\r\n                        <div class=\"text-truncate\">Am I a good boy? The reason I ask is because someone told me that\r\n                            people say this to all dogs, even if they aren't good...</div>\r\n                        <div class=\"small text-gray-500\">Chicken the Dog · 2w</div>\r\n                    </div>\r\n                </a>\r\n                <a class=\"dropdown-item text-center small text-gray-500\" href=\"#\">Read More Messages</a>\r\n            </div>\r\n        </li> -->\r\n\r\n        <div class=\"topbar-divider d-none d-sm-block\"></div>\r\n        <!-- Nav Item - User Information -->\r\n        <li *ngIf=\"profileData.data\" class=\"nav-item dropdown no-arrow\">\r\n            <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"userDropdown\" role=\"button\" data-toggle=\"dropdown\"\r\n                aria-haspopup=\"true\" aria-expanded=\"false\">\r\n                <span class=\"mr-2 d-none d-lg-inline text-gray-600 small\">{{profileData.data.firstName}}\r\n                    {{profileData.data.lastName}}</span>\r\n                <img class=\"img-profile rounded-circle\" src={{imagePath+profileData.data.profilePic}}>\r\n            </a>\r\n            <!-- Dropdown - User Information -->\r\n            <div class=\"dropdown-menu dropdown-menu-right shadow animated--grow-in top_header_profile\"\r\n                aria-labelledby=\"userDropdown\">\r\n                <a class=\"dropdown-item\" (click)=\"goToprofile()\">\r\n                    <i class=\"fa fa-user fa-sm fa-fw mr-2 text-gray-400\"></i>\r\n                    Profile\r\n                </a>\r\n                <a class=\"dropdown-item\" (click)=\"goTochangepassword()\">\r\n                    <i class=\"fa fa-lock fa-sm fa-fw mr-2 text-gray-400\"></i>\r\n                    Change Password\r\n                </a>\r\n                <!-- <a class=\"dropdown-item\" href=\"#\">\r\n                    <i class=\"fa fa-list fa-sm fa-fw mr-2 text-gray-400\"></i>\r\n                    Activity Log\r\n                </a> -->\r\n                <div class=\"dropdown-divider\"></div>\r\n                <a class=\"dropdown-item\" href=\"#\" data-toggle=\"modal\" data-target=\"#logoutModal\" (click)=\"goTologin()\">\r\n                    <i class=\"fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400\"></i>\r\n                    Logout\r\n                </a>\r\n            </div>\r\n        </li>\r\n        <!-- <li class=\"nav-item dropdown no-arrow\">\r\n            <a class=\"nav-link dropdown-toggle language_box\" href=\"#\" id=\"userDropdown\" role=\"button\"\r\n                data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\r\n                <svg xmlns=\"http://www.w3.org/2000/svg\" id=\"flag-icon-css-ae\" viewBox=\"0 0 640 480\">\r\n                    <path fill=\"#00732f\" d=\"M0 0h640v160H0z\" />\r\n                    <path fill=\"#fff\" d=\"M0 160h640v160H0z\" />\r\n                    <path d=\"M0 320h640v160H0z\" />\r\n                    <path fill=\"red\" d=\"M0 0h220v480H0z\" />\r\n                </svg>\r\n                <span class=\"mr-2 d-none d-lg-inline text-gray-600 small\">UAE</span>\r\n            </a>\r\n            \r\n            <div class=\"dropdown-menu dropdown-menu-right shadow animated--grow-in top_header_profile\"\r\n                aria-labelledby=\"userDropdown\">\r\n                <a class=\"dropdown-item language_dropdown\">\r\n                    <svg xmlns=\"http://www.w3.org/2000/svg\" id=\"flag-icon-css-ae\" viewBox=\"0 0 640 480\"\r\n                        style=\"width:20px;margin-right: 7px;\">\r\n                        <path fill=\"#00732f\" d=\"M0 0h640v160H0z\" />\r\n                        <path fill=\"#fff\" d=\"M0 160h640v160H0z\" />\r\n                        <path d=\"M0 320h640v160H0z\" />\r\n                        <path fill=\"red\" d=\"M0 0h220v480H0z\" />\r\n                    </svg>\r\n                    UAE\r\n                </a>\r\n\r\n            </div>\r\n        </li> -->\r\n    </ul>\r\n</nav>\r\n<!-- End of Topbar -->";
     /***/
   },
 
@@ -1109,7 +1137,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Discounts</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <a (click)=\"goToaddoffers()\"><span>+</span>Add Discounts</a>\r\n                    </div>\r\n                </div>\r\n                <div class=\"outer_table\">\r\n                    <div class=\"search_fields\">\r\n                        <div class=\"filters Booking_status\">\r\n                            <label>Filter</label>\r\n                            <select [(ngModel)]=\"filterBy\" (change)=\"filterSelected($event)\">\r\n                                <option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n                                <option *ngIf=\"flag==false\" value=\"\"></option>\r\n                                <option value=\"active\">Active</option>\r\n                                <option value=\"inactive\">Inactive</option>\r\n                            </select>\r\n                        </div>\r\n                        <div class=\"search_inner_fiels\">\r\n                            <div class=\"filters Booking_status\">\r\n                                <label>Search</label>\r\n                                <div class=\"search_with_icons\">\r\n                                    <mat-form-field [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"text\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                    </mat-form-field>\r\n                                    <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                        (click)=\"searchMethod()\"></i>\r\n                                    <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                        (click)=\"clearSearch()\"></i>\r\n                                </div>\r\n                            </div>\r\n\r\n                        </div>\r\n                    </div>\r\n                    <div *ngIf=\"flagData==true\">\r\n                        <h1>No Data Found</h1>\r\n                    </div>\r\n                    <div *ngIf=\"flagData==false\" class=\"table-responsive\">\r\n                        <table>\r\n                            <tr>\r\n                                <th>Sr No</th>\r\n                                <!-- <th>Category</th>\r\n                                <th>Sub Category\r\n                                </th> -->\r\n                                <th>Name</th>\r\n                                <th>Discount</th>\r\n                                <th>Status</th>\r\n                                <th>Start Date</th>\r\n                                <th>End Date</th>\r\n                                <th>Offer Details</th>\r\n                                <th class=\"action_bx\">Action</th>\r\n                            </tr>\r\n                            <tr *ngFor=\"let item of bannerList; index as i\">\r\n                                <td *ngIf=\"flagUserList==false\">{{i+1}}</td>\r\n                                <td *ngIf=\"flagUserList==true\">{{srNo+i+1}}</td>\r\n                                <!-- <td>Lorem</td>\r\n                                <td>Lorem ipsum</td> -->\r\n                                <td>{{item.name}}</td>\r\n                                <td>{{item.discount}}%</td>\r\n                                <td>\r\n                                    <div class=\"enable_disable\">\r\n                                        <mat-slide-toggle (change)=\"changeDiscountStatus(item._id,item.status)\"\r\n                                            [checked]=\"item.status=='1'? true:false\">\r\n                                        </mat-slide-toggle>\r\n                                    </div>\r\n                                </td>\r\n                                <td>{{item.startDate | date}}</td>\r\n                                <td>{{item.endDate | date}}</td>\r\n                                <td><a href=\"javascript:void(0)\" class=\"button-pad add_city show\" data-toggle=\"modal\"\r\n                                        data-target=\"#Add_city\" (click)=\"getDAta(item._id)\"><i\r\n                                            class=\"fa fa-eye\"></i></a>\r\n                                    <div>\r\n\r\n                                        <!-- Modal define loaction edit state  -->\r\n                                        <div id=\"Add_city\" class=\"modal fade\" role=\"dialog\">\r\n                                            <div class=\"modal-dialog\">\r\n                                                <div class=\"modal-content\">\r\n\r\n                                                    <div class=\"modal-body\">\r\n                                                        <div *ngIf=\"modalData\">\r\n                                                            <table>\r\n                                                                <tr>\r\n\r\n                                                                    <th>Name</th>\r\n                                                                    <th *ngIf=\"modalData.type!=='seller'\">Arbic Name\r\n                                                                    </th>\r\n                                                                    <th *ngIf=\"modalData.type==='seller'\"> Email</th>\r\n                                                                    <th>type</th>\r\n\r\n                                                                </tr>\r\n\r\n                                                                <tr *ngFor=\"let item of modalData.list\">\r\n                                                                    <td *ngIf=\"item.name\">\r\n                                                                        {{item.name}}\r\n                                                                    </td>\r\n                                                                    <td *ngIf=\"item.firstName\">\r\n                                                                        {{item.firstName}} {{item.lastName}}\r\n                                                                    </td>\r\n                                                                    <td *ngIf=\"item.name_ar\">{{item.name_ar}}</td>\r\n                                                                    <td *ngIf=\"item.email\">{{item.email}}</td>\r\n                                                                    <td>{{modalData.type}}</td>\r\n\r\n\r\n                                                                </tr>\r\n\r\n                                                            </table>\r\n                                                        </div>\r\n                                                    </div>\r\n                                                </div>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n\r\n                                </td>\r\n\r\n                                <td>\r\n                                    <div class=\"action\">\r\n                                        <ul>\r\n                                            <li class=\"show\" (click)=\"goToviewdiscount(item._id)\"><i\r\n                                                    class=\"fa fa-eye\"></i></li>\r\n                                            <li class=\"edit\" (click)=\"goToeditdiscount(item._id)\"><i\r\n                                                    class=\"fa fa-pencil fa-fw\"></i></li>\r\n                                            <li class=\"delete\" (click)=\"deleteDiscount(item._id)\"><i\r\n                                                    class=\"fa fa-trash-o fa-fw\"></i></li>\r\n                                        </ul>\r\n                                    </div>\r\n                                </td>\r\n                            </tr>\r\n\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n                <!-----start pagination-->\r\n                <mat-paginator [length]=\"100\" [pageSize]=\"10\" [pageSizeOptions]=\"[5, 10, 25, 100]\"\r\n                    (page)=\"pageEvent = discountListAfterPageSizeChanged($event)\">\r\n                </mat-paginator>\r\n                <!-----end pagination-->\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Discounts</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <a (click)=\"goToaddoffers()\"><span>+</span>Add Discounts</a>\r\n                    </div>\r\n                </div>\r\n                <div class=\"outer_table\">\r\n                    <div class=\"search_fields\">\r\n                        <div class=\"filters Booking_status\">\r\n                            <label>Filter</label>\r\n                            <select [(ngModel)]=\"filterBy\" (change)=\"filterSelected($event)\">\r\n                                <option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n                                <option *ngIf=\"flag==false\" value=\"\"></option>\r\n                                <option value=\"active\">Active</option>\r\n                                <option value=\"inactive\">Inactive</option>\r\n                            </select>\r\n                        </div>\r\n                        <div class=\"search_inner_fiels\">\r\n                            <div class=\"filters Booking_status\">\r\n                                <label>Search</label>\r\n                                <div class=\"search_with_icons\">\r\n                                    <mat-form-field [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"text\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                    </mat-form-field>\r\n                                    <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                        (click)=\"searchMethod()\"></i>\r\n                                    <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                        (click)=\"clearSearch()\"></i>\r\n                                </div>\r\n                            </div>\r\n\r\n                        </div>\r\n                    </div>\r\n                    <div *ngIf=\"flagData==true\">\r\n                        <h1>No Data Found</h1>\r\n                    </div>\r\n                    <div *ngIf=\"flagData==false\" class=\"table-responsive\">\r\n                        <table>\r\n                            <tr>\r\n                                <th>Sr No</th>\r\n                                <!-- <th>Category</th>\r\n                                <th>Sub Category\r\n                                </th> -->\r\n                                <th>Name</th>\r\n                                <th>Discount</th>\r\n                                <th>Status</th>\r\n                                <th>Start Date</th>\r\n                                <th>End Date</th>\r\n                                <th>Offer Details</th>\r\n                                <th class=\"action_bx\">Action</th>\r\n                            </tr>\r\n                            <tr *ngFor=\"let item of bannerList; index as i\">\r\n                                <td *ngIf=\"flagUserList==false\">{{i+1}}</td>\r\n                                <td *ngIf=\"flagUserList==true\">{{srNo+i+1}}</td>\r\n                                <!-- <td>Lorem</td>\r\n                                <td>Lorem ipsum</td> -->\r\n                                <td>{{item?.name}}</td>\r\n                                <td>{{item?.discount}}%</td>\r\n                                <td>\r\n                                    <div class=\"enable_disable\">\r\n                                        <mat-slide-toggle (change)=\"changeDiscountStatus(item._id,item?.status)\"\r\n                                            [checked]=\"item.status=='1'? true:false\">\r\n                                        </mat-slide-toggle>\r\n                                    </div>\r\n                                </td>\r\n                                <td>{{item?.startDate | date}}</td>\r\n                                <td>{{item?.endDate | date}}</td>\r\n                                <td><a href=\"javascript:void(0)\" class=\"button-pad add_city show\" data-toggle=\"modal\"\r\n                                        data-target=\"#Add_city\" (click)=\"getDAta(item._id)\"><i style=\"color: #696969;\"\r\n                                            class=\"fa fa-eye\"></i></a>\r\n                                    <div>\r\n\r\n                                        <!-- Modal define loaction edit state  -->\r\n                                        <div id=\"Add_city\" class=\"modal fade\" role=\"dialog\">\r\n                                            <div class=\"modal-dialog\">\r\n                                                <div class=\"modal-content\">\r\n\r\n                                                    <div class=\"modal-body\">\r\n                                                        <div *ngIf=\"modalData\">\r\n                                                            <table>\r\n                                                                <tr>\r\n\r\n                                                                    <th>Name</th>\r\n                                                                    <th *ngIf=\"modalData.type!=='seller'\">Arbic Name\r\n                                                                    </th>\r\n                                                                    <th *ngIf=\"modalData.type==='seller'\"> Email</th>\r\n                                                                    <th>type</th>\r\n\r\n                                                                </tr>\r\n\r\n                                                                <tr *ngFor=\"let item of modalData.list\">\r\n                                                                    <td *ngIf=\"item.name\">\r\n                                                                        {{item?.name}}\r\n                                                                    </td>\r\n                                                                    <td *ngIf=\"item.firstName\">\r\n                                                                        {{item?.firstName}} {{item?.lastName}}\r\n                                                                    </td>\r\n                                                                    <td *ngIf=\"item.name_ar\">{{item?.name_ar}}</td>\r\n                                                                    <td *ngIf=\"item.email\">{{item?.email}}</td>\r\n                                                                    <td>{{modalData?.type}}</td>\r\n\r\n\r\n                                                                </tr>\r\n\r\n                                                            </table>\r\n                                                        </div>\r\n                                                    </div>\r\n                                                </div>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n\r\n                                </td>\r\n\r\n                                <td>\r\n                                    <div class=\"action\">\r\n                                        <ul>\r\n                                            <li class=\"show\" (click)=\"goToviewdiscount(item._id)\"><i\r\n                                                    class=\"fa fa-eye\"></i></li>\r\n                                            <li class=\"edit\" (click)=\"goToeditdiscount(item._id)\"><i\r\n                                                    class=\"fa fa-pencil fa-fw\"></i></li>\r\n                                            <li class=\"delete\" (click)=\"deleteDiscount(item._id)\"><i\r\n                                                    class=\"fa fa-trash-o fa-fw\"></i></li>\r\n                                        </ul>\r\n                                    </div>\r\n                                </td>\r\n                            </tr>\r\n\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n                <!-----start pagination-->\r\n                <mat-paginator [length]=\"length\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"pageSizeOptions\"\r\n                    (page)=\"pageEvent = discountListAfterPageSizeChanged($event)\">\r\n                </mat-paginator>\r\n                <!-----end pagination-->\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -1129,7 +1157,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Sales</h1>\r\n                    <!-- <div class=\"top_subheading_add\">\r\n                        <a (click)=\"goToaddsale()\"><span>+</span>Add Sale</a>\r\n                    </div> -->\r\n                </div>\r\n                <div class=\"tab-content\">\r\n                    <div id=\"allOrders\" class=\"tab-pane fade in active\">\r\n                        <div class=\"inner_content\">\r\n                            <div class=\"outer_table\">\r\n                            <div class=\"search_fields\">\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Filter</label>\r\n                                    <select>\r\n                                        <option>All</option>\r\n                                        <option>Name</option>\r\n                                    </select>\r\n                                </div>\r\n                                <div class=\"search_inner_fiels\">\r\n                                    <div class=\"filters Booking_status\">\r\n                                        <label>Search</label>\r\n                                        <div class=\"search_with_icons\">\r\n                                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                                <input matInput type=\"text\" name=\"search\" placeholder=\"\">\r\n                                            </mat-form-field>\r\n                                            <i class=\"fa fa-search\" aria-hidden=\"true\"></i>\r\n                                        </div>\r\n                                    </div>\r\n                                    \r\n                                </div>\r\n                            </div>\r\n                            <div class=\"table-responsive\">\r\n                                <table>\r\n                                    <tr>\r\n                                        <th>Order Id</th>\r\n                                        <th>Product Name</th>\r\n                                        <th>Product category</th>\r\n                                        <th>Product sub category</th>\r\n                                   \r\n                                        <th>ISBN Number</th>\r\n                                        <th>SKU Number</th>\r\n                                        <th>Quantity</th>\r\n                                        <th>Price</th>\r\n                                        <th>User name</th>\r\n                                        <th>User Address</th>\r\n                                        <th>Order Date</th>\r\n                                        <th>Delivery Date</th>\r\n                                        <th>Status</th>\r\n                                        <th class=\"action_bx\">Action</th>\r\n                                    </tr>\r\n                                    <tr>\r\n                                        <td>1</td>\r\n                                        <td>ABC</td>\r\n                                        <td>Food Industry</td>\r\n                                        <td>Industry</td>\r\n                                      <td>44545454</td>\r\n                                        <td>13143543</td>\r\n                                        <td>20 piece</td>\r\n                                        <td>$800</td>\r\n                                        <td>John</td>\r\n                                        <td>Lorem ipsum</td>\r\n                                        <td>28-05-2020</td>\r\n                                        <td>01-06-2020</td>\r\n                                        <td>\r\n\r\n                                            <select>\r\n                                                <option>Pending</option>\r\n                                                <option>Confirmed</option>\r\n                                                <option>cancelled</option>\r\n                                            </select>\r\n                                            </td>\r\n                                    \r\n                                        <td>\r\n                                            <div class=\"action\">\r\n                                                <ul>\r\n                                                    <li class=\"show\" (click)=\"goToviewOrder()\"><i class=\"fa fa-eye\"></i></li>\r\n                                                    <li class=\"edit\" (click)=\"goToeditOrder()\"><i class=\"fa fa-pencil fa-fw\"></i></li>\r\n                                                    <!-- <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li> -->\r\n                                                </ul>\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n                                    <tr>\r\n                                        <td>2</td>\r\n                                        <td>Lorem</td>\r\n                                        <td>Food Industry</td>\r\n                                        <td>Industry</td>\r\n                                        <td>44545454</td>\r\n                                        <td>13143543</td>\r\n                                        <td>20 piece</td>\r\n                                        <td>$800</td>\r\n                                        <td>John</td>\r\n                                        <td>Lorem ipsum</td>\r\n                                        <td>28-05-2020</td>\r\n                                        <td>01-06-2020</td>\r\n                                        <td>\r\n\r\n                                            <select>\r\n                                                <option>Pending</option>\r\n                                                <option>Confirmed</option>\r\n                                                <option>cancelled</option>\r\n                                            </select>\r\n                                            </td>\r\n                                    \r\n                                        <td>\r\n                                            <div class=\"action\">\r\n                                                <ul>\r\n                                                    <li class=\"show\" (click)=\"goToviewOrder()\"><i class=\"fa fa-eye\"></i></li>\r\n                                                    <li class=\"edit\" (click)=\"goToeditOrder()\"><i class=\"fa fa-pencil fa-fw\"></i></li>\r\n                                                    <!-- <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li> -->\r\n                                                </ul>\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n                                    <tr>\r\n                                        <td>1</td>\r\n                                        <td>ABC</td>\r\n                                        <td>Food Industry</td>\r\n                                        <td>Industry</td>\r\n                                        <td>44545454</td>\r\n                                        <td>13143543</td>\r\n                                        <td>20 piece</td>\r\n                                        <td>$800</td>\r\n                                        <td>John</td>\r\n                                        <td>Lorem ipsum</td>\r\n                                        <td>28-05-2020</td>\r\n                                        <td>01-06-2020</td>\r\n                                        <td>\r\n\r\n                                            <select>\r\n                                                <option>Pending</option>\r\n                                                <option>Confirmed</option>\r\n                                                <option>cancelled</option>\r\n                                            </select>\r\n                                            </td>\r\n                                    \r\n                                        <td>\r\n                                            <div class=\"action\">\r\n                                                <ul>\r\n                                                    <li class=\"show\" (click)=\"goToviewOrder()\"><i class=\"fa fa-eye\"></i></li>\r\n                                                    <li class=\"edit\" (click)=\"goToeditOrder()\"><i class=\"fa fa-pencil fa-fw\"></i></li>\r\n                                                    <!-- <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li> -->\r\n                                                </ul>\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n                                    <tr>\r\n                                        <td>1</td>\r\n                                        <td>ABC</td>\r\n                                        <td>Food Industry</td>\r\n                                        <td>Industry</td>\r\n                                        <td>44545454</td>\r\n                                        <td>13143543</td>\r\n                                        <td>20 piece</td>\r\n                                        <td>$800</td>\r\n                                        <td>John</td>\r\n                                        <td>Lorem ipsum</td>\r\n                                        <td>28-05-2020</td>\r\n                                        <td>01-06-2020</td>\r\n                                        <td>\r\n\r\n                                            <select>\r\n                                                <option>Pending</option>\r\n                                                <option>Confirmed</option>\r\n                                                <option>cancelled</option>\r\n                                            </select>\r\n                                            </td>\r\n                                        <td>\r\n                                            <div class=\"action\">\r\n                                                <ul>\r\n                                                    <li class=\"show\" (click)=\"goToviewOrder()\"><i class=\"fa fa-eye\"></i></li>\r\n                                                    <li class=\"edit\" (click)=\"goToeditOrder()\"><i class=\"fa fa-pencil fa-fw\"></i></li>\r\n                                                    <!-- <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li> -->\r\n                                                </ul>\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n                                </table>\r\n                            </div>\r\n                        </div>\r\n                            <!-----start pagination-->\r\n                            <mat-paginator [length]=\"100\" [pageSize]=\"10\" [pageSizeOptions]=\"[5, 10, 25, 100]\">\r\n                            </mat-paginator>\r\n                            <!-----end pagination-->\r\n                     </div>\r\n                </div>\r\n                \r\n            </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Sales</h1>\r\n                    <!-- <div class=\"top_subheading_add\">\r\n                        <a (click)=\"goToaddsale()\"><span>+</span>Add Sale</a>\r\n                    </div> -->\r\n                </div>\r\n                <div class=\"tab-content\">\r\n                    <div id=\"allOrders\" class=\"tab-pane fade in active\">\r\n                        <div class=\"inner_content\">\r\n                            <div class=\"outer_table\">\r\n                                <div class=\"search_fields\">\r\n                                    <div class=\"filters Booking_status\">\r\n                                        <label>Filter</label>\r\n                                        <select [(ngModel)]=\"filterBy\" (change)=\"filterSelected($event)\">\r\n                                            <option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n                                            <option *ngIf=\"flag==false\" value=\"\"></option>\r\n                                            <option *ngFor=\"let item of filterList\" value=\"{{item.value}}\">\r\n                                                {{item.viewValue}}\r\n                                            </option>\r\n                                            <!-- <option value=\"active\">Active</option>\r\n                                            <option value=\"inactive\">Inactive</option> -->\r\n                                            <!-- <option value=\"lastName\"></option> -->\r\n                                        </select>\r\n                                    </div>\r\n                                    <div class=\"search_inner_fiels\">\r\n                                        <div class=\"filters Booking_status\">\r\n                                            <label>Search</label>\r\n                                            <div class=\"search_with_icons\">\r\n                                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                                    <input matInput type=\"text\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                                </mat-form-field>\r\n                                                <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                                    (click)=\"searchMethod()\"></i>\r\n                                                <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                                    (click)=\"clearSearch()\"></i>\r\n                                            </div>\r\n                                        </div>\r\n\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"table-responsive\">\r\n                                    <table>\r\n                                        <tr>\r\n                                            <th>Order Id</th>\r\n                                            <th>Product Name</th>\r\n                                            <th>Product category</th>\r\n                                            <th>Product sub category</th>\r\n\r\n                                            <th>ISBN Number</th>\r\n                                            <th>SKU Number</th>\r\n                                            <th>Quantity</th>\r\n                                            <th>Price</th>\r\n                                            <th>User name</th>\r\n                                            <th>User Address</th>\r\n                                            <th>Order Date</th>\r\n                                            <th>Expected Delivery Date</th>\r\n                                            <th>Delivery Date</th>\r\n                                            <th>Status</th>\r\n                                            <th class=\"action_bx\">Action</th>\r\n                                        </tr>\r\n\r\n\r\n\r\n                                        <tr *ngFor=\"let item of salesList; let i=index\">\r\n                                            <td>{{item.orderId}}</td>\r\n                                            <td>{{item.productId.name}}</td>\r\n                                            <td>{{item.productId.category.name}}</td>\r\n                                            <td>{{item.productId.subCategory.name}}</td>\r\n                                            <td>{{item.productId.isbn}}</td>\r\n                                            <td>{{item.productId.sku}}</td>\r\n                                            <td>{{item.quantity}}</td>\r\n                                            <td>{{item.totalAmount}}</td>\r\n                                            <td>{{item.userId.firstName}} {{item.userId.lastName}}</td>\r\n                                            <td>{{item.deliveryAddress.address1}} {{item.deliveryAddress.address2}}\r\n                                                {{item.deliveryAddress.city}} {{item.deliveryAddress.state}}\r\n                                                {{item.deliveryAddress.postalCode}}</td>\r\n                                            <td>{{item.createdAt|date}}</td>\r\n                                            <td>{{item.deliveryDate==null?\"Date not assigned yet\":item.deliveryDate|date}}\r\n                                            </td>\r\n                                            <td>{{item.deliveredDate==null ?\"Not delivered yet\":item.deliveredDate|date}}\r\n                                            </td>\r\n                                            <td>\r\n                                                {{item.status}}\r\n\r\n                                            </td>\r\n                                            <td>\r\n                                                <div class=\"action\">\r\n                                                    <ul>\r\n                                                        <li class=\"show\" (click)=\"goToviewOrder(item._id)\"><i\r\n                                                                class=\"fa fa-eye\"></i></li>\r\n                                                        <!-- <li class=\"edit\" (click)=\"goToeditOrder()\"><i\r\n                                                                class=\"fa fa-pencil fa-fw\"></i></li> -->\r\n                                                        <!-- <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li> -->\r\n                                                    </ul>\r\n                                                </div>\r\n                                            </td>\r\n                                        </tr>\r\n                                    </table>\r\n                                </div>\r\n                            </div>\r\n                            <!-----start pagination-->\r\n                            <mat-paginator [length]=\"length\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"[5, 10, 25, 100]\"\r\n                                (page)=\"pageEvent = productListAfterPageSizeChanged($event)\">\r\n                            </mat-paginator>\r\n                            <!-----end pagination-->\r\n                        </div>\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -1149,7 +1177,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Payment</h1>\r\n                    <!-- <div class=\"right_side_buttons\">\r\n                        <a (click)=\"goTomanageEarning()\">Manage Earning</a> \r\n                        <a (click)=\"goTorefund()\">Refund</a> \r\n                    </div> -->\r\n                </div>\r\n                <div class=\"outer_table\">\r\n                <div class=\"search_fields\">\r\n                    <div class=\"filters Booking_status\">\r\n                        <label>Filter</label>\r\n                        <select>\r\n                            <option>All</option>\r\n                            <option>Name</option>\r\n                        </select>\r\n                    </div>\r\n                    <div class=\"search_inner_fiels\">\r\n                        <div class=\"filters Booking_status\">\r\n                            <label>Search</label>\r\n                            <div class=\"search_with_icons\">\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" name=\"search\" placeholder=\"\">\r\n                                </mat-form-field>\r\n                                <i class=\"fa fa-search\" aria-hidden=\"true\"></i>\r\n                            </div>\r\n                        </div>\r\n                        \r\n                    </div>\r\n                </div>\r\n                <div class=\"table-responsive\">\r\n                    <table>\r\n                        <tr>\r\n                            \r\n                            <th>Vendor name </th>\r\n                            <th>Total payable amount </th>\r\n                            <th>Last paid amount</th>\r\n                            <th>Payment Method</th>\r\n                            <th>Action</th>\r\n                           \r\n                        </tr>\r\n                        <tr>\r\n                            \r\n                            <td>John</td>\r\n                            <td>$20.00</td>\r\n                            <td>28-04-2020</td>\r\n                            <td>Cash</td>\r\n                            <td class=\"Booking_status\">\r\n                                <a class=\"accept_button\" data-toggle=\"modal\"\r\n                                data-target=\"#pay_now\">Pay Now</a>\r\n                            </td>\r\n                        </tr>\r\n                        <tr>\r\n                            \r\n                            <td>John</td>\r\n                            <td>$20.00</td>\r\n                            <td>28-04-2020</td>\r\n                            <td>Credit\r\n                                </td>\r\n                            <td class=\"Booking_status\">\r\n                                <a class=\"accept_button\" data-toggle=\"modal\"\r\n                                data-target=\"#pay_now\">Pay Now</a>\r\n                            </td>\r\n                        </tr>\r\n                        <tr>\r\n                            \r\n                            <td>John</td>\r\n                            <td>$20.00</td>\r\n                            <td>28-04-2020</td>\r\n                            <td>Cash\r\n                                </td>\r\n                            <td class=\"Booking_status\">\r\n                                <a class=\"accept_button\" data-toggle=\"modal\"\r\n                                data-target=\"#pay_now\">Pay Now</a>\r\n                            </td>\r\n                        </tr>\r\n                        <tr>\r\n                            \r\n                            <td>John</td>\r\n                            <td>$20.00</td>\r\n                            <td>28-04-2020</td>\r\n                            <td>\r\nCredit\r\n                                </td>\r\n                            <td class=\"Booking_status\">\r\n                                <a class=\"accept_button\" data-toggle=\"modal\"\r\n                                data-target=\"#pay_now\">Pay Now</a>\r\n                            </td>\r\n                        </tr>\r\n                        <tr>\r\n                            \r\n                            <td>John</td>\r\n                            <td>$20.00</td>\r\n                            <td>28-04-2020</td>\r\n                            <td>Cash\r\n                                </td>\r\n                            <td class=\"Booking_status\">\r\n                                <a class=\"accept_button\" data-toggle=\"modal\"\r\n                                data-target=\"#pay_now\">Pay Now</a>\r\n                            </td>\r\n                        </tr>\r\n            \r\n                        <!-- <tr>\r\n                            <td>4</td>\r\n                            <td>Jhon</td>\r\n                            <td>Jhon@gmail.com</td>\r\n                            <td>12345678</td>\r\n                            <td class=\"Booking_status\">\r\n                                <select>\r\n                                    <option value=\"\">Gateway</option>\r\n                                    <option value=\"\">Card</option>\r\n                                </select>\r\n                            </td>\r\n                            <td>1000$</td>\r\n                            <td>1000$</td>\r\n                        </tr> -->\r\n\r\n                    </table>\r\n                </div>\r\n                </div>\r\n                <!-----start pagination-->\r\n                <mat-paginator [length]=\"100\" [pageSize]=\"10\" [pageSizeOptions]=\"[5, 10, 25, 100]\">\r\n                </mat-paginator>\r\n                <!-----end pagination-->\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!-- Modal define loaction edit state  -->\r\n<!-- <div id=\"pay_now\" class=\"modal fade\" role=\"dialog\">\r\n    <div class=\"modal-dialog\">\r\n    <div class=\"modal-content\"> -->\r\n    <!-- <div class=\"modal-header\">\r\n    <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\r\n    </div> -->\r\n    <!-- <div class=\"modal-body\">\r\n    <h3>Payment Method</h3>\r\n    \r\n    <div class=\"row\">\r\n    <div class=\"form-group\">\r\n        <div class=\" col-md-6\">\r\n    <label for=\"title\">Card Holder Name </label>\r\n    <div class=\"input-group\">\r\n    <input class=\"form-control\" type=\"text\" value=\"\" name=\"Name\">\r\n    </div>\r\n    </div>\r\n    <div class=\" col-md-6\">\r\n        <label for=\"title\">Card Number </label>\r\n        <div class=\"input-group\">\r\n        <input class=\"form-control\" type=\"text\" value=\"\" name=\"Name\">\r\n        </div>\r\n        </div>\r\n    </div>\r\n    </div>\r\n\r\n    <div class=\"row\">\r\n        <div class=\"form-group\">\r\n            <div class=\" col-md-6\">\r\n        <label for=\"title\">Expiration (mm/yy) \r\n        </label>\r\n        <div class=\"input-group\">\r\n        <input class=\"form-control\" type=\"text\" value=\"\" name=\"Name\">\r\n        </div>\r\n        </div>\r\n        <div class=\" col-md-6\">\r\n            <label for=\"title\">Security Code </label>\r\n            <div class=\"input-group\">\r\n            <input class=\"form-control\" type=\"text\" value=\"\" name=\"Name\">\r\n            </div>\r\n            </div>\r\n        </div>\r\n        </div>\r\n    \r\n\r\n    <div class=\"model_buttons\">\r\n    <button class=\"mat-raised-button mat-primary mr-3\">\r\n    Save\r\n    </button>\r\n    <button class=\"mat-raised-button mat-warn\" data-dismiss=\"modal\">Close</button>\r\n    </div>\r\n    </div>\r\n    </div>\r\n    </div>\r\n    </div> -->\r\n    <!--Modal define loaction edit state -->";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Payment</h1>\r\n                    <!-- <div class=\"right_side_buttons\">\r\n                        <a (click)=\"goTomanageEarning()\">Manage Earning</a> \r\n                        <a (click)=\"goTorefund()\">Refund</a> \r\n                    </div> -->\r\n                </div>\r\n                <div class=\"outer_table\">\r\n                    <div class=\"search_fields\">\r\n                        <div class=\"filters Booking_status\">\r\n                            <label>Filter</label>\r\n                            <select [(ngModel)]=\"filterBy\" (change)=\"filterSelected($event)\">\r\n                                <option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n                                <option *ngIf=\"flag==false\" value=\"\"></option>\r\n                                <option value=\"active\">Active</option>\r\n                                <option value=\"inactive\">Inactive</option>\r\n                            </select>\r\n                        </div>\r\n                        <div class=\"search_inner_fiels\">\r\n                            <div class=\"filters Booking_status\">\r\n                                <label>Search</label>\r\n                                <div class=\"search_with_icons\">\r\n                                    <mat-form-field [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"text\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                    </mat-form-field>\r\n                                    <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                        (click)=\"searchMethod()\"></i>\r\n                                    <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                        (click)=\"clearSearch()\"></i>\r\n                                </div>\r\n                            </div>\r\n\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-responsive\">\r\n                        <table>\r\n                            <tr>\r\n\r\n                                <th>Vendor name </th>\r\n                                <th>Total payable amount </th>\r\n                                <th>Last paid amount</th>\r\n                                <th>Payment Method</th>\r\n                                <th>Action</th>\r\n\r\n                            </tr>\r\n                            <tr>\r\n\r\n                                <td>John</td>\r\n                                <td>$20.00</td>\r\n                                <td>28-04-2020</td>\r\n                                <td>Cash</td>\r\n                                <td class=\"Booking_status\">\r\n                                    <a class=\"accept_button\" data-toggle=\"modal\" data-target=\"#pay_now\">Pay Now</a>\r\n                                </td>\r\n                            </tr>\r\n                            <tr>\r\n\r\n                                <td>John</td>\r\n                                <td>$20.00</td>\r\n                                <td>28-04-2020</td>\r\n                                <td>Credit\r\n                                </td>\r\n                                <td class=\"Booking_status\">\r\n                                    <a class=\"accept_button\" data-toggle=\"modal\" data-target=\"#pay_now\">Pay Now</a>\r\n                                </td>\r\n                            </tr>\r\n                            <tr>\r\n\r\n                                <td>John</td>\r\n                                <td>$20.00</td>\r\n                                <td>28-04-2020</td>\r\n                                <td>Cash\r\n                                </td>\r\n                                <td class=\"Booking_status\">\r\n                                    <a class=\"accept_button\" data-toggle=\"modal\" data-target=\"#pay_now\">Pay Now</a>\r\n                                </td>\r\n                            </tr>\r\n                            <tr>\r\n\r\n                                <td>John</td>\r\n                                <td>$20.00</td>\r\n                                <td>28-04-2020</td>\r\n                                <td>\r\n                                    Credit\r\n                                </td>\r\n                                <td class=\"Booking_status\">\r\n                                    <a class=\"accept_button\" data-toggle=\"modal\" data-target=\"#pay_now\">Pay Now</a>\r\n                                </td>\r\n                            </tr>\r\n                            <tr>\r\n\r\n                                <td>John</td>\r\n                                <td>$20.00</td>\r\n                                <td>28-04-2020</td>\r\n                                <td>Cash\r\n                                </td>\r\n                                <td class=\"Booking_status\">\r\n                                    <a class=\"accept_button\" data-toggle=\"modal\" data-target=\"#pay_now\">Pay Now</a>\r\n                                </td>\r\n                            </tr>\r\n\r\n                            <!-- <tr>\r\n                            <td>4</td>\r\n                            <td>Jhon</td>\r\n                            <td>Jhon@gmail.com</td>\r\n                            <td>12345678</td>\r\n                            <td class=\"Booking_status\">\r\n                                <select>\r\n                                    <option value=\"\">Gateway</option>\r\n                                    <option value=\"\">Card</option>\r\n                                </select>\r\n                            </td>\r\n                            <td>1000$</td>\r\n                            <td>1000$</td>\r\n                        </tr> -->\r\n\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n                <!-----start pagination-->\r\n                <mat-paginator [length]=\"100\" [pageSize]=\"10\" [pageSizeOptions]=\"[5, 10, 25, 100]\">\r\n                </mat-paginator>\r\n                <!-----end pagination-->\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!-- Modal define loaction edit state  -->\r\n<!-- <div id=\"pay_now\" class=\"modal fade\" role=\"dialog\">\r\n    <div class=\"modal-dialog\">\r\n    <div class=\"modal-content\"> -->\r\n<!-- <div class=\"modal-header\">\r\n    <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\r\n    </div> -->\r\n<!-- <div class=\"modal-body\">\r\n    <h3>Payment Method</h3>\r\n    \r\n    <div class=\"row\">\r\n    <div class=\"form-group\">\r\n        <div class=\" col-md-6\">\r\n    <label for=\"title\">Card Holder Name </label>\r\n    <div class=\"input-group\">\r\n    <input class=\"form-control\" type=\"text\" value=\"\" name=\"Name\">\r\n    </div>\r\n    </div>\r\n    <div class=\" col-md-6\">\r\n        <label for=\"title\">Card Number </label>\r\n        <div class=\"input-group\">\r\n        <input class=\"form-control\" type=\"text\" value=\"\" name=\"Name\">\r\n        </div>\r\n        </div>\r\n    </div>\r\n    </div>\r\n\r\n    <div class=\"row\">\r\n        <div class=\"form-group\">\r\n            <div class=\" col-md-6\">\r\n        <label for=\"title\">Expiration (mm/yy) \r\n        </label>\r\n        <div class=\"input-group\">\r\n        <input class=\"form-control\" type=\"text\" value=\"\" name=\"Name\">\r\n        </div>\r\n        </div>\r\n        <div class=\" col-md-6\">\r\n            <label for=\"title\">Security Code </label>\r\n            <div class=\"input-group\">\r\n            <input class=\"form-control\" type=\"text\" value=\"\" name=\"Name\">\r\n            </div>\r\n            </div>\r\n        </div>\r\n        </div>\r\n    \r\n\r\n    <div class=\"model_buttons\">\r\n    <button class=\"mat-raised-button mat-primary mr-3\">\r\n    Save\r\n    </button>\r\n    <button class=\"mat-raised-button mat-warn\" data-dismiss=\"modal\">Close</button>\r\n    </div>\r\n    </div>\r\n    </div>\r\n    </div>\r\n    </div> -->\r\n<!--Modal define loaction edit state -->";
     /***/
   },
 
@@ -1169,7 +1197,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Privacy Policy</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <!-- <a (click)=\"goToaddcategory()\"><span>+</span>Add Category</a> -->\r\n                        <!-- <a class=\"add_excelsheet\">Import excel sheet</a> -->\r\n                    </div>\r\n                </div>\r\n             \r\n                 <form role=\"form\" #myForm=\"ngForm\" accept-charset=\"UTF-8\" novalidate>\r\n<div class=\"form-group has-feedback\" \r\n      [ngClass]=\"{ 'has-error': myckeditor.invalid && myckeditor.touched }\">\r\n\t<ckeditor [(ngModel)]=\"mycontent\" \r\n            #myckeditor=\"ngModel\"\r\n            name=\"myckeditor\"\r\n            required\r\n            [config]=\"ckeConfig\" \r\n            debounce=\"500\" \r\n            (paste)=\"onPaste($event)\"\r\n            (change)=\"onChange($event)\">\r\n\t</ckeditor>\r\n  <div *ngIf=\"myckeditor.invalid && myckeditor.touched\" class=\"help-block\">Required field.</div>\r\n</div>\r\n<button [disabled]=\"myForm.invalid\" class=\"btn btn-primary\">Save</button>\r\n</form>\r\n  </div>\r\n        </div>\r\n    </div>\r\n   \r\n</div>\r\n\r\n\r\n\r\n";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Privacy Policy</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <!-- <a (click)=\"goToaddcategory()\"><span>+</span>Add Category</a> -->\r\n                        <!-- <a class=\"add_excelsheet\">Import excel sheet</a> -->\r\n                    </div>\r\n                </div>\r\n\r\n                <form role=\"form\" #myForm=\"ngForm\" accept-charset=\"UTF-8\" novalidate>\r\n                    <div class=\"form-group has-feedback\"\r\n                        [ngClass]=\"{ 'has-error': myckeditor.invalid && myckeditor.touched }\">\r\n                        <ckeditor [(ngModel)]=\"mycontent\" #myckeditor=\"ngModel\" name=\"myckeditor\" required\r\n                            [config]=\"ckeConfig\" debounce=\"500\" (paste)=\"onPaste($event)\" (change)=\"onChange($event)\">\r\n                        </ckeditor>\r\n                        <div *ngIf=\"myckeditor.invalid && myckeditor.touched\" class=\"help-block\">Required field.</div>\r\n                    </div>\r\n                    <button [disabled]=\"myForm.invalid\" class=\"btn btn-primary\"\r\n                        (click)=\"updateTermAndCondition()\">Save</button>\r\n                </form>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</div>";
     /***/
   },
 
@@ -1189,7 +1217,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>All Products</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <a (click)=\"goToVendorList()\">Go To Vendor</a>\r\n                    </div>\r\n                </div>\r\n                <div class=\"outer_table\">\r\n                    <div class=\"search_fields\">\r\n                        <div class=\"filters Booking_status\">\r\n                            <label>Filter</label>\r\n                            <select [(ngModel)]=\"filterBy\" (change)=\"filterSelected($event)\">\r\n                                <option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n                                <option *ngIf=\"flag==false\" value=\"\"></option>\r\n                                <option value=\"inactive\">Blocked</option>\r\n                                <option value=\"active\">Unblocked</option>\r\n                            </select>\r\n                        </div>\r\n                        <div class=\"search_inner_fiels\">\r\n                            <div class=\"filters Booking_status\">\r\n                                <label>Search</label>\r\n                                <div class=\"search_with_icons\">\r\n                                    <mat-form-field [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"text\" name=\"search\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                    </mat-form-field>\r\n                                    <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" (click)=\"searchMethod()\"\r\n                                        aria-hidden=\"true\"></i>\r\n                                    <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                        (click)=\"clearSearch()\"></i>\r\n                                </div>\r\n                            </div>\r\n\r\n                        </div>\r\n                    </div>\r\n                    <div *ngIf=\"flagData==true\">\r\n                        <h1>No Data Found</h1>\r\n                    </div>\r\n                    <div *ngIf=\"flagData==false\" class=\"table-responsive\">\r\n                        <table>\r\n                            <tr>\r\n                                <th>Sr. No.</th>\r\n                                <th>Product Image</th>\r\n                                <th>Product Name</th>\r\n                                <th>Product Category</th>\r\n                                <th>Product Sub Category</th>\r\n\r\n                                <!-- <th>Product ISBN  Number</th>\r\n                            <th>Product SKU  Number</th> -->\r\n                                <th>Product Quantity</th>\r\n                                <th>Product Minimum quantity</th>\r\n                                <th>Price </th>\r\n                                <th>Product Description</th>\r\n                                <th class=\"action_bx\">Block</th>\r\n                            </tr>\r\n\r\n                            <tr *ngFor=\"let product of productList;  let i = index\">\r\n                                <td *ngIf=\"flagUserList==false\">{{i+1}}</td>\r\n                                <td *ngIf=\"flagUserList==true\">{{srNo+i+1}}</td>\r\n                                <td class=\"product_img\">\r\n                                    <figure>\r\n                                        <img *ngIf=\"!product.category.image\" src=\"../../assets/images/makeup.png\"\r\n                                            alt=\"\">\r\n                                        <img *ngIf=\"product.category.image\" src={{imageUrl+product.category.image}}\r\n                                            alt=\"product.category.name\">\r\n                                    </figure>\r\n                                </td>\r\n                                <td>{{ product.name }}</td>\r\n                                <td>{{ product.category.name }}</td>\r\n                                <td>{{ product.subCategory.name }}</td>\r\n                                <!-- <td>45454</td>\r\n                            <td>565656</td> -->\r\n                                <td>{{ product.productQuantity }}</td>\r\n                                <td>{{ product.purchaseQuantity }}</td>\r\n                                <td>$ {{ product.price }}</td>\r\n                                <td>{{ product.description.length < 24 ?\r\n                            product.description :\r\n                        product.description.slice(0,24)+ \"...\" }}</td>\r\n                                <td>\r\n                                    <div class=\"enable_disable\">\r\n                                        <mat-slide-toggle [checked]=\"product.status=='1'? true:false\"\r\n                                            (change)=onChangeBlockStatus(product.id,product.status)>\r\n                                        </mat-slide-toggle>\r\n                                    </div>\r\n                                </td>\r\n                            </tr>\r\n                        </table>\r\n                        <!-----start pagination-->\r\n                        <mat-paginator #paginator [length]=\"length\" [pageSize]=\"pageSize\"\r\n                            [pageSizeOptions]=\"pageSizeOptions\"\r\n                            (page)=\"pageEvent = vendorProductListAfterPageSizeChanged($event)\">\r\n                        </mat-paginator>\r\n                        <!-----end pagination-->\r\n                    </div>\r\n                </div>\r\n\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>All Products</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <a (click)=\"goToVendorList()\">Go To Vendor</a>\r\n                    </div>\r\n                </div>\r\n                <div class=\"outer_table\">\r\n                    <div class=\"search_fields\">\r\n                        <div class=\"filters Booking_status\">\r\n                            <label>Filter</label>\r\n                            <select [(ngModel)]=\"filterBy\" (change)=\"filterSelected($event)\">\r\n                                <option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n                                <option *ngIf=\"flag==false\" value=\"\"></option>\r\n                                <option value=\"inactive\">Blocked</option>\r\n                                <option value=\"active\">Unblocked</option>\r\n                            </select>\r\n                        </div>\r\n                        <div class=\"search_inner_fiels\">\r\n                            <div class=\"filters Booking_status\">\r\n                                <label>Search</label>\r\n                                <div class=\"search_with_icons\">\r\n                                    <mat-form-field [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"text\" name=\"search\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                    </mat-form-field>\r\n                                    <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" (click)=\"searchMethod()\"\r\n                                        aria-hidden=\"true\"></i>\r\n                                    <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                        (click)=\"clearSearch()\"></i>\r\n                                </div>\r\n                            </div>\r\n\r\n                        </div>\r\n                    </div>\r\n                    <div *ngIf=\"flagData==true\">\r\n                        <h1>No Data Found</h1>\r\n                    </div>\r\n                    <div *ngIf=\"flagData==false\" class=\"table-responsive\">\r\n                        <table>\r\n                            <tr>\r\n                                <th>Sr. No.</th>\r\n                                <th> Image</th>\r\n                                <th> Name</th>\r\n                                <th> Category</th>\r\n                                <th> Sub Category</th>\r\n\r\n                                <!-- <th>Product ISBN  Number</th>\r\n                            <th>Product SKU  Number</th> -->\r\n                                <th> Quantity</th>\r\n                                <th> Minimum quantity</th>\r\n                                <th>Price </th>\r\n                                <th>Product Description</th>\r\n                                <th class=\"action_bx\">Block</th>\r\n                            </tr>\r\n\r\n                            <tr *ngFor=\"let product of productList;  let i = index\">\r\n                                <td *ngIf=\"flagUserList==false\">{{i+1}}</td>\r\n                                <td *ngIf=\"flagUserList==true\">{{srNo+i+1}}</td>\r\n                                <td class=\"product_img\">\r\n                                    <figure>\r\n                                        <img *ngIf=\"!product.category.image\" src=\"../../assets/images/makeup.png\"\r\n                                            alt=\"\">\r\n                                        <img *ngIf=\"product.category.image\" src={{imageUrl+product.category.image}}\r\n                                            alt=\"product.category.name\">\r\n                                    </figure>\r\n                                </td>\r\n                                <td>{{ product.name }}</td>\r\n                                <td>{{ product.category.name }}</td>\r\n                                <td>{{ product.subCategory.name }}</td>\r\n                                <!-- <td>45454</td>\r\n                            <td>565656</td> -->\r\n                                <td>{{ product.productQuantity }}</td>\r\n                                <td>{{ product.purchaseQuantity }}</td>\r\n                                <td>$ {{ product.price }}</td>\r\n                                <td>{{ product.description.length < 24 ?\r\n                            product.description :\r\n                        product.description.slice(0,24)+ \"...\" }}</td>\r\n                                <td>\r\n                                    <div class=\"enable_disable\">\r\n                                        <mat-slide-toggle [checked]=\"product.status=='1'? true:false\"\r\n                                            (change)=onChangeBlockStatus(product.id,product.status)>\r\n                                        </mat-slide-toggle>\r\n                                    </div>\r\n                                </td>\r\n                            </tr>\r\n                        </table>\r\n                        <!-----start pagination-->\r\n                        <mat-paginator #paginator [length]=\"length\" [pageSize]=\"pageSize\"\r\n                            [pageSizeOptions]=\"pageSizeOptions\"\r\n                            (page)=\"pageEvent = vendorProductListAfterPageSizeChanged($event)\">\r\n                        </mat-paginator>\r\n                        <!-----end pagination-->\r\n                    </div>\r\n                </div>\r\n\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -1209,7 +1237,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>{{profileData.firstName}} Profile</h1>\r\n                </div>\r\n\r\n                <div class=\"add_business_detail\">\r\n                    <div id=\"exTab1\">\r\n                        <div class=\"businiess_outer\">\r\n                            <div class=\"profile_image_detail\">\r\n                                <figure><img style=\"border-radius: 50%; height: 120px; width: 120px;\"\r\n                                        src={{imageUrl+profileData.profilePic}}>\r\n                                </figure>\r\n                                <h2>{{profileData.firstName}} {{profileData.lastName}}</h2>\r\n                                <div class=\"follow_all\">\r\n                                    <ul>\r\n                                        <li><a (click)=\"goToeditprofile(profileData._id)\">Edit Profile</a></li>\r\n                                    </ul>\r\n                                </div>\r\n                                <!-- <div class=\"social_icon\">\r\n                                    <ul>\r\n                                        <li><a href=\"javascript:void(0)\" href={{profileData?.facebookLink}}><img\r\n                                                    src=\"../../assets/images/facebook.png\"></a></li>\r\n                                        <li><a href=\"javascript:void(0)\" href={{profileData?.twitterLink}}><img\r\n                                                    src=\"../../assets/images/twitter.png\"></a>\r\n                                        </li>\r\n                                        <li><a href=\"javascript:void(0)\" href={{profileData?.instagramLink}}><img\r\n                                                    src=\"../../assets/images/instagram.png\"></a></li>\r\n                                        <li><a href=\"javascript:void(0)\" href={{profileData?.linkedinLink}}><img\r\n                                                    src=\"../../assets/images/linkedin.png\"></a></li>\r\n\r\n\r\n                                    </ul>\r\n                                </div> -->\r\n                                <!-- <div class=\"apple_store_link\">\r\n                                    <ul>\r\n                                        <li><a href=\"javascript:void(0)\" href={{profileData?.appleStoreLink}}><img\r\n                                                    src=\"../../assets/images/apple-store.png\"></a></li>\r\n                                        <li><a href=\"javascript:void(0)\" href={{profileData?.playStoreLink}}><img\r\n                                                    src=\"../../assets/images/google-play.png\"></a></li>\r\n\r\n                                    </ul>\r\n                                </div> -->\r\n\r\n                            </div>\r\n\r\n                        </div>\r\n                        <div class=\"tab-content clearfix\">\r\n                            <div class=\"tab-pane active\" id=\"1a\">\r\n                                <div class=\"personal_deatil\">\r\n                                    <ul>\r\n                                        <li><strong>Full Name :</strong>{{profileData.firstName}}\r\n                                            {{profileData.lastName}} </li>\r\n                                        <li><strong>Phone Number\r\n                                                :</strong>{{profileData.countryCode}}-{{profileData.phone}}</li>\r\n                                        <li><strong>Email :</strong> {{profileData.email}}</li>\r\n                                        <li><strong>Location :</strong>\r\n                                            {{profileData.address}}\r\n                                        </li>\r\n                                    </ul>\r\n\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n\r\n                </div>\r\n\r\n\r\n\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>{{profileData?.firstName}}'s Profile</h1>\r\n                </div>\r\n\r\n                <div class=\"add_business_detail\">\r\n                    <div id=\"exTab1\">\r\n                        <div class=\"businiess_outer\">\r\n                            <div class=\"profile_image_detail\">\r\n                                <figure><img style=\"border-radius: 50%; height: 120px; width: 120px;\"\r\n                                        src={{imageUrl+profileData?.profilePic}}>\r\n                                </figure>\r\n                                <h2>{{profileData?.firstName}} {{profileData?.lastName}}</h2>\r\n                                <div class=\"follow_all\">\r\n                                    <ul>\r\n                                        <li><a (click)=\"goToeditprofile(profileData._id)\">Edit Profile</a></li>\r\n                                    </ul>\r\n                                </div>\r\n                                <!-- <div class=\"social_icon\">\r\n                                    <ul>\r\n                                        <li><a href=\"javascript:void(0)\" href={{profileData?.facebookLink}}><img\r\n                                                    src=\"../../assets/images/facebook.png\"></a></li>\r\n                                        <li><a href=\"javascript:void(0)\" href={{profileData?.twitterLink}}><img\r\n                                                    src=\"../../assets/images/twitter.png\"></a>\r\n                                        </li>\r\n                                        <li><a href=\"javascript:void(0)\" href={{profileData?.instagramLink}}><img\r\n                                                    src=\"../../assets/images/instagram.png\"></a></li>\r\n                                        <li><a href=\"javascript:void(0)\" href={{profileData?.linkedinLink}}><img\r\n                                                    src=\"../../assets/images/linkedin.png\"></a></li>\r\n\r\n\r\n                                    </ul>\r\n                                </div> -->\r\n                                <!-- <div class=\"apple_store_link\">\r\n                                    <ul>\r\n                                        <li><a href=\"javascript:void(0)\" href={{profileData?.appleStoreLink}}><img\r\n                                                    src=\"../../assets/images/apple-store.png\"></a></li>\r\n                                        <li><a href=\"javascript:void(0)\" href={{profileData?.playStoreLink}}><img\r\n                                                    src=\"../../assets/images/google-play.png\"></a></li>\r\n\r\n                                    </ul>\r\n                                </div> -->\r\n\r\n                            </div>\r\n\r\n                        </div>\r\n                        <div class=\"tab-content clearfix\">\r\n                            <div class=\"tab-pane active\" id=\"1a\">\r\n                                <div class=\"personal_deatil\">\r\n                                    <ul>\r\n                                        <li><strong>Full Name :</strong>{{profileData?.firstName}}\r\n                                            {{profileData?.lastName}} </li>\r\n                                        <li><strong>Phone Number\r\n                                                :</strong>{{profileData?.countryCode}}-{{profileData?.phone}}</li>\r\n                                        <li><strong>Email :</strong> {{profileData?.email}}</li>\r\n                                        <li><strong>Location :</strong>\r\n                                            {{profileData?.address}}\r\n                                        </li>\r\n                                    </ul>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -1249,7 +1277,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "\r\n<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Vendor Sales Report Graph</h1>\r\n               </div>\r\n                \r\n                <div class=\"charts\">\r\n                    <ul>\r\n                        <li>\r\n                            <div class=\"chart_title\">\r\n                                <p>Report Graph</p>\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Filter</label>\r\n                                    <select>\r\n                                        <option>Daily</option>\r\n                                        <option>Weekly</option>\r\n                                        <option>Monthly</option>\r\n                                        <option>Yearly</option>\r\n                                    </select>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"user_charts\">\r\n                                <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\"\r\n                                    [options]=\"barChartOptions\" [plugins]=\"barChartPlugins\" [legend]=\"barChartLegend\"\r\n                                    [chartType]=\"barChartType\">\r\n                                </canvas>\r\n                            </div>\r\n                        </li>                     \r\n                    </ul>\r\n                </div>\r\n             \r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Vendor Sales Report Graph</h1>\r\n                </div>\r\n\r\n                <div class=\"charts\">\r\n                    <ul>\r\n                        <li>\r\n                            <div class=\"chart_title\">\r\n                                <p>Report Graph</p>\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Filter</label>\r\n                                    <select>\r\n                                        <option>Daily</option>\r\n                                        <option>Weekly</option>\r\n                                        <option>Monthly</option>\r\n                                        <option>Yearly</option>\r\n                                    </select>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"user_charts\">\r\n                                <app-graph [chartData]=\"data\"></app-graph>\r\n                                <!-- <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\"\r\n                                    [options]=\"barChartOptions\" [plugins]=\"barChartPlugins\" [legend]=\"barChartLegend\"\r\n                                    [chartType]=\"barChartType\">\r\n                                </canvas> -->\r\n                            </div>\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -1309,7 +1337,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Return  Policy</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <!-- <a (click)=\"goToaddcategory()\"><span>+</span>Add Category</a> -->\r\n                        <!-- <a class=\"add_excelsheet\">Import excel sheet</a> -->\r\n                    </div>\r\n                </div>\r\n             \r\n                 <form role=\"form\" #myForm=\"ngForm\" accept-charset=\"UTF-8\" novalidate>\r\n<div class=\"form-group has-feedback\" \r\n      [ngClass]=\"{ 'has-error': myckeditor.invalid && myckeditor.touched }\">\r\n\t<ckeditor [(ngModel)]=\"mycontent\" \r\n            #myckeditor=\"ngModel\"\r\n            name=\"myckeditor\"\r\n            required\r\n            [config]=\"ckeConfig\" \r\n            debounce=\"500\" \r\n            (paste)=\"onPaste($event)\"\r\n            (change)=\"onChange($event)\">\r\n\t</ckeditor>\r\n  <div *ngIf=\"myckeditor.invalid && myckeditor.touched\" class=\"help-block\">Required field.</div>\r\n</div>\r\n<button [disabled]=\"myForm.invalid\" class=\"btn btn-primary\">Save</button>\r\n</form>\r\n  </div>\r\n        </div>\r\n    </div>\r\n   \r\n</div>\r\n\r\n\r\n\r\n\r\n";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Return Policy</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <!-- <a (click)=\"goToaddcategory()\"><span>+</span>Add Category</a> -->\r\n                        <!-- <a class=\"add_excelsheet\">Import excel sheet</a> -->\r\n                    </div>\r\n                </div>\r\n\r\n                <form role=\"form\" #myForm=\"ngForm\" accept-charset=\"UTF-8\" novalidate>\r\n                    <div class=\"form-group has-feedback\"\r\n                        [ngClass]=\"{ 'has-error': myckeditor.invalid && myckeditor.touched }\">\r\n                        <ckeditor [(ngModel)]=\"mycontent\" #myckeditor=\"ngModel\" name=\"myckeditor\" required\r\n                            [config]=\"ckeConfig\" debounce=\"500\" (paste)=\"onPaste($event)\" (change)=\"onChange($event)\">\r\n                        </ckeditor>\r\n                        <div *ngIf=\"myckeditor.invalid && myckeditor.touched\" class=\"help-block\">Required field.</div>\r\n                    </div>\r\n                    <button [disabled]=\"myForm.invalid\" class=\"btn btn-primary\"\r\n                        (click)=\"updateTermAndCondition()\">Save</button>\r\n                </form>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</div>";
     /***/
   },
 
@@ -1329,7 +1357,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n<app-navbar></app-navbar>\r\n<div id=\"content-wrapper\" class=\"\">\r\n<div id=\"content\">\r\n<app-sidebar></app-sidebar>\r\n<div class=\"container-fluid\">\r\n<div class=\"sub_heading\">\r\n<h1>Report of Revenue</h1>\r\n<div class=\"top_subheading_add\">\r\n<a (click)=\"goToreveuegraph()\">View Revenue Graph</a>\r\n</div>\r\n</div>\r\n<div class=\"tab-content\">\r\n<div id=\"allOrders\" class=\"tab-pane fade in active\">\r\n<div class=\"inner_content\">\r\n<div class=\"outer_table\">\r\n<div class=\"search_fields\">\r\n<div class=\"filters Booking_status\">\r\n<label>Filter</label>\r\n<select>\r\n<option>All</option>\r\n<option>Name</option>\r\n</select>\r\n</div>\r\n<div class=\"search_inner_fiels\">\r\n<div class=\"filters Booking_status\">\r\n<label>Search</label>\r\n<div class=\"search_with_icons\">\r\n<mat-form-field [floatLabel]=\"'never'\">\r\n<input matInput type=\"text\" name=\"search\" placeholder=\"\">\r\n</mat-form-field>\r\n<i class=\"fa fa-search\" aria-hidden=\"true\"></i>\r\n</div>\r\n</div>\r\n\r\n</div>\r\n</div>\r\n<div class=\"table-responsive\">\r\n<table>\r\n<tr>\r\n    <th>Vendor</th>\r\n<th>Total Price</th>\r\n<th>Total Tax</th>\r\n<th>Total Commission</th>\r\n<th>Net Profit</th>\r\n<!-- <th>SKUN number</th>\r\n<th>Quantity</th>\r\n<th>Price</th>\r\n<th>User name</th>\r\n<th>User Address</th>\r\n<th>Order Date</th>\r\n<th>Delivery Date</th>\r\n<th>Status</th> -->\r\n<!-- <th class=\"action_bx\">Action</th> -->\r\n</tr>\r\n<tr>\r\n    <td>Lorem</td>\r\n    <td>$80</td>\r\n    <td>20</td>\r\n    <td>224</td>\r\n    <td>$50</td>\r\n<!-- <td>13143543</td>\r\n<td>20 piece</td>\r\n<td>800</td>\r\n<td>John</td>\r\n<td>Lorem ipsum</td>\r\n<td>28-05-2020</td>\r\n<td>01-06-2020</td>\r\n<td class=\"product_cost\">Pending</td> -->\r\n\r\n<!-- <td>\r\n<div class=\"action\">\r\n<ul>\r\n<li class=\"show\" (click)=\"goToreveuegraph()\"><i class=\"fa fa-eye\"></i></li>\r\n\r\n</ul>\r\n</div>\r\n</td> -->\r\n</tr>\r\n<tr>\r\n    <td>Lorem</td>\r\n    <td>$100</td>\r\n    <td>20</td>\r\n    <td>224</td>\r\n    <td>$50</td>\r\n\r\n<!-- <td>\r\n<div class=\"action\">\r\n<ul>\r\n<li class=\"show\" (click)=\"goToreveuegraph()\"><i class=\"fa fa-eye\"></i></li>\r\n\r\n</ul>\r\n</div>\r\n</td> -->\r\n</tr>\r\n<tr>\r\n    <td>Lorem</td>\r\n    <td>$80</td>\r\n    <td>20</td>\r\n    <td>224</td>\r\n    <td>$50</td>\r\n\r\n<!-- <td>\r\n<div class=\"action\">\r\n<ul>\r\n<li class=\"show\" (click)=\"goToreveuegraph()\"><i class=\"fa fa-eye\"></i></li>\r\n<li class=\"edit\" (click)=\"goToeditsale()\"><i class=\"fa fa-pencil fa-fw\"></i></li>\r\n<li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li>\r\n</ul>\r\n</div>\r\n</td> -->\r\n</tr>\r\n<tr>\r\n    <td>Lorem</td>\r\n    <td>$110</td>\r\n    <td>20</td>\r\n  <td>224</td>\r\n  <td>$50</td>\r\n<!--                                     \r\n<td>\r\n<div class=\"action\">\r\n<ul>\r\n<li class=\"show\" (click)=\"goToreveuegraph()\"><i class=\"fa fa-eye\"></i></li>\r\n<li class=\"edit\" (click)=\"goToeditsale()\"><i class=\"fa fa-pencil fa-fw\"></i></li> \r\n<li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li>\r\n</ul>\r\n</div>\r\n</td> -->\r\n</tr>\r\n</table>\r\n</div>\r\n</div>\r\n<!-----start pagination-->\r\n<mat-paginator [length]=\"100\" [pageSize]=\"10\" [pageSizeOptions]=\"[5, 10, 25, 100]\">\r\n</mat-paginator>\r\n<!-----end pagination-->\r\n</div>\r\n</div>\r\n\r\n</div>\r\n</div>\r\n</div>\r\n</div>\r\n</div>\r\n";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Report of Revenue</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <a (click)=\"goToreveuegraph()\">View Revenue Graph</a>\r\n                    </div>\r\n                </div>\r\n                <div class=\"tab-content\">\r\n                    <div id=\"allOrders\" class=\"tab-pane fade in active\">\r\n                        <div class=\"inner_content\">\r\n                            <div class=\"outer_table\">\r\n                                <div class=\"search_fields\">\r\n                                    <div class=\"filters Booking_status\">\r\n                                        <label>Filter</label>\r\n                                        <select [(ngModel)]=\"filterBy\" (change)=\"filterSelected($event)\">\r\n                                            <option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n                                            <option *ngIf=\"flag==false\" value=\"\"></option>\r\n                                            <option value=\"active\">Active</option>\r\n                                            <option value=\"inactive\">Inactive</option>\r\n                                        </select>\r\n                                    </div>\r\n                                    <div class=\"search_inner_fiels\">\r\n                                        <div class=\"filters Booking_status\">\r\n                                            <label>Search</label>\r\n                                            <div class=\"search_with_icons\">\r\n                                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                                    <input matInput type=\"text\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                                </mat-form-field>\r\n                                                <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                                    (click)=\"searchMethod()\"></i>\r\n                                                <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                                    (click)=\"clearSearch()\"></i>\r\n                                            </div>\r\n                                        </div>\r\n\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"table-responsive\">\r\n                                    <table>\r\n                                        <tr>\r\n                                            <th>Vendor</th>\r\n                                            <th>Total Price</th>\r\n                                            <th>Total Tax</th>\r\n                                            <th>Total Commission</th>\r\n                                            <th>Net Profit</th>\r\n                                            <!-- <th>SKUN number</th>\r\n<th>Quantity</th>\r\n<th>Price</th>\r\n<th>User name</th>\r\n<th>User Address</th>\r\n<th>Order Date</th>\r\n<th>Delivery Date</th>\r\n<th>Status</th> -->\r\n                                            <!-- <th class=\"action_bx\">Action</th> -->\r\n                                        </tr>\r\n                                        <tr>\r\n                                            <td>Lorem</td>\r\n                                            <td>$80</td>\r\n                                            <td>20</td>\r\n                                            <td>224</td>\r\n                                            <td>$50</td>\r\n                                            <!-- <td>13143543</td>\r\n<td>20 piece</td>\r\n<td>800</td>\r\n<td>John</td>\r\n<td>Lorem ipsum</td>\r\n<td>28-05-2020</td>\r\n<td>01-06-2020</td>\r\n<td class=\"product_cost\">Pending</td> -->\r\n\r\n                                            <!-- <td>\r\n<div class=\"action\">\r\n<ul>\r\n<li class=\"show\" (click)=\"goToreveuegraph()\"><i class=\"fa fa-eye\"></i></li>\r\n\r\n</ul>\r\n</div>\r\n</td> -->\r\n                                        </tr>\r\n                                        <tr>\r\n                                            <td>Lorem</td>\r\n                                            <td>$100</td>\r\n                                            <td>20</td>\r\n                                            <td>224</td>\r\n                                            <td>$50</td>\r\n\r\n                                            <!-- <td>\r\n<div class=\"action\">\r\n<ul>\r\n<li class=\"show\" (click)=\"goToreveuegraph()\"><i class=\"fa fa-eye\"></i></li>\r\n\r\n</ul>\r\n</div>\r\n</td> -->\r\n                                        </tr>\r\n                                        <tr>\r\n                                            <td>Lorem</td>\r\n                                            <td>$80</td>\r\n                                            <td>20</td>\r\n                                            <td>224</td>\r\n                                            <td>$50</td>\r\n\r\n                                            <!-- <td>\r\n<div class=\"action\">\r\n<ul>\r\n<li class=\"show\" (click)=\"goToreveuegraph()\"><i class=\"fa fa-eye\"></i></li>\r\n<li class=\"edit\" (click)=\"goToeditsale()\"><i class=\"fa fa-pencil fa-fw\"></i></li>\r\n<li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li>\r\n</ul>\r\n</div>\r\n</td> -->\r\n                                        </tr>\r\n                                        <tr>\r\n                                            <td>Lorem</td>\r\n                                            <td>$110</td>\r\n                                            <td>20</td>\r\n                                            <td>224</td>\r\n                                            <td>$50</td>\r\n                                            <!--                                     \r\n<td>\r\n<div class=\"action\">\r\n<ul>\r\n<li class=\"show\" (click)=\"goToreveuegraph()\"><i class=\"fa fa-eye\"></i></li>\r\n<li class=\"edit\" (click)=\"goToeditsale()\"><i class=\"fa fa-pencil fa-fw\"></i></li> \r\n<li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li>\r\n</ul>\r\n</div>\r\n</td> -->\r\n                                        </tr>\r\n                                    </table>\r\n                                </div>\r\n                            </div>\r\n                            <!-----start pagination-->\r\n                            <mat-paginator [length]=\"length\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"pageSizeOptions\"\r\n                                (page)=\"pageEvent = revenueReportListAfterPageSizeChanged($event)\">\r\n                            </mat-paginator>\r\n                            <!-----end pagination-->\r\n                        </div>\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -1349,7 +1377,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "\r\n<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Revenue Graph</h1>\r\n               </div>\r\n                \r\n                <div class=\"charts\">\r\n                    <ul>\r\n                        <li>\r\n                            <div class=\"chart_title\">\r\n                                <p>Revenue Graph</p>\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Filter</label>\r\n                                    <select>\r\n                                        <option>Daily</option>\r\n                                        <option>Weekly</option>\r\n                                        <option>Monthly</option>\r\n                                        <option>Yearly</option>\r\n                                    </select>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"user_charts\">\r\n                                <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\"\r\n                                    [options]=\"barChartOptions\" [plugins]=\"barChartPlugins\" [legend]=\"barChartLegend\"\r\n                                    [chartType]=\"barChartType\">\r\n                                </canvas>\r\n                            </div>\r\n                        </li>                     \r\n                    </ul>\r\n                </div>\r\n             \r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Revenue Graph</h1>\r\n                </div>\r\n\r\n                <div class=\"charts\">\r\n                    <ul>\r\n                        <li>\r\n                            <div class=\"chart_title\">\r\n                                <p>Revenue Graph</p>\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Filter</label>\r\n                                    <select>\r\n                                        <option>Daily</option>\r\n                                        <option>Weekly</option>\r\n                                        <option>Monthly</option>\r\n                                        <option>Yearly</option>\r\n                                    </select>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"user_charts\">\r\n                                <app-graph [chartData]=\"data\"></app-graph>\r\n                                <!-- <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\"\r\n                                    [options]=\"barChartOptions\" [plugins]=\"barChartPlugins\" [legend]=\"barChartLegend\"\r\n                                    [chartType]=\"barChartType\">\r\n                                </canvas> -->\r\n                            </div>\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -1369,7 +1397,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "\r\n<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Sales Graph</h1>\r\n               </div>\r\n                \r\n                <div class=\"charts\">\r\n                    <ul>\r\n                        <li>\r\n                            <div class=\"chart_title\">\r\n                                <p>Sales Graph</p>\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Filter</label>\r\n                                    <select>\r\n                                        <option>Daily</option>\r\n                                        <option>Weekly</option>\r\n                                        <option>Monthly</option>\r\n                                        <option>Yearly</option>\r\n                                    </select>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"user_charts\">\r\n                                <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\"\r\n                                    [options]=\"barChartOptions\" [plugins]=\"barChartPlugins\" [legend]=\"barChartLegend\"\r\n                                    [chartType]=\"barChartType\">\r\n                                </canvas>\r\n                            </div>\r\n                        </li>                     \r\n                    </ul>\r\n                </div>\r\n             \r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Sales Graph</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <a (click)=\"goTosales()\">Go to Sales </a>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"charts\">\r\n                    <ul>\r\n                        <li>\r\n                            <div class=\"chart_title\">\r\n                                <p>Sales Graph</p>\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Filter</label>\r\n                                    <select [(ngModel)]=\"period\" (change)=\"periodSelected($event)\">\r\n                                        <!-- <option>Daily</option> -->\r\n                                        <option value=\"weekly\">Weekly</option>\r\n                                        <option value=\"monthly\">Monthly</option>\r\n                                        <option value=\"yearly\"> Yearly</option>\r\n                                    </select>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"user_charts\" *ngIf=\"chartReady\">\r\n                                <!-- <app-graph [chartData]=\"data\"></app-graph> -->\r\n                                <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\"\r\n                                    [options]=\"barChartOptions\" [plugins]=\"barChartPlugins\" [legend]=\"barChartLegend\"\r\n                                    [chartType]=\"barChartType\">\r\n                                </canvas>\r\n                            </div>\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -1389,7 +1417,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n<app-navbar></app-navbar>\r\n<div id=\"content-wrapper\" class=\"\">\r\n<div id=\"content\">\r\n<app-sidebar></app-sidebar>\r\n<div class=\"container-fluid\">\r\n<div class=\"sub_heading\">\r\n<h1>Report of sales</h1>\r\n<div class=\"top_subheading_add\">\r\n<a (click)=\"goTosalesgraph()\">View Sales Graph</a>\r\n</div>\r\n</div>\r\n<div class=\"tab-content\">\r\n<div id=\"allOrders\" class=\"tab-pane fade in active\">\r\n<div class=\"inner_content\">\r\n<div class=\"outer_table\">\r\n<div class=\"search_fields\">\r\n<div class=\"filters Booking_status\">\r\n<label>Filter</label>\r\n<select>\r\n<option>All</option>\r\n<option>Name</option>\r\n</select>\r\n</div>\r\n<div class=\"search_inner_fiels\">\r\n<div class=\"filters Booking_status\">\r\n<label>Search</label>\r\n<div class=\"search_with_icons\">\r\n<mat-form-field [floatLabel]=\"'never'\">\r\n<input matInput type=\"text\" name=\"search\" placeholder=\"\">\r\n</mat-form-field>\r\n<i class=\"fa fa-search\" aria-hidden=\"true\"></i>\r\n</div>\r\n</div>\r\n\r\n</div>\r\n</div>\r\n<div class=\"table-responsive\">\r\n<table>\r\n<tr>\r\n<th>Order Id</th>\r\n<th>Product Name</th>\r\n<th>Product category</th>\r\n<th>Product sub category</th>\r\n\r\n<th>SKU number</th>\r\n<th>ISBN number</th>\r\n<th>Quantity</th>\r\n<th>Price</th>\r\n<th>User name</th>\r\n<th>User Address</th>\r\n<th>Order Date</th>\r\n<th>Delivery Date</th>\r\n<th>Status</th>\r\n<!-- <th class=\"action_bx\">Action</th> -->\r\n</tr>\r\n<tr>\r\n<td>1</td>\r\n<td>ABC</td>\r\n<td>Food Industry</td>\r\n<td>Industry</td>\r\n\r\n<td>13143543</td>\r\n<td>45345</td>\r\n<td>20 piece</td>\r\n<td>$800</td>\r\n<td>John</td>\r\n<td>Lorem ipsum</td>\r\n<td>28-05-2020</td>\r\n<td>01-06-2020</td>\r\n<td>\r\n    <select>\r\n        <option>Pending</option>\r\n        <option>Confirmed</option>\r\n        <option>cancelled</option>\r\n    </select>\r\n</td>\r\n\r\n<!-- <td>\r\n<div class=\"action\">\r\n<ul>\r\n<li class=\"show\" (click)=\"goTosalesgraph()\"><i class=\"fa fa-eye\"></i></li>\r\n\r\n</ul>\r\n</div>\r\n</td> -->\r\n</tr>\r\n<tr>\r\n<td>2</td>\r\n<td>Lorem</td>\r\n<td>Food Industry</td>\r\n<td>Industry</td>\r\n\r\n<td>13143543</td>\r\n<td>5566456</td>\r\n<td>20 piece</td>\r\n<td>$800</td>\r\n<td>John</td>\r\n<td>Lorem ipsum</td>\r\n<td>28-05-2020</td>\r\n<td>01-06-2020</td>\r\n<td>\r\n    <select>\r\n        <option>Pending</option>\r\n        <option>Confirmed</option>\r\n        <option>cancelled</option>\r\n    </select>\r\n</td>\r\n\r\n<!-- <td>\r\n<div class=\"action\">\r\n<ul>\r\n<li class=\"show\" (click)=\"goTosalesgraph()\"><i class=\"fa fa-eye\"></i></li>\r\n\r\n</ul>\r\n</div>\r\n</td> -->\r\n</tr>\r\n<tr>\r\n<td>1</td>\r\n<td>ABC</td>\r\n<td>Food Industry</td>\r\n<td>Industry</td>\r\n\r\n<td>13143543</td>\r\n<td>45345345</td>\r\n<td>20 piece</td>\r\n<td>$800</td>\r\n<td>John</td>\r\n<td>Lorem ipsum</td>\r\n<td>28-05-2020</td>\r\n<td>01-06-2020</td>\r\n<td>\r\n    <select>\r\n        <option>Pending</option>\r\n        <option>Confirmed</option>\r\n        <option>cancelled</option>\r\n    </select>\r\n</td>\r\n\r\n<!-- <td>\r\n<div class=\"action\">\r\n<ul>\r\n<li class=\"show\" (click)=\"goTosalesgraph()\"><i class=\"fa fa-eye\"></i></li>\r\n\r\n</ul>\r\n</div>\r\n</td> -->\r\n</tr>\r\n<tr>\r\n<td>1</td>\r\n<td>ABC</td>\r\n<td>Food Industry</td>\r\n<td>Industry</td>\r\n\r\n<td>13143543</td>\r\n<td>4334534</td>\r\n<td>20 piece</td>\r\n<td>$800</td>\r\n<td>John</td>\r\n<td>Lorem ipsum</td>\r\n<td>28-05-2020</td>\r\n<td>01-06-2020</td>\r\n<td>\r\n    <select>\r\n        <option>Pending</option>\r\n        <option>Confirmed</option>\r\n        <option>cancelled</option>\r\n    </select>\r\n</td>\r\n\r\n<!-- <td>\r\n<div class=\"action\">\r\n<ul>\r\n<li class=\"show\" (click)=\"goTosalesgraph()\"><i class=\"fa fa-eye\"></i></li>\r\n\r\n</ul>\r\n</div>\r\n</td> -->\r\n</tr>\r\n</table>\r\n</div>\r\n</div>\r\n<!-----start pagination-->\r\n<mat-paginator [length]=\"100\" [pageSize]=\"10\" [pageSizeOptions]=\"[5, 10, 25, 100]\">\r\n</mat-paginator>\r\n<!-----end pagination-->\r\n</div>\r\n</div>\r\n\r\n</div>\r\n</div>\r\n</div>\r\n</div>\r\n</div>\r\n\r\n";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Report of sales</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <a (click)=\"goTosalesgraph()\">View Sales Graph</a>\r\n                    </div>\r\n                </div>\r\n                <div class=\"tab-content\">\r\n                    <div id=\"allOrders\" class=\"tab-pane fade in active\">\r\n                        <div class=\"inner_content\">\r\n                            <div class=\"outer_table\">\r\n                                <div class=\"search_fields\">\r\n                                    <div class=\"filters Booking_status\">\r\n                                        <label>Filter</label>\r\n                                        <select [(ngModel)]=\"filterBy\" (change)=\"filterSelected($event)\">\r\n                                            <option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n                                            <option *ngIf=\"flag==false\" value=\"\"></option>\r\n                                            <option *ngFor=\"let item of filterList\" value=\"{{item.value}}\">\r\n                                                {{item.viewValue}}\r\n                                            </option>\r\n                                            <!-- <option value=\"active\">Active</option>\r\n                                            <option value=\"inactive\">Inactive</option> -->\r\n                                            <!-- <option value=\"lastName\"></option> -->\r\n                                        </select>\r\n                                    </div>\r\n                                    <div class=\"search_inner_fiels\">\r\n                                        <div class=\"filters Booking_status\">\r\n                                            <label>Search</label>\r\n                                            <div class=\"search_with_icons\">\r\n                                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                                    <input matInput type=\"text\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                                </mat-form-field>\r\n                                                <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                                    (click)=\"searchMethod()\"></i>\r\n                                                <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                                    (click)=\"clearSearch()\"></i>\r\n                                            </div>\r\n                                        </div>\r\n\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"table-responsive\">\r\n                                    <table>\r\n                                        <tr>\r\n                                            <th>Order Id</th>\r\n                                            <th>Product Name</th>\r\n                                            <th>Product category</th>\r\n                                            <th>Product sub category</th>\r\n\r\n                                            <th>ISBN Number</th>\r\n                                            <th>SKU Number</th>\r\n                                            <th>Quantity</th>\r\n                                            <th>Price</th>\r\n                                            <th>User name</th>\r\n                                            <th>User Address</th>\r\n                                            <th>Order Date</th>\r\n                                            <th>Expected Delivery Date</th>\r\n                                            <th>Delivery Date</th>\r\n                                            <th>Status</th>\r\n                                            <!-- <th class=\"action_bx\">Action</th> -->\r\n                                        </tr>\r\n\r\n\r\n\r\n                                        <tr *ngFor=\"let item of salesList; let i=index\">\r\n                                            <td>{{item.orderId}}</td>\r\n                                            <td>{{item.productId.name}}</td>\r\n                                            <td>{{item.productId.category.name}}</td>\r\n                                            <td>{{item.productId.subCategory.name}}</td>\r\n                                            <td>{{item.productId.isbn}}</td>\r\n                                            <td>{{item.productId.sku}}</td>\r\n                                            <td>{{item.quantity}}</td>\r\n                                            <td>{{item.totalAmount}}</td>\r\n                                            <td>{{item.userId.firstName}} {{item.userId.lastName}}</td>\r\n                                            <td>{{item.deliveryAddress.address1}} {{item.deliveryAddress.address2}}\r\n                                                {{item.deliveryAddress.city}} {{item.deliveryAddress.state}}\r\n                                                {{item.deliveryAddress.postalCode}}</td>\r\n                                            <td>{{item.createdAt|date}}</td>\r\n                                            <td>{{item.deliveryDate==null?\"Date not assigned yet\":item.deliveryDate|date}}\r\n                                            </td>\r\n                                            <td>{{item.deliveredDate==null ?\"Not delivered yet\":item.deliveredDate|date}}\r\n                                            </td>\r\n                                            <td>\r\n                                                {{item.status}}\r\n\r\n                                            </td>\r\n                                            <td>\r\n                                                <!-- <div class=\"action\">\r\n                                                      <ul>\r\n                                                          <li class=\"show\" (click)=\"goToviewOrder(item._id)\"><i\r\n                                                                  class=\"fa fa-eye\"></i></li>\r\n                                                          <li class=\"edit\" (click)=\"goToeditOrder()\"><i\r\n                                                                class=\"fa fa-pencil fa-fw\"></i></li> -->\r\n                                                <!-- <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li> \r\n                                                      </ul>\r\n                                                  </div> -->\r\n                                            </td>\r\n                                        </tr>\r\n                                    </table>\r\n                                </div>\r\n                            </div>\r\n                            <!-----start pagination-->\r\n                            <mat-paginator [length]=\"length\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"[5, 10, 25, 100]\"\r\n                                (page)=\"pageEvent = productListAfterPageSizeChanged($event)\">\r\n                            </mat-paginator>\r\n                            <!-----end pagination-->\r\n                        </div>\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -1449,7 +1477,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Terms and Conditions</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <!-- <a (click)=\"goToaddcategory()\"><span>+</span>Add Category</a> -->\r\n                        <!-- <a class=\"add_excelsheet\">Import excel sheet</a> -->\r\n                    </div>\r\n                </div>\r\n             \r\n                 <form role=\"form\" #myForm=\"ngForm\" accept-charset=\"UTF-8\" novalidate>\r\n<div class=\"form-group has-feedback\" \r\n      [ngClass]=\"{ 'has-error': myckeditor.invalid && myckeditor.touched }\">\r\n\t<ckeditor [(ngModel)]=\"mycontent\" \r\n            #myckeditor=\"ngModel\"\r\n            name=\"myckeditor\"\r\n            required\r\n            [config]=\"ckeConfig\" \r\n            debounce=\"500\" \r\n            (paste)=\"onPaste($event)\"\r\n            (change)=\"onChange($event)\">\r\n\t</ckeditor>\r\n  <div *ngIf=\"myckeditor.invalid && myckeditor.touched\" class=\"help-block\">Required field.</div>\r\n</div>\r\n<button [disabled]=\"myForm.invalid\" class=\"btn btn-primary\">Save</button>\r\n</form>\r\n  </div>\r\n        </div>\r\n    </div>\r\n   \r\n</div>\r\n\r\n";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Terms and Conditions</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <!-- <a (click)=\"goToaddcategory()\"><span>+</span>Add Category</a> -->\r\n                        <!-- <a class=\"add_excelsheet\">Import excel sheet</a> -->\r\n                    </div>\r\n                </div>\r\n             \r\n                 <form role=\"form\" #myForm=\"ngForm\" accept-charset=\"UTF-8\" novalidate>\r\n<div class=\"form-group has-feedback\" \r\n      [ngClass]=\"{ 'has-error': myckeditor.invalid && myckeditor.touched }\">\r\n\t<ckeditor [(ngModel)]=\"mycontent\" \r\n            #myckeditor=\"ngModel\"\r\n            name=\"myckeditor\"\r\n            required\r\n            [config]=\"ckeConfig\" \r\n            debounce=\"500\" \r\n            (paste)=\"onPaste($event)\"\r\n            (change)=\"onChange($event)\">\r\n\t</ckeditor>\r\n  <div *ngIf=\"myckeditor.invalid && myckeditor.touched\" class=\"help-block\">Required field.</div>\r\n</div>\r\n<button [disabled]=\"myForm.invalid\" class=\"btn btn-primary\" (click)=\"updateTermAndCondition()\">Save</button>\r\n</form>\r\n  </div>\r\n        </div>\r\n    </div>\r\n   \r\n</div>\r\n\r\n";
     /***/
   },
 
@@ -1469,7 +1497,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Terms of Sales</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <!-- <a (click)=\"goToaddcategory()\"><span>+</span>Add Category</a> -->\r\n                        <!-- <a class=\"add_excelsheet\">Import excel sheet</a> -->\r\n                    </div>\r\n                </div>\r\n             \r\n                 <form role=\"form\" #myForm=\"ngForm\" accept-charset=\"UTF-8\" novalidate>\r\n<div class=\"form-group has-feedback\" \r\n      [ngClass]=\"{ 'has-error': myckeditor.invalid && myckeditor.touched }\">\r\n\t<ckeditor [(ngModel)]=\"mycontent\" \r\n            #myckeditor=\"ngModel\"\r\n            name=\"myckeditor\"\r\n            required\r\n            [config]=\"ckeConfig\" \r\n            debounce=\"500\" \r\n            (paste)=\"onPaste($event)\"\r\n            (change)=\"onChange($event)\">\r\n\t</ckeditor>\r\n  <div *ngIf=\"myckeditor.invalid && myckeditor.touched\" class=\"help-block\">Required field.</div>\r\n</div>\r\n<button [disabled]=\"myForm.invalid\" class=\"btn btn-primary\">Save</button>\r\n</form>\r\n  </div>\r\n        </div>\r\n    </div>\r\n   \r\n</div>\r\n\r\n\r\n\r\n";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Terms of Sales</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <!-- <a (click)=\"goToaddcategory()\"><span>+</span>Add Category</a> -->\r\n                        <!-- <a class=\"add_excelsheet\">Import excel sheet</a> -->\r\n                    </div>\r\n                </div>\r\n\r\n                <form role=\"form\" #myForm=\"ngForm\" accept-charset=\"UTF-8\" novalidate>\r\n                    <div class=\"form-group has-feedback\"\r\n                        [ngClass]=\"{ 'has-error': myckeditor.invalid && myckeditor.touched }\">\r\n                        <ckeditor [(ngModel)]=\"mycontent\" #myckeditor=\"ngModel\" name=\"myckeditor\" required\r\n                            [config]=\"ckeConfig\" debounce=\"500\" (paste)=\"onPaste($event)\" (change)=\"onChange($event)\">\r\n                        </ckeditor>\r\n                        <div *ngIf=\"myckeditor.invalid && myckeditor.touched\" class=\"help-block\">Required field.</div>\r\n                    </div>\r\n                    <button [disabled]=\"myForm.invalid\" class=\"btn btn-primary\"\r\n                        (click)=\"updateTermAndCondition()\">Save</button>\r\n                </form>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</div>";
     /***/
   },
 
@@ -1489,7 +1517,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Terms of Use</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <!-- <a (click)=\"goToaddcategory()\"><span>+</span>Add Category</a> -->\r\n                        <!-- <a class=\"add_excelsheet\">Import excel sheet</a> -->\r\n                    </div>\r\n                </div>\r\n             \r\n                 <form role=\"form\" #myForm=\"ngForm\" accept-charset=\"UTF-8\" novalidate>\r\n<div class=\"form-group has-feedback\" \r\n      [ngClass]=\"{ 'has-error': myckeditor.invalid && myckeditor.touched }\">\r\n\t<ckeditor [(ngModel)]=\"mycontent\" \r\n            #myckeditor=\"ngModel\"\r\n            name=\"myckeditor\"\r\n            required\r\n            [config]=\"ckeConfig\" \r\n            debounce=\"500\" \r\n            (paste)=\"onPaste($event)\"\r\n            (change)=\"onChange($event)\">\r\n\t</ckeditor>\r\n  <div *ngIf=\"myckeditor.invalid && myckeditor.touched\" class=\"help-block\">Required field.</div>\r\n</div>\r\n<button [disabled]=\"myForm.invalid\" class=\"btn btn-primary\">Save</button>\r\n</form>\r\n  </div>\r\n        </div>\r\n    </div>\r\n   \r\n</div>\r\n\r\n\r\n\r\n";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Terms of Use</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <!-- <a (click)=\"goToaddcategory()\"><span>+</span>Add Category</a> -->\r\n                        <!-- <a class=\"add_excelsheet\">Import excel sheet</a> -->\r\n                    </div>\r\n                </div>\r\n             \r\n                 <form role=\"form\" #myForm=\"ngForm\" accept-charset=\"UTF-8\" novalidate>\r\n<div class=\"form-group has-feedback\" \r\n      [ngClass]=\"{ 'has-error': myckeditor.invalid && myckeditor.touched }\">\r\n\t<ckeditor [(ngModel)]=\"mycontent\" \r\n            #myckeditor=\"ngModel\"\r\n            name=\"myckeditor\"\r\n            required\r\n            [config]=\"ckeConfig\" \r\n            debounce=\"500\" \r\n            (paste)=\"onPaste($event)\"\r\n            (change)=\"onChange($event)\">\r\n\t</ckeditor>\r\n  <div *ngIf=\"myckeditor.invalid && myckeditor.touched\" class=\"help-block\">Required field.</div>\r\n</div>\r\n<button [disabled]=\"myForm.invalid\" class=\"btn btn-primary\" (click)=\"updateTermAndCondition()\">Save</button>\r\n</form>\r\n  </div>\r\n        </div>\r\n    </div>\r\n   \r\n</div>\r\n\r\n\r\n\r\n";
     /***/
   },
 
@@ -1509,7 +1537,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Vendor Management</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <a (click)=\"goToaddVender()\"><span>+</span>Add Vendor</a>\r\n                    </div>\r\n                </div>\r\n                <div class=\"outer_table\">\r\n                    <div class=\"search_fields\">\r\n                        <div class=\"filters Booking_status\">\r\n                            <label>Filter</label>\r\n                            <select [(ngModel)]=\"filterBy\" (change)=\"filterSelected($event)\">\r\n                                <option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n                                <option *ngIf=\"flag==false\" value=\"\"></option>\r\n                                <option value=\"active\">Active</option>\r\n                                <option value=\"inactive\">Inactive</option>\r\n                            </select>\r\n                        </div>\r\n                        <div class=\"search_inner_fiels\">\r\n                            <div class=\"filters Booking_status\">\r\n                                <label>Search</label>\r\n                                <div class=\"search_with_icons\">\r\n                                    <mat-form-field [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"text\" [(ngModel)]=\"search\" name=\"search\" placeholder=\"\">\r\n                                    </mat-form-field>\r\n                                    <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                        (click)=\"searchMethod()\"></i>\r\n                                    <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                        (click)=\"clearSearch()\"></i>\r\n                                </div>\r\n                            </div>\r\n\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-responsive\">\r\n                        <table>\r\n                            <tr>\r\n                                <th>Sr.no</th>\r\n                                <th>Vendor Name</th>\r\n                                <th>Vendor Address</th>\r\n                                <th>Vendor Phone Number </th>\r\n                                <th>Vendor Email ID</th>\r\n                                <th>Category and Sub Category Allocated</th>\r\n                                <th>Status </th>\r\n                                <th>Date of Joining</th>\r\n                                <th>Vendor VAT Number</th>\r\n                                <th>Vendor BRN Number</th>\r\n                                <th>Vendor Product List</th>\r\n                                <th>Total number of order</th>\r\n                                <th>Total revenue generated</th>\r\n\r\n                                <th class=\"action_bx\">Action</th>\r\n                            </tr>\r\n                            <tr *ngFor=\"let item of vendorList; index as i \">\r\n                                <td *ngIf=\"flagUserList==false\">{{i+1}}</td>\r\n                                <td *ngIf=\"flagUserList==true\">{{srNo+i+1}}</td>\r\n                                <td>{{item.firstName}} {{item.lastName}}</td>\r\n                                <td>{{item.address}},{{item.city}},{{item.state}},{{item.country}}</td>\r\n                                <td>{{item.countryCode}}-{{item.phone}}</td>\r\n                                <td>{{item.email}}</td>\r\n                                <td class=\"Booking_status\" (click)=\"goToViewCategory(item._id, item.firstName)\"><a\r\n                                        class=\"accept_button\">View Category</a>\r\n                                </td>\r\n                                <td>\r\n                                    <span>{{item.status==0?\"Inactive\":\"Active\"}}</span>\r\n\r\n                                </td>\r\n                                <td>{{item.createdAt | date}}</td>\r\n                                <td>{{item.vatNumber}}</td>\r\n                                <td>{{item.brnNumber}}</td>\r\n                                <td class=\"Booking_status\" (click)=\"goToproduct(i)\">\r\n                                    <a class=\"accept_button\">View List</a></td>\r\n                                <td>{{item.totalOrders}}</td>\r\n                                <td>{{item.totalRevenue}}</td>\r\n                                <td>\r\n                                    <div class=\"action\">\r\n                                        <ul>\r\n                                            <!-- <li class=\"show\" (click)=\"goToviewVendor()\"><i class=\"fa fa-eye\"></i></li>\r\n                                        <li class=\"edit\" (click)=\"goToeditVendor()\"><i class=\"fa fa-pencil fa-fw\"></i></li> -->\r\n                                            <li class=\"delete\" (click)=\"deleteVendor(i)\"><i\r\n                                                    class=\"fa fa-trash-o fa-fw\"></i></li>\r\n                                        </ul>\r\n                                    </div>\r\n                                </td>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n                <!-----start pagination-->\r\n                <mat-paginator [length]=\"length\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"pageSizeOptions\"\r\n                    (page)=\"pageEvent = vendorListAfterPageSizeChanged($event)\">\r\n                </mat-paginator>\r\n                <!-----end pagination-->\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Vendor Management</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <a (click)=\"goToaddVender()\"><span>+</span>Add Vendor</a>\r\n                    </div>\r\n                </div>\r\n                <div class=\"outer_table\">\r\n                    <div class=\"search_fields\">\r\n                        <div class=\"filters Booking_status\">\r\n                            <label>Filter</label>\r\n                            <select [(ngModel)]=\"filterBy\" (change)=\"filterSelected($event)\">\r\n                                <option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n                                <option *ngIf=\"flag==false\" value=\"\"></option>\r\n                                <option value=\"active\">Active</option>\r\n                                <option value=\"inactive\">Inactive</option>\r\n                            </select>\r\n                        </div>\r\n                        <div class=\"search_inner_fiels\">\r\n                            <div class=\"filters Booking_status\">\r\n                                <label>Search</label>\r\n                                <div class=\"search_with_icons\">\r\n                                    <mat-form-field [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"text\" [(ngModel)]=\"search\" name=\"search\" placeholder=\"\">\r\n                                    </mat-form-field>\r\n                                    <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                        (click)=\"searchMethod()\"></i>\r\n                                    <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                        (click)=\"clearSearch()\"></i>\r\n                                </div>\r\n                            </div>\r\n\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-responsive\">\r\n                        <table>\r\n                            <tr>\r\n                                <th>Sr.no</th>\r\n                                <th>Name</th>\r\n                                <th>Address</th>\r\n                                <th>Phone Number </th>\r\n                                <th>Email ID</th>\r\n                                <th>Category and Sub Category Allocated</th>\r\n                                <th>Status </th>\r\n                                <th>Date of Joining</th>\r\n                                <th>VAT Number</th>\r\n                                <th>BRN Number</th>\r\n                                <th>Product List</th>\r\n                                <th>Total number of order</th>\r\n                                <th>Total revenue generated</th>\r\n\r\n                                <th class=\"action_bx\">Action</th>\r\n                            </tr>\r\n                            <tr *ngFor=\"let item of vendorList; index as i \">\r\n                                <td *ngIf=\"flagUserList==false\">{{i+1}}</td>\r\n                                <td *ngIf=\"flagUserList==true\">{{srNo+i+1}}</td>\r\n                                <td>{{item.firstName}} {{item.lastName}}</td>\r\n                                <td>{{item.address}},{{item.city}},{{item.state}},{{item.country}}</td>\r\n                                <td>{{item.countryCode}}-{{item.phone}}</td>\r\n                                <td>{{item.email}}</td>\r\n                                <td class=\"Booking_status\" (click)=\"goToViewCategory(item._id, item.firstName)\"><a\r\n                                        class=\"accept_button\">View Category</a>\r\n                                </td>\r\n                                <td>\r\n                                    <span>{{item.status==0?\"Inactive\":\"Active\"}}</span>\r\n\r\n                                </td>\r\n                                <td>{{item.createdAt | date}}</td>\r\n                                <td>{{item.vatNumber}}</td>\r\n                                <td>{{item.brnNumber}}</td>\r\n                                <td class=\"Booking_status\" (click)=\"goToproduct(item._id)\">\r\n                                    <a class=\"accept_button\">View List</a></td>\r\n                                <td>{{item.totalOrders}}</td>\r\n                                <td>{{item.totalRevenue}}</td>\r\n                                <td>\r\n                                    <div class=\"action\">\r\n                                        <ul>\r\n                                            <!-- <li class=\"show\" (click)=\"goToviewVendor()\"><i class=\"fa fa-eye\"></i></li>\r\n                                        <li class=\"edit\" (click)=\"goToeditVendor()\"><i class=\"fa fa-pencil fa-fw\"></i></li> -->\r\n                                            <li class=\"delete\" (click)=\"deleteVendor(i)\"><i\r\n                                                    class=\"fa fa-trash-o fa-fw\"></i></li>\r\n                                        </ul>\r\n                                    </div>\r\n                                </td>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n                <!-----start pagination-->\r\n                <mat-paginator [length]=\"length\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"pageSizeOptions\"\r\n                    (page)=\"pageEvent = vendorListAfterPageSizeChanged($event)\">\r\n                </mat-paginator>\r\n                <!-----end pagination-->\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -1529,7 +1557,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Vendor Sales Report</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <a (click)=\"goToreportGraph()\">View Report Graph</a>\r\n                    </div>\r\n                </div>\r\n                <div class=\"outer_table\">\r\n                <div class=\"search_fields\">\r\n                    <div class=\"filters Booking_status\">\r\n                        <label>Filter</label>\r\n                        <select>\r\n                            <option>All</option>\r\n                            <option>Name</option>\r\n                        </select>\r\n                    </div>\r\n                    <div class=\"search_inner_fiels\">\r\n                        <div class=\"filters Booking_status\">\r\n                            <label>Search</label>\r\n                            <div class=\"search_with_icons\">\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" name=\"search\" placeholder=\"\">\r\n                                </mat-form-field>\r\n                                <i class=\"fa fa-search\" aria-hidden=\"true\"></i>\r\n                            </div>\r\n                        </div>\r\n                        \r\n                    </div>\r\n                </div>\r\n                <div class=\"table-responsive\">\r\n                    <table>\r\n                        <tr>\r\n                           \r\n                            <th>Vendor Id</th>\r\n                            <th>Vendor Name</th>\r\n                            <th>Vendor Address</th>\r\n                            <th>Vendor Phone Number </th>\r\n                            <th>Vendor Email ID</th>\r\n                            <th>Vendor Product List</th>\r\n                            <th>Price</th>\r\n                        </tr>\r\n                        <tr>\r\n                        \r\n                            <td>1</td>\r\n                            <td>John</td>\r\n                            <td>lorem ipsum lorem ipsum</td>\r\n                            <td>9087654321</td>\r\n                            <td>john@gmail.com</td>\r\n                            <td class=\"Booking_status\"  (click)=\"goToproduct()\">\r\n                                <a  class=\"accept_button\">View List</a></td>\r\n                            <td>$69</td>\r\n                        </tr>\r\n                        <tr>\r\n                        \r\n                            <td>2</td>\r\n                            <td>John</td>\r\n                            <td>lorem ipsum lorem ipsum</td>\r\n                            <td>9087654321</td>\r\n                            <td>john@gmail.com</td>\r\n                            <td class=\"Booking_status\"  (click)=\"goToproduct()\">\r\n                                <a  class=\"accept_button\">View List</a></td>\r\n                            <td>$69</td>\r\n                        </tr>\r\n                        <tr>\r\n                        \r\n                            <td>3</td>\r\n                            <td>John</td>\r\n                            <td>lorem ipsum lorem ipsum</td>\r\n                            <td>9087654321</td>\r\n                            <td>john@gmail.com</td>\r\n                            <td class=\"Booking_status\"  (click)=\"goToproduct()\">\r\n                                <a  class=\"accept_button\">View List</a></td>\r\n                            <td>$69</td>\r\n                        </tr>\r\n                        <tr>\r\n                        \r\n                            <td>4</td>\r\n                            <td>John</td>\r\n                            <td>lorem ipsum lorem ipsum</td>\r\n                            <td>9087654321</td>\r\n                            <td>john@gmail.com</td>\r\n                            <td class=\"Booking_status\"  (click)=\"goToproduct()\">\r\n                                <a  class=\"accept_button\">View List</a></td>\r\n                            <td>$69</td>\r\n                        </tr>\r\n                        <tr>\r\n                        \r\n                            <td>5</td>\r\n                            <td>John</td>\r\n                            <td>lorem ipsum lorem ipsum</td>\r\n                            <td>9087654321</td>\r\n                            <td>john@gmail.com</td>\r\n                            <td class=\"Booking_status\"  (click)=\"goToproduct()\">\r\n                                <a  class=\"accept_button\">View List</a></td>\r\n                            <td>$69</td>\r\n                        </tr>\r\n                        <tr>\r\n                        \r\n                            <td>6</td>\r\n                            <td>John</td>\r\n                            <td>lorem ipsum lorem ipsum</td>\r\n                            <td>9087654321</td>\r\n                            <td>john@gmail.com</td>\r\n                            <td class=\"Booking_status\"  (click)=\"goToproduct()\">\r\n                                <a  class=\"accept_button\">View List</a></td>\r\n                            <td>$69</td>\r\n                        </tr>\r\n                    </table>\r\n                </div>\r\n                </div>\r\n                <!-----start pagination-->\r\n                <mat-paginator [length]=\"100\" [pageSize]=\"10\" [pageSizeOptions]=\"[5, 10, 25, 100]\">\r\n                </mat-paginator>\r\n                <!-----end pagination-->\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Vendor Sales Report</h1>\r\n\r\n                </div>\r\n                <div class=\"outer_table\">\r\n                    <div class=\"search_fields\">\r\n                        <div class=\"filters Booking_status\">\r\n                            <label>Filter</label>\r\n                            <select [(ngModel)]=\"filterBy\" (change)=\"filterSelected($event)\">\r\n                                <option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n                                <option *ngIf=\"flag==false\" value=\"\"></option>\r\n                                <option value=\"active\">Active</option>\r\n                                <option value=\"inactive\">Inactive</option>\r\n                            </select>\r\n                        </div>\r\n                        <div class=\"search_inner_fiels\">\r\n                            <div class=\"filters Booking_status\">\r\n                                <label>Search</label>\r\n                                <div class=\"search_with_icons\">\r\n                                    <mat-form-field [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"text\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                    </mat-form-field>\r\n                                    <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                        (click)=\"searchMethod()\"></i>\r\n                                    <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                        (click)=\"clearSearch()\"></i>\r\n                                </div>\r\n                            </div>\r\n\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-responsive\">\r\n                        <table>\r\n                            <tr>\r\n\r\n                                <th>Sr no</th>\r\n                                <th>Vendor Name</th>\r\n                                <th>Vendor Address</th>\r\n                                <th>Vendor Phone Number </th>\r\n                                <th>Vendor Email ID</th>\r\n                                <th>Vendor Product List</th>\r\n                                <th>Total revenue generated</th>\r\n                                <th>Sales Graph</th>\r\n                            </tr>\r\n                            <tr *ngFor=\"let item of vendorList; let i=index\">\r\n\r\n                                <td *ngIf=\"flagUserList==false\">{{i+1}}</td>\r\n                                <td *ngIf=\"flagUserList==true\">{{srNo+i+1}}</td>\r\n                                <td>{{item.firstName}} {{item.lastName}}</td>\r\n                                <td>{{item.address}},{{item.city}},{{item.state}},{{item.country}}</td>\r\n                                <td>{{item.countryCode}}-{{item.phone}}</td>\r\n                                <td>{{item.email}}</td>\r\n                                <td class=\"Booking_status\" (click)=\"goToproduct(i)\">\r\n                                    <a class=\"accept_button\">View List</a></td>\r\n                                <td>{{item.totalRevenue}}</td>\r\n                                <td class=\"Booking_status\">\r\n\r\n                                    <a class=\"accept_button\" (click)=\"goToreportGraph()\">View Report Graph</a>\r\n\r\n                                </td>\r\n                            </tr>\r\n\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n                <!-----start pagination-->\r\n                <mat-paginator [length]=\"length\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"pageSizeOptions\"\r\n                    (page)=\"pageEvent = vendorSalesReportListAfterPageSizeChanged($event)\">\r\n                </mat-paginator>\r\n                <!-----end pagination-->\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -1549,7 +1577,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Vendor Terms and Condition</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <!-- <a (click)=\"goToaddcategory()\"><span>+</span>Add Category</a> -->\r\n                        <!-- <a class=\"add_excelsheet\">Import excel sheet</a> -->\r\n                    </div>\r\n                </div>\r\n             \r\n                 <form role=\"form\" #myForm=\"ngForm\" accept-charset=\"UTF-8\" novalidate>\r\n<div class=\"form-group has-feedback\" \r\n      [ngClass]=\"{ 'has-error': myckeditor.invalid && myckeditor.touched }\">\r\n\t<ckeditor [(ngModel)]=\"mycontent\" \r\n            #myckeditor=\"ngModel\"\r\n            name=\"myckeditor\"\r\n            required\r\n            [config]=\"ckeConfig\" \r\n            debounce=\"500\" \r\n            (paste)=\"onPaste($event)\"\r\n            (change)=\"onChange($event)\">\r\n\t</ckeditor>\r\n  <div *ngIf=\"myckeditor.invalid && myckeditor.touched\" class=\"help-block\">Required field.</div>\r\n</div>\r\n<button [disabled]=\"myForm.invalid\" class=\"btn btn-primary\">Save</button>\r\n</form>\r\n  </div>\r\n        </div>\r\n    </div>\r\n   \r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Vendor Terms and Condition</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <!-- <a (click)=\"goToaddcategory()\"><span>+</span>Add Category</a> -->\r\n                        <!-- <a class=\"add_excelsheet\">Import excel sheet</a> -->\r\n                    </div>\r\n                </div>\r\n\r\n                <form role=\"form\" #myForm=\"ngForm\" accept-charset=\"UTF-8\" novalidate>\r\n                    <div class=\"form-group has-feedback\"\r\n                        [ngClass]=\"{ 'has-error': myckeditor.invalid && myckeditor.touched }\">\r\n                        <ckeditor [(ngModel)]=\"mycontent\" #myckeditor=\"ngModel\" name=\"myckeditor\" required\r\n                            [config]=\"ckeConfig\" debounce=\"500\" (paste)=\"onPaste($event)\" (change)=\"onChange($event)\">\r\n                        </ckeditor>\r\n                        <div *ngIf=\"myckeditor.invalid && myckeditor.touched\" class=\"help-block\">Required field.</div>\r\n                    </div>\r\n                    <button [disabled]=\"myForm.invalid\" class=\"btn btn-primary\"\r\n                        (click)=\"updateTermAndCondition()\">Save</button>\r\n                </form>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</div>";
     /***/
   },
 
@@ -1569,7 +1597,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>View Sale</h1>\r\n                    <a (click)=\"goToordermanagement()\">Back To List</a>\r\n                </div>\r\n                <!-----start input fields------>\r\n                <div class=\"add_user_list\">\r\n                    <ul>\r\n                        <li>\r\n                            <label>Order ID<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\" value=\"ABC\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>Product Name<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\" value=\"ABC\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>Product Category<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\" disabled name=\"name\" Value=\"Lorem ipsum\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>Product Sub Category<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\" disabled name=\"name\" Value=\"Lorem ipsum\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                   \r\n                        <li>\r\n                            <label> ISBN  Number <span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\" value=\"25252\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label> SKU  Number <span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\" value=\"25252\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label> Quantity <span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\" value=\"30\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label> Price <span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\" value=\"800\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                     \r\n                        <li>\r\n                            <label>User name<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\" value=\"John\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>User Address <span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\" value=\"lorem ipsum\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>Order Date<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"date\" placeholder=\"\" name=\"name\" value=\"20-05-2020\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>Delivery Date<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"date\" placeholder=\"\" name=\"name\" value=\"20-05-2020\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                        <li>\r\n                            <label>Status<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\" value=\"pending\" disabled name=\"name\">\r\n                            </mat-form-field>\r\n                        </li>\r\n                      \r\n\r\n                    </ul>\r\n                    <!-- <div class=\"update_button\">\r\n                        <button mat-button>\r\n                            Update\r\n                        </button>\r\n                        <button mat-button class=\"cancel_button\">\r\n                            Cancel\r\n                        </button>\r\n                    </div> -->\r\n                </div>\r\n\r\n               \r\n                <!-----End input fields------>\r\n                \r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>View Sale</h1>\r\n                    <a (click)=\"goToordermanagement()\">Back To List</a>\r\n                </div>\r\n                <!-----start input fields------>\r\n                <div class=\"add_user_list\">\r\n                    <form [formGroup]=\"editSaleForm\">\r\n                        <ul>\r\n                            <li>\r\n                                <label>Order ID<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" formControlName=\"orderID\" name=\"name\"\r\n                                        readonly name=\"name\">\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <label>Product Name<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" name=\"name\" formControlName=\"productName\"\r\n                                        readonly name=\"name\">\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <label>Product Category<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" name=\"name\" readonly name=\"name\"\r\n                                        formControlName=\"productCategory\">\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <label>Product Sub Category<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" name=\"name\" readonly name=\"name\"\r\n                                        formControlName=\"productSubcategory\">\r\n                                </mat-form-field>\r\n                            </li>\r\n\r\n                            <li>\r\n                                <label> SKU number <span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" name=\"name\" formControlName=\"sku\"\r\n                                        readonly>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <!-- <li>\r\n                            <label> ISBN number <span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\" value=\"12345\" readonly name=\"name\">\r\n                            </mat-form-field>\r\n                        </li> -->\r\n                            <li>\r\n                                <label> Quantity <span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" name=\"name\" formControlName=\"quantity\"\r\n                                        readonly name=\"name\">\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <label> Price <span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" name=\"name\" formControlName=\"price\"\r\n                                        readonly name=\"name\">\r\n                                </mat-form-field>\r\n                            </li>\r\n\r\n                            <li>\r\n                                <label>User name<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" readonly name=\"name\"\r\n                                        formControlName=\"userName\" name=\"name\">\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <label> Address 1 <span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" readonly name=\"name\"\r\n                                        formControlName=\"userAddress1\" name=\"name\">\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <label> Address 2 <span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" readonly name=\"name\"\r\n                                        formControlName=\"userAddress2\" name=\"name\">\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <label> City <span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" readonly name=\"name\"\r\n                                        formControlName=\"userCity\" name=\"name\">\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <label> State <span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" name=\"name\" readonly\r\n                                        formControlName=\"userState\" name=\"name\">\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <label> Postal Code <span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" readonly name=\"name\"\r\n                                        formControlName=\"userPostalCode\" name=\"name\">\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <label>Order Date<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" name=\"name\" formControlName=\"orderDate\"\r\n                                        readonly>\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <li>\r\n                                <label>Delivery Date<span class=\"red\">*</span></label>\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" placeholder=\"\" readonly name=\"name\"\r\n                                        formControlName=\"deliveryDate\">\r\n                                </mat-form-field>\r\n                            </li>\r\n                            <!-- <li>\r\n                            <label>Status<span class=\"red\">*</span></label>\r\n                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                <input matInput type=\"text\" placeholder=\"\" name=\"name\" value=\"pending\" readonly name=\"name\">\r\n                            </mat-form-field>\r\n                        </li> -->\r\n\r\n\r\n                        </ul>\r\n                    </form>\r\n                    <!-- <div class=\"update_button\">\r\n                        <button mat-button>\r\n                            Update\r\n                        </button>\r\n                        <button mat-button class=\"cancel_button\">\r\n                            Cancel\r\n                        </button>\r\n                    </div> -->\r\n                </div>\r\n\r\n\r\n                <!-----End input fields------>\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -1649,7 +1677,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>All Category</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <a (click)=\"goToVendorList()\">Go To Vendor</a>\r\n                    </div>\r\n                </div>\r\n                <div>\r\n                    <div *ngIf=\"flagData==true\">\r\n                        <h1>No Data Found</h1>\r\n                    </div>\r\n                    <div *ngIf=\"flagData==false\" class=\"card\">\r\n\r\n\r\n                        <table>\r\n                            <tr>\r\n                                <th>Sr.no</th>\r\n                                <th>Category Name</th>\r\n                                <th>Category Arbic Name</th>\r\n                                <th>Category Image</th>\r\n                                <th>View Subcategory</th>\r\n                            </tr>\r\n                            <tr *ngFor=\"let item of categoryList;index as i\">\r\n                                <td>{{i+1}}</td>\r\n                                <td>{{item.name}}</td>\r\n                                <td>{{item.name_ar}}</td>\r\n                                <td>\r\n                                    <figure><img width=\"200\" src={{imagePath+item.image}}></figure><br>\r\n                                </td>\r\n                                <td style=\"text-align: center;\"><a class=\"edit\" style=\"float:none;\"\r\n                                        (click)=\"goToSubcategory(item._id, item.name)\"><i\r\n                                            class=\"fa fa-eye fa-fw\"></i></a></td>\r\n                            </tr>\r\n                        </table>\r\n\r\n\r\n\r\n\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>All Category</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <a (click)=\"goToVendorList()\">Go To Vendor</a>\r\n                    </div>\r\n                </div>\r\n                <div>\r\n                    <div *ngIf=\"flagData==true\">\r\n                        <h1>No Data Found</h1>\r\n                    </div>\r\n                    <div *ngIf=\"flagData==false\" class=\"card\">\r\n\r\n\r\n                        <table>\r\n                            <tr>\r\n                                <th>Sr.no</th>\r\n                                <th> Name</th>\r\n                                <th> Arbic Name</th>\r\n                                <th> Image</th>\r\n                                <th>View Subcategory</th>\r\n                            </tr>\r\n                            <tr *ngFor=\"let item of categoryList;index as i\">\r\n                                <td>{{i+1}}</td>\r\n                                <td>{{item.name}}</td>\r\n                                <td>{{item.name_ar}}</td>\r\n                                <td>\r\n                                    <figure><img width=\"200\" src={{imagePath+item.image}}></figure><br>\r\n                                </td>\r\n                                <td style=\"text-align: center;\"><a class=\"edit\" style=\"float:none;\"\r\n                                        (click)=\"goToSubcategory(item._id, item.name)\"><i\r\n                                            class=\"fa fa-eye fa-fw\"></i></a></td>\r\n                            </tr>\r\n                        </table>\r\n\r\n\r\n\r\n\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -1709,7 +1737,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>All Sub-Category</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <a (click)=\"goToVendorList()\"><span></span>Go To Vendor</a>\r\n                    </div>\r\n                </div>\r\n                <div>\r\n                    <div class=\"card\">\r\n\r\n\r\n                        <table>\r\n                            <tr>\r\n                                <th>Sr.no</th>\r\n                                <th>Sub Category Name</th>\r\n                                <th>Sub Category Arbic Name</th>\r\n                                <th>Sub Category Image</th>\r\n                                <th>View Subcategory</th>\r\n                            </tr>\r\n                            <tr *ngFor=\"let item of SubcategoryList;index as i\">\r\n                                <td>{{i+1}}</td>\r\n                                <td>{{item.name}}</td>\r\n                                <td>{{item.name_ar}}</td>\r\n                                <td>\r\n                                    <figure><img width=\"200px\" src={{imagePath+item.image}}></figure><br>\r\n                                </td>\r\n                                <td style=\"text-align: center;\"><a style=\"float:none;\" class=\"edit\"\r\n                                        (click)=\"goToproduct(item._id,item.name)\"><i class=\"fa fa-eye fa-fw\"></i></a>\r\n                                </td>\r\n                            </tr>\r\n                        </table>\r\n\r\n\r\n\r\n\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>All Sub-Category</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <a (click)=\"goToVendorList()\"><span></span>Go To Vendor</a>\r\n                    </div>\r\n                </div>\r\n                <div>\r\n                    <div class=\"card\">\r\n\r\n\r\n                        <table>\r\n                            <tr>\r\n                                <th>Sr.no</th>\r\n                                <th>Name</th>\r\n                                <th>Arbic Name</th>\r\n                                <th>Image</th>\r\n                                <th>View Product</th>\r\n                            </tr>\r\n                            <tr *ngFor=\"let item of SubcategoryList;index as i\">\r\n                                <td>{{i+1}}</td>\r\n                                <td>{{item.name}}</td>\r\n                                <td>{{item.name_ar}}</td>\r\n                                <td>\r\n                                    <figure><img width=\"200px\" src={{imagePath+item.image}}></figure><br>\r\n                                </td>\r\n                                <td style=\"text-align: center;\"><a style=\"float:none;\" class=\"edit\"\r\n                                        (click)=\"goToproduct(item._id,item.name)\"><i class=\"fa fa-eye fa-fw\"></i></a>\r\n                                </td>\r\n                            </tr>\r\n                        </table>\r\n\r\n\r\n\r\n\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
     /***/
   },
 
@@ -1729,7 +1757,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Warranty Policy</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <!-- <a (click)=\"goToaddcategory()\"><span>+</span>Add Category</a> -->\r\n                        <!-- <a class=\"add_excelsheet\">Import excel sheet</a> -->\r\n                    </div>\r\n                </div>\r\n             \r\n                 <form role=\"form\" #myForm=\"ngForm\" accept-charset=\"UTF-8\" novalidate>\r\n<div class=\"form-group has-feedback\" \r\n      [ngClass]=\"{ 'has-error': myckeditor.invalid && myckeditor.touched }\">\r\n\t<ckeditor [(ngModel)]=\"mycontent\" \r\n            #myckeditor=\"ngModel\"\r\n            name=\"myckeditor\"\r\n            required\r\n            [config]=\"ckeConfig\" \r\n            debounce=\"500\" \r\n            (paste)=\"onPaste($event)\"\r\n            (change)=\"onChange($event)\">\r\n\t</ckeditor>\r\n  <div *ngIf=\"myckeditor.invalid && myckeditor.touched\" class=\"help-block\">Required field.</div>\r\n</div>\r\n<button [disabled]=\"myForm.invalid\" class=\"btn btn-primary\">Save</button>\r\n</form>\r\n  </div>\r\n        </div>\r\n    </div>\r\n   \r\n</div>\r\n\r\n\r\n\r\n";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Warranty Policy</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <!-- <a (click)=\"goToaddcategory()\"><span>+</span>Add Category</a> -->\r\n                        <!-- <a class=\"add_excelsheet\">Import excel sheet</a> -->\r\n                    </div>\r\n                </div>\r\n\r\n                <form role=\"form\" #myForm=\"ngForm\" accept-charset=\"UTF-8\" novalidate>\r\n                    <div class=\"form-group has-feedback\"\r\n                        [ngClass]=\"{ 'has-error': myckeditor.invalid && myckeditor.touched }\">\r\n                        <ckeditor [(ngModel)]=\"mycontent\" #myckeditor=\"ngModel\" name=\"myckeditor\" required\r\n                            [config]=\"ckeConfig\" debounce=\"500\" (paste)=\"onPaste($event)\" (change)=\"onChange($event)\">\r\n                        </ckeditor>\r\n                        <div *ngIf=\"myckeditor.invalid && myckeditor.touched\" class=\"help-block\">Required field.</div>\r\n                    </div>\r\n                    <button [disabled]=\"myForm.invalid\" class=\"btn btn-primary\"\r\n                        (click)=\"updateTermAndCondition()\">Save</button>\r\n                </form>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</div>";
     /***/
   },
 
@@ -2318,20 +2346,62 @@
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var src_services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! src/services/api.service */
+    "./src/services/api.service.ts");
+    /* harmony import */
+
+
+    var src_services_common_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! src/services/common.service */
+    "./src/services/common.service.ts");
 
     let AboutComponent = class AboutComponent {
-      constructor() {
+      constructor(apiService, commonService) {
+        this.apiService = apiService;
+        this.commonService = commonService;
         this.name = 'ng4-ckeditor';
         this.log = '';
-        this.mycontent = "<p>My html content</p>";
+        this.title = "About Us";
+        this.slugName = "terms-of-sales";
+      }
+
+      getAllCms() {
+        let allCms = [];
+        this.apiService.getAllCMs().subscribe(res => {
+          console.log(res);
+
+          if (res.success == true) {
+            allCms = res.data;
+            this.termsAndCondition = allCms.find(ele => ele.slugName == this.slugName);
+            this.mycontent = this.termsAndCondition.description;
+            console.log(this.termsAndCondition);
+          }
+        });
       }
 
       ngOnInit() {
+        this.getAllCms();
         this.ckeConfig = {
           allowedContent: false,
           extraPlugins: 'divarea',
           forcePasteAsPlainText: true
         };
+      }
+
+      updateTermAndCondition() {
+        debugger;
+        this.termsAndCondition.description = this.mycontent;
+        this.apiService.updateCMS(this.termsAndCondition).subscribe(res => {
+          console.log(res);
+
+          if (res.success == true) {
+            this.commonService.successToast("Updated Successfully");
+          }
+        });
       }
 
       onChange($event) {
@@ -2343,6 +2413,13 @@
       }
 
     };
+
+    AboutComponent.ctorParameters = () => [{
+      type: src_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"]
+    }, {
+      type: src_services_common_service__WEBPACK_IMPORTED_MODULE_3__["CommonService"]
+    }];
+
     AboutComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-about',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
@@ -2496,6 +2573,7 @@
       }
 
       addVendor() {
+        debugger;
         this.submitted = true;
 
         if (this.submitted && this.addVendorForm.valid) {
@@ -2507,15 +2585,17 @@
               console.log(res);
 
               if (res.success) {
-                this.commonService.successToast("Edit Succesfully");
+                this.commonService.successToast("Added Succesfully");
+                this.router.navigate(['venderManagement']);
+                this.addVendorForm.reset;
+              } else {
+                if (res.message) {
+                  this.commonService.errorToast(res.message);
+                }
               }
-
-              this.router.navigate(['venderManagement']);
             }
           });
-        } else {
-          this.addVendorForm.reset;
-        }
+        } else {}
       }
 
     };
@@ -4261,6 +4341,12 @@
     var src_services_auth_guard__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(
     /*! src/services/auth.guard */
     "./src/services/auth.guard.ts");
+    /* harmony import */
+
+
+    var _graph_graph_component__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(
+    /*! ./graph/graph.component */
+    "./src/app/graph/graph.component.ts");
 
     const routes = [// {
     //   path: '',
@@ -4539,6 +4625,10 @@
     }, {
       path: 'deliveryAddress',
       component: _delivery_address_delivery_address_component__WEBPACK_IMPORTED_MODULE_70__["DeliveryAddressComponent"],
+      canActivate: [src_services_auth_guard__WEBPACK_IMPORTED_MODULE_71__["AuthGuard"]]
+    }, {
+      path: 'graph',
+      component: _graph_graph_component__WEBPACK_IMPORTED_MODULE_72__["GraphComponent"],
       canActivate: [src_services_auth_guard__WEBPACK_IMPORTED_MODULE_71__["AuthGuard"]]
     }];
     let AppRoutingModule = class AppRoutingModule {};
@@ -5136,10 +5226,21 @@
     var ng_multiselect_dropdown__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(
     /*! ng-multiselect-dropdown */
     "./node_modules/ng-multiselect-dropdown/fesm2015/ng-multiselect-dropdown.js");
+    /* harmony import */
+
+
+    var _graph_graph_component__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(
+    /*! ./graph/graph.component */
+    "./src/app/graph/graph.component.ts"); // import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+    // import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+    // export function HttpLoaderFactory(http: HttpClient) {
+    //   return new TranslateHttpLoader(http);
+    // }
+
 
     let AppModule = class AppModule {};
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
-      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"], _login_login_component__WEBPACK_IMPORTED_MODULE_6__["LoginComponent"], _forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_7__["ForgotPasswordComponent"], _reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_8__["ResetPasswordComponent"], _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_10__["DashboardComponent"], _sidebar_sidebar_component__WEBPACK_IMPORTED_MODULE_11__["SidebarComponent"], _navbar_navbar_component__WEBPACK_IMPORTED_MODULE_12__["NavbarComponent"], _manage_user_manage_user_component__WEBPACK_IMPORTED_MODULE_14__["ManageUserComponent"], _adduser_adduser_component__WEBPACK_IMPORTED_MODULE_15__["AdduserComponent"], _product_product_component__WEBPACK_IMPORTED_MODULE_16__["ProductComponent"], _addproduct_addproduct_component__WEBPACK_IMPORTED_MODULE_17__["AddproductComponent"], _notification_notification_component__WEBPACK_IMPORTED_MODULE_54__["NotificationComponent"], _addinventory_addinventory_component__WEBPACK_IMPORTED_MODULE_18__["AddinventoryComponent"], _ordermanagement_ordermanagement_component__WEBPACK_IMPORTED_MODULE_19__["OrdermanagementComponent"], _addordermanagement_addordermanagement_component__WEBPACK_IMPORTED_MODULE_20__["AddordermanagementComponent"], _payment_payment_component__WEBPACK_IMPORTED_MODULE_21__["PaymentComponent"], _my_line_chart_my_line_chart_component__WEBPACK_IMPORTED_MODULE_22__["MyLineChartComponent"], _reportpage_reportpage_component__WEBPACK_IMPORTED_MODULE_23__["ReportpageComponent"], _inventry_management_inventry_management_component__WEBPACK_IMPORTED_MODULE_24__["InventryManagementComponent"], _viewinventory_viewinventory_component__WEBPACK_IMPORTED_MODULE_25__["ViewinventoryComponent"], _manage_earning_manage_earning_component__WEBPACK_IMPORTED_MODULE_26__["ManageEarningComponent"], _refund_refund_component__WEBPACK_IMPORTED_MODULE_27__["RefundComponent"], _manage_reviews_manage_reviews_component__WEBPACK_IMPORTED_MODULE_28__["ManageReviewsComponent"], _vender_management_vender_management_component__WEBPACK_IMPORTED_MODULE_29__["VenderManagementComponent"], _add_vender_add_vender_component__WEBPACK_IMPORTED_MODULE_30__["AddVenderComponent"], _booking_request_history_booking_request_history_component__WEBPACK_IMPORTED_MODULE_31__["BookingRequestHistoryComponent"], _view_user_view_user_component__WEBPACK_IMPORTED_MODULE_32__["ViewUserComponent"], _edit_user_edit_user_component__WEBPACK_IMPORTED_MODULE_33__["EditUserComponent"], _edit_product_edit_product_component__WEBPACK_IMPORTED_MODULE_34__["EditProductComponent"], _view_product_view_product_component__WEBPACK_IMPORTED_MODULE_35__["ViewProductComponent"], _edit_order_edit_order_component__WEBPACK_IMPORTED_MODULE_36__["EditOrderComponent"], _view_order_view_order_component__WEBPACK_IMPORTED_MODULE_37__["ViewOrderComponent"], _edit_vendor_edit_vendor_component__WEBPACK_IMPORTED_MODULE_38__["EditVendorComponent"], _view_vendor_view_vendor_component__WEBPACK_IMPORTED_MODULE_39__["ViewVendorComponent"], _deals_deals_component__WEBPACK_IMPORTED_MODULE_40__["DealsComponent"], _category_category_component__WEBPACK_IMPORTED_MODULE_41__["CategoryComponent"], _banner_banner_component__WEBPACK_IMPORTED_MODULE_42__["BannerComponent"], _addcategory_addcategory_component__WEBPACK_IMPORTED_MODULE_43__["AddcategoryComponent"], _viewcategory_viewcategory_component__WEBPACK_IMPORTED_MODULE_44__["ViewcategoryComponent"], _editcategory_editcategory_component__WEBPACK_IMPORTED_MODULE_45__["EditcategoryComponent"], _cms_cms_component__WEBPACK_IMPORTED_MODULE_46__["CmsComponent"], _viewdiscount_viewdiscount_component__WEBPACK_IMPORTED_MODULE_50__["ViewdiscountComponent"], _editdiscount_editdiscount_component__WEBPACK_IMPORTED_MODULE_51__["EditdiscountComponent"], _addoffers_addoffers_component__WEBPACK_IMPORTED_MODULE_53__["AddoffersComponent"], _offerdeals_offerdeals_component__WEBPACK_IMPORTED_MODULE_52__["OfferdealsComponent"], _salesreport_salesreport_component__WEBPACK_IMPORTED_MODULE_65__["SalesreportComponent"], _revenuereport_revenuereport_component__WEBPACK_IMPORTED_MODULE_66__["RevenuereportComponent"], _reveuegraph_reveuegraph_component__WEBPACK_IMPORTED_MODULE_67__["ReveuegraphComponent"], _salesgraph_salesgraph_component__WEBPACK_IMPORTED_MODULE_68__["SalesgraphComponent"], _profile_profile_component__WEBPACK_IMPORTED_MODULE_69__["ProfileComponent"], _changepassword_changepassword_component__WEBPACK_IMPORTED_MODULE_70__["ChangepasswordComponent"], _about_about_component__WEBPACK_IMPORTED_MODULE_48__["AboutComponent"], _faq_faq_component__WEBPACK_IMPORTED_MODULE_49__["FaqComponent"], _subcategory_subcategory_component__WEBPACK_IMPORTED_MODULE_56__["SubcategoryComponent"], _editsubcategory_editsubcategory_component__WEBPACK_IMPORTED_MODULE_57__["EditsubcategoryComponent"], _viewsubcategory_viewsubcategory_component__WEBPACK_IMPORTED_MODULE_58__["ViewsubcategoryComponent"], _addsubcategory_addsubcategory_component__WEBPACK_IMPORTED_MODULE_59__["AddsubcategoryComponent"], _termcondition_termcondition_component__WEBPACK_IMPORTED_MODULE_60__["TermconditionComponent"], _contactus_contactus_component__WEBPACK_IMPORTED_MODULE_61__["ContactusComponent"], _privacypolicy_privacypolicy_component__WEBPACK_IMPORTED_MODULE_62__["PrivacypolicyComponent"], _returnpolicy_returnpolicy_component__WEBPACK_IMPORTED_MODULE_63__["ReturnpolicyComponent"], _ventor_t_ventor_t_component__WEBPACK_IMPORTED_MODULE_64__["VentorTComponent"], _editprofile_editprofile_component__WEBPACK_IMPORTED_MODULE_71__["EditprofileComponent"], _vendor_sales_report_vendor_sales_report_component__WEBPACK_IMPORTED_MODULE_72__["VendorSalesReportComponent"], _report_graph_report_graph_component__WEBPACK_IMPORTED_MODULE_73__["ReportGraphComponent"], _termofuse_termofuse_component__WEBPACK_IMPORTED_MODULE_74__["TermofuseComponent"], _termofsales_termofsales_component__WEBPACK_IMPORTED_MODULE_75__["TermofsalesComponent"], _consumerprivacypolicy_consumerprivacypolicy_component__WEBPACK_IMPORTED_MODULE_76__["ConsumerprivacypolicyComponent"], _warrantypolicy_warrantypolicy_component__WEBPACK_IMPORTED_MODULE_77__["WarrantypolicyComponent"], _delivery_address_delivery_address_component__WEBPACK_IMPORTED_MODULE_81__["DeliveryAddressComponent"]],
+      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"], _login_login_component__WEBPACK_IMPORTED_MODULE_6__["LoginComponent"], _forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_7__["ForgotPasswordComponent"], _reset_password_reset_password_component__WEBPACK_IMPORTED_MODULE_8__["ResetPasswordComponent"], _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_10__["DashboardComponent"], _sidebar_sidebar_component__WEBPACK_IMPORTED_MODULE_11__["SidebarComponent"], _navbar_navbar_component__WEBPACK_IMPORTED_MODULE_12__["NavbarComponent"], _manage_user_manage_user_component__WEBPACK_IMPORTED_MODULE_14__["ManageUserComponent"], _adduser_adduser_component__WEBPACK_IMPORTED_MODULE_15__["AdduserComponent"], _product_product_component__WEBPACK_IMPORTED_MODULE_16__["ProductComponent"], _addproduct_addproduct_component__WEBPACK_IMPORTED_MODULE_17__["AddproductComponent"], _notification_notification_component__WEBPACK_IMPORTED_MODULE_54__["NotificationComponent"], _addinventory_addinventory_component__WEBPACK_IMPORTED_MODULE_18__["AddinventoryComponent"], _ordermanagement_ordermanagement_component__WEBPACK_IMPORTED_MODULE_19__["OrdermanagementComponent"], _addordermanagement_addordermanagement_component__WEBPACK_IMPORTED_MODULE_20__["AddordermanagementComponent"], _payment_payment_component__WEBPACK_IMPORTED_MODULE_21__["PaymentComponent"], _my_line_chart_my_line_chart_component__WEBPACK_IMPORTED_MODULE_22__["MyLineChartComponent"], _reportpage_reportpage_component__WEBPACK_IMPORTED_MODULE_23__["ReportpageComponent"], _inventry_management_inventry_management_component__WEBPACK_IMPORTED_MODULE_24__["InventryManagementComponent"], _viewinventory_viewinventory_component__WEBPACK_IMPORTED_MODULE_25__["ViewinventoryComponent"], _manage_earning_manage_earning_component__WEBPACK_IMPORTED_MODULE_26__["ManageEarningComponent"], _refund_refund_component__WEBPACK_IMPORTED_MODULE_27__["RefundComponent"], _manage_reviews_manage_reviews_component__WEBPACK_IMPORTED_MODULE_28__["ManageReviewsComponent"], _vender_management_vender_management_component__WEBPACK_IMPORTED_MODULE_29__["VenderManagementComponent"], _add_vender_add_vender_component__WEBPACK_IMPORTED_MODULE_30__["AddVenderComponent"], _booking_request_history_booking_request_history_component__WEBPACK_IMPORTED_MODULE_31__["BookingRequestHistoryComponent"], _view_user_view_user_component__WEBPACK_IMPORTED_MODULE_32__["ViewUserComponent"], _edit_user_edit_user_component__WEBPACK_IMPORTED_MODULE_33__["EditUserComponent"], _edit_product_edit_product_component__WEBPACK_IMPORTED_MODULE_34__["EditProductComponent"], _view_product_view_product_component__WEBPACK_IMPORTED_MODULE_35__["ViewProductComponent"], _edit_order_edit_order_component__WEBPACK_IMPORTED_MODULE_36__["EditOrderComponent"], _view_order_view_order_component__WEBPACK_IMPORTED_MODULE_37__["ViewOrderComponent"], _edit_vendor_edit_vendor_component__WEBPACK_IMPORTED_MODULE_38__["EditVendorComponent"], _view_vendor_view_vendor_component__WEBPACK_IMPORTED_MODULE_39__["ViewVendorComponent"], _deals_deals_component__WEBPACK_IMPORTED_MODULE_40__["DealsComponent"], _category_category_component__WEBPACK_IMPORTED_MODULE_41__["CategoryComponent"], _banner_banner_component__WEBPACK_IMPORTED_MODULE_42__["BannerComponent"], _addcategory_addcategory_component__WEBPACK_IMPORTED_MODULE_43__["AddcategoryComponent"], _viewcategory_viewcategory_component__WEBPACK_IMPORTED_MODULE_44__["ViewcategoryComponent"], _editcategory_editcategory_component__WEBPACK_IMPORTED_MODULE_45__["EditcategoryComponent"], _cms_cms_component__WEBPACK_IMPORTED_MODULE_46__["CmsComponent"], _viewdiscount_viewdiscount_component__WEBPACK_IMPORTED_MODULE_50__["ViewdiscountComponent"], _editdiscount_editdiscount_component__WEBPACK_IMPORTED_MODULE_51__["EditdiscountComponent"], _addoffers_addoffers_component__WEBPACK_IMPORTED_MODULE_53__["AddoffersComponent"], _offerdeals_offerdeals_component__WEBPACK_IMPORTED_MODULE_52__["OfferdealsComponent"], _salesreport_salesreport_component__WEBPACK_IMPORTED_MODULE_65__["SalesreportComponent"], _revenuereport_revenuereport_component__WEBPACK_IMPORTED_MODULE_66__["RevenuereportComponent"], _reveuegraph_reveuegraph_component__WEBPACK_IMPORTED_MODULE_67__["ReveuegraphComponent"], _salesgraph_salesgraph_component__WEBPACK_IMPORTED_MODULE_68__["SalesgraphComponent"], _profile_profile_component__WEBPACK_IMPORTED_MODULE_69__["ProfileComponent"], _changepassword_changepassword_component__WEBPACK_IMPORTED_MODULE_70__["ChangepasswordComponent"], _about_about_component__WEBPACK_IMPORTED_MODULE_48__["AboutComponent"], _faq_faq_component__WEBPACK_IMPORTED_MODULE_49__["FaqComponent"], _subcategory_subcategory_component__WEBPACK_IMPORTED_MODULE_56__["SubcategoryComponent"], _editsubcategory_editsubcategory_component__WEBPACK_IMPORTED_MODULE_57__["EditsubcategoryComponent"], _viewsubcategory_viewsubcategory_component__WEBPACK_IMPORTED_MODULE_58__["ViewsubcategoryComponent"], _addsubcategory_addsubcategory_component__WEBPACK_IMPORTED_MODULE_59__["AddsubcategoryComponent"], _termcondition_termcondition_component__WEBPACK_IMPORTED_MODULE_60__["TermconditionComponent"], _contactus_contactus_component__WEBPACK_IMPORTED_MODULE_61__["ContactusComponent"], _privacypolicy_privacypolicy_component__WEBPACK_IMPORTED_MODULE_62__["PrivacypolicyComponent"], _returnpolicy_returnpolicy_component__WEBPACK_IMPORTED_MODULE_63__["ReturnpolicyComponent"], _ventor_t_ventor_t_component__WEBPACK_IMPORTED_MODULE_64__["VentorTComponent"], _editprofile_editprofile_component__WEBPACK_IMPORTED_MODULE_71__["EditprofileComponent"], _vendor_sales_report_vendor_sales_report_component__WEBPACK_IMPORTED_MODULE_72__["VendorSalesReportComponent"], _report_graph_report_graph_component__WEBPACK_IMPORTED_MODULE_73__["ReportGraphComponent"], _termofuse_termofuse_component__WEBPACK_IMPORTED_MODULE_74__["TermofuseComponent"], _termofsales_termofsales_component__WEBPACK_IMPORTED_MODULE_75__["TermofsalesComponent"], _consumerprivacypolicy_consumerprivacypolicy_component__WEBPACK_IMPORTED_MODULE_76__["ConsumerprivacypolicyComponent"], _warrantypolicy_warrantypolicy_component__WEBPACK_IMPORTED_MODULE_77__["WarrantypolicyComponent"], _delivery_address_delivery_address_component__WEBPACK_IMPORTED_MODULE_81__["DeliveryAddressComponent"], _graph_graph_component__WEBPACK_IMPORTED_MODULE_83__["GraphComponent"]],
       imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_9__["BrowserAnimationsModule"], _material_material_module__WEBPACK_IMPORTED_MODULE_3__["MaterialModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_79__["HttpClientModule"], ng2_charts__WEBPACK_IMPORTED_MODULE_13__["ChartsModule"], ckeditor4_angular__WEBPACK_IMPORTED_MODULE_47__["CKEditorModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_55__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_55__["ReactiveFormsModule"], ng6_toastr_notifications__WEBPACK_IMPORTED_MODULE_78__["ToastrModule"].forRoot(), ng_multiselect_dropdown__WEBPACK_IMPORTED_MODULE_82__["NgMultiSelectDropDownModule"].forRoot()],
       providers: [_angular_common__WEBPACK_IMPORTED_MODULE_80__["DatePipe"]],
       bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
@@ -6147,20 +6248,62 @@
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var src_services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! src/services/api.service */
+    "./src/services/api.service.ts");
+    /* harmony import */
+
+
+    var src_services_common_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! src/services/common.service */
+    "./src/services/common.service.ts");
 
     let ConsumerprivacypolicyComponent = class ConsumerprivacypolicyComponent {
-      constructor() {
+      constructor(apiService, commonService) {
+        this.apiService = apiService;
+        this.commonService = commonService;
         this.name = 'ng4-ckeditor';
         this.log = '';
-        this.mycontent = "<p>Lorem ipsum Lorem ipsum</p>";
+        this.title = "Privacy Policy";
+        this.slugName = "privacy-policy";
+      }
+
+      getAllCms() {
+        let allCms = [];
+        this.apiService.getAllCMs().subscribe(res => {
+          console.log(res);
+
+          if (res.success == true) {
+            allCms = res.data;
+            this.termsAndCondition = allCms.find(ele => ele.slugName == this.slugName);
+            this.mycontent = this.termsAndCondition.description;
+            console.log(this.termsAndCondition);
+          }
+        });
       }
 
       ngOnInit() {
+        this.getAllCms();
         this.ckeConfig = {
           allowedContent: false,
           extraPlugins: 'divarea',
           forcePasteAsPlainText: true
         };
+      }
+
+      updateTermAndCondition() {
+        debugger;
+        this.termsAndCondition.description = this.mycontent;
+        this.apiService.updateCMS(this.termsAndCondition).subscribe(res => {
+          console.log(res);
+
+          if (res.success == true) {
+            this.commonService.successToast("Updated Successfully");
+          }
+        });
       }
 
       onChange($event) {
@@ -6172,6 +6315,13 @@
       }
 
     };
+
+    ConsumerprivacypolicyComponent.ctorParameters = () => [{
+      type: src_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"]
+    }, {
+      type: src_services_common_service__WEBPACK_IMPORTED_MODULE_3__["CommonService"]
+    }];
+
     ConsumerprivacypolicyComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-consumerprivacypolicy',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
@@ -6235,20 +6385,62 @@
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var src_services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! src/services/api.service */
+    "./src/services/api.service.ts");
+    /* harmony import */
+
+
+    var src_services_common_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! src/services/common.service */
+    "./src/services/common.service.ts");
 
     let ContactusComponent = class ContactusComponent {
-      constructor() {
+      constructor(apiService, commonService) {
+        this.apiService = apiService;
+        this.commonService = commonService;
         this.name = 'ng4-ckeditor';
         this.log = '';
-        this.mycontent = "<p>Lorem ipsum Lorem ipsum</p>";
+        this.title = "Contact Us";
+        this.slugName = "contact-us";
+      }
+
+      getAllCms() {
+        let allCms = [];
+        this.apiService.getAllCMs().subscribe(res => {
+          console.log(res);
+
+          if (res.success == true) {
+            allCms = res.data;
+            this.CmsData = allCms.find(ele => ele.slugName == this.slugName);
+            this.mycontent = this.CmsData.description;
+            console.log(this.CmsData);
+          }
+        });
       }
 
       ngOnInit() {
+        this.getAllCms();
         this.ckeConfig = {
           allowedContent: false,
           extraPlugins: 'divarea',
           forcePasteAsPlainText: true
         };
+      }
+
+      updateTermAndCondition() {
+        debugger;
+        this.CmsData.description = this.mycontent;
+        this.apiService.updateCMS(this.CmsData).subscribe(res => {
+          console.log(res);
+
+          if (res.success == true) {
+            this.commonService.successToast("Updated Successfully");
+          }
+        });
       }
 
       onChange($event) {
@@ -6260,6 +6452,13 @@
       }
 
     };
+
+    ContactusComponent.ctorParameters = () => [{
+      type: src_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"]
+    }, {
+      type: src_services_common_service__WEBPACK_IMPORTED_MODULE_3__["CommonService"]
+    }];
+
     ContactusComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-contactus',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
@@ -6326,32 +6525,45 @@
     /* harmony import */
 
 
-    var chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var fusioncharts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! fusioncharts */
+    "./node_modules/fusioncharts/fusioncharts.js");
+    /* harmony import */
+
+
+    var fusioncharts__WEBPACK_IMPORTED_MODULE_2___default =
+    /*#__PURE__*/
+    __webpack_require__.n(fusioncharts__WEBPACK_IMPORTED_MODULE_2__);
+    /* harmony import */
+
+
+    var chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! chartjs-plugin-datalabels */
     "./node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.js");
     /* harmony import */
 
 
-    var chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_2___default =
+    var chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_3___default =
     /*#__PURE__*/
-    __webpack_require__.n(chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_2__);
+    __webpack_require__.n(chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_3__);
     /* harmony import */
 
 
-    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/fesm2015/router.js");
 
     let DashboardComponent = class DashboardComponent {
-      // dataSource: any;
-      // type: string;
-      // width: string;
-      // height: string;
       constructor(router) {
-        // this.type = "timeseries";
-        // this.width = "100%";
-        // this.height = "400";
         this.router = router;
+        this.page = 1;
+        this.length = 100;
+        this.pageSize = 10;
+        this.pageSizeOptions = [5, 10, 25, 100];
+        this.filterBy = '';
+        this.search = '';
+        this.salesList = [];
+        this.flagSearch = true;
         this.barChartOptions = {
           responsive: true,
           // We use these empty structures as placeholders for dynamic theming.
@@ -6369,7 +6581,7 @@
         this.barChartLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
         this.barChartType = 'bar';
         this.barChartLegend = true;
-        this.barChartPlugins = [chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_2__];
+        this.barChartPlugins = [chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_3__];
         this.barChartData = [{
           data: [65, 59, 80, 81, 56, 55, 40],
           label: 'Series A'
@@ -6377,49 +6589,65 @@
           data: [28, 48, 40, 19, 86, 27, 90],
           label: 'Series B'
         }];
+        this.type = "timeseries";
+        this.width = "100%";
+        this.height = "400";
       }
 
-      ngOnInit() {} // // This is the dataSource of the chart
-      // this.dataSource = {
-      //   chart: {},
-      //   caption: {
-      //     text: "Sales Analysis"
-      //   },
-      //   subcaption: {
-      //     text: "Grocery & Footwear"
-      //   },
-      //   series: "Type",
-      //   yaxis: [
-      //     {
-      //       plot: "Sales Value",
-      //       title: "Sale Value",
-      //       format: {
-      //         prefix: "$"
-      //       }
-      //     }
-      //   ]
-      // };
-      // this.fetchData();
-      // fetchData() {
-      //   var jsonify = res => res.json();
-      //   var dataFetch = fetch(
-      //     "https://s3.eu-central-1.amazonaws.com/fusion.store/ft/data/plotting-multiple-series-on-time-axis-data.json"
-      //   ).then(jsonify);
-      //   var schemaFetch = fetch(
-      //     "https://s3.eu-central-1.amazonaws.com/fusion.store/ft/schema/plotting-multiple-series-on-time-axis-schema.json"
-      //   ).then(jsonify);
-      //   Promise.all([dataFetch, schemaFetch]).then(res => {
-      //     const [data, schema] = res;
-      //     // First we are creating a DataStore
-      //     const fusionDataStore = new FusionCharts.DataStore();
-      //     // After that we are creating a DataTable by passing our data and schema as arguments
-      //     const fusionTable = fusionDataStore.createDataTable(data, schema);
-      //     // Afet that we simply mutated our timeseries datasource by attaching the above
-      //     // DataTable into its data property.
-      //     this.dataSource.data = fusionTable;
-      //   });
-      // }
+      ngOnInit() {
+        // This is the dataSource of the chart
+        this.dataSource = {
+          chart: {},
+          caption: {
+            text: "Sales Analysis"
+          },
+          subcaption: {
+            text: "Grocery & Footwear"
+          },
+          series: "Type",
+          yaxis: [{
+            plot: "Sales Value",
+            title: "Sale Value",
+            format: {
+              prefix: "$"
+            }
+          }]
+        };
+        this.fetchData();
+      }
 
+      fetchData() {
+        var jsonify = res => res.json();
+
+        var dataFetch = fetch("https://s3.eu-central-1.amazonaws.com/fusion.store/ft/data/plotting-multiple-series-on-time-axis-data.json").then(jsonify);
+        var schemaFetch = fetch("https://s3.eu-central-1.amazonaws.com/fusion.store/ft/schema/plotting-multiple-series-on-time-axis-schema.json").then(jsonify);
+        Promise.all([dataFetch, schemaFetch]).then(res => {
+          const _res = _slicedToArray(res, 2),
+                data = _res[0],
+                schema = _res[1]; // First we are creating a DataStore
+
+
+          const fusionDataStore = new fusioncharts__WEBPACK_IMPORTED_MODULE_2__["DataStore"](); // After that we are creating a DataTable by passing our data and schema as arguments
+
+          const fusionTable = fusionDataStore.createDataTable(data, schema); // Afet that we simply mutated our timeseries datasource by attaching the above
+          // DataTable into its data property.
+
+          this.dataSource.data = fusionTable;
+        });
+      }
+
+      filterSelected(e) {
+        console.log(e);
+
+        if (this.filterBy) {
+          this.flag = true;
+        } else {
+          this.flag = false;
+        }
+
+        console.log(e.target.value);
+        this.filterBy = e.target.value; // this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
+      }
 
       chartClicked({
         event,
@@ -6433,6 +6661,38 @@
         active
       }) {
         console.log(event, active);
+      }
+
+      searchMethod() {
+        this.flagSearch = false; // console.log(this.search);
+        // this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
+      }
+
+      clearSearch() {
+        this.flagSearch = true;
+        this.search = ''; // this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
+      }
+
+      productListAfterPageSizeChanged(e) {
+        console.log(e);
+
+        if (e.pageIndex == 0) {
+          this.page = 1; // this.page = e.pageIndex;
+          //  this.srNo = e.pageIndex * e.pageSize
+
+          this.flagUserList = false;
+        } else {
+          if (e.previousPageIndex < e.pageIndex) {
+            this.page = e.pageIndex + 1;
+            this.srNo = e.pageIndex * e.pageSize;
+            this.flagUserList = true;
+          } else {
+            this.page = e.pageIndex;
+            this.srNo = e.pageIndex * e.pageSize;
+            this.flagUserList = true;
+          }
+        } // this.getSaleslist(this.page, e.pageSize, this.search, this.filterBy)
+
       }
 
       randomize() {
@@ -6460,7 +6720,7 @@
     };
 
     DashboardComponent.ctorParameters = () => [{
-      type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
+      type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
     }];
 
     DashboardComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -6754,10 +7014,17 @@
     var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/forms */
+    "./node_modules/@angular/forms/fesm2015/forms.js");
 
     let EditOrderComponent = class EditOrderComponent {
-      constructor(router) {
+      constructor(router, fb) {
         this.router = router;
+        this.fb = fb;
         this.foods = [{
           value: 'steak-0',
           viewValue: 'Confirm'
@@ -6799,7 +7066,23 @@
         }
       }
 
-      ngOnInit() {}
+      ngOnInit() {
+        this.editOrderFormGroup = this.fb.group({
+          orderId: [''],
+          productName: [''],
+          category: [''],
+          subCategory: [''],
+          isbnNumber: [''],
+          skuNumber: [''],
+          qunatity: [''],
+          price: [''],
+          userName: [''],
+          userAddess: [],
+          orderDate: [''],
+          deliveryDate: [''],
+          status: ['']
+        });
+      }
 
       goToordermanagement() {
         this.router.navigate(['/ordermanagement']);
@@ -6809,6 +7092,8 @@
 
     EditOrderComponent.ctorParameters = () => [{
       type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+    }, {
+      type: _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"]
     }];
 
     EditOrderComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -8746,6 +9031,86 @@
   },
 
   /***/
+  "./src/app/graph/graph.component.scss":
+  /*!********************************************!*\
+    !*** ./src/app/graph/graph.component.scss ***!
+    \********************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppGraphGraphComponentScss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2dyYXBoL2dyYXBoLmNvbXBvbmVudC5zY3NzIn0= */";
+    /***/
+  },
+
+  /***/
+  "./src/app/graph/graph.component.ts":
+  /*!******************************************!*\
+    !*** ./src/app/graph/graph.component.ts ***!
+    \******************************************/
+
+  /*! exports provided: GraphComponent */
+
+  /***/
+  function srcAppGraphGraphComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "GraphComponent", function () {
+      return GraphComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+
+    let GraphComponent = class GraphComponent {
+      constructor() {//  console.log(this.chartData)
+      }
+
+      ngOnInit() {
+        console.log(this.chartData);
+        this.barChartOptions = this.chartData.barChartOptions;
+        this.barChartLabels = this.chartData.barChartLabels;
+        this.barChartType = 'bar';
+        this.barChartLegend = true;
+        this.barChartPlugins = this.chartData.barChartPlugins;
+        this.barChartData = this.chartData.barChartData;
+      }
+
+    };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])('chartData')], GraphComponent.prototype, "chartData", void 0);
+    GraphComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'app-graph',
+      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! raw-loader!./graph.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/graph/graph.component.html")).default,
+      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! ./graph.component.scss */
+      "./src/app/graph/graph.component.scss")).default]
+    })], GraphComponent);
+    /***/
+  },
+
+  /***/
   "./src/app/inventry-management/inventry-management.component.scss":
   /*!************************************************************************!*\
     !*** ./src/app/inventry-management/inventry-management.component.scss ***!
@@ -9127,13 +9492,142 @@
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var src_services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! src/services/api.service */
+    "./src/services/api.service.ts");
+    /* harmony import */
+
+
+    var sweetalert2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! sweetalert2 */
+    "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+    /* harmony import */
+
+
+    var sweetalert2__WEBPACK_IMPORTED_MODULE_3___default =
+    /*#__PURE__*/
+    __webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_3__);
+    /* harmony import */
+
+
+    var src_services_common_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! src/services/common.service */
+    "./src/services/common.service.ts");
 
     let ManageReviewsComponent = class ManageReviewsComponent {
-      constructor() {}
+      constructor(apiService, commonService) {
+        this.apiService = apiService;
+        this.commonService = commonService;
+        this.page = 1;
+        this.length = 100;
+        this.pageSize = 10;
+        this.pageSizeOptions = [5, 10, 25, 100];
+        this.filterBy = '';
+        this.search = '';
+        this.flagSearch = true;
+      }
 
-      ngOnInit() {}
+      ngOnInit() {
+        this.getReview(this.page, this.pageSize, this.search, this.filterBy);
+      }
+
+      getReview(page, pageSize, search, filterBy) {
+        this.apiService.getReviewList(page, pageSize, search, filterBy).subscribe(res => {
+          if (res.success == true) {
+            console.log(res);
+            this.reviewList = res.data; // alert("")
+          }
+        });
+      }
+
+      filterSelected(e) {
+        if (this.filterBy) {
+          this.flag = true;
+        } else {
+          this.flag = false;
+        }
+
+        console.log(e.target.value);
+        this.filterBy = e.target.value;
+        this.getReview(this.page, this.pageSize, this.search, this.filterBy);
+      }
+
+      searchMethod() {
+        this.flagSearch = false;
+        this.getReview(this.page, this.pageSize, this.search, this.filterBy);
+      }
+
+      clearSearch() {
+        this.flagSearch = true;
+        this.search = '';
+        this.getReview(this.page, this.pageSize, this.search, this.filterBy);
+      }
+
+      statusChnaged(e) {
+        console.log(e);
+      }
+
+      reviewListAfterPageSizeChanged(e) {
+        //console.log(e);
+        if (e.pageIndex == 0) {
+          this.page = 1; // this.page = e.pageIndex;
+          //  this.srNo = e.pageIndex * e.pageSize
+
+          this.flagUserList = false;
+        } else {
+          if (e.previousPageIndex < e.pageIndex) {
+            this.page = e.pageIndex + 1;
+            this.srNo = e.pageIndex * e.pageSize;
+            this.flagUserList = true;
+          } else {
+            this.page = e.pageIndex;
+            this.srNo = e.pageIndex * e.pageSize;
+            this.flagUserList = true;
+          }
+        }
+
+        this.getReview(this.page, this.pageSize, this.search, this.filterBy);
+      }
+
+      deleteReview(i) {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a.fire({
+          title: "Are you sure?",
+          text: "Once deleted, you will not be able to recover this Vendor!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085D6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes",
+          cancelButtonText: "Cancel",
+          allowOutsideClick: true
+        }).then(result => {
+          if (result.value) {
+            let id = i;
+            const data = {
+              "id": id,
+              "model": "Rating"
+            };
+            this.apiService.deleteHard(data).then(res => {
+              this.commonService.successToast("Review Deleted");
+              this.getReview(this.page, this.pageSize, this.search, this.filterBy);
+            });
+          } else {
+            console.log("cancelled");
+          }
+        });
+      }
 
     };
+
+    ManageReviewsComponent.ctorParameters = () => [{
+      type: src_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"]
+    }, {
+      type: src_services_common_service__WEBPACK_IMPORTED_MODULE_4__["CommonService"]
+    }];
+
     ManageReviewsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-manage-reviews',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
@@ -9765,6 +10259,10 @@
         this.profileData = JSON.parse(this.apiService.getUser());
       }
 
+      filterSelected(e) {
+        console.log(e.target.value);
+      }
+
       getProfile() {
         this;
       }
@@ -10292,13 +10790,159 @@
     var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var src_services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! src/services/api.service */
+    "./src/services/api.service.ts");
+    /* harmony import */
+
+
+    var src_services_common_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! src/services/common.service */
+    "./src/services/common.service.ts");
 
     let OrdermanagementComponent = class OrdermanagementComponent {
-      constructor(router) {
+      constructor(router, apiService, commonService) {
         this.router = router;
+        this.apiService = apiService;
+        this.commonService = commonService;
+        this.page = 1;
+        this.length = 100;
+        this.pageSize = 10;
+        this.filterList = [{
+          viewValue: 'New',
+          value: 'New'
+        }, {
+          viewValue: 'Accepted',
+          value: 'Accepted'
+        }, {
+          viewValue: 'Cancelled',
+          value: 'Canceled'
+        }, {
+          viewValue: 'Rejected',
+          value: 'Rejected'
+        }, {
+          viewValue: 'Packing',
+          value: 'Packing'
+        }, {
+          viewValue: 'Shipped',
+          value: 'Shipped'
+        }, {
+          viewValue: 'Delivered',
+          value: 'Delivered'
+        }, {
+          viewValue: 'Unwant',
+          value: 'UnWant'
+        }, {
+          viewValue: 'Picking',
+          value: 'Picking'
+        }, {
+          viewValue: 'Rescheduled',
+          value: 'Rescheduled'
+        }, {
+          viewValue: 'Picked For Shipping',
+          value: 'pickedShipping'
+        }, {
+          viewValue: 'Picked',
+          value: 'Picked'
+        }, {
+          viewValue: 'Picked and Delivered',
+          value: 'PickedDelivered'
+        }];
+        this.pageSizeOptions = [5, 10, 25, 100];
+        this.filterBy = '';
+        this.search = '';
+        this.salesList = [];
+        this.flagSearch = true;
       }
 
-      ngOnInit() {}
+      ngOnInit() {
+        this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy);
+      }
+
+      getSaleslist(page, pageSize, search, filterBy) {
+        this.apiService.getSaleList(page, pageSize, search, filterBy).subscribe(res => {
+          console.log(res);
+
+          if (res.data) {
+            this.flagData = false;
+            this.salesList = res.data;
+            this.length = res.total;
+          } else {
+            this.flagData = true;
+          }
+        });
+      }
+
+      filterSelected(e) {
+        console.log(e);
+
+        if (this.filterBy) {
+          this.flag = true;
+        } else {
+          this.flag = false;
+        }
+
+        console.log(e.target.value);
+        this.filterBy = e.target.value;
+        this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy);
+      }
+
+      searchMethod() {
+        this.flagSearch = false; // console.log(this.search);
+
+        this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy);
+      }
+
+      clearSearch() {
+        this.flagSearch = true;
+        this.search = '';
+        this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy);
+      }
+
+      statusChanged(value, id) {
+        console.log("value", value, "ID", id);
+        let body = {
+          id: id,
+          status: value
+        };
+        this.apiService.updateStatus(body).subscribe(res => {
+          console.log(res);
+
+          if (res.success) {
+            this.commonService.successToast('Updated Succesfully');
+            this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy);
+          } else {
+            this.commonService.errorToast('Error: Please Try again  after some time');
+            this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy);
+          }
+        });
+      }
+
+      productListAfterPageSizeChanged(e) {
+        console.log(e);
+
+        if (e.pageIndex == 0) {
+          this.page = 1; // this.page = e.pageIndex;
+          //  this.srNo = e.pageIndex * e.pageSize
+
+          this.flagUserList = false;
+        } else {
+          if (e.previousPageIndex < e.pageIndex) {
+            this.page = e.pageIndex + 1;
+            this.srNo = e.pageIndex * e.pageSize;
+            this.flagUserList = true;
+          } else {
+            this.page = e.pageIndex;
+            this.srNo = e.pageIndex * e.pageSize;
+            this.flagUserList = true;
+          }
+        }
+
+        this.getSaleslist(this.page, e.pageSize, this.search, this.filterBy);
+      }
 
       goToaddordermanagement() {
         this.router.navigate(['/addordermanagement']);
@@ -10308,14 +10952,22 @@
         this.router.navigate(['/editOrder']);
       }
 
-      goToviewOrder() {
-        this.router.navigate(['/viewOrder']);
+      goToviewOrder(id) {
+        this.router.navigate(['/viewOrder'], {
+          queryParams: {
+            "id": id
+          }
+        });
       }
 
     };
 
     OrdermanagementComponent.ctorParameters = () => [{
       type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+    }, {
+      type: src_services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"]
+    }, {
+      type: src_services_common_service__WEBPACK_IMPORTED_MODULE_4__["CommonService"]
     }];
 
     OrdermanagementComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -10391,9 +11043,101 @@
     let PaymentComponent = class PaymentComponent {
       constructor(router) {
         this.router = router;
+        this.flag = false;
+        this.flagSearch = true;
       }
 
       ngOnInit() {}
+
+      filterSelected(e) {
+        if (this.filterBy) {
+          this.flag = true;
+        } else {
+          this.flag = false;
+        }
+
+        console.log(e.target.value);
+        this.filterBy = e.target.value; // this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
+        //   if (res) {
+        //     if (res.data.length > 0) {
+        //       this.flagData = false
+        //       this.bannerList = res.data
+        //       this.length = res.total
+        //       console.log(this.bannerList)
+        //     } else {
+        //       this.flagData = true
+        //     }
+        //   };
+        // });
+      }
+
+      searchMethod() {
+        this.flagSearch = false; // console.log(this.search);
+        // this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
+        //   if (res.success) {
+        //     if (res.data.length > 0) {
+        //       this.flagData = false
+        //       this.bannerList = res.data;
+        //       this.length = res.total
+        //       console.log(this.bannerList);
+        //     } else {
+        //       this.flagData = true
+        //     }
+        //   }
+        // })
+      }
+
+      clearSearch() {
+        this.flagSearch = true;
+        this.search = ''; // this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
+        //   if (res.success) {
+        //     if (res.data.length > 0) {
+        //       this.flagData = false
+        //       this.bannerList = res.data;
+        //       this.length = res.total
+        //       console.log(this.bannerList);
+        //     } else {
+        //       this.flagData = true
+        //     }
+        //   }
+        // });
+      }
+
+      statusChnaged(e) {
+        console.log(e);
+      }
+
+      salesListAfterPageSizeChanged(e) {
+        //console.log(e);
+        if (e.pageIndex == 0) {
+          this.page = 1; // this.page = e.pageIndex;
+          //  this.srNo = e.pageIndex * e.pageSize
+
+          this.flagUserList = false;
+        } else {
+          if (e.previousPageIndex < e.pageIndex) {
+            this.page = e.pageIndex + 1;
+            this.srNo = e.pageIndex * e.pageSize;
+            this.flagUserList = true;
+          } else {
+            this.page = e.pageIndex;
+            this.srNo = e.pageIndex * e.pageSize;
+            this.flagUserList = true;
+          }
+        } // this.apiService.getAllDiscount(this.page, e.pageSize, this.search, this.filterBy).subscribe((res) => {
+        //   if (res.success) {
+        //     if (res.data.length > 0) {
+        //       this.flagData = false
+        //       this.bannerList = res.data;
+        //       this.length = res.total
+        //       console.log(this.bannerList);
+        //     } else {
+        //       this.flagData = true
+        //     }
+        //   }
+        // });
+
+      }
 
       goTomanageEarning() {
         this.router.navigate(['manageEarning']);
@@ -10472,20 +11216,62 @@
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var src_services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! src/services/api.service */
+    "./src/services/api.service.ts");
+    /* harmony import */
+
+
+    var src_services_common_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! src/services/common.service */
+    "./src/services/common.service.ts");
 
     let PrivacypolicyComponent = class PrivacypolicyComponent {
-      constructor() {
+      constructor(apiService, commonService) {
+        this.apiService = apiService;
+        this.commonService = commonService;
         this.name = 'ng4-ckeditor';
         this.log = '';
-        this.mycontent = "<p>Lorem ipsum Lorem ipsum</p>";
+        this.title = "Privacy Policy";
+        this.slugName = "privacy-policy";
+      }
+
+      getAllCms() {
+        let allCms = [];
+        this.apiService.getAllCMs().subscribe(res => {
+          console.log(res);
+
+          if (res.success == true) {
+            allCms = res.data;
+            this.termsAndCondition = allCms.find(ele => ele.slugName == this.slugName);
+            this.mycontent = this.termsAndCondition.description;
+            console.log(this.termsAndCondition);
+          }
+        });
       }
 
       ngOnInit() {
+        this.getAllCms();
         this.ckeConfig = {
           allowedContent: false,
           extraPlugins: 'divarea',
           forcePasteAsPlainText: true
         };
+      }
+
+      updateTermAndCondition() {
+        debugger;
+        this.termsAndCondition.description = this.mycontent;
+        this.apiService.updateCMS(this.termsAndCondition).subscribe(res => {
+          console.log(res);
+
+          if (res.success == true) {
+            this.commonService.successToast("Updated Successfully");
+          } else {}
+        });
       }
 
       onChange($event) {
@@ -10497,6 +11283,13 @@
       }
 
     };
+
+    PrivacypolicyComponent.ctorParameters = () => [{
+      type: src_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"]
+    }, {
+      type: src_services_common_service__WEBPACK_IMPORTED_MODULE_3__["CommonService"]
+    }];
+
     PrivacypolicyComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-privacypolicy',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
@@ -11087,6 +11880,14 @@
           data: [28, 48, 40, 19, 86, 27, 90],
           label: 'Series B'
         }];
+        this.data = {
+          'barChartOptions': this.barChartOptions,
+          'barChartLabels': this.barChartLabels,
+          'barChartType': this.barChartType,
+          'barChartLegend': this.barChartLegend,
+          'barChartPlugins': this.barChartPlugins,
+          'barChartData': this.barChartData
+        };
       }
 
       ngOnInit() {} // // This is the dataSource of the chart
@@ -11477,20 +12278,62 @@
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var src_services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! src/services/api.service */
+    "./src/services/api.service.ts");
+    /* harmony import */
+
+
+    var src_services_common_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! src/services/common.service */
+    "./src/services/common.service.ts");
 
     let ReturnpolicyComponent = class ReturnpolicyComponent {
-      constructor() {
+      constructor(apiService, commonService) {
+        this.apiService = apiService;
+        this.commonService = commonService;
         this.name = 'ng4-ckeditor';
         this.log = '';
-        this.mycontent = "<p>Lorem ipsum Lorem ipsum</p>";
+        this.title = "Return Policy";
+        this.slugName = "return-policy";
+      }
+
+      getAllCms() {
+        let allCms = [];
+        this.apiService.getAllCMs().subscribe(res => {
+          console.log(res);
+
+          if (res.success == true) {
+            allCms = res.data;
+            this.termsAndCondition = allCms.find(ele => ele.slugName == this.slugName);
+            this.mycontent = this.termsAndCondition.description;
+            console.log(this.termsAndCondition);
+          }
+        });
       }
 
       ngOnInit() {
+        this.getAllCms();
         this.ckeConfig = {
           allowedContent: false,
           extraPlugins: 'divarea',
           forcePasteAsPlainText: true
         };
+      }
+
+      updateTermAndCondition() {
+        debugger;
+        this.termsAndCondition.description = this.mycontent;
+        this.apiService.updateCMS(this.termsAndCondition).subscribe(res => {
+          console.log(res);
+
+          if (res.success == true) {
+            this.commonService.successToast("Updated Successfully");
+          }
+        });
       }
 
       onChange($event) {
@@ -11502,6 +12345,13 @@
       }
 
     };
+
+    ReturnpolicyComponent.ctorParameters = () => [{
+      type: src_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"]
+    }, {
+      type: src_services_common_service__WEBPACK_IMPORTED_MODULE_3__["CommonService"]
+    }];
+
     ReturnpolicyComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-returnpolicy',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
@@ -11575,9 +12425,103 @@
     let RevenuereportComponent = class RevenuereportComponent {
       constructor(router) {
         this.router = router;
+        this.length = 100;
+        this.pageSizeOptions = [5, 10, 25, 100];
+        this.flag = false;
+        this.flagSearch = true;
       }
 
       ngOnInit() {}
+
+      filterSelected(e) {
+        if (this.filterBy) {
+          this.flag = true;
+        } else {
+          this.flag = false;
+        }
+
+        console.log(e.target.value);
+        this.filterBy = e.target.value; // this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
+        //   if (res) {
+        //     if (res.data.length > 0) {
+        //       this.flagData = false
+        //       this.bannerList = res.data
+        //       this.length = res.total
+        //       console.log(this.bannerList)
+        //     } else {
+        //       this.flagData = true
+        //     }
+        //   };
+        // });
+      }
+
+      searchMethod() {
+        this.flagSearch = false; // console.log(this.search);
+        // this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
+        //   if (res.success) {
+        //     if (res.data.length > 0) {
+        //       this.flagData = false
+        //       this.bannerList = res.data;
+        //       this.length = res.total
+        //       console.log(this.bannerList);
+        //     } else {
+        //       this.flagData = true
+        //     }
+        //   }
+        // })
+      }
+
+      clearSearch() {
+        this.flagSearch = true;
+        this.search = ''; // this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
+        //   if (res.success) {
+        //     if (res.data.length > 0) {
+        //       this.flagData = false
+        //       this.bannerList = res.data;
+        //       this.length = res.total
+        //       console.log(this.bannerList);
+        //     } else {
+        //       this.flagData = true
+        //     }
+        //   }
+        // });
+      }
+
+      statusChnaged(e) {
+        console.log(e);
+      }
+
+      salesReportListAfterPageSizeChanged(e) {
+        //console.log(e);
+        if (e.pageIndex == 0) {
+          this.page = 1; // this.page = e.pageIndex;
+          //  this.srNo = e.pageIndex * e.pageSize
+
+          this.flagUserList = false;
+        } else {
+          if (e.previousPageIndex < e.pageIndex) {
+            this.page = e.pageIndex + 1;
+            this.srNo = e.pageIndex * e.pageSize;
+            this.flagUserList = true;
+          } else {
+            this.page = e.pageIndex;
+            this.srNo = e.pageIndex * e.pageSize;
+            this.flagUserList = true;
+          }
+        } // this.apiService.getAllDiscount(this.page, e.pageSize, this.search, this.filterBy).subscribe((res) => {
+        //   if (res.success) {
+        //     if (res.data.length > 0) {
+        //       this.flagData = false
+        //       this.bannerList = res.data;
+        //       this.length = res.total
+        //       console.log(this.bannerList);
+        //     } else {
+        //       this.flagData = true
+        //     }
+        //   }
+        // });
+
+      }
 
       goToanalytics() {
         this.router.navigate(['analytics']);
@@ -11696,6 +12640,14 @@
           data: [28, 48, 40, 19, 86, 27, 90],
           label: 'Series B'
         }];
+        this.data = {
+          'barChartOptions': this.barChartOptions,
+          'barChartLabels': this.barChartLabels,
+          'barChartType': this.barChartType,
+          'barChartLegend': this.barChartLegend,
+          'barChartPlugins': this.barChartPlugins,
+          'barChartData': this.barChartData
+        };
       }
 
       ngOnInit() {} // // This is the dataSource of the chart
@@ -11836,9 +12788,18 @@
     var chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_2___default =
     /*#__PURE__*/
     __webpack_require__.n(chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_2__);
+    /* harmony import */
+
+
+    var src_services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! src/services/api.service */
+    "./src/services/api.service.ts");
 
     let SalesgraphComponent = class SalesgraphComponent {
-      constructor() {
+      constructor(apiService) {
+        this.apiService = apiService;
+        this.period = 'monthly';
+        this.history = window.history;
         this.barChartOptions = {
           responsive: true,
           // We use these empty structures as placeholders for dynamic theming.
@@ -11853,40 +12814,69 @@
             }
           }
         };
-        this.barChartLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
         this.barChartType = 'bar';
         this.barChartLegend = true;
         this.barChartPlugins = [chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_2__];
-        this.barChartData = [{
-          data: [65, 59, 80, 81, 56, 55, 40],
-          label: 'Series A'
-        }, {
-          data: [28, 48, 40, 19, 86, 27, 90],
-          label: 'Series B'
-        }];
+        this.getData();
       }
 
-      ngOnInit() {} // // This is the dataSource of the chart
-      // this.dataSource = {
-      //   chart: {},
-      //   caption: {
-      //     text: "Sales Analysis"
-      //   },
-      //   subcaption: {
-      //     text: "Grocery & Footwear"
-      //   },
-      //   series: "Type",
-      //   yaxis: [
-      //     {
-      //       plot: "Sales Value",
-      //       title: "Sale Value",
-      //       format: {
-      //         prefix: "$"
-      //       }
-      //     }
-      //   ]
-      // };
-      // this.fetchData();
+      getData() {
+        // debugger
+        let array = [];
+        let body = {
+          'type': this.period
+        };
+        this.apiService.getSalesGraph(body).subscribe(res => {
+          console.log(res);
+          let data = res.data.length;
+
+          for (let i = 0; i < data; i++) {
+            if (this.period == 'monthly') {
+              array.push('Week' + ' ' + [i + 1]);
+            }
+
+            if (this.period == 'weekly') {
+              array.push('Day' + ' ' + [i + 1]);
+            }
+
+            if (this.period == 'yearly') {
+              array.push('Month' + ' ' + [i + 1]);
+            }
+          }
+
+          this.barChartLabels = array; // public barChartData: ChartDataSets[] = [
+          //     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+          //     // { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+          //   ];
+
+          this.barChartData = [{
+            data: res.data,
+            label: this.period + " " + 'Sale'
+          }];
+          this.barChartOptions = this.barChartOptions; // this.barChartLabels = this.barChartLabels;
+
+          this.barChartType = 'bar';
+          this.barChartLegend = true;
+          this.barChartPlugins = this.barChartPlugins; // this.barChartData = this.barChartData;
+
+          console.log("labels: ", this.barChartLabels);
+          console.log("data: ", this.barChartData);
+          console.log("options: ", this.barChartOptions);
+          this.chartReady = true;
+        });
+      }
+
+      periodSelected(e) {
+        this.period = e.target.value;
+        this.getData();
+        this.history.back();
+      }
+
+      goTosales() {
+        this.history.back();
+      }
+
+      ngOnInit() {} // console.log("From sales", this.data);
       // fetchData() {
       //   var jsonify = res => res.json();
       //   var dataFetch = fetch(
@@ -11922,13 +12912,12 @@
         console.log(event, active);
       }
 
-      randomize() {
-        // Only Change 3 values
-        const data = [Math.round(Math.random() * 100), 59, 80, Math.random() * 100, 56, Math.random() * 100, 40];
-        this.barChartData[0].data = data;
-      }
-
     };
+
+    SalesgraphComponent.ctorParameters = () => [{
+      type: src_services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"]
+    }];
+
     SalesgraphComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-salesgraph',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
@@ -11998,13 +12987,159 @@
     var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var src_services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! src/services/api.service */
+    "./src/services/api.service.ts");
+    /* harmony import */
+
+
+    var src_services_common_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! src/services/common.service */
+    "./src/services/common.service.ts");
 
     let SalesreportComponent = class SalesreportComponent {
-      constructor(router) {
+      constructor(router, apiService, commonService) {
         this.router = router;
+        this.apiService = apiService;
+        this.commonService = commonService;
+        this.page = 1;
+        this.length = 100;
+        this.pageSize = 10;
+        this.filterList = [{
+          viewValue: 'New',
+          value: 'New'
+        }, {
+          viewValue: 'Accepted',
+          value: 'Accepted'
+        }, {
+          viewValue: 'Cancelled',
+          value: 'Canceled'
+        }, {
+          viewValue: 'Rejected',
+          value: 'Rejected'
+        }, {
+          viewValue: 'Packing',
+          value: 'Packing'
+        }, {
+          viewValue: 'Shipped',
+          value: 'Shipped'
+        }, {
+          viewValue: 'Delivered',
+          value: 'Delivered'
+        }, {
+          viewValue: 'Unwant',
+          value: 'UnWant'
+        }, {
+          viewValue: 'Picking',
+          value: 'Picking'
+        }, {
+          viewValue: 'Rescheduled',
+          value: 'Rescheduled'
+        }, {
+          viewValue: 'Picked For Shipping',
+          value: 'pickedShipping'
+        }, {
+          viewValue: 'Picked',
+          value: 'Picked'
+        }, {
+          viewValue: 'Picked and Delivered',
+          value: 'PickedDelivered'
+        }];
+        this.pageSizeOptions = [5, 10, 25, 100];
+        this.filterBy = '';
+        this.search = '';
+        this.salesList = [];
+        this.flagSearch = true;
       }
 
-      ngOnInit() {}
+      ngOnInit() {
+        this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy);
+      }
+
+      getSaleslist(page, pageSize, search, filterBy) {
+        this.apiService.getSaleList(page, pageSize, search, filterBy).subscribe(res => {
+          console.log(res);
+
+          if (res.data) {
+            this.flagData = false;
+            this.salesList = res.data;
+            this.length = res.total;
+          } else {
+            this.flagData = true;
+          }
+        });
+      }
+
+      filterSelected(e) {
+        console.log(e);
+
+        if (this.filterBy) {
+          this.flag = true;
+        } else {
+          this.flag = false;
+        }
+
+        console.log(e.target.value);
+        this.filterBy = e.target.value;
+        this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy);
+      }
+
+      searchMethod() {
+        this.flagSearch = false; // console.log(this.search);
+
+        this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy);
+      }
+
+      clearSearch() {
+        this.flagSearch = true;
+        this.search = '';
+        this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy);
+      }
+
+      statusChanged(value, id) {
+        console.log("value", value, "ID", id);
+        let body = {
+          id: id,
+          status: value
+        };
+        this.apiService.updateStatus(body).subscribe(res => {
+          console.log(res);
+
+          if (res.success) {
+            this.commonService.successToast('Updated Succesfully');
+            this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy);
+          } else {
+            this.commonService.errorToast('Error: Please Try again  after some time');
+            this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy);
+          }
+        });
+      }
+
+      productListAfterPageSizeChanged(e) {
+        console.log(e);
+
+        if (e.pageIndex == 0) {
+          this.page = 1; // this.page = e.pageIndex;
+          //  this.srNo = e.pageIndex * e.pageSize
+
+          this.flagUserList = false;
+        } else {
+          if (e.previousPageIndex < e.pageIndex) {
+            this.page = e.pageIndex + 1;
+            this.srNo = e.pageIndex * e.pageSize;
+            this.flagUserList = true;
+          } else {
+            this.page = e.pageIndex;
+            this.srNo = e.pageIndex * e.pageSize;
+            this.flagUserList = true;
+          }
+        }
+
+        this.getSaleslist(this.page, e.pageSize, this.search, this.filterBy);
+      }
 
       goToanalytics() {
         this.router.navigate(['analytics']);
@@ -12018,6 +13153,10 @@
 
     SalesreportComponent.ctorParameters = () => [{
       type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+    }, {
+      type: src_services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"]
+    }, {
+      type: src_services_common_service__WEBPACK_IMPORTED_MODULE_4__["CommonService"]
     }];
 
     SalesreportComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -12415,20 +13554,62 @@
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var src_services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! src/services/api.service */
+    "./src/services/api.service.ts");
+    /* harmony import */
+
+
+    var src_services_common_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! src/services/common.service */
+    "./src/services/common.service.ts");
 
     let TermconditionComponent = class TermconditionComponent {
-      constructor() {
+      constructor(apiService, commonService) {
+        this.apiService = apiService;
+        this.commonService = commonService;
         this.name = 'ng4-ckeditor';
         this.log = '';
-        this.mycontent = "<p>Lorem ipsum Lorem ipsum</p>";
+        this.title = "Term and Condition";
+        this.slugName = "terms-and-conditions";
+      }
+
+      getAllCms() {
+        let allCms = [];
+        this.apiService.getAllCMs().subscribe(res => {
+          console.log(res);
+
+          if (res.success == true) {
+            allCms = res.data;
+            this.termsAndCondition = allCms.find(ele => ele.slugName == this.slugName);
+            this.mycontent = this.termsAndCondition.description;
+            console.log(this.termsAndCondition);
+          }
+        });
       }
 
       ngOnInit() {
+        this.getAllCms();
         this.ckeConfig = {
           allowedContent: false,
           extraPlugins: 'divarea',
           forcePasteAsPlainText: true
         };
+      }
+
+      updateTermAndCondition() {
+        debugger;
+        this.termsAndCondition.description = this.mycontent;
+        this.apiService.updateCMS(this.termsAndCondition).subscribe(res => {
+          console.log(res);
+
+          if (res.success == true) {
+            this.commonService.successToast("Updated Successfully");
+          }
+        });
       }
 
       onChange($event) {
@@ -12440,6 +13621,13 @@
       }
 
     };
+
+    TermconditionComponent.ctorParameters = () => [{
+      type: src_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"]
+    }, {
+      type: src_services_common_service__WEBPACK_IMPORTED_MODULE_3__["CommonService"]
+    }];
+
     TermconditionComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-termcondition',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
@@ -12503,20 +13691,62 @@
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var src_services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! src/services/api.service */
+    "./src/services/api.service.ts");
+    /* harmony import */
+
+
+    var src_services_common_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! src/services/common.service */
+    "./src/services/common.service.ts");
 
     let TermofsalesComponent = class TermofsalesComponent {
-      constructor() {
+      constructor(apiService, commonService) {
+        this.apiService = apiService;
+        this.commonService = commonService;
         this.name = 'ng4-ckeditor';
         this.log = '';
-        this.mycontent = "<p>Lorem ipsum Lorem ipsum</p>";
+        this.title = "Terms of Sales";
+        this.slugName = "terms-of-sales";
+      }
+
+      getAllCms() {
+        let allCms = [];
+        this.apiService.getAllCMs().subscribe(res => {
+          console.log(res);
+
+          if (res.success == true) {
+            allCms = res.data;
+            this.termsAndCondition = allCms.find(ele => ele.slugName == this.slugName);
+            this.mycontent = this.termsAndCondition.description;
+            console.log(this.termsAndCondition);
+          }
+        });
       }
 
       ngOnInit() {
+        this.getAllCms();
         this.ckeConfig = {
           allowedContent: false,
           extraPlugins: 'divarea',
           forcePasteAsPlainText: true
         };
+      }
+
+      updateTermAndCondition() {
+        debugger;
+        this.termsAndCondition.description = this.mycontent;
+        this.apiService.updateCMS(this.termsAndCondition).subscribe(res => {
+          console.log(res);
+
+          if (res.success == true) {
+            this.commonService.successToast("Updated Successfully");
+          }
+        });
       }
 
       onChange($event) {
@@ -12528,6 +13758,13 @@
       }
 
     };
+
+    TermofsalesComponent.ctorParameters = () => [{
+      type: src_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"]
+    }, {
+      type: src_services_common_service__WEBPACK_IMPORTED_MODULE_3__["CommonService"]
+    }];
+
     TermofsalesComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-termofsales',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
@@ -12591,20 +13828,62 @@
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var src_services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! src/services/api.service */
+    "./src/services/api.service.ts");
+    /* harmony import */
+
+
+    var src_services_common_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! src/services/common.service */
+    "./src/services/common.service.ts");
 
     let TermofuseComponent = class TermofuseComponent {
-      constructor() {
+      constructor(apiService, commonService) {
+        this.apiService = apiService;
+        this.commonService = commonService;
         this.name = 'ng4-ckeditor';
         this.log = '';
-        this.mycontent = "<p>Lorem ipsum Lorem ipsum</p>";
+        this.title = "Terms of Use";
+        this.slugName = "terms-of-use";
+      }
+
+      getAllCms() {
+        let allCms = [];
+        this.apiService.getAllCMs().subscribe(res => {
+          console.log(res);
+
+          if (res.success == true) {
+            allCms = res.data;
+            this.termsAndCondition = allCms.find(ele => ele.slugName == this.slugName);
+            this.mycontent = this.termsAndCondition.description;
+            console.log(this.termsAndCondition);
+          }
+        });
       }
 
       ngOnInit() {
+        this.getAllCms();
         this.ckeConfig = {
           allowedContent: false,
           extraPlugins: 'divarea',
           forcePasteAsPlainText: true
         };
+      }
+
+      updateTermAndCondition() {
+        debugger;
+        this.termsAndCondition.description = this.mycontent;
+        this.apiService.updateCMS(this.termsAndCondition).subscribe(res => {
+          console.log(res);
+
+          if (res.success == true) {
+            this.commonService.successToast("Updated Successfully");
+          }
+        });
       }
 
       onChange($event) {
@@ -12616,6 +13895,13 @@
       }
 
     };
+
+    TermofuseComponent.ctorParameters = () => [{
+      type: src_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"]
+    }, {
+      type: src_services_common_service__WEBPACK_IMPORTED_MODULE_3__["CommonService"]
+    }];
+
     TermofuseComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-termofuse',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
@@ -12816,12 +14102,13 @@
       deleteVendor(i) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.fire({
           title: "Are you sure?",
-          text: "Once deleted, you will not be able to recover this Category!",
+          text: "Once deleted, you will not be able to recover this Vendor!",
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085D6",
           cancelButtonColor: "#d33",
           confirmButtonText: "Yes",
+          cancelButtonText: "Cancel",
           allowOutsideClick: true
         }).then(result => {
           if (result.value) {
@@ -12978,16 +14265,121 @@
     var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var src_services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! src/services/api.service */
+    "./src/services/api.service.ts");
+    /* harmony import */
+
+
+    var src_services_common_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! src/services/common.service */
+    "./src/services/common.service.ts");
 
     let VendorSalesReportComponent = class VendorSalesReportComponent {
-      constructor(router) {
+      constructor(router, apiService, commonService) {
         this.router = router;
+        this.apiService = apiService;
+        this.commonService = commonService;
+        this.flagUserList = false;
+        this.page = 1;
+        this.search = '';
+        this.filterBy = ''; // page = 1;
+
+        this.length = 100;
+        this.pageSize = 10;
+        this.pageSizeOptions = [5, 10, 25, 100];
+        this.flag = false;
+        this.flagSearch = true;
       }
 
-      ngOnInit() {}
+      ngOnInit() {
+        this.getVendorSaleReport(this.page, this.pageSize, this.search, this.filterBy);
+      }
 
-      goToproduct() {
-        this.router.navigate(['product']);
+      getVendorSaleReport(page, pageSize, search, filterBy) {
+        this.apiService.getVendorList(page, pageSize, search, filterBy).subscribe(res => {
+          if (res.success) {
+            if (res.data.length > 0) {
+              this.flagData = false;
+              this.vendorList = res.data;
+              this.length = res.total;
+              console.log(this.vendorList);
+            } else {
+              this.flagData = true;
+            }
+          }
+        });
+      }
+
+      filterSelected(e) {
+        if (this.filterBy) {
+          this.flag = true;
+        } else {
+          this.flag = false;
+        }
+
+        console.log(e.target.value);
+        this.filterBy = e.target.value;
+        this.getVendorSaleReport(this.page, this.pageSize, this.search, this.filterBy);
+      }
+
+      searchMethod() {
+        this.flagSearch = false;
+        this.getVendorSaleReport(this.page, this.pageSize, this.search, this.filterBy);
+      }
+
+      clearSearch() {
+        this.flagSearch = true;
+        this.search = '';
+        this.getVendorSaleReport(this.page, this.pageSize, this.search, this.filterBy);
+      }
+
+      statusChnaged(e) {
+        console.log(e);
+      }
+
+      vendorSalesReportListAfterPageSizeChanged(e) {
+        //console.log(e);
+        if (e.pageIndex == 0) {
+          this.page = 1; // this.page = e.pageIndex;
+          //  this.srNo = e.pageIndex * e.pageSize
+
+          this.flagUserList = false;
+        } else {
+          if (e.previousPageIndex < e.pageIndex) {
+            this.page = e.pageIndex + 1;
+            this.srNo = e.pageIndex * e.pageSize;
+            this.flagUserList = true;
+          } else {
+            this.page = e.pageIndex;
+            this.srNo = e.pageIndex * e.pageSize;
+            this.flagUserList = true;
+          }
+        }
+
+        this.getVendorSaleReport(this.page, this.pageSize, this.search, this.filterBy);
+      }
+
+      goToproduct(i) {
+        let id;
+        let name;
+
+        for (let j = 0; j <= this.vendorList.length; j++) {
+          if (i == j) {
+            id = this.vendorList[j]._id;
+            name = this.vendorList[j].firstName;
+          }
+        }
+
+        this.router.navigate(['product'], {
+          queryParams: {
+            "id": id,
+            "name": name
+          }
+        });
       }
 
       goToreportGraph() {
@@ -12998,6 +14390,10 @@
 
     VendorSalesReportComponent.ctorParameters = () => [{
       type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+    }, {
+      type: src_services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"]
+    }, {
+      type: src_services_common_service__WEBPACK_IMPORTED_MODULE_4__["CommonService"]
     }];
 
     VendorSalesReportComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -13063,20 +14459,62 @@
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var src_services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! src/services/api.service */
+    "./src/services/api.service.ts");
+    /* harmony import */
+
+
+    var src_services_common_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! src/services/common.service */
+    "./src/services/common.service.ts");
 
     let VentorTComponent = class VentorTComponent {
-      constructor() {
+      constructor(apiService, commonService) {
+        this.apiService = apiService;
+        this.commonService = commonService;
         this.name = 'ng4-ckeditor';
         this.log = '';
-        this.mycontent = "<p>Lorem ipsum Lorem ipsum</p>";
+        this.title = "Vendor Terms and Conditions";
+        this.slugName = "vendor-terms-and-conditions";
+      }
+
+      getAllCms() {
+        let allCms = [];
+        this.apiService.getAllCMs().subscribe(res => {
+          console.log(res);
+
+          if (res.success == true) {
+            allCms = res.data;
+            this.CmsData = allCms.find(ele => ele.slugName == this.slugName);
+            this.mycontent = this.CmsData.description;
+            console.log(this.CmsData);
+          }
+        });
       }
 
       ngOnInit() {
+        this.getAllCms();
         this.ckeConfig = {
           allowedContent: false,
           extraPlugins: 'divarea',
           forcePasteAsPlainText: true
         };
+      }
+
+      updateTermAndCondition() {
+        debugger;
+        this.CmsData.description = this.mycontent;
+        this.apiService.updateCMS(this.CmsData).subscribe(res => {
+          console.log(res);
+
+          if (res.success == true) {
+            this.commonService.successToast("Updated Successfully");
+          }
+        });
       }
 
       onChange($event) {
@@ -13088,6 +14526,13 @@
       }
 
     };
+
+    VentorTComponent.ctorParameters = () => [{
+      type: src_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"]
+    }, {
+      type: src_services_common_service__WEBPACK_IMPORTED_MODULE_3__["CommonService"]
+    }];
+
     VentorTComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-ventor-t',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
@@ -13157,35 +14602,122 @@
     var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/forms */
+    "./node_modules/@angular/forms/fesm2015/forms.js");
+    /* harmony import */
+
+
+    var src_services_api_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! src/services/api.service */
+    "./src/services/api.service.ts");
+    /* harmony import */
+
+
+    var src_services_common_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! src/services/common.service */
+    "./src/services/common.service.ts");
+    /* harmony import */
+
+
+    var moment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! moment */
+    "./node_modules/moment/moment.js");
+    /* harmony import */
+
+
+    var moment__WEBPACK_IMPORTED_MODULE_6___default =
+    /*#__PURE__*/
+    __webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_6__);
 
     let ViewOrderComponent = class ViewOrderComponent {
-      constructor(router) {
+      constructor(router, route, apiService, commonService, fb) {
         this.router = router;
-        this.pick = [{
-          value: 'lorem ipsum',
-          viewValue: 'lorem ipsum'
-        }, {
-          value: 'lorem ipsum',
-          viewValue: 'lorem ipsum'
-        }, {
-          value: 'lorem ipsum',
-          viewValue: 'lorem ipsum'
-        }, {
-          value: 'lorem ipsum',
-          viewValue: 'lorem ipsum'
-        }];
+        this.route = route;
+        this.apiService = apiService;
+        this.commonService = commonService;
+        this.fb = fb;
+        this.sub = this.route.queryParams.subscribe(params => {
+          this.id = params['id'];
+          console.log(this.id);
+        });
+        this.getSale(this.id);
       }
 
-      ngOnInit() {}
+      getSale(id) {
+        this.apiService.getSale(id).subscribe(res => {
+          console.log(res);
+
+          if (res.status == true) {
+            let object = res.data[0];
+            console.log(object);
+            this.deliveryAddressId = object.deliveryAddress._id;
+            this.editSaleForm.controls['orderID'].setValue(object.orderId);
+            this.editSaleForm.controls['productName'].setValue(object.productId.name);
+            this.editSaleForm.controls['productCategory'].setValue(object.productId.category.name);
+            this.editSaleForm.controls['productSubcategory'].setValue(object.productId.subCategory.name);
+            this.editSaleForm.controls['sku'].setValue(object.productId.sku);
+            this.editSaleForm.controls['quantity'].setValue(object.quantity);
+            this.editSaleForm.controls['price'].setValue(object.totalAmount);
+            let name = object.userId.firstName + ' ' + object.userId.lastName;
+            this.editSaleForm.controls['userName'].setValue(name);
+            this.editSaleForm.controls['userAddress1'].setValue(object.deliveryAddress.address1);
+            this.editSaleForm.controls['userAddress2'].setValue(object.deliveryAddress.address2);
+            this.editSaleForm.controls['userCity'].setValue(object.deliveryAddress.city);
+            this.editSaleForm.controls['userState'].setValue(object.deliveryAddress.state); // this.editSaleForm.controls['userCountry'].setValue(object.deliveryAddress)
+
+            this.editSaleForm.controls['userPostalCode'].setValue(object.deliveryAddress.postalCode);
+            this.editSaleForm.controls['orderDate'].setValue(moment__WEBPACK_IMPORTED_MODULE_6__(object.createdAt).format('YYYY-MM-DD'));
+
+            if (object.deliveredDate) {
+              this.editSaleForm.controls['deliveryDate'].setValue(moment__WEBPACK_IMPORTED_MODULE_6__(object.deliveredDate).format('YYYY-MM-DD'));
+            } else {
+              this.editSaleForm.controls['deliveryDate'].setValue("Not delivered yet");
+            }
+          }
+        });
+      }
+
+      ngOnInit() {
+        this.editSaleForm = this.fb.group({
+          orderID: [''],
+          productName: [''],
+          productCategory: [''],
+          productSubcategory: [''],
+          sku: [''],
+          quantity: [''],
+          price: [''],
+          userName: [''],
+          userAddress1: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
+          userAddress2: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
+          userCity: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
+          userState: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
+          // userCountry: ['', Validators.required],
+          userPostalCode: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
+          orderDate: [''],
+          deliveryDate: ['']
+        });
+      }
 
       goToordermanagement() {
-        this.router.navigate(['/ordermanagement']);
+        this.router.navigate(['ordermanagement']);
       }
 
     };
 
     ViewOrderComponent.ctorParameters = () => [{
       type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+    }, {
+      type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]
+    }, {
+      type: src_services_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"]
+    }, {
+      type: src_services_common_service__WEBPACK_IMPORTED_MODULE_5__["CommonService"]
+    }, {
+      type: _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormBuilder"]
     }];
 
     ViewOrderComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -14084,20 +15616,62 @@
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var src_services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! src/services/api.service */
+    "./src/services/api.service.ts");
+    /* harmony import */
+
+
+    var src_services_common_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! src/services/common.service */
+    "./src/services/common.service.ts");
 
     let WarrantypolicyComponent = class WarrantypolicyComponent {
-      constructor() {
+      constructor(apiService, commonService) {
+        this.apiService = apiService;
+        this.commonService = commonService;
         this.name = 'ng4-ckeditor';
         this.log = '';
-        this.mycontent = "<p>Lorem ipsum Lorem ipsum</p>";
+        this.title = "Warranty Policy";
+        this.slugName = "warranty-policy";
+      }
+
+      getAllCms() {
+        let allCms = [];
+        this.apiService.getAllCMs().subscribe(res => {
+          console.log(res);
+
+          if (res.success == true) {
+            allCms = res.data;
+            this.termsAndCondition = allCms.find(ele => ele.slugName == this.slugName);
+            this.mycontent = this.termsAndCondition.description;
+            console.log(this.termsAndCondition);
+          }
+        });
       }
 
       ngOnInit() {
+        this.getAllCms();
         this.ckeConfig = {
           allowedContent: false,
           extraPlugins: 'divarea',
           forcePasteAsPlainText: true
         };
+      }
+
+      updateTermAndCondition() {
+        debugger;
+        this.termsAndCondition.description = this.mycontent;
+        this.apiService.updateCMS(this.termsAndCondition).subscribe(res => {
+          console.log(res);
+
+          if (res.success == true) {
+            this.commonService.successToast("Updated Successfully");
+          }
+        });
       }
 
       onChange($event) {
@@ -14109,6 +15683,13 @@
       }
 
     };
+
+    WarrantypolicyComponent.ctorParameters = () => [{
+      type: src_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"]
+    }, {
+      type: src_services_common_service__WEBPACK_IMPORTED_MODULE_3__["CommonService"]
+    }];
+
     WarrantypolicyComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-warrantypolicy',
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
@@ -14395,10 +15976,13 @@
           getAllUser: 'admin/user',
           getUser: 'admin/viewUser',
           editUser: 'admin/user',
-          delete: 'admin/delete',
           viewOrderHistory: "admin/userOrderHistory",
           status: "admin/status",
           userAddress: "admin/userAddress",
+          //Delete
+          delete: 'admin/delete',
+          //Hard Delete
+          hardDelete: 'admin/hardDelete',
           //Products
           getAllProduct: 'admin/product',
           viewProduct: 'admin/viewProduct',
@@ -14420,7 +16004,15 @@
           getVendorListByCat: 'admin/getVendorsByCat',
           getProductByVendor: 'admin/getProductsByCatOrVendor',
           addBanner: 'admin/banner',
-          viewBanner: 'admin/viewBanner'
+          viewBanner: 'admin/viewBanner',
+          //Sales Module Routes
+          salesList: 'admin/adminSales',
+          processOrder: 'admin/processOrder',
+          getSale: 'admin/viewSales',
+          salesGraph: 'admin/adminSalesGraph',
+          adminReview: 'admin/reviews',
+          updateCms: 'admin/addStaticPage',
+          getAllCms: 'admin/getAllStaticPages'
         };
 
         for (let key in this.apiEndPoints) {
@@ -14471,7 +16063,8 @@
           "email": email
         };
         return this.http.post(this.apiEndPoints.forgetPassword, data, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('Forgot Password')));
-      }
+      } // Method start of Soft Delete
+
 
       deleteData(url = '', data = {}) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0,
@@ -14515,9 +16108,7 @@
           return regeneratorRuntime.wrap(function _callee9$(_context9) {
             while (1) switch (_context9.prev = _context9.next) {
               case 0:
-                // this.flagDelete = false;
-                debugger;
-                _context9.next = 3;
+                _context9.next = 2;
                 return this.deleteData(this.apiEndPoints.delete, body).then(data => {
                   if (data.success) {
                     console.log("passed");
@@ -14526,26 +16117,81 @@
                   } else {
                     console.log("Failed");
                     this.flagDelete == false;
-                  } // of(data).subscribe((res) => {
-                  //   if (res.success == true) {
-                  //     //  console.log(res)
-                  //     this.flagDelete = true;
-                  //     // alert(this.flagDelete) 
-                  //   } else {
-                  //     this.flagDelete == false
-                  //     // alert(this.flagDelete)
-                  //   }
-                  // }); // JSON data parsed by `data.json()` call
-
+                  }
                 });
 
-              case 3:
+              case 2:
               case "end":
                 return _context9.stop();
             }
           }, _callee9, this);
         }));
+      } //Method End For Soft Delete
+      //Method End For hard Delete
+
+
+      hardDeleteData(url = '', data = {}) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0,
+        /*#__PURE__*/
+        regeneratorRuntime.mark(function _callee10() {
+          var response;
+          return regeneratorRuntime.wrap(function _callee10$(_context10) {
+            while (1) switch (_context10.prev = _context10.next) {
+              case 0:
+                _context10.next = 2;
+                return fetch(url, {
+                  method: 'delete',
+                  mode: 'cors',
+                  cache: 'no-cache',
+                  credentials: 'same-origin',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': this.getToken()
+                  },
+                  redirect: 'follow',
+                  referrerPolicy: 'no-referrer',
+                  body: JSON.stringify(data)
+                });
+
+              case 2:
+                response = _context10.sent;
+                return _context10.abrupt("return", response.json());
+
+              case 4:
+              case "end":
+                return _context10.stop();
+            }
+          }, _callee10, this);
+        }));
       }
+
+      deleteHard(body) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0,
+        /*#__PURE__*/
+        regeneratorRuntime.mark(function _callee11() {
+          return regeneratorRuntime.wrap(function _callee11$(_context11) {
+            while (1) switch (_context11.prev = _context11.next) {
+              case 0:
+                _context11.next = 2;
+                return this.hardDeleteData(this.apiEndPoints.hardDelete, body).then(data => {
+                  if (data.success) {
+                    console.log("passed");
+                    this.flagDelete = true;
+                    this.data = data;
+                  } else {
+                    console.log("Failed");
+                    this.flagDelete == false;
+                  }
+                });
+
+              case 2:
+              case "end":
+                return _context11.stop();
+            }
+          }, _callee11, this);
+        }));
+      } //method end for hard delete
+
 
       setUser(user) {
         localStorage.setItem("Rupee_Admin", user);
@@ -14690,6 +16336,35 @@
 
       getAllDiscount(page, pageSize, search, filterBy) {
         return this.http.get("".concat(this.apiEndPoints.getAllBanner, "?page=").concat(page, "&count=").concat(pageSize, "&search=").concat(search, "&filter=").concat(filterBy), this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError("get discount(banner)")));
+      } //Sales Module
+
+
+      getSaleList(page, pageSize, search, filterBy) {
+        return this.http.get("".concat(this.apiEndPoints.salesList, "?page=").concat(page, "&count=").concat(pageSize, "&filter=").concat(filterBy, "&search=").concat(search), this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError()));
+      }
+
+      updateStatus(body) {
+        return this.http.post(this.apiEndPoints.processOrder, body, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+      }
+
+      getSale(id) {
+        return this.http.get("".concat(this.apiEndPoints.getSale, "?id=").concat(id), this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+      }
+
+      getSalesGraph(body) {
+        return this.http.post(this.apiEndPoints.salesGraph, body, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+      }
+
+      getReviewList(page, pageSize, search, filterBy) {
+        return this.http.get("".concat(this.apiEndPoints.adminReview, "?page=").concat(page, "&count=").concat(pageSize, "&search=").concat(search, "&filter=").concat(filterBy), this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+      }
+
+      updateCMS(body) {
+        return this.http.post(this.apiEndPoints.updateCms, body, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError()));
+      }
+
+      getAllCMs() {
+        return this.http.get(this.apiEndPoints.getAllCms, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
       } // Error handling
 
 

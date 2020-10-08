@@ -36,11 +36,14 @@ export class ApiService {
       getAllUser: 'admin/user',
       getUser: 'admin/viewUser',
       editUser: 'admin/user',
-      delete: 'admin/delete',
+
       viewOrderHistory: "admin/userOrderHistory",
       status: "admin/status",
       userAddress: "admin/userAddress",
-
+      //Delete
+      delete: 'admin/delete',
+      //Hard Delete
+      hardDelete: 'admin/hardDelete',
       //Products
       getAllProduct: 'admin/product',
       viewProduct: 'admin/viewProduct',
@@ -70,9 +73,13 @@ export class ApiService {
       viewBanner: 'admin/viewBanner',
 
       //Sales Module Routes
-      salesList: 'admin/sales',
+      salesList: 'admin/adminSales',
       processOrder: 'admin/processOrder',
       getSale: 'admin/viewSales',
+      salesGraph: 'admin/adminSalesGraph',
+      adminReview: 'admin/reviews',
+      updateCms: 'admin/addStaticPage',
+      getAllCms: 'admin/getAllStaticPages'
     }
     for (let key in this.apiEndPoints) {
       this.apiEndPoints[key] = this.BASE_URL + this.apiEndPoints[key];
@@ -144,7 +151,7 @@ export class ApiService {
       );
   }
 
-
+  // Method start of Soft Delete
   async  deleteData(url = '', data = {}) {
     const response = await fetch(url, {
       method: 'delete',
@@ -165,6 +172,7 @@ export class ApiService {
 
 
 
+
   flagDelete: boolean
   data: any
   async delete(body) {
@@ -181,22 +189,55 @@ export class ApiService {
           this.flagDelete == false
         }
 
-        // of(data).subscribe((res) => {
-        //   if (res.success == true) {
-        //     //  console.log(res)
-        //     this.flagDelete = true;
-        //     // alert(this.flagDelete) 
-        //   } else {
-        //     this.flagDelete == false
-        //     // alert(this.flagDelete)
-        //   }
-        // }); // JSON data parsed by `data.json()` call
+
       });
 
+  }
+  //Method End For Soft Delete
+
+  //Method End For hard Delete
+  async  hardDeleteData(url = '', data = {}) {
+    const response = await fetch(url, {
+      method: 'delete',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': this.getToken(),
+
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: JSON.stringify(data)
+    });
+    return response.json(); // parses JSON response into native JavaScript objects
+  }
 
 
+
+
+  flaghardDelete: boolean
+  harddata: any
+  async deleteHard(body) {
+    // this.flagDelete = false;
+
+    await this.hardDeleteData(this.apiEndPoints.hardDelete, body)
+      .then(data => {
+        if (data.success) {
+          console.log("passed")
+          this.flagDelete = true;
+          this.data = data
+        } else {
+          console.log("Failed")
+          this.flagDelete == false
+        }
+
+
+      });
 
   }
+  //method end for hard delete
 
 
 
@@ -464,7 +505,25 @@ export class ApiService {
   getSale(id): Observable<any> {
     return this.http.get<any>(`${this.apiEndPoints.getSale}?id=${id}`, this.getHeaders()).pipe(catchError(this.handleError))
 
+  }
 
+  getSalesGraph(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.salesGraph, body, this.getHeaders()).pipe(catchError(this.handleError))
+  }
+
+
+  getReviewList(page, pageSize, search, filterBy): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.adminReview}?page=${page}&count=${pageSize}&search=${search}&filter=${filterBy}`, this.getHeaders()).pipe(catchError(this.handleError))
+  }
+
+
+  updateCMS(body): Observable<any> {// method to update CMS Pages
+    return this.http.post<any>(this.apiEndPoints.updateCms, body, this.getHeaders()).pipe(catchError(this.handleError()));
+  }
+
+
+  getAllCMs(): Observable<any> { // Method  to get All CMS Pages
+    return this.http.get<any>(this.apiEndPoints.getAllCms, this.getHeaders()).pipe(catchError(this.handleError));
   }
 
 

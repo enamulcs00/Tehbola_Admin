@@ -42,7 +42,6 @@ export class SalesreportComponent implements OnInit {
   flag: any
   flagUserList: boolean;
   srNo: number;
-
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) {
 
 
@@ -51,7 +50,6 @@ export class SalesreportComponent implements OnInit {
   ngOnInit() {
     this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
   }
-
 
   getSaleslist(page, pageSize, search, filterBy) {
     this.apiService.getSaleList(page, pageSize, search, filterBy).subscribe(res => {
@@ -93,7 +91,6 @@ export class SalesreportComponent implements OnInit {
     this.search = ''
     this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
   }
-
   statusChanged(value, id) {
     console.log("value", value, "ID", id);
     let body = {

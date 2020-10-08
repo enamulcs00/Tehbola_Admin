@@ -73,7 +73,7 @@
                                 <td>{{item.createdAt | date}}</td>
                                 <td>{{item.vatNumber}}</td>
                                 <td>{{item.brnNumber}}</td>
-                                <td class="Booking_status" (click)="goToproduct(i)">
+                                <td class="Booking_status" (click)="goToproduct(item._id)">
                                     <a class="accept_button">View List</a></td>
                                 <td>{{item.totalOrders}}</td>
                                 <td>{{item.totalRevenue}}</td>

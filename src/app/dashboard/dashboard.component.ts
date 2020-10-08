@@ -4,6 +4,7 @@ import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { Router } from '@angular/router';
+import { PageEvent } from '@angular/material/paginator';
 declare var $: any;
 @Component({
   selector: 'app-dashboard',
@@ -11,6 +12,21 @@ declare var $: any;
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+
+  page = 1;
+  length = 100;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageEvent: PageEvent;
+  filterBy: string = '';
+  search: string = '';
+  salesList = []
+  status: number
+  flagSearch: boolean = true;
+  flagData: any;
+  flag: any
+  flagUserList: boolean;
+  srNo: number;
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
@@ -31,62 +47,80 @@ export class DashboardComponent implements OnInit {
     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
     { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
   ];
-  // dataSource: any;
-  // type: string;
-  // width: string;
-  // height: string;
+  dataSource: any;
+  type: string;
+  width: string;
+  height: string;
   constructor(private router: Router) {
-    // this.type = "timeseries";
-    // this.width = "100%";
-    // this.height = "400";
+    this.type = "timeseries";
+    this.width = "100%";
+    this.height = "400";
 
 
   }
+
 
   ngOnInit() {
-    // // This is the dataSource of the chart
-    // this.dataSource = {
-    //   chart: {},
-    //   caption: {
-    //     text: "Sales Analysis"
-    //   },
-    //   subcaption: {
-    //     text: "Grocery & Footwear"
-    //   },
-    //   series: "Type",
-    //   yaxis: [
-    //     {
-    //       plot: "Sales Value",
-    //       title: "Sale Value",
-    //       format: {
-    //         prefix: "$"
-    //       }
-    //     }
-    //   ]
-    // };
+    // This is the dataSource of the chart
+    this.dataSource = {
+      chart: {},
+      caption: {
+        text: "Sales Analysis"
+      },
+      subcaption: {
+        text: "Grocery & Footwear"
+      },
+      series: "Type",
+      yaxis: [
+        {
+          plot: "Sales Value",
+          title: "Sale Value",
+          format: {
+            prefix: "$"
+          }
+        }
+      ]
+    };
 
-    // this.fetchData();
+    this.fetchData();
   }
-  // fetchData() {
-  //   var jsonify = res => res.json();
-  //   var dataFetch = fetch(
-  //     "https://s3.eu-central-1.amazonaws.com/fusion.store/ft/data/plotting-multiple-series-on-time-axis-data.json"
-  //   ).then(jsonify);
-  //   var schemaFetch = fetch(
-  //     "https://s3.eu-central-1.amazonaws.com/fusion.store/ft/schema/plotting-multiple-series-on-time-axis-schema.json"
-  //   ).then(jsonify);
+  fetchData() {
+    var jsonify = res => res.json();
+    var dataFetch = fetch(
+      "https://s3.eu-central-1.amazonaws.com/fusion.store/ft/data/plotting-multiple-series-on-time-axis-data.json"
+    ).then(jsonify);
+    var schemaFetch = fetch(
+      "https://s3.eu-central-1.amazonaws.com/fusion.store/ft/schema/plotting-multiple-series-on-time-axis-schema.json"
+    ).then(jsonify);
 
-  //   Promise.all([dataFetch, schemaFetch]).then(res => {
-  //     const [data, schema] = res;
-  //     // First we are creating a DataStore
-  //     const fusionDataStore = new FusionCharts.DataStore();
-  //     // After that we are creating a DataTable by passing our data and schema as arguments
-  //     const fusionTable = fusionDataStore.createDataTable(data, schema);
-  //     // Afet that we simply mutated our timeseries datasource by attaching the above
-  //     // DataTable into its data property.
-  //     this.dataSource.data = fusionTable;
-  //   });
-  // }
+    Promise.all([dataFetch, schemaFetch]).then(res => {
+      const [data, schema] = res;
+      // First we are creating a DataStore
+      const fusionDataStore = new FusionCharts.DataStore();
+      // After that we are creating a DataTable by passing our data and schema as arguments
+      const fusionTable = fusionDataStore.createDataTable(data, schema);
+      // Afet that we simply mutated our timeseries datasource by attaching the above
+      // DataTable into its data property.
+      this.dataSource.data = fusionTable;
+    });
+  }
+
+
+  filterSelected(e) {
+    console.log(e);
+    if (this.filterBy) {
+      this.flag = true
+    }
+    else {
+      this.flag = false
+    }
+    console.log(e.target.value);
+
+    this.filterBy = e.target.value
+
+    // this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
+
+  }
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);
   }
@@ -94,6 +128,42 @@ export class DashboardComponent implements OnInit {
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);
   }
+
+
+  searchMethod() {
+    this.flagSearch = false
+    // console.log(this.search);
+    // this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
+  }
+  clearSearch() {
+    this.flagSearch = true
+    this.search = ''
+    // this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
+  }
+
+  productListAfterPageSizeChanged(e): any {
+
+    console.log(e)
+    if (e.pageIndex == 0) {
+      this.page = 1;
+      // this.page = e.pageIndex;
+      //  this.srNo = e.pageIndex * e.pageSize
+      this.flagUserList = false
+    } else {
+      if (e.previousPageIndex < e.pageIndex) {
+        this.page = e.pageIndex + 1;
+        this.srNo = e.pageIndex * e.pageSize
+        this.flagUserList = true
+      } else {
+        this.page = e.pageIndex;
+        this.srNo = e.pageIndex * e.pageSize
+        this.flagUserList = true
+      }
+
+    }
+    // this.getSaleslist(this.page, e.pageSize, this.search, this.filterBy)
+  }
+
 
   public randomize(): void {
     // Only Change 3 values
@@ -108,17 +178,17 @@ export class DashboardComponent implements OnInit {
     this.barChartData[0].data = data;
   }
 
-  goTosalesgraph(){
+  goTosalesgraph() {
     this.router.navigate(['salesgraph'])
   }
-  goToreveuegraph(){
+  goToreveuegraph() {
     this.router.navigate(['reveuegraph'])
   }
-  goToeditOrder(){
-  this.router.navigate(['editOrder'])
-}
-goToviewOrder(){
-  this.router.navigate(['viewOrder'])
-}
+  goToeditOrder() {
+    this.router.navigate(['editOrder'])
+  }
+  goToviewOrder() {
+    this.router.navigate(['viewOrder'])
+  }
 }
 

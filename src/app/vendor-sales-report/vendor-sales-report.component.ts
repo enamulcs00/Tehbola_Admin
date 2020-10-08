@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiService } from 'src/services/api.service';
+import { CommonService } from 'src/services/common.service';
 
 @Component({
   selector: 'app-vendor-sales-report',
@@ -7,22 +9,39 @@ import { Router } from '@angular/router';
   styleUrls: ['./vendor-sales-report.component.scss']
 })
 export class VendorSalesReportComponent implements OnInit {
-  flagUserList: boolean;
+  flagUserList: boolean = false;
   srNo: number;
-  page: any;
-  search: string;
-  filterBy: any;
+  page: any = 1;
+  search: string = '';
+  filterBy: any = '';
   // page = 1;
   length = 100;
   pageSize = 10;
 
   pageSizeOptions = [5, 10, 25, 100]
-  constructor(private router: Router) { }
+  flagData: boolean;
+  vendorList: any;
+  constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) { }
 
   ngOnInit() {
+    this.getVendorSaleReport(this.page, this.pageSize, this.search, this.filterBy)
   }
 
 
+  getVendorSaleReport(page, pageSize, search, filterBy) {
+    this.apiService.getVendorList(page, pageSize, search, filterBy).subscribe((res) => {
+      if (res.success) {
+        if (res.data.length > 0) {
+          this.flagData = false
+          this.vendorList = res.data;
+          this.length = res.total
+          console.log(this.vendorList);
+        } else {
+          this.flagData = true
+        }
+      }
+    });
+  }
 
   flag = false
   filterSelected(e) {
@@ -35,38 +54,14 @@ export class VendorSalesReportComponent implements OnInit {
     }
     console.log(e.target.value);
     this.filterBy = e.target.value;
-    // this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
-    //   if (res) {
-    //     if (res.data.length > 0) {
-    //       this.flagData = false
-    //       this.bannerList = res.data
-    //       this.length = res.total
-    //       console.log(this.bannerList)
-    //     } else {
-    //       this.flagData = true
-    //     }
-    //   };
-    // });
-
+    this.getVendorSaleReport(this.page, this.pageSize, this.search, this.filterBy)
   }
 
   flagSearch: boolean = true
   searchMethod() {
 
     this.flagSearch = false
-    // console.log(this.search);
-    // this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
-    //   if (res.success) {
-    //     if (res.data.length > 0) {
-    //       this.flagData = false
-    //       this.bannerList = res.data;
-    //       this.length = res.total
-    //       console.log(this.bannerList);
-    //     } else {
-    //       this.flagData = true
-    //     }
-    //   }
-    // })
+    this.getVendorSaleReport(this.page, this.pageSize, this.search, this.filterBy)
 
   }
 
@@ -75,18 +70,7 @@ export class VendorSalesReportComponent implements OnInit {
 
     this.flagSearch = true
     this.search = ''
-    // this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
-    //   if (res.success) {
-    //     if (res.data.length > 0) {
-    //       this.flagData = false
-    //       this.bannerList = res.data;
-    //       this.length = res.total
-    //       console.log(this.bannerList);
-    //     } else {
-    //       this.flagData = true
-    //     }
-    //   }
-    // });
+    this.getVendorSaleReport(this.page, this.pageSize, this.search, this.filterBy)
   }
 
   statusChnaged(e) {
@@ -114,23 +98,23 @@ export class VendorSalesReportComponent implements OnInit {
 
     }
 
-    // this.apiService.getAllDiscount(this.page, e.pageSize, this.search, this.filterBy).subscribe((res) => {
-    //   if (res.success) {
-    //     if (res.data.length > 0) {
-    //       this.flagData = false
-    //       this.bannerList = res.data;
-    //       this.length = res.total
-    //       console.log(this.bannerList);
-    //     } else {
-    //       this.flagData = true
-    //     }
-    //   }
-    // });
+    this.getVendorSaleReport(this.page, this.pageSize, this.search, this.filterBy)
   }
 
-  goToproduct() {
-    this.router.navigate(['product'])
+  goToproduct(i) {
+    let id: any
+    let name: string
+    for (let j = 0; j <= this.vendorList.length; j++) {
+      if (i == j) {
+        id = this.vendorList[j]._id;
+        name = this.vendorList[j].firstName;
+
+      }
+    }
+
+    this.router.navigate(['product'], { queryParams: { "id": id, "name": name } })
   }
+
   goToreportGraph() {
     this.router.navigate(['reportGraph'])
   }

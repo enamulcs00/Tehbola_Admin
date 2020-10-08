@@ -70,7 +70,7 @@
                                 <div class="filters Booking_status">
                                     <label>Filter</label>
                                     <select>
-                                        <option>Daily</option>
+                                        <!-- <option>Daily</option> -->
                                         <option>Weekly</option>
                                         <option>Monthly</option>
                                         <option>Yearly</option>
@@ -78,11 +78,11 @@
                                 </div>
                             </div>
                             <div class="user_charts">
-                                <app-graph></app-graph>
-                                <!-- <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                                <!-- <app-graph></app-graph> -->
+                                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
                                     [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend"
                                     [chartType]="barChartType">
-                                </canvas> -->
+                                </canvas>
                             </div>
                         </li>
 
@@ -92,7 +92,7 @@
                                 <div class="filters Booking_status">
                                     <label>Filter</label>
                                     <select>
-                                        <option>Daily</option>
+                                        <!-- <option>Daily</option> -->
                                         <option>Weekly</option>
                                         <option>Monthly</option>
                                         <option>Yearly</option>
@@ -100,11 +100,11 @@
                                 </div>
                             </div>
                             <div class="user_charts">
-                                <app-graph></app-graph>
-                                <!-- <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                                <!-- <app-graph></app-graph> -->
+                                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
                                     [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend"
                                     [chartType]="barChartType">
-                                </canvas> -->
+                                </canvas>
                             </div>
                         </li>
                         <li>
@@ -113,7 +113,7 @@
                                 <div class="filters Booking_status">
                                     <label>Filter</label>
                                     <select>
-                                        <option>Daily</option>
+                                        <!-- <option>Daily</option> -->
                                         <option>Weekly</option>
                                         <option>Monthly</option>
                                         <option>Yearly</option>
@@ -122,11 +122,11 @@
                             </div>
                             <div class="user_charts">
 
-                                <app-graph></app-graph>
-                                <!-- <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                                <!-- <app-graph></app-graph> -->
+                                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
                                     [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend"
                                     [chartType]="barChartType">
-                                </canvas> -->
+                                </canvas>
                             </div>
                         </li>
                         <!-- <li>
@@ -154,9 +154,15 @@
                         <div class="search_fields">
                             <div class="filters Booking_status">
                                 <label>Filter</label>
-                                <select>
-                                    <option>Product Name</option>
-                                    <option>Order Id</option>
+                                <select [(ngModel)]="filterBy" (change)="filterSelected($event)">
+                                    <option *ngIf="flag==true" value="">Remove Filter</option>
+                                    <option *ngIf="flag==false" value=""></option>
+                                    <option>Product Name </option>
+                                    <option>Order Id </option>
+
+                                    <!-- <option value="active">Active</option>
+                                            <option value="inactive">Inactive</option> -->
+                                    <!-- <option value="lastName"></option> -->
                                 </select>
                             </div>
                             <div class="search_inner_fiels">
@@ -164,9 +170,12 @@
                                     <label>Search</label>
                                     <div class="search_with_icons">
                                         <mat-form-field [floatLabel]="'never'">
-                                            <input matInput type="text" name="search" placeholder="">
+                                            <input matInput type="text" [(ngModel)]="search" placeholder="">
                                         </mat-form-field>
-                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                        <i *ngIf="flagSearch==true" class="fa fa-search" aria-hidden="true"
+                                            (click)="searchMethod()"></i>
+                                        <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
+                                            (click)="clearSearch()"></i>
                                     </div>
                                 </div>
 
@@ -330,7 +339,8 @@
                         </div>
                     </div>
                     <!-----start pagination-->
-                    <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+                    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
+                        (page)="pageEvent = productListAfterPageSizeChanged($event)">
                     </mat-paginator>
                     <!-----end pagination-->
 

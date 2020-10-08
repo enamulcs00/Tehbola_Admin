@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/services/api.service';
+import { PageEvent } from '@angular/material/paginator';
+import Swal from 'sweetalert2';
+import { CommonService } from 'src/services/common.service';
 
 @Component({
   selector: 'app-manage-reviews',
@@ -6,25 +10,40 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manage-reviews.component.scss']
 })
 export class ManageReviewsComponent implements OnInit {
-  filterBy: any;
-  search: string;
-  page: number;
+
+  page = 1;
+  length = 100;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageEvent: PageEvent;
+  filterBy: string = '';
+  search: string = '';
+
+  status: number
+  flagSearch: boolean = true;
+  flagData: any;
+  flag: any
   flagUserList: boolean;
   srNo: number;
-  length = 100
-  pageSizeOptions = [5, 10, 25, 100]
-  pageSize: any;
-
-  constructor() { }
+  reviewList: any;
+  constructor(private apiService: ApiService, private commonService: CommonService) { }
 
   ngOnInit() {
     this.getReview(this.page, this.pageSize, this.search, this.filterBy)
   }
 
   getReview(page, pageSize, search, filterBy) {
+    this.apiService.getReviewList(page, pageSize, search, filterBy).subscribe(res => {
+      if (res.success == true) {
+        console.log(res)
+        this.reviewList = res.data;
+        // alert("")
+      }
+    })
+
 
   }
-  flag = false
+
   filterSelected(e) {
     if (this.filterBy) {
       this.flag = true
@@ -38,7 +57,7 @@ export class ManageReviewsComponent implements OnInit {
     this.getReview(this.page, this.pageSize, this.search, this.filterBy)
   }
 
-  flagSearch: boolean = true
+
   searchMethod() {
 
     this.flagSearch = false
@@ -82,6 +101,34 @@ export class ManageReviewsComponent implements OnInit {
     this.getReview(this.page, this.pageSize, this.search, this.filterBy)
   }
 
+  deleteReview(i) {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this Vendor!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085D6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+      cancelButtonText: "Cancel",
+      allowOutsideClick: true
+    }).then(result => {
+      if (result.value) {
+        let id = i
 
+        const data = {
+          "id": id,
+          "model": "Rating"
+        }
+        this.apiService.deleteHard(data).then(res => {
+          this.commonService.successToast("Review Deleted")
+          this.getReview(this.page, this.pageSize, this.search, this.filterBy)
+        });
+      }
+      else {
+        console.log("cancelled");
+      }
+    })
+  }
 
 }

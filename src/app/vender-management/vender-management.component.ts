@@ -122,7 +122,7 @@ export class VenderManagementComponent implements OnInit {
   deleteVendor(i) {
     Swal.fire({
       title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this Category!",
+      text: "Once deleted, you will not be able to recover this Vendor!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085D6",

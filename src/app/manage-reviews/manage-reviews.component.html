@@ -40,75 +40,33 @@
 
                                 <th>User Name</th>
                                 <th>User Email</th>
+                                <th>Rating </th>
                                 <th>Review </th>
                                 <th>Product Name</th>
                                 <th>Vendor name</th>
                                 <th>Action</th>
                             </tr>
-                            <tr>
+                            <tr *ngFor="let item of reviewList; let i=index">
 
-                                <td>John</td>
-                                <td>John@gmail.com</td>
+                                <td>{{item.userId.firstName}} {{item.userId.lastName}}</td>
+                                <td>{{item.userId.email}}</td>
 
-                                <td>4.5</td>
-                                <td>Lorem</td>
-                                <td>XYZ</td>
+                                <td>{{item.rating}}</td>
+                                <td>{{item.review}}</td>
+                                <td>{{item.productId.name}}</td>
+                                <td>{{item.productId.seller.firstName}} {{item.productId.seller.lastName}}</td>
                                 <td>
                                     <div class="action">
                                         <ul>
-                                            <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
+                                            <li class="delete"><a (click)="deleteReview(item._id)"><i
+                                                        class="fa fa-trash-o fa-fw"></i></a></li>
                                         </ul>
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
 
-                                <td>John</td>
-                                <td>John@gmail.com</td>
 
-                                <td>4.5</td>
-                                <td>Lorem</td>
-                                <td>XYZ</td>
-                                <td>
-                                    <div class="action">
-                                        <ul>
-                                            <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
 
-                                <td>John</td>
-                                <td>John@gmail.com</td>
-
-                                <td>4.5</td>
-                                <td>Lorem</td>
-                                <td>XYZ</td>
-                                <td>
-                                    <div class="action">
-                                        <ul>
-                                            <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-
-                                <td>John</td>
-                                <td>John@gmail.com</td>
-
-                                <td>4.5</td>
-                                <td>Lorem</td>
-                                <td>XYZ</td>
-                                <td>
-                                    <div class="action">
-                                        <ul>
-                                            <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
                         </table>
                     </div>
                 </div>

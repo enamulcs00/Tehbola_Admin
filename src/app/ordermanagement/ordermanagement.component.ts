@@ -144,8 +144,8 @@ export class OrdermanagementComponent implements OnInit {
   goToeditOrder() {
     this.router.navigate(['/editOrder'])
   };
-  goToviewOrder() {
-    this.router.navigate(['/viewOrder'])
+  goToviewOrder(id) {
+    this.router.navigate(['/viewOrder'], { queryParams: { "id": id } })
   };
 
 

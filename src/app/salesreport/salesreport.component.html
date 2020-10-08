@@ -19,9 +19,13 @@
                                         <label>Filter</label>
                                         <select [(ngModel)]="filterBy" (change)="filterSelected($event)">
                                             <option *ngIf="flag==true" value="">Remove Filter</option>
-                                            <!-- <option *ngIf="flag==false" value=""></option> -->
-                                            <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option>
+                                            <option *ngIf="flag==false" value=""></option>
+                                            <option *ngFor="let item of filterList" value="{{item.value}}">
+                                                {{item.viewValue}}
+                                            </option>
+                                            <!-- <option value="active">Active</option>
+                                            <option value="inactive">Inactive</option> -->
+                                            <!-- <option value="lastName"></option> -->
                                         </select>
                                     </div>
                                     <div class="search_inner_fiels">
@@ -48,140 +52,54 @@
                                             <th>Product category</th>
                                             <th>Product sub category</th>
 
-                                            <th>SKU number</th>
-                                            <th>ISBN number</th>
+                                            <th>ISBN Number</th>
+                                            <th>SKU Number</th>
                                             <th>Quantity</th>
                                             <th>Price</th>
                                             <th>User name</th>
                                             <th>User Address</th>
                                             <th>Order Date</th>
+                                            <th>Expected Delivery Date</th>
                                             <th>Delivery Date</th>
                                             <th>Status</th>
                                             <!-- <th class="action_bx">Action</th> -->
                                         </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>ABC</td>
-                                            <td>Food Industry</td>
-                                            <td>Industry</td>
 
-                                            <td>13143543</td>
-                                            <td>45345</td>
-                                            <td>20 piece</td>
-                                            <td>$800</td>
-                                            <td>John</td>
-                                            <td>Lorem ipsum</td>
-                                            <td>28-05-2020</td>
-                                            <td>01-06-2020</td>
-                                            <td>
-                                                <select>
-                                                    <option>Pending</option>
-                                                    <option>Confirmed</option>
-                                                    <option>cancelled</option>
-                                                </select>
+
+
+                                        <tr *ngFor="let item of salesList; let i=index">
+                                            <td>{{item.orderId}}</td>
+                                            <td>{{item.productId.name}}</td>
+                                            <td>{{item.productId.category.name}}</td>
+                                            <td>{{item.productId.subCategory.name}}</td>
+                                            <td>{{item.productId.isbn}}</td>
+                                            <td>{{item.productId.sku}}</td>
+                                            <td>{{item.quantity}}</td>
+                                            <td>{{item.totalAmount}}</td>
+                                            <td>{{item.userId.firstName}} {{item.userId.lastName}}</td>
+                                            <td>{{item.deliveryAddress.address1}} {{item.deliveryAddress.address2}}
+                                                {{item.deliveryAddress.city}} {{item.deliveryAddress.state}}
+                                                {{item.deliveryAddress.postalCode}}</td>
+                                            <td>{{item.createdAt|date}}</td>
+                                            <td>{{item.deliveryDate==null?"Date not assigned yet":item.deliveryDate|date}}
                                             </td>
-
-                                            <!-- <td>
-<div class="action">
-<ul>
-<li class="show" (click)="goTosalesgraph()"><i class="fa fa-eye"></i></li>
-
-</ul>
-</div>
-</td> -->
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Lorem</td>
-                                            <td>Food Industry</td>
-                                            <td>Industry</td>
-
-                                            <td>13143543</td>
-                                            <td>5566456</td>
-                                            <td>20 piece</td>
-                                            <td>$800</td>
-                                            <td>John</td>
-                                            <td>Lorem ipsum</td>
-                                            <td>28-05-2020</td>
-                                            <td>01-06-2020</td>
-                                            <td>
-                                                <select>
-                                                    <option>Pending</option>
-                                                    <option>Confirmed</option>
-                                                    <option>cancelled</option>
-                                                </select>
+                                            <td>{{item.deliveredDate==null ?"Not delivered yet":item.deliveredDate|date}}
                                             </td>
-
-                                            <!-- <td>
-<div class="action">
-<ul>
-<li class="show" (click)="goTosalesgraph()"><i class="fa fa-eye"></i></li>
-
-</ul>
-</div>
-</td> -->
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>ABC</td>
-                                            <td>Food Industry</td>
-                                            <td>Industry</td>
-
-                                            <td>13143543</td>
-                                            <td>45345345</td>
-                                            <td>20 piece</td>
-                                            <td>$800</td>
-                                            <td>John</td>
-                                            <td>Lorem ipsum</td>
-                                            <td>28-05-2020</td>
-                                            <td>01-06-2020</td>
                                             <td>
-                                                <select>
-                                                    <option>Pending</option>
-                                                    <option>Confirmed</option>
-                                                    <option>cancelled</option>
-                                                </select>
+                                                {{item.status}}
+
                                             </td>
-
-                                            <!-- <td>
-<div class="action">
-<ul>
-<li class="show" (click)="goTosalesgraph()"><i class="fa fa-eye"></i></li>
-
-</ul>
-</div>
-</td> -->
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>ABC</td>
-                                            <td>Food Industry</td>
-                                            <td>Industry</td>
-
-                                            <td>13143543</td>
-                                            <td>4334534</td>
-                                            <td>20 piece</td>
-                                            <td>$800</td>
-                                            <td>John</td>
-                                            <td>Lorem ipsum</td>
-                                            <td>28-05-2020</td>
-                                            <td>01-06-2020</td>
                                             <td>
-                                                <select>
-                                                    <option>Pending</option>
-                                                    <option>Confirmed</option>
-                                                    <option>cancelled</option>
-                                                </select>
+                                                <!-- <div class="action">
+                                                      <ul>
+                                                          <li class="show" (click)="goToviewOrder(item._id)"><i
+                                                                  class="fa fa-eye"></i></li>
+                                                          <li class="edit" (click)="goToeditOrder()"><i
+                                                                class="fa fa-pencil fa-fw"></i></li> -->
+                                                <!-- <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li> 
+                                                      </ul>
+                                                  </div> -->
                                             </td>
-
-                                            <!-- <td>
-<div class="action">
-<ul>
-<li class="show" (click)="goTosalesgraph()"><i class="fa fa-eye"></i></li>
-
-</ul>
-</div>
-</td> -->
                                         </tr>
                                     </table>
                                 </div>

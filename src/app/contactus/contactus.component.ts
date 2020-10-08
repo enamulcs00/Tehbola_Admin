@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/services/api.service';
+import { CommonService } from 'src/services/common.service';
 
 @Component({
   selector: 'app-contactus',
@@ -7,21 +9,56 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactusComponent implements OnInit {
 
+
   name = 'ng4-ckeditor';
   ckeConfig: any;
   mycontent: string;
   log: string = '';
-  constructor() { 
-    this.mycontent = `<p>Lorem ipsum Lorem ipsum</p>`;
+  title: string = "Contact Us"
+  slugName = "contact-us";
+  CmsData: any;
+  constructor(private apiService: ApiService, private commonService: CommonService) {
+
   }
 
+  getAllCms() {
+    let allCms = []
+    this.apiService.getAllCMs().subscribe(res => {
+      console.log(res);
+      if (res.success == true) {
+        allCms = res.data;
+        this.CmsData = allCms.find(ele => ele.slugName == this.slugName);
+        this.mycontent = this.CmsData.description;
+        console.log(this.CmsData);
+      }
+    })
+  }
+
+
   ngOnInit() {
+    this.getAllCms();
     this.ckeConfig = {
       allowedContent: false,
       extraPlugins: 'divarea',
       forcePasteAsPlainText: true
     };
   }
+  updateTermAndCondition() {
+    debugger
+    this.CmsData.description = this.mycontent
+
+
+    this.apiService.updateCMS(this.CmsData).subscribe(res => {
+      console.log(res)
+      if (res.success == true) {
+        this.commonService.successToast("Updated Successfully")
+      }
+
+    })
+
+  }
+
+
   onChange($event: any): void {
     console.log("onChange");
     //this.log += new Date() + "<br />";
@@ -31,4 +68,5 @@ export class ContactusComponent implements OnInit {
     console.log("onPaste");
     //this.log += new Date() + "<br />";
   }
+
 }
