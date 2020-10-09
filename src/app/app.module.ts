@@ -82,6 +82,10 @@ import { DeliveryAddressComponent } from './delivery-address/delivery-address.co
 import * as moment from 'moment';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { GraphComponent } from './graph/graph.component';
+import { AddbrandComponent } from './addbrand/addbrand.component';
+import { EditbrandComponent } from './editbrand/editbrand.component';
+import { ViewbrandComponent } from './viewbrand/viewbrand.component';
+import { BrandlistComponent } from './brandlist/brandlist.component';
 // import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 // import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -163,6 +167,10 @@ import { GraphComponent } from './graph/graph.component';
     WarrantypolicyComponent,
     DeliveryAddressComponent,
     GraphComponent,
+    AddbrandComponent,
+    EditbrandComponent,
+    ViewbrandComponent,
+    BrandlistComponent,
 
 
   ],

@@ -71,6 +71,10 @@ import { WarrantypolicyComponent } from './warrantypolicy/warrantypolicy.compone
 import { DeliveryAddressComponent } from './delivery-address/delivery-address.component';
 import { AuthGuard } from 'src/services/auth.guard';
 import { GraphComponent } from './graph/graph.component';
+import { BrandlistComponent } from './brandlist/brandlist.component';
+import { AddbrandComponent } from './addbrand/addbrand.component';
+import { EditbrandComponent } from './editbrand/editbrand.component';
+import { ViewbrandComponent } from './viewbrand/viewbrand.component';
 
 const routes: Routes = [
   // {
@@ -159,6 +163,26 @@ const routes: Routes = [
   {
     path: 'inventryManagement',
     component: InventryManagementComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'brandList',
+    component: BrandlistComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'addBrand',
+    component: AddbrandComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'editBrand',
+    component: EditbrandComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'viewBrand',
+    component: ViewbrandComponent,
     canActivate: [AuthGuard]
   },
   {

@@ -77,9 +77,16 @@ export class ApiService {
       processOrder: 'admin/processOrder',
       getSale: 'admin/viewSales',
       salesGraph: 'admin/adminSalesGraph',
+      vendorSales: 'admin/graph',
       adminReview: 'admin/reviews',
       updateCms: 'admin/addStaticPage',
-      getAllCms: 'admin/getAllStaticPages'
+      getAllCms: 'admin/getAllStaticPages',
+      // dashBoard
+      getDashboard: 'admin/adminDashboard',
+      //Brand Module
+      getBrandList: 'admin/getAllBrand',
+      addBrand: 'admin/addBrand',
+      editBrand:'admin/editBrand'
     }
     for (let key in this.apiEndPoints) {
       this.apiEndPoints[key] = this.BASE_URL + this.apiEndPoints[key];
@@ -511,6 +518,10 @@ export class ApiService {
     return this.http.post<any>(this.apiEndPoints.salesGraph, body, this.getHeaders()).pipe(catchError(this.handleError))
   }
 
+  getVendortSalesGraph(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.vendorSales, body, this.getHeaders()).pipe(catchError(this.handleError))
+  }
+
 
   getReviewList(page, pageSize, search, filterBy): Observable<any> {
     return this.http.get<any>(`${this.apiEndPoints.adminReview}?page=${page}&count=${pageSize}&search=${search}&filter=${filterBy}`, this.getHeaders()).pipe(catchError(this.handleError))
@@ -525,6 +536,27 @@ export class ApiService {
   getAllCMs(): Observable<any> { // Method  to get All CMS Pages
     return this.http.get<any>(this.apiEndPoints.getAllCms, this.getHeaders()).pipe(catchError(this.handleError));
   }
+
+
+  getDashboardData(page, pageSize, search, filterBy, type): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.getDashboard}?page=${page}&count=${pageSize}&search=${search}&filter=${filterBy}&type=${type}`, this.getHeaders()).pipe(catchError(this.handleError));
+
+  }
+
+  getBrandList(): Observable<any> {
+
+    return this.http.get<any>(this.apiEndPoints.getBrandList, this.getHeaders()).pipe(catchError(this.handleError()))
+
+  }
+
+  addBrand(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.addBrand, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  editBrand(body): Observable<any> {
+    return this.http.put<any>(this.apiEndPoints.editBrand, body,this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
 
 
 

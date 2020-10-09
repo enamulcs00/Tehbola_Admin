@@ -293,23 +293,9 @@ export class CategoryComponent implements OnInit {
   }
 
   deleteSubCategoryFromList(id) {
-    // setTimeout(() => {
-    //   let temp = this.apiService.flagDelete;
-    //   if (temp == true) {
-    //     // this.categories.splice(i, 1);
+
     this.getAllCategories()
     this.commonService.successToast("Sub Cateogry Deleted");
-    //     console.log(this.categories)
-    //     if (this.result) {
-
-    //       console.log("service is not called")
-    //     }
-    //   }
-    //   else {
-    //     console.log("error");
-    //     this.commonService.errorToast("Error Occured")
-    //   }
-    // }, 2000);
 
 
   }

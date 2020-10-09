@@ -551,7 +551,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"wrapper\">\r\n\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Dashboard</h1>\r\n                </div>\r\n                <div class=\"inner_data\">\r\n                    <div class=\"dashboard_boxs\">\r\n                        <div class=\"card border-left-primary shadow\">\r\n                            <div class=\"card-body\" (click)=\"goTosalesgraph()\">\r\n                                <div class=\"left_card\">\r\n                                    <div class=\"left_heading\">\r\n                                        <h3> Sales</h3>\r\n                                    </div>\r\n                                    <div class=\"bottom_numbers\">\r\n                                        <p>40,000</p>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"right_card\">\r\n                                    <i class=\"fa fa-user fa-2x\"></i>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n\r\n                        <div class=\"card border-left-success shadow\">\r\n                            <div class=\"card-body\">\r\n                                <div class=\"left_card\">\r\n                                    <div class=\"left_heading\">\r\n                                        <h3>Vendors</h3>\r\n                                    </div>\r\n                                    <div class=\"bottom_numbers\">\r\n                                        <p>215,000</p>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"right_card\">\r\n                                    <i class=\"fa fa-product-hunt fa-2x\" aria-hidden=\"true\"></i>\r\n\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"card border-left-info shadow\">\r\n                            <div class=\"card-body\" (click)=\"goToreveuegraph()\">\r\n                                <div class=\"left_card\">\r\n                                    <div class=\"left_heading\">\r\n                                        <h3>Revenue</h3>\r\n                                    </div>\r\n                                    <div class=\"bottom_numbers\">\r\n                                        <p>215,000</p>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"right_card\">\r\n                                    <i class=\"fa fa-line-chart fa-2x\"></i>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n\r\n\r\n\r\n                    </div>\r\n                </div>\r\n                <div class=\"charts\">\r\n                    <ul>\r\n                        <li>\r\n                            <div class=\"chart_title\">\r\n                                <p>Sales</p>\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Filter</label>\r\n                                    <select>\r\n                                        <!-- <option>Daily</option> -->\r\n                                        <option>Weekly</option>\r\n                                        <option>Monthly</option>\r\n                                        <option>Yearly</option>\r\n                                    </select>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"user_charts\">\r\n                                <!-- <app-graph></app-graph> -->\r\n                                <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\"\r\n                                    [options]=\"barChartOptions\" [plugins]=\"barChartPlugins\" [legend]=\"barChartLegend\"\r\n                                    [chartType]=\"barChartType\">\r\n                                </canvas>\r\n                            </div>\r\n                        </li>\r\n\r\n                        <li>\r\n                            <div class=\"chart_title\">\r\n                                <p>Vendors</p>\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Filter</label>\r\n                                    <select>\r\n                                        <!-- <option>Daily</option> -->\r\n                                        <option>Weekly</option>\r\n                                        <option>Monthly</option>\r\n                                        <option>Yearly</option>\r\n                                    </select>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"user_charts\">\r\n                                <!-- <app-graph></app-graph> -->\r\n                                <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\"\r\n                                    [options]=\"barChartOptions\" [plugins]=\"barChartPlugins\" [legend]=\"barChartLegend\"\r\n                                    [chartType]=\"barChartType\">\r\n                                </canvas>\r\n                            </div>\r\n                        </li>\r\n                        <li>\r\n                            <div class=\"chart_title\">\r\n                                <p>Revenue</p>\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Filter</label>\r\n                                    <select>\r\n                                        <!-- <option>Daily</option> -->\r\n                                        <option>Weekly</option>\r\n                                        <option>Monthly</option>\r\n                                        <option>Yearly</option>\r\n                                    </select>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"user_charts\">\r\n\r\n                                <!-- <app-graph></app-graph> -->\r\n                                <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\"\r\n                                    [options]=\"barChartOptions\" [plugins]=\"barChartPlugins\" [legend]=\"barChartLegend\"\r\n                                    [chartType]=\"barChartType\">\r\n                                </canvas>\r\n                            </div>\r\n                        </li>\r\n                        <!-- <li>\r\n                            <div class=\"chart_title\">\r\n                                <p>Current Order listing</p>\r\n                            </div>\r\n                            <div class=\"user_charts\">\r\n                                <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\"\r\n                                    [options]=\"barChartOptions\" [plugins]=\"barChartPlugins\" [legend]=\"barChartLegend\"\r\n                                    [chartType]=\"barChartType\">\r\n                                </canvas>\r\n                            </div>\r\n                        </li> -->\r\n                    </ul>\r\n                </div>\r\n\r\n                <div class=\"current_Admins\">\r\n                    <div class=\"sub_heading\">\r\n                        <h1>Current Sales </h1>\r\n                        <!-- <div class=\"top_subheading_add\">\r\n                            <a (click)=\"goToaddinventory()\"><span>+</span>Add Inventory</a>\r\n                        </div> -->\r\n                    </div>\r\n                    <div class=\"outer_table\">\r\n                        <div class=\"search_fields\">\r\n                            <div class=\"filters Booking_status\">\r\n                                <label>Filter</label>\r\n                                <select [(ngModel)]=\"filterBy\" (change)=\"filterSelected($event)\">\r\n                                    <option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n                                    <option *ngIf=\"flag==false\" value=\"\"></option>\r\n                                    <option>Product Name </option>\r\n                                    <option>Order Id </option>\r\n\r\n                                    <!-- <option value=\"active\">Active</option>\r\n                                            <option value=\"inactive\">Inactive</option> -->\r\n                                    <!-- <option value=\"lastName\"></option> -->\r\n                                </select>\r\n                            </div>\r\n                            <div class=\"search_inner_fiels\">\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Search</label>\r\n                                    <div class=\"search_with_icons\">\r\n                                        <mat-form-field [floatLabel]=\"'never'\">\r\n                                            <input matInput type=\"text\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                        </mat-form-field>\r\n                                        <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                            (click)=\"searchMethod()\"></i>\r\n                                        <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                            (click)=\"clearSearch()\"></i>\r\n                                    </div>\r\n                                </div>\r\n\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"table-responsive\">\r\n                            <table>\r\n                                <tr>\r\n                                    <th>Sr no</th>\r\n                                    <th>Product Name</th>\r\n                                    <th>Product category</th>\r\n                                    <th>Product sub category</th>\r\n\r\n                                    <th>ISBN Number</th>\r\n                                    <th>SKU Number</th>\r\n                                    <th>Quantity</th>\r\n                                    <th>Price</th>\r\n                                    <th>User name</th>\r\n                                    <th>User Address</th>\r\n                                    <th>Order Date</th>\r\n                                    <th>Delivery Date</th>\r\n                                    <th>Status</th>\r\n                                    <th class=\"action_bx\">Action</th>\r\n                                </tr>\r\n                                <tr>\r\n                                    <td>1</td>\r\n                                    <td>ABC</td>\r\n                                    <td>Food Industry</td>\r\n                                    <td>Industry</td>\r\n                                    <td>764765454</td>\r\n                                    <td>13143543</td>\r\n                                    <td>20 piece</td>\r\n                                    <td>$800</td>\r\n                                    <td>John</td>\r\n                                    <td>Lorem ipsum</td>\r\n                                    <td>28-05-2020</td>\r\n                                    <td>01-06-2020</td>\r\n                                    <td>\r\n\r\n                                        <select>\r\n                                            <option>Pending</option>\r\n                                            <option>Confirmed</option>\r\n                                            <option>cancelled</option>\r\n                                        </select>\r\n                                    </td>\r\n\r\n                                    <td>\r\n                                        <div class=\"action\">\r\n                                            <ul>\r\n                                                <li class=\"show\" (click)=\"goToviewOrder()\"><i class=\"fa fa-eye\"></i>\r\n                                                </li>\r\n                                                <li class=\"edit\" (click)=\"goToeditOrder()\"><i\r\n                                                        class=\"fa fa-pencil fa-fw\"></i></li>\r\n                                                <!-- <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li> -->\r\n                                            </ul>\r\n                                        </div>\r\n                                    </td>\r\n                                </tr>\r\n                                <tr>\r\n                                    <td>2</td>\r\n                                    <td>Lorem</td>\r\n                                    <td>Food Industry</td>\r\n                                    <td>Industry</td>\r\n                                    <td>764765454</td>\r\n                                    <td>13143543</td>\r\n                                    <td>20 piece</td>\r\n                                    <td>$800</td>\r\n                                    <td>John</td>\r\n                                    <td>Lorem ipsum</td>\r\n                                    <td>28-05-2020</td>\r\n                                    <td>01-06-2020</td>\r\n                                    <td>\r\n\r\n                                        <select>\r\n                                            <option>Pending</option>\r\n                                            <option>Confirmed</option>\r\n                                            <option>cancelled</option>\r\n                                        </select>\r\n                                    </td>\r\n\r\n                                    <td>\r\n                                        <div class=\"action\">\r\n                                            <ul>\r\n                                                <li class=\"show\" (click)=\"goToviewOrder()\"><i class=\"fa fa-eye\"></i>\r\n                                                </li>\r\n                                                <li class=\"edit\" (click)=\"goToeditOrder()\"><i\r\n                                                        class=\"fa fa-pencil fa-fw\"></i></li>\r\n                                                <!-- <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li> -->\r\n                                            </ul>\r\n                                        </div>\r\n                                    </td>\r\n                                </tr>\r\n                                <tr>\r\n                                    <td>3</td>\r\n                                    <td>ABC</td>\r\n                                    <td>Food Industry</td>\r\n                                    <td>Industry</td>\r\n                                    <td>764765454</td>\r\n                                    <td>13143543</td>\r\n                                    <td>20 piece</td>\r\n                                    <td>$800</td>\r\n                                    <td>John</td>\r\n                                    <td>Lorem ipsum</td>\r\n                                    <td>28-05-2020</td>\r\n                                    <td>01-06-2020</td>\r\n                                    <td>\r\n\r\n                                        <select>\r\n                                            <option>Pending</option>\r\n                                            <option>Confirmed</option>\r\n                                            <option>cancelled</option>\r\n                                        </select>\r\n                                    </td>\r\n\r\n                                    <td>\r\n                                        <div class=\"action\">\r\n                                            <ul>\r\n                                                <li class=\"show\" (click)=\"goToviewOrder()\"><i class=\"fa fa-eye\"></i>\r\n                                                </li>\r\n                                                <li class=\"edit\" (click)=\"goToeditOrder()\"><i\r\n                                                        class=\"fa fa-pencil fa-fw\"></i></li>\r\n                                                <!-- <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li> -->\r\n                                            </ul>\r\n                                        </div>\r\n                                    </td>\r\n                                </tr>\r\n                                <tr>\r\n                                    <td>4</td>\r\n                                    <td>ABC</td>\r\n                                    <td>Food Industry</td>\r\n                                    <td>Industry</td>\r\n                                    <td>764765454</td>\r\n                                    <td>13143543</td>\r\n                                    <td>20 piece</td>\r\n                                    <td>$800</td>\r\n                                    <td>John</td>\r\n                                    <td>Lorem ipsum</td>\r\n                                    <td>28-05-2020</td>\r\n                                    <td>01-06-2020</td>\r\n                                    <td>\r\n                                        <select>\r\n                                            <option>Pending</option>\r\n                                            <option>Confirmed</option>\r\n                                            <option>cancelled</option>\r\n                                        </select>\r\n                                    </td>\r\n\r\n                                    <td>\r\n                                        <div class=\"action\">\r\n                                            <ul>\r\n                                                <li class=\"show\" (click)=\"goToviewOrder()\"><i class=\"fa fa-eye\"></i>\r\n                                                </li>\r\n                                                <li class=\"edit\" (click)=\"goToeditOrder()\"><i\r\n                                                        class=\"fa fa-pencil fa-fw\"></i></li>\r\n                                                <!-- <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li> -->\r\n                                            </ul>\r\n                                        </div>\r\n                                    </td>\r\n                                </tr>\r\n                            </table>\r\n                        </div>\r\n                    </div>\r\n                    <!-----start pagination-->\r\n                    <mat-paginator [length]=\"length\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"[5, 10, 25, 100]\"\r\n                        (page)=\"pageEvent = productListAfterPageSizeChanged($event)\">\r\n                    </mat-paginator>\r\n                    <!-----end pagination-->\r\n\r\n                </div>\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"wrapper\">\r\n\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Dashboard</h1>\r\n                </div>\r\n                <div class=\"inner_data\">\r\n                    <div class=\"dashboard_boxs\">\r\n                        <div class=\"card border-left-primary shadow\">\r\n                            <div class=\"card-body\" (click)=\"goTosalesgraph()\">\r\n                                <div class=\"left_card\">\r\n                                    <div class=\"left_heading\">\r\n                                        <h3> Sales</h3>\r\n                                    </div>\r\n                                    <div class=\"bottom_numbers\">\r\n                                        <p>{{this.dashboardData?.salesTotal}}</p>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"right_card\">\r\n                                    <i class=\"fa fa-user fa-2x\"></i>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n\r\n                        <div class=\"card border-left-success shadow\">\r\n                            <div class=\"card-body\">\r\n                                <div class=\"left_card\">\r\n                                    <div class=\"left_heading\">\r\n                                        <h3>Vendors</h3>\r\n                                    </div>\r\n                                    <div class=\"bottom_numbers\">\r\n                                        <p>{{this.dashboardData?.totalVendors}}</p>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"right_card\">\r\n                                    <i class=\"fa fa-product-hunt fa-2x\" aria-hidden=\"true\"></i>\r\n\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"card border-left-info shadow\">\r\n                            <div class=\"card-body\" (click)=\"goToreveuegraph()\">\r\n                                <div class=\"left_card\">\r\n                                    <div class=\"left_heading\">\r\n                                        <h3>Revenue</h3>\r\n                                    </div>\r\n                                    <div class=\"bottom_numbers\">\r\n                                        <p>215,000</p>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"right_card\">\r\n                                    <i class=\"fa fa-line-chart fa-2x\"></i>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n\r\n\r\n\r\n                    </div>\r\n                </div>\r\n                <div class=\"charts\">\r\n                    <ul>\r\n                        <li>\r\n                            <div class=\"chart_title\">\r\n                                <p>Sales</p>\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Filter</label>\r\n                                    <select [(ngModel)]=\"periodSale\" (change)=\"periodChanged($event)\">\r\n                                        <!-- <option>Daily</option> -->\r\n                                        <option value=\"weekly\">Weekly</option>\r\n                                        <option value=\"monthly\">Monthly</option>\r\n                                        <option value=\"yearly\">Yearly</option>\r\n                                    </select>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"user_charts\" *ngIf=\"chartReady\">\r\n                                <!-- <app-graph></app-graph> -->\r\n                                <canvas baseChart [datasets]=\"barChartDataSale\" [labels]=\"barChartLabelSale\"\r\n                                    [options]=\"barChartOptionsSale\" [plugins]=\"barChartPluginsSale\"\r\n                                    [legend]=\"barChartLegendSale\" [chartType]=\"barChartTypeSale\">\r\n                                </canvas>\r\n                            </div>\r\n                        </li>\r\n\r\n                        <li>\r\n                            <div class=\"chart_title\">\r\n                                <p>Vendors</p>\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Filter</label>\r\n                                    <select>\r\n                                        <!-- <option>Daily</option> -->\r\n                                        <option>Weekly</option>\r\n                                        <option>Monthly</option>\r\n                                        <option>Yearly</option>\r\n                                    </select>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"user_charts\">\r\n                                <!-- <app-graph></app-graph> -->\r\n                                <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\"\r\n                                    [options]=\"barChartOptions\" [plugins]=\"barChartPlugins\" [legend]=\"barChartLegend\"\r\n                                    [chartType]=\"barChartType\">\r\n                                </canvas>\r\n                            </div>\r\n                        </li>\r\n                        <li>\r\n                            <div class=\"chart_title\">\r\n                                <p>Revenue</p>\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Filter</label>\r\n                                    <select>\r\n                                        <!-- <option>Daily</option> -->\r\n                                        <option>Weekly</option>\r\n                                        <option>Monthly</option>\r\n                                        <option>Yearly</option>\r\n                                    </select>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"user_charts\">\r\n\r\n                                <!-- <app-graph></app-graph> -->\r\n                                <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\"\r\n                                    [options]=\"barChartOptions\" [plugins]=\"barChartPlugins\" [legend]=\"barChartLegend\"\r\n                                    [chartType]=\"barChartType\">\r\n                                </canvas>\r\n                            </div>\r\n                        </li>\r\n                        <!-- <li>\r\n                            <div class=\"chart_title\">\r\n                                <p>Current Order listing</p>\r\n                            </div>\r\n                            <div class=\"user_charts\">\r\n                                <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\"\r\n                                    [options]=\"barChartOptions\" [plugins]=\"barChartPlugins\" [legend]=\"barChartLegend\"\r\n                                    [chartType]=\"barChartType\">\r\n                                </canvas>\r\n                            </div>\r\n                        </li> -->\r\n                    </ul>\r\n                </div>\r\n\r\n                <div class=\"current_Admins\">\r\n                    <div class=\"sub_heading\">\r\n                        <h1>Current Sales </h1>\r\n                        <!-- <div class=\"top_subheading_add\">\r\n                            <a (click)=\"goToaddinventory()\"><span>+</span>Add Inventory</a>\r\n                        </div> -->\r\n                    </div>\r\n                    <div class=\"outer_table\">\r\n                        <div class=\"search_fields\">\r\n                            <div class=\"filters Booking_status\">\r\n                                <label>Filter</label>\r\n                                <select [(ngModel)]=\"filterBy\" (change)=\"filterSelected($event)\">\r\n                                    <option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n                                    <option *ngIf=\"flag==false\" value=\"\"></option>\r\n                                    <option *ngFor=\"let item of filterList\" value=\"{{item.value}}\">\r\n                                        {{item.viewValue}}\r\n                                    </option>\r\n\r\n                                    <!-- <option value=\"active\">Active</option>\r\n                                            <option value=\"inactive\">Inactive</option> -->\r\n                                    <!-- <option value=\"lastName\"></option> -->\r\n                                </select>\r\n                            </div>\r\n                            <div class=\"search_inner_fiels\">\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Search</label>\r\n                                    <div class=\"search_with_icons\">\r\n                                        <mat-form-field [floatLabel]=\"'never'\">\r\n                                            <input matInput type=\"text\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                        </mat-form-field>\r\n                                        <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                            (click)=\"searchMethod()\"></i>\r\n                                        <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                            (click)=\"clearSearch()\"></i>\r\n                                    </div>\r\n                                </div>\r\n\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"table-responsive\">\r\n                            <table>\r\n                                <tr>\r\n                                    <th>Sr no</th>\r\n                                    <th>Product Name</th>\r\n                                    <th>Product category</th>\r\n                                    <th>Product sub category</th>\r\n\r\n                                    <th>ISBN Number</th>\r\n                                    <th>SKU Number</th>\r\n                                    <th>Quantity</th>\r\n                                    <th>Price</th>\r\n                                    <th>User name</th>\r\n                                    <th>User Address</th>\r\n                                    <th>Order Date</th>\r\n                                    <th>Except Delivery Date</th>\r\n                                    <th>Delivery Date</th>\r\n                                    <th>Status</th>\r\n\r\n                                </tr>\r\n                                <tr *ngFor=\"let item of salesListData; let i=index\">\r\n                                    <td *ngIf=\"flagUserList==true\">{{srNo+i+1}}</td>\r\n                                    <td *ngIf=\"flagUserList==false\">{{i+1}}</td>\r\n                                    <td>{{item.productId.name}}</td>\r\n                                    <td>{{item.productId.category.name}}</td>\r\n                                    <td>{{item.productId.subCategory.name}}</td>\r\n                                    <td>{{item.productId.isbn}}</td>\r\n                                    <td>{{item.productId.sku}}</td>\r\n                                    <td>{{item.quantity}}</td>\r\n                                    <td>{{item.totalAmount}}</td>\r\n                                    <td>{{item.userId.firstName}} {{item.userId.lastName}}</td>\r\n                                    <td>{{item.deliveryAddress.address1}}, {{item.deliveryAddress.address2}},\r\n                                        {{item.deliveryAddress.city}}, {{item.deliveryAddress.state}},\r\n                                        {{item.deliveryAddress.postalCode}}</td>\r\n                                    <td>{{item.createdAt}}</td>\r\n                                    <td>{{item.deliveryDate==null?\"Not Assigened Yet\":item.deliveryDate}}</td>\r\n                                    <td>{{item.deliveredDate==null?\"Not Delivered Yet\":item.deliveredDate}}</td>\r\n                                    <td>\r\n\r\n                                        {{item.status}}\r\n                                    </td>\r\n\r\n\r\n                                </tr>\r\n\r\n                            </table>\r\n                        </div>\r\n                    </div>\r\n                    <!-----start pagination-->\r\n                    <mat-paginator [length]=\"length\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"[5, 10, 25, 100]\"\r\n                        (page)=\"pageEvent = productListAfterPageSizeChanged($event)\">\r\n                    </mat-paginator>\r\n                    <!-----end pagination-->\r\n\r\n                </div>\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
 
 /***/ }),
 
@@ -785,7 +785,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>User Management</h1>\r\n                    <!-- <div class=\"top_subheading_add\">\r\n<a (click)=\"goToadduser()\"><span>+</span>Add User</a>\r\n</div> -->\r\n                </div>\r\n                <div class=\"outer_table\">\r\n                    <div class=\"search_fields\">\r\n                        <div class=\"filters Booking_status\">\r\n                            <label>Filter</label>\r\n                            <select [(ngModel)]=\"filterBy\" (change)=\"filterSelected($event)\">\r\n                                <option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n                                <option *ngIf=\"flag==false\" value=\"\"></option>\r\n                                <option value=\"active\">Active</option>\r\n                                <option value=\"inactive\">Inactive</option>\r\n                                <!-- <option value=\"lastName\"></option> -->\r\n                            </select>\r\n                        </div>\r\n                        <div class=\"search_inner_fiels\">\r\n                            <div class=\"filters Booking_status\">\r\n                                <label>Search</label>\r\n                                <div class=\"search_with_icons\">\r\n                                    <mat-form-field [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"text\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                    </mat-form-field>\r\n                                    <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                        (click)=\"searchMethod()\"></i>\r\n                                    <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                        (click)=\"clearSearch()\"></i>\r\n                                </div>\r\n                            </div>\r\n\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-responsive\">\r\n                        <div *ngIf=\"flagData==true\">\r\n                            <h1>No Data Found</h1>\r\n                        </div>\r\n                        <div *ngIf=\"flagData==false\">\r\n                            <table>\r\n                                <tr>\r\n                                    <th>Sr.no</th>\r\n                                    <th> Name</th>\r\n                                    <th> Email </th>\r\n                                    <th> Phone number</th>\r\n                                    <th>Status</th>\r\n                                    <th>Number of Order</th>\r\n                                    <th>Completed Order</th>\r\n                                    <th>Rejected Order</th>\r\n                                    <th>Total Amount Paid</th>\r\n                                    <th> Address </th>\r\n                                    <th>Last order date and time</th>\r\n                                    <th>Last product purchased</th>\r\n                                    <th class=\"action_bx\">Action</th>\r\n                                </tr>\r\n                                <tr *ngFor=\"let item of userList; index as i \">\r\n\r\n                                    <td *ngIf=\"flagNumber==true\">{{srNo+i+1}}</td>\r\n                                    <td *ngIf=\"flagNumber==false\">{{i+1}}</td>\r\n                                    <td>{{item?.firstName}} {{item?.lastName}}</td>\r\n\r\n                                    <td>{{item?.email}}</td>\r\n                                    <td>{{item?.countryCode}}-{{item?.phone}}</td>\r\n                                    <td>\r\n                                        <div class=\"enable_disable\">\r\n                                            <mat-slide-toggle (change)=\"changeUserStatus(item._id,item.status)\"\r\n                                                [checked]=\"item.status=='1'? true:false\"></mat-slide-toggle>\r\n                                        </div>\r\n                                    </td>\r\n                                    <td>{{item?.totalOrders}}</td>\r\n                                    <td>{{item?.completedOrders}}</td>\r\n                                    <td>{{item?.rejectedOrders}}</td>\r\n                                    <td>{{item?.totalPaid}}</td>\r\n                                    <td>\r\n                                        <div class=\"top_subheading_add\">\r\n                                            <button class=\"accept_button \"\r\n                                                (click)=\"goToUserAddress(item._id)\"><span></span>User\r\n                                                Address</button>\r\n                                        </div>\r\n                                    </td>\r\n                                    <td>{{item?.lastOrderAt | date}}</td>\r\n                                    <td>{{item?.lastOrder?.productId?.name}}</td>\r\n                                    <!-- <td><a class=\"request_hisrty\" (click)=\"goTobookingRequestHistory()\"><i class=\"fa fa-eye\"></i></a></td> -->\r\n                                    <td>\r\n                                        <div class=\"action\">\r\n                                            <ul>\r\n                                                <li class=\"show\" (click)=\"goTobookingRequestHistory(i)\"><i\r\n                                                        class=\"fa fa-eye\"></i></li>\r\n                                                <li class=\"edit\" (click)=\"goToeditUser(i)\"><i\r\n                                                        class=\"fa fa-pencil fa-fw\"></i>\r\n                                                </li>\r\n                                                <li class=\"delete\" (click)=\"deleteUser(i)\"><i\r\n                                                        class=\"fa fa-trash-o fa-fw\"></i></li>\r\n                                            </ul>\r\n                                        </div>\r\n                                    </td>\r\n                                </tr>\r\n\r\n                            </table>\r\n\r\n                        </div>\r\n                        <!-----start pagination-->\r\n                        <mat-paginator [length]=\"length\" [pageIndex]=\"page\" [pageSize]=\"pageSize\"\r\n                            [pageSizeOptions]=\"pageSizeOptions\"\r\n                            (page)=\"pageEvent = UserListAfterPageSizeChanged($event)\">\r\n                        </mat-paginator>\r\n                        <!-----end pagination-->\r\n                    </div>\r\n\r\n                </div>\r\n\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>User Management</h1>\r\n                    <!-- <div class=\"top_subheading_add\">\r\n<a (click)=\"goToadduser()\"><span>+</span>Add User</a>\r\n</div> -->\r\n                </div>\r\n                <div class=\"outer_table\">\r\n                    <div class=\"search_fields\">\r\n                        <div class=\"filters Booking_status\">\r\n                            <label>Filter</label>\r\n                            <select [(ngModel)]=\"filterBy\" (change)=\"filterSelected($event)\">\r\n                                <option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n                                <option *ngIf=\"flag==false\" value=\"\"></option>\r\n                                <option value=\"active\">Active</option>\r\n                                <option value=\"inactive\">Inactive</option>\r\n                                <!-- <option value=\"lastName\"></option> -->\r\n                            </select>\r\n                        </div>\r\n                        <div class=\"search_inner_fiels\">\r\n                            <div class=\"filters Booking_status\">\r\n                                <label>Search</label>\r\n                                <div class=\"search_with_icons\">\r\n                                    <mat-form-field [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"text\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                    </mat-form-field>\r\n                                    <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                        (click)=\"searchMethod()\"></i>\r\n                                    <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                        (click)=\"clearSearch()\"></i>\r\n                                </div>\r\n                            </div>\r\n\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-responsive\">\r\n                        <div *ngIf=\"flagData==true\">\r\n                            <h1>No Data Found</h1>\r\n                        </div>\r\n                        <div *ngIf=\"flagData==false\">\r\n                            <table>\r\n                                <tr>\r\n                                    <th>Sr.no</th>\r\n                                    <th> Name</th>\r\n                                    <th> Email </th>\r\n                                    <th> Phone number</th>\r\n                                    <th>Status</th>\r\n                                    <th>Number of Order</th>\r\n                                    <th>Completed Order</th>\r\n                                    <th>Rejected Order</th>\r\n                                    <th>Total Amount Paid</th>\r\n                                    <th> Address </th>\r\n                                    <th>Last order date and time</th>\r\n                                    <th>Last product purchased</th>\r\n                                    <th class=\"action_bx\">Action</th>\r\n                                </tr>\r\n                                <tr *ngFor=\"let item of userList; index as i \">\r\n\r\n                                    <td *ngIf=\"flagUserList==true\">{{srNo+i+1}}</td>\r\n                                    <td *ngIf=\"flagUserList==false\">{{i+1}}</td>\r\n                                    <td>{{item?.firstName}} {{item?.lastName}}</td>\r\n\r\n                                    <td>{{item?.email}}</td>\r\n                                    <td>{{item?.countryCode}}-{{item?.phone}}</td>\r\n                                    <td>\r\n                                        <div class=\"enable_disable\">\r\n                                            <mat-slide-toggle (change)=\"changeUserStatus(item._id,item.status)\"\r\n                                                [checked]=\"item.status=='1'? true:false\"></mat-slide-toggle>\r\n                                        </div>\r\n                                    </td>\r\n                                    <td>{{item?.totalOrders}}</td>\r\n                                    <td>{{item?.completedOrders}}</td>\r\n                                    <td>{{item?.rejectedOrders}}</td>\r\n                                    <td>{{item?.totalPaid}}</td>\r\n                                    <td>\r\n                                        <div class=\"top_subheading_add\">\r\n                                            <button class=\"accept_button \"\r\n                                                (click)=\"goToUserAddress(item._id)\"><span></span>User\r\n                                                Address</button>\r\n                                        </div>\r\n                                    </td>\r\n                                    <td>{{item?.lastOrderAt | date}}</td>\r\n                                    <td>{{item?.lastOrder?.productId?.name}}</td>\r\n                                    <!-- <td><a class=\"request_hisrty\" (click)=\"goTobookingRequestHistory()\"><i class=\"fa fa-eye\"></i></a></td> -->\r\n                                    <td>\r\n                                        <div class=\"action\">\r\n                                            <ul>\r\n                                                <li class=\"show\" (click)=\"goTobookingRequestHistory(i)\"><i\r\n                                                        class=\"fa fa-eye\"></i></li>\r\n                                                <li class=\"edit\" (click)=\"goToeditUser(i)\"><i\r\n                                                        class=\"fa fa-pencil fa-fw\"></i>\r\n                                                </li>\r\n                                                <li class=\"delete\" (click)=\"deleteUser(i)\"><i\r\n                                                        class=\"fa fa-trash-o fa-fw\"></i></li>\r\n                                            </ul>\r\n                                        </div>\r\n                                    </td>\r\n                                </tr>\r\n\r\n                            </table>\r\n\r\n                        </div>\r\n                        <!-----start pagination-->\r\n                        <mat-paginator [length]=\"length\" [pageIndex]=\"page\" [pageSize]=\"pageSize\"\r\n                            [pageSizeOptions]=\"pageSizeOptions\"\r\n                            (page)=\"pageEvent = UserListAfterPageSizeChanged($event)\">\r\n                        </mat-paginator>\r\n                        <!-----end pagination-->\r\n                    </div>\r\n\r\n                </div>\r\n\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
 
 /***/ }),
 
@@ -928,7 +928,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Vendor Sales Report Graph</h1>\r\n                </div>\r\n\r\n                <div class=\"charts\">\r\n                    <ul>\r\n                        <li>\r\n                            <div class=\"chart_title\">\r\n                                <p>Report Graph</p>\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Filter</label>\r\n                                    <select>\r\n                                        <option>Daily</option>\r\n                                        <option>Weekly</option>\r\n                                        <option>Monthly</option>\r\n                                        <option>Yearly</option>\r\n                                    </select>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"user_charts\">\r\n                                <app-graph [chartData]=\"data\"></app-graph>\r\n                                <!-- <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\"\r\n                                    [options]=\"barChartOptions\" [plugins]=\"barChartPlugins\" [legend]=\"barChartLegend\"\r\n                                    [chartType]=\"barChartType\">\r\n                                </canvas> -->\r\n                            </div>\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Vendor Sales Report Graph</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <a (click)=\"goTosales()\">Go to Vendor Sales list </a>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"charts\">\r\n                    <ul>\r\n                        <li>\r\n                            <div class=\"chart_title\">\r\n                                <p>Sales Graph</p>\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Filter</label>\r\n                                    <select [(ngModel)]=\"period\" (change)=\"periodSelected($event)\">\r\n                                        <!-- <option>Daily</option> -->\r\n                                        <option value=\"weekly\">Weekly</option>\r\n                                        <option value=\"monthly\">Monthly</option>\r\n                                        <option value=\"yearly\"> Yearly</option>\r\n                                    </select>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"user_charts\" *ngIf=\"chartReady\">\r\n                                <!-- <app-graph [chartData]=\"data\"></app-graph> -->\r\n                                <canvas baseChart [datasets]=\"barChartData\" [labels]=\"barChartLabels\"\r\n                                    [options]=\"barChartOptions\" [plugins]=\"barChartPlugins\" [legend]=\"barChartLegend\"\r\n                                    [chartType]=\"barChartType\">\r\n                                </canvas>\r\n                            </div>\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
 
 /***/ }),
 
@@ -1110,7 +1110,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Vendor Sales Report</h1>\r\n\r\n                </div>\r\n                <div class=\"outer_table\">\r\n                    <div class=\"search_fields\">\r\n                        <div class=\"filters Booking_status\">\r\n                            <label>Filter</label>\r\n                            <select [(ngModel)]=\"filterBy\" (change)=\"filterSelected($event)\">\r\n                                <option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n                                <option *ngIf=\"flag==false\" value=\"\"></option>\r\n                                <option value=\"active\">Active</option>\r\n                                <option value=\"inactive\">Inactive</option>\r\n                            </select>\r\n                        </div>\r\n                        <div class=\"search_inner_fiels\">\r\n                            <div class=\"filters Booking_status\">\r\n                                <label>Search</label>\r\n                                <div class=\"search_with_icons\">\r\n                                    <mat-form-field [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"text\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                    </mat-form-field>\r\n                                    <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                        (click)=\"searchMethod()\"></i>\r\n                                    <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                        (click)=\"clearSearch()\"></i>\r\n                                </div>\r\n                            </div>\r\n\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-responsive\">\r\n                        <table>\r\n                            <tr>\r\n\r\n                                <th>Sr no</th>\r\n                                <th>Vendor Name</th>\r\n                                <th>Vendor Address</th>\r\n                                <th>Vendor Phone Number </th>\r\n                                <th>Vendor Email ID</th>\r\n                                <th>Vendor Product List</th>\r\n                                <th>Total revenue generated</th>\r\n                                <th>Sales Graph</th>\r\n                            </tr>\r\n                            <tr *ngFor=\"let item of vendorList; let i=index\">\r\n\r\n                                <td *ngIf=\"flagUserList==false\">{{i+1}}</td>\r\n                                <td *ngIf=\"flagUserList==true\">{{srNo+i+1}}</td>\r\n                                <td>{{item.firstName}} {{item.lastName}}</td>\r\n                                <td>{{item.address}},{{item.city}},{{item.state}},{{item.country}}</td>\r\n                                <td>{{item.countryCode}}-{{item.phone}}</td>\r\n                                <td>{{item.email}}</td>\r\n                                <td class=\"Booking_status\" (click)=\"goToproduct(i)\">\r\n                                    <a class=\"accept_button\">View List</a></td>\r\n                                <td>{{item.totalRevenue}}</td>\r\n                                <td class=\"Booking_status\">\r\n\r\n                                    <a class=\"accept_button\" (click)=\"goToreportGraph()\">View Report Graph</a>\r\n\r\n                                </td>\r\n                            </tr>\r\n\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n                <!-----start pagination-->\r\n                <mat-paginator [length]=\"length\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"pageSizeOptions\"\r\n                    (page)=\"pageEvent = vendorSalesReportListAfterPageSizeChanged($event)\">\r\n                </mat-paginator>\r\n                <!-----end pagination-->\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Vendor Sales Report</h1>\r\n\r\n                </div>\r\n                <div class=\"outer_table\">\r\n                    <div class=\"search_fields\">\r\n                        <div class=\"filters Booking_status\">\r\n                            <label>Filter</label>\r\n                            <select [(ngModel)]=\"filterBy\" (change)=\"filterSelected($event)\">\r\n                                <option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n                                <option *ngIf=\"flag==false\" value=\"\"></option>\r\n                                <option value=\"active\">Active</option>\r\n                                <option value=\"inactive\">Inactive</option>\r\n                            </select>\r\n                        </div>\r\n                        <div class=\"search_inner_fiels\">\r\n                            <div class=\"filters Booking_status\">\r\n                                <label>Search</label>\r\n                                <div class=\"search_with_icons\">\r\n                                    <mat-form-field [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"text\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                    </mat-form-field>\r\n                                    <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                        (click)=\"searchMethod()\"></i>\r\n                                    <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                        (click)=\"clearSearch()\"></i>\r\n                                </div>\r\n                            </div>\r\n\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-responsive\">\r\n                        <table>\r\n                            <tr>\r\n\r\n                                <th>Sr no</th>\r\n                                <th>Vendor Name</th>\r\n                                <th>Vendor Address</th>\r\n                                <th>Vendor Phone Number </th>\r\n                                <th>Vendor Email ID</th>\r\n                                <th>Vendor Product List</th>\r\n                                <th>Total revenue generated</th>\r\n                                <th>Sales Graph</th>\r\n                            </tr>\r\n                            <tr *ngFor=\"let item of vendorList; let i=index\">\r\n\r\n                                <td *ngIf=\"flagUserList==false\">{{i+1}}</td>\r\n                                <td *ngIf=\"flagUserList==true\">{{srNo+i+1}}</td>\r\n                                <td>{{item.firstName}} {{item.lastName}}</td>\r\n                                <td>{{item.address}},{{item.city}},{{item.state}},{{item.country}}</td>\r\n                                <td>{{item.countryCode}}-{{item.phone}}</td>\r\n                                <td>{{item.email}}</td>\r\n                                <td class=\"Booking_status\" (click)=\"goToproduct(i)\">\r\n                                    <a class=\"accept_button\">View List</a></td>\r\n                                <td>{{item.totalRevenue}}</td>\r\n                                <td class=\"Booking_status\">\r\n\r\n                                    <a class=\"accept_button\" (click)=\"goToreportGraph(item._id)\">View Report Graph</a>\r\n\r\n                                </td>\r\n                            </tr>\r\n\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n                <!-----start pagination-->\r\n                <mat-paginator [length]=\"length\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"pageSizeOptions\"\r\n                    (page)=\"pageEvent = vendorSalesReportListAfterPageSizeChanged($event)\">\r\n                </mat-paginator>\r\n                <!-----end pagination-->\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
 
 /***/ }),
 
@@ -4391,19 +4391,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DashboardComponent", function() { return DashboardComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var fusioncharts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! fusioncharts */ "./node_modules/fusioncharts/fusioncharts.js");
-/* harmony import */ var fusioncharts__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(fusioncharts__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! chartjs-plugin-datalabels */ "./node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.js");
-/* harmony import */ var chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! chartjs-plugin-datalabels */ "./node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.js");
+/* harmony import */ var chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var src_services_api_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/services/api.service */ "./src/services/api.service.ts");
 
 
 
 
 
 let DashboardComponent = class DashboardComponent {
-    constructor(router) {
+    constructor(router, apiService) {
         this.router = router;
+        this.apiService = apiService;
         this.page = 1;
         this.length = 100;
         this.pageSize = 10;
@@ -4412,6 +4412,19 @@ let DashboardComponent = class DashboardComponent {
         this.search = '';
         this.salesList = [];
         this.flagSearch = true;
+        this.filterList = [{ viewValue: 'New', value: 'New' },
+            { viewValue: 'Accepted', value: 'Accepted' },
+            { viewValue: 'Cancelled', value: 'Canceled' },
+            { viewValue: 'Rejected', value: 'Rejected' },
+            { viewValue: 'Packing', value: 'Packing' },
+            { viewValue: 'Shipped', value: 'Shipped' },
+            { viewValue: 'Delivered', value: 'Delivered' },
+            { viewValue: 'Unwant', value: 'UnWant' },
+            { viewValue: 'Picking', value: 'Picking' },
+            { viewValue: 'Rescheduled', value: 'Rescheduled' },
+            { viewValue: 'Picked For Shipping', value: 'pickedShipping' },
+            { viewValue: 'Picked', value: 'Picked' },
+            { viewValue: 'Picked and Delivered', value: 'PickedDelivered' }];
         this.barChartOptions = {
             responsive: true,
             // We use these empty structures as placeholders for dynamic theming.
@@ -4426,52 +4439,77 @@ let DashboardComponent = class DashboardComponent {
         this.barChartLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
         this.barChartType = 'bar';
         this.barChartLegend = true;
-        this.barChartPlugins = [chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_3__];
+        this.barChartPlugins = [chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_2__];
         this.barChartData = [
             { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
             { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
         ];
+        this.barChartOptionsSale = {
+            responsive: true,
+            // We use these empty structures as placeholders for dynamic theming.
+            scales: { xAxes: [{}], yAxes: [{}] },
+            plugins: {
+                datalabels: {
+                    anchor: 'end',
+                    align: 'end',
+                }
+            }
+        };
+        this.barChartTypeSale = 'bar';
+        this.barChartLegendSale = true;
+        this.barChartPluginsSale = [chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_2__];
+        this.periodSale = 'weekly';
         this.type = "timeseries";
         this.width = "100%";
         this.height = "400";
+        this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale);
+    }
+    getDashboardData(page, pageSize, search, filterBy, typeSale) {
+        this.apiService.getDashboardData(page, pageSize, search, filterBy, typeSale).subscribe(res => {
+            console.log(res);
+            debugger;
+            if (res.success) {
+                this.dashboardData = res;
+                this.salesListData = this.dashboardData.salesList;
+                this.length = this.salesListData.length;
+                console.log("Dashboard Data:", this.dashboardData);
+                this.salesData(this.dashboardData.graph);
+            }
+        });
     }
     ngOnInit() {
         // This is the dataSource of the chart
-        this.dataSource = {
-            chart: {},
-            caption: {
-                text: "Sales Analysis"
-            },
-            subcaption: {
-                text: "Grocery & Footwear"
-            },
-            series: "Type",
-            yaxis: [
-                {
-                    plot: "Sales Value",
-                    title: "Sale Value",
-                    format: {
-                        prefix: "$"
-                    }
-                }
-            ]
-        };
-        this.fetchData();
     }
-    fetchData() {
-        var jsonify = res => res.json();
-        var dataFetch = fetch("https://s3.eu-central-1.amazonaws.com/fusion.store/ft/data/plotting-multiple-series-on-time-axis-data.json").then(jsonify);
-        var schemaFetch = fetch("https://s3.eu-central-1.amazonaws.com/fusion.store/ft/schema/plotting-multiple-series-on-time-axis-schema.json").then(jsonify);
-        Promise.all([dataFetch, schemaFetch]).then(res => {
-            const [data, schema] = res;
-            // First we are creating a DataStore
-            const fusionDataStore = new fusioncharts__WEBPACK_IMPORTED_MODULE_2__["DataStore"]();
-            // After that we are creating a DataTable by passing our data and schema as arguments
-            const fusionTable = fusionDataStore.createDataTable(data, schema);
-            // Afet that we simply mutated our timeseries datasource by attaching the above
-            // DataTable into its data property.
-            this.dataSource.data = fusionTable;
-        });
+    salesData(graphData) {
+        let array = [];
+        console.log(graphData);
+        let data = graphData.length;
+        for (let i = 0; i < data; i++) {
+            if (this.periodSale == 'monthly') {
+                array.push('Week' + ' ' + [i + 1]);
+            }
+            if (this.periodSale == 'weekly') {
+                array.push('Day' + ' ' + [i + 1]);
+            }
+            if (this.periodSale == 'yearly') {
+                array.push('Month' + ' ' + [i + 1]);
+            }
+        }
+        this.barChartLabelSale = array;
+        // public barChartData: ChartDataSets[] = [
+        //     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+        //     // { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+        //   ];
+        this.barChartDataSale = [{ data: graphData, label: this.periodSale + " " + 'Sale' }];
+        // this.barChartData = this.barChartData;
+        console.log("labels: ", this.barChartLabelSale);
+        console.log("data: ", this.barChartDataSale);
+        console.log("options: ", this.barChartOptionsSale);
+        this.chartReady = true;
+    }
+    periodChanged(e) {
+        this.periodSale = e.target.value;
+        this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale);
     }
     filterSelected(e) {
         console.log(e);
@@ -4483,7 +4521,7 @@ let DashboardComponent = class DashboardComponent {
         }
         console.log(e.target.value);
         this.filterBy = e.target.value;
-        // this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
+        this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale);
     }
     chartClicked({ event, active }) {
         console.log(event, active);
@@ -4493,13 +4531,12 @@ let DashboardComponent = class DashboardComponent {
     }
     searchMethod() {
         this.flagSearch = false;
-        // console.log(this.search);
-        // this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
+        this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale);
     }
     clearSearch() {
         this.flagSearch = true;
         this.search = '';
-        // this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
+        this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale);
     }
     productListAfterPageSizeChanged(e) {
         console.log(e);
@@ -4521,20 +4558,7 @@ let DashboardComponent = class DashboardComponent {
                 this.flagUserList = true;
             }
         }
-        // this.getSaleslist(this.page, e.pageSize, this.search, this.filterBy)
-    }
-    randomize() {
-        // Only Change 3 values
-        const data = [
-            Math.round(Math.random() * 100),
-            59,
-            80,
-            (Math.random() * 100),
-            56,
-            (Math.random() * 100),
-            40
-        ];
-        this.barChartData[0].data = data;
+        this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale);
     }
     goTosalesgraph() {
         this.router.navigate(['salesgraph']);
@@ -4550,7 +4574,8 @@ let DashboardComponent = class DashboardComponent {
     }
 };
 DashboardComponent.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
+    { type: src_services_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"] }
 ];
 DashboardComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -8259,11 +8284,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! chartjs-plugin-datalabels */ "./node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.js");
 /* harmony import */ var chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var src_services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/services/api.service */ "./src/services/api.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
+
 
 
 
 let ReportGraphComponent = class ReportGraphComponent {
-    constructor() {
+    constructor(apiService, route) {
+        this.apiService = apiService;
+        this.route = route;
+        this.period = 'monthly';
+        this.history = window.history;
         this.barChartOptions = {
             responsive: true,
             // We use these empty structures as placeholders for dynamic theming.
@@ -8275,86 +8308,78 @@ let ReportGraphComponent = class ReportGraphComponent {
                 }
             }
         };
-        this.barChartLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
         this.barChartType = 'bar';
         this.barChartLegend = true;
         this.barChartPlugins = [chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_2__];
-        this.barChartData = [
-            { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-            { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
-        ];
-        this.data
-            = {
-                'barChartOptions': this.barChartOptions,
-                'barChartLabels': this.barChartLabels,
-                'barChartType': this.barChartType,
-                'barChartLegend': this.barChartLegend,
-                'barChartPlugins': this.barChartPlugins,
-                'barChartData': this.barChartData
-            };
+        this.sub = this.route
+            .queryParams
+            .subscribe(params => {
+            // Defaults to 0 if no query param provided.
+            this.id = params['id'];
+        });
+        //alert(this.id)
+    }
+    getData() {
+        debugger;
+        let array = [];
+        let body = {
+            'type': this.period,
+            'userId': this.id
+        };
+        this.apiService.getVendortSalesGraph(body).subscribe(res => {
+            console.log(res);
+            let data = res.data.length;
+            for (let i = 0; i < data; i++) {
+                if (this.period == 'monthly') {
+                    array.push('Week' + ' ' + [i + 1]);
+                }
+                if (this.period == 'weekly') {
+                    array.push('Day' + ' ' + [i + 1]);
+                }
+                if (this.period == 'yearly') {
+                    array.push('Month' + ' ' + [i + 1]);
+                }
+            }
+            this.barChartLabels = array;
+            // public barChartData: ChartDataSets[] = [
+            //     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+            //     // { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+            //   ];
+            this.barChartData = [{ data: res.data, label: this.period + " " + 'Sale' }];
+            this.barChartOptions = this.barChartOptions;
+            // this.barChartLabels = this.barChartLabels;
+            this.barChartType = 'bar';
+            this.barChartLegend = true;
+            this.barChartPlugins = this.barChartPlugins;
+            // this.barChartData = this.barChartData;
+            console.log("labels: ", this.barChartLabels);
+            console.log("data: ", this.barChartData);
+            console.log("options: ", this.barChartOptions);
+            this.chartReady = true;
+        });
+    }
+    periodSelected(e) {
+        this.period = e.target.value;
+        this.getData();
+        this.history.back();
+    }
+    goTosales() {
+        this.history.back();
     }
     ngOnInit() {
-        // // This is the dataSource of the chart
-        // this.dataSource = {
-        //   chart: {},
-        //   caption: {
-        //     text: "Sales Analysis"
-        //   },
-        //   subcaption: {
-        //     text: "Grocery & Footwear"
-        //   },
-        //   series: "Type",
-        //   yaxis: [
-        //     {
-        //       plot: "Sales Value",
-        //       title: "Sale Value",
-        //       format: {
-        //         prefix: "$"
-        //       }
-        //     }
-        //   ]
-        // };
-        // this.fetchData();
+        this.getData();
     }
-    // fetchData() {
-    //   var jsonify = res => res.json();
-    //   var dataFetch = fetch(
-    //     "https://s3.eu-central-1.amazonaws.com/fusion.store/ft/data/plotting-multiple-series-on-time-axis-data.json"
-    //   ).then(jsonify);
-    //   var schemaFetch = fetch(
-    //     "https://s3.eu-central-1.amazonaws.com/fusion.store/ft/schema/plotting-multiple-series-on-time-axis-schema.json"
-    //   ).then(jsonify);
-    //   Promise.all([dataFetch, schemaFetch]).then(res => {
-    //     const [data, schema] = res;
-    //     // First we are creating a DataStore
-    //     const fusionDataStore = new FusionCharts.DataStore();
-    //     // After that we are creating a DataTable by passing our data and schema as arguments
-    //     const fusionTable = fusionDataStore.createDataTable(data, schema);
-    //     // Afet that we simply mutated our timeseries datasource by attaching the above
-    //     // DataTable into its data property.
-    //     this.dataSource.data = fusionTable;
-    //   });
-    // }
     chartClicked({ event, active }) {
         console.log(event, active);
     }
     chartHovered({ event, active }) {
         console.log(event, active);
     }
-    randomize() {
-        // Only Change 3 values
-        const data = [
-            Math.round(Math.random() * 100),
-            59,
-            80,
-            (Math.random() * 100),
-            56,
-            (Math.random() * 100),
-            40
-        ];
-        this.barChartData[0].data = data;
-    }
 };
+ReportGraphComponent.ctorParameters = () => [
+    { type: src_services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] }
+];
 ReportGraphComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-report-graph',
@@ -8963,13 +8988,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! chartjs-plugin-datalabels */ "./node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.js");
 /* harmony import */ var chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var src_services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/services/api.service */ "./src/services/api.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
 
 
 
 
 let SalesgraphComponent = class SalesgraphComponent {
-    constructor(apiService) {
+    constructor(apiService, route) {
+        //alert(this.id)
         this.apiService = apiService;
+        this.route = route;
         this.period = 'monthly';
         this.history = window.history;
         this.barChartOptions = {
@@ -8986,13 +9015,12 @@ let SalesgraphComponent = class SalesgraphComponent {
         this.barChartType = 'bar';
         this.barChartLegend = true;
         this.barChartPlugins = [chartjs_plugin_datalabels__WEBPACK_IMPORTED_MODULE_2__];
-        this.getData();
     }
     getData() {
         // debugger
         let array = [];
         let body = {
-            'type': this.period
+            'type': this.period,
         };
         this.apiService.getSalesGraph(body).subscribe(res => {
             console.log(res);
@@ -9035,27 +9063,8 @@ let SalesgraphComponent = class SalesgraphComponent {
         this.history.back();
     }
     ngOnInit() {
-        // console.log("From sales", this.data);
+        this.getData();
     }
-    // fetchData() {
-    //   var jsonify = res => res.json();
-    //   var dataFetch = fetch(
-    //     "https://s3.eu-central-1.amazonaws.com/fusion.store/ft/data/plotting-multiple-series-on-time-axis-data.json"
-    //   ).then(jsonify);
-    //   var schemaFetch = fetch(
-    //     "https://s3.eu-central-1.amazonaws.com/fusion.store/ft/schema/plotting-multiple-series-on-time-axis-schema.json"
-    //   ).then(jsonify);
-    //   Promise.all([dataFetch, schemaFetch]).then(res => {
-    //     const [data, schema] = res;
-    //     // First we are creating a DataStore
-    //     const fusionDataStore = new FusionCharts.DataStore();
-    //     // After that we are creating a DataTable by passing our data and schema as arguments
-    //     const fusionTable = fusionDataStore.createDataTable(data, schema);
-    //     // Afet that we simply mutated our timeseries datasource by attaching the above
-    //     // DataTable into its data property.
-    //     this.dataSource.data = fusionTable;
-    //   });
-    // }
     chartClicked({ event, active }) {
         console.log(event, active);
     }
@@ -9064,7 +9073,8 @@ let SalesgraphComponent = class SalesgraphComponent {
     }
 };
 SalesgraphComponent.ctorParameters = () => [
-    { type: src_services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"] }
+    { type: src_services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] }
 ];
 SalesgraphComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -10096,8 +10106,8 @@ let VendorSalesReportComponent = class VendorSalesReportComponent {
         }
         this.router.navigate(['product'], { queryParams: { "id": id, "name": name } });
     }
-    goToreportGraph() {
-        this.router.navigate(['reportGraph']);
+    goToreportGraph(id) {
+        this.router.navigate(['reportGraph'], { queryParams: { id: id } });
     }
 };
 VendorSalesReportComponent.ctorParameters = () => [
@@ -11168,9 +11178,12 @@ let ApiService = class ApiService {
             processOrder: 'admin/processOrder',
             getSale: 'admin/viewSales',
             salesGraph: 'admin/adminSalesGraph',
+            vendorSales: 'admin/graph',
             adminReview: 'admin/reviews',
             updateCms: 'admin/addStaticPage',
-            getAllCms: 'admin/getAllStaticPages'
+            getAllCms: 'admin/getAllStaticPages',
+            // dashBoard
+            getDashboard: 'admin/adminDashboard'
         };
         for (let key in this.apiEndPoints) {
             this.apiEndPoints[key] = this.BASE_URL + this.apiEndPoints[key];
@@ -11450,6 +11463,9 @@ let ApiService = class ApiService {
     getSalesGraph(body) {
         return this.http.post(this.apiEndPoints.salesGraph, body, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
     }
+    getVendortSalesGraph(body) {
+        return this.http.post(this.apiEndPoints.vendorSales, body, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+    }
     getReviewList(page, pageSize, search, filterBy) {
         return this.http.get(`${this.apiEndPoints.adminReview}?page=${page}&count=${pageSize}&search=${search}&filter=${filterBy}`, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
     }
@@ -11458,6 +11474,9 @@ let ApiService = class ApiService {
     }
     getAllCMs() {
         return this.http.get(this.apiEndPoints.getAllCms, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+    }
+    getDashboardData(page, pageSize, search, filterBy, type) {
+        return this.http.get(`${this.apiEndPoints.getDashboard}?page=${page}&count=${pageSize}&search=${search}&filter=${filterBy}&type=${type}`, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
     }
     // Error handling
     handleError(operation = 'operation', result) {

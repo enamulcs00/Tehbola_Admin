@@ -4,6 +4,7 @@ import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { chartData } from '../chartData';
 import { ApiService } from 'src/services/api.service';
+import { ActivatedRoute } from '@angular/router';
 declare var $: any;
 
 @Component({
@@ -37,16 +38,21 @@ export class SalesgraphComponent implements OnInit {
 
   data: { barChartOptions: ChartOptions; barChartLabels: Label[]; barChartType: ChartType; barChartLegend: boolean; barChartPlugins: (typeof pluginDataLabels)[]; barChartData: ChartDataSets[]; };
   chartReady: boolean;
+  sub: any;
+  id: any;
 
-  constructor(private apiService: ApiService) {
-    this.getData()
+  constructor(private apiService: ApiService, private route: ActivatedRoute) {
+
+    //alert(this.id)
+
   }
 
   getData() {
     // debugger
     let array = [];
     let body = {
-      'type': this.period
+      'type': this.period,
+
     }
     this.apiService.getSalesGraph(body).subscribe(res => {
       console.log(res);
@@ -109,29 +115,11 @@ export class SalesgraphComponent implements OnInit {
 
   ngOnInit() {
 
-    // console.log("From sales", this.data);
+    this.getData();
 
   }
-  // fetchData() {
-  //   var jsonify = res => res.json();
-  //   var dataFetch = fetch(
-  //     "https://s3.eu-central-1.amazonaws.com/fusion.store/ft/data/plotting-multiple-series-on-time-axis-data.json"
-  //   ).then(jsonify);
-  //   var schemaFetch = fetch(
-  //     "https://s3.eu-central-1.amazonaws.com/fusion.store/ft/schema/plotting-multiple-series-on-time-axis-schema.json"
-  //   ).then(jsonify);
 
-  //   Promise.all([dataFetch, schemaFetch]).then(res => {
-  //     const [data, schema] = res;
-  //     // First we are creating a DataStore
-  //     const fusionDataStore = new FusionCharts.DataStore();
-  //     // After that we are creating a DataTable by passing our data and schema as arguments
-  //     const fusionTable = fusionDataStore.createDataTable(data, schema);
-  //     // Afet that we simply mutated our timeseries datasource by attaching the above
-  //     // DataTable into its data property.
-  //     this.dataSource.data = fusionTable;
-  //   });
-  // }
+
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);
   }
@@ -140,17 +128,5 @@ export class SalesgraphComponent implements OnInit {
     console.log(event, active);
   }
 
-  // public randomize(): void {
-  //   // Only Change 3 values
-  //   const data = [
-  //     Math.round(Math.random() * 100),
-  //     59,
-  //     80,
-  //     (Math.random() * 100),
-  //     56,
-  //     (Math.random() * 100),
-  //     40];
-  //   this.barChartData[0].data = data;
-  // 
 
 }

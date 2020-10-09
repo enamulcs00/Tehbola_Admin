@@ -115,7 +115,7 @@ export class VendorSalesReportComponent implements OnInit {
     this.router.navigate(['product'], { queryParams: { "id": id, "name": name } })
   }
 
-  goToreportGraph() {
-    this.router.navigate(['reportGraph'])
+  goToreportGraph(id) {
+    this.router.navigate(['reportGraph'], { queryParams: { id: id } })
   }
 }

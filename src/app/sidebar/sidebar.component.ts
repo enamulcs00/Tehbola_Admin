@@ -70,73 +70,77 @@ export class SidebarComponent implements OnInit {
   }
   goTodashboard() {
     this.router.navigate(['dashboard']);
-  } 
+  }
+
+  goToBrand() {
+    this.router.navigate(['brandList'])
+  }
   goToreportpage() {
     this.router.navigate(['reportpage']);
-  }  
-  goToinventry(){
+  }
+  goToinventry() {
     this.router.navigate(['inventryManagement'])
   }
-  goTomanageReviews(){
+  goTomanageReviews() {
     this.router.navigate(['manageReviews'])
   }
-  goTovendermanagement(){
+  goTovendermanagement() {
     this.router.navigate(['venderManagement'])
   }
-   goTocategory(){
+  goTocategory() {
     this.router.navigate(['category'])
   }
-  goToabout(){
+  goToabout() {
     this.router.navigate(['about'])
   }
-  goTofaq(){
+  goTofaq() {
     this.router.navigate(['faq'])
   }
-  goTosubcategory(){
+  goTosubcategory() {
     this.router.navigate(['subcategory'])
   }
-  goToofferdeals(){
+  goToofferdeals() {
     this.router.navigate(['offerdeals'])
   }
 
-  goTosalesreport(){
+  goTosalesreport() {
     this.router.navigate(['salesreport'])
   }
 
-  goTorevenuereport(){
+  goTorevenuereport() {
     this.router.navigate(['revenuereport'])
   }
-  goTonotification(){
+  goTonotification() {
     this.router.navigate(['notification'])
-  }  
-  goTotermcondition(){
+  }
+  goTotermcondition() {
     this.router.navigate(['termcondition'])
-  }  
-  goTocontactus(){
+  }
+  goTocontactus() {
     this.router.navigate(['contactus'])
-  }  
+  }
   /*goToprivacypolicy(){
     this.router.navigate(['privacypolicy'])
   }  */
-  goToreturnpolicy(){
+  goToreturnpolicy() {
     this.router.navigate(['returnpolicy'])
-  }  
-  goToventorT(){
+  }
+  goToventorT() {
     this.router.navigate(['ventorT'])
-  }  
-  goTovendorSalesReport(){
+  }
+  goTovendorSalesReport() {
     this.router.navigate(['vendorSalesReport'])
   }
-  goTotermofuse(){
+  goTotermofuse() {
     this.router.navigate(['termofuse'])
   }
-  goTotermofsales(){
+  goTotermofsales() {
     this.router.navigate(['termofsales'])
   }
-  goToconsumerprivacypolicy(){
+  goToconsumerprivacypolicy() {
     this.router.navigate(['consumerprivacypolicy'])
   }
-  goTowarrantypolicy(){
+  goTowarrantypolicy() {
     this.router.navigate(['warrantypolicy'])
   }
 }

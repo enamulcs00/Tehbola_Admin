@@ -1,0 +1,185 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>Brand</h1>
+                    <!-- <div class="top_subheading_add">
+                   <a (click)="goTosubcategory()"><span>+</span>Sub Category</a>
+                   <a (click)="goToaddcategory()"><span>+</span>Add Category</a>
+                   </div> -->
+                </div>
+                <div class="content_sec_comman">
+                    <div class="content_wrap">
+                        <div class="outer_loaction">
+                            <div class="location_name">
+                                <!-- <h3>Electronics</h3> -->
+                                <!-- <p><i class="fa fa-compress" aria-hidden="true"></i></p> -->
+                            </div>
+
+                            <div class="add_location_name">
+                                <a href="javascript:;" class="button-border add_state" data-toggle="modal"
+                                    data-target="#Add_State">
+                                    <i class="fa fa-plus"></i> Add Brand</a>
+                            </div>
+
+                            <div class="state-list button-border" *ngFor="let item of brandList; let i=index">
+                                <div class="state">
+                                    <div class="country_name">
+                                        {{item.name}}
+
+                                        <a href="javascript:;" data-toggle="modal" data-target="#Add_State_delete">
+                                            <i class="fa fa-edit" (click)="editBrand(item._id)"></i>
+                                        </a>
+
+                                        <!-- <a href="javascript:;" data-toggle="modal" data-target="#Add_city">
+                                            <i class="fa fa-plus"></i>
+                                        </a> -->
+                                        <a href="javascript:;">
+                                            <i class="fa fa-trash" (click)="deleteBrand(item._id)"></i>
+                                        </a>
+
+
+
+                                    </div>
+
+
+                                    <!-- state-list-->
+                                </div>
+                                <!--state-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-----start pagination-->
+
+                <!-----end pagination-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal define loaction add state  -->
+<div id="Add_State" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">&times;</button>
+</div> -->
+            <div class="modal-body">
+                <h3> Add Brand</h3>
+                <form [formGroup]="addBrandForm">
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="title">Name of the Brand</label>
+                            <div class="input-group">
+                                <input class="form-control" type="text" value="" name="name" formControlName="name">
+                            </div>
+                            <div *ngIf="submitted && addBrandForm.controls.name.errors" class="invalid-feedback">
+                                <div *ngIf="addBrandForm.controls.name.errors.required">
+                                    Brand Name is required.
+                                </div>
+
+                                <div *ngIf="addBrandForm.controls.name.errors.maxlength">
+                                    Brand Name should be max 25 characters long.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label for="title">Arabic Name of the Brand</label>
+                            <div class="input-group">
+                                <input class="form-control" type="text" value="" name="name_ar"
+                                    formControlName="name_ar">
+                            </div>
+                            <div *ngIf="submitted && addBrandForm.controls.name_ar.errors" class="invalid-feedback">
+                                <div *ngIf="addBrandForm.controls.name_ar.errors.required">
+                                    Brand arabic name is required.
+                                </div>
+                                <div *ngIf="addBrandForm.controls.name_ar.errors.pattern">
+                                    Brand arabic name is not valid.
+                                </div>
+                                <div *ngIf="addBrandForm.controls.name_ar.errors.maxlength">
+                                    Brand arabic name should be max 25 characters long.
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </form>
+                <div class="model_buttons">
+                    <button class="mat-raised-button mat-primary mr-3" data-dismiss="modal" (click)="onAddBrand()">
+                        Save
+                    </button>
+                    <button class="mat-raised-button mat-warn" (click)="cancelClicked()"
+                        data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal define loaction add state -->
+
+<!-- Modal define loaction edit state  -->
+<div id="Add_State_delete" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">&times;</button>
+</div> -->
+            <div class="modal-body">
+                <h3> Edit Brand</h3>
+                <form [formGroup]="editBrandForm">
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="title">Name of the Brand</label>
+                            <div class="input-group">
+                                <input class="form-control" type="text" value="" name="name" formControlName="name">
+                            </div>
+                            <div *ngIf="submitted && editBrandForm.controls.name.errors" class="invalid-feedback">
+                                <div *ngIf="editBrandForm.controls.name.errors.required">
+                                    Brand Name is required.
+                                </div>
+
+                                <div *ngIf="editBrandForm.controls.name.errors.maxlength">
+                                    Brand Name should be max 25 characters long.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label for="title">Arabic Name of the Brand</label>
+                            <div class="input-group">
+                                <input class="form-control" type="text" value="" name="name_ar"
+                                    formControlName="name_ar">
+                            </div>
+                            <div *ngIf="submitted && editBrandForm.controls.name_ar.errors" class="invalid-feedback">
+                                <div *ngIf="editBrandForm.controls.name_ar.errors.required">
+                                    Brand arabic name is required.
+                                </div>
+
+                                <div *ngIf="editBrandForm.controls.name_ar.errors.maxlength">
+                                    Brand arabic name should be max 25 characters long.
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </form>
+                <div class="model_buttons">
+                    <button class="mat-raised-button mat-primary mr-3" data-dismiss="modal" (click)="onUpdateBrand()">
+                        Update
+                    </button>
+                    <button class="mat-raised-button mat-warn" (click)="cancelClicked()"
+                        data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal define loaction edit state -->

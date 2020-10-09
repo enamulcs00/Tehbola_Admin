@@ -6,29 +6,32 @@
             <div class="container-fluid">
                 <div class="sub_heading">
                     <h1>Vendor Sales Report Graph</h1>
+                    <div class="top_subheading_add">
+                        <a (click)="goTosales()">Go to Vendor Sales list </a>
+                    </div>
                 </div>
 
                 <div class="charts">
                     <ul>
                         <li>
                             <div class="chart_title">
-                                <p>Report Graph</p>
+                                <p>Sales Graph</p>
                                 <div class="filters Booking_status">
                                     <label>Filter</label>
-                                    <select>
-                                        <option>Daily</option>
-                                        <option>Weekly</option>
-                                        <option>Monthly</option>
-                                        <option>Yearly</option>
+                                    <select [(ngModel)]="period" (change)="periodSelected($event)">
+                                        <!-- <option>Daily</option> -->
+                                        <option value="weekly">Weekly</option>
+                                        <option value="monthly">Monthly</option>
+                                        <option value="yearly"> Yearly</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="user_charts">
-                                <app-graph [chartData]="data"></app-graph>
-                                <!-- <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                            <div class="user_charts" *ngIf="chartReady">
+                                <!-- <app-graph [chartData]="data"></app-graph> -->
+                                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
                                     [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend"
                                     [chartType]="barChartType">
-                                </canvas> -->
+                                </canvas>
                             </div>
                         </li>
                     </ul>

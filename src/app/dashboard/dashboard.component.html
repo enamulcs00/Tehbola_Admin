@@ -17,7 +17,7 @@
                                         <h3> Sales</h3>
                                     </div>
                                     <div class="bottom_numbers">
-                                        <p>40,000</p>
+                                        <p>{{this.dashboardData?.salesTotal}}</p>
                                     </div>
                                 </div>
                                 <div class="right_card">
@@ -33,7 +33,7 @@
                                         <h3>Vendors</h3>
                                     </div>
                                     <div class="bottom_numbers">
-                                        <p>215,000</p>
+                                        <p>{{this.dashboardData?.totalVendors}}</p>
                                     </div>
                                 </div>
                                 <div class="right_card">
@@ -69,19 +69,19 @@
                                 <p>Sales</p>
                                 <div class="filters Booking_status">
                                     <label>Filter</label>
-                                    <select>
+                                    <select [(ngModel)]="periodSale" (change)="periodChanged($event)">
                                         <!-- <option>Daily</option> -->
-                                        <option>Weekly</option>
-                                        <option>Monthly</option>
-                                        <option>Yearly</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="monthly">Monthly</option>
+                                        <option value="yearly">Yearly</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="user_charts">
+                            <div class="user_charts" *ngIf="chartReady">
                                 <!-- <app-graph></app-graph> -->
-                                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
-                                    [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend"
-                                    [chartType]="barChartType">
+                                <canvas baseChart [datasets]="barChartDataSale" [labels]="barChartLabelSale"
+                                    [options]="barChartOptionsSale" [plugins]="barChartPluginsSale"
+                                    [legend]="barChartLegendSale" [chartType]="barChartTypeSale">
                                 </canvas>
                             </div>
                         </li>
@@ -157,8 +157,9 @@
                                 <select [(ngModel)]="filterBy" (change)="filterSelected($event)">
                                     <option *ngIf="flag==true" value="">Remove Filter</option>
                                     <option *ngIf="flag==false" value=""></option>
-                                    <option>Product Name </option>
-                                    <option>Order Id </option>
+                                    <option *ngFor="let item of filterList" value="{{item.value}}">
+                                        {{item.viewValue}}
+                                    </option>
 
                                     <!-- <option value="active">Active</option>
                                             <option value="inactive">Inactive</option> -->
@@ -196,145 +197,36 @@
                                     <th>User name</th>
                                     <th>User Address</th>
                                     <th>Order Date</th>
+                                    <th>Except Delivery Date</th>
                                     <th>Delivery Date</th>
                                     <th>Status</th>
-                                    <th class="action_bx">Action</th>
+
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>ABC</td>
-                                    <td>Food Industry</td>
-                                    <td>Industry</td>
-                                    <td>764765454</td>
-                                    <td>13143543</td>
-                                    <td>20 piece</td>
-                                    <td>$800</td>
-                                    <td>John</td>
-                                    <td>Lorem ipsum</td>
-                                    <td>28-05-2020</td>
-                                    <td>01-06-2020</td>
+                                <tr *ngFor="let item of salesListData; let i=index">
+                                    <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
+                                    <td *ngIf="flagUserList==false">{{i+1}}</td>
+                                    <td>{{item.productId.name}}</td>
+                                    <td>{{item.productId.category.name}}</td>
+                                    <td>{{item.productId.subCategory.name}}</td>
+                                    <td>{{item.productId.isbn}}</td>
+                                    <td>{{item.productId.sku}}</td>
+                                    <td>{{item.quantity}}</td>
+                                    <td>{{item.totalAmount}}</td>
+                                    <td>{{item.userId.firstName}} {{item.userId.lastName}}</td>
+                                    <td>{{item.deliveryAddress.address1}}, {{item.deliveryAddress.address2}},
+                                        {{item.deliveryAddress.city}}, {{item.deliveryAddress.state}},
+                                        {{item.deliveryAddress.postalCode}}</td>
+                                    <td>{{item.createdAt}}</td>
+                                    <td>{{item.deliveryDate==null?"Not Assigened Yet":item.deliveryDate}}</td>
+                                    <td>{{item.deliveredDate==null?"Not Delivered Yet":item.deliveredDate}}</td>
                                     <td>
 
-                                        <select>
-                                            <option>Pending</option>
-                                            <option>Confirmed</option>
-                                            <option>cancelled</option>
-                                        </select>
+                                        {{item.status}}
                                     </td>
 
-                                    <td>
-                                        <div class="action">
-                                            <ul>
-                                                <li class="show" (click)="goToviewOrder()"><i class="fa fa-eye"></i>
-                                                </li>
-                                                <li class="edit" (click)="goToeditOrder()"><i
-                                                        class="fa fa-pencil fa-fw"></i></li>
-                                                <!-- <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li> -->
-                                            </ul>
-                                        </div>
-                                    </td>
+
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Lorem</td>
-                                    <td>Food Industry</td>
-                                    <td>Industry</td>
-                                    <td>764765454</td>
-                                    <td>13143543</td>
-                                    <td>20 piece</td>
-                                    <td>$800</td>
-                                    <td>John</td>
-                                    <td>Lorem ipsum</td>
-                                    <td>28-05-2020</td>
-                                    <td>01-06-2020</td>
-                                    <td>
 
-                                        <select>
-                                            <option>Pending</option>
-                                            <option>Confirmed</option>
-                                            <option>cancelled</option>
-                                        </select>
-                                    </td>
-
-                                    <td>
-                                        <div class="action">
-                                            <ul>
-                                                <li class="show" (click)="goToviewOrder()"><i class="fa fa-eye"></i>
-                                                </li>
-                                                <li class="edit" (click)="goToeditOrder()"><i
-                                                        class="fa fa-pencil fa-fw"></i></li>
-                                                <!-- <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li> -->
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>ABC</td>
-                                    <td>Food Industry</td>
-                                    <td>Industry</td>
-                                    <td>764765454</td>
-                                    <td>13143543</td>
-                                    <td>20 piece</td>
-                                    <td>$800</td>
-                                    <td>John</td>
-                                    <td>Lorem ipsum</td>
-                                    <td>28-05-2020</td>
-                                    <td>01-06-2020</td>
-                                    <td>
-
-                                        <select>
-                                            <option>Pending</option>
-                                            <option>Confirmed</option>
-                                            <option>cancelled</option>
-                                        </select>
-                                    </td>
-
-                                    <td>
-                                        <div class="action">
-                                            <ul>
-                                                <li class="show" (click)="goToviewOrder()"><i class="fa fa-eye"></i>
-                                                </li>
-                                                <li class="edit" (click)="goToeditOrder()"><i
-                                                        class="fa fa-pencil fa-fw"></i></li>
-                                                <!-- <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li> -->
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>ABC</td>
-                                    <td>Food Industry</td>
-                                    <td>Industry</td>
-                                    <td>764765454</td>
-                                    <td>13143543</td>
-                                    <td>20 piece</td>
-                                    <td>$800</td>
-                                    <td>John</td>
-                                    <td>Lorem ipsum</td>
-                                    <td>28-05-2020</td>
-                                    <td>01-06-2020</td>
-                                    <td>
-                                        <select>
-                                            <option>Pending</option>
-                                            <option>Confirmed</option>
-                                            <option>cancelled</option>
-                                        </select>
-                                    </td>
-
-                                    <td>
-                                        <div class="action">
-                                            <ul>
-                                                <li class="show" (click)="goToviewOrder()"><i class="fa fa-eye"></i>
-                                                </li>
-                                                <li class="edit" (click)="goToeditOrder()"><i
-                                                        class="fa fa-pencil fa-fw"></i></li>
-                                                <!-- <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li> -->
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
                             </table>
                         </div>
                     </div>
