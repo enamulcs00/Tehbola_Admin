@@ -46,7 +46,7 @@ export class ReturnpolicyComponent implements OnInit {
     };
   }
   updateTermAndCondition() {
-    debugger
+
     this.termsAndCondition.description = this.mycontent
 
 

@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/services/api.service';
 import { CommonService } from 'src/services/common.service';
-
+import { PageEvent } from '@angular/material/paginator';
+interface readOnly {
+  viewValue: string,
+  value: string
+}
 @Component({
   selector: 'app-vendor-sales-report',
   templateUrl: './vendor-sales-report.component.html',
@@ -14,10 +18,23 @@ export class VendorSalesReportComponent implements OnInit {
   page: any = 1;
   search: string = '';
   filterBy: any = '';
+  filterList: readOnly[] = [{ viewValue: 'New', value: 'New' },
+  { viewValue: 'Accepted', value: 'Accepted' },
+  { viewValue: 'Cancelled', value: 'Canceled' },
+  { viewValue: 'Rejected', value: 'Rejected' },
+  { viewValue: 'Packing', value: 'Packing' },
+  { viewValue: 'Shipped', value: 'Shipped' },
+  { viewValue: 'Delivered', value: 'Delivered' },
+  { viewValue: 'Unwant', value: 'UnWant' },
+  { viewValue: 'Picking', value: 'Picking' },
+  { viewValue: 'Rescheduled', value: 'Rescheduled' },
+  { viewValue: 'Picked For Shipping', value: 'pickedShipping' },
+  { viewValue: 'Picked', value: 'Picked' },
+  { viewValue: 'Picked and Delivered', value: 'PickedDelivered' }]
   // page = 1;
   length = 100;
   pageSize = 10;
-
+  pageEvent: PageEvent;
   pageSizeOptions = [5, 10, 25, 100]
   flagData: boolean;
   vendorList: any;
@@ -45,6 +62,7 @@ export class VendorSalesReportComponent implements OnInit {
 
   flag = false
   filterSelected(e) {
+
     if (this.filterBy) {
       this.flag = true
     }
@@ -54,14 +72,28 @@ export class VendorSalesReportComponent implements OnInit {
     }
     console.log(e.target.value);
     this.filterBy = e.target.value;
-    this.getVendorSaleReport(this.page, this.pageSize, this.search, this.filterBy)
+    this.apiService.getVendorList(this.page, this.pageSize, this.filterBy, this.search).subscribe((res) => {
+      if (res.success) {
+        console.log(res);
+        this.vendorList = res.data;
+        this.length = res.total;
+      }
+    });
   }
+
 
   flagSearch: boolean = true
   searchMethod() {
 
     this.flagSearch = false
-    this.getVendorSaleReport(this.page, this.pageSize, this.search, this.filterBy)
+    console.log(this.search);
+    this.apiService.getVendorList(this.page, this.pageSize, this.filterBy, this.search).subscribe((res) => {
+      if (res.success) {
+        this.vendorList = res.data;
+        console.log(this.vendorList);
+        this.length = res.total;
+      }
+    })
 
   }
 

@@ -292,7 +292,7 @@ export class EditdiscountComponent implements OnInit {
     if (index < 0) this.selectedProductItem.push(item)
   }
   onSelectAll(items: any) {
-    debugger
+
     console.log(items)
     for (let i = 0; i < items.length; i++) {
       this.selectedItem.push(items[i].id)
@@ -303,7 +303,7 @@ export class EditdiscountComponent implements OnInit {
 
 
   getDiscount(id) {
-    debugger
+
     this.apiService.getDisountDetails(id).subscribe(res => {
       if (res.success) {
         this.discountDetails = res.data;
@@ -649,7 +649,7 @@ export class EditdiscountComponent implements OnInit {
 
 
   checkBanner() {
-    debugger
+    
     this.submitted = true
     console.log(this.editDiscountForm);
     let checkOffer = this.dicountOn;

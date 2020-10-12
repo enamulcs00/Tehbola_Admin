@@ -1,18 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PageEvent } from '@angular/material/paginator';
 @Component({
   selector: 'app-revenuereport',
   templateUrl: './revenuereport.component.html',
   styleUrls: ['./revenuereport.component.scss']
 })
 export class RevenuereportComponent implements OnInit {
-  page: number;
-  flagUserList: boolean;
-  srNo: number;
-  search: string;
-  filterBy: any;
   length = 100;
-  pageSizeOptions = [5, 10, 25, 100]
+  pageSize = 10;
+  page = 1
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageEvent: PageEvent;
+  filterBy = '';
+  search = '';
+  vendorList: any;
+  status: any
+  selectOption: string
+  flagUserList: boolean = false;
+  srNo: number = 1;
 
   constructor(private router: Router) { }
 
@@ -89,7 +95,7 @@ export class RevenuereportComponent implements OnInit {
     console.log(e)
   }
 
-  salesReportListAfterPageSizeChanged(e): any {
+  revenueReportListAfterPageSizeChanged(e): any {
     //console.log(e);
 
     if (e.pageIndex == 0) {

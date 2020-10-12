@@ -204,7 +204,7 @@ export class OfferdealsComponent implements OnInit {
 
 
   async deleteDiscount(id) {
-    debugger
+
     Swal.fire({
       title: "Are you sure?",
       text: "Once deleted, you will not be able to recover this User!",
@@ -242,7 +242,7 @@ export class OfferdealsComponent implements OnInit {
   }
 
   deleteFromList() {
-    debugger
+
     // setTimeout(() => {
     //   let temp = this.apiService.flagDelete;
     //   if (temp == true) {

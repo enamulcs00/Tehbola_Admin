@@ -16,6 +16,7 @@ export class BrandlistComponent implements OnInit {
   submitted: boolean
   brandList = []
   result: import("sweetalert2").SweetAlertResult<unknown>;
+  editableBrandId: any;
   constructor(private apiService: ApiService, private fb: FormBuilder, private commonService: CommonService) {
     this.getBrandList()
   }
@@ -45,6 +46,7 @@ export class BrandlistComponent implements OnInit {
     let editableBrand = this.brandList.find(ele => ele._id == id)
 
     console.log(editableBrand)
+    this.editableBrandId = editableBrand._id
     this.editBrandForm.controls['name'].setValue(editableBrand.name);
     this.editBrandForm.controls['name_ar'].setValue(editableBrand.name_ar)
 
@@ -113,7 +115,10 @@ export class BrandlistComponent implements OnInit {
   onUpdateBrand() {
     this.submitted = true
     if (this.submitted && this.editBrandForm.valid) {
-      let body = this.editBrandForm.value
+      let body = new FormData;
+      body.append('id', this.editableBrandId)
+      body.append('name', this.editBrandForm.controls['name'].value);
+      body.append('name_ar', this.editBrandForm.controls['name_ar'].value);
       this.apiService.editBrand(body).subscribe(res => {
         console.log(res)
         if (res.success == true) {

@@ -46,7 +46,7 @@ export class PrivacypolicyComponent implements OnInit {
     };
   }
   updateTermAndCondition() {
-    debugger
+
     this.termsAndCondition.description = this.mycontent
 
 

@@ -71,7 +71,7 @@ export class AddVenderComponent implements OnInit {
 
 
   addVendor() {
-    debugger
+    
     this.submitted = true
     if (this.submitted && this.addVendorForm.valid) {
       const data = new FormData();

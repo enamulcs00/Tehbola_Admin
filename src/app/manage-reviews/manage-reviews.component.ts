@@ -37,6 +37,7 @@ export class ManageReviewsComponent implements OnInit {
       if (res.success == true) {
         console.log(res)
         this.reviewList = res.data;
+        this.length = res.total
         // alert("")
       }
     })
@@ -78,7 +79,7 @@ export class ManageReviewsComponent implements OnInit {
   }
 
   reviewListAfterPageSizeChanged(e): any {
-    //console.log(e);
+    console.log(e);
 
     if (e.pageIndex == 0) {
       this.page = 1;

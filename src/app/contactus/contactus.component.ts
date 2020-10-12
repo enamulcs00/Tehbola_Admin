@@ -44,7 +44,7 @@ export class ContactusComponent implements OnInit {
     };
   }
   updateTermAndCondition() {
-    debugger
+
     this.CmsData.description = this.mycontent
 
 

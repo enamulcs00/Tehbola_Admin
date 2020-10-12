@@ -86,7 +86,7 @@ export class ApiService {
       //Brand Module
       getBrandList: 'admin/getAllBrand',
       addBrand: 'admin/addBrand',
-      editBrand:'admin/editBrand'
+      editBrand: 'admin/editBrand'
     }
     for (let key in this.apiEndPoints) {
       this.apiEndPoints[key] = this.BASE_URL + this.apiEndPoints[key];
@@ -350,6 +350,7 @@ export class ApiService {
   }
 
 
+
   getVendorList(page, count, filter, search) {
 
     return this.http.get<any>(`${this.apiEndPoints.getAllVendor}?page=${page}&count=${count}&search=${search}&filter=${filter}`,
@@ -554,7 +555,7 @@ export class ApiService {
   }
 
   editBrand(body): Observable<any> {
-    return this.http.put<any>(this.apiEndPoints.editBrand, body,this.getHeaders()).pipe(catchError(this.handleError()))
+    return this.http.put<any>(this.apiEndPoints.editBrand, body, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
 

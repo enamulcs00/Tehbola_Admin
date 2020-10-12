@@ -53,7 +53,7 @@ export class ReportGraphComponent implements OnInit {
   }
 
   getData() {
-    debugger
+
     let array = [];
     let body = {
       'type': this.period,

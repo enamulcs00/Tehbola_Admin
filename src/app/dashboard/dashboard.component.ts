@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
   flagSearch: boolean = true;
   flagData: any;
   flag: any
-  flagUserList: boolean;
+  flagUserList: boolean = false;
   filterList: readOnly[] = [{ viewValue: 'New', value: 'New' },
   { viewValue: 'Accepted', value: 'Accepted' },
   { viewValue: 'Cancelled', value: 'Canceled' },
@@ -105,7 +105,7 @@ export class DashboardComponent implements OnInit {
   getDashboardData(page, pageSize, search, filterBy, typeSale) {
     this.apiService.getDashboardData(page, pageSize, search, filterBy, typeSale).subscribe(res => {
       console.log(res);
-      debugger
+
       if (res.success) {
 
         this.dashboardData = res;

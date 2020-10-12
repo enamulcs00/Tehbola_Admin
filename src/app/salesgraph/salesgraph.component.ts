@@ -4,7 +4,7 @@ import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { chartData } from '../chartData';
 import { ApiService } from 'src/services/api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 declare var $: any;
 
 @Component({
@@ -41,7 +41,7 @@ export class SalesgraphComponent implements OnInit {
   sub: any;
   id: any;
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute) {
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) {
 
     //alert(this.id)
 
@@ -103,12 +103,12 @@ export class SalesgraphComponent implements OnInit {
   periodSelected(e) {
     this.period = e.target.value;
     this.getData()
-    this.history.back()
+
 
   }
 
   goTosales() {
-    this.history.back()
+    this.router.navigate(['salesreport'])
 
   }
 

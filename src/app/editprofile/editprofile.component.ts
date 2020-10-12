@@ -36,7 +36,7 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
         // Defaults to 0 if no query param provided.
         this.id = params['id'];
       });
-    debugger
+
 
     this.imagePath = this.urlService.imageUrl;
 
@@ -85,7 +85,7 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
 
   setValue() {
 
-    debugger
+    
 
     this.updateProfileForm.controls['firstName'].setValue(this.firstname)
     this.updateProfileForm.controls['lastName'].setValue(this.lastName)

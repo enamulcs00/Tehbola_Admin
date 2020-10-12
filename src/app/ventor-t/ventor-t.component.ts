@@ -43,7 +43,7 @@ export class VentorTComponent implements OnInit {
     };
   }
   updateTermAndCondition() {
-    debugger
+
     this.CmsData.description = this.mycontent
 
 

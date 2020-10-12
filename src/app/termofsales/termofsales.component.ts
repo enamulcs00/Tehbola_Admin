@@ -47,7 +47,7 @@ export class TermofsalesComponent implements OnInit {
     };
   }
   updateTermAndCondition() {
-    debugger
+
     this.termsAndCondition.description = this.mycontent
 
 
