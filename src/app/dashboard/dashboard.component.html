@@ -91,19 +91,19 @@
                                 <p>Vendors</p>
                                 <div class="filters Booking_status">
                                     <label>Filter</label>
-                                    <select>
+                                    <select [(ngModel)]="vendorFilter" (change)="vendorPeriodChanged($event)">
                                         <!-- <option>Daily</option> -->
-                                        <option>Weekly</option>
-                                        <option>Monthly</option>
-                                        <option>Yearly</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="monthly">Monthly</option>
+                                        <option value="yearly">Yearly</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="user_charts">
+                            <div class="user_charts" *ngIf="chartReady">
                                 <!-- <app-graph></app-graph> -->
-                                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
-                                    [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend"
-                                    [chartType]="barChartType">
+                                <canvas baseChart [datasets]="barChartDataVendor" [labels]="barChartLabelVendor"
+                                    [options]="barChartOptionsVendor" [plugins]="barChartPluginsVendor"
+                                    [legend]="barChartLegendVendor" [chartType]="barChartTypeVendor">
                                 </canvas>
                             </div>
                         </li>

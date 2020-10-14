@@ -143,5 +143,9 @@ export class SidebarComponent implements OnInit {
   goTowarrantypolicy() {
     this.router.navigate(['warrantypolicy'])
   }
+
+  goToBroadCast() {
+    this.router.navigate(['push-notification'])
+  }
 }
 

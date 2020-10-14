@@ -2,6 +2,8 @@ import { Injectable } from "@angular/core";
 //import { NgxSpinnerService } from "ngx-spinner";
 import { ToastrManager } from "ng6-toastr-notifications";
 import { HttpHeaders, HttpClient } from "@angular/common/http";
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: "root"
@@ -33,4 +35,26 @@ export class CommonService {
       maxShown: 1
     });
   }
+
+
+  isNewNotification = new BehaviorSubject<boolean>(false);
+  notificationCount = new BehaviorSubject<number>(0)
+
+  getNotification(): Observable<boolean> {
+    return this.isNewNotification.asObservable();
+  }
+  setNotification(value: boolean) {
+    console.log(value);
+
+    // this.notificationCount.next()
+    console.log(this.notificationCount);
+
+    this.isNewNotification.next(value);
+  }
+
+  getNotificationCount() {
+    return this.notificationCount.asObservable();
+  }
+
+
 }

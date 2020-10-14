@@ -86,6 +86,8 @@ import { AddbrandComponent } from './addbrand/addbrand.component';
 import { EditbrandComponent } from './editbrand/editbrand.component';
 import { ViewbrandComponent } from './viewbrand/viewbrand.component';
 import { BrandlistComponent } from './brandlist/brandlist.component';
+import { NotificationService } from 'src/services/notification.service';
+import { BroadcastComponent } from './broadcast/broadcast.component';
 // import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 // import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -171,6 +173,7 @@ import { BrandlistComponent } from './brandlist/brandlist.component';
     EditbrandComponent,
     ViewbrandComponent,
     BrandlistComponent,
+    BroadcastComponent,
 
 
   ],
@@ -193,7 +196,7 @@ import { BrandlistComponent } from './brandlist/brandlist.component';
 
 
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

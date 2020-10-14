@@ -86,7 +86,9 @@ export class ApiService {
       //Brand Module
       getBrandList: 'admin/getAllBrand',
       addBrand: 'admin/addBrand',
-      editBrand: 'admin/editBrand'
+      editBrand: 'admin/editBrand',
+      getNotificationList: 'app/notificationListing',
+      broadcast: 'admin/broadcast'
     }
     for (let key in this.apiEndPoints) {
       this.apiEndPoints[key] = this.BASE_URL + this.apiEndPoints[key];
@@ -539,8 +541,8 @@ export class ApiService {
   }
 
 
-  getDashboardData(page, pageSize, search, filterBy, type): Observable<any> {
-    return this.http.get<any>(`${this.apiEndPoints.getDashboard}?page=${page}&count=${pageSize}&search=${search}&filter=${filterBy}&type=${type}`, this.getHeaders()).pipe(catchError(this.handleError));
+  getDashboardData(page, pageSize, search, filterBy, type, typeGraph): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.getDashboard}?page=${page}&count=${pageSize}&search=${search}&filter=${filterBy}&type=${type}&vendorGraphType=${typeGraph}`, this.getHeaders()).pipe(catchError(this.handleError));
 
   }
 
@@ -558,8 +560,13 @@ export class ApiService {
     return this.http.put<any>(this.apiEndPoints.editBrand, body, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
+  getNotification(isRead, page, count): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.getNotificationList}?page=${page}&count=${count}`, this.getHeaders()).pipe(catchError(this.handleError))
+  }
 
-
+  broadcastNotification(value): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.broadcast, value, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
 
   // Error handling
   private handleError<T>(operation = 'operation', result?: T) {

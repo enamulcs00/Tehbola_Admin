@@ -78,8 +78,8 @@
             </select></li> -->
         <!-- Nav Item - Alerts -->
         <li class="nav-item dropdown no-arrow mx-1 notification_nav">
-            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" (click)="getNotificationList()"
+                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <svg xmlns="http://www.w3.org/2000/svg" width="166.938" height="217.193" viewBox="0 0 166.938 217.193">
                     <g id="Group_4" data-name="Group 4" transform="translate(-359.225 -371.33)">
                         <path id="Path_10" data-name="Path 10"
@@ -98,7 +98,7 @@
                 </svg>
 
                 <!-- Counter - Alerts -->
-                <span class="badge badge-danger badge-counter">3+</span>
+                <span class="badge badge-danger badge-counter" *ngIf="badge!=0">{{badge<=10?badge:'10+'}}</span>
             </a>
             <!-- Dropdown - Alerts -->
             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in alert_center"
@@ -106,7 +106,7 @@
                 <h6 class="dropdown-header">
                     Notification
                 </h6>
-                <a class="dropdown-item d-flex align-items-center" href="#">
+                <!-- <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="mr-3">
                         <div class="icon-circle">
                             <i class="material-icons">info_outline</i>
@@ -116,8 +116,8 @@
                         <div class="small text-gray-500">December 12, 2019</div>
                         <span class="notification_list">New Product Added by Vendor</span>
                     </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
+                </a> -->
+                <!-- <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="mr-3">
                         <div class="icon-circle">
                             <i class="material-icons">check</i>
@@ -127,16 +127,22 @@
                         <div class="small text-gray-500">December 7, 2019</div>
                         <span class="notification_list">$290.29 has been deposited into your account!</span>
                     </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
+                </a> -->
+                <a class="dropdown-item d-flex align-items-center" *ngFor="let item of notificationList"
+                    (click)="goTonotification()">
                     <div class="mr-3">
                         <div class="icon-circle">
-                            <i class="material-icons">update</i>
+                            <i class="material-icons" *ngIf="item.notiType==21">update</i>
+                            <i class="material-icons" *ngIf="item.notiType==24">star</i>
+                            <i class="material-icons" *ngIf="item.notiType==22">info_outline</i>
+                            <i class="material-icons" *ngIf="item.notiType==26">warning</i>
+                            <i class="material-icons" *ngIf="item.notiType==28">check</i>
+
                         </div>
                     </div>
                     <div>
-                        <div class="small text-gray-500">December 2, 2019</div>
-                        <span class="notification_list"> Vendor Profile is Updated</span>
+                        <div class="small text-gray-500">{{item.date |date}}</div>
+                        <span class="notification_list"> {{item.message}}</span>
                     </div>
                 </a>
                 <a class="dropdown-item text-center small text-gray-500" (click)="goTonotification()">Show All

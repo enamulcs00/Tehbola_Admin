@@ -29,6 +29,7 @@ export class DashboardComponent implements OnInit {
   salesList = []
   status: number
   flagSearch: boolean = true;
+  vendorFilter = 'weekly'
   flagData: any;
   flag: any
   flagUserList: boolean = false;
@@ -46,7 +47,7 @@ export class DashboardComponent implements OnInit {
   { viewValue: 'Picked', value: 'Picked' },
   { viewValue: 'Picked and Delivered', value: 'PickedDelivered' }]
   srNo: number;
-  public barChartOptions: ChartOptions = {
+  public barChartOptionsVendor: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
     scales: { xAxes: [{}], yAxes: [{}] },
@@ -57,15 +58,12 @@ export class DashboardComponent implements OnInit {
       }
     }
   };
-  public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  public barChartType: ChartType = 'bar';
-  public barChartLegend = true;
-  public barChartPlugins = [pluginDataLabels];
+  public barChartLabelVendor: Label[];
+  public barChartTypeVendor: ChartType = 'bar';
+  public barChartLegendVendor = true;
+  public barChartPluginsVendor = [pluginDataLabels];
 
-  public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
-  ];
+  public barChartDataVendor: ChartDataSets[]
   dataSource: any;
   public barChartOptionsSale: ChartOptions = {
     responsive: true,
@@ -82,7 +80,6 @@ export class DashboardComponent implements OnInit {
   public barChartTypeSale: ChartType = 'bar';
   public barChartLegendSale = true;
   public barChartPluginsSale = [pluginDataLabels];
-
   public barChartDataSale: ChartDataSets[]
 
   data: { barChartOptions: ChartOptions; barChartLabels: Label[]; barChartType: ChartType; barChartLegend: boolean; barChartPlugins: (typeof pluginDataLabels)[]; barChartData: ChartDataSets[]; };
@@ -97,13 +94,13 @@ export class DashboardComponent implements OnInit {
     this.type = "timeseries";
     this.width = "100%";
     this.height = "400";
-    this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale)
+    this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale, this.vendorFilter)
 
 
   }
 
-  getDashboardData(page, pageSize, search, filterBy, typeSale) {
-    this.apiService.getDashboardData(page, pageSize, search, filterBy, typeSale).subscribe(res => {
+  getDashboardData(page, pageSize, search, filterBy, typeSale, typeGraph) {
+    this.apiService.getDashboardData(page, pageSize, search, filterBy, typeSale, typeGraph).subscribe(res => {
       console.log(res);
 
       if (res.success) {
@@ -113,7 +110,8 @@ export class DashboardComponent implements OnInit {
         this.length = this.salesListData.length
         console.log("Dashboard Data:", this.dashboardData);
 
-        this.salesData(this.dashboardData.graph)
+        this.salesData(this.dashboardData.graph);
+        this.vendorData(this.dashboardData.vendorGraph)
       }
     })
   }
@@ -152,7 +150,7 @@ export class DashboardComponent implements OnInit {
     //     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
     //     // { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
     //   ];
-    this.barChartDataSale = [{ data: graphData, label: this.periodSale + " " + 'Sale' }]
+    this.barChartDataSale = [{ data: graphData, label: this.periodSale + " " + 'Sale', backgroundColor: 'rgba(33, 169, 236, 0.5)', borderColor: 'rgba(33, 169, 236, 0.5)', hoverBackgroundColor: 'rgba(33, 169, 236, 0.5)', hoverBorderColor: 'rgba(33, 169, 236, 0.5)' }]
 
 
     // this.barChartData = this.barChartData;
@@ -165,9 +163,56 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  vendorData(vendorGraphData) {
+    debugger
+    let array = []
+    console.log(vendorGraphData);
+    let data = vendorGraphData.length
+    for (let i = 0; i < data; i++) {
+      if (this.vendorFilter == 'monthly') {
+
+        array.push('Week' + ' ' + [i + 1]);
+
+      }
+      if (this.vendorFilter == 'weekly') {
+
+        array.push('Day' + ' ' + [i + 1]);
+
+      }
+      if (this.vendorFilter == 'yearly') {
+
+        array.push('Month' + ' ' + [i + 1]);
+
+      }
+
+    }
+    this.barChartLabelVendor = array;
+
+    // public barChartData: ChartDataSets[] = [
+    //     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+    //     // { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+    //   ];
+    this.barChartDataVendor = [{ data: vendorGraphData, label: this.periodSale + " " + 'new Vendor' }]
+
+
+    // this.barChartData = this.barChartData;
+    console.log("labels: ", this.barChartLabelVendor);
+    console.log("data: ", this.barChartDataVendor);
+    console.log("options: ", this.barChartOptionsVendor);
+
+    this.chartReady = true
+
+  }
+
   periodChanged(e) {
     this.periodSale = e.target.value;
-    this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale)
+    this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale, this.vendorFilter)
+  }
+
+  vendorPeriodChanged(e) {
+
+    this.vendorFilter = e.target.value;
+    this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale, this.vendorFilter)
   }
 
   filterSelected(e) {
@@ -182,7 +227,7 @@ export class DashboardComponent implements OnInit {
 
     this.filterBy = e.target.value
 
-    this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale)
+    this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale, this.vendorFilter)
 
   }
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
@@ -196,12 +241,12 @@ export class DashboardComponent implements OnInit {
 
   searchMethod() {
     this.flagSearch = false
-    this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale)
+    this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale, this.vendorFilter)
   }
   clearSearch() {
     this.flagSearch = true
     this.search = ''
-    this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale)
+    this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale, this.vendorFilter)
   }
 
   productListAfterPageSizeChanged(e): any {
@@ -224,7 +269,7 @@ export class DashboardComponent implements OnInit {
       }
 
     }
-    this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale)
+    this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale, this.vendorFilter)
   }
 
 

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NotificationService } from 'src/services/notification.service';
 
 
 @Component({
@@ -9,5 +10,8 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'nunuAdminPanel';
 
+  constructor(private notification: NotificationService) {
+    // this.id = JSON.parse(localStorage.getItem('User')).id
 
+  }
 }

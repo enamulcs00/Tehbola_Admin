@@ -75,6 +75,7 @@ import { BrandlistComponent } from './brandlist/brandlist.component';
 import { AddbrandComponent } from './addbrand/addbrand.component';
 import { EditbrandComponent } from './editbrand/editbrand.component';
 import { ViewbrandComponent } from './viewbrand/viewbrand.component';
+import { BroadcastComponent } from './broadcast/broadcast.component';
 
 const routes: Routes = [
   // {
@@ -456,6 +457,13 @@ const routes: Routes = [
   }, {
     path: 'graph',
     component: GraphComponent,
+    canActivate: [AuthGuard]
+
+
+  },
+  {
+    path: 'push-notification',
+    component: BroadcastComponent,
     canActivate: [AuthGuard]
 
 
