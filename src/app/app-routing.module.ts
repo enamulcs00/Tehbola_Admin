@@ -76,6 +76,7 @@ import { AddbrandComponent } from './addbrand/addbrand.component';
 import { EditbrandComponent } from './editbrand/editbrand.component';
 import { ViewbrandComponent } from './viewbrand/viewbrand.component';
 import { BroadcastComponent } from './broadcast/broadcast.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
   // {
@@ -465,11 +466,12 @@ const routes: Routes = [
     path: 'push-notification',
     component: BroadcastComponent,
     canActivate: [AuthGuard]
-
-
+  },
+  {
+    path: 'Settings',
+    component: SettingsComponent,
+    canActivate: [AuthGuard]
   }
-
-
 ];
 
 @NgModule({

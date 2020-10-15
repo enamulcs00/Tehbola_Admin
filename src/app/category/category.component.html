@@ -31,6 +31,7 @@
                                         <figure><img src={{imageUrl+category.image}}></figure>
                                         <span>
                                             <b>{{ i+1 }}. {{ category.name }} </b>
+                                            <p>Commission:{{category.commission}}</p>
                                         </span>
 
                                         <a href="javascript:;" data-toggle="modal" data-target="#Add_State_delete">
@@ -137,6 +138,25 @@
                         </div>
 
                         <div class="form-group col-md-12">
+                            <label for="title">Commission percentage of the Category</label>
+                            <div class="input-group">
+                                <input class="form-control" type="text" value="" name="name_ar"
+                                    formControlName="commission">
+                            </div>
+                            <div *ngIf="submitted && addCategoryForm.controls.name_ar.errors" class="invalid-feedback">
+                                <div *ngIf="addCategoryForm.controls.name_ar.errors.required">
+                                    Commission percentage is required.
+                                </div>
+                                <div *ngIf="addCategoryForm.controls.name_ar.errors.pattern">
+                                    Commission percentage is not valid.
+                                </div>
+                                <div *ngIf="addCategoryForm.controls.name_ar.errors.maxlength">
+                                    Commission percentage should be max 25 characters long.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12">
                             <label for="title">Add Image</label>
                             <div class="user_img">
                                 <figure *ngIf="categoryImage">
@@ -210,6 +230,24 @@
                                 </div>
                                 <div *ngIf="editCategoryForm.controls.name_ar.errors.maxlength">
                                     Category arabic name should be max 25 characters long.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="title">Commission percentage of the Category</label>
+                            <div class="input-group">
+                                <input class="form-control" type="text" value="" name="name_ar"
+                                    formControlName="commission">
+                            </div>
+                            <div *ngIf="submitted && addCategoryForm.controls.name_ar.errors" class="invalid-feedback">
+                                <div *ngIf="addCategoryForm.controls.name_ar.errors.required">
+                                    Commission percentage is required.
+                                </div>
+                                <div *ngIf="addCategoryForm.controls.name_ar.errors.pattern">
+                                    Commission percentage is not valid.
+                                </div>
+                                <div *ngIf="addCategoryForm.controls.name_ar.errors.maxlength">
+                                    Commission percentage should be max 25 characters long.
                                 </div>
                             </div>
                         </div>

@@ -43,11 +43,13 @@ export class CategoryComponent implements OnInit {
     this.addCategoryForm = this.formBuilder.group({
       name: new FormControl("", [Validators.required, Validators.maxLength(20), Validators.pattern(".*\\S.*[a-zA-z0-9 ]")]),
       name_ar: new FormControl("", [Validators.required, Validators.maxLength(20)]),
+      commission: new FormControl("", [Validators.required, Validators.maxLength(20)]),
       image: new FormControl("", [Validators.required]),
     });
     this.editCategoryForm = this.formBuilder.group({
       name: new FormControl("", [Validators.required, Validators.maxLength(20), Validators.pattern(".*\\S.*[a-zA-z0-9 ]")]),
       name_ar: new FormControl("", [Validators.required, Validators.maxLength(20)]),
+      commission: new FormControl("", [Validators.required, Validators.maxLength(20)]),
       image: new FormControl(""),
     });
     this.addSubcategoryForm = this.formBuilder.group({
@@ -113,7 +115,8 @@ export class CategoryComponent implements OnInit {
     if (this.submitted && this.addCategoryForm.valid) {
       const data = new FormData();
       data.append('name', this.addCategoryForm.get('name').value);
-      data.append('name_ar', this.addCategoryForm.get('name').value);
+      data.append('name_ar', this.addCategoryForm.get('name_ar').value);
+      data.append('commission', this.addCategoryForm.get('commission').value);
       data.append('image', this.imageFile, this.imageFile.name);
 
       this.apiService.addCategory(data).subscribe(res => {
@@ -144,6 +147,7 @@ export class CategoryComponent implements OnInit {
       data.append('id', this.id)
       data.append('name', this.editCategoryForm.get('name').value);
       data.append('name_ar', this.editCategoryForm.get('name_ar').value);
+      data.append('commission', this.editCategoryForm.get('commission').value);
       if (this.picUploader == true) {
         data.append('image', this.imageFile, this.imageFile.name);
 
@@ -202,7 +206,7 @@ export class CategoryComponent implements OnInit {
         this.editCategoryForm.controls['name'].setValue(res.data.name);
 
         this.editCategoryForm.controls['name_ar'].setValue(res.data.name_ar);
-        //  this.editCategoryForm.controls['image'].patchValue(res.data.image)
+        this.editCategoryForm.controls['commission'].patchValue(res.data.commission)
 
         let data = res.data
         this.image = data.image
@@ -302,24 +306,10 @@ export class CategoryComponent implements OnInit {
 
 
   deleteFromList(i) {
-    // alert("ok")
-    // setTimeout(() => {
-    //   let temp = this.apiService.flagDelete;
-    //   if (temp == true) {
-    //     // this.categories.splice(i, 1);
+
     this.getAllCategories()
     this.commonService.successToast("Cateogry Deleted");
     console.log(this.categories)
-    //     if (this.result) {
-
-    //       console.log("service is not called")
-    //     }
-    //   }
-    //   else {
-    //     console.log("error");
-    //     this.commonService.errorToast("Error Occured")
-    //   }
-    // }, 2000);
 
 
   }

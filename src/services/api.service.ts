@@ -88,7 +88,13 @@ export class ApiService {
       addBrand: 'admin/addBrand',
       editBrand: 'admin/editBrand',
       getNotificationList: 'app/notificationListing',
-      broadcast: 'admin/broadcast'
+      broadcast: 'admin/broadcast',
+      getCountry: 'app/countries',
+      postShippingCharge: 'admin/shippingCharges',
+      getShippingChargesList: 'admin/shippingCharges',
+      getSingleShippingCharges: 'admin/viewShippingCharges',
+      getTax: 'app/settings',
+
     }
     for (let key in this.apiEndPoints) {
       this.apiEndPoints[key] = this.BASE_URL + this.apiEndPoints[key];
@@ -567,7 +573,34 @@ export class ApiService {
   broadcastNotification(value): Observable<any> {
     return this.http.post<any>(this.apiEndPoints.broadcast, value, this.getHeaders()).pipe(catchError(this.handleError()))
   }
+  getCountryList(): Observable<any> {
+    return this.http.get<any>(this.apiEndPoints.getCountry, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
 
+  addShippingRate(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.postShippingCharge, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  getShippingRateList(): Observable<any> {
+    return this.http.get<any>(this.apiEndPoints.getShippingChargesList, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  getSingleShippingCharge(id): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.getSingleShippingCharges}?id=${id}`, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  updateShippingRate(body) {
+    return this.http.put<any>(this.apiEndPoints.postShippingCharge, body, this.getHeaders()).pipe(catchError(this.handleError()))
+
+  }
+
+  getTax(): Observable<any> {
+    return this.http.get<any>(this.apiEndPoints.getTax, this.getHeaders()).pipe(catchError(this.handleError))
+  }
+
+  updateTax(body): Observable<any> {
+    return this.http.put<any>(this.apiEndPoints.getTax, body, this.getHeaders()).pipe(catchError(this.handleError))
+  }
   // Error handling
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

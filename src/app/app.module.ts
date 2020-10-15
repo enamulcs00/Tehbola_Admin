@@ -88,6 +88,7 @@ import { ViewbrandComponent } from './viewbrand/viewbrand.component';
 import { BrandlistComponent } from './brandlist/brandlist.component';
 import { NotificationService } from 'src/services/notification.service';
 import { BroadcastComponent } from './broadcast/broadcast.component';
+import { SettingsComponent } from './settings/settings.component';
 // import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 // import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -174,6 +175,7 @@ import { BroadcastComponent } from './broadcast/broadcast.component';
     ViewbrandComponent,
     BrandlistComponent,
     BroadcastComponent,
+    SettingsComponent,
 
 
   ],
