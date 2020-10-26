@@ -27,8 +27,10 @@ export class NavbarComponent implements OnInit {
 
   constructor(private router: Router, private apiService: ApiService, private urlService: UrlService, private notificationService: NotificationService, private commonService: CommonService) {
 
-    this.id = JSON.parse(localStorage.getItem('User'))._id
-    console.log(this.id)
+    if (localStorage.getItem('User') != null || localStorage.getItem('User') != undefined) {
+      this.id = JSON.parse(localStorage.getItem('User'))._id
+      console.log(this.id)
+    }
   }
   pick: Ready[] = [
     { value: '10 Min-0', viewValue: 'Arabic' },

@@ -104,6 +104,7 @@ export class CategoryComponent implements OnInit {
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (event: any) => {
+
         this.subCategoryImage = event.target.result;
         this.addSubcategoryForm.controls['image'].patchValue(this.imageFile);
       };
@@ -260,6 +261,7 @@ export class CategoryComponent implements OnInit {
 
   cancelClicked() {
     console.log("hi")
+    this.addCategoryForm.reset()
   }
 
   deleteSubcategory(id) {

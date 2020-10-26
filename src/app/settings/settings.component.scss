@@ -3,3 +3,7 @@ ul li {
 
     margin: 10px 25px;
 }
+
+input:read-only {
+    cursor: not-allowed;
+}

@@ -104,17 +104,13 @@ export class ReportGraphComponent implements OnInit {
     });
 
   }
-
   periodSelected(e) {
     this.period = e.target.value;
     this.getData()
-    this.history.back()
-
   }
 
   goTosales() {
     this.history.back()
-
   }
 
 

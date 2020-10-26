@@ -146,6 +146,7 @@ export class SidebarComponent implements OnInit {
 
   goToBroadCast() {
 
+    this.router.navigate(['push-notification'])
   }
   goToSettings() {
     this.router.navigate(['Settings'])

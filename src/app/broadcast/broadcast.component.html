@@ -11,20 +11,23 @@
                 <div class="card">
                     <form [formGroup]="broadcastForm">
                         <div class="inputClass">
+                            <label class="col-md-10" style="margin-left: -10px;" for="title">Select </label>
                             <select mat-select class="input" formControlName="type">
                                 <option value="user">User</option>
                                 <option value="seller">Vendor</option>
                             </select>
                         </div>
                         <div class="inputClass">
+                            <label class="col-md-10" style="margin-left: -10px;" for="title">Title</label>
                             <input class="input" type="text" formControlName="title">
                         </div>
                         <div class="inputClass">
+                            <label class="col-md-10" style="margin-left: -10px;" for="title">Description</label>
                             <textarea name="description" class="input" formControlName="message" id="" cols="30"
                                 rows="10"></textarea>
                         </div>
 
-                        <button mat-button class="button" (click)="sendNotification()">Send Notification</button>
+                        <button mat-button class="button m-3" (click)="sendNotification()">Send Notification</button>
                     </form>
                 </div>
 

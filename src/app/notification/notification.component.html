@@ -5,7 +5,7 @@
             <app-sidebar></app-sidebar>
             <div class="container-fluid">
                 <div class="sub_heading">
-                    <h1>Notification</h1>
+                    <h1>Notifications</h1>
 
                 </div>
 
@@ -14,11 +14,11 @@
                     <div class="alert" *ngFor="let item of notificationList; let i=index">
                         <div class=" comman_alert">
                             <p> <span class="icon_order">
-                                    <i class="material-icons" *ngIf="item.notiType==25">update</i>
+                                    <i class="material-icons" *ngIf="item.notiType==22">update</i>
                                     <i class="material-icons" *ngIf="item.notiType==24">star</i>
-                                    <i class="material-icons" *ngIf="item.notiType==27">info_outline</i>
+                                    <i class="material-icons" *ngIf="item.notiType==23">info_outline</i>
                                     <i class="material-icons" *ngIf="item.notiType==26">warning</i>
-                                    <i class="material-icons" *ngIf="item.notiType==28">check</i>
+                                    <i class="material-icons" *ngIf="item.notiType==21">check</i>
                                 </span></p>
                             <h5>
                                 <h3 class="notification_date">{{item.date |date}}</h3>

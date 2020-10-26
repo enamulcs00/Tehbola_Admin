@@ -23,10 +23,12 @@ export class NotificationComponent implements OnInit {
 
     this.getNotificationList()
   }
+
+
   getNotificationList() {
-    let type = "seller"
-    let page;
-    let count
+    let type = "admin"
+    let page = '';
+    let count = ''
     this.apiService.getNotification(type, page, count).subscribe(res => {
       console.log(res);
       if (res.success == true) {

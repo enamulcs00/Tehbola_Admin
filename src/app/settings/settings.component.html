@@ -12,14 +12,14 @@
                 </div>
                 <div class="add_user_list">
                     <ul class="card">
-                        <li>
+                        <li class="col-md-4">
                             <label>Tax Percentage<span class="red">*</span></label>
                             <mat-form-field [floatLabel]="'never'">
                                 <input matInput type="number" placeholder="" name="name" [(ngModel)]="tax">
                             </mat-form-field>
                         </li>
 
-                        <li class="row">
+                        <li class="col-md-4">
                             <label>Apply Tax<span class="red">*</span></label>
                             <div>
                                 <input type="checkbox" placeholder="" name="name" [(ngModel)]="applyTax">
@@ -27,9 +27,9 @@
                             </div>
 
                         </li>
-
-                        <button mat-button class="button" (click)="updateTax()">Update Tax</button>
-
+                        <li class="col-md-2">
+                            <button mat-button class="button" (click)="updateTax()">Update Tax</button>
+                        </li>
                     </ul>
 
 
@@ -38,11 +38,17 @@
 
                         <li class="row">
                             <div class="row">
-                                <label>Shipping Rates<span class="red">*</span></label>
-                                <div class="top_subheading_add">
-                                    <button mat-button (click)="openPopUp()" data-toggle="modal"
-                                        data-target="#largeModal">Add Shipping
-                                        Rate</button>
+                                <div class="col-md-10">
+                                    <label>Shipping Rates<span class="red">*</span></label>
+                                </div>
+
+                                <div class="col-md-2 pb-2">
+                                    <div class="top_subheading_add">
+                                        <button mat-button (click)="openPopUp()" data-toggle="modal"
+                                            data-target="#largeModal"><i class="fa fa-plus"></i> Add
+                                            Shipping
+                                            Rate</button>
+                                    </div>
                                 </div>
                             </div>
                             <div>
@@ -104,69 +110,104 @@
             <div class="modal-body add_user_list">
                 <form [formGroup]="zoneFormGroup">
                     <ul>
-                        <!-- <li>
-                            <label>Zone Name<span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name" formControlName="zoneName">
-                            </mat-form-field>
-                        </li> -->
+
                         <li>
+
                             <label>Country<span class="red">*</span></label>
-                            <input matInput list="browsers" name="browser" formControlName="selectedCountry"
-                                id="browser">
-                            <datalist id="browsers" *ngFor="let body of countryList">
-                                <option *ngFor="let body of countryList" value="{{body.name}}">{{body.name}}</option>
-                            </datalist>
-                            <!-- <select (selectionChange)="countrySelected($event.value)">
-                            <input class="form-controll" placeholder="Search Product"
-                                (keyup)="onKeyInCountry($event.target.value)">
-                            <option>None</option>
-                            <option *ngFor="let body of countryList" [value]="body.code">{{body.name}}
-                            </option>
-                        </select> -->
+
+
+                            <mat-form-field>
+                                <input type="text" list="browsers" (keyup)="onKey($event.target.value)"
+                                    aria-label="Number" matInput formControlName="selectedCountry">
+                                <datalist id="browsers">
+                                    <option *ngFor="let body of showCountryList" value="{{body.name}}">
+                                        {{body.name}}
+                                    </option>
+                                </datalist>
+
+                            </mat-form-field>
+
+
+                            <div class="custom-invalid"
+                                *ngIf="submitted && zoneFormGroup.controls['selectedCountry'].hasError('required')">
+                                Country is <strong>required</strong>
+                            </div>
+
 
                         </li>
 
                         <li class="row">
-                            <label>Shipping charges below this range<span class="red">*</span></label>
-                            <div>
-                                <input type="number" placeholder="" formControlName="belowMinValue" name="name">
-
-                            </div>
-
+                            <mat-form-field [floatLabel]="'never'">
+                                <label>Shipping charges below this range<span class="red">*</span></label>
+                                <div>
+                                    <input matInput matInput type="number" placeholder=""
+                                        formControlName="belowMinValue" name="name">
+                                </div>
+                                <div class="custom-invalid"
+                                    *ngIf="submitted && zoneFormGroup.controls['belowMinValue'].hasError('required')">
+                                    Shipping charges below this range is <strong>required</strong>
+                                </div>
+                            </mat-form-field>
                         </li>
                         <li>
+
                             <div class="row">
-                                <div class="col-lg-3">
-                                    <label>Product min value<span class="red">*</span></label>
-                                    <input type="number" class="form-controll" placeholder="" formControlName="minValue"
+                                <mat-form-field [floatLabel]="'never'">
+                                    <div class="col-lg-3">
+                                        <label>Product min value<span class="red">*</span></label>
+                                        <input matInput type="number" class="form-controll" placeholder=""
+                                            formControlName="minValue" name="name">
+                                    </div>
+                                    <div class="custom-invalid"
+                                        *ngIf=" submitted && zoneFormGroup.controls['minValue'].hasError('required')">
+                                        Product min value is <strong>required</strong>
+                                    </div>
+                                </mat-form-field>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <div class="col-lg-3 offset-lg-1">
+                                        <label>Product max value<span class="red">*</span></label>
+                                        <input matInput type="number" placeholder="" formControlName="maxValue"
+                                            name="name">
+
+                                    </div>
+                                    <div class="custom-invalid"
+                                        *ngIf=" submitted && zoneFormGroup.controls['maxValue'].hasError('required')">
+                                        Product max value is <strong>required</strong>
+                                    </div>
+                                </mat-form-field>
+
+                            </div>
+                        </li>
+
+                        <li class="row">
+                            <mat-form-field [floatLabel]="'never'">
+                                <label>Shipping charges in this range<span class="red">*</span></label>
+                                <div>
+                                    <input matInput type="number" placeholder="" formControlName="rangePrice"
                                         name="name">
+
                                 </div>
-                                <div class="col-lg-3 offset-lg-1">
-                                    <label>Product max value<span class="red">*</span></label>
-                                    <input type="number" placeholder="" formControlName="maxValue" name="name">
+                                <div class="custom-invalid"
+                                    *ngIf=" submitted && zoneFormGroup.controls['rangePrice'].hasError('required')">
+                                    Shipping charges in this range is <strong>required</strong>
                                 </div>
-
-                            </div>
-                        </li>
-
-                        <li class="row">
-                            <label>Shipping charges in this range<span class="red">*</span></label>
-                            <div>
-                                <input type="number" placeholder="" formControlName="rangePrice" name="name">
-
-                            </div>
-
+                            </mat-form-field>
                         </li>
 
 
                         <li class="row">
-                            <label>Price above max value<span class="red">*</span></label>
-                            <div>
-                                <input type="number" placeholder="" formControlName="aboveMaxValue" name="name">
+                            <mat-form-field [floatLabel]="'never'">
+                                <label>Price above max value<span class="red">*</span></label>
+                                <div>
+                                    <input matInput type="number" placeholder="" formControlName="aboveMaxValue"
+                                        name="name">
 
-                            </div>
-
+                                </div>
+                                <div class="custom-invalid"
+                                    *ngIf=" submitted && zoneFormGroup.controls['aboveMaxValue'].hasError('required')">
+                                    Price above max value is <strong>required</strong>
+                                </div>
+                            </mat-form-field>
                         </li>
 
 
@@ -175,7 +216,7 @@
             </div>
             <div class="modal-footer">
 
-                <button mat-button data-dismiss="modal" class="button" (click)="saveZone()">Save</button>
+                <button mat-button class="button" (click)="saveZone()">Save</button>
 
             </div>
         </div>
@@ -204,11 +245,8 @@
                         </li> -->
                         <li>
                             <label>Country<span class="red">*</span></label>
-                            <input disabled matInput list="list" name="browser" formControlName="selectedCountry"
-                                id="browser">
-                            <datalist id="list" *ngFor="let body of countryList">
-                                <option *ngFor="let body of countryList" value="{{body.name}}">{{body.name}}</option>
-                            </datalist>
+                            <input readonly matInput formControlName="selectedCountry" id="browser">
+
                             <!-- <select (selectionChange)="countrySelected($event.value)">
                             <input class="form-controll" placeholder="Search Product"
                                 (keyup)="onKeyInCountry($event.target.value)">

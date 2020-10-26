@@ -89,11 +89,12 @@ export class ApiService {
       editBrand: 'admin/editBrand',
       getNotificationList: 'app/notificationListing',
       broadcast: 'admin/broadcast',
-      getCountry: 'app/countries',
+      getCountry: 'app/getCountries',
       postShippingCharge: 'admin/shippingCharges',
       getShippingChargesList: 'admin/shippingCharges',
       getSingleShippingCharges: 'admin/viewShippingCharges',
       getTax: 'app/settings',
+      updateTax: 'admin/settings'
 
     }
     for (let key in this.apiEndPoints) {
@@ -566,15 +567,15 @@ export class ApiService {
     return this.http.put<any>(this.apiEndPoints.editBrand, body, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
-  getNotification(isRead, page, count): Observable<any> {
-    return this.http.get<any>(`${this.apiEndPoints.getNotificationList}?page=${page}&count=${count}`, this.getHeaders()).pipe(catchError(this.handleError))
+  getNotification(type, page, count): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.getNotificationList}?page=${page}&count=${count}&type=${type}`, this.getHeaders()).pipe(catchError(this.handleError))
   }
 
   broadcastNotification(value): Observable<any> {
     return this.http.post<any>(this.apiEndPoints.broadcast, value, this.getHeaders()).pipe(catchError(this.handleError()))
   }
-  getCountryList(): Observable<any> {
-    return this.http.get<any>(this.apiEndPoints.getCountry, this.getHeaders()).pipe(catchError(this.handleError()))
+  getCountryList(data): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.getCountry}?page=1&count=10&search=${data}`, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
   addShippingRate(body): Observable<any> {
@@ -599,7 +600,7 @@ export class ApiService {
   }
 
   updateTax(body): Observable<any> {
-    return this.http.put<any>(this.apiEndPoints.getTax, body, this.getHeaders()).pipe(catchError(this.handleError))
+    return this.http.put<any>(this.apiEndPoints.updateTax, body, this.getHeaders()).pipe(catchError(this.handleError))
   }
   // Error handling
   private handleError<T>(operation = 'operation', result?: T) {
