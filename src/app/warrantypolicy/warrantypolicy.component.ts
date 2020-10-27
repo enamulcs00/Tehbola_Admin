@@ -71,4 +71,9 @@ export class WarrantypolicyComponent implements OnInit {
     console.log("onPaste");
     //this.log += new Date() + "<br />";
   }
+
+
+  back() {
+    window.history.back()
+  }
 }

@@ -149,5 +149,9 @@ export class OrdermanagementComponent implements OnInit {
   };
 
 
+  back() {
+    window.history.back()
+  }
+
 
 }

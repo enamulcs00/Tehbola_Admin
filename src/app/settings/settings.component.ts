@@ -260,4 +260,8 @@ export class SettingsComponent implements OnInit {
   }
 
 
+  back() {
+    window.history.back()
+  }
+
 }

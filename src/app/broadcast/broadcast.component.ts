@@ -35,4 +35,10 @@ export class BroadcastComponent implements OnInit {
 
   }
 
+
+
+
+  back() {
+    window.history.back()
+  }
 }

@@ -6,10 +6,10 @@
             <div class="container-fluid">
                 <div class="sub_heading">
                     <h1>Payment</h1>
-                    <!-- <div class="right_side_buttons">
-                        <a (click)="goTomanageEarning()">Manage Earning</a> 
-                        <a (click)="goTorefund()">Refund</a> 
-                    </div> -->
+                    <div class="right_side_buttons">
+                        <a (click)="back()">Go Back</a>
+
+                    </div>
                 </div>
                 <div class="outer_table">
                     <div class="search_fields">
@@ -41,78 +41,39 @@
                     <div class="table-responsive">
                         <table>
                             <tr>
-
+                                <th>Sr.no</th>
                                 <th>Vendor name </th>
                                 <th>Total payable amount </th>
-                                <th>Last paid amount</th>
-                                <th>Payment Method</th>
+                                <th>Last paid Date</th>
+
                                 <th>Action</th>
 
                             </tr>
-                            <tr>
 
-                                <td>John</td>
-                                <td>$20.00</td>
-                                <td>28-04-2020</td>
-                                <td>Cash</td>
+                            <tr *ngFor="let item of paymentData; let i=index">
+                                <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
+                                <td *ngIf="flagUserList==false">{{i+1}}</td>
+                                <td>{{item.seller.firstName}} {{item.seller.lastName}}</td>
+                                <td>{{item.totalPayableAmount |number}}</td>
+                                <td>{{item.seller.lastPaidDate|date}}</td>
                                 <td class="Booking_status">
-                                    <a class="accept_button" data-toggle="modal" data-target="#pay_now">Pay Now</a>
+                                    <ng-container *ngIf="item.totalPayableAmount>0; else elseTemplate">
+                                        <a class="accept_button" data-toggle="modal" data-target="#pay_now"
+                                            (click)="setPaid(item.seller._id,item.seller.phone, item.seller.email )">Paid</a>
+                                    </ng-container>
+                                    <ng-template #elseTemplate>
+                                        Nothing To pay
+                                    </ng-template>
                                 </td>
                             </tr>
-                            <tr>
-
-                                <td>John</td>
-                                <td>$20.00</td>
-                                <td>28-04-2020</td>
-                                <td>Credit
-                                </td>
-                                <td class="Booking_status">
-                                    <a class="accept_button" data-toggle="modal" data-target="#pay_now">Pay Now</a>
-                                </td>
-                            </tr>
-                            <tr>
-
-                                <td>John</td>
-                                <td>$20.00</td>
-                                <td>28-04-2020</td>
-                                <td>Cash
-                                </td>
-                                <td class="Booking_status">
-                                    <a class="accept_button" data-toggle="modal" data-target="#pay_now">Pay Now</a>
-                                </td>
-                            </tr>
-                            <tr>
-
-                                <td>John</td>
-                                <td>$20.00</td>
-                                <td>28-04-2020</td>
-                                <td>
-                                    Credit
-                                </td>
-                                <td class="Booking_status">
-                                    <a class="accept_button" data-toggle="modal" data-target="#pay_now">Pay Now</a>
-                                </td>
-                            </tr>
-                            <tr>
-
-                                <td>John</td>
-                                <td>$20.00</td>
-                                <td>28-04-2020</td>
-                                <td>Cash
-                                </td>
-                                <td class="Booking_status">
-                                    <a class="accept_button" data-toggle="modal" data-target="#pay_now">Pay Now</a>
-                                </td>
-                            </tr>
-
-
                         </table>
                     </div>
                 </div>
-                <!-----start pagination-->
-                <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+                <!-----start pagination----->
+                <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                    (page)="pageEvent = salesListAfterPageSizeChanged($event)">
                 </mat-paginator>
-                <!-----end pagination-->
+                <!-----end pagination------->
 
             </div>
         </div>

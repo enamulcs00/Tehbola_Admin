@@ -8,6 +8,7 @@
                     <h1>Report of Revenue</h1>
                     <div class="top_subheading_add">
                         <a (click)="goToreveuegraph()">View Revenue Graph</a>
+                        <a style="margin-left: 1em;" (click)="back()">Go Back</a>
                     </div>
                 </div>
                 <div class="tab-content">
@@ -43,95 +44,23 @@
                                 <div class="table-responsive">
                                     <table>
                                         <tr>
+                                            <th>Sr.no</th>
                                             <th>Vendor</th>
                                             <th>Total Price</th>
                                             <th>Total Tax</th>
-                                            <th>Total Commission</th>
-                                            <th>Net Profit</th>
-                                            <!-- <th>SKUN number</th>
-<th>Quantity</th>
-<th>Price</th>
-<th>User name</th>
-<th>User Address</th>
-<th>Order Date</th>
-<th>Delivery Date</th>
-<th>Status</th> -->
-                                            <!-- <th class="action_bx">Action</th> -->
-                                        </tr>
-                                        <tr>
-                                            <td>Lorem</td>
-                                            <td>$80</td>
-                                            <td>20</td>
-                                            <td>224</td>
-                                            <td>$50</td>
-                                            <!-- <td>13143543</td>
-<td>20 piece</td>
-<td>800</td>
-<td>John</td>
-<td>Lorem ipsum</td>
-<td>28-05-2020</td>
-<td>01-06-2020</td>
-<td class="product_cost">Pending</td> -->
+                                            <th>Total Commission Earned</th>
 
-                                            <!-- <td>
-<div class="action">
-<ul>
-<li class="show" (click)="goToreveuegraph()"><i class="fa fa-eye"></i></li>
-
-</ul>
-</div>
-</td> -->
                                         </tr>
-                                        <tr>
-                                            <td>Lorem</td>
-                                            <td>$100</td>
-                                            <td>20</td>
-                                            <td>224</td>
-                                            <td>$50</td>
+                                        <tr *ngFor="let item of revenueReport; let i=index">
+                                            <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
+                                            <td *ngIf="flagUserList==false">{{i+1}}</td>
+                                            <td>{{item.seller.firstName}} {{item.seller.lastName}}</td>
+                                            <td>{{item.totalPrice}}</td>
+                                            <td>{{item.tax}}</td>
+                                            <td>{{item.commission}}</td>
 
-                                            <!-- <td>
-<div class="action">
-<ul>
-<li class="show" (click)="goToreveuegraph()"><i class="fa fa-eye"></i></li>
+                                        </tr>
 
-</ul>
-</div>
-</td> -->
-                                        </tr>
-                                        <tr>
-                                            <td>Lorem</td>
-                                            <td>$80</td>
-                                            <td>20</td>
-                                            <td>224</td>
-                                            <td>$50</td>
-
-                                            <!-- <td>
-<div class="action">
-<ul>
-<li class="show" (click)="goToreveuegraph()"><i class="fa fa-eye"></i></li>
-<li class="edit" (click)="goToeditsale()"><i class="fa fa-pencil fa-fw"></i></li>
-<li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
-</ul>
-</div>
-</td> -->
-                                        </tr>
-                                        <tr>
-                                            <td>Lorem</td>
-                                            <td>$110</td>
-                                            <td>20</td>
-                                            <td>224</td>
-                                            <td>$50</td>
-                                            <!--                                     
-<td>
-<div class="action">
-<ul>
-<li class="show" (click)="goToreveuegraph()"><i class="fa fa-eye"></i></li>
-<li class="edit" (click)="goToeditsale()"><i class="fa fa-pencil fa-fw"></i></li> 
-<li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
-</ul>
-</div>
-</td> -->
-                                        </tr>
                                     </table>
                                 </div>
                             </div>

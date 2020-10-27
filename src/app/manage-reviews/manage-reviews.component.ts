@@ -132,4 +132,9 @@ export class ManageReviewsComponent implements OnInit {
     })
   }
 
+
+  back() {
+    window.history.back()
+  }
+
 }

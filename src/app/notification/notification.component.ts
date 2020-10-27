@@ -43,4 +43,8 @@ export class NotificationComponent implements OnInit {
   }
 
 
+  back() {
+    window.history.back()
+  }
+
 }

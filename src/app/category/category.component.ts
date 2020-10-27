@@ -322,4 +322,8 @@ export class CategoryComponent implements OnInit {
   }
 
 
+  back() {
+    window.history.back()
+  }
+
 }

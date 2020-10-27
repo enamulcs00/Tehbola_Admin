@@ -72,4 +72,9 @@ export class ReturnpolicyComponent implements OnInit {
     //this.log += new Date() + "<br />";
   }
 
+
+  back() {
+    window.history.back()
+  }
+
 }

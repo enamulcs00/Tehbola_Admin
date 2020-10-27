@@ -271,4 +271,9 @@ export class OfferdealsComponent implements OnInit {
   goToeditdiscount(id) {
     this.router.navigate(['editdiscount'], { queryParams: { "id": id } })
   }
+
+
+  back() {
+    window.history.back()
+  }
 }

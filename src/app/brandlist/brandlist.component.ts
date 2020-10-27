@@ -134,4 +134,9 @@ export class BrandlistComponent implements OnInit {
 
   }
 
+
+
+  back() {
+    window.history.back()
+  }
 }

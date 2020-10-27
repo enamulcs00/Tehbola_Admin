@@ -141,4 +141,9 @@ export class SalesreportComponent implements OnInit {
   goTosalesgraph() {
     this.router.navigate(['salesgraph'])
   }
+
+
+  back() {
+    window.history.back()
+  }
 }

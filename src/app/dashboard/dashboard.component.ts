@@ -164,7 +164,7 @@ export class DashboardComponent implements OnInit {
   }
 
   vendorData(vendorGraphData) {
-    debugger
+    
     let array = []
     console.log(vendorGraphData);
     let data = vendorGraphData.length

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
+import { CommonService } from 'src/services/common.service';
+import { ApiService } from 'src/services/api.service';
 @Component({
   selector: 'app-revenuereport',
   templateUrl: './revenuereport.component.html',
@@ -19,12 +21,33 @@ export class RevenuereportComponent implements OnInit {
   selectOption: string
   flagUserList: boolean = false;
   srNo: number = 1;
+  flagData: boolean;
+  revenueReport: any;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) { }
 
   ngOnInit() {
+
+    this.getRevenueReport(this.page, this.pageSize, this.search, this.filterBy)
+
   }
 
+  getRevenueReport(page, pageSize, search, filterBy) {
+    this.apiService.getRevenueReport(page, pageSize, search, filterBy).subscribe((res) => {
+      if (res) {
+        if (res.data.length > 0) {
+          this.flagData = false
+          this.revenueReport = res.data
+          this.length = res.total
+          console.log(this.revenueReport)
+        } else {
+          this.flagData = true
+        }
+      };
+    });
+
+
+  }
 
   flag = false
   filterSelected(e) {
@@ -37,38 +60,15 @@ export class RevenuereportComponent implements OnInit {
     }
     console.log(e.target.value);
     this.filterBy = e.target.value;
-    // this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
-    //   if (res) {
-    //     if (res.data.length > 0) {
-    //       this.flagData = false
-    //       this.bannerList = res.data
-    //       this.length = res.total
-    //       console.log(this.bannerList)
-    //     } else {
-    //       this.flagData = true
-    //     }
-    //   };
-    // });
+    this.getRevenueReport(this.page, this.pageSize, this.search, this.filterBy)
 
   }
 
   flagSearch: boolean = true
   searchMethod() {
-
+    this.page = 1
     this.flagSearch = false
-    // console.log(this.search);
-    // this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
-    //   if (res.success) {
-    //     if (res.data.length > 0) {
-    //       this.flagData = false
-    //       this.bannerList = res.data;
-    //       this.length = res.total
-    //       console.log(this.bannerList);
-    //     } else {
-    //       this.flagData = true
-    //     }
-    //   }
-    // })
+    this.getRevenueReport(this.page, this.pageSize, this.search, this.filterBy)
 
   }
 
@@ -77,18 +77,7 @@ export class RevenuereportComponent implements OnInit {
 
     this.flagSearch = true
     this.search = ''
-    // this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
-    //   if (res.success) {
-    //     if (res.data.length > 0) {
-    //       this.flagData = false
-    //       this.bannerList = res.data;
-    //       this.length = res.total
-    //       console.log(this.bannerList);
-    //     } else {
-    //       this.flagData = true
-    //     }
-    //   }
-    // });
+    this.getRevenueReport(this.page, this.pageSize, this.search, this.filterBy)
   }
 
   statusChnaged(e) {
@@ -116,18 +105,7 @@ export class RevenuereportComponent implements OnInit {
 
     }
 
-    // this.apiService.getAllDiscount(this.page, e.pageSize, this.search, this.filterBy).subscribe((res) => {
-    //   if (res.success) {
-    //     if (res.data.length > 0) {
-    //       this.flagData = false
-    //       this.bannerList = res.data;
-    //       this.length = res.total
-    //       console.log(this.bannerList);
-    //     } else {
-    //       this.flagData = true
-    //     }
-    //   }
-    // });
+    this.getRevenueReport(this.page, this.pageSize, this.search, this.filterBy)
   }
 
 
@@ -136,5 +114,10 @@ export class RevenuereportComponent implements OnInit {
   }
   goToreveuegraph() {
     this.router.navigate(['reveuegraph'])
+  }
+
+
+  back() {
+    window.history.back()
   }
 }

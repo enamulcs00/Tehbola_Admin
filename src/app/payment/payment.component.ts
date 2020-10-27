@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PageEvent } from '@angular/material/paginator';
+import { ApiService } from 'src/services/api.service';
+import * as moment from 'moment';
+import { CommonService } from 'src/services/common.service';
 
 @Component({
   selector: 'app-payment',
@@ -7,15 +11,41 @@ import { Router } from '@angular/router';
   styleUrls: ['./payment.component.scss']
 })
 export class PaymentComponent implements OnInit {
-  filterBy: any;
-  search: string;
-  page: number;
-  flagUserList: boolean;
-  srNo: number;
 
-  constructor(private router: Router) { }
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageEvent: PageEvent;
+  filterBy: string = '';
+  search: string = '';
+  flagUserList: boolean = false;
+  srNo: number;
+  page = 1;
+  length = 100;
+  pageSize = 10;
+  flagData: boolean;
+  paymentData: any;
+  constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) { }
 
   ngOnInit() {
+
+    this.getPaymentData(this.page, this.pageSize, this.search, this.filterBy)
+  }
+
+  getPaymentData(page, pageSize, search, filterBy) {
+
+    this.apiService.getPaymentDaTA(page, pageSize, search, filterBy).subscribe(res => {
+      console.log(res)
+      if (res) {
+        if (res.data.length > 0) {
+          this.flagData = false
+          this.paymentData = res.data
+          this.length = res.total
+          // this.pageSize = res.total
+        } else {
+          this.flagData = true
+        }
+      };
+    })
+
   }
 
   flag = false
@@ -29,38 +59,14 @@ export class PaymentComponent implements OnInit {
     }
     console.log(e.target.value);
     this.filterBy = e.target.value;
-    // this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
-    //   if (res) {
-    //     if (res.data.length > 0) {
-    //       this.flagData = false
-    //       this.bannerList = res.data
-    //       this.length = res.total
-    //       console.log(this.bannerList)
-    //     } else {
-    //       this.flagData = true
-    //     }
-    //   };
-    // });
-
+    this.getPaymentData(this.page, this.pageSize, this.search, this.filterBy)
   }
 
   flagSearch: boolean = true
   searchMethod() {
-
+    this.page = 1
     this.flagSearch = false
-    // console.log(this.search);
-    // this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
-    //   if (res.success) {
-    //     if (res.data.length > 0) {
-    //       this.flagData = false
-    //       this.bannerList = res.data;
-    //       this.length = res.total
-    //       console.log(this.bannerList);
-    //     } else {
-    //       this.flagData = true
-    //     }
-    //   }
-    // })
+    this.getPaymentData(this.page, this.pageSize, this.search, this.filterBy)
 
   }
 
@@ -69,18 +75,7 @@ export class PaymentComponent implements OnInit {
 
     this.flagSearch = true
     this.search = ''
-    // this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
-    //   if (res.success) {
-    //     if (res.data.length > 0) {
-    //       this.flagData = false
-    //       this.bannerList = res.data;
-    //       this.length = res.total
-    //       console.log(this.bannerList);
-    //     } else {
-    //       this.flagData = true
-    //     }
-    //   }
-    // });
+    this.getPaymentData(this.page, this.pageSize, this.search, this.filterBy)
   }
 
   statusChnaged(e) {
@@ -108,28 +103,32 @@ export class PaymentComponent implements OnInit {
 
     }
 
-    // this.apiService.getAllDiscount(this.page, e.pageSize, this.search, this.filterBy).subscribe((res) => {
-    //   if (res.success) {
-    //     if (res.data.length > 0) {
-    //       this.flagData = false
-    //       this.bannerList = res.data;
-    //       this.length = res.total
-    //       console.log(this.bannerList);
-    //     } else {
-    //       this.flagData = true
-    //     }
-    //   }
-    // });
+    this.getPaymentData(this.page, this.pageSize, this.search, this.filterBy)
   }
 
 
+  setPaid(id, phone, email) {
+    let body = {
+      id: id,
+      lastPaidDate: moment.now(),
+      phone: phone,
+      email: email
+    }
+    console.log(body);
+    this.apiService.editUser(body).subscribe((res) => {
 
-  goTomanageEarning() {
-    this.router.navigate(['manageEarning'])
-  }
-  goTorefund() {
-    this.router.navigate(['refund'])
+      console.log(res);
+      if (res.success) {
+        this.commonService.successToast(res.message)
+      } else {
+        this.commonService.errorToast(res.message)
+      }
+
+    });
   }
 
+  back() {
+    window.history.back()
+  }
 
 }

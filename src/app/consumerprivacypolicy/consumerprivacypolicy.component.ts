@@ -46,7 +46,7 @@ export class ConsumerprivacypolicyComponent implements OnInit {
     };
   }
   updateTermAndCondition() {
-    
+
     this.termsAndCondition.description = this.mycontent
 
 
@@ -70,5 +70,10 @@ export class ConsumerprivacypolicyComponent implements OnInit {
   onPaste($event: any): void {
     console.log("onPaste");
     //this.log += new Date() + "<br />";
+  }
+
+
+  back() {
+    window.history.back()
   }
 }

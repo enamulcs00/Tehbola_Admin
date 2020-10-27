@@ -150,4 +150,9 @@ export class VendorSalesReportComponent implements OnInit {
   goToreportGraph(id) {
     this.router.navigate(['reportGraph'], { queryParams: { id: id } })
   }
+
+
+  back() {
+    window.history.back()
+  }
 }

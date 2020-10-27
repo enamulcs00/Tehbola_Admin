@@ -69,4 +69,9 @@ export class ContactusComponent implements OnInit {
     //this.log += new Date() + "<br />";
   }
 
+
+  back() {
+    window.history.back()
+  }
+
 }

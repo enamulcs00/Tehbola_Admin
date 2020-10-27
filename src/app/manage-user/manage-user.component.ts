@@ -282,4 +282,8 @@ export class ManageUserComponent implements OnInit {
   }
 
 
+
+  back() {
+    window.history.back()
+  }
 }

@@ -87,14 +87,23 @@ export class ApiService {
       getBrandList: 'admin/getAllBrand',
       addBrand: 'admin/addBrand',
       editBrand: 'admin/editBrand',
+
+      //get and push notification
       getNotificationList: 'app/notificationListing',
       broadcast: 'admin/broadcast',
+
+      // setting module
       getCountry: 'app/getCountries',
       postShippingCharge: 'admin/shippingCharges',
       getShippingChargesList: 'admin/shippingCharges',
       getSingleShippingCharges: 'admin/viewShippingCharges',
       getTax: 'app/settings',
-      updateTax: 'admin/settings'
+      updateTax: 'admin/settings',
+
+      //payment module
+      getPaymentOfvendor: "admin/payoutsData",
+      //revene report
+      revenuereport: "admin/revenueReport"
 
     }
     for (let key in this.apiEndPoints) {
@@ -208,6 +217,10 @@ export class ApiService {
 
       });
 
+  }
+
+  back() {
+    window.history.back()
   }
   //Method End For Soft Delete
 
@@ -407,10 +420,8 @@ export class ApiService {
   }
 
 
-  editUser(userUpdate) {
-
+  editUser(userUpdate): Observable<any> {
     console.log(userUpdate)
-
     return this.http.put<any>(this.apiEndPoints.editUser, userUpdate, this.getHeaders()).pipe(
       catchError(this.handleError<any>('Edit User'))
     )
@@ -601,6 +612,14 @@ export class ApiService {
 
   updateTax(body): Observable<any> {
     return this.http.put<any>(this.apiEndPoints.updateTax, body, this.getHeaders()).pipe(catchError(this.handleError))
+  }
+
+  getRevenueReport(page, count, search, filter): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.revenuereport}?page=${page}&count=${count}&search=${search}&filter=${filter}`, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  getPaymentDaTA(page, count, search, filter): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.getPaymentOfvendor}?page=${page}&count=${count}&search=${search}&filter=${filter}`, this.getHeaders()).pipe(catchError(this.handleError()))
   }
   // Error handling
   private handleError<T>(operation = 'operation', result?: T) {
