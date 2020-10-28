@@ -61,7 +61,7 @@
                                 <td>{{item.email}}</td>
                                 <td class="Booking_status" (click)="goToproduct(i)">
                                     <a class="accept_button">View List</a></td>
-                                <td>{{item.totalRevenue}}</td>
+                                <td>{{item.totalRevenue|number}}</td>
                                 <td class="Booking_status">
 
                                     <a class="accept_button" (click)="goToreportGraph(item._id)">View Report Graph</a>

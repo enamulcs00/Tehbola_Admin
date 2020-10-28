@@ -303,7 +303,7 @@ export class EditdiscountComponent implements OnInit {
 
 
   getDiscount(id) {
-
+    debugger
     this.apiService.getDisountDetails(id).subscribe(res => {
       if (res.success) {
         this.discountDetails = res.data;
@@ -649,7 +649,7 @@ export class EditdiscountComponent implements OnInit {
 
 
   checkBanner() {
-    
+
     this.submitted = true
     console.log(this.editDiscountForm);
     let checkOffer = this.dicountOn;
@@ -753,7 +753,7 @@ export class EditdiscountComponent implements OnInit {
 
     const body = new FormData();
     body.append('id', this.id);
-    body.append('category', this.selectedCategory)
+    body.append('category', this.categoryId)
     body.append('name', this.editDiscountForm.controls['name'].value);
     body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
     if (this.flagImage) {
@@ -779,8 +779,8 @@ export class EditdiscountComponent implements OnInit {
 
     const body = new FormData();
     body.append('id', this.id);
-    body.append('category', this.selectedCategory);
-    body.append('subCategory', this.selectedSubCategory);
+    body.append('category', this.categoryId);
+    body.append('subCategory', this.subCategoryId);
     body.append('name', this.editDiscountForm.controls['name'].value);
     body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
     if (this.flagImage) {
@@ -806,8 +806,8 @@ export class EditdiscountComponent implements OnInit {
 
     const body = new FormData();
     body.append('id', this.id);
-    body.append('category', this.selectedCategory);
-    body.append('subCategory', this.selectedSubCategory);
+    body.append('category', this.categoryId);
+    body.append('subCategory', this.subCategoryId);
     body.append('name', this.editDiscountForm.controls['name'].value);
     body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
     if (this.flagImage) {

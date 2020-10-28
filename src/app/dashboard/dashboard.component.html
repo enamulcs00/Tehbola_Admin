@@ -211,14 +211,14 @@
                                     <td>{{item.productId.isbn}}</td>
                                     <td>{{item.productId.sku}}</td>
                                     <td>{{item.quantity}}</td>
-                                    <td>{{item.totalAmount}}</td>
+                                    <td>{{item.totalAmount|number}}</td>
                                     <td>{{item.userId.firstName}} {{item.userId.lastName}}</td>
                                     <td>{{item.deliveryAddress.address1}}, {{item.deliveryAddress.address2}},
                                         {{item.deliveryAddress.city}}, {{item.deliveryAddress.state}},
                                         {{item.deliveryAddress.postalCode}}</td>
-                                    <td>{{item.createdAt}}</td>
-                                    <td>{{item.deliveryDate==null?"Not Assigened Yet":item.deliveryDate}}</td>
-                                    <td>{{item.deliveredDate==null?"Not Delivered Yet":item.deliveredDate}}</td>
+                                    <td>{{item.createdAt|date}}</td>
+                                    <td>{{item.deliveryDate==null?"Not Assigened Yet":item.deliveryDate|date}}</td>
+                                    <td>{{item.deliveredDate==null?"Not Delivered Yet":item.deliveredDate|date}}</td>
                                     <td>
 
                                         {{item.status}}
