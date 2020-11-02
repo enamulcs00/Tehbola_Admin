@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted: boolean = false;
   matcher = new MyErrorStateMatcher();
+  disableButton: boolean;
 
   constructor(private router: Router,
     private formBuilder: FormBuilder,
@@ -52,6 +53,7 @@ export class LoginComponent implements OnInit {
   }
   onLogin() {
 
+
     this.submitted = true;
     if (this.loginForm.valid && this.submitted) {
       const data = this.loginForm.value;
@@ -62,6 +64,9 @@ export class LoginComponent implements OnInit {
           this.apiService.setUser(JSON.stringify(res));
           this.apiService.sendToken(res.data.accessToken);
 
+
+        }
+        else {
 
         }
       })

@@ -86,7 +86,7 @@ export class ReportGraphComponent implements OnInit {
       //     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
       //     // { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
       //   ];
-      this.barChartData = [{ data: res.data, label: this.period + " " + 'Sale' }]
+      this.barChartData = [{ data: res.data, label: this.period + " " + 'Sale', backgroundColor: 'rgba(28,200,138,1)', borderColor: 'rgba(28,200,138,1)', hoverBackgroundColor: 'rgba(28,200,138,1)', hoverBorderColor: 'rgba(28,200,138,1)' }]
 
       this.barChartOptions = this.barChartOptions;
       // this.barChartLabels = this.barChartLabels;

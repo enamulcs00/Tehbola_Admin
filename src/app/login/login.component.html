@@ -76,7 +76,7 @@
                 </div>
                 <div class="input_divs forgot_password"><a (click)="goToforgotPassword()">Forgot Password</a></div>
                 <div class="input_divs input_button">
-                    <a (click)="onLogin()"><button mat-button>Login</button></a>
+                    <button (click)="onLogin()" [disabled]="!loginForm.valid" mat-button>Login</button>
                 </div>
             </form>
         </div>

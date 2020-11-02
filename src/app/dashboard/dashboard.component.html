@@ -17,7 +17,7 @@
                                         <h3> Sales</h3>
                                     </div>
                                     <div class="bottom_numbers">
-                                        <p>{{this.dashboardData?.salesTotal}}</p>
+                                        <p>{{dashboardData?.salesTotal}}</p>
                                     </div>
                                 </div>
                                 <div class="right_card">
@@ -33,7 +33,7 @@
                                         <h3>Vendors</h3>
                                     </div>
                                     <div class="bottom_numbers">
-                                        <p>{{this.dashboardData?.totalVendors}}</p>
+                                        <p>{{dashboardData?.totalVendors}}</p>
                                     </div>
                                 </div>
                                 <div class="right_card">
@@ -49,7 +49,7 @@
                                         <h3>Revenue</h3>
                                     </div>
                                     <div class="bottom_numbers">
-                                        <p>215,000</p>
+                                        <p>{{dashboardData?.revenue}}</p>
                                     </div>
                                 </div>
                                 <div class="right_card">
@@ -112,20 +112,20 @@
                                 <p>Revenue</p>
                                 <div class="filters Booking_status">
                                     <label>Filter</label>
-                                    <select>
+                                    <select [(ngModel)]="revenueFilter" (change)="revenuePeriodChanged($event)">
                                         <!-- <option>Daily</option> -->
-                                        <option>Weekly</option>
-                                        <option>Monthly</option>
-                                        <option>Yearly</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="monthly">Monthly</option>
+                                        <option value="yearly">Yearly</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="user_charts">
+                            <div class="user_charts" *ngIf="chartReady">
 
                                 <!-- <app-graph></app-graph> -->
-                                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
-                                    [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend"
-                                    [chartType]="barChartType">
+                                <canvas baseChart [datasets]="barChartDataRevenue" [labels]="barChartLabelrevenue"
+                                    [options]="barChartOptionsRevenue" [plugins]="barChartPluginsRevenue"
+                                    [legend]="barChartLegendRevenue" [chartType]="barChartTypeRevenue">
                                 </canvas>
                             </div>
                         </li>

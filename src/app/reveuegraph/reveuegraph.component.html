@@ -12,23 +12,24 @@
                     <ul>
                         <li>
                             <div class="chart_title">
-                                <p>Revenue Graph</p>
+                                <p>Revenue</p>
                                 <div class="filters Booking_status">
                                     <label>Filter</label>
-                                    <select>
-                                        <option>Daily</option>
-                                        <option>Weekly</option>
-                                        <option>Monthly</option>
-                                        <option>Yearly</option>
+                                    <select [(ngModel)]="revenueFilter" (change)="revenuePeriodChanged($event)">
+                                        <!-- <option>Daily</option> -->
+                                        <option value="weekly">Weekly</option>
+                                        <option value="monthly">Monthly</option>
+                                        <option value="yearly">Yearly</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="user_charts">
-                                <app-graph [chartData]="data"></app-graph>
-                                <!-- <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
-                                    [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend"
-                                    [chartType]="barChartType">
-                                </canvas> -->
+                            <div class="user_charts" *ngIf="chartReady">
+
+                                <!-- <app-graph></app-graph> -->
+                                <canvas baseChart [datasets]="barChartDataRevenue" [labels]="barChartLabelrevenue"
+                                    [options]="barChartOptionsRevenue" [plugins]="barChartPluginsRevenue"
+                                    [legend]="barChartLegendRevenue" [chartType]="barChartTypeRevenue">
+                                </canvas>
                             </div>
                         </li>
                     </ul>

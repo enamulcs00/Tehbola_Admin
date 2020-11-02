@@ -26,14 +26,15 @@ export class SettingsComponent implements OnInit {
   tax: any;
   zoneName: any
   zoneFormGroup: FormGroup
-  zoneEditFormGroup: FormGroup
-  applyTax: any = false;
+  zoneEditFormGroup: FormGroup;
+  updateSetting: FormGroup
+  // applyTax: any = false;
   countryList: countrylist[] = []
   selectedCountry: any;
   browser: any
   shippingChargesList: any;
   openEditform: boolean;
-  result: import("sweetalert2").SweetAlertResult<unknown>;
+  result: any
   id: any;
   taxId: any;
   countryId: any;
@@ -64,6 +65,17 @@ export class SettingsComponent implements OnInit {
       maxValue: ['', Validators.required],
       aboveMaxValue: ['', Validators.required]
     });
+
+    this.updateSetting = this.fb.group({
+      facebook: ['', Validators.required],
+      twitter: ['', Validators.required],
+      instagram: ['', Validators.required],
+      linkedIn: ['', Validators.required],
+      appStoreLink: ['', Validators.required],
+      googlePlayLink: ['', Validators.required],
+      tax: ['', Validators.required],
+      applyTax: ['',]
+    })
     this.openPopUp()
   }
   getTax() {
@@ -71,20 +83,36 @@ export class SettingsComponent implements OnInit {
     this.apiService.getTax().subscribe(res => {
       console.log(res)
       if (res.success) {
-        this.tax = res.data[0].tax
-        this.taxId = res.data[0]._id
-        this.applyTax = res.data[0].taxApplicable
+        let data = res.data[0];
+        this.taxId = data._id
+        this.updateSetting.controls['tax'].setValue(data.tax);
+        this.updateSetting.controls['applyTax'].setValue(data.taxApplicable);
+        this.updateSetting.controls['facebook'].setValue(data.facebook);
+        this.updateSetting.controls['twitter'].setValue(data.twitter);
+        this.updateSetting.controls['instagram'].setValue(data.instagram);
+        this.updateSetting.controls['linkedIn'].setValue(data.linkedin);
+        this.updateSetting.controls['appStoreLink'].setValue(data.appStore);
+        this.updateSetting.controls['googlePlayLink'].setValue(data.playStore);
+
       }
     })
   }
 
   updateTax() {
 
-    console.log(this.tax, this.applyTax)
+    console.log(this.tax, this.updateSetting.controls['applyTax'].value)
     let body = {
       id: this.taxId,
-      tax: this.tax,
-      taxApplicable: this.applyTax
+      tax: this.updateSetting.controls['tax'].value,
+      facebook: this.updateSetting.controls['facebook'].value,
+      instagram: this.updateSetting.controls['instagram'].value,
+      linkedin: this.updateSetting.controls['linkedIn'].value,
+      playStore: this.updateSetting.controls['googlePlayLink'].value,
+      twitter: this.updateSetting.controls['twitter'].value,
+      taxApplicable: this.updateSetting.controls['applyTax'].value,
+      appStore: this.updateSetting.controls['appStoreLink'].value
+
+      //taxApplicable: this.applyTax
     }
     this.apiService.updateTax(body).subscribe(res => {
       console.log(res);

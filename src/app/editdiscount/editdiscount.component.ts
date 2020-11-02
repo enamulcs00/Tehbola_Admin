@@ -303,7 +303,7 @@ export class EditdiscountComponent implements OnInit {
 
 
   getDiscount(id) {
-    debugger
+    
     this.apiService.getDisountDetails(id).subscribe(res => {
       if (res.success) {
         this.discountDetails = res.data;

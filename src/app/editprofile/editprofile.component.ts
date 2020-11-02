@@ -68,6 +68,12 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
       countryCode: ['', Validators.required],
       phone: ['', Validators.required],
       profilePic1: ['',],
+      facebook: ['', Validators.required],
+      twitter: ['', Validators.required],
+      instagram: ['', Validators.required],
+      linkedIn: ['', Validators.required],
+      appStoreLink: ['', Validators.required],
+      googlePlayLink: ['', Validators.required],
       profilePic: []
     });
 
@@ -85,7 +91,7 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
 
   setValue() {
 
-    
+
 
     this.updateProfileForm.controls['firstName'].setValue(this.firstname)
     this.updateProfileForm.controls['lastName'].setValue(this.lastName)

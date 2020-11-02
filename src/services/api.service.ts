@@ -559,8 +559,8 @@ export class ApiService {
   }
 
 
-  getDashboardData(page, pageSize, search, filterBy, type, typeGraph): Observable<any> {
-    return this.http.get<any>(`${this.apiEndPoints.getDashboard}?page=${page}&count=${pageSize}&search=${search}&filter=${filterBy}&type=${type}&vendorGraphType=${typeGraph}`, this.getHeaders()).pipe(catchError(this.handleError));
+  getDashboardData(page, pageSize, search, filterBy, type, typeGraph, revenueFilter): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.getDashboard}?page=${page}&count=${pageSize}&search=${search}&filter=${filterBy}&type=${type}&vendorGraphType=${typeGraph}&revenueType=${revenueFilter}`, this.getHeaders()).pipe(catchError(this.handleError));
 
   }
 

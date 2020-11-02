@@ -11,26 +11,98 @@
                     </div>
                 </div>
                 <div class="add_user_list">
-                    <ul class="card">
-                        <li class="col-md-4">
-                            <label>Tax Percentage<span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="number" placeholder="" name="name" [(ngModel)]="tax">
-                            </mat-form-field>
-                        </li>
+                    <form [formGroup]="updateSetting">
+                        <ul class="card">
+                            <li class="social_links_name"> Social Links Information</li>
 
-                        <li class="col-md-4">
-                            <label>Apply Tax<span class="red">*</span></label>
-                            <div>
-                                <input type="checkbox" placeholder="" name="name" [(ngModel)]="applyTax">
-                                {{applyTax==true?"Applied":""}}
-                            </div>
+                            <li>
+                                <label>Facebook</label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" formControlName="facebook" placeholder="" name="name">
+                                </mat-form-field>
+                                <div class="custom-invalid"
+                                    *ngIf="submitted && updateSetting.controls['facebook'].hasError('required')">
+                                    Facebook link is <strong>required</strong>
+                                </div>
+                            </li>
+                            <li>
+                                <label>Twitter</label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" placeholder="" formControlName="twitter" name="name">
+                                </mat-form-field>
+                                <div class="custom-invalid"
+                                    *ngIf="submitted && updateSetting.controls['twitter'].hasError('required')">
+                                    Facebook link is <strong>required</strong>
+                                </div>
+                            </li>
+                            <li>
+                                <label>Instagram</label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" formControlName="instagram" placeholder="" name="name">
+                                </mat-form-field>
+                                <div class="custom-invalid"
+                                    *ngIf="submitted && updateSetting.controls['instagram'].hasError('required')">
+                                    Facebook link is <strong>required</strong>
+                                </div>
+                            </li>
+                            <li>
+                                <label>LinkedIn</label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" formControlName="linkedIn" placeholder="" name="name">
+                                </mat-form-field>
+                                <div class="custom-invalid"
+                                    *ngIf="submitted && updateSetting.controls['linkedIn'].hasError('required')">
+                                    Facebook link is <strong>required</strong>
+                                </div>
+                            </li>
 
-                        </li>
-                        <li class="col-md-2">
-                            <button mat-button class="button" (click)="updateTax()">Update Tax</button>
-                        </li>
-                    </ul>
+                            <li class="social_links_name"> App Store Links</li>
+
+                            <li>
+                                <label>App Store Link</label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" placeholder="" formControlName="appStoreLink"
+                                        name="name">
+                                </mat-form-field>
+                                <div class="custom-invalid"
+                                    *ngIf="submitted && updateSetting.controls['appStoreLink'].hasError('required')">
+                                    Facebook link is <strong>required</strong>
+                                </div>
+                            </li>
+                            <li>
+                                <label>Google Play Link</label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="text" formControlName="googlePlayLink" placeholder=""
+                                        name="name">
+                                </mat-form-field>
+                                <div class="custom-invalid"
+                                    *ngIf="submitted && updateSetting.controls['googlePlayLink'].hasError('required')">
+                                    Facebook link is <strong>required</strong>
+                                </div>
+                            </li>
+
+
+
+                            <li class="col-md-4">
+                                <label>Tax Percentage<span class="red">*</span></label>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <input matInput type="number" placeholder="" name="name" formControlName="tax">
+                                </mat-form-field>
+                            </li>
+
+                            <li class="col-md-4">
+                                <label>Apply Tax<span class="red">*</span></label>
+                                <div>
+                                    <input type="checkbox" placeholder="" name="name" formControlName="applyTax">
+                                    {{updateSetting.controls['applyTax'].value==true?"Applied":""}}
+                                </div>
+
+                            </li>
+                            <li class="col-md-2">
+                                <button mat-button class="button" (click)="updateTax()">Update Tax</button>
+                            </li>
+                        </ul>
+                    </form>
 
 
                     <ul class="card">

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { ApiService } from 'src/services/api.service';
 declare var $: any;
 
 @Component({
@@ -11,16 +12,23 @@ declare var $: any;
 })
 export class ReveuegraphComponent implements OnInit {
 
-  data: {
-    barChartOptions: ChartOptions;
-    barChartLabels: Label[];
-    barChartType: ChartType;
-    barChartLegend: boolean;
-    barChartPlugins: (typeof pluginDataLabels)[];
-    barChartData: ChartDataSets[];
-  };
 
-  public barChartOptions: ChartOptions = {
+  page = 1;
+  length = 100;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+  filterBy: string = '';
+  search: string = '';
+  salesList = []
+  status: number
+  flagSearch: boolean = true;
+  vendorFilter = 'weekly'
+  flagData: any;
+  flag: any
+  flagUserList: boolean = false;
+
+  srNo: number;
+  public barChartOptionsVendor: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
     scales: { xAxes: [{}], yAxes: [{}] },
@@ -31,72 +39,134 @@ export class ReveuegraphComponent implements OnInit {
       }
     }
   };
-  public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  public barChartType: ChartType = 'bar';
-  public barChartLegend = true;
-  public barChartPlugins = [pluginDataLabels];
+  public barChartLabelVendor: Label[];
+  public barChartLabelrevenue: Label[];
+  public barChartTypeVendor: ChartType = 'bar';
+  public barChartLegendVendor = true;
+  public barChartPluginsVendor = [pluginDataLabels];
 
-  public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
-  ];
-  constructor() {
-    this.data
-      = {
-      'barChartOptions': this.barChartOptions,
-      'barChartLabels': this.barChartLabels,
-      'barChartType': this.barChartType,
-      'barChartLegend': this.barChartLegend,
-      'barChartPlugins': this.barChartPlugins,
-      'barChartData': this.barChartData
-
+  public barChartDataVendor: ChartDataSets[]
+  public barChartDataRevenue: ChartDataSets[]
+  dataSource: any;
+  public barChartOptionsSale: ChartOptions = {
+    responsive: true,
+    // We use these empty structures as placeholders for dynamic theming.
+    scales: { xAxes: [{}], yAxes: [{}] },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+      }
     }
+  };
+  public barChartLabelSale: Label[]
+  public barChartTypeSale: ChartType = 'bar';
+  public barChartLegendSale = true;
+  public barChartPluginsSale = [pluginDataLabels];
+  public barChartDataSale: ChartDataSets[]
+
+
+  public barChartLabelRevenue: Label[]
+  public barChartTypeRevenue: ChartType = 'bar';
+  public barChartLegendRevenue = true;
+  public barChartPluginsRevenue = [pluginDataLabels];
+  public barChartOptionsRevenue: ChartOptions = {
+    responsive: true,
+    // We use these empty structures as placeholders for dynamic theming.
+    scales: { xAxes: [{}], yAxes: [{}] },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+      }
+    }
+  };
+
+  data: { barChartOptions: ChartOptions; barChartLabels: Label[]; barChartType: ChartType; barChartLegend: boolean; barChartPlugins: (typeof pluginDataLabels)[]; barChartData: ChartDataSets[]; };
+  chartReady: boolean;
+  type: string;
+  width: string;
+  height: string;
+  periodSale = 'weekly';
+  dashboardData: any;
+  salesListData: any;
+  revenueFilter: string = 'weekly';
+  constructor(private apiService: ApiService) {
+
   }
 
   ngOnInit() {
-    // // This is the dataSource of the chart
-    // this.dataSource = {
-    //   chart: {},
-    //   caption: {
-    //     text: "Sales Analysis"
-    //   },
-    //   subcaption: {
-    //     text: "Grocery & Footwear"
-    //   },
-    //   series: "Type",
-    //   yaxis: [
-    //     {
-    //       plot: "Sales Value",
-    //       title: "Sale Value",
-    //       format: {
-    //         prefix: "$"
-    //       }
-    //     }
-    //   ]
-    // };
+    this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale, this.vendorFilter, this.revenueFilter)
 
-    // this.fetchData();
+
   }
-  // fetchData() {
-  //   var jsonify = res => res.json();
-  //   var dataFetch = fetch(
-  //     "https://s3.eu-central-1.amazonaws.com/fusion.store/ft/data/plotting-multiple-series-on-time-axis-data.json"
-  //   ).then(jsonify);
-  //   var schemaFetch = fetch(
-  //     "https://s3.eu-central-1.amazonaws.com/fusion.store/ft/schema/plotting-multiple-series-on-time-axis-schema.json"
-  //   ).then(jsonify);
 
-  //   Promise.all([dataFetch, schemaFetch]).then(res => {
-  //     const [data, schema] = res;
-  //     // First we are creating a DataStore
-  //     const fusionDataStore = new FusionCharts.DataStore();
-  //     // After that we are creating a DataTable by passing our data and schema as arguments
-  //     const fusionTable = fusionDataStore.createDataTable(data, schema);
-  //     // Afet that we simply mutated our timeseries datasource by attaching the above
-  //     // DataTable into its data property.
-  //     this.dataSource.data = fusionTable;
-  //   });
-  // }
+  getDashboardData(page, pageSize, search, filterBy, typeSale, typeGraph, revenueFilter) {
+    this.apiService.getDashboardData(page, pageSize, search, filterBy, typeSale, typeGraph, revenueFilter).subscribe(res => {
+      console.log("dashboardData", res);
+
+      if (res.success) {
+
+        this.dashboardData = res;
+        this.salesListData = this.dashboardData.salesList;
+        this.length = this.salesListData.length
+        console.log("Dashboard Data:", this.dashboardData);
+
+        this.revenueData(this.dashboardData.revenueGraph)
+      }
+    })
+  }
+
+  revenueData(revenueGraphData) {
+
+    let array = []
+    console.log(revenueGraphData);
+    let data = revenueGraphData.length
+    for (let i = 0; i < data; i++) {
+      if (this.revenueFilter == 'monthly') {
+
+        array.push('Week' + ' ' + [i + 1]);
+
+      }
+      if (this.revenueFilter == 'weekly') {
+
+        array.push('Day' + ' ' + [i + 1]);
+
+      }
+      if (this.revenueFilter == 'yearly') {
+
+        array.push('Month' + ' ' + [i + 1]);
+
+      }
+
+    }
+    this.barChartLabelrevenue = array;
+
+    // public barChartData: ChartDataSets[] = [
+    //     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+    //     // { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+    //   ];
+    this.barChartDataRevenue = [{ data: revenueGraphData, label: this.periodSale + " " + 'Revenue', backgroundColor: 'rgba(54,185,204,1)', borderColor: 'rgba(54,185,204,1)', hoverBackgroundColor: 'rgba(54,185,204,1)', hoverBorderColor: 'rgba(54,185,204,1)' }]
+
+
+    // this.barChartData = this.barChartData;
+    console.log("labels: ", this.barChartLabelVendor);
+    console.log("data: ", this.barChartDataVendor);
+    console.log("options: ", this.barChartOptionsVendor);
+
+    this.chartReady = true
+
+  }
+
+  revenuePeriodChanged(e) {
+    this.revenueFilter = e.target.value;
+    this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale, this.vendorFilter, this.revenueFilter)
+
+
+  }
+
+
+
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);
   }
@@ -105,16 +175,4 @@ export class ReveuegraphComponent implements OnInit {
     console.log(event, active);
   }
 
-  public randomize(): void {
-    // Only Change 3 values
-    const data = [
-      Math.round(Math.random() * 100),
-      59,
-      80,
-      (Math.random() * 100),
-      56,
-      (Math.random() * 100),
-      40];
-    this.barChartData[0].data = data;
-  }
 }
