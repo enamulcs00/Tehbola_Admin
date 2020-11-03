@@ -26,84 +26,10 @@ export class ApiService {
   ) {
     this.apiEndPoints = {
       //Admin Account
-      adminLogin: 'admin/signin',
-      adminLogout: 'admin/logout',
-      changePassword: 'admin/changePassword',
-      forgetPassword: 'app/forgotPassword',
-      profile: 'admin/getProfile',
-      updateProfile: 'admin/editProfile',
-      //User Management
-      getAllUser: 'admin/user',
-      getUser: 'admin/viewUser',
-      editUser: 'admin/user',
-
-      viewOrderHistory: "admin/userOrderHistory",
-      status: "admin/status",
-      userAddress: "admin/userAddress",
-      //Delete
-      delete: 'admin/delete',
-      //Hard Delete
-      hardDelete: 'admin/hardDelete',
-      //Products
-      getAllProduct: 'admin/product',
-      viewProduct: 'admin/viewProduct',
-
-      //Categories
-      getAllCategories: 'admin/categories',
-      addCategories: 'admin/category',
-      viewCategory: 'admin/category',
-
-      //Sub Category
-      addSubCategory: 'admin/subCategory',
-
-      //Vendor Management
-      getAllVendor: 'admin/getVendors',
-      getVendorProducts: 'admin/vendorProducts',
-
-      addVendor: 'admin/vendor',
-      vendorsCategory: 'admin/getVendorCategories',
-      vendorSubcategory: 'admin/getVendorSubCategories',
-
-      //Banner(Discount)
-      getAllBanner: 'admin/banner',
-      getAllCategoriesforDiscount: 'admin/getAllCategories',
-      getVendorListByCat: 'admin/getVendorsByCat',
-      getProductByVendor: 'admin/getProductsByCatOrVendor',
-      addBanner: 'admin/banner',
-      viewBanner: 'admin/viewBanner',
-
-      //Sales Module Routes
-      salesList: 'admin/adminSales',
-      processOrder: 'admin/processOrder',
-      getSale: 'admin/viewSales',
-      salesGraph: 'admin/adminSalesGraph',
-      vendorSales: 'admin/graph',
-      adminReview: 'admin/reviews',
-      updateCms: 'admin/addStaticPage',
-      getAllCms: 'admin/getAllStaticPages',
-      // dashBoard
-      getDashboard: 'admin/adminDashboard',
-      //Brand Module
-      getBrandList: 'admin/getAllBrand',
-      addBrand: 'admin/addBrand',
-      editBrand: 'admin/editBrand',
-
-      //get and push notification
-      getNotificationList: 'app/notificationListing',
-      broadcast: 'admin/broadcast',
-
-      // setting module
-      getCountry: 'app/getCountries',
-      postShippingCharge: 'admin/shippingCharges',
-      getShippingChargesList: 'admin/shippingCharges',
-      getSingleShippingCharges: 'admin/viewShippingCharges',
-      getTax: 'app/settings',
-      updateTax: 'admin/settings',
-
-      //payment module
-      getPaymentOfvendor: "admin/payoutsData",
-      //revene report
-      revenuereport: "admin/revenueReport"
+      signUp: 'panel/signup',
+      verifyPhoneNo: 'app/verifyPhone',
+      adminLogin: 'panel/signin',
+      forgotPassword: 'panel/forgotPassword'
 
     }
     for (let key in this.apiEndPoints) {
@@ -125,7 +51,7 @@ export class ApiService {
 
   getCountryCode() {
     return this.http
-      .get<Response>("assets/json/countryCode.json")
+      .get<Response>("assets/data.json")
       .pipe(map(response => response));
   }
 
@@ -138,6 +64,11 @@ export class ApiService {
       );
   }
 
+
+  signUp(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.signUp, body).pipe(catchError(this.handleError<any>('Sign-Up')))
+  }
+
   setUserDetails(body) {
     localStorage.setItem('User', body);
   }
@@ -145,6 +76,10 @@ export class ApiService {
   getUserDetails() {
     let data = localStorage.getItem('User')
     return data
+  }
+
+  verifyPhone(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.verifyPhoneNo, body).pipe(catchError(this.handleError('verify phone')))
   }
 
   singOut(): Observable<any> {
@@ -165,12 +100,10 @@ export class ApiService {
       );
   }
 
-  forgetPassword(email): Observable<any> {
-    const data = {
-      "email": email
-    }
+  forgetPassword(data): Observable<any> {
+
     return this.http.
-      post<any>(this.apiEndPoints.forgetPassword, data, this.getHeaders())
+      post<any>(this.apiEndPoints.forgotPassword, data)
       .pipe(
         catchError(this.handleError<any>('Forgot Password'))
       );
@@ -271,15 +204,15 @@ export class ApiService {
 
 
   setUser(user: any) {
-    localStorage.setItem("Rupee_Admin", user);
+    sessionStorage.setItem("Markat_User", user);
   }
 
   getUser() {
-    return localStorage.getItem('Rupee_Admin')
+    return sessionStorage.getItem('Markat_User')
   }
 
   sendToken(token: string) {
-    localStorage.setItem("token", token);
+    sessionStorage.setItem("token", token);
   }
 
 

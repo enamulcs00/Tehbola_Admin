@@ -89,6 +89,11 @@ import { BrandlistComponent } from './brandlist/brandlist.component';
 import { NotificationService } from 'src/services/notification.service';
 import { BroadcastComponent } from './broadcast/broadcast.component';
 import { SettingsComponent } from './settings/settings.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { SignUpWithMobileComponent } from './sign-up-with-mobile/sign-up-with-mobile.component';
+import { NgOtpInputModule } from 'ng-otp-input';
+import { ProfileSetUpComponent } from './profile-set-up/profile-set-up.component';
+
 // import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 // import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -176,6 +181,9 @@ import { SettingsComponent } from './settings/settings.component';
     BrandlistComponent,
     BroadcastComponent,
     SettingsComponent,
+    SignUpComponent,
+    SignUpWithMobileComponent,
+    ProfileSetUpComponent,
 
 
   ],
@@ -187,6 +195,7 @@ import { SettingsComponent } from './settings/settings.component';
     HttpClientModule,
     ChartsModule, CKEditorModule, FormsModule, ReactiveFormsModule,
     ToastrModule.forRoot(),
+    NgOtpInputModule,
     NgMultiSelectDropDownModule.forRoot(),
     // TranslateModule.forRoot({
     //   loader: {

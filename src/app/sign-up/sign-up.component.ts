@@ -1,0 +1,55 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ApiService } from 'src/services/api.service';
+import { CommonService } from 'src/services/common.service';
+
+@Component({
+  selector: 'app-sign-up',
+  templateUrl: './sign-up.component.html',
+  styleUrls: ['./sign-up.component.scss']
+})
+export class SignUpComponent implements OnInit {
+  submitted: boolean
+  singUpFormWithPhone: FormGroup;
+  ShowTrue: boolean;
+  constructor(private router: Router, private fb: FormBuilder, private apiService: ApiService, private commonService: CommonService) { }
+  singUpFormWithEmail: FormGroup
+  ngOnInit() {
+
+    this.singUpFormWithEmail = this.fb.group({
+      roles: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+
+    })
+
+
+  }
+
+
+
+  onSignUp() {
+    this.submitted = true
+    if (this.submitted && this.singUpFormWithEmail.valid) {
+      console.log(this.singUpFormWithEmail.value);
+      let body = this.singUpFormWithEmail.value;
+      this.apiService.signUp(body).subscribe(res => {
+        console.log(res);
+        if (res.success) {
+          this.commonService.successToast(res.message);
+          this.router.navigate(['login']);
+        } else {
+          this.commonService.errorToast(res.message);
+
+        }
+
+      })
+    }
+  }
+
+  goToLogin() {
+    this.router.navigate(['login']);
+  }
+
+}

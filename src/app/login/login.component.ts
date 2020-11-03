@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   submitted: boolean = false;
   matcher = new MyErrorStateMatcher();
   disableButton: boolean;
-
+  rememberMe: boolean
   constructor(private router: Router,
     private formBuilder: FormBuilder,
     private apiService: ApiService,
@@ -40,16 +40,29 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: new FormControl("", [Validators.required, Validators.email]),
+      email: new FormControl("", Validators.required),
       password: new FormControl("", [Validators.required, Validators.minLength(7)]),
     });
+    this.checkRememberMe()
+  }
+
+
+  checkRememberMe() {
+
+    if (localStorage.getItem('rememberMe')) {
+      let userDetails = JSON.parse(localStorage.getItem('rememberMe'));
+      this.loginForm.controls['email'].setValue(userDetails.email);
+      this.loginForm.controls['password'].setValue(userDetails.password);
+      this.rememberMe = true
+
+    }
   }
 
   goToforgotPassword() {
     this.router.navigate(['forgotPassword']);
   }
-  goTodashboard() {
-    this.router.navigate(['dashboard']);
+  goToRegister() {
+    this.router.navigate(['sign-Up']);
   }
   onLogin() {
 
@@ -59,14 +72,44 @@ export class LoginComponent implements OnInit {
       const data = this.loginForm.value;
       this, this.apiService.singIn(data).subscribe(res => {
         if (res.success) {
-          this.router.navigate(['dashboard']);
-          this.commonService.successToast(res.message);
-          this.apiService.setUser(JSON.stringify(res));
+
+
+
+          // this.commonService.successToast(res.message);
+          let body = {
+            firstName: res.data.firstName,
+            lastName: res.data.lastName,
+            roles: res.data.roles,
+            lang: res.data.lang,
+            status: res.data.status,
+            isVerified: res.data.isVerified,
+            sellerProfileStatus: res.data.sellerProfileStatus,
+            _id: res.data._id,
+            phone: res.data.phone,
+            loginType: res.data.loginType,
+          }
+
+          if (this.rememberMe) {
+            let userData = this.loginForm.value;
+            localStorage.setItem('rememberMe', JSON.stringify(userData))
+          } else {
+            localStorage.removeItem('rememberMe')
+          }
+          this.apiService.setUser(JSON.stringify(body));
+
           this.apiService.sendToken(res.data.accessToken);
-
-
+          if (res.data.roles == 'celebrity' || res.data.roles == 'merchant') {
+            if (res.data.profileStatus === 0 && res.data.sellerProfileStatus === 0) {
+              this.router.navigate(['setUpProfile']);
+            } else {
+              this.router.navigate(['dashboard']);
+            }
+          } else {
+            this.router.navigate(['dashboard']);
+          }
         }
         else {
+          this.commonService.errorToast(res.message);
 
         }
       })

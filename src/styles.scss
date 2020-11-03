@@ -138,6 +138,7 @@ th.profile_bx {
 .logininner form {
     display: flex;
     align-items: center;
+    border-radius: 20px;
     justify-content: center;
     flex-direction: column;
     background-color: #fff;
@@ -175,7 +176,7 @@ input.mat-input-element,
 }
 
 textarea#mat-input-5 {
-    border: solid 1px #b3b3b3;
+    border: solid 1px #b3b3b3 !important;
     padding: 15px 20px;
     border-radius: 2px;
     font-size: 16px;
@@ -237,6 +238,7 @@ button.mat-button.mat-button-base {
 
 .logininner .sub_main_heading {
     text-align: center;
+    border-radius: 10px;
     margin-bottom: 25px;
 }
 
@@ -1014,4 +1016,11 @@ td.Booking_status a.Reject_button {
     .container-fluid {
         height: 540px;
     }
+}
+
+
+.login_anchor {
+    margin: 10px 20px;
+    padding: 10px 20px;
+
 }

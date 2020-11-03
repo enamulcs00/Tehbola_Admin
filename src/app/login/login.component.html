@@ -48,11 +48,9 @@
                 </div>
                 <div class="input_divs">
                     <mat-form-field [floatLabel]="'never'">
-                        <input matInput type="email" name="number" placeholder="Email" formControlName="email">
-                        <div class="custom-invalid"
-                            *ngIf="submitted && loginForm.controls['email'].hasError('email') && !loginForm.controls['email'].hasError('required')">
-                            Please enter a valid email address
-                        </div>
+                        <input matInput type="text" name="number" placeholder="Email or Phone number"
+                            formControlName="email">
+
                         <div class="custom-invalid"
                             *ngIf=" submitted && loginForm.controls['email'].hasError('required')">
                             Email is <strong>required</strong>
@@ -74,7 +72,25 @@
                         </div>
                     </mat-form-field>
                 </div>
-                <div class="input_divs forgot_password"><a (click)="goToforgotPassword()">Forgot Password</a></div>
+                <div>
+                    <mat-checkbox [(ngModel)]="rememberMe" [ngModelOptions]="{standalone: true}">
+                        Remember Me
+                    </mat-checkbox>
+
+                </div>
+
+
+                <div class="row">
+
+
+
+
+                    <a [routerLink]="['/sign-Up']" class="login_anchor">Not a admin Yet, Register
+                        Now</a>
+
+                    <a [routerLink]="['/forgotPassword']" class="login_anchor">Forgot
+                        Password</a>
+                </div>
                 <div class="input_divs input_button">
                     <button (click)="onLogin()" [disabled]="!loginForm.valid" mat-button>Login</button>
                 </div>

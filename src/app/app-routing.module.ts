@@ -77,6 +77,9 @@ import { EditbrandComponent } from './editbrand/editbrand.component';
 import { ViewbrandComponent } from './viewbrand/viewbrand.component';
 import { BroadcastComponent } from './broadcast/broadcast.component';
 import { SettingsComponent } from './settings/settings.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { SignUpWithMobileComponent } from './sign-up-with-mobile/sign-up-with-mobile.component';
+import { ProfileSetUpComponent } from './profile-set-up/profile-set-up.component';
 
 const routes: Routes = [
   // {
@@ -94,6 +97,20 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
+
+  {
+    path: 'sign-Up',
+    component: SignUpComponent
+  },
+  {
+    path: 'sign-UpWithMobile',
+    component: SignUpWithMobileComponent
+  },
+  {
+    path: 'setUpProfile',
+    component: ProfileSetUpComponent
+  },
+
   {
     path: 'forgotPassword',
     component: ForgotPasswordComponent

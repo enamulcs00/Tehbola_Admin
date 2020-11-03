@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { FormControl, Validators, FormGroup, FormBuilder, RequiredValidator } from '@angular/forms';
 import { ApiService } from 'src/services/api.service';
 import { CommonService } from 'src/services/common.service';
 
@@ -14,40 +14,118 @@ export class ForgotPasswordComponent implements OnInit {
   forgetPasswordForm: FormGroup
   email: FormControl;
   submitted: boolean
+  countryList: any;
+  gotPhoneNumber: boolean = false
+  showPage: boolean = true
+  otp: any;
   constructor(private router: Router, private formBuilder: FormBuilder, private apiService: ApiService, private commonService: CommonService) { }
+  binding: string
 
   ngOnInit() {
-
     this.forgetPasswordForm = this.formBuilder.group({
-      email: new FormControl('', [Validators.required, Validators.email])
+      email: [''],
+      phone: [''],
+      countryCode: ['']
     })
+
+    this.readCountryCode()
+
+
+  }
+
+
+  clickOnCheckBox(e) {
+    debugger
+    this.binding = e.value
+    if (e.value == 'number') {
+      this.forgetPasswordForm.get('phone').setValidators([Validators.required])
+      this.forgetPasswordForm.get('countryCode').setValidators([Validators.required])
+      this.forgetPasswordForm.get('email').clearValidators()
+      this.forgetPasswordForm.get('phone').updateValueAndValidity();
+      this.forgetPasswordForm.get('countryCode').updateValueAndValidity()
+      this.forgetPasswordForm.get('email').updateValueAndValidity()
+
+    }
+    if (e.value === 'email') {
+      this.forgetPasswordForm.get('email').setValidators([Validators.required]);
+      this.forgetPasswordForm.get('phone').clearValidators();
+      this.forgetPasswordForm.get('countryCode').clearValidators()
+      this.forgetPasswordForm.get('phone').updateValueAndValidity();
+      this.forgetPasswordForm.get('countryCode').updateValueAndValidity()
+      this.forgetPasswordForm.get('email').updateValueAndValidity()
+    }
   }
 
   get f() {
     return this.forgetPasswordForm.controls
   }
-
+  readCountryCode() {
+    this.apiService.getCountryCode().subscribe(res => {
+      console.log(res);
+      this.countryList = res;
+    })
+  }
 
   goToLogin() {
+    debugger
     this.submitted = true
-    var temp = this.forgetPasswordForm.get('email').value
-    //console.log(temp);
+    let data
     if (this.submitted && this.forgetPasswordForm.valid) {
-      const email = this.forgetPasswordForm.get('email').value
-      console.log(email);
-      this.apiService.forgetPassword(email).subscribe((res) => {
+      if (this.binding === 'email') {
+        data = {
+          email: this.forgetPasswordForm.controls['email'].value
+        }
+      } else if (this.binding === 'number') {
+        data = {
+          countryCode: this.forgetPasswordForm.controls['countryCode'].value,
+          phone: this.forgetPasswordForm.controls['phone'].value
+        }
+      }
+
+      this.apiService.forgetPassword(data).subscribe((res) => {
         console.log(res)
         if (res.success) {
-          this.router.navigate(['']);
-          this.commonService.successToast("Reset password link sent to email, Please check your email")
+          if (this.binding === 'number') {
+            this.showPage = false;
+            this.gotPhoneNumber = true;
+            this.commonService.successToast(res.message)
+          }
+          if (this.binding === 'email') {
+            this.router.navigate(['']);
+            this.commonService.successToast(res.message)
+
+          }
+
+          this.commonService.successToast(res.message)
+        } else {
+          this.commonService.errorToast(res.message)
         }
-
       })
-
     }
+  }
 
 
+  onOtpChange(e) {
+    this.otp = e
+  }
 
+  onOTPSubmit() {
+    let body = {
+      phone: this.forgetPasswordForm.controls['phone'].value,
+      countryCode: this.forgetPasswordForm.controls['countryCode'].value,
+      otp: this.otp,
+      type: 'signupVerification'
+    }
+    console.log(body);
+    this.apiService.verifyPhone(body).subscribe(res => {
+      console.log(res);
+      if (res.success) {
+        this.commonService.successToast(res.message)
+        this.router.navigate(['login'])
+      } else {
+        this.commonService.errorToast(res.message)
+      }
+    })
   }
 
 }
