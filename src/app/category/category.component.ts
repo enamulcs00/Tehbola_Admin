@@ -59,7 +59,7 @@ export class CategoryComponent implements OnInit {
     });
   }
   getAllCategories() {
-    this.apiService.getAllCategories(1, 10).subscribe(res => {
+    this.apiService.getAllCategories().subscribe(res => {
       this.categories = res.data;
       console.log(this.categories);
       this.submitted = false;

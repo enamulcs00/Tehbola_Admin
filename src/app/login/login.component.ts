@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
       this, this.apiService.singIn(data).subscribe(res => {
         if (res.success) {
 
-
+          debugger
 
           // this.commonService.successToast(res.message);
           let body = {
@@ -85,6 +85,7 @@ export class LoginComponent implements OnInit {
             isVerified: res.data.isVerified,
             sellerProfileStatus: res.data.sellerProfileStatus,
             _id: res.data._id,
+            countryCode: res.data.countryCode,
             phone: res.data.phone,
             loginType: res.data.loginType,
           }

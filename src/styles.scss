@@ -160,53 +160,27 @@ th.profile_bx {
     width: 100%;
 }
 
-.login_div .mat-form-field {
+.example-form {
+    // min-width: 150px;
+    // max-width: 500px;
     width: 100%;
 }
 
-input.mat-input-element,
-.mat-select {
-    border: solid 1px #b3b3b3;
-    padding: 9px 20px;
-    border-radius: 2px;
-    font-size: 14px;
-    margin: 0 !important;
-    animation-name: unset !important;
-    position: relative;
+.example-full-width {
+    width: 100%;
 }
 
-textarea#mat-input-5 {
-    border: solid 1px #b3b3b3 !important;
-    padding: 15px 20px;
-    border-radius: 2px;
-    font-size: 16px;
-    margin: 0 !important;
-    animation-name: unset !important;
-    position: relative;
-}
+// textarea#mat-input-5 {
+//     border: solid 1px #b3b3b3 !important;
+//     padding: 15px 20px;
+//     border-radius: 2px;
+//     font-size: 16px;
+//     margin: 0 !important;
+//     animation-name: unset !important;
+//     position: relative;
+// }
 
-.mat-form-field-appearance-legacy .mat-form-field-label {
-    top: 26px;
-    left: 20px;
-    font-size: 16px;
-    line-height: normal;
-    font-weight: 400;
-    color: #afafaf !important;
-}
 
-.mat-form-field-appearance-legacy .mat-form-field-subscript-wrapper {
-    margin-top: 0 !important;
-    top: 0 !important;
-}
-
-.mat-form-field-appearance-legacy .mat-form-field-underline {
-    display: none !important;
-}
-
-.mat-form-field-infix {
-    padding: 0 !important;
-    border-top: unset;
-}
 
 button.mat-button.mat-button-base {
     background-color: #feee00;
@@ -216,10 +190,6 @@ button.mat-button.mat-button-base {
     text-transform: uppercase;
     font-weight: 400;
     color: #000 !important;
-}
-
-.mat-form-field-appearance-legacy .mat-form-field-wrapper {
-    padding-bottom: 0 !important;
 }
 
 .input_divs {
@@ -256,12 +226,6 @@ button.mat-button.mat-button-base {
     overflow-y: scroll;
 }
 
-.mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after,
-.mat-input-element:disabled {
-    color: #000;
-    background: #F1F1F1;
-}
-
 table th:first-child {
     width: 65px !important;
 }
@@ -269,6 +233,8 @@ table th:first-child {
 .custom-invalid {
     color: red;
     display: block;
+    padding: 10px;
+    margin: 10px;
 
 }
 
@@ -278,15 +244,6 @@ button.cancel_button.mat-button {
     margin-left: 10px;
 }
 
-.genral_product mat-form-field {
-    width: 100%;
-}
-
-.genral_product mat-form-field textarea {
-    width: 100%;
-    background-color: #fff;
-    margin-top: 10px;
-}
 
 .add_product_highloghts {
     width: 100%;
@@ -328,20 +285,6 @@ button.cancel_button.mat-button {
     margin-bottom: 15px;
 }
 
-.add_user_list ul li .mat-form-field-label-wrapper {
-    position: unset;
-}
-
-.add_user_list ul li .mat-form-field-appearance-legacy .mat-form-field-label {
-    top: 0;
-    left: 0;
-    font-size: 14px;
-    line-height: normal;
-    font-weight: 400;
-    color: #afafaf !important;
-    padding: 15px 20px;
-}
-
 .add_user_list ul li input.mat-input-element {
     font-size: 14px;
 }
@@ -361,11 +304,11 @@ td.related_product {
     font-weight: bold;
 }
 
-textarea#mat-input-6 {
-    border: solid 1px #b3b3b3;
-    padding: 15px 20px;
-    border-radius: 2px;
-}
+// textarea#mat-input-6 {
+//     border: solid 1px #b3b3b3;
+//     padding: 15px 20px;
+//     border-radius: 2px;
+// }
 
 .product_image_upload {
     border: solid 1px #b3b3b3;
@@ -452,10 +395,10 @@ textarea#mat-input-58 {
     border-radius: 2px;
 }
 
-.textarea_kandil textarea {
-    border: solid 1px #b3b3b3;
-    padding: 15px 20px !important;
-}
+// .textarea_kandil textarea {
+//     border: solid 1px #b3b3b3;
+//     padding: 15px 20px !important;
+// }
 
 .outer_table {
     padding: 15px;
@@ -557,9 +500,6 @@ td.importstbl_download a {
     border-radius: 4px;
 }
 
-.notification_input ul li .mat-form-field {
-    width: 100%;
-}
 
 .add_user_list label {
     font-weight: 700;
@@ -730,9 +670,9 @@ td.importstbl_download a {
     text-align: center;
 }
 
-textarea#mat-input-12 {
-    resize: none;
-}
+// textarea#mat-input-12 {
+//     resize: none;
+// }
 
 a.add_excelsheet {
     margin-left: 13px;
@@ -779,10 +719,6 @@ textarea {
     font-weight: 500;
 }
 
-.search_fields button .mat-form-field-appearance-legacy .mat-form-field-label {
-    top: 26px;
-}
-
 .search_inner_fiels {
     display: flex;
     align-items: center;
@@ -807,11 +743,6 @@ textarea {
     border: unset;
 }
 
-.search_with_icons .mat-form-field-label {
-    top: 9px !important;
-    left: 0px;
-    padding: 0 !important;
-}
 
 .search_inner_fiels .filters.Booking_status {
     display: flex;
@@ -865,10 +796,6 @@ textarea {
 
 .tab-pane.fade.active.in {
     opacity: 1 !important;
-}
-
-.mat-form-field-infix {
-    border-top: unset !important;
 }
 
 
@@ -935,13 +862,6 @@ td.Booking_status a.Reject_button {
     padding: 10px 0;
 }
 
-
-.edit_order_part .add_user_list ul li .mat-form-field-appearance-legacy .mat-form-field-label {
-    top: 1px;
-    font-size: 14px;
-    color: #000 !important;
-}
-
 .mat-select-value {
     font-size: 14px;
 }
@@ -982,13 +902,6 @@ td.Booking_status a.Reject_button {
         padding: 9px 16px;
     }
 
-    .add_user_list ul li .mat-form-field-appearance-legacy .mat-form-field-label {
-        padding: 11px 20px;
-    }
-
-    .container-fluid .mat-form-field-appearance-legacy .mat-form-field-label {
-        padding: 11px 20px;
-    }
 }
 
 @media(max-width:1400px) {

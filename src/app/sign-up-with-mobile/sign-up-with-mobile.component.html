@@ -47,8 +47,8 @@
                     <h2>Sign-Up with Mobile</h2>
                 </div>
                 <div class="input_divs">
-                    <mat-form-field style="width: 30%;" [floatLabel]="'never'">
-
+                    <mat-form-field style="width: 30%;" class="example-full-width">
+                        <mat-label>Country Code<span class="red">*</span></mat-label>
                         <input type="text" list="browsers" placeholder="Country code" aria-label="Number" matInput
                             formControlName="countryCode">
                         <datalist id="browsers">
@@ -56,27 +56,32 @@
                                 {{body.name}}
                             </option>
                         </datalist>
-                    </mat-form-field>
-                    <mat-form-field style="width: 70%;" [floatLabel]="'never'">
-                        <input matInput type="tel" name="phone" placeholder="Phone" formControlName="phone">
+                        <mat-error *ngIf="singUpFormWithPhone.get('countryCode').hasError('required')">
+                            Country Code is <strong>required</strong>
+                        </mat-error>
 
-                        <div class="custom-invalid"
-                            *ngIf=" submitted && singUpFormWithPhone.controls['phone'].hasError('required')">
-                            Phone number is <strong>required</strong>
-                        </div>
+                    </mat-form-field>
+                    <mat-form-field style="width: 70%;" class="example-full-width">
+                        <mat-label>Phone<span class="red">*</span></mat-label>
+                        <input matInput type="tel" name="phone" placeholder="Phone" formControlName="phone">
+                        <mat-error *ngIf="singUpFormWithPhone.get('phone').hasError('required')">
+                            Phone is <strong>required</strong>
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div class="input_divs">
-                    <mat-form-field [floatLabel]="'never'">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Password<span class="red">*</span></mat-label>
+
                         <input matInput type="text" name="password" placeholder="Password" formControlName="password">
 
-                        <div class="custom-invalid"
-                            *ngIf=" submitted && singUpFormWithPhone.controls['password'].hasError('required')">
+                        <mat-error *ngIf="singUpFormWithPhone.get('password').hasError('required')">
                             Password is <strong>required</strong>
-                        </div>
+                        </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="input_divs">
+                <div class="input_divs" style="border: 1px dotted; border-radius: 20px;">
+
                     <mat-radio-group formControlName="roles">
                         <mat-radio-button class="input_radio" value="celebrity">Celebrity</mat-radio-button>
                         <mat-radio-button class="input_radio" value="merchant">Vendor</mat-radio-button>

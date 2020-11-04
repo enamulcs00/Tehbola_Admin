@@ -93,6 +93,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignUpWithMobileComponent } from './sign-up-with-mobile/sign-up-with-mobile.component';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { ProfileSetUpComponent } from './profile-set-up/profile-set-up.component';
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
 // import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 // import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -186,6 +187,7 @@ import { ProfileSetUpComponent } from './profile-set-up/profile-set-up.component
     ProfileSetUpComponent,
 
 
+
   ],
   imports: [
     BrowserModule,
@@ -193,6 +195,7 @@ import { ProfileSetUpComponent } from './profile-set-up/profile-set-up.component
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
+    GooglePlaceModule,
     ChartsModule, CKEditorModule, FormsModule, ReactiveFormsModule,
     ToastrModule.forRoot(),
     NgOtpInputModule,

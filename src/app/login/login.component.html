@@ -47,7 +47,14 @@
                     <h2>Login</h2>
                 </div>
                 <div class="input_divs">
-                    <mat-form-field [floatLabel]="'never'">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Email<span class="red">*</span></mat-label>
+                        <input matInput type="email" placeholder="Email/Phone" formControlName="email" name="email">
+                        <mat-error *ngIf="loginForm.get('email').hasError('required')">
+                            Email/Phone is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <!-- <mat-form-field [floatLabel]="'never'">
                         <input matInput type="text" name="number" placeholder="Email or Phone number"
                             formControlName="email">
 
@@ -55,10 +62,23 @@
                             *ngIf=" submitted && loginForm.controls['email'].hasError('required')">
                             Email is <strong>required</strong>
                         </div>
-                    </mat-form-field>
+                    </mat-form-field> -->
                 </div>
                 <div class="input_divs">
-                    <mat-form-field [floatLabel]="'never'">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Password<span class="red">*</span></mat-label>
+                        <input matInput type="password" placeholder="Password" formControlName="password"
+                            name="password">
+                        <mat-error *ngIf="loginForm.get('password').hasError('required')">
+                            Password is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf=" loginForm.get('password').hasError('minlength') &&
+                              !loginForm.get('password').hasError('required')">
+                            Password should be more than 7 characters
+                        </mat-error>
+                    </mat-form-field>
+
+                    <!-- <mat-form-field [floatLabel]="'never'">
                         <input matInput type="password" name="password" placeholder="Password"
                             formControlName="password">
 
@@ -70,7 +90,7 @@
                             *ngIf=" submitted && loginForm.controls['password'].hasError('minlength') && !loginForm.controls['password'].hasError('required')">
                             Password should be more than 7 characters
                         </div>
-                    </mat-form-field>
+                    </mat-form-field> -->
                 </div>
                 <div>
                     <mat-checkbox [(ngModel)]="rememberMe" [ngModelOptions]="{standalone: true}">

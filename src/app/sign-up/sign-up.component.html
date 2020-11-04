@@ -47,7 +47,7 @@
                     <h2>Sign-Up with E-mail</h2>
                 </div>
                 <div class="input_divs">
-                    <mat-form-field [floatLabel]="'never'">
+                    <!-- <mat-form-field [floatLabel]="'never'">
                         <input matInput type="email" name="number" placeholder="Email" formControlName="email">
                         <div class="custom-invalid" *ngIf="submitted && singUpFormWithEmail.controls['email'].hasError('email') &&
                             !singUpFormWithEmail.controls['email'].hasError('required')">
@@ -57,32 +57,44 @@
                             *ngIf=" submitted && singUpFormWithEmail.controls['email'].hasError('required')">
                             Email is <strong>required</strong>
                         </div>
+                    </mat-form-field> -->
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Email<span class="red">*</span></mat-label>
+                        <input matInput type="email" placeholder="" formControlName="email" name="email">
+                        <mat-error *ngIf="singUpFormWithEmail.get('email').hasError('required')">
+                            Email is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="singUpFormWithEmail.get('email').hasError('email') &&
+                                  !singUpFormWithEmail.get('email').hasError('required')">
+                            Email is <strong>not valid</strong>
+                        </mat-error>
                     </mat-form-field>
+
                 </div>
                 <div class="input_divs">
-                    <mat-form-field [floatLabel]="'never'">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Password<span class="red">*</span></mat-label>
                         <input matInput type="text" name="password" placeholder="Password" formControlName="password">
 
-                        <div class="custom-invalid"
-                            *ngIf=" submitted && singUpFormWithEmail.controls['password'].hasError('required')">
+                        <mat-error *ngIf="singUpFormWithEmail.get('password').hasError('required')">
                             Password is <strong>required</strong>
-                        </div>
+                        </mat-error>
                     </mat-form-field>
+
+
                 </div>
-                <div class="input_divs">
+                <div class="input_divs" style="border: 1px dotted; border-radius: 20px;">
 
                     <mat-radio-group formControlName="roles">
                         <mat-radio-button class="input_radio" value="celebrity">Celebrity</mat-radio-button>
                         <mat-radio-button class="input_radio" value="merchant">Vendor</mat-radio-button>
                     </mat-radio-group>
                     <div class="custom-invalid"
-                        *ngIf=" submitted && singUpFormWithEmail.controls['roles'].hasError('required')">
-                        Please Choose One
+                        *ngIf=" submitted && singUpFormWithPhone.controls['roles'].hasError('required')">
+                        Please Choose one
                     </div>
-                    <!--  <div class="custom-invalid"
-                            *ngIf=" submitted && loginForm.controls['password'].hasError('minlength') && !loginForm.controls['password'].hasError('required')">
-                            Password should be more than 7 characters
-                        </div> -->
+
 
                 </div>
                 <div class="row">

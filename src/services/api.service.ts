@@ -29,7 +29,9 @@ export class ApiService {
       signUp: 'panel/signup',
       verifyPhoneNo: 'app/verifyPhone',
       adminLogin: 'panel/signin',
-      forgotPassword: 'panel/forgotPassword'
+      forgotPassword: 'panel/forgotPassword',
+      resetPasswordPhone: 'panel/resetPasswordPhone',
+      getCategoryList: 'admin/getAllCategories'
 
     }
     for (let key in this.apiEndPoints) {
@@ -97,6 +99,14 @@ export class ApiService {
       .put<any>(this.apiEndPoints.changePassword, body, this.getHeaders())
       .pipe(
         catchError(this.handleError<any>('Login'))
+      );
+  }
+  resetPasswordByPhone(data): Observable<any> {
+
+    return this.http.
+      post<any>(this.apiEndPoints.resetPasswordPhone, data)
+      .pipe(
+        catchError(this.handleError<any>('Forgot Password'))
       );
   }
 
@@ -217,7 +227,7 @@ export class ApiService {
 
 
   getToken() {
-    return localStorage.getItem("token");
+    return sessionStorage.getItem("token");
   }
 
 
@@ -371,9 +381,9 @@ export class ApiService {
   }
 
   //Categories
-  getAllCategories(page, count) {
+  getAllCategories() {
     return this.http
-      .get<any>(`${this.apiEndPoints.getAllCategories}?page=${page}&count=${count}`, this.getHeaders())
+      .get<any>(`${this.apiEndPoints.getCategoryList}`, this.getHeaders())
       .pipe(
         catchError(this.handleError<any>('All Product'))
       );

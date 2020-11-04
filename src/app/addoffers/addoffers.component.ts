@@ -357,14 +357,14 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
 
           }
         }
-        this.subCategoryList = temp;
+
       });
 
     } else {
       this.commonService.errorToast("Please Select a category.");
 
     }
-
+    this.subCategoryList = temp;
   }
 
 

@@ -114,14 +114,14 @@ export class ForgotPasswordComponent implements OnInit {
       phone: this.forgetPasswordForm.controls['phone'].value,
       countryCode: this.forgetPasswordForm.controls['countryCode'].value,
       otp: this.otp,
-      type: 'signupVerification'
+      type: 'normal'
     }
     console.log(body);
     this.apiService.verifyPhone(body).subscribe(res => {
       console.log(res);
       if (res.success) {
         this.commonService.successToast(res.message)
-        this.router.navigate(['login'])
+        this.router.navigate(['resetPassword'], { queryParams: { 'phone': body.phone, 'countryCode': body.countryCode } })
       } else {
         this.commonService.errorToast(res.message)
       }
