@@ -224,12 +224,19 @@ export class OfferdealsComponent implements OnInit {
           "id": id,
           "model": "Banner"
         }
-        this.apiService.delete(data).then(res => {
 
-          this.deleteFromList()
+        this.apiService.delete(data).subscribe(res => {
+          console.log(res);
+          if (res.success) {
+            // this.getAllCategories()
+            this.commonService.successToast(res.message);
 
-        }
-        )
+          } else {
+            this.commonService.errorToast(res.message)
+          }
+
+        });
+
 
 
       } else {

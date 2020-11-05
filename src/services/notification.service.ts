@@ -11,12 +11,12 @@ import * as io from 'socket.io-client';
 export class NotificationService {
 
 
-    socket;
-    constructor(private UrlService: UrlService) { }
-    setupSocketConnection() {
-        this.socket = io(this.UrlService.SERVER_URL);
-        console.log("socket connected");
+    // socket;
+    // constructor(private UrlService: UrlService) { }
+    // setupSocketConnection() {
+    //     this.socket = io(this.UrlService.SERVER_URL);
+    //     console.log("socket connected");
 
 
-    }
+    // }
 }

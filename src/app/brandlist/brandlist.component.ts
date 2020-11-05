@@ -76,10 +76,19 @@ export class BrandlistComponent implements OnInit {
         console.log(data)
 
 
-        this.apiService.delete(data).then(res => {
 
-          this.getBrandList()
+        this.apiService.delete(data).subscribe(res => {
+          console.log(res);
+          if (res.success) {
+            // this.getAllCategories()
+            this.commonService.successToast(res.message);
+
+          } else {
+            this.commonService.errorToast(res.message)
+          }
+
         });
+
 
       } else {
         console.log("cancelled");

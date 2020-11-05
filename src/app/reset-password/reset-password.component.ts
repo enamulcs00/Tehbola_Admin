@@ -40,7 +40,7 @@ export class ResetPasswordComponent implements OnInit {
   get f() { return this.changePassForm.controls; }
 
   onChangePassword() {
-    debugger
+
     this.submitted = true;
     if (this.changePassForm.valid && this.submitted) {
       let body = {

@@ -273,13 +273,19 @@ export class SettingsComponent implements OnInit {
           "id": id,
           "model": "ShippingCharges"
         }
-        this.apiService.delete(data).then(res => {
-          console.log(res);
 
-          this.commonService.successToast("Successfully Deleted");
-          this.getShippingRateList()
-        }
-        )
+        this.apiService.delete(data).subscribe(res => {
+          console.log(res);
+          if (res.success) {
+            //  this.getAllCategories()
+            this.commonService.successToast(res.message);
+
+          } else {
+            this.commonService.errorToast(res.message)
+          }
+
+        });
+
 
       } else {
         console.log("cancelled");

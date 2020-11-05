@@ -80,6 +80,8 @@ import { SettingsComponent } from './settings/settings.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignUpWithMobileComponent } from './sign-up-with-mobile/sign-up-with-mobile.component';
 import { ProfileSetUpComponent } from './profile-set-up/profile-set-up.component';
+import { ManageCelebrityComponent } from './manage-celebrity/manage-celebrity.component';
+import { DocumentComponent } from './document/document.component';
 
 const routes: Routes = [
   // {
@@ -135,8 +137,18 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'document',
+    component: DocumentComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'manageUser',
     component: ManageUserComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'manageCelebrity',
+    component: ManageCelebrityComponent,
     canActivate: [AuthGuard]
   },
   {

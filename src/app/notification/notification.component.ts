@@ -35,7 +35,7 @@ export class NotificationComponent implements OnInit {
 
         this.commonService.notificationCount.next(0)
         this.notificationList = res.data;
-        this.notification.socket.emit('clearBadge', { 'userId': this.id })
+        // this.notification.socket.emit('clearBadge', { 'userId': this.id })
       }
     })
 

@@ -60,8 +60,13 @@
                                                 <span class="sub_category_image">
                                                     <figure><img src={{imageUrl+subcategory.image}}></figure>
                                                 </span> <span>{{j+1}}. {{subcategory.name}}</span>
+                                                <a style="margin-left:25px ;" href="javascript:;" data-toggle="modal"
+                                                    data-target="#EditSubcategory">
+                                                    <i class="fa fa-edit"
+                                                        (click)="editSubCategory(subcategory._id)"></i>
+                                                </a>
 
-                                                <a style="margin-left: 50px;" href="javascript:;">
+                                                <a style="margin-left: 20px;" href="javascript:;">
                                                     <i class="fa fa-trash"
                                                         (click)="deleteSubcategory(subcategory._id)"></i>
                                                 </a>
@@ -105,7 +110,7 @@
                 <form [formGroup]="addCategoryForm">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="title">Name of the Category</label>
+                            <!-- <label for="title">Name of the Category</label>
                             <div class="input-group">
                                 <input class="form-control" type="text" value="" name="name" formControlName="name">
                             </div>
@@ -119,45 +124,57 @@
                                 <div *ngIf="addCategoryForm.controls.name.errors.maxlength">
                                     Category Name should be max 25 characters long.
                                 </div>
-                            </div>
+                            </div> -->
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Name of the Category<span class="red">*</span></mat-label>
+                                <input matInput type="text" placeholder="Category Name" formControlName="name"
+                                    name="password">
+                                <mat-error *ngIf="addCategoryForm.get('name').hasError('required')">
+                                    Category Name is <strong>required</strong>
+                                </mat-error>
+                                <mat-error *ngIf=" addCategoryForm.get('name').hasError('maxlength') &&
+                              !addCategoryForm.get('name').hasError('required')">
+                                    Category Name should be max 20 characters long.
+                                </mat-error>
+                            </mat-form-field>
+
+
                         </div>
 
                         <div class="form-group col-md-12">
-                            <label for="title">Arabic Name of the Category</label>
-                            <div class="input-group">
-                                <input class="form-control" type="text" value="" name="name_ar"
-                                    formControlName="name_ar">
-                            </div>
-                            <div *ngIf="submitted && addCategoryForm.controls.name_ar.errors" class="invalid-feedback">
-                                <div *ngIf="addCategoryForm.controls.name_ar.errors.required">
-                                    Category arabic name is required.
-                                </div>
-                                <div *ngIf="addCategoryForm.controls.name_ar.errors.pattern">
-                                    Category arabic name is not valid.
-                                </div>
-                                <div *ngIf="addCategoryForm.controls.name_ar.errors.maxlength">
-                                    Category arabic name should be max 25 characters long.
-                                </div>
-                            </div>
+
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Arabic Name of the Category<span class="red">*</span></mat-label>
+                                <input matInput type="text" placeholder="Arabic Category Name" formControlName="name_ar"
+                                    name="name_ar">
+                                <mat-error *ngIf="addCategoryForm.get('name_ar').hasError('required')">
+                                    Arabic Category Name is <strong>required</strong>
+                                </mat-error>
+                                <mat-error *ngIf=" addCategoryForm.get('name_ar').hasError('maxlength') &&
+                              !addCategoryForm.get('name_ar').hasError('required')">
+                                    Arabic Category Name should be max 20 characters long.
+                                </mat-error>
+                            </mat-form-field>
                         </div>
 
                         <div class="form-group col-md-12">
-                            <label for="title">Commission percentage of the Category</label>
-                            <div class="input-group">
-                                <input class="form-control" type="text" value="" name="name_ar"
-                                    formControlName="commission">
-                            </div>
-                            <div *ngIf="submitted && addCategoryForm.controls.name_ar.errors" class="invalid-feedback">
-                                <div *ngIf="addCategoryForm.controls.name_ar.errors.required">
-                                    Commission percentage is required.
-                                </div>
-                                <div *ngIf="addCategoryForm.controls.name_ar.errors.pattern">
-                                    Commission percentage is not valid.
-                                </div>
-                                <div *ngIf="addCategoryForm.controls.name_ar.errors.maxlength">
-                                    Commission percentage should be max 25 characters long.
-                                </div>
-                            </div>
+
+
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Commission percentage of the Category<span class="red">*</span></mat-label>
+                                <input matInput type="text" placeholder="Commission" formControlName="commission"
+                                    name="commission">
+                                <mat-error *ngIf="addCategoryForm.get('commission').hasError('required')">
+                                    Commission is <strong>required</strong>
+                                </mat-error>
+                                <mat-error *ngIf=" addCategoryForm.get('commission').hasError('maxlength') &&
+                              !addCategoryForm.get('commission').hasError('required')">
+                                    Commission should be max 20 characters long.
+                                </mat-error>
+                            </mat-form-field>
                         </div>
 
                         <div class="form-group col-md-12">
@@ -202,58 +219,53 @@
                 <form [formGroup]="editCategoryForm">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="title">Name of the Category</label>
-                            <div class="input-group">
-                                <input class="form-control" type="text" value="" name="name" formControlName="name">
-                            </div>
-                            <div *ngIf="submitted && editCategoryForm.controls.name.errors" class="invalid-feedback">
-                                <div *ngIf="editCategoryForm.controls.name.errors.required">
-                                    Category Name is required.
-                                </div>
-                                <div *ngIf="editCategoryForm.controls.name.errors.pattern">
-                                    Category Name is not valid.
-                                </div>
-                                <div *ngIf="editCategoryForm.controls.name.errors.maxlength">
-                                    Category Name should be max 25 characters long.
-                                </div>
-                            </div>
+
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Name of the Category<span class="red">*</span></mat-label>
+                                <input matInput type="text" placeholder="Category Name" formControlName="name"
+                                    name="password">
+                                <mat-error *ngIf="editCategoryForm.get('name').hasError('required')">
+                                    Category Name is <strong>required</strong>
+                                </mat-error>
+                                <mat-error *ngIf=" editCategoryForm.get('name').hasError('maxlength') &&
+                              !editCategoryForm.get('name').hasError('required')">
+                                    Category Name should be max 20 characters long.
+                                </mat-error>
+                            </mat-form-field>
+
                         </div>
 
                         <div class="form-group col-md-12">
-                            <label for="title">Arabic Name of the Category</label>
-                            <div class="input-group">
-                                <input class="form-control" type="text" value="" name="name_ar"
-                                    formControlName="name_ar">
-                            </div>
-                            <div *ngIf="submitted && editCategoryForm.controls.name_ar.errors" class="invalid-feedback">
-                                <div *ngIf="editCategoryForm.controls.name_ar.errors.required">
-                                    Category arabic name is required.
-                                </div>
-                                <div *ngIf="editCategoryForm.controls.name_ar.errors.pattern">
-                                    Category arabic name is not valid.
-                                </div>
-                                <div *ngIf="editCategoryForm.controls.name_ar.errors.maxlength">
-                                    Category arabic name should be max 25 characters long.
-                                </div>
-                            </div>
+
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Arabic Name of the Category<span class="red">*</span></mat-label>
+                                <input matInput type="text" placeholder="Arabic Category Name" formControlName="name_ar"
+                                    name="name_ar">
+                                <mat-error *ngIf="editCategoryForm.get('name_ar').hasError('required')">
+                                    Arabic Category Name is <strong>required</strong>
+                                </mat-error>
+                                <mat-error *ngIf=" editCategoryForm.get('name_ar').hasError('maxlength') &&
+                              !editCategoryForm.get('name_ar').hasError('required')">
+                                    Arabic Category Name should be max 20 characters long.
+                                </mat-error>
+                            </mat-form-field>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="title">Commission percentage of the Category</label>
-                            <div class="input-group">
-                                <input class="form-control" type="text" value="" name="name_ar"
-                                    formControlName="commission">
-                            </div>
-                            <div *ngIf="submitted && addCategoryForm.controls.name_ar.errors" class="invalid-feedback">
-                                <div *ngIf="addCategoryForm.controls.name_ar.errors.required">
-                                    Commission percentage is required.
-                                </div>
-                                <div *ngIf="addCategoryForm.controls.name_ar.errors.pattern">
-                                    Commission percentage is not valid.
-                                </div>
-                                <div *ngIf="addCategoryForm.controls.name_ar.errors.maxlength">
-                                    Commission percentage should be max 25 characters long.
-                                </div>
-                            </div>
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Commission percentage of the Category<span class="red">*</span></mat-label>
+                                <input matInput type="text" placeholder="Commission" formControlName="commission"
+                                    name="commission">
+                                <mat-error *ngIf="editCategoryForm.get('commission').hasError('required')">
+                                    Commission is <strong>required</strong>
+                                </mat-error>
+                                <mat-error *ngIf=" editCategoryForm.get('commission').hasError('maxlength') &&
+                              !editCategoryForm.get('commission').hasError('required')">
+                                    Commission should be max 20 characters long.
+                                </mat-error>
+                            </mat-form-field>
                         </div>
 
                         <div class="form-group col-md-12">
@@ -302,40 +314,38 @@
                 <form [formGroup]="addSubcategoryForm">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="title">Name of the SubCategory</label>
-                            <div class="input-group">
-                                <input class="form-control" type="text" value="" name="name" formControlName="name">
-                            </div>
-                            <div *ngIf="submitted && addSubcategoryForm.controls.name.errors" class="invalid-feedback">
-                                <div *ngIf="addSubcategoryForm.controls.name.errors.required">
-                                    SubCategory Name is required.
-                                </div>
-                                <div *ngIf="addSubcategoryForm.controls.name.errors.pattern">
-                                    SubCategory Name is not valid.
-                                </div>
-                                <div *ngIf="addSubcategoryForm.controls.name.errors.maxlength">
-                                    SubCategory Name can be max 20 characters long.
-                                </div>
-                            </div>
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Name of the SubCategory<span class="red">*</span></mat-label>
+                                <input matInput type="text" placeholder="Sub-Category Name" formControlName="name"
+                                    name="password">
+                                <mat-error *ngIf="addSubcategoryForm.get('name').hasError('required')">
+                                    SubCategory Name is <strong>required</strong>
+                                </mat-error>
+                                <mat-error *ngIf=" addSubcategoryForm.get('name').hasError('maxlength') &&
+                              !addSubcategoryForm.get('name').hasError('required')">
+                                    SubCategory Name should be max 20 characters long.
+                                </mat-error>
+                            </mat-form-field>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="title">Arabic Name of the SubCategory</label>
-                            <div class="input-group">
-                                <input class="form-control" type="text" value="" name="name_ar"
-                                    formControlName="name_ar">
-                            </div>
-                            <div *ngIf="submitted && addSubcategoryForm.controls.name_ar.errors"
-                                class="invalid-feedback">
-                                <div *ngIf="addSubcategoryForm.controls.name_ar.errors.required">
-                                    SubCategory Name is required.
-                                </div>
-                                <div *ngIf="addSubcategoryForm.controls.name_ar.errors.maxlength">
-                                    SubCategory Name can be max 20 characters long.
-                                </div>
-                            </div>
+
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Arabic Name of the SubCategory<span class="red">*</span></mat-label>
+                                <input matInput type="text" placeholder="Sub-Category Name" formControlName="name_ar"
+                                    name="password">
+                                <mat-error *ngIf="addSubcategoryForm.get('name_ar').hasError('required')">
+                                    Arabic SubCategory Name is <strong>required</strong>
+                                </mat-error>
+                                <mat-error *ngIf=" addSubcategoryForm.get('name_ar').hasError('maxlength') &&
+                              !addSubcategoryForm.get('name').hasError('required')">
+                                    Arabic SubCategory Name should be max 20 characters long.
+                                </mat-error>
+                            </mat-form-field>
                         </div>
                     </div>
                     <div class="row">
@@ -370,3 +380,82 @@
     </div>
 </div>
 <!--Modal define loaction edit state -->
+
+
+<!-- Edit Sub-category -->
+<div id="EditSubcategory" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">&times;</button>
+</div> -->
+            <div class="modal-body">
+                <h3>Edit SubCategory</h3>
+                <form [formGroup]="editSubcategoryForm">
+                    <div class="row">
+                        <div class="form-group col-md-12">
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Name of the SubCategory<span class="red">*</span></mat-label>
+                                <input matInput type="text" placeholder="Sub-Category Name" formControlName="name"
+                                    name="password">
+                                <mat-error *ngIf="editSubcategoryForm.get('name').hasError('required')">
+                                    SubCategory Name is <strong>required</strong>
+                                </mat-error>
+                                <mat-error *ngIf=" editSubcategoryForm.get('name').hasError('maxlength') &&
+                              !editSubcategoryForm.get('name').hasError('required')">
+                                    SubCategory Name should be max 20 characters long.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Arabic Name of the SubCategory<span class="red">*</span></mat-label>
+                                <input matInput type="text" placeholder="Sub-Category Name" formControlName="name_ar"
+                                    name="password">
+                                <mat-error *ngIf="editSubcategoryForm.get('name_ar').hasError('required')">
+                                    Arabic SubCategory Name is <strong>required</strong>
+                                </mat-error>
+                                <mat-error *ngIf=" editSubcategoryForm.get('name_ar').hasError('maxlength') &&
+                              !addCategoryForm.get('name').hasError('required')">
+                                    Arabic SubCategory Name should be max 25 characters long.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="title">Add Image</label>
+                            <div class="user_img">
+                                <figure *ngIf="subCategoryImage">
+                                    <img style="height: 50px;width: 50px" [src]="subCategoryImage" />
+                                </figure>
+                            </div>
+                            <div class="input-group">
+                                <input class="form-control file" id="subcategoryImage" type="file" accept="image/*"
+                                    (change)="subCategoryPic($event)" name="image" formControlName="image">
+                            </div>
+                            <div *ngIf="submitted && !subCategoryImage" class="invalid-feedback">
+                                Image is required.
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+                <div class="model_buttons">
+                    <button class="mat-raised-button mat-primary mr-3" data-dismiss="modal"
+                        (click)="updateSubcategory()">
+                        Save
+                    </button>
+                    <button class="mat-raised-button mat-warn" (click)="cancelClicked()"
+                        data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

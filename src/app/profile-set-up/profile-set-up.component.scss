@@ -7,3 +7,14 @@
 .example-full-width {
     width: 100%;
 }
+
+.item_img {
+    position: relative;
+    margin-top: 20px;
+
+    .del_btn {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+    }
+}

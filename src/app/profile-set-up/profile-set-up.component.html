@@ -168,7 +168,7 @@
 
                         </div> -->
                         </li>
-                        <li>
+                        <li *ngIf="roles !=='merchant'">
                             <mat-form-field class="example-full-width">
                                 <mat-label>Purpose<span class="red">*</span></mat-label>
 
@@ -194,12 +194,15 @@
                             <label>Certificates <span class="red">*</span></label>
 
                             <input type="file" placeholder="Add Contract" id="file" (change)="onFileChange($event) "
-                                formControlName="profilePhoto" name="documentOne" multiple>
+                                formControlName="profilePhoto" name="documentOne">
 
-                            <div>
-                                <figure *ngFor="let item of urls">
+                            <div class="row" *ngIf="urls">
+                                <figure class="col-4 item_img" *ngFor="let item of urls;let i=index">
                                     <img width="100px" height="100px " [src]="item.document" alt="tent">
+                                    <a class="del_btn" aria-label="Delete" (click)="deletePhoto(i)"> <i
+                                            class="fa fa-trash-o fa-fw"></i></a>
                                 </figure>
+
                             </div>
 
 

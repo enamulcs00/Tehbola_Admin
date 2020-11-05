@@ -1,0 +1,29 @@
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="container-fluid">
+                <div class="sub_heading">
+                    <h1>{{userType}} Management</h1>
+                    <div class="top_subheading_add">
+
+                        <a style="margin-left: 1em;" (click)="back()">Go Back</a>
+                    </div>
+                </div>
+                <div class="outer_table">
+
+                    <div>
+                        <figure *ngFor="let item of documentList">
+                            <img [src]="baseUrl+item.image" alt="">
+                        </figure>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

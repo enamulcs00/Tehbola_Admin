@@ -81,6 +81,7 @@ export class LoginComponent implements OnInit {
             lastName: res.data.lastName,
             roles: res.data.roles,
             lang: res.data.lang,
+            email: res.data.email,
             status: res.data.status,
             isVerified: res.data.isVerified,
             sellerProfileStatus: res.data.sellerProfileStatus,
@@ -101,7 +102,7 @@ export class LoginComponent implements OnInit {
           this.apiService.sendToken(res.data.accessToken);
           if (res.data.roles == 'celebrity' || res.data.roles == 'merchant') {
             if (res.data.profileStatus === 0 && res.data.sellerProfileStatus === 0) {
-              this.router.navigate(['setUpProfile']);
+              this.router.navigate(['setUpProfile'], { queryParams: { 'roles': res.data.roles } });
             } else {
               this.router.navigate(['dashboard']);
             }

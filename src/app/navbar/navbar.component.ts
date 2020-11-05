@@ -39,27 +39,27 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
 
     this.imagePath = this.urlService.imageUrl;
-    this.notificationService.setupSocketConnection()
-    this.notificationService.socket.on(`admin-notification`, (data) => {
-      console.log(data);
-      console.log("new Notification", data)
-      // this.badge = data.badge
-      this.commonService.setNotification(true);
-      this.commonService.notificationCount.next(data.badge)
-      this.commonService.notificationCount.subscribe(value => {
-        console.log('count', value);
+    // this.notificationService.setupSocketConnection()
+    // this.notificationService.socket.on(`admin-notification`, (data) => {
+    //   console.log(data);
+    //   console.log("new Notification", data)
+    //   // this.badge = data.badge
+    //   this.commonService.setNotification(true);
+    //   this.commonService.notificationCount.next(data.badge)
+    //   this.commonService.notificationCount.subscribe(value => {
+    //     console.log('count', value);
 
-        this.badge = value
-      })
-      this.message = data.title;
-      var option = {
-        'body': data.body,
-        'silent': false,
+    //     this.badge = value
+    //   })
+    //   this.message = data.title;
+    //   var option = {
+    //     'body': data.body,
+    //     'silent': false,
 
 
-      }
-      var notification = new Notification(this.message, option);
-    });
+    //   }
+    //   var notification = new Notification(this.message, option);
+    // });
 
     this.profileData = JSON.parse(this.apiService.getUser());
 
@@ -76,7 +76,7 @@ export class NavbarComponent implements OnInit {
 
         this.commonService.notificationCount.next(0)
         this.notificationList = res.data;
-        this.notificationService.socket.emit('clearBadge', { 'userId': this.id })
+        // this.notificationService.socket.emit('clearBadge', { 'userId': this.id })
       }
     })
 

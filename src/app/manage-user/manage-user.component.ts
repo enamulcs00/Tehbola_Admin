@@ -14,7 +14,8 @@ import Swal from 'sweetalert2';
 export class ManageUserComponent implements OnInit {
   length = 100;
   pageSize = 10;
-  page = 1
+  page = 1;
+  roles = 'user';
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pageEvent: PageEvent;
   filterBy: string = '';
@@ -35,33 +36,18 @@ export class ManageUserComponent implements OnInit {
 
   flag: boolean = false
   filterSelected(e) {
-
+    debugger
     if (this.filterBy) {
       this.flag = true
     }
     else {
       this.flag = false
     }
-    console.log(e.target.value);
+    // console.log(e.target.value);
 
-    this.filterBy = e.target.value
+    //  this.filterBy = e.target.value
+    this.ShowAllUser()
 
-    this.apiService.getAllUser(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
-      if (res.success) {
-        if (res.data.length > 0) {
-          this.flagData = false
-          this.userList = res.data;
-          this.length = res.total;
-
-          //this.srNo = res.data.length
-
-          console.log(this.userList);
-        } else {
-          this.flagData = true
-        }
-
-      }
-    })
   }
 
 
@@ -88,7 +74,11 @@ export class ManageUserComponent implements OnInit {
         console.log(this.body)
         this.apiService.changeUserStatus(this.body).subscribe((res) => {
           console.log(res)
-          this.ShowAllUser();
+          if (res.success) {
+            this.commonService.successToast(res.message)
+            this.ShowAllUser();
+          }
+
         });
       }
 
@@ -100,18 +90,7 @@ export class ManageUserComponent implements OnInit {
   searchMethod() {
     this.flagSearch = false
     // console.log(this.search);
-    this.apiService.getAllUser(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
-      if (res.success) {
-        if (res.data.length > 0) {
-          this.flagData = false
-          this.userList = res.data;
-          this.length = res.total;
-          console.log(this.userList);
-        } else {
-          this.flagData = true
-        }
-      }
-    })
+    this.ShowAllUser()
 
   }
 
@@ -119,27 +98,17 @@ export class ManageUserComponent implements OnInit {
 
     this.flagSearch = true
     this.search = ''
-    this.apiService.getAllUser(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
-      if (res.success) {
-        if (res.data.length > 0) {
-          this.flagData = false
-          this.userList = res.data;
-          this.length = res.total;
-          console.log(this.userList);
-        } else {
-          this.flagData = true
-        }
-      }
-    });
+    this.ShowAllUser()
   }
 
 
 
   UserListAfterPageSizeChanged(e): any {
     //console.log(e);
-
+    debugger
     if (e.pageIndex == 0) {
       this.page = 1;
+      this.pageSize = e.pageSize
       // this.page = e.pageIndex;
       //  this.srNo = e.pageIndex * e.pageSize
       this.flagUserList = false
@@ -148,32 +117,32 @@ export class ManageUserComponent implements OnInit {
         this.page = e.pageIndex + 1;
         this.srNo = e.pageIndex * e.pageSize
         this.flagUserList = true
+        this.pageSize = e.pageSize
       } else {
         this.page = e.pageIndex;
         this.srNo = e.pageIndex * e.pageSize
         this.flagUserList = true
+        this.pageSize = e.pageSize
       }
 
     }
-    this.apiService.getAllUser(this.page, e.pageSize, this.search, this.filterBy).subscribe((res) => {
-      if (res.success) {
-        if (res.data.length > 0) {
-          this.flagData = false
-          this.userList = res.data;
-          this.length = res.total;
-          console.log(this.userList);
-        } else {
-          this.flagData = true
-        }
-      }
-    })
+    this.ShowAllUser();
   }
 
 
   ShowAllUser() {
 
     //Calling method from service which will call api for data
-    this.apiService.getAllUser(this.page, this.pageSize, this.search, this.filterBy).subscribe(res => {
+    let body = {
+      roles: this.roles,
+      filter: this.filterBy,
+      search: this.search,
+      page: this.page,
+      count: this.pageSize
+    }
+    this.apiService.getList(body).subscribe(res => {
+      console.log(res);
+
       if (res.success) {
         if (res.data.length > 0) {
           this.flagData = false
@@ -250,33 +219,24 @@ export class ManageUserComponent implements OnInit {
           "id": id,
           "model": "User"
         }
-        this.apiService.delete(data).then(res => {
 
-          this.deleteFromList(i)
+        this.apiService.delete(data).subscribe(res => {
+          console.log(res);
+          if (res.success) {
+            //  this.getAllCategories()
+            this.commonService.successToast(res.message);
+
+          } else {
+            this.commonService.errorToast(res.message)
+          }
+
         });
+
       } else {
         console.log("cancellled")
       }
 
     });
-
-
-  }
-  deleteFromList(i) {
-    this.commonService.successToast('User deleted');
-    this.ShowAllUser();
-    // setTimeout(() => {
-    //   let temp = this.apiService.flagDelete;
-    //   if (temp == true) {
-    //     // this.userList.splice(i, 1);
-    //     // console.log(this.userList)
-    //     // alert("deleted")
-
-    //   }
-    //   else {
-    //     console.log("error")
-    //   }
-    // }, 1000);
 
 
   }

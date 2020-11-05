@@ -94,6 +94,8 @@ import { SignUpWithMobileComponent } from './sign-up-with-mobile/sign-up-with-mo
 import { NgOtpInputModule } from 'ng-otp-input';
 import { ProfileSetUpComponent } from './profile-set-up/profile-set-up.component';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { ManageCelebrityComponent } from './manage-celebrity/manage-celebrity.component';
+import { DocumentComponent } from './document/document.component';
 
 // import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 // import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -185,6 +187,8 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
     SignUpComponent,
     SignUpWithMobileComponent,
     ProfileSetUpComponent,
+    ManageCelebrityComponent,
+    DocumentComponent,
 
 
 

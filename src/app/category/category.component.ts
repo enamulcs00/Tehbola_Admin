@@ -17,6 +17,7 @@ export class CategoryComponent implements OnInit {
   addCategoryForm: FormGroup;
   editCategoryForm: FormGroup;
   addSubcategoryForm: FormGroup;
+  editSubcategoryForm: FormGroup
   categoryImage: any;
   subCategoryImage: any;
   submitted: any;
@@ -25,7 +26,9 @@ export class CategoryComponent implements OnInit {
   imageUrl: any
   flagImage: boolean;
   previewImage: any;
-
+  page: number = 1
+  count: number = 100
+  subCatId: any;
 
 
 
@@ -41,25 +44,30 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit() {
     this.addCategoryForm = this.formBuilder.group({
-      name: new FormControl("", [Validators.required, Validators.maxLength(20), Validators.pattern(".*\\S.*[a-zA-z0-9 ]")]),
+      name: new FormControl("", [Validators.required, Validators.maxLength(20),]),
       name_ar: new FormControl("", [Validators.required, Validators.maxLength(20)]),
       commission: new FormControl("", [Validators.required, Validators.maxLength(20)]),
       image: new FormControl("", [Validators.required]),
     });
     this.editCategoryForm = this.formBuilder.group({
-      name: new FormControl("", [Validators.required, Validators.maxLength(20), Validators.pattern(".*\\S.*[a-zA-z0-9 ]")]),
+      name: new FormControl("", [Validators.required, Validators.maxLength(20),]),
       name_ar: new FormControl("", [Validators.required, Validators.maxLength(20)]),
       commission: new FormControl("", [Validators.required, Validators.maxLength(20)]),
       image: new FormControl(""),
     });
     this.addSubcategoryForm = this.formBuilder.group({
-      name: new FormControl("", [Validators.required, Validators.maxLength(20), Validators.pattern(".*\\S.*[a-zA-z0-9 ]")]),
+      name: new FormControl("", [Validators.required, Validators.maxLength(20),]),
       name_ar: new FormControl("", [Validators.required, Validators.maxLength(20)]),
       image: new FormControl("", [Validators.required]),
     });
+    this.editSubcategoryForm = this.formBuilder.group({
+      name: new FormControl("", [Validators.required, Validators.maxLength(20),]),
+      name_ar: new FormControl("", [Validators.required, Validators.maxLength(20)]),
+      image: new FormControl(""),
+    });
   }
   getAllCategories() {
-    this.apiService.getAllCategories().subscribe(res => {
+    this.apiService.getAllCategories(this.page, this.count).subscribe(res => {
       this.categories = res.data;
       console.log(this.categories);
       this.submitted = false;
@@ -138,8 +146,6 @@ export class CategoryComponent implements OnInit {
   }
 
   onUpdateCategory() {
-
-
     this.submitted = true;
     console.log(this.imageFile);
     if (this.submitted && this.editCategoryForm.valid) {
@@ -173,7 +179,6 @@ export class CategoryComponent implements OnInit {
   }
 
   onAddSubCategory() {
-
     this.submitted = true;
     if (this.submitted && this.addSubcategoryForm.valid) {
       const data = new FormData();
@@ -247,11 +252,19 @@ export class CategoryComponent implements OnInit {
           "id": id,
           "model": "Category"
         }
-        this.apiService.delete(data).then(res => {
 
-          this.deleteFromList(id)
-        }
-        )
+        this.apiService.delete(data).subscribe(res => {
+          console.log(res);
+          if (res.success) {
+            this.getAllCategories()
+            this.commonService.successToast(res.message);
+
+          } else {
+            this.commonService.errorToast(res.message)
+          }
+
+        });
+
 
       } else {
         console.log("cancelled");
@@ -287,9 +300,16 @@ export class CategoryComponent implements OnInit {
         console.log(data)
 
 
-        this.apiService.delete(data).then(res => {
+        this.apiService.delete(data).subscribe(res => {
+          console.log(res);
+          if (res.success) {
+            this.getAllCategories()
+            this.commonService.successToast(res.message);
 
-          this.deleteSubCategoryFromList(id)
+          } else {
+            this.commonService.errorToast(res.message)
+          }
+
         });
 
       } else {
@@ -298,13 +318,6 @@ export class CategoryComponent implements OnInit {
     });
   }
 
-  deleteSubCategoryFromList(id) {
-
-    this.getAllCategories()
-    this.commonService.successToast("Sub Cateogry Deleted");
-
-
-  }
 
 
   deleteFromList(i) {
@@ -320,6 +333,72 @@ export class CategoryComponent implements OnInit {
   onAddSubCategoryBtn(id) {
     this.id = id;
   }
+
+  editSubCategory(id) {
+    // alert(id);
+    this.subCatId = id
+    this.viewSubCategory(id);
+  }
+
+  viewSubCategory(id) {
+    this.picUploader = false
+
+    this.apiService.viewCategory(id).subscribe((res) => {
+      if (res.data) {
+        this.flagImage = false;
+        console.log(res)
+        this.editSubcategoryForm.controls['name'].setValue(res.data.name);
+
+        this.editSubcategoryForm.controls['name_ar'].setValue(res.data.name_ar);
+        let data = res.data
+        this.image = data.image
+        this.imageFile = data.image;
+        this.imageName = data.image.name
+        console.log(this.image);
+
+      }
+    })
+
+    console.log(this.image)
+  }
+
+
+
+  updateSubcategory() {
+
+    debugger
+
+    this.submitted = true;
+    console.log(this.imageFile);
+    if (this.submitted && this.editSubcategoryForm.valid) {
+      console.log(this.editSubcategoryForm.value)
+      const data = new FormData();
+      data.append('id', this.subCatId)
+      data.append('name', this.editSubcategoryForm.get('name').value);
+      data.append('name_ar', this.editSubcategoryForm.get('name_ar').value);
+      if (this.picUploader == true) {
+        data.append('image', this.imageFile, this.imageFile.name);
+
+      }
+      console.log(" form data");
+      data.forEach((value, key) => {
+        console.log(key + " " + value)
+      });
+      this.apiService.editCategory(data).subscribe(res => {
+        if (res) {
+          this.previewImage = null
+          this.getAllCategories();
+          this.commonService.successToast(res.message);
+          this.submitted = false;
+          this.editSubcategoryForm.reset();
+          this.image = null;
+
+          this.imageFile = null
+        }
+      });
+    }
+  }
+
 
 
   back() {

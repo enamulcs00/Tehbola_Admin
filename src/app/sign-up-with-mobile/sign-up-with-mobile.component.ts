@@ -39,7 +39,7 @@ export class SignUpWithMobileComponent implements OnInit {
   }
 
   onSignUp() {
-    debugger
+
 
     this.submitted = true
     if (this.submitted && this.singUpFormWithPhone.valid) {

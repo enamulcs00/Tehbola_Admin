@@ -31,7 +31,17 @@ export class ApiService {
       adminLogin: 'panel/signin',
       forgotPassword: 'panel/forgotPassword',
       resetPasswordPhone: 'panel/resetPasswordPhone',
-      getCategoryList: 'admin/getAllCategories'
+      getCategoryList: 'admin/getAllCategories',
+      setProfile: 'panel/profileSetup',
+      getAllCategory: 'admin/categories',
+      addCategory: 'admin/category',
+      addSubCategory: 'admin/subCategory',
+      softdelete: 'common/delete',
+      getList: 'admin/getUsers',
+      viewDocument: 'admin/documents',
+      //commonApi to change status of any user type
+      status: 'common/status',
+
 
     }
     for (let key in this.apiEndPoints) {
@@ -119,6 +129,21 @@ export class ApiService {
       );
   }
 
+  setProfile(data): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.setProfile, data, this.getHeaders()).pipe(catchError(this.handleError()))
+
+  }
+
+
+  getList(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.getList, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+
+  getDocument(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.viewDocument, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
   // Method start of Soft Delete
   async  deleteData(url = '', data = {}) {
     const response = await fetch(url, {
@@ -143,10 +168,10 @@ export class ApiService {
 
   flagDelete: boolean
   data: any
-  async delete(body) {
+  async  deletemethod(body) {
     // this.flagDelete = false;
 
-    await this.deleteData(this.apiEndPoints.delete, body)
+    await this.deleteData(this.apiEndPoints.softdelete, body)
       .then(data => {
         if (data.success) {
           console.log("passed")
@@ -162,11 +187,17 @@ export class ApiService {
 
   }
 
+  delete(body): Observable<any> {
+
+    return this.http.post<any>(this.apiEndPoints.softdelete, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+
+  //Method End For Soft Delete
+
   back() {
     window.history.back()
   }
-  //Method End For Soft Delete
-
   //Method End For hard Delete
   async  hardDeleteData(url = '', data = {}) {
     const response = await fetch(url, {
@@ -316,9 +347,9 @@ export class ApiService {
 
 
 
-  getVendorList(page, count, filter, search) {
+  getVendorList(body, page, count, change) {
 
-    return this.http.get<any>(`${this.apiEndPoints.getAllVendor}?page=${page}&count=${count}&search=${search}&filter=${filter}`,
+    return this.http.post<any>(this.apiEndPoints.getAllVendor, body,
       this.getHeaders()
     ).pipe(
       catchError(this.handleError<any>('No user'))
@@ -381,9 +412,9 @@ export class ApiService {
   }
 
   //Categories
-  getAllCategories() {
+  getAllCategories(page, count) {
     return this.http
-      .get<any>(`${this.apiEndPoints.getCategoryList}`, this.getHeaders())
+      .get<any>(`${this.apiEndPoints.getAllCategory}?page=${page}&count=${count}`, this.getHeaders())
       .pipe(
         catchError(this.handleError<any>('All Product'))
       );
@@ -398,11 +429,13 @@ export class ApiService {
 
   addCategory(data) {
     return this.http
-      .post<any>(this.apiEndPoints.addCategories, data, this.getHeaders())
+      .post<any>(this.apiEndPoints.addCategory, data, this.getHeaders())
       .pipe(
         catchError(this.handleError<any>('Add Category'))
       );
   }
+
+
 
   editCategory(data) {
     // const data: FormData = new FormData();
@@ -412,7 +445,7 @@ export class ApiService {
     // data.append('image', category.img);
 
     return this.http
-      .put<any>(this.apiEndPoints.viewCategory, data, this.getHeaders())
+      .put<any>(this.apiEndPoints.addCategory, data, this.getHeaders())
       .pipe(
         catchError(this.handleError<any>('Edit Category'))
       );
@@ -420,7 +453,7 @@ export class ApiService {
 
   viewCategory(id) {
     return this.http
-      .get<any>(`${this.apiEndPoints.viewCategory}?id=${id}`, this.getHeaders())
+      .get<any>(`${this.apiEndPoints.addCategory}?id=${id}`, this.getHeaders())
       .pipe(
         catchError(this.handleError<any>('View Category'))
       );
@@ -434,6 +467,7 @@ export class ApiService {
       .pipe(
         catchError(this.handleError<any>('Add Category'))
       );
+
   }
 
   addVendor(data) {
