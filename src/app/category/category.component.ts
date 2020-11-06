@@ -67,7 +67,7 @@ export class CategoryComponent implements OnInit {
     });
   }
   getAllCategories() {
-    this.apiService.getAllCategories(this.page, this.count).subscribe(res => {
+    this.apiService.getAllCategories().subscribe(res => {
       this.categories = res.data;
       console.log(this.categories);
       this.submitted = false;
@@ -366,7 +366,7 @@ export class CategoryComponent implements OnInit {
 
   updateSubcategory() {
 
-    debugger
+
 
     this.submitted = true;
     console.log(this.imageFile);

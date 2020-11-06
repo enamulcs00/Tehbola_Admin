@@ -26,13 +26,13 @@ export class ManageCelebrityComponent implements OnInit {
   srNo: number = 1;
   roles: any = 'celebrity';
   categoryList: any[];
-  selectedCategory: any;
+  selectedCategory = [];
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) {
-    this.getCategoryList
+    this.getCategoryList()
   }
 
   ngOnInit() {
-    this.showVendorList();
+    this.showCelebrityList();
   }
 
 
@@ -48,12 +48,12 @@ export class ManageCelebrityComponent implements OnInit {
       this.flag = false
 
     }
-    this.showVendorList();
+    this.showCelebrityList();
 
   }
 
 
-  showVendorList() {
+  showCelebrityList() {
     console.log("inside get vendor")
     let body = {
       roles: this.roles,
@@ -71,14 +71,22 @@ export class ManageCelebrityComponent implements OnInit {
     });
   }
 
-  acceptVendor() { }
+  acceptVendor(id) {
+    let body = {
+      id: id,
+      sellerProfileStatus: 1,
+
+    }
+    this.acceptReject(body)
+
+  }
   viewDocument(id) {
     this.router.navigate(['document'], { queryParams: { 'id': id, 'role': 'celebrity' } })
   }
-  declinedVendor() {
+  declinedVendor(id) {
     Swal.fire({
       title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this Vendor!",
+      text: "Please Provide the reason to decline this request!",
       icon: "warning",
       showCancelButton: true,
       input: 'text',
@@ -88,9 +96,35 @@ export class ManageCelebrityComponent implements OnInit {
       cancelButtonText: "Cancel",
       allowOutsideClick: true
     }).then(result => {
+      if (result.isConfirmed) {
+        let body = {
+          id: id,
+          sellerProfileStatus: 2,
+          message: result.value,
+        }
+        this.acceptReject(body)
+      } else {
+        console.log("nothing changed");
+
+      }
 
     })
 
+  }
+
+  acceptReject(body) {
+
+    this.apiService.approveReject(body).subscribe(res => {
+      console.log(res);
+      if (res.success) {
+        this.commonService.successToast(res.message)
+        this.showCelebrityList();
+
+      } else {
+        this.commonService.errorToast(res.message)
+
+      }
+    })
 
   }
 
@@ -116,7 +150,7 @@ export class ManageCelebrityComponent implements OnInit {
       }
 
     }
-    this.showVendorList()
+    this.showCelebrityList()
   }
 
 
@@ -124,37 +158,32 @@ export class ManageCelebrityComponent implements OnInit {
   searchMethod() {
     this.flagSearch = false
     console.log(this.search);
-    this.showVendorList()
+    this.showCelebrityList()
   }
 
   clearSearch() {
     this.flagSearch = true
     this.search = ''
-    this.showVendorList()
+    this.showCelebrityList()
 
   }
+  deleteCelebrity(id) {
 
-  deleteVendor(i) {
     Swal.fire({
       title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this Vendor!",
+      text: "Once deleted, you will not be able to recover this User!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085D6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes",
-      cancelButtonText: "Cancel",
+
       allowOutsideClick: true
     }).then(result => {
       if (result.value) {
-        let id: any
-        for (let j = 0; j <= this.vendorList.length; j++) {
-          if (i == j) {
-            id = this.vendorList[j]._id;
-            console.log("got delete request For-", id)
+        console.log(id)
 
-          }
-        }
+
         const data = {
           "id": id,
           "model": "User"
@@ -165,6 +194,7 @@ export class ManageCelebrityComponent implements OnInit {
           if (res.success) {
             //  this.getAllCategories()
             this.commonService.successToast(res.message);
+            this.showCelebrityList()
 
           } else {
             this.commonService.errorToast(res.message)
@@ -172,16 +202,14 @@ export class ManageCelebrityComponent implements OnInit {
 
         });
 
+      } else {
+        console.log("cancellled")
       }
-      else {
-        console.log("cancelled");
-      }
-    })
+
+    });
 
 
   }
-
-
 
 
   goToaddVender() {
@@ -208,10 +236,11 @@ export class ManageCelebrityComponent implements OnInit {
   }
 
   goToViewCategory(id) {
+    this.selectedCategory = []
     // alert(id);
     for (let item in this.categoryList) {
       for (let category in id) {
-        if (this.categoryList[item].id = id[category]) {
+        if (this.categoryList[item].id == id[category]) {
           this.selectedCategory.push(this.categoryList[item])
         }
       }
@@ -227,7 +256,7 @@ export class ManageCelebrityComponent implements OnInit {
     let page = 1;
     let count = 200;
 
-    this.apiService.getAllCategories(page, count).subscribe(res => {
+    this.apiService.getAllCategories().subscribe(res => {
 
       if (res.success) {
 

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from 'src/services/api.service';
 import { CommonService } from 'src/services/common.service';
 import Swal from 'sweetalert2';
+import { UrlService } from 'src/services/url.service';
 
 @Component({
   selector: 'app-brandlist',
@@ -17,38 +18,129 @@ export class BrandlistComponent implements OnInit {
   brandList = []
   result: import("sweetalert2").SweetAlertResult<unknown>;
   editableBrandId: any;
-  constructor(private apiService: ApiService, private fb: FormBuilder, private commonService: CommonService) {
+  page: any;
+  count: any;
+  imageUrl: string;
+  categoryList: any;
+  subcategoryList: any;
+  imageFile: any;
+  id: any;
+  flagImage: boolean;
+  previewImage: any;
+  brandImage: any;
+  picUploader: boolean;
+  constructor(private apiService: ApiService, private fb: FormBuilder, private commonService: CommonService, private urlService: UrlService) {
     this.getBrandList()
+    this.getCategoryList()
+    this.imageUrl = this.urlService.imageUrl;
   }
 
   ngOnInit() {
     this.addBrandForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(25)]],
-      name_ar: ['', [Validators.required, Validators.maxLength(25)]]
+      name_ar: ['', [Validators.required, Validators.maxLength(25)]],
+      category: ['', [Validators.required, Validators.maxLength(25)]],
+      subCategory: ['', [Validators.required, Validators.maxLength(25)]],
+      image: ['', [Validators.required, Validators.maxLength(25)]],
     });
     this.editBrandForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(25)]],
-      name_ar: ['', [Validators.required, Validators.maxLength(25)]]
+      name_ar: ['', [Validators.required, Validators.maxLength(25)]],
+      category: ['', [Validators.required, Validators.maxLength(25)]],
+      subCategory: ['', [Validators.required, Validators.maxLength(25)]],
+      image: ['', [Validators.required,]],
     })
   }
 
   getBrandList() {
+    //Pagination is applied in the backend. just not using in the front end because of design same as category
     this.apiService.getBrandList().subscribe(res => {
       console.log(res)
       if (res.success == true) {
+        console.log(res.data);
         this.brandList = res.data
       }
     })
   }
 
+  getCategoryList() {
+    this.apiService.getAllCategories().subscribe(res => {
+      console.log(res)
+      if (res.success == true) {
+        console.log(res.data);
+        this.categoryList = res.data
+      }
+    })
+  }
+
+
+  categorySelected(e) {
+    debugger
+    console.log(e.value);
+    let id = e.value
+    this.apiService.getSubcategoryList(e).subscribe(res => {
+      console.log(res)
+      if (res.success == true) {
+        console.log(res.data);
+        this.subcategoryList = res.data
+      }
+    })
+
+  }
+
+  async profilePic(event) {
+
+    this.picUploader = true
+    if (event.target.files && event.target.files[0]) {
+      this.imageFile = event.target.files[0];
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: any) => {
+        if (this.id) {
+          this.flagImage = true;
+          this.previewImage = event.target.result;
+          this.editBrandForm.controls['image'].setValue(this.imageFile);
+        } else {
+          this.brandImage = event.target.result;
+          this.addBrandForm.controls['image'].setValue(this.brandImage);
+
+        }
+
+      };
+    }
+  }
+
   editBrand(id) {
+    this.id = id
+    debugger
+    this.apiService.viewBrand(id).subscribe((res) => {
+      if (res.data) {
+        this.flagImage = false;
+        this.apiService.getSubcategoryList(res.data.category._id).subscribe(res => {
+          console.log(res)
+          if (res.success == true) {
+            console.log(res.data);
+            this.subcategoryList = res.data
+          }
+        })
+        console.log(res)
+        this.editableBrandId = res.data._id
+        this.editBrandForm.controls['name'].setValue(res.data.name);
 
-    let editableBrand = this.brandList.find(ele => ele._id == id)
+        this.editBrandForm.controls['name_ar'].setValue(res.data.name_ar);
+        this.editBrandForm.controls['category'].setValue(res.data.category.id);
 
-    console.log(editableBrand)
-    this.editableBrandId = editableBrand._id
-    this.editBrandForm.controls['name'].setValue(editableBrand.name);
-    this.editBrandForm.controls['name_ar'].setValue(editableBrand.name_ar)
+        this.editBrandForm.controls['subCategory'].setValue(res.data.subCategory.id);
+        this.editBrandForm.controls['image'].setValue(res.data.image.name)
+
+        let data = res.data
+        //  this.image = data.image
+        this.brandImage = data.image;
+        //   this.imageName = data.image.name
+        //  console.log(this.image);
+
+      }
+    })
 
   }
 
@@ -74,9 +166,6 @@ export class BrandlistComponent implements OnInit {
         }
 
         console.log(data)
-
-
-
         this.apiService.delete(data).subscribe(res => {
           console.log(res);
           if (res.success) {
@@ -88,8 +177,6 @@ export class BrandlistComponent implements OnInit {
           }
 
         });
-
-
       } else {
         console.log("cancelled");
       }
@@ -99,10 +186,20 @@ export class BrandlistComponent implements OnInit {
 
 
   onAddBrand() {
+
     this.submitted = true
     if (this.submitted && this.addBrandForm.valid) {
       let body = this.addBrandForm.value
-      this.apiService.addBrand(body).subscribe(res => {
+      console.log(body);
+
+      let formData = new FormData();
+      formData.append('name', this.addBrandForm.get('name').value);
+      formData.append('name_ar', this.addBrandForm.get('name').value);
+      formData.append('category', this.addBrandForm.get('name').value);
+      formData.append('subCategory', this.addBrandForm.get('name').value);
+      formData.append('image', this.imageFile, this.imageFile.name);
+
+      this.apiService.addBrand(formData).subscribe(res => {
         console.log(res)
         if (res.success == true) {
           this.commonService.successToast('SuccessFully Added')
@@ -122,13 +219,16 @@ export class BrandlistComponent implements OnInit {
   }
 
   onUpdateBrand() {
+    debugger
     this.submitted = true
     if (this.submitted && this.editBrandForm.valid) {
-      let body = new FormData;
-      body.append('id', this.editableBrandId)
-      body.append('name', this.editBrandForm.controls['name'].value);
-      body.append('name_ar', this.editBrandForm.controls['name_ar'].value);
-      this.apiService.editBrand(body).subscribe(res => {
+      let formData = new FormData();
+      formData.append('name', this.editBrandForm.get('name').value);
+      formData.append('name_ar', this.editBrandForm.get('name').value);
+      formData.append('category', this.editBrandForm.get('name').value);
+      formData.append('subCategory', this.editBrandForm.get('name').value);
+      formData.append('image', this.imageFile, this.imageFile.name);
+      this.apiService.editBrand(formData).subscribe(res => {
         console.log(res)
         if (res.success == true) {
           this.commonService.successToast('SuccessFully Edited')

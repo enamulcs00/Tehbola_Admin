@@ -39,6 +39,12 @@ export class ApiService {
       softdelete: 'common/delete',
       getList: 'admin/getUsers',
       viewDocument: 'admin/documents',
+      getBrandList: 'admin/getAllBrand',
+      getsubcategoryList: 'admin/subCategories',
+      addBrand: 'admin/addBrand',
+      viewBrand: 'admin/viewBrand',
+      editBrand: 'admin/editBrand',
+      approveReject: 'admin/approveReject',
       //commonApi to change status of any user type
       status: 'common/status',
 
@@ -132,6 +138,10 @@ export class ApiService {
   setProfile(data): Observable<any> {
     return this.http.post<any>(this.apiEndPoints.setProfile, data, this.getHeaders()).pipe(catchError(this.handleError()))
 
+  }
+
+  approveReject(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.approveReject, body, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
 
@@ -393,6 +403,13 @@ export class ApiService {
       pipe(catchError(this.handleError<any>('No user')));
   }
 
+  getSubcategoryList(id): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.getsubcategoryList}?parentId=${id}`, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  viewBrand(id): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.viewBrand}?id=${id}`, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
 
   editUser(userUpdate): Observable<any> {
     console.log(userUpdate)
@@ -412,9 +429,9 @@ export class ApiService {
   }
 
   //Categories
-  getAllCategories(page, count) {
+  getAllCategories() {
     return this.http
-      .get<any>(`${this.apiEndPoints.getAllCategory}?page=${page}&count=${count}`, this.getHeaders())
+      .get<any>(this.apiEndPoints.getAllCategory, this.getHeaders())
       .pipe(
         catchError(this.handleError<any>('All Product'))
       );

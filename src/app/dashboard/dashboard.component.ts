@@ -111,12 +111,13 @@ export class DashboardComponent implements OnInit {
   dashboardData: any;
   salesListData: any;
   revenueFilter: string = 'weekly';
+  roles: any;
   constructor(private router: Router, private apiService: ApiService) {
     this.type = "timeseries";
     this.width = "100%";
     this.height = "400";
     this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale, this.vendorFilter, this.revenueFilter)
-
+    this.roles=JSON.parse(this.apiService.getUser())
 
   }
 

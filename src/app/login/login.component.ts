@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
       this, this.apiService.singIn(data).subscribe(res => {
         if (res.success) {
 
-          debugger
+
 
           // this.commonService.successToast(res.message);
           let body = {

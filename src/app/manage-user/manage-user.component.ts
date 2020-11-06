@@ -36,7 +36,7 @@ export class ManageUserComponent implements OnInit {
 
   flag: boolean = false
   filterSelected(e) {
-    debugger
+
     if (this.filterBy) {
       this.flag = true
     }
@@ -105,7 +105,7 @@ export class ManageUserComponent implements OnInit {
 
   UserListAfterPageSizeChanged(e): any {
     //console.log(e);
-    debugger
+
     if (e.pageIndex == 0) {
       this.page = 1;
       this.pageSize = e.pageSize
@@ -194,7 +194,7 @@ export class ManageUserComponent implements OnInit {
     this.router.navigate(['editUser'], { queryParams: { "id": id } })
   }
 
-  async deleteUser(i) {
+  deleteUser(id) {
 
     Swal.fire({
       title: "Are you sure?",
@@ -208,13 +208,9 @@ export class ManageUserComponent implements OnInit {
       allowOutsideClick: true
     }).then(result => {
       if (result.value) {
-        console.log(i)
-        let id: any
-        for (let j = 0; j <= this.userList.length; j++) {
-          if (i == j) {
-            id = this.userList[j]._id
-          }
-        }
+        console.log(id)
+
+
         const data = {
           "id": id,
           "model": "User"
@@ -225,6 +221,7 @@ export class ManageUserComponent implements OnInit {
           if (res.success) {
             //  this.getAllCategories()
             this.commonService.successToast(res.message);
+            this.ShowAllUser()
 
           } else {
             this.commonService.errorToast(res.message)

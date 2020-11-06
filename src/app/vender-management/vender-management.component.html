@@ -7,7 +7,7 @@
                 <div class="sub_heading">
                     <h1>Vendor Management</h1>
                     <div class="top_subheading_add">
-                        <a (click)="goToaddVender()"><span>+</span>Add Vendor</a>
+                        <!-- <a (click)="goToaddVender()"><span>+</span>Add Vendor</a> -->
 
                         <a style="margin-left: 1em;" (click)="back()">Go Back</a>
 
@@ -85,8 +85,10 @@
                                 <td>{{item.address}}</td>
                                 <td>{{item.countryCode}}-{{item.phone}}</td>
                                 <td>{{item.email}}</td>
-                                <td class="Booking_status" (click)="goToViewCategory(item._id, item.firstName)"><a
-                                        class="accept_button">View Category</a>
+                                <td class="Booking_status" data-toggle="modal" style="margin-left:25px ;"
+                                    href="javascript:;" (click)="goToViewCategory(item.categories)"
+                                    data-target="#EditSubcategory"><a class="accept_button">View Category</a>
+
                                 </td>
                                 <td>
                                     <span>{{item.status==0?"Inactive":"Active"}}</span>
@@ -109,10 +111,10 @@
                                         <ul *ngIf="item.sellerProfileStatus==1">
                                             <!-- <li class="show" (click)="goToviewVendor()"><i class="fa fa-eye"></i></li>
                                         <li class="edit" (click)="goToeditVendor()"><i class="fa fa-pencil fa-fw"></i></li> -->
-                                            <li class="delete" (click)="deleteVendor(i)"><i
+                                            <li class="delete" (click)="deleteVendor(item._id)"><i
                                                     class="fa fa-trash-o fa-fw"></i></li>
                                         </ul>
-                                        <ul *ngIf="item.sellerProfileStatus ==0">
+                                        <ul *ngIf="item.sellerProfileStatus ==0 || item.sellerProfileStatus ==2">
                                             <li class="show" (click)="acceptVendor(item._id)"><i
                                                     class="fa fa-check"></i></li>
                                             <li class="edit" (click)="declinedVendor(item._id)"><i
@@ -130,6 +132,25 @@
                     (page)="pageEvent = vendorListAfterPageSizeChanged($event)">
                 </mat-paginator>
                 <!-----end pagination-->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Edit Sub-category -->
+<div id="EditSubcategory" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <h3>Category List</h3>
+                <ul>
+                    <li *ngFor="let item of selectedCategory; let i=index">
+                        {{i+1}} {{item.name}}
+                    </li>
+                </ul>
 
             </div>
         </div>

@@ -50,11 +50,13 @@
         <ul>
             <li (click)="goTodashboard()">Dashboard</li>
             <!-- <li (click)="goToreportpage()">Reporting</li> -->
-            <li (click)="goTomanageUser()">User Management </li>
-            <li (click)="goTovendermanagement()">Vendor Management</li>
-            <li (click)="goToCelebritymanagement()">Celebrity Management</li>
-            <!-- <li (click)="goToBrand()">Brand</li> -->
-            <li (click)="goTocategory()">Category</li>
+            <li (click)="goTomanageUser()" *ngIf="roles =='admin'">User Management </li>
+            <!-- <li  (click)="goToProduct()">Product Management </li> -->
+            <!-- *ngIf="roles =='celebrity || merchant'" -->
+            <li (click)="goTovendermanagement()" *ngIf="roles =='admin'">Vendor Management</li>
+            <li (click)="goToCelebritymanagement()" *ngIf="roles =='admin'">Celebrity Management</li>
+            <!-- <li (click)="goToBrand()">Brand Management</li> -->
+            <li (click)="goTocategory()" *ngIf="roles=='admin'">Category</li>
             <!-- <li (click)="goTosubcategory()">Sub-Category</li>
             <li (click)="goToinventry()">Inventory Management</li> -->
             <!-- <li (click)="goToordermanagement()">Sales </li> -->

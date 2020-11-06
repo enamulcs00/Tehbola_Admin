@@ -59,8 +59,8 @@ export class ProfileSetUpComponent implements OnInit {
     this.categoryList = []
     let page = 1;
     let count = 200;
-      
-    this.apiService.getAllCategories(page,count).subscribe(res => {
+
+    this.apiService.getAllCategories().subscribe(res => {
 
       if (res.success) {
 
@@ -99,7 +99,7 @@ export class ProfileSetUpComponent implements OnInit {
       bio: ['',],
       Specialities: ['', Validators.required],
       celebrityType: ['', Validators.required],
-      profilePhoto: ['', Validators.required],
+      profilePhoto: ['',],
       gender: ['', Validators.required]
     })
     if (this.roles === 'merchant') {
@@ -203,7 +203,7 @@ export class ProfileSetUpComponent implements OnInit {
 
   deletePhoto(id) {
     console.log(id);
-    debugger
+
     let temp = [];
     let tempDoc = []
     console.log("beforeDelete", this.urls);
@@ -219,7 +219,7 @@ export class ProfileSetUpComponent implements OnInit {
   }
 
   onProfileSetUp() {
-    debugger
+
 
     console.log("Form", this.setUpProfile.value);
     console.log("image", this.profileImage);

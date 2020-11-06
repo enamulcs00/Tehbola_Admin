@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as js from '../../assets/js/custom';
 import { Router } from '@angular/router';
 import { throwMatDuplicatedDrawerError } from '@angular/material';
+import { ApiService } from 'src/services/api.service';
 declare var $: any;
 @Component({
   selector: 'app-sidebar',
@@ -9,10 +10,24 @@ declare var $: any;
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
+  user: any;
+  roles: string;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private apiService: ApiService) {
+
+    this.user = JSON.parse(this.apiService.getUser())
+  }
 
   ngOnInit() {
+    this.roles = this.user.roles
+    // if (this.roles == 'admin') {
+    //   alert('Admin')
+
+    // } else if (this.roles == 'merchant') {
+    //   alert('vendor')
+    // } else if (this.roles == 'celebrity') {
+    //   alert('celebrity')
+    // }
     $('.nav_item').click(function () {
       $('.side_pages').css('width', '200')
     });
@@ -74,6 +89,10 @@ export class SidebarComponent implements OnInit {
 
   goToCelebritymanagement() {
     this.router.navigate(['manageCelebrity'])
+  }
+
+  goToProduct() {
+    this.router.navigate(['product'])
   }
 
   goToBrand() {

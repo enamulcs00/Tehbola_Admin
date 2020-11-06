@@ -93,6 +93,8 @@ export class NavbarComponent implements OnInit {
   //   this
   // }
   goTologin() {
+    sessionStorage.clear();
+
     this.router.navigate(['/login'])
   }
   goTonotification() {

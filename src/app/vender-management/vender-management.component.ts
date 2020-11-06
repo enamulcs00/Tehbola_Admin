@@ -27,7 +27,10 @@ export class VenderManagementComponent implements OnInit {
   roles: any = 'merchant';
   categoryList: any[];
   selectedCategory: any;
-  constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) { }
+  constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) {
+
+    this.getCategoryList()
+  }
 
   ngOnInit() {
     this.showVendorList();
@@ -66,11 +69,22 @@ export class VenderManagementComponent implements OnInit {
     });
   }
 
-  acceptVendor() { }
-  declinedVendor() {
+  acceptVendor(id) {
+    debugger
+    let body = {
+      id: id,
+      sellerProfileStatus: 1,
+
+    }
+    this.acceptReject(body)
+  }
+
+
+  declinedVendor(id) {
+    debugger
     Swal.fire({
       title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this Vendor!",
+      text: "Please Provide the reason to decline this request!",
       icon: "warning",
       showCancelButton: true,
       input: 'text',
@@ -80,9 +94,36 @@ export class VenderManagementComponent implements OnInit {
       cancelButtonText: "Cancel",
       allowOutsideClick: true
     }).then(result => {
+      if (result.isConfirmed) {
+        let body = {
+          id: id,
+          sellerProfileStatus: 2,
+          message: result.value,
+        }
+        this.acceptReject(body)
+      } else {
+        console.log("nothing changed");
+
+      }
 
     })
 
+
+  }
+
+  acceptReject(body) {
+
+    this.apiService.approveReject(body).subscribe(res => {
+      console.log(res);
+      if (res.success) {
+        this.commonService.successToast(res.message)
+        this.showVendorList();
+
+      } else {
+        this.commonService.errorToast(res.message)
+
+      }
+    })
 
   }
 
@@ -125,28 +166,23 @@ export class VenderManagementComponent implements OnInit {
     this.showVendorList()
 
   }
-
-  deleteVendor(i) {
+  deleteVendor(id) {
+    debugger
     Swal.fire({
       title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this Vendor!",
+      text: "Once deleted, you will not be able to recover this User!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085D6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes",
-      cancelButtonText: "Cancel",
+
       allowOutsideClick: true
     }).then(result => {
       if (result.value) {
-        let id: any
-        for (let j = 0; j <= this.vendorList.length; j++) {
-          if (i == j) {
-            id = this.vendorList[j]._id;
-            console.log("got delete request For-", id)
+        console.log(id)
 
-          }
-        }
+
         const data = {
           "id": id,
           "model": "User"
@@ -157,6 +193,7 @@ export class VenderManagementComponent implements OnInit {
           if (res.success) {
             //  this.getAllCategories()
             this.commonService.successToast(res.message);
+            this.showVendorList()
 
           } else {
             this.commonService.errorToast(res.message)
@@ -164,17 +201,14 @@ export class VenderManagementComponent implements OnInit {
 
         });
 
+      } else {
+        console.log("cancellled")
       }
-      else {
-        console.log("cancelled");
-      }
-    })
+
+    });
 
 
   }
-
-
-
 
   goToaddVender() {
     this.router.navigate(['addVender'])
@@ -201,6 +235,7 @@ export class VenderManagementComponent implements OnInit {
 
   goToViewCategory(id) {
     // alert(id);
+    this.selectedCategory = []
     for (let item in this.categoryList) {
       for (let category in id) {
         if (this.categoryList[item].id = id[category]) {
@@ -223,7 +258,7 @@ export class VenderManagementComponent implements OnInit {
     let page = 1;
     let count = 200;
 
-    this.apiService.getAllCategories(page, count).subscribe(res => {
+    this.apiService.getAllCategories().subscribe(res => {
 
       if (res.success) {
 

@@ -35,7 +35,7 @@ export class ForgotPasswordComponent implements OnInit {
 
 
   clickOnCheckBox(e) {
-    debugger
+    
     this.binding = e.value
     if (e.value == 'number') {
       this.forgetPasswordForm.get('phone').setValidators([Validators.required])
@@ -67,7 +67,7 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   goToLogin() {
-    debugger
+    
     this.submitted = true
     let data
     if (this.submitted && this.forgetPasswordForm.valid) {

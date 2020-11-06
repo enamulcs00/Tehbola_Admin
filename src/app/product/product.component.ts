@@ -201,7 +201,7 @@ export class ProductComponent implements OnInit {
 
   }
 
-  goToaddproduct() {
+  goToaddProduct() {
     this.router.navigate(['/addproduct'])
   }
   goToeditProduct() {
@@ -213,6 +213,10 @@ export class ProductComponent implements OnInit {
 
   goToVendorList() {
     this.router.navigate(['venderManagement']);
+  }
+
+  back() {
+    window.history.back()
   }
 
 }

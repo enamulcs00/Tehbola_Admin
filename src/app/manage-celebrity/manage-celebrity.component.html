@@ -7,7 +7,7 @@
                 <div class="sub_heading">
                     <h1>Celebrity Management</h1>
                     <div class="top_subheading_add">
-                        <a (click)="goToaddVender()"><span>+</span>Add Celebrity</a>
+                        <!-- <a (click)="goToaddVender()"><span>+</span>Add Celebrity</a> -->
 
                         <a style="margin-left: 1em;" (click)="back()">Go Back</a>
 
@@ -118,10 +118,10 @@
                                         <ul *ngIf="item.sellerProfileStatus==1">
                                             <!-- <li class="show" (click)="goToviewVendor()"><i class="fa fa-eye"></i></li>
                                         <li class="edit" (click)="goToeditVendor()"><i class="fa fa-pencil fa-fw"></i></li> -->
-                                            <li class="delete" (click)="deleteVendor(i)"><i
+                                            <li class="delete" (click)="deleteCelebrity(item._id)"><i
                                                     class="fa fa-trash-o fa-fw"></i></li>
                                         </ul>
-                                        <ul *ngIf="item.sellerProfileStatus ==0">
+                                        <ul *ngIf="item.sellerProfileStatus ==0 || item.sellerProfileStatus ==2">
                                             <li class="show" (click)="acceptVendor(item._id)"><i
                                                     class="fa fa-check"></i></li>
                                             <li class="edit" (click)="declinedVendor(item._id)"><i
@@ -154,8 +154,8 @@
             <div class="modal-body">
                 <h3>Category List</h3>
                 <ul>
-                    <li *ngFor="let item of selectedCategory">
-                        {{item.name}}
+                    <li *ngFor="let item of selectedCategory; let i=index">
+                        {{i+1}} {{item.name}}
                     </li>
                 </ul>
 

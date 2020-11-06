@@ -32,18 +32,24 @@
                             <div class="state-list button-border" *ngFor="let item of brandList; let i=index">
                                 <div class="state">
                                     <div class="country_name">
+                                        <figure><img src={{imageUrl+item.image}}></figure>
+                                        <span>
+                                            <span>
+                                                <b>{{ i+1 }}. {{ item.name }} </b> <a href="javascript:;"
+                                                    data-toggle="modal" data-target="#Add_State_delete">
+                                                    <i class="fa fa-edit" (click)="editBrand(item._id)"></i>
+                                                </a>
+
+                                                <a href="javascript:;">
+                                                    <i class="fa fa-trash" (click)="deleteBrand(item._id)"></i>
+                                                </a>
+                                                <p>Category:{{item.category.name}}</p>
+                                                <p>Sub-Category:{{item.subCategory.name}}</p>
+                                            </span>
+                                        </span>
                                         {{item.name}}
 
-                                        <a href="javascript:;" data-toggle="modal" data-target="#Add_State_delete">
-                                            <i class="fa fa-edit" (click)="editBrand(item._id)"></i>
-                                        </a>
 
-                                        <!-- <a href="javascript:;" data-toggle="modal" data-target="#Add_city">
-                                            <i class="fa fa-plus"></i>
-                                        </a> -->
-                                        <a href="javascript:;">
-                                            <i class="fa fa-trash" (click)="deleteBrand(item._id)"></i>
-                                        </a>
 
 
 
@@ -78,40 +84,97 @@
                 <form [formGroup]="addBrandForm">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="title">Name of the Brand</label>
-                            <div class="input-group">
-                                <input class="form-control" type="text" value="" name="name" formControlName="name">
-                            </div>
-                            <div *ngIf="submitted && addBrandForm.controls.name.errors" class="invalid-feedback">
-                                <div *ngIf="addBrandForm.controls.name.errors.required">
-                                    Brand Name is required.
-                                </div>
 
-                                <div *ngIf="addBrandForm.controls.name.errors.maxlength">
-                                    Brand Name should be max 25 characters long.
-                                </div>
-                            </div>
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Name of the Brand<span class="red">*</span></mat-label>
+                                <input matInput type="text" placeholder="Brand Name" formControlName="name"
+                                    name="password">
+                                <mat-error *ngIf="addBrandForm.get('name').hasError('required')">
+                                    Brand Name is <strong>required</strong>
+                                </mat-error>
+                                <mat-error *ngIf=" addBrandForm.get('name').hasError('maxlength') &&
+                              !addBrandForm.get('name').hasError('required')">
+                                    Brand Name should be max 20 characters long.
+                                </mat-error>
+                            </mat-form-field>
                         </div>
 
                         <div class="form-group col-md-12">
-                            <label for="title">Arabic Name of the Brand</label>
-                            <div class="input-group">
-                                <input class="form-control" type="text" value="" name="name_ar"
-                                    formControlName="name_ar">
-                            </div>
-                            <div *ngIf="submitted && addBrandForm.controls.name_ar.errors" class="invalid-feedback">
-                                <div *ngIf="addBrandForm.controls.name_ar.errors.required">
-                                    Brand arabic name is required.
-                                </div>
-                                <div *ngIf="addBrandForm.controls.name_ar.errors.pattern">
-                                    Brand arabic name is not valid.
-                                </div>
-                                <div *ngIf="addBrandForm.controls.name_ar.errors.maxlength">
-                                    Brand arabic name should be max 25 characters long.
-                                </div>
-                            </div>
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label> Arabic Name of the Brand<span class="red">*</span></mat-label>
+                                <input matInput type="text" placeholder="Arabic Brand Name" formControlName="name_ar"
+                                    name="password">
+                                <mat-error *ngIf="addBrandForm.get('name_ar').hasError('required')">
+                                    Brand Name is <strong>required</strong>
+                                </mat-error>
+                                <mat-error *ngIf=" addBrandForm.get('name_ar').hasError('maxlength') &&
+                              !addBrandForm.get('name_ar').hasError('required')">
+                                    Brand Name should be max 20 characters long.
+                                </mat-error>
+                            </mat-form-field>
+
                         </div>
 
+                        <div class="form-group col-md-12">
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Category<span class="red">*</span></mat-label>
+
+                                <mat-select placeholder="Category" (selectionChange)='categorySelected($event)'
+                                    formControlName="category">
+
+                                    <mat-option>--</mat-option>
+                                    <mat-option *ngFor="let item of categoryList" [value]="item._id">
+                                        {{item.name}}
+                                    </mat-option>
+                                </mat-select>
+
+                                <mat-error *ngIf="addBrandForm.get('category').hasError('required')">
+                                    Category is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Sub-Category<span class="red">*</span></mat-label>
+
+                                <mat-select placeholder="SubCategory" formControlName="subCategory">
+
+                                    <mat-option>--</mat-option>
+                                    <mat-option *ngFor="let item of subcategoryList" [value]="item._id">
+                                        {{item.name}}
+                                    </mat-option>
+                                </mat-select>
+
+                                <mat-error *ngIf="addBrandForm.get('subCategory').hasError('required')">
+                                    SubCategory is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+
+                        </div>
+
+                        <div class="form-group col-md-12">
+
+
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="title">Add Image</label>
+                            <div class="user_img">
+                                <figure *ngIf="brandImage">
+                                    <img style="height: 50px;width: 50px" [src]="brandImage" />
+                                </figure>
+                            </div>
+                            <div class="input-group">
+                                <input class="form-control file" type="file" accept="image/*"
+                                    (change)="profilePic($event)" formControlName="image" name="image">
+                            </div>
+                            <mat-error *ngIf="submitted && addBrandForm.get('image').hasError('required')">
+                                Image is <strong>required</strong>
+                            </mat-error>
+                        </div>
 
                     </div>
                 </form>
@@ -140,38 +203,98 @@
                 <form [formGroup]="editBrandForm">
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <label for="title">Name of the Brand</label>
-                            <div class="input-group">
-                                <input class="form-control" type="text" value="" name="name" formControlName="name">
-                            </div>
-                            <div *ngIf="submitted && editBrandForm.controls.name.errors" class="invalid-feedback">
-                                <div *ngIf="editBrandForm.controls.name.errors.required">
-                                    Brand Name is required.
-                                </div>
 
-                                <div *ngIf="editBrandForm.controls.name.errors.maxlength">
-                                    Brand Name should be max 25 characters long.
-                                </div>
-                            </div>
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Name of the Brand<span class="red">*</span></mat-label>
+                                <input matInput type="text" placeholder="Brand Name" formControlName="name"
+                                    name="password">
+                                <mat-error *ngIf="editBrandForm.get('name').hasError('required')">
+                                    Brand Name is <strong>required</strong>
+                                </mat-error>
+                                <mat-error *ngIf=" editBrandForm.get('name').hasError('maxlength') &&
+                              !editBrandForm.get('name').hasError('required')">
+                                    Brand Name should be max 20 characters long.
+                                </mat-error>
+                            </mat-form-field>
                         </div>
 
                         <div class="form-group col-md-12">
-                            <label for="title">Arabic Name of the Brand</label>
-                            <div class="input-group">
-                                <input class="form-control" type="text" value="" name="name_ar"
-                                    formControlName="name_ar">
-                            </div>
-                            <div *ngIf="submitted && editBrandForm.controls.name_ar.errors" class="invalid-feedback">
-                                <div *ngIf="editBrandForm.controls.name_ar.errors.required">
-                                    Brand arabic name is required.
-                                </div>
 
-                                <div *ngIf="editBrandForm.controls.name_ar.errors.maxlength">
-                                    Brand arabic name should be max 25 characters long.
-                                </div>
-                            </div>
+                            <mat-form-field class="example-full-width">
+                                <mat-label> Arabic Name of the Brand<span class="red">*</span></mat-label>
+                                <input matInput type="text" placeholder="Arabic Brand Name" formControlName="name_ar"
+                                    name="password">
+                                <mat-error *ngIf="editBrandForm.get('name_ar').hasError('required')">
+                                    Brand Name is <strong>required</strong>
+                                </mat-error>
+                                <mat-error *ngIf=" addBrandForm.get('name_ar').hasError('maxlength') &&
+                              !editBrandForm.get('name_ar').hasError('required')">
+                                    Brand Name should be max 20 characters long.
+                                </mat-error>
+                            </mat-form-field>
+
                         </div>
 
+                        <div class="form-group col-md-12">
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Category<span class="red">*</span></mat-label>
+
+                                <mat-select placeholder="Category" (selectionChange)='categorySelected($event.value)'
+                                    formControlName="category">
+
+                                    <mat-option>--</mat-option>
+                                    <mat-option *ngFor="let item of categoryList" [value]="item._id">
+                                        {{item.name}}
+                                    </mat-option>
+                                </mat-select>
+
+                                <mat-error *ngIf="editBrandForm.get('category').hasError('required')">
+                                    Category is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Sub-Category<span class="red">*</span></mat-label>
+
+                                <mat-select placeholder="SubCategory" formControlName="subCategory">
+
+                                    <mat-option>--</mat-option>
+                                    <mat-option *ngFor="let item of subcategoryList" [value]="item._id">
+                                        {{item.name}}
+                                    </mat-option>
+                                </mat-select>
+
+                                <mat-error *ngIf="editBrandForm.get('subCategory').hasError('required')">
+                                    SubCategory is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+
+                        </div>
+
+                        <div class="form-group col-md-12">
+
+
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="title">Add Image</label>
+                            <div class="user_img">
+                                <figure *ngIf="brandImage">
+                                    <img *ngIf="id" style="height: 50px;width: 50px" [src]="imageUrl+brandImage" alt="">
+                                    <img *ngIf="!id" style="height: 50px;width: 50px" [src]="previewImage" />
+                                </figure>
+                            </div>
+                            <div class="input-group">
+                                <input class="form-control file" type="file" accept="image/*"
+                                    (change)="profilePic($event)" formControlName="image" name="image">
+                            </div>
+                            <mat-error *ngIf="submitted && editBrandForm.get('image').hasError('required')">
+                                Image is <strong>required</strong>
+                            </mat-error>
+                        </div>
 
                     </div>
                 </form>
