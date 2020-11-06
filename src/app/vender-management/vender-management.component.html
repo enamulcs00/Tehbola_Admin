@@ -6,14 +6,9 @@
             <div class="container-fluid">
                 <div class="sub_heading">
                     <h1>Vendor Management</h1>
-                    <div class="top_subheading_add">
-                        <!-- <a (click)="goToaddVender()"><span>+</span>Add Vendor</a> -->
-
-                        <a style="margin-left: 1em;" (click)="back()">Go Back</a>
-
-
+                    <div class="input_divs input_button">
+                        <button mat-button (click)="back()">Go Back</button>
                     </div>
-
                 </div>
                 <div class="outer_table">
                     <div class="search_fields">
@@ -87,16 +82,19 @@
                                 <td>{{item.email}}</td>
                                 <td class="Booking_status" data-toggle="modal" style="margin-left:25px ;"
                                     href="javascript:;" (click)="goToViewCategory(item.categories)"
-                                    data-target="#EditSubcategory"><a class="accept_button">View Category</a>
+                                    data-target="#EditSubcategory"><button mat-button class="accept_button">View
+                                        Category</button>
 
                                 </td>
                                 <td>
-                                    <span>{{item.status==0?"Inactive":"Active"}}</span>
-
+                                    <div class="enable_disable">
+                                        <mat-slide-toggle (change)="changeUserStatus(item._id,item.status)"
+                                            [checked]="item.status=='1'? true:false"></mat-slide-toggle>
+                                    </div>
                                 </td>
                                 <td>{{item.createdAt | date}}</td>
                                 <td class="Booking_status" (click)="goToproduct(item._id)">
-                                    <a class="accept_button">View List</a></td>
+                                    <button mat-button class="accept_button">View List</button></td>
                                 <td>{{item.totalOrders}}</td>
                                 <td>{{item.totalRevenue}}</td>
                                 <td>

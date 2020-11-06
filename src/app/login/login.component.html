@@ -5,7 +5,7 @@
             <form [formGroup]="loginForm">
                 <div class="logo">
 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="197.459" height="60.406"
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="197.459" height="60.406"
                         viewBox="0 0 197.459 60.406">
                         <g id="Group_58938" data-name="Group 58938" transform="translate(-89 -358.274)">
                             <g id="Group_58920" data-name="Group 58920" transform="translate(89 358.274)">
@@ -40,9 +40,13 @@
                                     transform="translate(-618.105 -537.21)" fill="#ff960b" />
                             </g>
                         </g>
-                    </svg>
+                    </svg> -->
+                    <figure>
+                        <img src="assets/images/Icon-512.png" width="120px" height="120px" alt="">
+                    </figure>
 
                 </div>
+
                 <div class="sub_main_heading">
                     <h2>Login</h2>
                 </div>
@@ -54,15 +58,7 @@
                             Email/Phone is <strong>required</strong>
                         </mat-error>
                     </mat-form-field>
-                    <!-- <mat-form-field [floatLabel]="'never'">
-                        <input matInput type="text" name="number" placeholder="Email or Phone number"
-                            formControlName="email">
 
-                        <div class="custom-invalid"
-                            *ngIf=" submitted && loginForm.controls['email'].hasError('required')">
-                            Email is <strong>required</strong>
-                        </div>
-                    </mat-form-field> -->
                 </div>
                 <div class="input_divs">
                     <mat-form-field class="example-full-width">
@@ -78,41 +74,20 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <!-- <mat-form-field [floatLabel]="'never'">
-                        <input matInput type="password" name="password" placeholder="Password"
-                            formControlName="password">
-
-                        <div class="custom-invalid"
-                            *ngIf=" submitted && loginForm.controls['password'].hasError('required')">
-                            Password is <strong>required</strong>
-                        </div>
-                        <div class="custom-invalid"
-                            *ngIf=" submitted && loginForm.controls['password'].hasError('minlength') && !loginForm.controls['password'].hasError('required')">
-                            Password should be more than 7 characters
-                        </div>
-                    </mat-form-field> -->
                 </div>
-                <div>
-                    <mat-checkbox [(ngModel)]="rememberMe" [ngModelOptions]="{standalone: true}">
+                <div class="remember_me">
+                    <mat-checkbox class="loginCheckBox" [(ngModel)]="rememberMe" [ngModelOptions]="{standalone: true}">
                         Remember Me
                     </mat-checkbox>
-
-                </div>
-
-
-                <div class="row">
-
-
-
-
-                    <a [routerLink]="['/sign-Up']" class="login_anchor">Not a admin Yet, Register
-                        Now</a>
-
                     <a [routerLink]="['/forgotPassword']" class="login_anchor">Forgot
                         Password</a>
                 </div>
                 <div class="input_divs input_button">
                     <button (click)="onLogin()" [disabled]="!loginForm.valid" mat-button>Login</button>
+                </div>
+                <div class="row">
+                    <a [routerLink]="['/sign-Up']" class="login_anchor">Not a admin Yet, Register
+                        Now</a>
                 </div>
             </form>
         </div>

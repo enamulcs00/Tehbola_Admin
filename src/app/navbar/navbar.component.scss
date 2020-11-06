@@ -1,23 +1,25 @@
 .company_logo img {
-    width: 44%;
+    width: 100%;
     object-fit: contain;
 }
+
 .message_center h6.dropdown-header {
     font-size: 10px !important;
     font-weight: 500 !important;
 }
+
 .message_center .text-truncate {
     font-size: 11px;
 }
+
 .alert_center h6.dropdown-header {
     font-size: 15px !important;
     font-weight: 500 !important;
     background-color: #404553;
     border: 1px solid #404553;
 
-    
-}
 
+}
 
 .notification_list {
     font-size: 13px;
@@ -27,72 +29,105 @@
     vertical-align: middle;
     color: #000;
 }
+
 .topbar .dropdown-list .dropdown-item {
-   
-   padding: 10px;}
+
+    padding: 10px;
+}
+
 .dropdown-menu.dropdown-menu-right.shadow.animated--grow-in.top_header_profile a {
     font-size: 13px;
     font-weight: 600;
 }
-.country_flag svg{width:20px}
-li.language_change_sec {
-display: flex;
-align-items: center;
-justify-content: flex-end;
+
+.country_flag svg {
+    width: 20px
 }
+
+li.language_change_sec {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
 .country_flag {
-margin-right: 12px;
-margin-left: 10px;
-display: flex;
-justify-content: center;
-align-items: center;
+    margin-right: 12px;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .language_change_selectbox mat-form-field {
-width: 100%;
+    width: 100%;
 }
+
 .language_change_selectbox {
-width: 83px;
+    width: 83px;
 }
+
 .language_box svg#flag-icon-css-ae {
-width: 22px;
-margin-right: 11px;
+    width: 22px;
+    margin-right: 11px;
 }
-.language_dropdown{display: flex;justify-content: flex-start;align-items: center;}
+
+.language_dropdown {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
 .notification_nav svg {
     width: 30px;
     height: 26px;
 }
-.message_topnav svg{
-    width: 22px;height: 24px;
+
+.message_topnav svg {
+    width: 22px;
+    height: 24px;
 }
+
 .small {
     font-size: 12px;
 }
-.admin-contact h3{font-size: 12px;padding: 2px;}
+
+.admin-contact h3 {
+    font-size: 12px;
+    padding: 2px;
+}
+
 li.admin-contact {
- 
+
     padding-right: 20px;
 
 }
-h2.admin_conatct{font-size: 14px;padding-right: 12px;}
+
+h2.admin_conatct {
+    font-size: 14px;
+    padding-right: 12px;
+}
+
 ul.navbar-nav.ml-auto {
- 
+
     align-items: center;
 }
+
 span.contact_us {
     color: #8c7f7f;
     font-weight: 500;
 }
+
 span.email_us {
     font-weight: 500;
 }
 
-.dropdown-item:focus, .dropdown-item:hover {
+.dropdown-item:focus,
+.dropdown-item:hover {
     color: #2e2f37;
     text-decoration: none;
     background-color: #f8f9fc;
 }
+
 .icon-circle {
     display: inline-block;
     vertical-align: middle;
@@ -103,6 +138,7 @@ span.email_us {
     position: relative;
     border: 1px solid #eee;
 }
+
 i.material-icons {
     /* position: absolute; */
     position: absolute;
@@ -115,4 +151,6 @@ i.material-icons {
     font-size: 22px;
 }
 
-.topbar .dropdown-list{width: 400px !important;}
+.topbar .dropdown-list {
+    width: 400px !important;
+}

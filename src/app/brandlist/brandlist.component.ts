@@ -75,7 +75,7 @@ export class BrandlistComponent implements OnInit {
 
 
   categorySelected(e) {
-    debugger
+
     console.log(e.value);
     let id = e.value
     this.apiService.getSubcategoryList(e).subscribe(res => {
@@ -112,7 +112,7 @@ export class BrandlistComponent implements OnInit {
 
   editBrand(id) {
     this.id = id
-    debugger
+
     this.apiService.viewBrand(id).subscribe((res) => {
       if (res.data) {
         this.flagImage = false;
@@ -219,7 +219,7 @@ export class BrandlistComponent implements OnInit {
   }
 
   onUpdateBrand() {
-    debugger
+
     this.submitted = true
     if (this.submitted && this.editBrandForm.valid) {
       let formData = new FormData();

@@ -45,6 +45,7 @@ export class ApiService {
       viewBrand: 'admin/viewBrand',
       editBrand: 'admin/editBrand',
       approveReject: 'admin/approveReject',
+      editUser: 'admin/editUser',
       //commonApi to change status of any user type
       status: 'common/status',
 
@@ -330,6 +331,23 @@ export class ApiService {
   }
 
   changeUserStatus(body) {
+
+    return this.http.put<any>(`${this.apiEndPoints.status}`, body, this.getHeaders()
+    ).pipe(
+      catchError(this.handleError<any>('User status')))
+
+  }
+
+  editCelebrity(body) {
+
+    return this.http.put<any>(`${this.apiEndPoints.editUser}`, body, this.getHeaders()
+    ).pipe(
+      catchError(this.handleError<any>('User status')))
+
+  }
+  // 
+
+  changeCelebrityStatus(body) {
 
     return this.http.put<any>(`${this.apiEndPoints.status}`, body, this.getHeaders()
     ).pipe(

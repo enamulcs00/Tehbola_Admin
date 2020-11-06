@@ -6,8 +6,8 @@
             <div class="container-fluid">
                 <div class="sub_heading">
                     <h1>User Management</h1>
-                    <div class="right_side_buttons">
-                        <a (click)="back()">Go Back</a>
+                    <div class="input_divs input_button">
+                        <button mat-button (click)="back()">Go Back</button>
 
                     </div>
                     <!-- <div class="top_subheading_add">
@@ -100,8 +100,7 @@
                                     <td>{{item?.totalPaid}}</td>
                                     <td>
                                         <div class="top_subheading_add">
-                                            <button class="accept_button "
-                                                (click)="goToUserAddress(item._id)"><span></span>User
+                                            <button mat-button (click)="goToUserAddress(item._id)"><span></span>User
                                                 Address</button>
                                         </div>
                                     </td>

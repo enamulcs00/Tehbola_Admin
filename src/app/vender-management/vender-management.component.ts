@@ -27,6 +27,7 @@ export class VenderManagementComponent implements OnInit {
   roles: any = 'merchant';
   categoryList: any[];
   selectedCategory: any;
+  body: { model: string; id: any; status: number; };
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) {
 
     this.getCategoryList()
@@ -70,7 +71,7 @@ export class VenderManagementComponent implements OnInit {
   }
 
   acceptVendor(id) {
-    debugger
+
     let body = {
       id: id,
       sellerProfileStatus: 1,
@@ -79,6 +80,38 @@ export class VenderManagementComponent implements OnInit {
     this.acceptReject(body)
   }
 
+
+  changeUserStatus(id, status) {
+
+    let temp = id
+    for (let i = 0; i <= this.vendorList.length; i++) {
+      if (this.vendorList[i]._id == temp) {
+        if (status == 1) {
+          this.body = {
+            "model": "User",
+            "id": temp,
+            "status": 0
+          }
+        } else {
+          this.body = {
+            "model": "User",
+            "id": temp,
+            "status": 1
+          }
+        }
+        console.log(this.body)
+        this.apiService.changeUserStatus(this.body).subscribe((res) => {
+          console.log(res)
+          if (res.success) {
+            this.commonService.successToast(res.message)
+            this.showVendorList();
+          }
+
+        });
+      }
+
+    }
+  }
 
   declinedVendor(id) {
     debugger
@@ -167,7 +200,7 @@ export class VenderManagementComponent implements OnInit {
 
   }
   deleteVendor(id) {
-    debugger
+
     Swal.fire({
       title: "Are you sure?",
       text: "Once deleted, you will not be able to recover this User!",

@@ -6,12 +6,8 @@
             <div class="container-fluid">
                 <div class="sub_heading">
                     <h1>Celebrity Management</h1>
-                    <div class="top_subheading_add">
-                        <!-- <a (click)="goToaddVender()"><span>+</span>Add Celebrity</a> -->
-
-                        <a style="margin-left: 1em;" (click)="back()">Go Back</a>
-
-
+                    <div class="input_divs input_button">
+                        <button mat-button (click)="back()">Go Back</button>
                     </div>
 
                 </div>
@@ -19,8 +15,7 @@
                     <div class="search_fields">
                         <div class="filters Booking_status">
                             <mat-form-field class="example-full-width">
-                                <mat-label>Filter<span class="red">*</span></mat-label>
-
+                                <!-- <mat-label>Filter<span class="red">*</span></mat-label> -->
                                 <mat-select placeholder="Filter" [(ngModel)]="filterBy"
                                     (selectionChange)="filterSelected($event)">
                                     <mat-option *ngIf="flag==true" value="">
@@ -41,11 +36,9 @@
                         </div>
                         <div class="search_inner_fiels">
                             <div class="filters Booking_status">
-                                <label>Search</label>
                                 <div class="search_with_icons">
                                     <mat-form-field class="example-full-width">
                                         <mat-label>Search</mat-label>
-
                                         <input matInput type="text" [(ngModel)]="search" placeholder="">
                                     </mat-form-field>
                                     <button mat-button matSuffix mat-icon-button> <i *ngIf="flagSearch==true"
@@ -70,6 +63,7 @@
                                 <th>Email ID</th>
                                 <th>Category</th>
                                 <th>Status </th>
+                                <th>Featured</th>
                                 <th>Date of Joining</th>
                                 <th>Product List</th>
                                 <th>Total number of order</th>
@@ -88,16 +82,25 @@
                                 <td>{{item.email}}</td>
                                 <td class="Booking_status" data-toggle="modal" style="margin-left:25px ;"
                                     href="javascript:;" (click)="goToViewCategory(item.categories)"
-                                    data-target="#EditSubcategory"><a class="accept_button">View Category</a>
+                                    data-target="#EditSubcategory"><button mat-button class="accept_button ">View
+                                        Category</button>
 
                                 </td>
                                 <td>
-                                    <span>{{item.status==0?"Inactive":"Active"}}</span>
-
+                                    <div class="enable_disable">
+                                        <mat-slide-toggle (change)="changeUserStatus(item._id,item.status)"
+                                            [checked]="item.status=='1'? true:false"></mat-slide-toggle>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="enable_disable">
+                                        <mat-slide-toggle (change)="changeUserfeatured(item._id,item.isfeatured)"
+                                            [checked]="item.isFeatured=='1'? true:false"></mat-slide-toggle>
+                                    </div>
                                 </td>
                                 <td>{{item.createdAt | date}}</td>
                                 <td class="Booking_status" (click)="goToproduct(item._id)">
-                                    <a class="accept_button">View List</a></td>
+                                    <button mat-button class="accept_button">View List</button></td>
                                 <td>{{item.totalOrders}}</td>
 
                                 <td>{{item.totalRevenue}}</td>
