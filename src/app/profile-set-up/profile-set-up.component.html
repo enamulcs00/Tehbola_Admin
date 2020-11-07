@@ -196,6 +196,7 @@
                             <input type="file" placeholder="Add Contract" id="file" (change)="onFileChange($event) "
                                 formControlName="profilePhoto" name="documentOne">
 
+
                             <div class="row" *ngIf="urls">
                                 <figure class="col-4 item_img" *ngFor="let item of urls;let i=index">
                                     <img width="100px" height="100px " [src]="item.document" alt="tent">

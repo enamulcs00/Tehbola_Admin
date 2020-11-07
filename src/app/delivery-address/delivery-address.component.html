@@ -6,7 +6,10 @@
             <div class="container-fluid">
                 <div class="sub_heading">
                     <h1>Addresses</h1>
-                    <a (click)="goTomanageUser()">Back To List</a>
+                    <!-- <a (click)="goTomanageUser()">Back To List</a> -->
+                </div>
+                <div class="input_divs input_button input_button2">
+                    <button mat-button (click)="back()">Go Back</button>
                 </div>
 
                 <div col-lg-12 *ngIf="flagData==false">

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/services/api.service';
@@ -37,7 +37,7 @@ export class ProfileSetUpComponent implements OnInit {
   country: any;
   sub: any;
   roles: any;
-  constructor(private fb: FormBuilder, private route: Router, private router: ActivatedRoute, private apiService: ApiService, private commonService: CommonService) {
+  constructor(private fb: FormBuilder, private route: Router, private cd: ChangeDetectorRef, private router: ActivatedRoute, private apiService: ApiService, private commonService: CommonService) {
 
     this.readCountryCode();
     this.userDetails = JSON.parse(sessionStorage.getItem('Markat_User'));
@@ -99,7 +99,7 @@ export class ProfileSetUpComponent implements OnInit {
       bio: ['',],
       Specialities: ['', Validators.required],
       celebrityType: ['', Validators.required],
-      profilePhoto: ['',],
+      profilePhoto: [''],
       gender: ['', Validators.required]
     })
     if (this.roles === 'merchant') {
@@ -176,6 +176,8 @@ export class ProfileSetUpComponent implements OnInit {
           }
           this.urls.push(body);
           this.setUpProfile.controls['profilePhoto'].patchValue(this.imageFile);
+          // need to run CD since file load runs outside of zone
+          this.cd.markForCheck();
         };
       }
     } else {
@@ -228,9 +230,13 @@ export class ProfileSetUpComponent implements OnInit {
       let temp
 
       let formData = new FormData;
-      formData.append('profilePic', this.imageFile, this.imageFile.name);
-      for (let item in this.document) {
-        formData.append('documentOne', this.document[item], this.document[item].name);
+      if (this.imageFile) {
+        formData.append('profilePic', this.imageFile, this.imageFile.name);
+      }
+      if (this.document.length) {
+        for (let item in this.document) {
+          formData.append('documentOne', this.document[item], this.document[item].name);
+        }
       }
       formData.append('firstName', this.setUpProfile.get('firstName').value);
       formData.append('lastName', this.setUpProfile.get('lastName').value)

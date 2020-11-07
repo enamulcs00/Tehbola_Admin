@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="sub_heading">
                     <h1>Celebrity Management</h1>
-                    <div class="input_divs input_button">
+                    <div class="input_divs input_button input_button2">
                         <button mat-button (click)="back()">Go Back</button>
                     </div>
 
@@ -21,9 +21,7 @@
                                     <mat-option *ngIf="flag==true" value="">
                                         Remove Filter
                                     </mat-option>
-                                    <mat-option *ngIf="flag==false" value="">
 
-                                    </mat-option>
                                     <mat-option value="active">
                                         Active
                                     </mat-option>
@@ -43,10 +41,9 @@
                                     </mat-form-field>
                                     <button mat-button matSuffix mat-icon-button> <i *ngIf="flagSearch==true"
                                             class="fa fa-search" aria-hidden="true" (click)="searchMethod()"></i>
-                                    </button>
-                                    <button>
                                         <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
-                                            (click)="clearSearch()"></i></button>
+                                            (click)="clearSearch()"></i>
+                                    </button>
                                 </div>
                             </div>
 

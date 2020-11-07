@@ -51,6 +51,11 @@ export class DeliveryAddressComponent implements OnInit {
 
   }
 
+
+  back() {
+    window.history.back();
+  }
+
   editAddress(id) {
     this.editId = id
     this.flag = !this.flag

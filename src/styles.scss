@@ -201,9 +201,13 @@ b .input_divs {
 }
 
 .input_divs.input_button {
-    text-align: right;
+    text-align: center;
     margin: 30px 0 0;
     color: #97334b;
+}
+
+.input_divs.input_button2 {
+    text-align: right;
 }
 
 .input_divs.forgot_password {
@@ -225,7 +229,7 @@ b .input_divs {
     justify-content: space-between;
 }
 
-.container-fluid {
+.container-fluid-fluid {
     padding: 32px 28px 187px 90px !important;
     height: 800px;
     overflow-y: scroll;
@@ -790,10 +794,10 @@ textarea {
     margin-right: 10px;
 }
 
-.filters {
-    margin-right: 20px;
-    width: 300px;
-}
+// .filters {
+//     margin-right: 20px;
+//     width: 300px;
+// }
 
 .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
     background-color: #97334b !important;
@@ -898,7 +902,7 @@ td.Booking_status a.Reject_button {
         margin-bottom: 1rem;
     }
 
-    .container-fluid {
+    .container-fluid-fluid {
         height: 680px;
     }
 
@@ -912,13 +916,13 @@ td.Booking_status a.Reject_button {
 
     input.mat-input-element,
     .mat-select {
-        padding: 9px 16px;
+        // padding: 9px 16px;
     }
 
 }
 
 @media(max-width:1400px) {
-    .container-fluid {
+    .container-fluid-fluid {
         height: 650px;
     }
 
@@ -943,14 +947,14 @@ td.Booking_status a.Reject_button {
 
 }
 
-.cdk-overlay-container {
+.cdk-overlay-container-fluid {
     position: fixed;
     z-index: 1100 !important;
 }
 
 
 @media(max-width:1300px) {
-    .container-fluid {
+    .container-fluid-fluid {
         height: 540px;
     }
 }

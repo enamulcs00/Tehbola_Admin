@@ -215,6 +215,10 @@ export class BrandlistComponent implements OnInit {
   }
 
   cancelClicked() {
+    this.addBrandForm.reset();
+    this.editBrandForm.reset();
+    this.imageFile = ''
+    this.brandImage = ''
 
   }
 
