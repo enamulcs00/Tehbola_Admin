@@ -5,7 +5,7 @@
             <app-sidebar></app-sidebar>
             <div class="container-fluid">
                 <div class="sub_heading">
-                    <h1>{{profileData?.firstName}}'s Profile</h1>
+                    <h1> Profile</h1>
                 </div>
 
                 <div class="add_business_detail">
@@ -18,7 +18,8 @@
                                 <h2>{{profileData?.firstName}} {{profileData?.lastName}}</h2>
                                 <div class="follow_all">
                                     <ul>
-                                        <li><a (click)="goToeditprofile(profileData._id)">Edit Profile</a></li>
+                                        <li class="input_divs input_button "><button mat-button
+                                                (click)="goToeditprofile(profileData._id)">Edit Profile</button></li>
                                     </ul>
                                 </div>
                                 <div class="social_icon">

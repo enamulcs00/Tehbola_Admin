@@ -46,6 +46,7 @@ export class ApiService {
       editBrand: 'admin/editBrand',
       approveReject: 'admin/approveReject',
       editUser: 'admin/editUser',
+      changePassword: 'panel/changePassword',
       //commonApi to change status of any user type
       status: 'common/status',
 

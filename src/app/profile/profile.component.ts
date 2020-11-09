@@ -17,11 +17,11 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.imageUrl = this.urlService.imageUrl
-    this.apiService.getProfile().subscribe((res) => {
-      console.log(res.data)
-      this.profileData = res.data
+    // this.apiService.getProfile().subscribe((res) => {
+    //   console.log(res.data)
+    //   this.profileData = res.data
 
-    });
+    // });
 
   }
   goToeditprofile(id) {

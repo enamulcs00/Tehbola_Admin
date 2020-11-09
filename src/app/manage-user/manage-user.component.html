@@ -6,8 +6,9 @@
             <div class="container-fluid">
                 <div class="sub_heading">
                     <h1>User Management</h1>
-                    <div class="input_divs input_button input_button2">
-                        <button mat-button (click)="back()">Go Back</button>
+                    <div class="input_divs2 input_button input_button2">
+                        <button mat-button (click)="back()"><i class="fa fa-long-arrow-left"
+                                aria-hidden="true"></i></button>
 
                     </div>
                     <!-- <div class="top_subheading_add">
@@ -98,8 +99,8 @@
                                     <td>{{item?.totalPaid}}</td>
                                     <td>
                                         <div class="top_subheading_add">
-                                            <button mat-button (click)="goToUserAddress(item._id)"><span></span>User
-                                                Address</button>
+                                            <button mat-button
+                                                (click)="goToUserAddress(item._id)"><span></span>View</button>
                                         </div>
                                     </td>
                                     <td>{{item?.lastOrderAt | date}}</td>
@@ -110,9 +111,9 @@
                                             <ul>
                                                 <li class="show" (click)="goTobookingRequestHistory(i)"><i
                                                         class="fa fa-eye"></i></li>
-                                                <li class="edit" (click)="goToeditUser(i)"><i
+                                                <!-- <li class="edit" (click)="goToeditUser(i)"><i
                                                         class="fa fa-pencil fa-fw"></i>
-                                                </li>
+                                                </li> -->
                                                 <li class="delete" (click)="deleteUser(item._id)"><i
                                                         class="fa fa-trash-o fa-fw"></i></li>
                                             </ul>

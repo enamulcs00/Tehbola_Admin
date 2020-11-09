@@ -142,6 +142,8 @@ export class CategoryComponent implements OnInit {
 
         }
       });
+    } else {
+      this.submitted = false
     }
   }
 
@@ -197,6 +199,9 @@ export class CategoryComponent implements OnInit {
 
         }
       });
+    }
+    else {
+      this.submitted = false
     }
   }
 
