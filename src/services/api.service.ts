@@ -47,6 +47,8 @@ export class ApiService {
       approveReject: 'admin/approveReject',
       editUser: 'admin/editUser',
       changePassword: 'panel/changePassword',
+      getProducts: 'admin/product',
+      getUser: 'admin/viewUser',
       //commonApi to change status of any user type
       status: 'common/status',
 
@@ -210,6 +212,8 @@ export class ApiService {
   back() {
     window.history.back()
   }
+
+
   //Method End For hard Delete
   async  hardDeleteData(url = '', data = {}) {
     const response = await fetch(url, {
@@ -277,6 +281,9 @@ export class ApiService {
   isLoggedIn() {
     return this.getToken() !== null;
   }
+
+
+
 
 
   //Products
@@ -385,9 +392,9 @@ export class ApiService {
     );
   }
 
-  getVendorProduct(id, page, count, search, filter, categoryId, subCategoryId) {
-    console.log(id);
-    return this.http.get<any>(`${this.apiEndPoints.getVendorProducts}?id=${id}&page=${page}&count=${count}&search=${search}&filter=${filter}&category=${categoryId}&subCategory=${subCategoryId}`,
+  getProducts(page, count, filter, isApproved, search, seller, ) {
+    // console.log(id);
+    return this.http.get<any>(`${this.apiEndPoints.getProducts}?page=${page}&count=${count}&status=${filter}&isApproved=${isApproved}&search=${search}&seller=${seller}`,
       this.getHeaders()
     ).pipe(
       catchError(this.handleError<any>('Get Vendor Products'))

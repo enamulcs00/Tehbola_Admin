@@ -1,4 +1,4 @@
-<div class="login_div">
+<div class="login_div login_div2">
     <div class="container-fluid">
         <div class="conta_iner">
 
@@ -11,16 +11,16 @@
 
                     <ul>
 
-                        <li class="input_file">
-                            <label>Profile Photo </label>
+                        <li class="input_file P_file">
 
-                            <input type="file" placeholder="Add Profile Photo" id="file"
-                                (change)="onProfileChange($event) " formControlName="profilePhoto" name="documentOne">
+                            <input type="file" placeholder="" id="file" (change)="onProfileChange($event) "
+                                formControlName="profilePhoto" name="documentOne">
+
                             <div class="user_img">
 
                                 <ng-container *ngIf="uploaded==true; else elseTemplate">
                                     <figure>
-                                        <img style="height: 100px;width: 100px" [src]="profileImage" />
+                                        <img style="height: 100%;width: 100%" [src]="profileImage" />
                                     </figure>
                                 </ng-container>
                                 <ng-template #elseTemplate>

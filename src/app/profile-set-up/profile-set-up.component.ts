@@ -241,7 +241,8 @@ export class ProfileSetUpComponent implements OnInit {
       formData.append('firstName', this.setUpProfile.get('firstName').value);
       formData.append('lastName', this.setUpProfile.get('lastName').value)
       formData.append('email', this.setUpProfile.get('email').value)
-      formData.append('phone', this.setUpProfile.get('phone').value)
+      formData.append('phone', this.setUpProfile.get('phone').value);
+      formData.append('bio', this.setUpProfile.get('bio').value);
       formData.append('country', this.country)
       formData.append('address', this.formattedaddress)
       formData.append('countryCode', this.setUpProfile.get('countryCode').value)

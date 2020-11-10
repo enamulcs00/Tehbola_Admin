@@ -4,6 +4,8 @@ import { ApiService } from 'src/services/api.service';
 import { PageEvent } from '@angular/material/paginator';
 import { DomSanitizer } from '@angular/platform-browser';
 import { UrlService } from 'src/services/url.service';
+import Swal from 'sweetalert2';
+import { CommonService } from 'src/services/common.service';
 
 @Component({
   selector: 'app-product',
@@ -30,12 +32,18 @@ export class ProductComponent implements OnInit {
   page: number = 1;
   flagUserList: boolean = false;
   srNo: number;
+  user: any;
+  sellerId: any;
+  isApproved = false
+    ;
+  flagapproval: boolean;
+  idToDelete: any;
   constructor(private router: Router,
     private apiService: ApiService,
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
-    private serverUrl: UrlService
-
+    private serverUrl: UrlService,
+    private commonService: CommonService
   ) {
     this.sub = this.route
       .queryParams
@@ -48,6 +56,10 @@ export class ProductComponent implements OnInit {
           this.subCategory = params['subCategory']
         }
       });
+    this.user = JSON.parse(sessionStorage.getItem('Markat_User'))
+    console.log(this.user);
+    this.sellerId = this.user._id
+
     //alert(this.id)
   }
 
@@ -71,22 +83,26 @@ export class ProductComponent implements OnInit {
     console.log(e.target.value);
     this.filterBy = e.target.value;
 
-    this.apiService.getVendorProduct(this.id, this.page, this.pageSize, this.search, this.filterBy, this.categoryId, this.subCategory).
-      subscribe(res => {
-        if (res.data.length > 0) {
-          this.flagData = false;
-          this.productList = res.data;
-          this.length = res.total
-          console.log(res.data);
-          // this.productList = res.data
-        } else {
-          this.flagData = true;
-        }
-      })
+    this.getAllProducts()
+  }
+
+  approvedSelected(e) {
+    if (this.filterBy) {
+      this.flagapproval = true
+    }
+    else {
+      this.flagapproval = false
+
+    }
+    console.log(e.target.value);
+    this.isApproved = e.target.value;
+
+    this.getAllProducts()
   }
 
   getAllProducts() {
-    this.apiService.getVendorProduct(this.id, this.page, this.pageSize, this.search, this.filterBy, this.categoryId, this.subCategory)
+    this.apiService.getProducts(this.page, this.pageSize, this.filterBy, this.isApproved, this.search,
+      this.sellerId)
       .subscribe(res => {
         if (res.data.length > 0) {
           this.flagData = false;
@@ -101,38 +117,18 @@ export class ProductComponent implements OnInit {
       })
   }
 
+
   flagSearch: boolean = true
   searchMethod() {
     this.flagSearch = false
-    this.apiService.getVendorProduct(this.id, this.page, this.pageSize, this.search, this.filterBy, this.categoryId, this.subCategory).subscribe(res => {
-      if (res.data.length > 0) {
-        this.flagData = false;
-        this.productList = res.data;
-        this.length = res.total
-        console.log(res.data);
-        this.length = res.total
-        // this.productList = res.data
-      } else {
-        this.flagData = true;
-      }
-    });
+    this.getAllProducts();
 
   }
 
   clearSearch() {
     this.flagSearch = true
     this.search = ''
-    this.apiService.getVendorProduct(this.id, this.page, this.pageSize, this.search, this.filterBy, this.categoryId, this.subCategory).subscribe(res => {
-      if (res.data.length > 0) {
-        this.flagData = false;
-        this.productList = res.data;
-        console.log(res.data);
-        this.length = res.total
-        // this.productList = res.data
-      } else {
-        this.flagData = true;
-      }
-    });
+    this.getAllProducts()
   }
 
   onChangeBlockStatus(id, status) {
@@ -187,17 +183,7 @@ export class ProductComponent implements OnInit {
 
 
 
-    this.apiService.getVendorProduct(this.id, this.page, e.pageSize, this.search, this.filterBy, this.categoryId, this.subCategory).subscribe(res => {
-      if (res.data.length > 0) {
-        this.flagData = false;
-        this.productList = res.data;
-        console.log(res.data);
-        this.length = res.total
-        // this.productList = res.data
-      } else {
-        this.flagData = true;
-      }
-    });
+    this.getAllProducts()
 
   }
 
@@ -209,6 +195,44 @@ export class ProductComponent implements OnInit {
   }
   goToviewProduct(id: any) {
     this.router.navigate(['/viewProduct'], { queryParams: { "id": id, "name": this.name } })
+  }
+
+  deleteProduct(id) {
+    this.idToDelete = id
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this Product!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085D6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+
+      allowOutsideClick: true
+    }).then(result => {
+      if (result.value) {
+        console.log(this.idToDelete)
+        //  let id: any
+
+        const data = {
+          "id": this.idToDelete,
+          "model": "Product"
+        }
+        this.apiService.delete(data).subscribe(res => {
+          console.log(res);
+          if (res.success) {
+            this.commonService.successToast("Succesfully Deleted")
+          } else {
+            this.commonService.errorToast(res.message)
+          }
+        })
+      }
+    });
+
+
+
+
   }
 
   goToVendorList() {

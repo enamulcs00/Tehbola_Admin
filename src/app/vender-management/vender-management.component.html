@@ -105,8 +105,11 @@
                                 <td>
                                     <div class="action">
                                         <ul *ngIf="item.sellerProfileStatus==1">
-                                            <!-- <li class="show" (click)="goToviewVendor()"><i class="fa fa-eye"></i></li>
-                                        <li class="edit" (click)="goToeditVendor()"><i class="fa fa-pencil fa-fw"></i></li> -->
+                                            <li class="show" (click)="goToviewVendor(item._id)"><i
+                                                    class="fa fa-eye"></i></li>
+
+                                            <li class="edit" (click)="goToeditVendor()"><i
+                                                    class="fa fa-pencil fa-fw"></i></li>
                                             <li class="delete" (click)="deleteVendor(item._id)"><i
                                                     class="fa fa-trash-o fa-fw"></i></li>
                                         </ul>

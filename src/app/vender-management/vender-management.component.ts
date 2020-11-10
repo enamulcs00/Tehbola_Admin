@@ -246,8 +246,8 @@ export class VenderManagementComponent implements OnInit {
   goToaddVender() {
     this.router.navigate(['addVender'])
   }
-  goToviewVendor() {
-    this.router.navigate(['viewVendor'])
+  goToviewVendor(id) {
+    this.router.navigate(['viewVendor'], { queryParams: { 'id': id } })
   }
   goToeditVendor() {
     this.router.navigate(['editVendor'])

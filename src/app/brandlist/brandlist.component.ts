@@ -48,7 +48,7 @@ export class BrandlistComponent implements OnInit {
       name_ar: ['', [Validators.required, Validators.maxLength(25)]],
       category: ['', [Validators.required, Validators.maxLength(25)]],
       subCategory: ['', [Validators.required, Validators.maxLength(25)]],
-      image: ['', [Validators.required,]],
+      image: ['',],
     })
   }
 
@@ -75,9 +75,9 @@ export class BrandlistComponent implements OnInit {
 
 
   categorySelected(e) {
-
+    debugger
     console.log(e.value);
-    let id = e.value
+    // let id = e
     this.apiService.getSubcategoryList(e).subscribe(res => {
       console.log(res)
       if (res.success == true) {
@@ -138,7 +138,6 @@ export class BrandlistComponent implements OnInit {
         this.brandImage = data.image;
         //   this.imageName = data.image.name
         //  console.log(this.image);
-
       }
     })
 
@@ -146,7 +145,7 @@ export class BrandlistComponent implements OnInit {
 
   deleteBrand(id) {
 
-    Swal.clickCancel();
+    // Swal.clickCancel();
     Swal.fire({
       title: "Are you sure?",
       text: "Once deleted, you will not be able to recover this Brand!",
@@ -186,7 +185,7 @@ export class BrandlistComponent implements OnInit {
 
 
   onAddBrand() {
-
+    debugger
     this.submitted = true
     if (this.submitted && this.addBrandForm.valid) {
       let body = this.addBrandForm.value
@@ -194,9 +193,9 @@ export class BrandlistComponent implements OnInit {
 
       let formData = new FormData();
       formData.append('name', this.addBrandForm.get('name').value);
-      formData.append('name_ar', this.addBrandForm.get('name').value);
-      formData.append('category', this.addBrandForm.get('name').value);
-      formData.append('subCategory', this.addBrandForm.get('name').value);
+      formData.append('name_ar', this.addBrandForm.get('name_ar').value);
+      formData.append('category', this.addBrandForm.get('category').value);
+      formData.append('subCategory', this.addBrandForm.get('subCategory').value);
       formData.append('image', this.imageFile, this.imageFile.name);
 
       this.apiService.addBrand(formData).subscribe(res => {
@@ -204,6 +203,8 @@ export class BrandlistComponent implements OnInit {
         if (res.success == true) {
           this.commonService.successToast('SuccessFully Added')
           this.getBrandList()
+          this.addBrandForm.reset();
+          this.imageFile = ''
           this.submitted = false
         } else {
           this.commonService.errorToast(res.message)
@@ -223,15 +224,18 @@ export class BrandlistComponent implements OnInit {
   }
 
   onUpdateBrand() {
-
+    debugger
     this.submitted = true
     if (this.submitted && this.editBrandForm.valid) {
       let formData = new FormData();
+      formData.append('id', this.editableBrandId)
       formData.append('name', this.editBrandForm.get('name').value);
-      formData.append('name_ar', this.editBrandForm.get('name').value);
-      formData.append('category', this.editBrandForm.get('name').value);
-      formData.append('subCategory', this.editBrandForm.get('name').value);
-      formData.append('image', this.imageFile, this.imageFile.name);
+      formData.append('name_ar', this.editBrandForm.get('name_ar').value);
+      formData.append('category', this.editBrandForm.get('category').value);
+      formData.append('subCategory', this.editBrandForm.get('subCategory').value);
+      if (this.imageFile) {
+        formData.append('image', this.imageFile, this.imageFile.name);
+      }
       this.apiService.editBrand(formData).subscribe(res => {
         console.log(res)
         if (res.success == true) {
