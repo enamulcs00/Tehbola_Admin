@@ -26,6 +26,19 @@ export class ViewVendorComponent implements OnInit {
     types: [],
 
   }
+
+  celebrityTypeModel = [{
+    'value': 2,
+    'viewValue': 'Sell'
+  },
+  {
+    'value': 1,
+    'viewValue': 'Endorse'
+  },
+  {
+    'value': 3,
+    'viewValue': 'Both'
+  },]
   userDetails: any;
   roles: any;
   sub: any;
@@ -35,6 +48,7 @@ export class ViewVendorComponent implements OnInit {
   matchedCategory = [];
   categories: any;
   userRole: any;
+  celebrityType: any;
   constructor(private route: Router, private router: ActivatedRoute, private urlService: UrlService, private apiService: ApiService, private fb: FormBuilder) {
     this.userDetails = JSON.parse(sessionStorage.getItem('Markat_User'));
     console.log("USer", this.userDetails);
@@ -79,7 +93,7 @@ export class ViewVendorComponent implements OnInit {
     this.apiService.viewUser(this.id).subscribe(res => {
       console.log(res);
       if (res.success) {
-        debugger
+
         this.viewVendor.get('firstName').setValue(res.data.firstName),
           this.viewVendor.get('lastName').setValue(res.data.lastName);
         if (res.data.gender == 'M') {
@@ -95,15 +109,15 @@ export class ViewVendorComponent implements OnInit {
           this.viewVendor.get('bio').setValue(res.data.bio),
           this.viewVendor.get('address').setValue(res.data.address);
         this.viewVendor.get('celebrityType').setValue(res.data.celebrityType);
+        this.celebrityType = res.data.celebrityType
 
         //  this.viewVendor.get('firstName').setValue(res.data.firstName),
         this.userRole = res.data.roles
         this.profileImage = res.data.profilePic;
         this.categories = res.data.categories
 
-        this.findCategory(this.categories)
+        this.viewVendor.disable()
 
-        this.viewVendor.disable
       } else {
 
       }
@@ -111,15 +125,6 @@ export class ViewVendorComponent implements OnInit {
     })
   }
 
-  findCategory(categorys) {
-
-    for (let i = 0; i < categorys.length; i++) {
-      this.matchedCategory.push(categorys[i].name)
-    }
-
-    console.log(this.matchedCategory);
-
-  }
 
 
   public AddressChange(address: any) {

@@ -13,72 +13,130 @@
                     <div class="add_user_list">
                         <ul>
                             <li>
-                                <label>Name<span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="text" formControlName="name" placeholder="" name="name">
-                                    <div class="custom-invalid"
-                                        *ngIf=" submitted && addProductForm.controls['name'].hasError('required')">
-                                        Name is <strong>required</strong>
-                                    </div>
+                                <fieldset>
+                                    Celebrity
+                                    <input type="radio" formControlName="dicountOn" name="dicountOn"
+                                        (click)="setradio('celebrity')" value="category">
+                                    &nbsp;&nbsp;
+                                    Merchant
+                                    <input type="radio" formControlName="dicountOn" name="dicountOn"
+                                        (click)="setradio('merchant')" value="subCategory">&nbsp;&nbsp;
 
+                                    <mat-error *ngIf="addProductForm.get('dicountOn').hasError('required')">
+                                        Choose Seller is <strong>required</strong>
+                                    </mat-error>
+
+                                    <ng-container *ngIf="showMerchant; ">
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>Select Merchant<span class="red">*</span></mat-label>
+                                            <mat-select (selectionChange)="categorySelected($event.value)"
+                                                formControlName="merchantSeller">
+                                                <mat-option *ngFor="let body of vendorList" [value]="body._id">
+                                                    {{body.firstName}} {{body.lastName}}
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error
+                                                *ngIf="addProductForm.get('merchantSeller').hasError('required')">
+                                                Merchant is <strong>required</strong>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </ng-container>
+                                    <ng-container *ngIf="showCelebrity; ">
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>Select Celebrity<span class="red">*</span></mat-label>
+                                            <mat-select (selectionChange)="categorySelected($event.value)"
+                                                formControlName="celebritySeller">
+                                                <mat-option *ngFor="let body of vendorList" [value]="body._id">
+                                                    {{body.firstName}} {{body.lastName}}
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error
+                                                *ngIf="addProductForm.get('celebritySeller').hasError('required')">
+                                                Celebrity is <strong>required</strong>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </ng-container>
+
+
+                                </fieldset>
+
+
+                            </li>
+
+                            <li>
+
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Name<span class="red">*</span></mat-label>
+                                    <input type="text" matInput formControlName="name" placeholder="Name">
+
+                                    <mat-error *ngIf="addProductForm.get('name').hasError('required')">
+                                        Name is <strong>required</strong>
+                                    </mat-error>
                                 </mat-form-field>
                             </li>
                             <li>
-                                <label>Arbic Name <span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="text" formControlName="name_ar" placeholder="" name="name">
-                                    <div class="custom-invalid"
-                                        *ngIf=" submitted && addProductForm.controls['name_ar'].hasError('required')">
-                                        Arabic name is <strong>required</strong>
-                                    </div>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Arbic Name <span class="red">*</span></mat-label>
+                                    <input matInput type="text" placeholder="Arabic Name" formControlName="name_ar"
+                                        placeholder="" name="name">
+                                    <mat-error *ngIf="addProductForm.get('name_ar').hasError('required')">
+                                        Arabic Name is <strong>required</strong>
+                                    </mat-error>
                                 </mat-form-field>
                             </li>
                             <li>
-                                <label>Category<span class="red">*</span></label>
-                                <mat-form-field>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Category<span class="red">*</span></mat-label>
                                     <mat-select (selectionChange)="categorySelected($event.value)"
                                         formControlName="category">
-
-                                        <mat-option>None</mat-option>
                                         <mat-option *ngFor="let body of categoryList" [value]="body.id">{{body.name}}
                                         </mat-option>
                                     </mat-select>
-                                    <div class="custom-invalid"
-                                        *ngIf=" submitted && addProductForm.controls['category'].hasError('required')">
+                                    <mat-error *ngIf="addProductForm.get('category').hasError('required')">
                                         Category is <strong>required</strong>
-                                    </div>
+                                    </mat-error>
                                 </mat-form-field>
+
+                                <!-- <mat-form-field class="example-full-width">
+                                    <mat-label>Gender<span class="red">*</span></mat-label>
+
+                                    <mat-select [(value)]='gender' (selectionChange)="categorySelected($event.value)"
+                                        formControlName="gender">
+                                        <mat-option [value]="item.value" *ngFor="let item of genderModel">
+                                            {{item.viewValue}}
+                                        </mat-option>
+                                    </mat-select>
+
+                                    <mat-error *ngIf="editVendor.get('gender').hasError('required')">
+                                        Gender is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field> -->
                             </li>
                             <li>
-                                <label>Sub Category<span class="red">*</span></label>
-                                <mat-form-field>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Sub Category<span class="red">*</span></mat-label>
                                     <mat-select formControlName="subCategory">
 
-                                        <mat-option>None</mat-option>
                                         <mat-option *ngFor="let body of subCategoryList" [value]="body.id">{{body.name}}
                                         </mat-option>
                                     </mat-select>
-                                    <div class="custom-invalid"
-                                        *ngIf=" submitted && addProductForm.controls['subCategory'].hasError('required')">
-                                        Sub Category is <strong>required</strong>
-                                    </div>
+                                    <mat-error *ngIf="addProductForm.get('subCategory').hasError('required')">
+                                        Sub-Category is <strong>required</strong>
+                                    </mat-error>
                                 </mat-form-field>
                             </li>
 
                             <li>
-                                <label>Brand <span class="red">*</span></label>
 
-                                <mat-form-field>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Brand <span class="red">*</span></mat-label>
                                     <mat-select formControlName="brand" (selectionChange)="brandSelected($event.value)">
-
-                                        <mat-option>None</mat-option>
                                         <mat-option *ngFor="let body of brandList" [value]="body.id">{{body.name}}
                                         </mat-option>
                                     </mat-select>
-                                    <div class="custom-invalid"
-                                        *ngIf=" submitted && addProductForm.controls['brand'].hasError('required')">
+                                    <mat-error *ngIf="addProductForm.get('brand').hasError('required')">
                                         Brand is <strong>required</strong>
-                                    </div>
+                                    </mat-error>
                                 </mat-form-field>
 
                             </li>

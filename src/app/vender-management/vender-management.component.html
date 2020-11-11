@@ -6,7 +6,12 @@
             <div class="container-fluid">
                 <div class="sub_heading">
                     <h1>Vendor Management</h1>
+                    <div class="input_divs2 input_button ">
+                        <button mat-button (click)="goToaddVender()">Add Vendor</button>
+
+                    </div>
                     <div class="input_divs2 input_button input_button2">
+
                         <button mat-button (click)="back()"><i class="fa fa-long-arrow-left"
                                 aria-hidden="true"></i></button>
                     </div>
@@ -108,7 +113,7 @@
                                             <li class="show" (click)="goToviewVendor(item._id)"><i
                                                     class="fa fa-eye"></i></li>
 
-                                            <li class="edit" (click)="goToeditVendor()"><i
+                                            <li class="edit" (click)="goToeditVendor(item._id)"><i
                                                     class="fa fa-pencil fa-fw"></i></li>
                                             <li class="delete" (click)="deleteVendor(item._id)"><i
                                                     class="fa fa-trash-o fa-fw"></i></li>

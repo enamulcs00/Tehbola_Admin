@@ -31,6 +31,10 @@ export class AddproductComponent implements OnInit {
   tax: any;
   taxId: any;
   applyTax: any;
+  vendorList: any;
+  length: any;
+  showCelebrity: boolean;
+  showMerchant: boolean;
 
 
 
@@ -82,8 +86,54 @@ export class AddproductComponent implements OnInit {
 
 
   constructor(private router: Router, private apiService: ApiService,
-    private commonService: CommonService, private urlService: UrlService, private fb: FormBuilder) { }
+    private commonService: CommonService, private urlService: UrlService, private fb: FormBuilder) {
 
+
+
+  }
+  setradio(user) {
+    if (user == 'celebrity') {
+      this.showMerchant = false
+      let body = {
+        roles: 'celebrity',
+        filter: '',
+        search: '',
+        page: 1,
+        count: 1000
+      }
+      this.apiService.getList(body).subscribe((res) => {
+        if (res.success) {
+          console.log(res);
+          this.vendorList = res.data;
+          this.showCelebrity = true;
+          this.addProductForm.get('merchantSeller').disable()
+          this.length = res.total;
+        }
+      });
+
+    } else if (user == 'merchant') {
+      this.showCelebrity = false
+      let body = {
+        roles: 'merchant',
+        filter: '',
+        search: '',
+        page: 1,
+        count: 1000
+      }
+      this.apiService.getList(body).subscribe((res) => {
+        if (res.success) {
+          console.log(res);
+          this.vendorList = res.data;
+          this.showMerchant = true;
+          this.addProductForm.get('celebritySeller').disable()
+          this.length = res.total;
+        }
+      });
+
+
+    }
+
+  }
 
   getTax() {
 
@@ -112,6 +162,8 @@ export class AddproductComponent implements OnInit {
     this.getBrand();
 
     this.addProductForm = this.fb.group({
+      celebritySeller: ['', Validators.required],
+      merchantSeller: ['', Validators.required],
       name: ['', [Validators.required,]],
       name_ar: ['', Validators.required],
       category: ['', Validators.required],
@@ -125,7 +177,7 @@ export class AddproductComponent implements OnInit {
       discount: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
       highlights: ['',],
       highlights_ar: [''],
-
+      dicountOn: [''],
       isfeatured: ['', Validators.required],
       brand: ['', [Validators.required,]],
       price: ['', [Validators.required, Validators.min(0)]],

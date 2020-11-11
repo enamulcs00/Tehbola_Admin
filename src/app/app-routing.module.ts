@@ -282,12 +282,12 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'viewVendor',
+    path: 'view',
     component: ViewVendorComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'editVendor',
+    path: 'edit',
     component: EditVendorComponent,
     canActivate: [AuthGuard]
   },

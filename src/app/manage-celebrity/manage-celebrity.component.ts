@@ -145,6 +145,11 @@ export class ManageCelebrityComponent implements OnInit {
   }
 
 
+  addCelebrity() {
+
+  }
+
+
 
   changeUserStatus(id, status) {
 
@@ -279,13 +284,14 @@ export class ManageCelebrityComponent implements OnInit {
 
 
   goToaddVender() {
-    this.router.navigate(['addVender'])
+    this.router.navigate(['addVender'], { queryParams: { 'Add': 'celebrity' } })
   }
-  goToviewVendor() {
-    this.router.navigate(['viewVendor'])
+  goToviewVendor(id) {
+    this.router.navigate(['view'], { queryParams: { 'id': id } })
+
   }
-  goToeditVendor() {
-    this.router.navigate(['editVendor'])
+  goToeditVendor(id) {
+    this.router.navigate(['edit'], { queryParams: { 'id': id } })
   }
   goToproduct(i) {
     let id: any

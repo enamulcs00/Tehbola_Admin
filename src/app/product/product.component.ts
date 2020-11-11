@@ -34,7 +34,7 @@ export class ProductComponent implements OnInit {
   srNo: number;
   user: any;
   sellerId: any;
-  isApproved = false
+  isApproved = true
     ;
   flagapproval: boolean;
   idToDelete: any;
@@ -101,6 +101,7 @@ export class ProductComponent implements OnInit {
   }
 
   getAllProducts() {
+
     this.apiService.getProducts(this.page, this.pageSize, this.filterBy, this.isApproved, this.search,
       this.sellerId)
       .subscribe(res => {

@@ -184,7 +184,6 @@ export class ProfileSetUpComponent implements OnInit {
       this.commonService.errorToast('Only Document can be uploaded')
     }
 
-
   }
 
   onProfileChange(e) {
