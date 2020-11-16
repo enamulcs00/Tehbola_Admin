@@ -3,68 +3,96 @@
     <div id="content-wrapper" class="">
         <div id="content">
             <app-sidebar></app-sidebar>
-            <div class="container-fluid">
-                <div class="sub_heading">
-                    <h1>Add Vendor</h1>
-                    <a (click)="goTovendermanagement()">Back To List</a>
-                </div>
-                <!-----start input fields------>
-                <div class="add_user_list">
-                    <form [formGroup]="addVendorForm">
-                        <ul>
-                            <li>
-                                <label>First Name<span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="text" placeholder="" formControlName="firstName"
-                                        name="firstName">
-                                </mat-form-field>
-                                <div *ngIf="submitted && f.firstName.errors" class="custom-invalid">
-                                    <div *ngIf="f.firstName.errors.required">
-                                        First Name is required.
-                                    </div>
+            <div class="login_div login_div2">
+                <div class="container-fluid">
+                    <div class="conta_iner">
 
-                                    <div *ngIf="f.firstName.errors.maxlength">
-                                        First Name should not be more than 25.
-                                    </div>
+                        <div class="logininner">
 
-
+                            <form [formGroup]="setUpProfile">
+                                <div class="sub_main_heading">
+                                    <h2>Add {{roles=='merchant'? 'Vendor':'Celebrity'}} </h2>
                                 </div>
-                            </li>
-                            <li>
-                                <label>Last Name<span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="text" placeholder="" formControlName="lastName"
-                                        name="lastName">
-                                </mat-form-field>
-                                <div *ngIf="submitted && f.lastName.errors" class="custom-invalid">
-                                    <div *ngIf="f.lastName.errors.required">
-                                        Last Name is required.
-                                    </div>
 
-                                    <div *ngIf="f.lastName.errors.maxlength">
-                                        Last Name should not be more than 25.
-                                    </div>
+                                <ul>
 
+                                    <li class="input_file P_file">
 
-                                </div>
-                            </li>
-                            <li>
-                                <label>Email ID<span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="email" placeholder="" formControlName="email" name="email">
-                                </mat-form-field>
-                                <div *ngIf="submitted && f.email.errors" class="custom-invalid">
-                                    <div *ngIf="f.email.errors.required">
-                                        Email is required.
-                                    </div>
-                                    <div *ngIf="f.email.errors.email">
-                                        Email you entered is not valid, please type in a valid email address.
-                                    </div>
+                                        <input type="file" placeholder="" id="file" (change)="onProfileChange($event) "
+                                            formControlName="profilePhoto" name="documentOne">
+
+                                        <div class="user_img">
+
+                                            <ng-container *ngIf="uploaded==true; else elseTemplate">
+                                                <figure>
+                                                    <img style="height: 100%;width: 100%" [src]="profileImage" />
+                                                </figure>
+                                            </ng-container>
+                                            <ng-template #elseTemplate>
+                                                <img src="assets/profileImage" alt="">
+                                            </ng-template>
+
+                                        </div>
+
+                                    </li>
+
+                                    <li>
 
 
-                                </div>
-                            </li>
-                            <!-- <li>
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>First Name<span class="red">*</span></mat-label>
+                                            <input type="email" matInput formControlName="firstName"
+                                                placeholder="First Name">
+
+                                            <mat-error *ngIf="setUpProfile.get('firstName').hasError('required')">
+                                                First Name <strong>required</strong>
+                                            </mat-error>
+                                        </mat-form-field>
+
+                                    </li>
+                                    <li>
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>Last Name<span class="red">*</span></mat-label>
+                                            <input matInput type="text" placeholder="" formControlName="lastName"
+                                                name="lastName">
+                                            <mat-error *ngIf="setUpProfile.get('lastName').hasError('required')">
+                                                Last Name <strong>required</strong>
+                                            </mat-error>
+                                        </mat-form-field>
+
+                                    </li>
+                                    <li>
+                                        <!-- <label>Address<span class="red">*</span></label> -->
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>Gender<span class="red">*</span></mat-label>
+
+                                            <mat-select placeholder="Placeholder" formControlName="gender">
+                                                <mat-option value="M">
+                                                    Male
+                                                </mat-option>
+                                                <mat-option value="F">
+                                                    Female
+                                                </mat-option>
+                                            </mat-select>
+
+                                            <mat-error *ngIf="setUpProfile.get('gender').hasError('required')">
+                                                Gender is <strong>required</strong>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </li>
+
+                                    <li>
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>Email<span class="red">*</span></mat-label>
+                                            <input matInput type="email" placeholder="" formControlName="email"
+                                                name="email">
+                                            <mat-error *ngIf="setUpProfile.get('email').hasError('required')">
+                                                Email is <strong>required</strong>
+                                            </mat-error>
+                                        </mat-form-field>
+
+                                    </li>
+                                    <!-- <li>
 
 
 
@@ -81,165 +109,116 @@
 
                                 </div>
                             </li> -->
-                            <li>
-                                <label>Contact Number<span class="red">*</span></label>
-                                <div class="cardList">
-                                    <mat-form-field style="width: 20%;" [floatLabel]="'never'">
-                                        <input matInput type="number" min="0" id="firstInput"
-                                            formControlName="countryCode" name="countryCode">
-                                        <div *ngIf="submitted && f.countryCode.errors" class="custom-invalid">
-                                            <div *ngIf="f.countryCode.errors.required">
-                                                Country Code is required.
-                                            </div>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <li>
+                                        <!-- <label><span class="red">*</span></label> -->
+                                        <div class="cardList">
+                                            <mat-form-field style="width: 20%;" class="example-full-width">
+                                                <mat-label>Country Code<span class="red">*</span></mat-label>
+                                                <input type="text" list="browsers" aria-label="Number" matInput
+                                                    formControlName="countryCode">
+                                                <datalist id="browsers">
+                                                    <option *ngFor="let body of countryList" value="{{body.dial_code}}">
+                                                        {{body.name}}
+                                                    </option>
+                                                </datalist>
+                                                <mat-error *ngIf="setUpProfile.get('countryCode').hasError('required')">
+                                                    Country Code is <strong>required</strong>
+                                                </mat-error>
+
+                                            </mat-form-field>
+
+                                            <mat-form-field style="width: 80%;" class="example-full-width">
+                                                <mat-label>Phone Number<span class="red">*</span></mat-label>
+                                                <input matInput type="number" min="0" id="secondInput"
+                                                    formControlName="phone" name="phone">
+                                                <mat-error *ngIf="setUpProfile.get('phone').hasError('required')">
+                                                    Phone Number is <strong>required</strong>
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <!-- <label>Address<span class="red">*</span></label> -->
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>Address<span class="red">*</span></mat-label>
+
+                                            <input matInput formControlName="address" [options]="options"
+                                                ngx-google-places-autocomplete #placesRef="ngx-places"
+                                                (onAddressChange)="AddressChange($event)" />
+
+                                            <mat-error *ngIf="setUpProfile.get('address').hasError('required')">
+                                                Address is <strong>required</strong>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </li>
+                                    <!-- {{ formattedaddress }} -->
+                                    <li>
+                                        <mat-form-field class="example-full-width">
+
+                                            <mat-label>Bio</mat-label>
+                                            <textarea matInput placeholder="Tell us something about your self"
+                                                formControlName="bio"></textarea>
+                                        </mat-form-field>
+
+                                    </li>
+                                    <li>
+                                        <mat-label>Specialities<span class="red">*</span></mat-label>
+                                        <ng-multiselect-dropdown [placeholder]="" [data]="categoryList"
+                                            [(ngModel)]="selectedCategoryItem" [ngModelOptions]="{standalone: true}"
+                                            [settings]="categoryDropDownSettings" (onSelect)="onCategorySelect($event)"
+                                            (onSelectAll)="onSelectAll($event)">
+                                        </ng-multiselect-dropdown>
+                                        <mat-error
+                                            *ngIf="submitted==true && setUpProfile.get('Specialities').hasError('required')">
+                                            Specialities is <strong>required</strong>
+                                        </mat-error>
+
+                                    </li>
+                                    <li *ngIf="roles !=='merchant'">
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>Purpose<span class="red">*</span></mat-label>
+
+                                            <mat-select placeholder="Placeholder" formControlName="celebrityType">
+                                                <mat-option value="1">
+                                                    Endorse
+                                                </mat-option>
+                                                <mat-option value="2">
+                                                    Sell
+                                                </mat-option>
+                                                <mat-option value="3">
+                                                    Both
+                                                </mat-option>
+                                            </mat-select>
+
+                                            <mat-error *ngIf="setUpProfile.get('celebrityType').hasError('required')">
+                                                Purpose is <strong>required</strong>
+                                            </mat-error>
+                                        </mat-form-field>
+
+                                    </li>
+                                    <li class="input_file">
+                                        <label>Certificates </label>
+
+                                        <input type="file" placeholder="Add Contract" id="file"
+                                            (change)="onFileChange($event) " formControlName="profilePhoto"
+                                            name="documentOne">
+
+
+                                        <div class="row" *ngIf="urls">
+                                            <figure class="col-4 item_img" *ngFor="let item of urls;let i=index">
+                                                <img width="100px" height="100px " [src]="item.document" alt="tent">
+                                                <a class="del_btn" aria-label="Delete" (click)="deletePhoto(i)"> <i
+                                                        class="fa fa-trash-o fa-fw"></i></a>
+                                            </figure>
 
                                         </div>
 
 
-                                    </mat-form-field>
-
-                                    <mat-form-field style="width: 80%;" [floatLabel]="'never'">
-                                        <input matInput type="number" min="0" id="secondInput" formControlName="phone"
-                                            name="phone">
-                                        <div *ngIf="submitted && f.phone.errors" class="custom-invalid">
-                                            <div *ngIf="f.phone.errors.required">
-                                                Phone Number is required.
-                                            </div>
-                                        </div>
-                                    </mat-form-field>
-                                </div>
-                            </li>
-                            <li>
-                                <label>Address<span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="text" placeholder="" formControlName="address" name="address">
-                                </mat-form-field>
-                                <div *ngIf="submitted && f.address.errors" class="custom-invalid">
-                                    <div *ngIf="f.address.errors.required">
-                                        Address is required.
-                                    </div>
-                                    <div *ngIf="f.address.errors.maxlength">
-                                        Address should not be more than 200.
-                                    </div>
-
-
-                                </div>
-                            </li>
-                            <li>
-                                <label>City<span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="text" placeholder="" formControlName="city" name="city">
-                                </mat-form-field>
-                                <div *ngIf="submitted && f.city.errors" class="custom-invalid">
-                                    <div *ngIf="f.city.errors.required">
-                                        City is required.
-                                    </div>
-                                    <div *ngIf="f.city.errors.maxlength">
-                                        City should not be more than 50.
-                                    </div>
-
-                                </div>
-                            </li>
-                            <li>
-                                <label>State<span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="text" placeholder="" formControlName="state" name="state">
-                                </mat-form-field>
-                                <div *ngIf="submitted && f.state.errors" class="custom-invalid">
-                                    <div *ngIf="f.state.errors.required">
-                                        State is required.
-                                    </div>
-                                    <div *ngIf="f.state.errors.maxlength">
-                                        State should not be more than 50.
-                                    </div>
-
-                                </div>
-                            </li>
-                            <li>
-                                <label>Country<span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="text" placeholder="" formControlName="country" name="country">
-                                </mat-form-field>
-                                <div *ngIf="submitted && f.country.errors" class="custom-invalid">
-                                    <div *ngIf="f.country.errors.required">
-                                        Country is required.
-                                    </div>
-                                    <div *ngIf="f.country.errors.minlength">
-                                        Country should be more than 2.
-                                    </div>
-                                    <div *ngIf="f.country.errors.maxlength">
-                                        Country should not be more than 50.
-                                    </div>
-
-
-                                </div>
-                            </li>
-
-
-                            <li>
-                                <label>VatNumber<span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="number" placeholder="" min="0" formControlName="vatNumber"
-                                        name="vatNumber">
-                                </mat-form-field>
-                                <div *ngIf="submitted && f.vatNumber.errors" class="custom-invalid">
-                                    <div *ngIf="f.vatNumber.errors.required">
-                                        Vat number is required.
-                                    </div>
-
-
-                                </div>
-                            </li>
-                            <li>
-                                <label>BRN Number<span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="number" placeholder="" min="0" formControlName="brnNumber"
-                                        name="brnNumber">
-                                </mat-form-field>
-                                <div *ngIf="submitted && f.brnNumber.errors" class="custom-invalid">
-                                    <div *ngIf="f.brnNumber.errors.required">
-                                        BRN number is required.
-                                    </div>
-
-
-                                </div>
-                            </li>
-                            <li>
-                                <label>Name <span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="text" formControlName="company" name="company">
-                                </mat-form-field>
-                                <div *ngIf="submitted && f.company.errors" class="custom-invalid">
-                                    <div *ngIf="f.company.errors.required">
-                                        Company is required.
-                                    </div>
-                                    <div *ngIf="f.company.errors.maxLength">
-                                        Company should not be more than 50.
-                                    </div>
+                                    </li>
 
 
 
-                                </div>
-
-                            </li>
-                            <li class="input_file">
-                                <label>Contract <span class="red">*</span></label>
-
-                                <input type="file" placeholder="Add Contract" id="file" (change)="onFileChange($event) "
-                                    formControlName="vendorFile" name="documentOne">
-
-
-                                <div *ngIf="submitted && f.vendorFile.errors" class="custom-invalid">
-                                    <div *ngIf="f.vendorFile.errors.required">
-                                        Contract is required.
-                                    </div>
-
-                                </div>
-                            </li>
-
-
-
-                            <!-- <li>
+                                    <!-- <li>
                             <label>Status<span class="red">*</span></label>
                             <mat-form-field>
                                 <mat-select>
@@ -252,19 +231,16 @@
 
 
 
-                        </ul>
-                        <div class="update_button">
-                            <button mat-button (click)="addVendor()">
-                                <span><i class="fa fa-window-restore"></i>
-                                </span>
-                                Add
-                            </button>
+                                </ul>
+
+                                <div class="input_divs input_button">
+                                    <button (click)="onProfileSetUp()" mat-button>Save</button>
+                                </div>
+
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </div>
-                <!-----End input fields------>
-
-
             </div>
         </div>
     </div>

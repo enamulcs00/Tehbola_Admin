@@ -34,7 +34,7 @@ export class ProductComponent implements OnInit {
   srNo: number;
   user: any;
   sellerId: any;
-  isApproved = true
+  isApproved: any
     ;
   flagapproval: boolean;
   idToDelete: any;
@@ -58,8 +58,13 @@ export class ProductComponent implements OnInit {
       });
     this.user = JSON.parse(sessionStorage.getItem('Markat_User'))
     console.log(this.user);
-    this.sellerId = this.user._id
 
+    if (this.user.roles == 'admin') {
+      this.sellerId = null
+    } else {
+      this.sellerId = this.user._id
+
+    }
     //alert(this.id)
   }
 
@@ -73,6 +78,7 @@ export class ProductComponent implements OnInit {
   flag: boolean = false
 
   filterSelected(e) {
+
     if (this.filterBy) {
       this.flag = true
     }
@@ -80,42 +86,93 @@ export class ProductComponent implements OnInit {
       this.flag = false
 
     }
-    console.log(e.target.value);
-    this.filterBy = e.target.value;
+    console.log(e.value);
+    this.filterBy = e.value;
 
     this.getAllProducts()
   }
 
   approvedSelected(e) {
-    if (this.filterBy) {
+
+    if (this.isApproved) {
       this.flagapproval = true
     }
     else {
       this.flagapproval = false
 
     }
-    console.log(e.target.value);
-    this.isApproved = e.target.value;
+    console.log(e.value);
+    this.isApproved = e.value;
 
     this.getAllProducts()
   }
 
+
+  acceptProduct(id) {
+    let body = {
+      id: id,
+      isApproved: true
+    }
+    this.apiService.editProduct(body).subscribe(res => {
+      console.log(res);
+      if (res.success) {
+        this.commonService.successToast('Product Approved');
+        this.getAllProducts();
+      } else {
+        this.commonService.errorToast("Opps, SOmething went wrong, Please try again later")
+      }
+
+    })
+
+
+
+
+
+  }
+
   getAllProducts() {
 
-    this.apiService.getProducts(this.page, this.pageSize, this.filterBy, this.isApproved, this.search,
-      this.sellerId)
-      .subscribe(res => {
-        if (res.data.length > 0) {
-          this.flagData = false;
-          this.productList = res.data;
-          console.log(res.data);
-          this.length = res.total
-          // this.productList = res.data
-        } else {
-          this.flagData = true;
-        }
+    if (this.isApproved) { //Method if isApproved is selected for some value
+      this.apiService.getProducts(this.page, this.pageSize, this.filterBy, this.isApproved, this.search,
+        this.sellerId)
+        .subscribe(res => {
+          if (res.success) {
+            if (res.data.length > 0) {
+              this.flagData = false;
+              this.productList = res.data;
+              console.log(res.data);
+              this.length = res.total
+              // this.productList = res.data
+            } else {
+              this.flagData = true;
+            }
+          } else {
+            this.commonService.errorToast(res.message)
+            this.flagData = true
+          }
 
-      })
+        })
+    } else {  //method for get data with out isApproved in initial stage
+      this.apiService.getProductsWithoutApproved(this.page, this.pageSize, this.filterBy, this.search,
+        this.sellerId)
+        .subscribe(res => {
+          if (res.success) {
+            if (res.data.length > 0) {
+              this.flagData = false;
+              this.productList = res.data;
+              console.log(res.data);
+              this.length = res.total
+              // this.productList = res.data
+            } else {
+              this.flagData = true;
+            }
+          } else {
+            this.commonService.errorToast(res.message)
+            this.flagData = true
+          }
+
+        })
+    }
   }
 
 
@@ -133,6 +190,7 @@ export class ProductComponent implements OnInit {
   }
 
   onChangeBlockStatus(id, status) {
+
     console.log(id, status)
     let data: any
     let temp = id
@@ -164,8 +222,10 @@ export class ProductComponent implements OnInit {
 
 
   vendorProductListAfterPageSizeChanged(e): any {
+
     if (e.pageIndex == 0) {
       this.page = 1;
+      this.pageSize = e.pageSize
       // this.page = e.pageIndex;
       //  this.srNo = e.pageIndex * e.pageSize
       this.flagUserList = false
@@ -191,14 +251,15 @@ export class ProductComponent implements OnInit {
   goToaddProduct() {
     this.router.navigate(['/addproduct'])
   }
-  goToeditProduct() {
-    this.router.navigate(['/editProduct'])
+  goToeditProduct(id) {
+    this.router.navigate(['/editProduct'], { queryParams: { "id": id } })
   }
   goToviewProduct(id: any) {
-    this.router.navigate(['/viewProduct'], { queryParams: { "id": id, "name": this.name } })
+    this.router.navigate(['/viewProduct'], { queryParams: { "id": id } })
   }
 
   deleteProduct(id) {
+
     this.idToDelete = id
 
     Swal.fire({

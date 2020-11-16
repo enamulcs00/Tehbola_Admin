@@ -121,10 +121,10 @@ export class ManageReviewsComponent implements OnInit {
           "id": id,
           "model": "Rating"
         }
-        this.apiService.deleteHard(data).then(res => {
-          this.commonService.successToast("Review Deleted")
-          this.getReview(this.page, this.pageSize, this.search, this.filterBy)
-        });
+        // this.apiService.deleteHard(data).subscribe(res => {
+        //   this.commonService.successToast("Review Deleted")
+        //   this.getReview(this.page, this.pageSize, this.search, this.filterBy)
+        // });
       }
       else {
         console.log("cancelled");

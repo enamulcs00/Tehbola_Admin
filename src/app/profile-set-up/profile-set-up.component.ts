@@ -58,7 +58,7 @@ export class ProfileSetUpComponent implements OnInit {
     let temp = []
     this.categoryList = []
     let page = 1;
-    let count = 200;
+    let count = 2000;
 
     this.apiService.getAllCategories().subscribe(res => {
 
@@ -129,8 +129,8 @@ export class ProfileSetUpComponent implements OnInit {
     }
     for (let item in this.selectedCategoryItem) {
       this.selectedCategoryId.push(this.selectedCategoryItem[item].id)
-
     }
+
     this.setUpProfile.get('Specialities').setValue(this.selectedCategoryId)
   }
   onSelectAll(e) {

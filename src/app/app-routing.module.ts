@@ -242,7 +242,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'addVender',
+    path: 'add',
     component: AddVenderComponent,
     canActivate: [AuthGuard]
   },

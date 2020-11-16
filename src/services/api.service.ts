@@ -48,7 +48,15 @@ export class ApiService {
       editUser: 'admin/editUser',
       changePassword: 'panel/changePassword',
       getProducts: 'admin/product',
+      editProduct: 'admin/product',
+      addProduct: 'admin/product',
       getUser: 'admin/viewUser',
+      addCelebrityVendor: 'admin/addCelebrityVendor',
+      getSubcategory: 'admin/subCategories',
+      getCatByUser: 'admin/getUserCatAndSubCat',
+      getBrandBySubcat: 'admin/getBrands',
+      viewProduct: 'admin/viewProduct',
+      deleteImage: 'admin/deleteImage',
       //commonApi to change status of any user type
       status: 'common/status',
 
@@ -152,58 +160,71 @@ export class ApiService {
   getList(body): Observable<any> {
     return this.http.post<any>(this.apiEndPoints.getList, body, this.getHeaders()).pipe(catchError(this.handleError()))
   }
+  getCelebList(search, roles): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.getList}?search=${search}&roles=${roles}`, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
 
+  getCategoryByUser(id): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.getCatByUser}?id=${id}`, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+  getBrandListBySubcat(catId): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.getBrandBySubcat}?category=${catId}`, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
 
   getDocument(body): Observable<any> {
     return this.http.post<any>(this.apiEndPoints.viewDocument, body, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
   // Method start of Soft Delete
-  async  deleteData(url = '', data = {}) {
-    const response = await fetch(url, {
-      method: 'delete',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': this.getToken(),
+  // async  deleteData(url = '', data = {}) {
+  //   const response = await fetch(url, {
+  //     method: 'delete',
+  //     mode: 'cors',
+  //     cache: 'no-cache',
+  //     credentials: 'same-origin',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': this.getToken(),
 
-      },
-      redirect: 'follow',
-      referrerPolicy: 'no-referrer',
-      body: JSON.stringify(data)
-    });
-    return response.json(); // parses JSON response into native JavaScript objects
-  }
-
-
+  //     },
+  //     redirect: 'follow',
+  //     referrerPolicy: 'no-referrer',
+  //     body: JSON.stringify(data)
+  //   });
+  //   return response.json(); // parses JSON response into native JavaScript objects
+  // }
 
 
-  flagDelete: boolean
-  data: any
-  async  deletemethod(body) {
-    // this.flagDelete = false;
-
-    await this.deleteData(this.apiEndPoints.softdelete, body)
-      .then(data => {
-        if (data.success) {
-          console.log("passed")
-          this.flagDelete = true;
-          this.data = data
-        } else {
-          console.log("Failed")
-          this.flagDelete == false
-        }
 
 
-      });
+  // flagDelete: boolean
+  // data: any
+  // async  deletemethod(body) {
+  //   // this.flagDelete = false;
 
-  }
+  //   await this.deleteData(this.apiEndPoints.softdelete, body)
+  //     .then(data => {
+  //       if (data.success) {
+  //         console.log("passed")
+  //         this.flagDelete = true;
+  //         this.data = data
+  //       } else {
+  //         console.log("Failed")
+  //         this.flagDelete == false
+  //       }
+
+
+  //     });
+
+  // }
 
   delete(body): Observable<any> {
 
     return this.http.post<any>(this.apiEndPoints.softdelete, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  deleteImage(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.deleteImage, body, this.getHeaders()).pipe(catchError(this.handleError))
   }
 
 
@@ -215,47 +236,47 @@ export class ApiService {
 
 
   //Method End For hard Delete
-  async  hardDeleteData(url = '', data = {}) {
-    const response = await fetch(url, {
-      method: 'delete',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': this.getToken(),
+  // async  hardDeleteData(url = '', data = {}) {
+  //   const response = await fetch(url, {
+  //     method: 'delete',
+  //     mode: 'cors',
+  //     cache: 'no-cache',
+  //     credentials: 'same-origin',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': this.getToken(),
 
-      },
-      redirect: 'follow',
-      referrerPolicy: 'no-referrer',
-      body: JSON.stringify(data)
-    });
-    return response.json(); // parses JSON response into native JavaScript objects
-  }
-
-
+  //     },
+  //     redirect: 'follow',
+  //     referrerPolicy: 'no-referrer',
+  //     body: JSON.stringify(data)
+  //   });
+  //   return response.json(); // parses JSON response into native JavaScript objects
+  // }
 
 
-  flaghardDelete: boolean
-  harddata: any
-  async deleteHard(body) {
-    // this.flagDelete = false;
-
-    await this.hardDeleteData(this.apiEndPoints.hardDelete, body)
-      .then(data => {
-        if (data.success) {
-          console.log("passed")
-          this.flagDelete = true;
-          this.data = data
-        } else {
-          console.log("Failed")
-          this.flagDelete == false
-        }
 
 
-      });
+  // flaghardDelete: boolean
+  // harddata: any
+  // async deleteHard(body) {
+  //   // this.flagDelete = false;
 
-  }
+  //   await this.hardDeleteData(this.apiEndPoints.hardDelete, body)
+  //     .then(data => {
+  //       if (data.success) {
+  //         console.log("passed")
+  //         this.flagDelete = true;
+  //         this.data = data
+  //       } else {
+  //         console.log("Failed")
+  //         this.flagDelete == false
+  //       }
+
+
+  //     });
+
+  // }
   //method end for hard delete
 
 
@@ -283,10 +304,20 @@ export class ApiService {
   }
 
 
-
+  addVendorCelebrity(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.addCelebrityVendor, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
 
 
   //Products
+  AddProduct(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.addProduct, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  updateProduct(body): Observable<any> {
+    return this.http.put<any>(this.apiEndPoints.addProduct, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
   getAllProduct(page, count, search) {
     return this.http
       .get<any>(`${this.apiEndPoints.getAllProduct}?page=${page}&count=${count}&search=${search}`, this.getHeaders())
@@ -297,7 +328,7 @@ export class ApiService {
 
   viewProduct(id: any) {
     return this.http
-      .get<any>(`${this.apiEndPoints.viewProduct}?id=${id}`, this.getHeaders())
+      .get<any>(`${this.apiEndPoints.viewProduct}/${id}`, this.getHeaders())
       .pipe(
         catchError(this.handleError<any>('All Product'))
       );
@@ -399,6 +430,21 @@ export class ApiService {
     ).pipe(
       catchError(this.handleError<any>('Get Vendor Products'))
     );
+
+  }
+
+  getProductsWithoutApproved(page, count, filter, search, seller, ) {
+    // console.log(id);
+    return this.http.get<any>(`${this.apiEndPoints.getProducts}?page=${page}&count=${count}&status=${filter}&search=${search}&seller=${seller}`,
+      this.getHeaders()
+    ).pipe(
+      catchError(this.handleError<any>('Get Vendor Products'))
+    );
+
+  }
+
+  editProduct(body): Observable<any> {
+    return this.http.put<any>(this.apiEndPoints.editProduct, body, this.getHeaders()).pipe(catchError(this.handleError()))
 
   }
 
@@ -586,7 +632,7 @@ export class ApiService {
 
   getBrandList(): Observable<any> {
 
-    return this.http.get<any>(this.apiEndPoints.getBrandList, this.getHeaders()).pipe(catchError(this.handleError()))
+    return this.http.get<any>(`${this.apiEndPoints.getBrandList}?page=1&count=10000`, this.getHeaders()).pipe(catchError(this.handleError()))
 
   }
 

@@ -46,7 +46,7 @@
 
                                 <mat-select placeholder="Filter" [(ngModel)]="isApproved"
                                     (selectionChange)="approvedSelected($event)">
-                                    <mat-option *ngIf="flag==true" value="">
+                                    <mat-option *ngIf="flagapproval==true" value="">
                                         Remove Filter
                                     </mat-option>
 
@@ -108,19 +108,24 @@
                                 <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
                                 <td class="product_img">
                                     <figure>
-                                        <img *ngIf="!product.images" src="../../assets/images/makeup.png" alt="">
-                                        <img *ngIf="product.images" src={{imageUrl+product.images[0]}}
-                                            alt="product.category.name">
+                                        <img *ngIf="!product.images[0]" src="../../assets/images/makeup.png" alt="">
+                                        <img width="50px" height="50px" *ngIf="product.images[0]"
+                                            src={{imageUrl+product?.images[0]?.image}} alt="product.category.name">
                                     </figure>
                                 </td>
                                 <td>{{ product.name }}</td>
                                 <td>{{ product.category.name }}</td>
-                                <td>{{ product.subCategory.name }}</td>
+                                <td>
+                                    <span *ngFor="let item of product.subCategory">{{ item.name }},&nbsp;</span>
+                                </td>
                                 <td>{{ product.brand.name }}</td>
                                 <td>
-                                    <p *ngIf="product.gender=='M'">Male</p>
-                                    <p *ngIf="product.gender=='F'">Female</p>
-                                    <p *ngIf="product.gender=='B'">Both</p>
+                                    <p *ngIf="product.gender.length!=2">
+                                        <span *ngFor="let item of product.gender">{{ item=='M'?'Male':'Female' }}</span>
+                                    </p>
+                                    <p *ngIf="product.gender.length==2">
+                                        <span>Male,Female</span>
+                                    </p>
                                 </td>
                                 <td>{{ product.productQuantity }}</td>
                                 <td>{{ product.purchaseQuantity }}</td>
@@ -137,15 +142,37 @@
                                 </td>
                                 <td>
                                     <div class="action">
-                                        <ul>
-                                            <li class="show" (click)="goToviewProduct(product.id)"><i
-                                                    class="fa fa-eye"></i></li>
-                                            <li class="edit" (click)="goToeditProduct(product.id)"><i
-                                                    class="fa fa-pencil fa-fw"></i></li>
-                                            <li class="delete" (click)="deleteProduct(product.id)"><i
-                                                    class="fa fa-trash-o fa-fw"></i></li>
-                                        </ul>
+                                        <ng-container
+                                            *ngIf="user.roles=='admin' && product.isApproved==false; else elseTemplate">
+                                            <ul>
+                                                <li class="show" (click)="acceptProduct(product._id)"><i
+                                                        class="fa fa-check"></i></li>
+                                            </ul>
+                                        </ng-container>
+                                        <ng-template #elseTemplate>
+                                            <ng-container
+                                                *ngIf="user.roles!='admin' && product.isApproved==false; else elseTemplate">
+
+                                                To be approved by Admin
+
+                                            </ng-container>
+                                            <ng-template #elseTemplate>
+                                                <ul>
+                                                    <li class="show" (click)="goToviewProduct(product.id)"><i
+                                                            class="fa fa-eye"></i></li>
+                                                    <li class="edit" (click)="goToeditProduct(product.id)"><i
+                                                            class="fa fa-pencil fa-fw"></i></li>
+                                                    <li class="delete" (click)="deleteProduct(product.id)"><i
+                                                            class="fa fa-trash-o fa-fw"></i></li>
+                                                </ul>
+                                            </ng-template>
+
+
+                                        </ng-template>
+
+
                                     </div>
+
                                 </td>
                             </tr>
                         </table>

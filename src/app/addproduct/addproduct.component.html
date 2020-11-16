@@ -6,30 +6,34 @@
             <div class="container-fluid">
                 <div class="sub_heading">
                     <h1>Add Products</h1>
-                    <a (click)="goToproduct()">Back To List</a>
+                    <div class="input_divs2 input_button input_button2">
+
+                        <button mat-button (click)="apiService.back()"><i class="fa fa-long-arrow-left"
+                                aria-hidden="true"></i></button>
+                    </div>
                 </div>
                 <!-----start input fields------>
                 <form [formGroup]="addProductForm">
                     <div class="add_user_list">
                         <ul>
-                            <li>
+                            <li *ngIf="user.roles=='admin'">
                                 <fieldset>
                                     Celebrity
-                                    <input type="radio" formControlName="dicountOn" name="dicountOn"
-                                        (click)="setradio('celebrity')" value="category">
+                                    <input type="radio" formControlName="seller" name="seller"
+                                        (click)="setradio('celebrity')" value="celebrity">
                                     &nbsp;&nbsp;
-                                    Merchant
-                                    <input type="radio" formControlName="dicountOn" name="dicountOn"
-                                        (click)="setradio('merchant')" value="subCategory">&nbsp;&nbsp;
+                                    Vendor
+                                    <input type="radio" formControlName="seller" name="seller"
+                                        (click)="setradio('merchant')" value="merchant">&nbsp;&nbsp;
 
-                                    <mat-error *ngIf="addProductForm.get('dicountOn').hasError('required')">
+                                    <mat-error *ngIf="addProductForm.get('seller').hasError('required')">
                                         Choose Seller is <strong>required</strong>
                                     </mat-error>
 
                                     <ng-container *ngIf="showMerchant; ">
                                         <mat-form-field class="example-full-width">
-                                            <mat-label>Select Merchant<span class="red">*</span></mat-label>
-                                            <mat-select (selectionChange)="categorySelected($event.value)"
+                                            <mat-label>Select Vendor<span class="red">*</span></mat-label>
+                                            <mat-select (selectionChange)="merchantSelected($event.value)"
                                                 formControlName="merchantSeller">
                                                 <mat-option *ngFor="let body of vendorList" [value]="body._id">
                                                     {{body.firstName}} {{body.lastName}}
@@ -37,14 +41,14 @@
                                             </mat-select>
                                             <mat-error
                                                 *ngIf="addProductForm.get('merchantSeller').hasError('required')">
-                                                Merchant is <strong>required</strong>
+                                                Vendor is <strong>required</strong>
                                             </mat-error>
                                         </mat-form-field>
                                     </ng-container>
                                     <ng-container *ngIf="showCelebrity; ">
                                         <mat-form-field class="example-full-width">
                                             <mat-label>Select Celebrity<span class="red">*</span></mat-label>
-                                            <mat-select (selectionChange)="categorySelected($event.value)"
+                                            <mat-select (selectionChange)="celebritySelected($event.value)"
                                                 formControlName="celebritySeller">
                                                 <mat-option *ngFor="let body of vendorList" [value]="body._id">
                                                     {{body.firstName}} {{body.lastName}}
@@ -89,7 +93,7 @@
                                     <mat-label>Category<span class="red">*</span></mat-label>
                                     <mat-select (selectionChange)="categorySelected($event.value)"
                                         formControlName="category">
-                                        <mat-option *ngFor="let body of categoryList" [value]="body.id">{{body.name}}
+                                        <mat-option *ngFor="let body of categoryList" [value]="body._id">{{body.name}}
                                         </mat-option>
                                     </mat-select>
                                     <mat-error *ngIf="addProductForm.get('category').hasError('required')">
@@ -115,9 +119,11 @@
                             <li>
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Sub Category<span class="red">*</span></mat-label>
-                                    <mat-select formControlName="subCategory">
+                                    <mat-select formControlName="subCategory"
+                                        (selectionChange)="subCategorySelected($event.value)" multiple>
 
-                                        <mat-option *ngFor="let body of subCategoryList" [value]="body.id">{{body.name}}
+                                        <mat-option *ngFor="let body of subCategoryList" [value]="body._id">
+                                            {{body.name}}
                                         </mat-option>
                                     </mat-select>
                                     <mat-error *ngIf="addProductForm.get('subCategory').hasError('required')">
@@ -131,7 +137,7 @@
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Brand <span class="red">*</span></mat-label>
                                     <mat-select formControlName="brand" (selectionChange)="brandSelected($event.value)">
-                                        <mat-option *ngFor="let body of brandList" [value]="body.id">{{body.name}}
+                                        <mat-option *ngFor="let body of brandList" [value]="body._id">{{body.name}}
                                         </mat-option>
                                     </mat-select>
                                     <mat-error *ngIf="addProductForm.get('brand').hasError('required')">
@@ -140,8 +146,25 @@
                                 </mat-form-field>
 
                             </li>
-
                             <li>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Best suited for <span class="red">*</span></mat-label>
+                                    <mat-select formControlName="gender" multiple>
+
+                                        <mat-option value="M">
+                                            Male
+                                        </mat-option>
+                                        <mat-option value="F">
+                                            Female
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="addProductForm.get('gender').hasError('required')">
+                                        Please Select the gender this suits for
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+
+                            <!-- <li>
                                 <label>SKU number <span class="red">*</span></label>
                                 <mat-form-field [floatLabel]="'never'">
                                     <input matInput formControlName="skuNumber" type="number" placeholder=""
@@ -170,69 +193,77 @@
                                         ISBN number should not be less than 0
                                     </div>
                                 </mat-form-field>
-                            </li>
+                            </li> -->
                             <li>
                                 <label>Quantity <span class="red">*</span></label>
                                 <mat-form-field [floatLabel]="'never'">
                                     <input matInput type="number" formControlName="quantity" placeholder="" name="name">
-                                    <div class="custom-invalid"
-                                        *ngIf=" submitted && addProductForm.controls['quantity'].hasError('required')">
+                                    <mat-error *ngIf="addProductForm.get('quantity').hasError('required')">
                                         Quantity is <strong>required</strong>
-                                    </div>
-                                    <div class="custom-invalid"
-                                        *ngIf=" submitted && addProductForm.controls['quantity'].hasError('min') && !addProductForm.controls['quantity'].hasError('required')">
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="addProductForm.controls['quantity'].hasError('min') && !addProductForm.controls['quantity'].hasError('required')">
                                         Quantity should not be less than 0
-                                    </div>
+                                    </mat-error>
+
                                 </mat-form-field>
                             </li>
-                            <li>
-                                <label>Normal Stock <span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="number" formControlName="normalStock" placeholder=""
-                                        name="name">
-                                    <div class="custom-invalid" *ngIf=" submitted &&
-                                         addProductForm.controls['normalStock'].hasError('required')">
-                                        Normal Stock is <strong>required</strong>
-                                    </div>
-                                    <div class="custom-invalid" *ngIf=" submitted && addProductForm.controls['normalStock'].hasError('min') &&
-                                         !addProductForm.controls['quantity'].hasError('required')">
-                                        Normal Stock should not be less than 0
-                                    </div>
-                                </mat-form-field>
-                            </li>
-                            <li>
-                                <label>Over Stock <span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="number" formControlName="overStock" placeholder=""
-                                        name="name">
-                                    <div class="custom-invalid" *ngIf=" submitted &&
-                                          addProductForm.controls['overStock'].hasError('required')">
-                                        Over Stock is <strong>required</strong>
-                                    </div>
-                                    <div class="custom-invalid" *ngIf=" submitted && addProductForm.controls['overStock'].hasError('min') &&
-                                          !addProductForm.controls['quantity'].hasError('required')">
-                                        Over Stock should not be less than 0
-                                    </div>
-                                </mat-form-field>
-                            </li>
+                            <div class="row">
+                                <div class="col-6">
+                                    <li>
+                                        <label>Normal Stock <span class="red">*</span></label>
+                                        <mat-form-field [floatLabel]="'never'">
+                                            <input matInput type="number" formControlName="normalStock" placeholder=""
+                                                name="name">
+                                            <mat-error *ngIf="addProductForm.get('normalStock').hasError('required')">
+                                                Normal Stock is <strong>required</strong>
+                                            </mat-error>
+                                            <mat-error *ngIf="addProductForm.controls['normalStock'].hasError('min') &&
+                                         !addProductForm.controls['normalStock'].hasError('required')">
+                                                Normal Stock should not be less than 0
+                                            </mat-error>
+
+
+                                        </mat-form-field>
+                                    </li>
+                                </div>
+                                <div class="col-6">
+                                    <li>
+                                        <label>Over Stock <span class="red">*</span></label>
+                                        <mat-form-field [floatLabel]="'never'">
+                                            <input matInput type="number" formControlName="overStock" placeholder=""
+                                                name="name">
+                                            <mat-error *ngIf="addProductForm.get('overStock').hasError('required')">
+                                                Normal Stock is <strong>required</strong>
+                                            </mat-error>
+                                            <mat-error *ngIf="addProductForm.controls['overStock'].hasError('min') &&
+                                         !addProductForm.controls['overStock'].hasError('required')">
+                                                Normal Stock should not be less than 0
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </li>
+                                </div>
+                            </div>
                             <li>
                                 <label>Purchase quantity
                                     <span class="red">*</span></label>
                                 <mat-form-field [floatLabel]="'never'">
                                     <input matInput type="number" formControlName="purchaseQuantity" placeholder=""
                                         name="name">
-                                    <div class="custom-invalid"
-                                        *ngIf=" submitted && addProductForm.controls['purchaseQuantity'].hasError('required')">
+
+                                    <mat-error *ngIf="addProductForm.get('purchaseQuantity').hasError('required')">
                                         Purchase Quantity is <strong>required</strong>.
-                                    </div>
-                                    <div class="custom-invalid"
-                                        *ngIf=" submitted && addProductForm.controls['purchaseQuantity'].hasError('min') && !addProductForm.controls['quantity'].hasError('required')">
+                                    </mat-error>
+                                    <mat-error *ngIf="addProductForm.controls['purchaseQuantity'].hasError('min') &&
+                                         !addProductForm.controls['purchaseQuantity'].hasError('required')">
                                         Purchase Quantity should not be less than 0.
-                                    </div>
-                                    <div class="custom-invalid"
-                                        *ngIf=" submitted && addProductForm.controls['purchaseQuantity'].hasError('moreThan') && !addProductForm.controls['quantity'].hasError('required')">
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf="addProductForm.controls['purchaseQuantity'].hasError('moreThan') && !addProductForm.controls['quantity'].hasError('required')">
                                         Purchase Quantity should not be more than quantity.
-                                    </div>
+                                    </mat-error>
+
+
                                 </mat-form-field>
                             </li>
 
@@ -242,12 +273,10 @@
                                 <label>Base Price<span class="red">*</span></label>
                                 <mat-form-field [floatLabel]="'never'">
                                     <input matInput type="text" formControlName="price" placeholder="" name="name">
-                                    <div class="custom-invalid"
-                                        *ngIf=" submitted && addProductForm.controls['price'].hasError('required')">
-                                        Base Price is <strong>required</strong>
-                                    </div>
-                                    <p *ngIf="showCommission">{{commission.commission}}% commission will be added to
-                                        base price</p>
+                                    <mat-error *ngIf="addProductForm.get('price').hasError('required')">
+                                        Purchase Quantity is <strong>required</strong>.
+                                    </mat-error>
+
 
                                 </mat-form-field>
                             </li>
@@ -255,18 +284,20 @@
                                 <label>Discount<span class="red">*</span></label>
                                 <mat-form-field [floatLabel]="'never'">
                                     <input matInput type="number" formControlName="discount" placeholder="" name="name">
-                                    <div class="custom-invalid"
-                                        *ngIf=" submitted && addProductForm.controls['discount'].hasError('required')">
+
+                                    <mat-error *ngIf="addProductForm.get('discount').hasError('required')">
                                         Discount is <strong>required</strong>
-                                    </div>
-                                    <div class="custom-invalid"
-                                        *ngIf=" submitted && addProductForm.controls['discount'].hasError('min')">
+                                    </mat-error>
+                                    <mat-error
+                                        *ngIf=" addProductForm.controls['discount'].hasError('min') && !addProductForm.get('discount').hasError('required')">
                                         Discount can be min 0
-                                    </div>
-                                    <div class="custom-invalid"
-                                        *ngIf=" submitted && addProductForm.controls['discount'].hasError('max')">
+                                    </mat-error>
+                                    <mat-error *ngIf="addProductForm.controls['discount'].hasError('max') &&
+                                         !addProductForm.controls['discount'].hasError('min') &&
+                                         !addProductForm.get('discount').hasError('required')">
                                         Discount can be max 100
-                                    </div>
+                                    </mat-error>
+
                                 </mat-form-field>
                             </li>
                             <li>
@@ -281,10 +312,10 @@
                                         <mat-option value="false">False
                                         </mat-option>
                                     </mat-select>
-                                    <div class="custom-invalid"
-                                        *ngIf=" submitted && addProductForm.controls['isfeatured'].hasError('required')">
+                                    <mat-error *ngIf="addProductForm.get('isfeatured').hasError('required')">
                                         Featuring is <strong>required</strong>
-                                    </div>
+                                    </mat-error>
+
                                 </mat-form-field>
 
                             </li>
@@ -367,10 +398,13 @@
                                         </td>
                                     </tr>
                                 </table>
-                                <div class="custom-invalid"
+                                <mat-error *ngIf="addProductForm.get('specification').hasError('required')">
+                                    Specifications are <strong>required</strong>
+                                </mat-error>
+                                <!-- <div class="custom-invalid"
                                     *ngIf="submitted && addProductForm.controls['specification'].hasError('required')">
                                     Specifications are <strong>required</strong>
-                                </div>
+                                </div> -->
                             </li>
                             <li>
                                 <label> Add Arbic Specification</label>
@@ -397,10 +431,13 @@
                                         </td>
                                     </tr>
                                 </table>
-                                <div class="custom-invalid"
+                                <mat-error *ngIf="addProductForm.get('specification_ar').hasError('required')">
+                                    Arabic Specifications are <strong>required</strong>
+                                </mat-error>
+                                <!-- <div class="custom-invalid"
                                     *ngIf="submitted && addProductForm.controls['specification_ar'].hasError('required')">
                                     Arabic Specifications are <strong>required</strong>
-                                </div>
+                                </div> -->
                             </li>
                             <li>
                                 <label>Add Search Keywords<span class="red">*</span></label>
@@ -424,10 +461,13 @@
                                     </tr>
 
                                 </table>
-                                <div class="custom-invalid"
+                                <mat-error *ngIf="addProductForm.get('aliases').hasError('required')">
+                                    Search Keywords are <strong>required</strong>
+                                </mat-error>
+                                <!-- <div class="custom-invalid"
                                     *ngIf="submitted && addProductForm.controls['aliases'].hasError('required')">
                                     Search Keywords are <strong>required</strong>
-                                </div>
+                                </div> -->
                             </li>
                             <li>
                                 <!--  -->

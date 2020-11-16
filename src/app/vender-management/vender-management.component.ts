@@ -71,13 +71,31 @@ export class VenderManagementComponent implements OnInit {
   }
 
   acceptVendor(id) {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "What will be the Commission percentage for the Vendor",
+      icon: "info",
+      showCancelButton: true,
+      input: 'number',
+      confirmButtonColor: "#3085D6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+      cancelButtonText: "Cancel",
+      allowOutsideClick: true
+    }).then(result => {
+      if (result.isConfirmed) {
+        let body = {
+          id: id,
+          sellerProfileStatus: 1,
+          commission: result.value,
+        }
+        this.acceptReject(body)
+      } else {
+        console.log("nothing changed");
 
-    let body = {
-      id: id,
-      sellerProfileStatus: 1,
+      }
 
-    }
-    this.acceptReject(body)
+    })
   }
 
 
@@ -145,7 +163,7 @@ export class VenderManagementComponent implements OnInit {
   }
 
   acceptReject(body) {
-
+    debugger
     this.apiService.approveReject(body).subscribe(res => {
       console.log(res);
       if (res.success) {
@@ -244,7 +262,7 @@ export class VenderManagementComponent implements OnInit {
   }
 
   goToaddVender() {
-    this.router.navigate(['addVender'], { queryParams: { 'Add': 'celebrity' } })
+    this.router.navigate(['add'], { queryParams: { 'check': 'merchant' } })
   }
   goToviewVendor(id) {
     this.router.navigate(['view'], { queryParams: { 'id': id } })
