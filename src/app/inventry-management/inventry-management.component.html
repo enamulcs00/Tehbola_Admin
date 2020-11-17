@@ -9,121 +9,96 @@
                 </div>
                 <div class="search_fields">
                     <div class="filters Booking_status">
-                        <label>Filter</label>
-                        <select>
-                            <option>All</option>
-                            <option>Name</option>
-                        </select>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Filter<span class="red">*</span></mat-label>
+
+                            <mat-select placeholder="Filter" [(ngModel)]="filterBy"
+                                (selectionChange)="filterSelected($event)">
+                                <mat-option *ngIf="flag==true" value="">
+                                    Remove Filter
+                                </mat-option>
+
+                                <mat-option value="active">
+                                    Active
+                                </mat-option>
+                                <mat-option value="inactive">
+                                    Inactive
+                                </mat-option>
+
+                            </mat-select>
+                        </mat-form-field>
                     </div>
                     <div class="search_inner_fiels">
                         <div class="filters Booking_status">
-                            <label>Search</label>
                             <div class="search_with_icons">
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="text" name="search" placeholder="">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Search</mat-label>
+
+                                    <input matInput type="text" [(ngModel)]="search" placeholder="">
                                 </mat-form-field>
-                                <i class="fa fa-search" aria-hidden="true"></i>
+                                <button mat-button matSuffix mat-icon-button> <i *ngIf="flagSearch==true"
+                                        class="fa fa-search" aria-hidden="true" (click)="searchMethod()"></i>
+                                    <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
+                                        (click)="clearSearch()"></i>
+                                </button>
                             </div>
                         </div>
 
                     </div>
                 </div>
-                <div class="table-responsive">
+                <div *ngIf="flagData==true">
+                    <h1>No Data Found</h1>
+                </div>
+                <div *ngIf="flagData==false" class="table-responsive">
                     <table>
                         <tr>
+                            <th>Sr. No.</th>
                             <th>Product Id</th>
-                            <th>Product Name</th>
-                            <th>Product Cost</th>
-                            <th>Required quantity</th>
-                            <th>Current quantity</th>
-                            <th class="action_bx">Action</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th *ngIf="user.roles=='admin'|| 'celebrity'">Seller</th>
+                            <th *ngIf="user.roles=='admin'">View</th>
+                            <th>Normal Stock</th>
+                            <th>Over Stock</th>
+                            <th>Current Quantity</th>
+                            <th> Minimum puchase quantity</th>
+                            <th>Price </th>
+                            <th *ngIf="user.roles!='admin'">Action</th>
+
                         </tr>
 
-                        <tr>
-                            <td>1</td>
-                            <td>Test</td>
-                            <td class="product_cost">10$</td>
-                            <td class="product_quanity">10 piece</td>
-                            <td>20 piece</td>
+                        <tr *ngFor="let product of productList;  let i = index">
+                            <td *ngIf="flagUserList==false">{{i+1}}</td>
+                            <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
                             <td>
-                                <div class="action">
-                                    <ul>
-                                        <li class="show" (click)="goToviewinventory()"><i class="fa fa-eye"></i></li>
-                                        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
-                                    </ul>
-                                </div>
+                                {{product.productId}}
+                            </td>
+                            <td>{{ product.name }}</td>
+                            <td>{{ product.category.name }}</td>
+                            <td *ngIf="user.roles=='admin'|| 'celebrity'">{{product.seller.firstName}}
+                                {{product.seller.lastName}}
+                            </td>
+                            <td *ngIf="user.roles=='admin'">{{product.seller.view}}
+                            </td>
+                            <td>{{product.normalStock}}</td>
+                            <td>{{product.overStock}}</td>
+                            <td>{{ product.productQuantity }}</td>
+                            <td>{{ product.purchaseQuantity }}</td>
+                            <td>{{ product.price }}</td>
+                            <td *ngIf="user.roles!='admin'">
+                                <ul>
+                                    <li class="edit" (click)="gotoUpdateInventory(product.id)"><i
+                                            class="fa fa-pencil fa-fw"></i></li>
+                                </ul>
                             </td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Test</td>
-                            <td class="product_cost">10$</td>
-                            <td class="product_quanity">10 piece</td>
-                            <td>20 piece</td>
-                            <td>
-                                <div class="action">
-                                    <ul>
-                                        <li class="show" (click)="goToviewinventory()"><i class="fa fa-eye"></i></li>
-                                        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Test</td>
-                            <td class="product_cost">10$</td>
-                            <td class="product_quanity">10 piece</td>
-                            <td>20 piece</td>
-                            <td>
-                                <div class="action">
-                                    <ul>
-                                        <li class="show" (click)="goToviewinventory()"><i class="fa fa-eye"></i></li>
-                                        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Test</td>
-                            <td class="product_cost">10$</td>
-                            <td class="product_quanity">10 piece</td>
-                            <td>20 piece</td>
-                            <td>
-                                <div class="action">
-                                    <ul>
-                                        <li class="show" (click)="goToviewinventory()"><i class="fa fa-eye"></i></li>
-                                        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>Test</td>
-                            <td class="product_cost">10$</td>
-                            <td class="product_quanity">10 piece</td>
-                            <td>20 piece</td>
-                            <td>
-                                <div class="action">
-                                    <ul>
-                                        <li class="show" (click)="goToviewinventory()"><i class="fa fa-eye"></i></li>
-                                        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-
-
-
                     </table>
+                    <!-----start pagination-->
+                    <mat-paginator #paginator [length]="length" [pageSize]="pageSize"
+                        [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = ListAfterPageSizeChanged($event)">
+                    </mat-paginator>
+                    <!-----end pagination-->
                 </div>
-                <!-----start pagination-->
-                <mat-paginator [length]="" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
-                </mat-paginator>
-                <!-----end pagination-->
-
             </div>
         </div>
     </div>

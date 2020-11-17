@@ -86,6 +86,9 @@ export class SidebarComponent implements OnInit {
   goTodashboard() {
     this.router.navigate(['dashboard']);
   }
+  goToEndorsement() {
+    this.router.navigate(['endorsement']);
+  }
 
   goToCelebritymanagement() {
     this.router.navigate(['manageCelebrity'])

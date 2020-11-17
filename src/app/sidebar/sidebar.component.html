@@ -57,8 +57,9 @@
             <li (click)="goToCelebritymanagement()" *ngIf="roles =='admin'">Celebrity Management</li>
             <li (click)="goToBrand()" *ngIf="roles=='admin'">Brand Management</li>
             <li (click)="goTocategory()" *ngIf="roles=='admin'">Category</li>
-            <!-- <li (click)="goTosubcategory()">Sub-Category</li>
-            <li (click)="goToinventry()">Inventory Management</li> -->
+            <li (click)="goToEndorsement()" *ngIf="roles!='admin'">Endorsement</li>
+            <!-- <li (click)="goTosubcategory()">Sub-Category</li>-->
+            <li (click)="goToinventry()">Inventory Management</li>
             <!-- <li (click)="goToordermanagement()">Sales </li> -->
             <!-- <li (click)="goToofferdeals()">Discounts</li> -->
         </ul>

@@ -57,6 +57,10 @@ export class ApiService {
       getBrandBySubcat: 'admin/getBrands',
       viewProduct: 'admin/viewProduct',
       deleteImage: 'admin/deleteImage',
+      endorsementRequest: 'panel/endorseProduct',
+      endorsementProduct: 'panel/getSellerEndorsements',
+      approveEndorsementRequest: 'panel/approveEndorsement',
+      getEndorsedProduct: 'panel/getCelebrityEndorsements',
       //commonApi to change status of any user type
       status: 'common/status',
 
@@ -377,6 +381,15 @@ export class ApiService {
 
   }
 
+  approveEndorsementRequest(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.approveEndorsementRequest, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  getEndorsedProduct(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.getEndorsedProduct, body, this.getHeaders()).pipe(catchError(this.handleError()))
+
+  }
+
   editCelebrity(body) {
 
     return this.http.put<any>(`${this.apiEndPoints.editUser}`, body, this.getHeaders()
@@ -431,6 +444,24 @@ export class ApiService {
       catchError(this.handleError<any>('Get Vendor Products'))
     );
 
+  }
+
+  getProductsForEndorsement(page, count, filter, isApproved, search, seller, isEndorse) {
+    // console.log(id);
+    return this.http.get<any>(`${this.apiEndPoints.getProducts}?page=${page}&count=${count}&status=${filter}&isApproved=${isApproved}&search=${search}&seller=${seller}&isEndorse=${isEndorse}`,
+      this.getHeaders()
+    ).pipe(
+      catchError(this.handleError<any>('Get Vendor Products'))
+    );
+
+  }
+
+  endorsementRequest(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.endorsementRequest, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  getEndorsement(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.endorsementProduct, body, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
   getProductsWithoutApproved(page, count, filter, search, seller, ) {

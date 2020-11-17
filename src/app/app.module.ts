@@ -96,6 +96,9 @@ import { ProfileSetUpComponent } from './profile-set-up/profile-set-up.component
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { ManageCelebrityComponent } from './manage-celebrity/manage-celebrity.component';
 import { DocumentComponent } from './document/document.component';
+import { EndorsementComponent } from './endorsement/endorsement.component';
+import { EndorsementProductComponent } from './endorsement-product/endorsement-product.component';
+import { EndorsedProductComponent } from './endorsed-product/endorsed-product.component';
 
 // import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 // import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -189,6 +192,9 @@ import { DocumentComponent } from './document/document.component';
     ProfileSetUpComponent,
     ManageCelebrityComponent,
     DocumentComponent,
+    EndorsementComponent,
+    EndorsementProductComponent,
+    EndorsedProductComponent,
 
 
 

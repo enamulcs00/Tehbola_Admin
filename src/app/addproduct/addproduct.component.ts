@@ -89,7 +89,7 @@ export class AddproductComponent implements OnInit {
       highlights: ['',],
       highlights_ar: [''],
       seller: [''],
-      isfeatured: ['', Validators.required],
+      //  isfeatured: ['', Validators.required],
       brand: ['', [Validators.required,]],
       price: ['', [Validators.required, Validators.min(0)]],
       description: ['', [Validators.required,]],
@@ -355,7 +355,7 @@ export class AddproductComponent implements OnInit {
       body.append('overStock', this.addProductForm.controls['overStock'].value);
       body.append('specifications', JSON.stringify(this.addProductForm.controls['specification'].value));
       body.append('trustedShipping', JSON.stringify(this.addProductForm.controls['trustedShipping'].value));
-      body.append('isFeatured', JSON.stringify(this.addProductForm.controls['isfeatured'].value));
+      // body.append('isFeatured', JSON.stringify(this.addProductForm.controls['isfeatured'].value));
       body.append('easyReturn', JSON.stringify(this.addProductForm.controls['easyReturn'].value));
       body.append('secureShopping', JSON.stringify(this.addProductForm.controls['secureShopping'].value));
       body.append('gender', JSON.stringify(this.addProductForm.controls['gender'].value));
@@ -368,7 +368,7 @@ export class AddproductComponent implements OnInit {
       }
       body.append('highlights', this.addProductForm.controls['highlights'].value)
       body.append('highlights_ar', this.addProductForm.controls['highlights_ar'].value)
-     
+
       body.append('discount', this.addProductForm.controls['discount'].value)
 
       body.forEach((value, key) => {

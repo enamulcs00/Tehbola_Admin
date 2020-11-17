@@ -248,6 +248,77 @@ export class ProductComponent implements OnInit {
 
   }
 
+  onChangeFeatured(id, featured) {
+
+    debugger
+    console.log(id, featured)
+    let data: any
+    let temp = id
+    for (let i = 0; i <= this.productList.length; i++) {
+      if (this.productList[i]._id == temp) {
+        if (featured === false) {
+
+          data = {
+
+            "id": temp,
+            "isFeatured": true
+          }
+        } else {
+          data = {
+            "id": temp,
+            "isFeatured": false
+          }
+        }
+        console.log(data)
+        this.apiService.updateProduct(data).subscribe((res) => {
+          if (res.success) {
+            this.commonService.successToast("Product Successfully Updated")
+            this.router.navigate(['/product'])
+            console.log(res)
+          } else {
+            this.commonService.errorToast(res.message)
+          }
+        })
+      }
+    }
+
+  }
+
+
+  onChangeEndorse(id, endorse) {
+    debugger
+    console.log(id, endorse)
+    let data: any
+    let temp = id
+    for (let i = 0; i <= this.productList.length; i++) {
+      if (this.productList[i]._id == temp) {
+        if (endorse === false) {
+
+          data = {
+
+            "id": temp,
+            "isEndorse": true
+          }
+        } else {
+          data = {
+            "id": temp,
+            "isEndorse": false
+          }
+        }
+        console.log(data)
+        this.apiService.updateProduct(data).subscribe((res) => {
+          if (res.success) {
+            this.commonService.successToast("Product Successfully Updated")
+            this.router.navigate(['/product'])
+            console.log(res)
+          } else {
+            this.commonService.errorToast(res.message)
+          }
+        })
+      }
+    }
+  }
+
   goToaddProduct() {
     this.router.navigate(['/addproduct'])
   }

@@ -99,6 +99,8 @@
                                 <th> Minimum quantity</th>
                                 <th>Price </th>
                                 <th>Product Description</th>
+                                <th *ngIf="user.roles=='admin'">Is Featured</th>
+                                <th *ngIf="user.roles=='merchant'">Available to Endorsement</th>
                                 <th class="action_bx">Status</th>
                                 <th>Action</th>
                             </tr>
@@ -133,6 +135,21 @@
                                 <td>{{ product.description.length < 24 ?
                             product.description :
                             product.description.slice(0,24)+ "..." }}</td>
+                                <td *ngIf="user.roles=='admin'">
+                                    <div class="enable_disable">
+                                        <mat-slide-toggle [checked]="product.isFeatured"
+                                            (change)=onChangeFeatured(product.id,product.isFeatured)>
+                                        </mat-slide-toggle>
+                                    </div>
+                                </td>
+                                <td *ngIf="user.roles=='merchant'">
+                                    <div class="enable_disable">
+                                        <mat-slide-toggle [checked]="product.isEndorse"
+                                            (change)=onChangeEndorse(product.id,product.isEndorse)>
+                                        </mat-slide-toggle>
+                                    </div>
+                                </td>
+
                                 <td>
                                     <div class="enable_disable">
                                         <mat-slide-toggle [checked]="product.status=='1'? true:false"

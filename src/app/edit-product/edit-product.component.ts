@@ -407,7 +407,7 @@ export class EditProductComponent implements OnInit {
 
       this.apiService.updateProduct(body).subscribe((res) => {
         if (res.success) {
-          this.commonService.successToast("Product Successfully added")
+          this.commonService.successToast("Product Successfully update")
           this.router.navigate(['/product'])
           console.log(res)
         } else {

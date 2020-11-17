@@ -82,6 +82,9 @@ import { SignUpWithMobileComponent } from './sign-up-with-mobile/sign-up-with-mo
 import { ProfileSetUpComponent } from './profile-set-up/profile-set-up.component';
 import { ManageCelebrityComponent } from './manage-celebrity/manage-celebrity.component';
 import { DocumentComponent } from './document/document.component';
+import { EndorsementComponent } from './endorsement/endorsement.component';
+import { EndorsementProductComponent } from './endorsement-product/endorsement-product.component';
+import { EndorsedProductComponent } from './endorsed-product/endorsed-product.component';
 
 const routes: Routes = [
   // {
@@ -244,6 +247,22 @@ const routes: Routes = [
   {
     path: 'add',
     component: AddVenderComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'endorsement',
+    component: EndorsementComponent,
+    canActivate: [AuthGuard]
+  },
+
+  {
+    path: 'endorsedProduct',
+    component: EndorsedProductComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'endorsmentProduct',
+    component: EndorsementProductComponent,
     canActivate: [AuthGuard]
   },
   {
