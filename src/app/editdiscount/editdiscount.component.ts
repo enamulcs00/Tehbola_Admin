@@ -303,7 +303,7 @@ export class EditdiscountComponent implements OnInit {
 
 
   getDiscount(id) {
-    
+
     this.apiService.getDisountDetails(id).subscribe(res => {
       if (res.success) {
         this.discountDetails = res.data;
@@ -429,7 +429,7 @@ export class EditdiscountComponent implements OnInit {
 
     this.categoryList = []
     let temp = []
-    this.apiService.getAllCategoriesForDiscount(this.parentId).subscribe(res => {
+    this.apiService.getAllCategoriesForPanel().subscribe(res => {
       if (res.success) {
         // console.log(res)
         if (res.data) {
@@ -459,7 +459,7 @@ export class EditdiscountComponent implements OnInit {
     let temp = []
     this.subCategoryList = []
 
-    this.apiService.getAllCategoriesForDiscount(id).subscribe(res => {
+    this.apiService.getAllSubCategoriesForDiscount(id).subscribe(res => {
       if (res.success) {
         //  console.log(res)
         if (res.data) {
@@ -507,11 +507,10 @@ export class EditdiscountComponent implements OnInit {
   subCategorySelected(id) {
     console.log("subcategory:", id)
     this.selectedSubCategory = id
-    if (this.showVendor) {
-      this.getAllVendor();
-    } else {
-      this.getAllProduct()
-    }
+
+    this.getAllVendor();
+
+
   }
 
 
@@ -532,7 +531,7 @@ export class EditdiscountComponent implements OnInit {
       }
     }
 
-    this.apiService.getVendorListbyCat(body).subscribe(res => {
+    this.apiService.getBrandListbyCat(this.selectedCategory, this.selectedSubCategory).subscribe(res => {
 
       if (res.success) {
         // console.log(res)

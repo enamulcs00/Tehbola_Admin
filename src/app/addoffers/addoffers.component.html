@@ -5,24 +5,24 @@
             <app-sidebar></app-sidebar>
             <div class="container-fluid">
                 <div class="sub_heading">
-                    <h1>Add Discount</h1>
+                    <h1>Add Banner</h1>
                     <a (click)="goToofferdeals()">Back To List</a>
                 </div>
                 <form [formGroup]="addDiscountForm">
                     <!-----start input fields------>
                     <div class="add_user_list">
-                        <div>
+                        <div *ngIf="userDetails.roles=='admin'">
                             <fieldset>
                                 Category
                                 <input type="radio" formControlName="dicountOn" name="dicountOn"
-                                    (click)="setradio('category')" value="category" [checked]="true">
+                                    (click)="setradio('category')" value="category">
                                 &nbsp;&nbsp;
                                 Sub-category
                                 <input type="radio" formControlName="dicountOn" name="dicountOn"
                                     (click)="setradio('subcategory')" value="subCategory">&nbsp;&nbsp;
-                                Vendor
+                                Brand
                                 <input type="radio" formControlName="dicountOn" name="dicountOn"
-                                    (click)="setradio('vendor')" value="vendor">&nbsp;&nbsp;
+                                    (click)="setradio('brand')" value="brand">&nbsp;&nbsp;
                                 Product
                                 <input type="radio" formControlName="dicountOn" name="dicountOn"
                                     (click)="setradio('product')" value="product">&nbsp;&nbsp;
@@ -67,7 +67,7 @@
                                 </ng-multiselect-dropdown>
                             </li>
                             <li *ngIf="showVendor">
-                                <label>Select Vendor<span class="red">*</span></label>
+                                <label>Select Brand<span class="red">*</span></label>
                                 <mat-form-field *ngIf="singleVendorSelection">
                                     <mat-select (selectionChange)="vendorSelected($event.value)">
                                         <input matInput placeholder="Search Vendor"
@@ -95,49 +95,74 @@
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
-                                <ng-multiselect-dropdown *ngIf="!singleProductSelection" [placeholder]=""
+                                <ng-multiselect-dropdown *ngIf="singleProductSelection==false" [placeholder]=""
                                     [(ngModel)]="selectedProductItem" [ngModelOptions]="{standalone: true}"
                                     [settings]="productDropDownSettings" [data]="productList"
                                     (onSelect)="onProductSelect($event)" (onSelectAll)="onSelectAll($event)">
                                 </ng-multiselect-dropdown>
                             </li>
                             <li>
-                                <label> Name <span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput formControlName="name" type="text" placeholder="" name="name">
+                                <!-- <label> Name <span class="red">*</span></label> -->
+                                <mat-form-field>
+                                    <mat-label>Name<span class="red">*</span></mat-label>
+                                    <input matInput formControlName="name" type="text" placeholder="Name" name="name">
                                     <div class="custom-invalid"
                                         *ngIf=" submitted && addDiscountForm.controls['name'].hasError('required')">
                                         Name is <strong>required</strong>
                                     </div>
-                                    <div class="custom-invalid"
-                                        *ngIf=" submitted && addDiscountForm.controls['name'].hasError('maxLength')">
-                                        Max length should not be more than <strong>25 character</strong>
-                                    </div>
+                                    <mat-error *ngIf="addDiscountForm.get('name').hasError('required')">
+                                        Name is <strong>required</strong>
+                                    </mat-error>
+
                                 </mat-form-field>
                             </li>
                             <li>
-                                <label> Arbic Name </label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput formControlName="name_ar" type="text" placeholder="" name="name_ar">
+                                <!-- <label> Arbic Name </label> -->
+                                <mat-form-field>
+                                    <mat-label>Arbic Name<span class="red">*</span></mat-label>
+                                    <input matInput formControlName="name_ar" type="text" placeholder="Arbic Name"
+                                        name="name_ar">
                                     <div class="custom-invalid"
                                         *ngIf=" submitted && addDiscountForm.controls['name_ar'].hasError('required')">
                                         Arbic Name is <strong>required</strong>
                                     </div>
+
+                                    <mat-error *ngIf="addDiscountForm.get('name_ar').hasError('required')">
+                                        Arabic Name is <strong>required</strong>
+                                    </mat-error>
                                 </mat-form-field>
                             </li>
                             <li>
-                                <label> Discount <span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Best suited for <span class="red">*</span></mat-label>
+                                    <mat-select formControlName="gender" multiple>
+
+                                        <mat-option value="M">
+                                            Male
+                                        </mat-option>
+                                        <mat-option value="F">
+                                            Female
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="addDiscountForm.get('gender').hasError('required')">
+                                        Please Select the gender this suits for
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <!-- <label> Discount <span class="red">*</span></label> -->
+                                <mat-form-field>
+                                    <mat-label>Discount<span class="red">*</span></mat-label>
                                     <input matInput formControlName="disount" min="0" max="100" type="number"
                                         placeholder="" name="name">
-                                    <div class="custom-invalid"
-                                        *ngIf=" submitted && addDiscountForm.controls['disount'].hasError('required')">
+
+                                    <mat-error *ngIf="addDiscountForm.get('disount').hasError('required')">
                                         Discount percentage is <strong>required</strong>
-                                    </div>
-                                    <div class="custom-invalid"
-                                        *ngIf=" submitted && addDiscountForm.controls['disount'].hasError('min')">
+                                    </mat-error>
+                                    <mat-error *ngIf="addDiscountForm.controls['disount'].hasError('min')">
                                         Discount percentage should not be <strong>less than zero</strong>
-                                    </div>
+                                    </mat-error>
+
                                 </mat-form-field>
                             </li>
                             <!-- <li>
@@ -147,58 +172,56 @@
                             </mat-form-field>
                         </li> -->
                             <li>
-                                <label>Start Date <span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput formControlName="startDate" type="date" [min]="today" placeholder=""
-                                        name="name">
-
-
-                                    <div class="custom-invalid"
-                                        *ngIf=" submitted && addDiscountForm.controls['startDate'].hasError('required')">
-                                        Start Date is <strong>required</strong>
-                                    </div>
-                                </mat-form-field>
-                            </li>
-                            <li>
-                                <label>End Date <span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput formControlName="endDate" type="date" [min]="endTommorow"
-                                        placeholder="" name="name">
-                                    <div class="custom-invalid"
-                                        *ngIf=" submitted && addDiscountForm.controls['endDate'].hasError('required')">
-                                        End Date is <strong>required</strong>
-                                    </div>
-                                    <!-- <div class="custom-invalid"
-                                        *ngIf=" submitted && addDiscountForm.controls['endDate'].hasError('dateGreater') && !addDiscountForm.controls['endDate'].hasError('required')">
-                                        End Date is <strong>required</strong>
-                                    </div> -->
-
-                                </mat-form-field>
-                            </li>
-                            <li>
-                                <label>Select Type<span class="red">*</span></label>
+                                <!-- <label>Start Date <span class="red">*</span></label> -->
                                 <mat-form-field>
-                                    <mat-select formControlName="type">
-                                        <input matInput placeholder="Search Product">
+                                    <mat-label>Start Date<span class="red">*</span></mat-label>
+                                    <input matInput formControlName="startDate" type="date" [min]="today"
+                                        placeholder="Start Date" name="name">
+
+                                    <mat-error *ngIf="addDiscountForm.get('startDate').hasError('required')">
+                                        Start Date is <strong>required</strong>
+                                    </mat-error>
+
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <!-- <label>End Date <span class="red">*</span></label> -->
+                                <mat-form-field>
+                                    <mat-label>End Date<span class="red">*</span></mat-label>
+                                    <input matInput formControlName="endDate" type="date" [min]="endTommorow"
+                                        placeholder="End Date" name="name">
+                                    <mat-error *ngIf="addDiscountForm.get('endDate').hasError('required')">
+                                        End Date is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <mat-form-field>
+                                    <mat-label>Select Type<span class="red">*</span></mat-label>
+                                    <mat-select (selectionChange)='typeSelected($event.value)' formControlName="type">
+
                                         <mat-option>None</mat-option>
                                         <mat-option *ngFor="let ready of type" [value]="ready.value">{{ready.viewValue}}
                                         </mat-option>
                                     </mat-select>
-                                    <div class="custom-invalid"
+                                    <mat-error *ngIf="addDiscountForm.get('type').hasError('required')">
+                                        Deal Type is <strong>required</strong>
+                                    </mat-error>
+                                    <!-- <div class="custom-invalid"
                                         *ngIf=" submitted && addDiscountForm.controls['type'].hasError('required')">
                                         Deal Type is <strong>required</strong>
-                                    </div>
+                                    </div> -->
                                 </mat-form-field>
                             </li>
                             <li class="banner_image">
                                 <label>Add Banner image</label>
                                 <div class="product_image_upload">
-                                    <input type='file' (change)="bannerImageEvent($event)" accept="image/*"
-                                        formControlName="bannerImage" placeholder="choosefile" class="images_uploader">
+                                    <input type='file' [disabled]='imageNotAccepted' (change)="bannerImageEvent($event)"
+                                        accept="image/*" formControlName="bannerImage" placeholder="choosefile"
+                                        class="images_uploader">
 
                                     <span>Choose File</span>
-                                    <div class="custom-invalid"
-                                        *ngIf="submitted &&  addDiscountForm.controls['bannerImage'].hasError('required')">
+                                    <div class="custom-invalid" *ngIf="submitted && images.length==0">
                                         Banner Image is <strong>required</strong>
                                     </div>
 

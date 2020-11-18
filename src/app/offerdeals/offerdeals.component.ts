@@ -28,19 +28,34 @@ export class OfferdealsComponent implements OnInit {
   srNo: number = 1;
   flagUserList: boolean = false;
   length: number = 100;
+  userDetails: any;
+  sellerId: any = '';
+  bannerType: any;
+  isApproved: any;
   constructor(private router: Router, private apiService: ApiService, private urlService: UrlService, private commonService: CommonService) {
     this.imagePath = this.urlService.imageUrl;
+    this.userDetails = JSON.parse(sessionStorage.getItem('Markat_User'))
+    if (this.userDetails.roles != 'admin') {
+      this.sellerId = this.userDetails._id
 
+      this.bannerType = this.userDetails.roles
+      this.isApproved = ''
+    } else {
+      this.bannerType = ''
+      this.isApproved = ''
+    }
   }
 
   ngOnInit() {
-    this.getAllDiscount()
+    this.getAllDiscount(this.bannerType, this.sellerId, this.isApproved, this.page, this.pageSize, this.search, this.filterBy)
   }
 
-  getAllDiscount() {
+  getAllDiscount(bannerType, sellerId, isApproved, page, pageSize, search, filterby) {
 
-    this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
+    this.apiService.getAllDiscount(bannerType, sellerId, isApproved, page, pageSize, search, filterby).subscribe((res) => {
       if (res) {
+        console.log(res);
+
         if (res.data.length > 0) {
           this.flagData = false
           this.bannerList = res.data
@@ -76,18 +91,8 @@ export class OfferdealsComponent implements OnInit {
     }
     console.log(e.target.value);
     this.filterBy = e.target.value;
-    this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
-      if (res) {
-        if (res.data.length > 0) {
-          this.flagData = false
-          this.bannerList = res.data
-          this.length = res.total
-          console.log(this.bannerList)
-        } else {
-          this.flagData = true
-        }
-      };
-    });
+    this.getAllDiscount(this.bannerType, this.sellerId, this.isApproved, this.page, this.pageSize, this.search, this.filterBy)
+
 
   }
 
@@ -114,18 +119,9 @@ export class OfferdealsComponent implements OnInit {
 
     }
 
-    this.apiService.getAllDiscount(this.page, e.pageSize, this.search, this.filterBy).subscribe((res) => {
-      if (res.success) {
-        if (res.data.length > 0) {
-          this.flagData = false
-          this.bannerList = res.data;
-          this.length = res.total
-          console.log(this.bannerList);
-        } else {
-          this.flagData = true
-        }
-      }
-    })
+    this.getAllDiscount(this.bannerType, this.sellerId, this.isApproved, this.page, this.pageSize, this.search, this.filterBy)
+
+
   }
 
 
@@ -133,41 +129,46 @@ export class OfferdealsComponent implements OnInit {
   searchMethod() {
 
     this.flagSearch = false
-    // console.log(this.search);
-    this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
-      if (res.success) {
-        if (res.data.length > 0) {
-          this.flagData = false
-          this.bannerList = res.data;
-          this.length = res.total
-          console.log(this.bannerList);
-        } else {
-          this.flagData = true
-        }
-      }
-    })
+
+    this.getAllDiscount(this.bannerType, this.sellerId, this.isApproved, this.page, this.pageSize, this.search, this.filterBy)
+
 
   }
+
 
 
   clearSearch() {
 
     this.flagSearch = true
     this.search = ''
-    this.apiService.getAllDiscount(this.page, this.pageSize, this.search, this.filterBy).subscribe((res) => {
-      if (res.success) {
-        if (res.data.length > 0) {
-          this.flagData = false
-          this.bannerList = res.data;
-          this.length = res.total
-          console.log(this.bannerList);
-        } else {
-          this.flagData = true
-        }
-      }
-    });
+
+    this.getAllDiscount(this.bannerType, this.sellerId, this.isApproved, this.page, this.pageSize, this.search, this.filterBy)
+
+
   }
 
+
+  accept(id, name, name_ar) {
+    let body = {
+      id: id,
+      name: name,
+      name_ar: name_ar,
+      isApproved: true
+    }
+
+    this.apiService.EditBanner(body).subscribe(res => {
+      console.log(res);
+      if (res.success) {
+        this.commonService.successToast(res.message)
+        this.getAllDiscount(this.bannerType, this.sellerId, this.isApproved, this.page, this.pageSize, this.search, this.filterBy)
+
+      } else {
+        this.commonService.errorToast(res.message)
+      }
+    })
+
+
+  }
 
 
   changeDiscountStatus(id, status) {
@@ -193,7 +194,7 @@ export class OfferdealsComponent implements OnInit {
         console.log(body)
         this.apiService.changeUserStatus(body).subscribe((res) => {
           console.log(res)
-          this.getAllDiscount();
+          this.getAllDiscount(this.bannerType, this.sellerId, this.isApproved, this.page, this.pageSize, this.search, this.filterBy);
         });
       }
 
@@ -203,11 +204,11 @@ export class OfferdealsComponent implements OnInit {
 
 
 
-  async deleteDiscount(id) {
+  deleteDiscount(id) {
 
     Swal.fire({
       title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this User!",
+      text: "Once deleted, you will not be able to recover this Banner!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085D6",
@@ -230,6 +231,7 @@ export class OfferdealsComponent implements OnInit {
           if (res.success) {
             // this.getAllCategories()
             this.commonService.successToast(res.message);
+            this.getAllDiscount(this.bannerType, this.sellerId, this.isApproved, this.page, this.pageSize, this.search, this.filterBy)
 
           } else {
             this.commonService.errorToast(res.message)
@@ -248,24 +250,6 @@ export class OfferdealsComponent implements OnInit {
 
   }
 
-  deleteFromList() {
-
-    // setTimeout(() => {
-    //   let temp = this.apiService.flagDelete;
-    //   if (temp == true) {
-    //     // this.userList.splice(i, 1);
-    //     // console.log(this.userList)
-    //     // alert("deleted")
-    this.commonService.successToast('Discount deleted');
-    this.getAllDiscount();
-    // }
-    //   else {
-    //     console.log("error")
-    //   }
-    // }, 2000);
-
-
-  }
 
 
   goToaddoffers() {

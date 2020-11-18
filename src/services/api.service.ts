@@ -61,6 +61,11 @@ export class ApiService {
       endorsementProduct: 'panel/getSellerEndorsements',
       approveEndorsementRequest: 'panel/approveEndorsement',
       getEndorsedProduct: 'panel/getCelebrityEndorsements',
+      getAllBanner: 'admin/banner',
+      getAllCategoriesforDiscount: 'admin/subCategories',
+      getBrandListByCat: 'admin/getBrands',
+      getAllCategoryForDiscount: 'admin/categoryByVendor',
+      addBanner: 'admin/banner',
       //commonApi to change status of any user type
       status: 'common/status',
 
@@ -351,6 +356,12 @@ export class ApiService {
         catchError(this.handleError<any>("add bannner")))
   }
 
+
+  EditBanner(body): Observable<any> {
+    return this.http.put<any>(this.apiEndPoints.addBanner, body, this.getHeaders()). //using end point add banner because of same end point
+      pipe(
+        catchError(this.handleError<any>("add bannner")))
+  }
   updateBanner(body): Observable<any> {
     return this.http.put<any>(this.apiEndPoints.addBanner, body, this.getHeaders()).
       pipe(
@@ -446,6 +457,17 @@ export class ApiService {
 
   }
 
+
+  getProductsforBanner(page, count, filter, isApproved, search, seller, category, subCategory, brand) {
+    // console.log(id);
+    return this.http.get<any>(`${this.apiEndPoints.getProducts}?page=${page}&count=${count}&status=${filter}&isApproved=${isApproved}&search=${search}&seller=${seller}&category=${category}&subCategory=${subCategory}&brand=${brand}`,
+      this.getHeaders()
+    ).pipe(
+      catchError(this.handleError<any>('Get Vendor Products'))
+    );
+
+  }
+
   getProductsForEndorsement(page, count, filter, isApproved, search, seller, isEndorse) {
     // console.log(id);
     return this.http.get<any>(`${this.apiEndPoints.getProducts}?page=${page}&count=${count}&status=${filter}&isApproved=${isApproved}&search=${search}&seller=${seller}&isEndorse=${isEndorse}`,
@@ -494,8 +516,8 @@ export class ApiService {
 
   }
 
-  getVendorListbyCat(body) {
-    return this.http.post<any>(this.apiEndPoints.getVendorListByCat, body, this.getHeaders())
+  getBrandListbyCat(selectedCategory, selectedSubCategory) {
+    return this.http.get<any>(`${this.apiEndPoints.getBrandListByCat}?category=${selectedCategory}&subCategory=${selectedSubCategory}`, this.getHeaders())
       .pipe(
         catchError(this.handleError<any>("list of vendor by category and sub-category")))
   }
@@ -540,12 +562,23 @@ export class ApiService {
       );
   }
 
-  getAllCategoriesForDiscount(parentId) {
+  getAllCategoriesForPanel() {
+    return this.http
+      .get<any>(this.apiEndPoints.getAllCategoryForDiscount, this.getHeaders())
+      .pipe(
+        catchError(this.handleError<any>('All Product'))
+      );
+  }
+
+  getAllSubCategoriesForDiscount(parentId) {
 
     return this.http.get<any>(`${this.apiEndPoints.getAllCategoriesforDiscount}?parentId=${parentId}`, this.getHeaders()).pipe(catchError(this.handleError("get all category for discount")))
 
   }
 
+
+
+  // 
 
   addCategory(data) {
     return this.http
@@ -611,8 +644,8 @@ export class ApiService {
   }
 
 
-  getAllDiscount(page, pageSize, search, filterBy) {
-    return this.http.get<any>(`${this.apiEndPoints.getAllBanner}?page=${page}&count=${pageSize}&search=${search}&filter=${filterBy}`, this.getHeaders())
+  getAllDiscount(bannerType, sellerId, isApproved, page, pageSize, search, filterBy) {
+    return this.http.get<any>(`${this.apiEndPoints.getAllBanner}?bannerType=${bannerType}&seller=${sellerId}&isApproved=${isApproved}&page=${page}&count=${pageSize}&search=${search}&filter=${filterBy}`, this.getHeaders())
       .pipe(
         catchError(this.handleError<any>("get discount(banner)"))
       )

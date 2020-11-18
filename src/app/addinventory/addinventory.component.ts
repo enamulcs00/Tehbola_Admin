@@ -79,8 +79,8 @@ export class AddinventoryComponent implements OnInit {
 
       this.apiService.updateProduct(body).subscribe((res) => {
         if (res.success) {
-          this.commonService.successToast("Product Successfully update")
-          this.router.navigate(['/product'])
+          this.commonService.successToast(res.message)
+          this.router.navigate(['/inventryManagement'])
           console.log(res)
         } else {
           this.commonService.errorToast(res.message)

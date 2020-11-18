@@ -20,7 +20,7 @@ interface Ready {
 export class AddoffersComponent implements OnInit, AfterContentChecked, AfterViewChecked {
 
 
-  showCategory: boolean
+  showCategory: boolean = false
   showSubcategory: boolean
   showVendor: boolean
   showProduct: boolean
@@ -47,23 +47,25 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   selectedSubcategoryItem: any;
   selectedVendorItem: any;
   selectedProductItem: any;
-
+  userDetails: any;
+  sellerId: string;
+  imageNotAccepted: boolean = true
+  tempArray: any[];
+  images: any = [];
 
 
   constructor(private router: Router, private apiService: ApiService, private fb: FormBuilder, private commonService: CommonService) {
 
-    //this.getAllCategory()
+    this.userDetails = JSON.parse(sessionStorage.getItem('Markat_User'))
 
-    this.getAllCategory();
 
   }
-
-
 
   showMultiCategory: boolean = false
 
 
   setradio(e: string) {
+    debugger
     this.singleCategorySelection = true;
     this.singleSubCategorySelection = true;
     this.singleVendorSelection = true;
@@ -85,7 +87,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
         this.showProduct = false
         console.log("subcategory");
         break;
-      case "vendor":
+      case "brand":
         this.singleVendorSelection = false
         this.showCategory = true;
         this.showSubcategory = true;
@@ -93,13 +95,13 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
         this.showProduct = false
         this.selectedCategory = '';
         this.selectedSubCategory = '';
-        console.log("vendor");
+        console.log("brand");
         break;
       case "product":
         this.singleProductSelection = false
         this.showCategory = true;
         this.showSubcategory = true;
-        this.showVendor = false;
+        this.showVendor = true;
         this.showProduct = true
         this.selectedCategory = '';
         this.selectedSubCategory = '';
@@ -121,7 +123,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   }
   onKeyInVendor(value) {
     // this.selectedItem = [];
-    this.selectedVendor = this.searchVendor(value).toString();
+    this.selectedBrand = this.searchVendor(value).toString();
   }
   onKeyInProduct(value) {
     //  this.selectedItem = [];
@@ -162,17 +164,28 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
       type: ['', Validators.required],
-      dicountOn: ['category', Validators.required],
+      dicountOn: ['', Validators.required],
       name: ['', [Validators.required, Validators.maxLength(25)]],
       name_ar: ['', Validators.required],
-      bannerImage: ['', Validators.required]
+      gender: ['', Validators.required],
+      bannerImage: ['',]
     },
       // {
       // validator: GreaterDateMatch('startDate', 'EndDate')
 
       // }
     )
+    if (this.userDetails.roles == 'admin') {
+      this.getAllCategoryForAdmin();
+      this.sellerId = ''
+    } else {
+      this.getAllCategory();
+      this.sellerId = this.userDetails._id
+      //  this.setradio('product');
+      this.addDiscountForm.get('dicountOn').setValue('product');
 
+    }
+    this.addDiscountForm.get('bannerImage').disable()
 
   }
   ngAfterViewChecked(): void {
@@ -245,16 +258,107 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
 
   }
   async bannerImageEvent(event) {
+    let tempfile: any
+    let imageOk: boolean = true
+    var img = new Image;
+    let sefl = this
     if (event.target.files && event.target.files[0]) {
-      this.imageFile = event.target.files[0];
+      tempfile = event.target.files[0];
+      let name = event.target.files[0].name;
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (event: any) => {
-        this.previewImage = event.target.result;
-        this.addDiscountForm.controls['bannerImage'].patchValue(this.imageFile);
+        img.src = event.target.result;
+
+        let temp = {
+          name: name,
+          image: event.target.result
+        }
+        img.onload = () => {
+
+          var height = img.height;
+          var width = img.width;
+          if (this.addDiscountForm.get('type').value == 'Home Banner') {
+            if (height != width / 2) {
+              this.commonService.errorToast("Image should be a Square size");
+              imageOk = false
+              // this.pushImage();
+              return imageOk
+            } else {
+              this.commonService.successToast("Image Size is Ok");
+              imageOk = true
+              this.previewImage = temp.image;
+              this.images = tempfile
+              return imageOk
+            }
+          } else {
+            if (height != width) {
+              this.commonService.errorToast("Image should be a Square size");
+              imageOk = false
+              // this.pushImage();
+              return imageOk
+            } else {
+              this.commonService.successToast("Image Size is Ok");
+              imageOk = true
+              this.previewImage = temp.image;
+              this.images = tempfile;
+
+              return imageOk
+            }
+          }
+
+        };
+        // this.previewImage = event.target.result;
+        // this.addDiscountForm.controls['bannerImage'].patchValue(this.imageFile);
       };
 
     }
+
+
+
+
+    // if (event.target.files && event.target.files[0]) {
+    //   var filesAmount = event.target.files.length;
+    //   for (let i = 0; i < filesAmount; i++) {
+    //     let name = event.target.files[i].name;
+    //     tempfile = event.target.files[i]
+    //     console.log("check image", event.target.files[i].size);
+    //     var reader = new FileReader();
+    //     let toasterService = this.commonService
+
+    //     reader.readAsDataURL(event.target.files[i])
+    //     reader.onload = (event: any) => {
+    //       img.src = event.target.result;
+    //       console.log(event.target.result);
+
+    //       let temp = {
+    //         name: name,
+    //         image: event.target.result
+    //       }
+
+    //       img.onload = () => {
+
+    //         var height = img.height;
+    //         var width = img.width;
+    //         if (height != width) {
+    //           toasterService.errorToast("Image should be a Square size");
+    //           imageOk = false
+    //           // this.pushImage();
+    //           return imageOk
+    //         } else {
+    //           toasterService.successToast("Image Size is Ok");
+    //           imageOk = true
+    //           this.previewImage = temp.image;
+    //           this.images.push(tempfile);
+
+    //           return imageOk
+    //         }
+
+    //       };
+    //     }
+    //   }
+    // }
+
   }
   goToofferdeals() {
     this.router.navigate(['offerdeals'])
@@ -262,23 +366,27 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
 
   onCategorySelect(item: any) {
     console.log(item.id);
-    const index = this.selectedCategoryItem.findIndex(o => o._id.toString() == item.id.toString());
+
+    const index = this.selectedCategoryItem.findIndex(o => o.id.toString() == item.id.toString());
     if (index < 0) this.selectedCategoryItem.push(item);
 
   }
 
   onSubcategorySelect(item: any) {
-    const index = this.selectedSubcategoryItem.findIndex(o => o._id.toString() == item.id.toString());
+
+    const index = this.selectedSubcategoryItem.findIndex(o => o.id.toString() == item.id.toString());
     if (index < 0) this.selectedSubcategoryItem.push(item)
   }
 
   onVendorSelect(item: any) {
-    const index = this.selectedVendorItem.findIndex(o => o._id.toString() == item.id.toString());
+
+    const index = this.selectedVendorItem.findIndex(o => o.id.toString() == item.id.toString());
     if (index < 0) this.selectedVendorItem.push(item)
   }
 
   onProductSelect(item: any) {
-    const index = this.selectedProductItem.findIndex(o => o._id.toString() == item.id.toString());
+
+    const index = this.selectedProductItem.findIndex(o => o.id.toString() == item.id.toString());
     if (index < 0) this.selectedProductItem.push(item)
   }
   onSelectAll(items: any) {
@@ -289,20 +397,18 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
     }
   }
   type: Ready[] = [
-    { value: 'Home', viewValue: 'Home' },
-    { value: 'Coupon', viewValue: 'Coupon' },
+    { value: 'Home Banner', viewValue: 'Home Banner' },
+    { value: 'Home', viewValue: 'Banner' },
     { value: 'Offer', viewValue: 'Offer' },
-    { value: 'Deal', viewValue: 'Deal' },
-    { value: 'Deal Slider', viewValue: 'Deal Slider' }
+    // { value: 'Deal', viewValue: 'Deal' },
+    // { value: 'Deal Slider', viewValue: 'Deal Slider' }
   ];
 
-
-  getAllCategory() {
-
+  getAllCategoryForAdmin() {
     let temp = []
     this.categoryList = []
 
-    this.apiService.getAllCategoriesForDiscount(this.parentId).subscribe(res => {
+    this.apiService.getAllCategories().subscribe(res => {
 
       if (res.success) {
 
@@ -316,10 +422,40 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
             temp.push(body);
 
           }
-          this.addDiscountForm.controls['disount'].setValue('category');
+          // this.addDiscountForm.controls['disount'].setValue('category');
 
-          this.setradio('category')
-          this.addDiscountForm.controls['disountOn'].setValue('category');
+          // this.setradio('category')
+          // this.addDiscountForm.controls['disountOn'].setValue('category');
+        }
+      }
+    });
+
+    this.categoryList = temp;
+
+  }
+
+  getAllCategory() {
+
+    let temp = []
+    this.categoryList = []
+
+    this.apiService.getAllCategoriesForPanel().subscribe(res => {
+
+      if (res.success) {
+
+        console.log("categoryList", res)
+        if (res.data) {
+          for (let i = 0; i < res.data.length; i++) {
+            let body = {
+              'id': res.data[i]._id,
+              'name': res.data[i].name
+            }
+            temp.push(body);
+
+          }
+
+          this.setradio('product')
+
         }
       }
     });
@@ -331,6 +467,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
 
   selectedCategory = ''
   categorySelected(id) {
+    debugger
     console.log("category :", id);
     this.selectedCategory = id;
     this.getAllSubcategory(id);
@@ -341,10 +478,10 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
     let temp = []
     this.subCategoryList = []
     if (this.selectedCategory) {
-      this.apiService.getAllCategoriesForDiscount(id).subscribe(res => {
+      this.apiService.getAllSubCategoriesForDiscount(id).subscribe(res => {
         if (res.success) {
 
-          console.log(res)
+          console.log("subCategoryList", res)
           if (res.data) {
 
             for (let i = 0; i < res.data.length; i++) {
@@ -357,14 +494,14 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
 
           }
         }
-
+        this.subCategoryList = temp;
       });
 
     } else {
       this.commonService.errorToast("Please Select a category.");
 
     }
-    this.subCategoryList = temp;
+
   }
 
 
@@ -372,11 +509,9 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   subCategorySelected(id) {
     console.log("subcategory:", id)
     this.selectedSubCategory = id
-    if (this.showVendor) {
-      this.getAllVendor();
-    } else {
-      this.getAllProduct()
-    }
+
+    this.getAllVendor();
+
   }
 
   getAllVendor() {
@@ -384,20 +519,19 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
     this.vendorList = []
     let temp = []
     if (this.selectedSubCategory) {
-      let body = {
-        'categories': [this.selectedCategory],
-        'subCategories': [this.selectedSubCategory]
-      }
 
-      this.apiService.getVendorListbyCat(body).subscribe(res => {
+
+      this.apiService.getBrandListbyCat(this.selectedCategory, this.selectedSubCategory).subscribe(res => {
 
         if (res.success) {
-          // console.log(res)
+
+
+          console.log("brnadlist", res)
           if (res.data) {
             for (let i = 0; i < res.data.length; i++) {
               let body = {
                 'id': res.data[i]._id,
-                'name': res.data[i].firstName + res.data[i].lastName,
+                'name': res.data[i].name
 
               }
               temp.push(body)
@@ -412,12 +546,12 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
     }
   }
 
-  selectedVendor = ''
+  selectedBrand = ''
   vendorSelected(e) {
 
     console.log("vendor:", e)
-    this.selectedVendor = e
-    // this.getAllProduct()
+    this.selectedBrand = e
+    this.getAllProduct()
   }
 
   getAllProduct() {
@@ -431,9 +565,11 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
 
       }
 
-      this.apiService.getProductByVendor(body).subscribe(res => {
+      this.apiService.getProductsforBanner(1, 10000, 'active', true, '', this.sellerId, this.selectedCategory, this.selectedSubCategory, this.selectedBrand).subscribe(res => {
 
         if (res.success) {
+          console.log("ProductList", res);
+
           if (res.data) {
             for (let i = 0; i < res.data.length; i++) {
               let body = {
@@ -456,6 +592,12 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   productSelected(id) {
     console.log("product:", id);
     this.selectedProduct = id;
+
+  }
+
+  typeSelected(e) {
+    console.log(e);
+    this.addDiscountForm.get('bannerImage').enable()
 
   }
 
@@ -506,7 +648,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
         } else {
           let selectedVendor = [];
           for (let i = 0; i < this.selectedVendorItem.length; i++) {
-            selectedVendor.push(this.selectedVendorItem[i].id)
+            selectedVendor.push(this.selectedVendorItem[i]._id)
           }
 
           this.typeVendor(checkOffer, selectedVendor);
@@ -534,7 +676,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
 
 
   typeCategory(checkOffer, selectedCategoryItem) {
-
+    debugger
 
     let startDate = moment(this.addDiscountForm.controls['startDate'].value).toLocaleString();
     let endDate = moment(this.addDiscountForm.controls['endDate'].value).toLocaleString()
@@ -545,7 +687,10 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
     const body = new FormData();
     body.append('name', this.addDiscountForm.controls['name'].value);
     body.append('name_ar', this.addDiscountForm.controls['name_ar'].value);
-    body.append('image', this.imageFile, this.imageFile.name);
+
+    body.append('image', this.images, this.images.name);
+    body.append('gender', JSON.stringify(this.addDiscountForm.controls['gender'].value));
+
     body.append('type', this.addDiscountForm.controls['type'].value);
     body.append('discount', this.addDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
@@ -569,7 +714,9 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
     body.append('category', this.selectedCategory)
     body.append('name', this.addDiscountForm.controls['name'].value);
     body.append('name_ar', this.addDiscountForm.controls['name_ar'].value);
-    body.append('image', this.imageFile, this.imageFile.name);
+    body.append('image', this.images, this.images.name);
+    body.append('gender', JSON.stringify(this.addDiscountForm.controls['gender'].value));
+
     body.append('type', this.addDiscountForm.controls['type'].value);
     body.append('discount', this.addDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
@@ -578,7 +725,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
 
     this.addbanner(body);
   }
-  typeVendor(checkOffer, selectedVendorItem) {
+  typeVendor(checkOffer, selectedVendorItem) { //vendor is reused as brand
 
     let startDate = moment(this.addDiscountForm.controls['startDate'].value).toLocaleString();
     let endDate = moment(this.addDiscountForm.controls['endDate'].value).toLocaleString();
@@ -591,7 +738,9 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
     body.append('subCategory', this.selectedSubCategory);
     body.append('name', this.addDiscountForm.controls['name'].value);
     body.append('name_ar', this.addDiscountForm.controls['name_ar'].value);
-    body.append('image', this.imageFile, this.imageFile.name);
+    body.append('gender', JSON.stringify(this.addDiscountForm.controls['gender'].value));
+
+    body.append('image', this.images, this.images.name);
     body.append('type', this.addDiscountForm.controls['type'].value);
     body.append('discount', this.addDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
@@ -611,9 +760,12 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
     const body = new FormData();
     body.append('category', this.selectedCategory);
     body.append('subCategory', this.selectedSubCategory);
+    body.append('brand', this.selectedBrand);
+    body.append('gender', JSON.stringify(this.addDiscountForm.controls['gender'].value));
+
     body.append('name', this.addDiscountForm.controls['name'].value);
     body.append('name_ar', this.addDiscountForm.controls['name_ar'].value);
-    body.append('image', this.imageFile, this.imageFile.name);
+    body.append('image', this.images, this.images.name);
     body.append('type', this.addDiscountForm.controls['type'].value);
     body.append('discount', this.addDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
@@ -625,7 +777,12 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
 
 
 
+
+
   addbanner(body) {
+    debugger
+    this.tempArray = []
+    this.tempArray.push(body);
     //  console.log(body)
     body.forEach((value, key) => {
       console.log(key + " " + value)
