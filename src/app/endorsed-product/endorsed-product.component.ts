@@ -29,6 +29,7 @@ export class EndorsedProductComponent implements OnInit {
   user: any;
   isApproved: any;
   endorsementProductList: any;
+  progress: boolean;
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) {
     this.user = JSON.parse(sessionStorage.getItem('Markat_User'));
     console.log(this.user);
@@ -67,11 +68,17 @@ export class EndorsedProductComponent implements OnInit {
       page: this.page,
       count: this.pageSize
     }
+    this.progress = true
+
     this.apiService.getList(body).subscribe((res) => {
       if (res.success) {
+        this.progress = false
         console.log(res);
         this.vendorList = res.data;
         this.length = res.total;
+      } else {
+        this.progress = false
+        this.commonService.errorToast(res.message)
       }
     });
   }
@@ -84,11 +91,16 @@ export class EndorsedProductComponent implements OnInit {
       page: this.page,
       count: this.pageSize
     }
+    this.progress = true
     this.apiService.getEndorsedProduct(body).subscribe(res => {
       console.log(res);
       if (res.success) {
+        this.progress = false
         this.endorsementProductList = res.data;
         this.length = res.total;
+      } else {
+        this.progress = false
+        this.commonService.errorToast(res.message)
       }
 
     })
@@ -127,13 +139,16 @@ export class EndorsedProductComponent implements OnInit {
         model: 'Endorse'
       }
     }
+    this.progress = true
     this.apiService.changeUserStatus(body).subscribe(res => {
       console.log(res);
       if (res.success) {
+        this.progress = false
         this.commonService.successToast(res.message)
         this.showVendorList();
 
       } else {
+        this.progress = false
         this.commonService.errorToast(res.message)
 
       }

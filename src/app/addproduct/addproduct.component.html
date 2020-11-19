@@ -8,7 +8,7 @@
                     <h1>Add Products</h1>
                     <div class="input_divs2 input_button input_button2">
 
-                        <button mat-button (click)="apiService.back()"><i class="fa fa-long-arrow-left"
+                        <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
                                 aria-hidden="true"></i></button>
                     </div>
                 </div>
@@ -492,7 +492,6 @@
                                     <span *ngFor="let item of urls">
                                         <figure>
                                             <img [src]="item.image" alt="use this">
-                                            {{item.name}}
                                         </figure>
                                     </span>
                                 </div>
@@ -529,6 +528,11 @@
 
                 </form>
                 <!-----End input fields------>
+                 <div class="loader_bg" *ngIf="progress">
+                     <div class="spinner-border" role="status">
+                         <span class="sr-only">Loading...</span>
+                     </div>
+                 </div>
 
             </div>
         </div>

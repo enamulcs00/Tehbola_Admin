@@ -39,6 +39,7 @@ export class EndorsementProductComponent implements OnInit {
   flagapproval: boolean;
   idToDelete: any;
   isEndorse: any = true;
+  progress: boolean;
   constructor(private router: Router,
     private apiService: ApiService,
     private route: ActivatedRoute,
@@ -105,10 +106,12 @@ export class EndorsementProductComponent implements OnInit {
   getAllProducts() {
 
     //Method if isApproved is selected for some value
+    this.progress = true
     this.apiService.getProductsForEndorsement(this.page, this.pageSize, this.filterBy, this.isApproved, this.search,
       this.sellerId, this.isEndorse)
       .subscribe(res => {
         if (res.success) {
+          this.progress = false
           if (res.data.length > 0) {
             this.flagData = false;
             this.productList = res.data;
@@ -119,6 +122,7 @@ export class EndorsementProductComponent implements OnInit {
             this.flagData = true;
           }
         } else {
+          this.progress = false
           this.commonService.errorToast(res.message)
           this.flagData = true
         }
@@ -185,13 +189,15 @@ export class EndorsementProductComponent implements OnInit {
           product: id,
           commission: result.value,
         }
-
+        this.progress = true
         this.apiService.endorsementRequest(body).subscribe(res => {
           console.log(res);
           if (res.success) {
+            this.progress = false
             console.log('requestSent');
             this.commonService.successToast(res.message)
           } else {
+            this.progress = false
             this.commonService.errorToast(res.message)
 
           }

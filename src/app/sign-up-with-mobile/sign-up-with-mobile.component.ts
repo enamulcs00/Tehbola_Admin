@@ -16,6 +16,7 @@ export class SignUpWithMobileComponent implements OnInit {
   otp: number;
   submitted: boolean
   countryList: any;
+  progress: boolean;
   constructor(private fb: FormBuilder, private router: Router, private apiService: ApiService, private commonService: CommonService) {
     this.readCountryCode()
   }
@@ -45,14 +46,16 @@ export class SignUpWithMobileComponent implements OnInit {
     if (this.submitted && this.singUpFormWithPhone.valid) {
       console.log(this.singUpFormWithPhone.value);
       let body = this.singUpFormWithPhone.value;
-
+      this.progress = true
       this.apiService.signUp(body).subscribe(res => {
         console.log(res);
         if (res.success) {
+          this.progress = false
           this.getPhoneNumber = false
           this.commonService.successToast(res.message);
           this.gotPhoneNumber = true
         } else {
+          this.progress = false
           this.commonService.errorToast(res.message);
 
         }
@@ -78,12 +81,15 @@ export class SignUpWithMobileComponent implements OnInit {
       type: 'signupVerification'
     }
     console.log(body);
+    this.progress = true
     this.apiService.verifyPhone(body).subscribe(res => {
       console.log(res);
       if (res.success) {
+        this.progress = false
         this.commonService.successToast(res.message)
         this.router.navigate(['login'])
       } else {
+        this.progress = false
         this.commonService.errorToast(res.message)
       }
     })

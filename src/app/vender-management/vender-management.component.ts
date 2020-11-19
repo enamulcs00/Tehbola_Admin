@@ -11,7 +11,7 @@ import { CommonService } from 'src/services/common.service';
   styleUrls: ['./vender-management.component.scss']
 })
 export class VenderManagementComponent implements OnInit {
-
+  progress: boolean
   length = 100;
   pageSize = 10;
   page = 1
@@ -61,11 +61,16 @@ export class VenderManagementComponent implements OnInit {
       page: this.page,
       count: this.pageSize
     }
+    this.progress = true
     this.apiService.getList(body).subscribe((res) => {
       if (res.success) {
         console.log(res);
         this.vendorList = res.data;
         this.length = res.total;
+        this.progress = false
+      } else {
+        this.progress = false
+        this.commonService.errorToast(res.message)
       }
     });
   }
@@ -84,12 +89,16 @@ export class VenderManagementComponent implements OnInit {
       allowOutsideClick: true
     }).then(result => {
       if (result.isConfirmed) {
-        let body = {
-          id: id,
-          sellerProfileStatus: 1,
-          commission: result.value,
+        if (result.value) {
+          let body = {
+            id: id,
+            sellerProfileStatus: 1,
+            commission: result.value,
+          }
+          this.acceptReject(body)
+        } else {
+          this.commonService.errorToast('Please add commission')
         }
-        this.acceptReject(body)
       } else {
         console.log("nothing changed");
 
@@ -118,11 +127,17 @@ export class VenderManagementComponent implements OnInit {
           }
         }
         console.log(this.body)
+        this.progress = false
         this.apiService.changeUserStatus(this.body).subscribe((res) => {
           console.log(res)
           if (res.success) {
+            this.progress = false
             this.commonService.successToast(res.message)
             this.showVendorList();
+          } else {
+            this.progress = false
+            this.commonService.errorToast(res.message)
+
           }
 
         });
@@ -146,12 +161,16 @@ export class VenderManagementComponent implements OnInit {
       allowOutsideClick: true
     }).then(result => {
       if (result.isConfirmed) {
-        let body = {
-          id: id,
-          sellerProfileStatus: 2,
-          message: result.value,
+        if (result.value) {
+          let body = {
+            id: id,
+            sellerProfileStatus: 2,
+            message: result.value,
+          }
+          this.acceptReject(body)
+        } else {
+          this.commonService.errorToast("Please add commission")
         }
-        this.acceptReject(body)
       } else {
         console.log("nothing changed");
 
@@ -164,13 +183,16 @@ export class VenderManagementComponent implements OnInit {
 
   acceptReject(body) {
     debugger
+    this.progress = true
     this.apiService.approveReject(body).subscribe(res => {
       console.log(res);
       if (res.success) {
+        this.progress = false
         this.commonService.successToast(res.message)
         this.showVendorList();
 
       } else {
+        this.progress = false
         this.commonService.errorToast(res.message)
 
       }
@@ -238,15 +260,17 @@ export class VenderManagementComponent implements OnInit {
           "id": id,
           "model": "User"
         }
-
+        this.progress = true
         this.apiService.delete(data).subscribe(res => {
           console.log(res);
           if (res.success) {
+            this.progress = false
             //  this.getAllCategories()
             this.commonService.successToast(res.message);
             this.showVendorList()
 
           } else {
+            this.progress = false
             this.commonService.errorToast(res.message)
           }
 

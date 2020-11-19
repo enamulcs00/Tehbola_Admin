@@ -16,6 +16,7 @@ export class ResetPasswordComponent implements OnInit {
   phone: any;
   changePassForm: FormGroup
   submitted: boolean;
+  progress: boolean;
 
   constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private apiService: ApiService, private commonService: CommonService) { }
 
@@ -48,12 +49,14 @@ export class ResetPasswordComponent implements OnInit {
         countryCode: this.countryCode,
         password: this.changePassForm.get('newPassword').value
       }
-
+      this.progress = true
       this.apiService.resetPasswordByPhone(body).subscribe(res => {
         if (res.success) {
+          this.progress = false
           this.commonService.successToast(res.message);
           this.router.navigateByUrl("login");
         } else {
+          this.progress = false
           this.commonService.errorToast(res.message)
         }
       });

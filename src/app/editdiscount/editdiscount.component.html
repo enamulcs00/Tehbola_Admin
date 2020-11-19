@@ -250,7 +250,7 @@
                                     </ng-container>
                                     <ng-template #elseTemplate1>
                                         <figure class="figure">
-                                            <img style="max-width: 200px; max-height: 200px;" [src]="previewImage" />
+                                            <img style="max-width: 150px;" [src]="previewImage" />
                                         </figure>
                                     </ng-template>
 
@@ -275,5 +275,10 @@
 
             </div>
         </div>
+    </div>
+</div>
+<div class="loader_bg" *ngIf="progress">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
     </div>
 </div>

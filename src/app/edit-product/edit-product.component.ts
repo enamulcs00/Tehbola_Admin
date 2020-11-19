@@ -44,6 +44,7 @@ export class EditProductComponent implements OnInit {
   flagImageEditted: boolean;
   previewImage: any;
   tempSelectedCategoryId: any;
+  progress: boolean;
 
 
 
@@ -129,15 +130,19 @@ export class EditProductComponent implements OnInit {
   }
 
   getProduct(id) {
+    this.progress = true
     this.apiService.viewProduct(id).subscribe(res => {
       console.log(res);
       if (res.success) {
-
+        this.progress = false
         this.sellerDetails = res.data.seller
 
         this.getAllCategory(this.sellerDetails._id)
         this.setValue(res.data)
 
+      } else {
+        this.progress = false
+        this.commonService.errorToast(res.message)
       }
     })
 
@@ -404,13 +409,15 @@ export class EditProductComponent implements OnInit {
       body.forEach((value, key) => {
         console.log(key + " " + value)
       });
-
+      this.progress = true
       this.apiService.updateProduct(body).subscribe((res) => {
         if (res.success) {
+          this.progress = false
           this.commonService.successToast("Product Successfully update")
           this.router.navigate(['/product'])
           console.log(res)
         } else {
+          this.progress = false
           this.commonService.errorToast(res.message)
         }
       })
@@ -469,6 +476,11 @@ export class EditProductComponent implements OnInit {
         }
       }
     }
+  }
+
+
+  back() {
+    history.back()
   }
 
 }

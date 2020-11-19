@@ -32,6 +32,7 @@ export class OfferdealsComponent implements OnInit {
   sellerId: any = '';
   bannerType: any;
   isApproved: any;
+  progress: boolean;
   constructor(private router: Router, private apiService: ApiService, private urlService: UrlService, private commonService: CommonService) {
     this.imagePath = this.urlService.imageUrl;
     this.userDetails = JSON.parse(sessionStorage.getItem('Markat_User'))
@@ -51,11 +52,11 @@ export class OfferdealsComponent implements OnInit {
   }
 
   getAllDiscount(bannerType, sellerId, isApproved, page, pageSize, search, filterby) {
-
+    this.progress = true
     this.apiService.getAllDiscount(bannerType, sellerId, isApproved, page, pageSize, search, filterby).subscribe((res) => {
-      if (res) {
+      if (res.success) {
         console.log(res);
-
+        this.progress = false
         if (res.data.length > 0) {
           this.flagData = false
           this.bannerList = res.data
@@ -65,7 +66,10 @@ export class OfferdealsComponent implements OnInit {
         } else {
           this.flagData = true
         }
-      };
+      } else {
+        this.progress = false
+        this.commonService.errorToast(res.message)
+      }
 
     })
 
@@ -155,14 +159,16 @@ export class OfferdealsComponent implements OnInit {
       name_ar: name_ar,
       isApproved: true
     }
-
+    this.progress = true
     this.apiService.EditBanner(body).subscribe(res => {
       console.log(res);
       if (res.success) {
+        this.progress = false
         this.commonService.successToast(res.message)
         this.getAllDiscount(this.bannerType, this.sellerId, this.isApproved, this.page, this.pageSize, this.search, this.filterBy)
 
       } else {
+        this.progress = false
         this.commonService.errorToast(res.message)
       }
     })
@@ -192,9 +198,18 @@ export class OfferdealsComponent implements OnInit {
           }
         }
         console.log(body)
+        this.progress = true
         this.apiService.changeUserStatus(body).subscribe((res) => {
           console.log(res)
-          this.getAllDiscount(this.bannerType, this.sellerId, this.isApproved, this.page, this.pageSize, this.search, this.filterBy);
+          if (res.success) {
+            this.progress = false
+
+            this.getAllDiscount(this.bannerType, this.sellerId, this.isApproved, this.page, this.pageSize, this.search, this.filterBy);
+          } else {
+            this.progress = false
+            this.commonService.errorToast(res.message)
+
+          }
         });
       }
 
@@ -225,15 +240,20 @@ export class OfferdealsComponent implements OnInit {
           "id": id,
           "model": "Banner"
         }
+        this.progress = true
 
         this.apiService.delete(data).subscribe(res => {
           console.log(res);
           if (res.success) {
+            this.progress = false
+
             // this.getAllCategories()
             this.commonService.successToast(res.message);
             this.getAllDiscount(this.bannerType, this.sellerId, this.isApproved, this.page, this.pageSize, this.search, this.filterBy)
 
           } else {
+            this.progress = false
+
             this.commonService.errorToast(res.message)
           }
 

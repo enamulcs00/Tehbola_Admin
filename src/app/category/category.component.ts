@@ -29,6 +29,7 @@ export class CategoryComponent implements OnInit {
   page: number = 1
   count: number = 100
   subCatId: any;
+  progress: boolean;
 
 
 
@@ -127,9 +128,10 @@ export class CategoryComponent implements OnInit {
       data.append('name_ar', this.addCategoryForm.get('name_ar').value);
       data.append('commission', this.addCategoryForm.get('commission').value);
       data.append('image', this.imageFile, this.imageFile.name);
-
+      this.progress = true
       this.apiService.addCategory(data).subscribe(res => {
-        if (res) {
+        if (res.success) {
+          this.progress = false
           this.getAllCategories();
           this.commonService.successToast("Category added successfully");
           this.submitted = false;
@@ -140,6 +142,9 @@ export class CategoryComponent implements OnInit {
 
 
 
+        } else {
+          this.progress = false
+          this.commonService.errorToast(res.message)
         }
       });
     } else {
@@ -165,8 +170,10 @@ export class CategoryComponent implements OnInit {
       data.forEach((value, key) => {
         console.log(key + " " + value)
       });
+      this.progress = true
       this.apiService.editCategory(data).subscribe(res => {
-        if (res) {
+        if (res.success) {
+          this.progress = false
           this.previewImage = null
           this.getAllCategories();
           this.commonService.successToast(res.message);
@@ -175,6 +182,9 @@ export class CategoryComponent implements OnInit {
           this.image = null;
 
           this.imageFile = null
+        } else {
+          this.progress = false
+          this.commonService.errorToast(res.message)
         }
       });
     }
@@ -188,14 +198,20 @@ export class CategoryComponent implements OnInit {
       data.append('name', this.addSubcategoryForm.get('name').value);
       data.append('name_ar', this.addSubcategoryForm.get('name_ar').value);
       data.append('image', this.imageFile, this.imageFile.name);
+      this.progress = true
       this.apiService.addSubCategory(data).subscribe(res => {
-        if (res) {
+        if (res.success) {
+          this.progress = false
           this.getAllCategories();
           this.commonService.successToast(res.message);
           this.submitted = false;
           this.addSubcategoryForm.reset();
           this.imageFile = null;
           this.subCategoryImage = null
+
+        } else {
+          this.progress = false
+          this.commonService.errorToast(res.message)
 
         }
       });
@@ -389,8 +405,10 @@ export class CategoryComponent implements OnInit {
       data.forEach((value, key) => {
         console.log(key + " " + value)
       });
+      this.progress = true
       this.apiService.editCategory(data).subscribe(res => {
-        if (res) {
+        if (res.success) {
+          this.progress = false
           this.previewImage = null
           this.getAllCategories();
           this.commonService.successToast(res.message);
@@ -399,6 +417,9 @@ export class CategoryComponent implements OnInit {
           this.image = null;
 
           this.imageFile = null
+        } else {
+          this.progress = false
+          this.commonService.errorToast(res.message)
         }
       });
     }

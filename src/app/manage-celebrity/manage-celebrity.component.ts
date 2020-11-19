@@ -28,6 +28,7 @@ export class ManageCelebrityComponent implements OnInit {
   categoryList: any[];
   selectedCategory = [];
   body: any;
+  progress: boolean;
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) {
     this.getCategoryList()
   }
@@ -63,11 +64,16 @@ export class ManageCelebrityComponent implements OnInit {
       page: this.page,
       count: this.pageSize
     }
+    this.progress = false
     this.apiService.getList(body).subscribe((res) => {
       if (res.success) {
+        this.progress = false
         console.log(res);
         this.vendorList = res.data;
         this.length = res.total;
+      } else {
+        this.progress = false
+        this.commonService.errorToast(res.message)
       }
     });
   }
@@ -86,12 +92,16 @@ export class ManageCelebrityComponent implements OnInit {
       allowOutsideClick: true
     }).then(result => {
       if (result.isConfirmed) {
-        let body = {
-          id: id,
-          sellerProfileStatus: 1,
-          commission: result.value,
+        if (result.value) {
+          let body = {
+            id: id,
+            sellerProfileStatus: 1,
+            commission: result.value,
+          }
+          this.acceptReject(body)
+        } else {
+          this.commonService.errorToast('Please add commission')
         }
-        this.acceptReject(body)
       } else {
         console.log("nothing changed");
 
@@ -115,13 +125,20 @@ export class ManageCelebrityComponent implements OnInit {
       cancelButtonText: "Cancel",
       allowOutsideClick: true
     }).then(result => {
+      debugger
       if (result.isConfirmed) {
-        let body = {
-          id: id,
-          sellerProfileStatus: 2,
-          message: result.value,
+
+
+        if (result.value) {
+          let body = {
+            id: id,
+            sellerProfileStatus: 2,
+            message: result.value,
+          }
+          this.acceptReject(body)
+        } else {
+          this.commonService.errorToast('Please add commission')
         }
-        this.acceptReject(body)
       } else {
         console.log("nothing changed");
 
@@ -149,11 +166,16 @@ export class ManageCelebrityComponent implements OnInit {
           }
         }
         console.log(this.body)
+        this.progress = false
         this.apiService.editCelebrity(this.body).subscribe((res) => {
           console.log(res)
           if (res.success) {
+            this.progress = false
             this.commonService.successToast(res.message)
             this.showCelebrityList();
+          } else {
+            this.progress = false
+            this.commonService.errorToast(res.message)
           }
 
         });
@@ -188,11 +210,15 @@ export class ManageCelebrityComponent implements OnInit {
           }
         }
         console.log(this.body)
+        this.progress = true
         this.apiService.changeUserStatus(this.body).subscribe((res) => {
           console.log(res)
           if (res.success) {
+            this.progress = false
             this.commonService.successToast(res.message)
             this.showCelebrityList();
+          } else {
+            this.progress = false
           }
 
         });
@@ -203,13 +229,16 @@ export class ManageCelebrityComponent implements OnInit {
 
   acceptReject(body) {
     debugger
+    this.progress = true
     this.apiService.approveReject(body).subscribe(res => {
       console.log(res);
       if (res.success) {
+        this.progress = false
         this.commonService.successToast(res.message)
         this.showCelebrityList();
 
       } else {
+        this.progress = false
         this.commonService.errorToast(res.message)
 
       }
@@ -277,15 +306,17 @@ export class ManageCelebrityComponent implements OnInit {
           "id": id,
           "model": "User"
         }
-
+        this.progress = true
         this.apiService.delete(data).subscribe(res => {
           console.log(res);
           if (res.success) {
             //  this.getAllCategories()
+            this.progress = false
             this.commonService.successToast(res.message);
             this.showCelebrityList()
 
           } else {
+            this.progress = false
             this.commonService.errorToast(res.message)
           }
 
@@ -352,9 +383,7 @@ export class ManageCelebrityComponent implements OnInit {
 
         console.log(res)
         this.categoryList = res.data
-
       }
-
     }
     );
   }

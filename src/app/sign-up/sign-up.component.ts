@@ -13,6 +13,7 @@ export class SignUpComponent implements OnInit {
   submitted: boolean
   singUpFormWithPhone: FormGroup;
   ShowTrue: boolean;
+  progress: boolean;
   constructor(private router: Router, private fb: FormBuilder, private apiService: ApiService, private commonService: CommonService) { }
   singUpFormWithEmail: FormGroup
   ngOnInit() {
@@ -34,12 +35,15 @@ export class SignUpComponent implements OnInit {
     if (this.submitted && this.singUpFormWithEmail.valid) {
       console.log(this.singUpFormWithEmail.value);
       let body = this.singUpFormWithEmail.value;
+      this.progress = false
       this.apiService.signUp(body).subscribe(res => {
         console.log(res);
         if (res.success) {
+          this.progress = false
           this.commonService.successToast(res.message);
           this.router.navigate(['login']);
         } else {
+          this.progress = false
           this.commonService.errorToast(res.message);
 
         }

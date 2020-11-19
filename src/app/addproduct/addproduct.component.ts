@@ -331,7 +331,7 @@ export class AddproductComponent implements OnInit {
     console.log(id);
 
   }
-
+  progress: boolean
   onSubmit() {
     debugger
     console.log("check", this.addProductForm)
@@ -374,14 +374,16 @@ export class AddproductComponent implements OnInit {
       body.forEach((value, key) => {
         console.log(key + " " + value)
       });
-
+      this.progress = true
       this.apiService.AddProduct(body).subscribe((res) => {
         if (res.success) {
           this.commonService.successToast("Product Successfully added")
           this.router.navigate(['/product'])
           console.log(res)
+          this.progress = false
         } else {
           this.commonService.errorToast(res.message)
+          this.progress = false
         }
       })
     }
@@ -438,6 +440,11 @@ export class AddproductComponent implements OnInit {
         }
       }
     }
+  }
+
+
+  back() {
+    history.back();
   }
 
 }

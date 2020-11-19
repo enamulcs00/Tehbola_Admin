@@ -29,6 +29,7 @@ export class BrandlistComponent implements OnInit {
   previewImage: any;
   brandImage: any;
   picUploader: boolean;
+  progress: boolean;
   constructor(private apiService: ApiService, private fb: FormBuilder, private commonService: CommonService, private urlService: UrlService) {
     this.getBrandList()
     this.getCategoryList()
@@ -197,16 +198,18 @@ export class BrandlistComponent implements OnInit {
       formData.append('category', this.addBrandForm.get('category').value);
       formData.append('subCategory', this.addBrandForm.get('subCategory').value);
       formData.append('image', this.imageFile, this.imageFile.name);
-
+      this.progress = true
       this.apiService.addBrand(formData).subscribe(res => {
         console.log(res)
         if (res.success == true) {
+          this.progress = false
           this.commonService.successToast('SuccessFully Added')
           this.getBrandList()
           this.addBrandForm.reset();
           this.imageFile = ''
           this.submitted = false
         } else {
+          this.progress = false
           this.commonService.errorToast(res.message)
           this.submitted = false
         }
@@ -236,13 +239,16 @@ export class BrandlistComponent implements OnInit {
       if (this.imageFile) {
         formData.append('image', this.imageFile, this.imageFile.name);
       }
+      this.progress = true
       this.apiService.editBrand(formData).subscribe(res => {
         console.log(res)
         if (res.success == true) {
+          this.progress = false
           this.commonService.successToast('SuccessFully Edited')
           this.getBrandList()
           this.submitted = false
         } else {
+          this.progress = false
           this.commonService.errorToast(res.message)
           this.submitted = false
         }

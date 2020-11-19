@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
   disableButton: boolean;
   rememberMe: boolean
+  progress: boolean;
   constructor(private router: Router,
     private formBuilder: FormBuilder,
     private apiService: ApiService,
@@ -70,10 +71,11 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     if (this.loginForm.valid && this.submitted) {
       const data = this.loginForm.value;
+      this.progress = false
       this, this.apiService.singIn(data).subscribe(res => {
         if (res.success) {
 
-
+          this.progress = false
 
           // this.commonService.successToast(res.message);
           let body = {
@@ -111,6 +113,7 @@ export class LoginComponent implements OnInit {
           }
         }
         else {
+          this.progress = false
           this.commonService.errorToast(res.message);
 
         }

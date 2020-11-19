@@ -26,6 +26,7 @@ export class InventryManagementComponent implements OnInit {
   productList: any;
   isApproved: any = true;
   imageUrl: string;
+  progress: boolean;
 
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService, private urlService: UrlService) {
     debugger
@@ -110,10 +111,12 @@ export class InventryManagementComponent implements OnInit {
       page: this.page,
       count: this.pageSize
     }
+    this.progress = true
     this.apiService.getProducts(this.page, this.pageSize, this.filterBy, this.isApproved, this.search,
       this.sellerId)
       .subscribe(res => {
         if (res.success) {
+          this.progress = false
           if (res.data.length > 0) {
             this.flagData = false;
             this.productList = res.data;
@@ -124,6 +127,7 @@ export class InventryManagementComponent implements OnInit {
             this.flagData = true;
           }
         } else {
+          this.progress = false
           this.commonService.errorToast(res.message)
           this.flagData = true
         }

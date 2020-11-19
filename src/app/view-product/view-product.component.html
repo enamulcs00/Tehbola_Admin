@@ -8,7 +8,7 @@
                     <h1>Edit Products</h1>
                     <div class="input_divs2 input_button input_button2">
 
-                        <button mat-button (click)="apiService.back()"><i class="fa fa-long-arrow-left"
+                        <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
                                 aria-hidden="true"></i></button>
                     </div>
                 </div>
@@ -552,5 +552,10 @@
 
             </div>
         </div>
+    </div>
+</div>
+<div class="loader_bg" *ngIf="progress">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
     </div>
 </div>

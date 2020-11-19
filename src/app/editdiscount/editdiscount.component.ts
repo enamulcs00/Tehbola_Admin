@@ -59,6 +59,7 @@ export class EditdiscountComponent implements OnInit {
   discountDetails: any;
   imageUrl: string;
   urlImage: boolean;
+  progress: boolean;
 
 
   constructor(private router: Router, private route: ActivatedRoute, private apiService: ApiService, private fb: FormBuilder, private urlService: UrlService, private commonService: CommonService) {
@@ -1002,11 +1003,15 @@ export class EditdiscountComponent implements OnInit {
     body.forEach((value, key) => {
       console.log(key + " " + value)
     });
-
+    this.progress = true
     this.apiService.editBanner(body).subscribe(res => {
       console.log(res)
       if (res.success) {
+        this.progress = false
         this.router.navigateByUrl('offerdeals');
+      } else {
+        this.progress = false
+        this.commonService.errorToast(res.message)
       }
     })
 

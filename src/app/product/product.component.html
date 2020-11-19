@@ -6,14 +6,9 @@
             <div class="container-fluid">
                 <div class="sub_heading">
                     <h1>All Products</h1>
-                    <div class="input_divs2 input_button ">
-                        <button mat-button (click)="goToaddProduct()"><span>+</span>Add Product</button>
-
-
-
-                    </div>
                     <div class="input_divs2 input_button input_button2">
-                        <button mat-button (click)="back()"><i class="fa fa-long-arrow-left"
+                        <button mat-button (click)="goToaddProduct()"><span>+</span>Add Product</button>
+                        <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
                                 aria-hidden="true"></i></button>
                     </div>
 
@@ -40,7 +35,7 @@
                                 </mat-select>
                             </mat-form-field>
                         </div>
-                        <div class="filters Booking_status">
+                        <div class="filters Booking_status pl-3">
                             <mat-form-field class="example-full-width">
                                 <mat-label>Product Approval</mat-label>
 
@@ -85,7 +80,7 @@
                     <div *ngIf="flagData==true">
                         <h1>No Data Found</h1>
                     </div>
-                    <div *ngIf="flagData==false" class="table-responsive">
+                    <div *ngIf="flagData==false" class="table-responsive divAboveTable">
                         <table>
                             <tr>
                                 <th>Sr. No.</th>
@@ -205,5 +200,10 @@
 
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="loader_bg" *ngIf="progress">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
         </div>
     </div>

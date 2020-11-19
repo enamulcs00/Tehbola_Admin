@@ -32,6 +32,7 @@ export class EditUserComponent implements OnInit {
   totalAmountPaid: string;
   editUserForm: FormGroup
   submitted: boolean;
+  progress: boolean;
 
   constructor(private router: Router, private fb: FormBuilder, private commonService: CommonService, private route: ActivatedRoute, private apiService: ApiService,
     private datePipe: DatePipe) {
@@ -68,9 +69,10 @@ export class EditUserComponent implements OnInit {
       });
 
 
-
+    this.progress = true
     this.apiService.viewUser(this.id).subscribe((res) => {
       if (res.success) {
+        this.progress = false
         console.log(res.data);
         this.editUserForm.controls['firstName'].setValue(res.data.firstName);
 
@@ -100,6 +102,9 @@ export class EditUserComponent implements OnInit {
         }
 
 
+      } else {
+        this.progress = false
+        this.commonService.errorToast(res.message)
       }
     });
   }
@@ -131,11 +136,14 @@ export class EditUserComponent implements OnInit {
         totalPaid: this.editUserForm.get('totalAmountPaid').value,
 
       }
+      this.progress = true
       this.apiService.editUser(userUpdate).subscribe((res) => {
         console.log(res);
         if (res.success) {
+          this.progress = false
           this.commonService.successToast(res.message)
         } else {
+          this.progress = false
           this.commonService.errorToast(res.message)
         }
         this.goTomanageUser()

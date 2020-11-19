@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/services/api.service';
 import { UrlService } from 'src/services/url.service';
+import { CommonService } from 'src/services/common.service';
 
 interface Ready {
   value: string;
@@ -24,7 +25,8 @@ export class ViewdiscountComponent implements OnInit {
 
   bannerDetails: any
   imagePath: any;
-  constructor(private router: Router, private route: ActivatedRoute, private apiService: ApiService, private urlService: UrlService) {
+  progress: boolean;
+  constructor(private router: Router, private route: ActivatedRoute, private apiService: ApiService, private commonService: CommonService, private urlService: UrlService) {
 
     this.imagePath = this.urlService.imageUrl;
   }
@@ -41,9 +43,10 @@ export class ViewdiscountComponent implements OnInit {
 
   }
   getDiscount(id) {
-
+    this.progress = false
     this.apiService.getDisountDetails(id).subscribe((res) => {
       if (res.success) {
+        this.progress = false
         console.log(res.data);
         this.bannerDetails = {
           'name': res.data.name,
@@ -58,6 +61,9 @@ export class ViewdiscountComponent implements OnInit {
 
         }
 
+      } else {
+        this.progress = false
+        this.commonService.errorToast(res.message)
       }
     })
   }

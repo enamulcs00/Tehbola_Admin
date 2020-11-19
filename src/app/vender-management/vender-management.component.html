@@ -6,13 +6,9 @@
             <div class="container-fluid">
                 <div class="sub_heading">
                     <h1>Vendor Management</h1>
-                    <div class="input_divs2 input_button ">
-
-                        <button mat-button (click)="goToaddVender()">Add Vendor</button>
-                    </div>
                     <div class="input_divs2 input_button input_button2">
-
-                        <button mat-button (click)="back()"><i class="fa fa-long-arrow-left"
+                        <button mat-button (click)="goToaddVender()">Add Vendor</button>
+                        <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
                                 aria-hidden="true"></i></button>
                     </div>
 
@@ -57,7 +53,14 @@
 
                         </div>
                     </div>
-                    <div class="table-responsive">
+
+                    <div class="loader_bg" *ngIf="progress">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+
+                    <div *ngIf="!progress" class="table-responsive divAboveTable">
                         <table>
                             <tr>
                                 <th>Sr.no</th>

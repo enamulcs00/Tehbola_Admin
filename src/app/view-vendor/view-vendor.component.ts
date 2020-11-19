@@ -5,6 +5,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { UrlService } from 'src/services/url.service';
 import { element } from 'protractor';
+import { CommonService } from 'src/services/common.service';
 
 @Component({
   selector: 'app-view-vendor',
@@ -49,7 +50,8 @@ export class ViewVendorComponent implements OnInit {
   categories: any;
   userRole: any;
   celebrityType: any;
-  constructor(private route: Router, private router: ActivatedRoute, private urlService: UrlService, private apiService: ApiService, private fb: FormBuilder) {
+  progress: boolean;
+  constructor(private route: Router, private router: ActivatedRoute, private urlService: UrlService, private apiService: ApiService, private commonService: CommonService, private fb: FormBuilder) {
     this.userDetails = JSON.parse(sessionStorage.getItem('Markat_User'));
     console.log("USer", this.userDetails);
     this.roles = this.userDetails.roles
@@ -89,11 +91,11 @@ export class ViewVendorComponent implements OnInit {
 
 
   getProfile() {
-
+    this.progress = true
     this.apiService.viewUser(this.id).subscribe(res => {
       console.log(res);
       if (res.success) {
-
+        this.progress = false
         this.viewVendor.get('firstName').setValue(res.data.firstName),
           this.viewVendor.get('lastName').setValue(res.data.lastName);
         if (res.data.gender == 'M') {
@@ -119,7 +121,8 @@ export class ViewVendorComponent implements OnInit {
         this.viewVendor.disable()
 
       } else {
-
+        this.progress = false
+        this.commonService.errorToast(res.message)
       }
 
     })

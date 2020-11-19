@@ -13,6 +13,7 @@ import { MustMatch } from 'src/services/mustMatch';
 export class ChangepasswordComponent implements OnInit {
   submitted: boolean = false;
   changePassForm: FormGroup
+  progress: boolean;
   constructor(private formBuilder: FormBuilder,
     private apiService: ApiService,
     private commService: CommonService,
@@ -40,11 +41,14 @@ export class ChangepasswordComponent implements OnInit {
 
     this.submitted = true;
     if (this.changePassForm.valid && this.submitted) {
+      this.progress = false
       this.apiService.changePassword(this.changePassForm.value).subscribe(res => {
         if (res.success) {
+          this.progress = false
           this.commService.successToast(res.message);
           this.router.navigateByUrl("dashboard");
         } else {
+          this.progress = false
           this.commService.errorToast(res.message)
         }
       });

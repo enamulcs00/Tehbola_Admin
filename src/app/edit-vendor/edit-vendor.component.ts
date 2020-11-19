@@ -66,6 +66,7 @@ export class EditVendorComponent implements OnInit {
   gender: any;
   Userid: any;
   gotProfile: boolean;
+  progress: boolean;
   constructor(private route: Router, private router: ActivatedRoute, private commonService: CommonService, private urlService: UrlService, private apiService: ApiService, private fb: FormBuilder) {
     this.userDetails = JSON.parse(sessionStorage.getItem('Markat_User'));
     console.log("USer", this.userDetails);
@@ -293,14 +294,16 @@ export class EditVendorComponent implements OnInit {
       formData.forEach((value, key) => {
         console.log(key + " " + value)
       });
-
+      this.progress = true
       this.apiService.editUser(formData).subscribe(res => {
         console.log(res);
         if (res.success) {
+          this.progress = false
           this.commonService.successToast(res.message);
 
           this.apiService.back();
         } else {
+          this.progress = false
           this.commonService.errorToast(res.message);
         }
 

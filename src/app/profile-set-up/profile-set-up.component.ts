@@ -37,6 +37,7 @@ export class ProfileSetUpComponent implements OnInit {
   country: any;
   sub: any;
   roles: any;
+  progress: boolean;
   constructor(private fb: FormBuilder, private route: Router, private cd: ChangeDetectorRef, private router: ActivatedRoute, private apiService: ApiService, private commonService: CommonService) {
 
     this.readCountryCode();
@@ -254,14 +255,16 @@ export class ProfileSetUpComponent implements OnInit {
       formData.forEach((value, key) => {
         console.log(key + " " + value)
       });
-
+      this.progress = true
       this.apiService.setProfile(formData).subscribe(res => {
         console.log(res);
         if (res.success) {
+          this.progress = false
           this.commonService.successToast(res.message);
 
           this.route.navigate(['/login']);
         } else {
+          this.progress = false
           this.commonService.errorToast(res.message);
         }
 

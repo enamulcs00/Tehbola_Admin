@@ -52,6 +52,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   imageNotAccepted: boolean = true
   tempArray: any[];
   images: any = [];
+  progress: boolean;
 
 
   constructor(private router: Router, private apiService: ApiService, private fb: FormBuilder, private commonService: CommonService) {
@@ -784,11 +785,16 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
     body.forEach((value, key) => {
       console.log(key + " " + value)
     });
-
+    this.progress = true
     this.apiService.addBanner(body).subscribe(res => {
       console.log(res)
       if (res.success) {
+        this.progress = false
         this.router.navigateByUrl('offerdeals');
+
+      } else {
+        this.commonService.errorToast(res.message)
+        this.progress = false
       }
     })
 

@@ -24,6 +24,7 @@ export class ManageUserComponent implements OnInit {
   flagData: any;
   flagNumber: boolean = false;
   flagUserList: boolean = false;
+  progress: boolean;
   constructor(private router: Router,
     private apiService: ApiService,
     private commonService: CommonService) { }
@@ -72,11 +73,15 @@ export class ManageUserComponent implements OnInit {
           }
         }
         console.log(this.body)
+        this.progress = true
         this.apiService.changeUserStatus(this.body).subscribe((res) => {
           console.log(res)
           if (res.success) {
+            this.progress = false
             this.commonService.successToast(res.message)
             this.ShowAllUser();
+          } else {
+            this.commonService.errorToast(res.message)
           }
 
         });
@@ -140,19 +145,25 @@ export class ManageUserComponent implements OnInit {
       page: this.page,
       count: this.pageSize
     }
+    this.progress = true
     this.apiService.getList(body).subscribe(res => {
       console.log(res);
 
       if (res.success) {
+        this.progress = false
         if (res.data.length > 0) {
           this.flagData = false
           this.userList = res.data;
           this.length = res.total;
           console.log(this.userList);
         } else {
+
           this.flagData = true
         }
 
+      } else {
+        this.progress = false
+        this.commonService.errorToast(res.message)
       }
     })
 
@@ -215,15 +226,17 @@ export class ManageUserComponent implements OnInit {
           "id": id,
           "model": "User"
         }
-
+        this.progress = true
         this.apiService.delete(data).subscribe(res => {
           console.log(res);
           if (res.success) {
+            this.progress = false
             //  this.getAllCategories()
             this.commonService.successToast(res.message);
             this.ShowAllUser()
 
           } else {
+            this.progress = false
             this.commonService.errorToast(res.message)
           }
 

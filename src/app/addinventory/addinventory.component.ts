@@ -14,6 +14,7 @@ export class AddinventoryComponent implements OnInit {
   id: any;
   updateInventoryForm: FormGroup;
   submitted: boolean;
+  progress: boolean;
 
   constructor(private router: Router, private activatedrouter: ActivatedRoute, private apiService: ApiService, private fb: FormBuilder, private commonService: CommonService) {
 
@@ -76,14 +77,16 @@ export class AddinventoryComponent implements OnInit {
       body.forEach((value, key) => {
         console.log(key + " " + value)
       });
-
+      this.progress = true
       this.apiService.updateProduct(body).subscribe((res) => {
         if (res.success) {
           this.commonService.successToast(res.message)
+          this.progress = false
           this.router.navigate(['/inventryManagement'])
           console.log(res)
         } else {
           this.commonService.errorToast(res.message)
+          this.progress = false
         }
       })
     }

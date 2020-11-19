@@ -40,6 +40,7 @@ export class AddVenderComponent implements OnInit {
   sub: any;
   roles: any;
   submitted: boolean;
+  progress: boolean;
   constructor(private fb: FormBuilder, private route: Router, private cd: ChangeDetectorRef, private router: ActivatedRoute, private apiService: ApiService, private commonService: CommonService) {
 
     this.readCountryCode();
@@ -263,12 +264,12 @@ export class AddVenderComponent implements OnInit {
       formData.forEach((value, key) => {
         console.log(key + " " + value)
       });
-
+      this.progress = true
       this.apiService.addVendorCelebrity(formData).subscribe(res => {
         console.log(res);
         if (res.success) {
           this.commonService.successToast(res.message);
-
+          this.progress = false
           if (this.roles == 'merchant') {
             this.route.navigate(['/venderManagement']);
           } {
@@ -277,6 +278,7 @@ export class AddVenderComponent implements OnInit {
           }
         } else {
           this.commonService.errorToast(res.message);
+          this.progress = false
         }
 
       })
@@ -285,5 +287,9 @@ export class AddVenderComponent implements OnInit {
     }
 
 
+  }
+
+  back() {
+    history.back()
   }
 }

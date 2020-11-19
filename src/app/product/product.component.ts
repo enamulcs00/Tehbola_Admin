@@ -38,6 +38,7 @@ export class ProductComponent implements OnInit {
     ;
   flagapproval: boolean;
   idToDelete: any;
+  progress: boolean;
   constructor(private router: Router,
     private apiService: ApiService,
     private route: ActivatedRoute,
@@ -113,13 +114,19 @@ export class ProductComponent implements OnInit {
       id: id,
       isApproved: true
     }
+    this.progress = true
+
     this.apiService.editProduct(body).subscribe(res => {
       console.log(res);
       if (res.success) {
-        this.commonService.successToast('Product Approved');
+        this.progress = false
+
+        this.commonService.successToast(res.message);
         this.getAllProducts();
       } else {
-        this.commonService.errorToast("Opps, SOmething went wrong, Please try again later")
+        this.progress = false
+
+        this.commonService.errorToast(res.message)
       }
 
     })
@@ -133,10 +140,12 @@ export class ProductComponent implements OnInit {
   getAllProducts() {
 
     if (this.isApproved) { //Method if isApproved is selected for some value
+      this.progress = true
       this.apiService.getProducts(this.page, this.pageSize, this.filterBy, this.isApproved, this.search,
         this.sellerId)
         .subscribe(res => {
           if (res.success) {
+            this.progress = false
             if (res.data.length > 0) {
               this.flagData = false;
               this.productList = res.data;
@@ -147,16 +156,19 @@ export class ProductComponent implements OnInit {
               this.flagData = true;
             }
           } else {
+            this.progress = true
             this.commonService.errorToast(res.message)
             this.flagData = true
           }
 
         })
     } else {  //method for get data with out isApproved in initial stage
+      this.progress = true
       this.apiService.getProductsWithoutApproved(this.page, this.pageSize, this.filterBy, this.search,
         this.sellerId)
         .subscribe(res => {
           if (res.success) {
+            this.progress = false
             if (res.data.length > 0) {
               this.flagData = false;
               this.productList = res.data;
@@ -164,9 +176,11 @@ export class ProductComponent implements OnInit {
               this.length = res.total
               // this.productList = res.data
             } else {
+
               this.flagData = true;
             }
           } else {
+            this.progress = false
             this.commonService.errorToast(res.message)
             this.flagData = true
           }
@@ -211,9 +225,15 @@ export class ProductComponent implements OnInit {
           }
         }
         console.log(data)
+        this.progress = true
         this.apiService.changeUserStatus(data).subscribe((res) => {
           console.log(res)
-          this.getAllProducts();
+          if (res.success) {
+            this.getAllProducts();
+          } else {
+            this.progress = false
+            this.commonService.errorToast(res.message)
+          }
         });
       }
     }
@@ -270,12 +290,15 @@ export class ProductComponent implements OnInit {
           }
         }
         console.log(data)
+        this.progress = true
         this.apiService.updateProduct(data).subscribe((res) => {
           if (res.success) {
+            this.progress = false
             this.commonService.successToast("Product Successfully Updated")
             this.router.navigate(['/product'])
             console.log(res)
           } else {
+            this.progress = false
             this.commonService.errorToast(res.message)
           }
         })
@@ -306,12 +329,15 @@ export class ProductComponent implements OnInit {
           }
         }
         console.log(data)
+        this.progress = true
         this.apiService.updateProduct(data).subscribe((res) => {
           if (res.success) {
+            this.progress = false
             this.commonService.successToast("Product Successfully Updated")
             this.router.navigate(['/product'])
             console.log(res)
           } else {
+            this.progress = false
             this.commonService.errorToast(res.message)
           }
         })
@@ -352,11 +378,14 @@ export class ProductComponent implements OnInit {
           "id": this.idToDelete,
           "model": "Product"
         }
+        this.progress = true
         this.apiService.delete(data).subscribe(res => {
           console.log(res);
           if (res.success) {
+            this.progress = false
             this.commonService.successToast("Succesfully Deleted")
           } else {
+            this.progress = false
             this.commonService.errorToast(res.message)
           }
         })
