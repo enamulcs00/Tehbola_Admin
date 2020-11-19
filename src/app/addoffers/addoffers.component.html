@@ -216,6 +216,17 @@
                             <li class="banner_image">
                                 <label>Add Banner image</label>
                                 <div class="product_image_upload">
+                                    <ng-container
+                                        *ngIf="addDiscountForm.get('type').value=='Home Banner'; else elseTemplate">
+                                        <p>Please Upload image which is in the aspect ratio of 2:1</p>
+                                    </ng-container>
+                                    <ng-template #elseTemplate>
+                                        <div *ngIf="addDiscountForm.get('type').value=='Home' ||
+                                        addDiscountForm.get('type').value=='Offer'">
+                                            <p>Please Upload image which is in the aspect ratio of 1:1</p>
+                                        </div>
+                                    </ng-template>
+
                                     <input type='file' [disabled]='imageNotAccepted' (change)="bannerImageEvent($event)"
                                         accept="image/*" formControlName="bannerImage" placeholder="choosefile"
                                         class="images_uploader">

@@ -66,6 +66,7 @@ export class ApiService {
       getBrandListByCat: 'admin/getBrands',
       getAllCategoryForDiscount: 'admin/categoryByVendor',
       addBanner: 'admin/banner',
+      viewBanner: 'admin/viewBanner',
       //commonApi to change status of any user type
       status: 'common/status',
 
@@ -356,6 +357,11 @@ export class ApiService {
         catchError(this.handleError<any>("add bannner")))
   }
 
+  editBanner(body): Observable<any> {
+    return this.http.put<any>(this.apiEndPoints.addBanner, body, this.getHeaders()).
+      pipe(
+        catchError(this.handleError<any>("add bannner")))
+  }
 
   EditBanner(body): Observable<any> {
     return this.http.put<any>(this.apiEndPoints.addBanner, body, this.getHeaders()). //using end point add banner because of same end point

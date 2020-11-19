@@ -169,12 +169,8 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
       name_ar: ['', Validators.required],
       gender: ['', Validators.required],
       bannerImage: ['',]
-    },
-      // {
-      // validator: GreaterDateMatch('startDate', 'EndDate')
+    })
 
-      // }
-    )
     if (this.userDetails.roles == 'admin') {
       this.getAllCategoryForAdmin();
       this.sellerId = ''
@@ -641,14 +637,14 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
       }
 
     }
-    if (checkOffer == 'vendor') {
+    if (checkOffer == 'brand') {
       if (this.submitted && this.addDiscountForm.valid) {
         if (this.selectedItem.length > 0) {
           this.typeVendor(checkOffer, this.selectedItem);
         } else {
           let selectedVendor = [];
           for (let i = 0; i < this.selectedVendorItem.length; i++) {
-            selectedVendor.push(this.selectedVendorItem[i]._id)
+            selectedVendor.push(this.selectedVendorItem[i].id)
           }
 
           this.typeVendor(checkOffer, selectedVendor);
@@ -730,7 +726,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
     let startDate = moment(this.addDiscountForm.controls['startDate'].value).toLocaleString();
     let endDate = moment(this.addDiscountForm.controls['endDate'].value).toLocaleString();
     let offer = {
-      'list': selectedVendorItem, 'type': 'seller'
+      'list': selectedVendorItem, 'type': 'brand'
     }
 
     const body = new FormData();
@@ -751,6 +747,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   }
   typeProduct(checkOffer, selectedItem) {
 
+    debugger
     let startDate = moment(this.addDiscountForm.controls['startDate'].value).toLocaleString();
     let endDate = moment(this.addDiscountForm.controls['endDate'].value).toLocaleString();
     let offer = {
