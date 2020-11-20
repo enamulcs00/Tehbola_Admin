@@ -277,7 +277,11 @@
                                 <mat-form-field [floatLabel]="'never'">
                                     <input matInput type="text" formControlName="price" placeholder="" name="name">
                                     <mat-error *ngIf="editProductForm.get('price').hasError('required')">
-                                        Purchase Quantity is <strong>required</strong>.
+                                        Base price is <strong>required</strong>.
+                                    </mat-error>
+                                    <mat-error *ngIf="editProductForm.get('price').hasError('min')  &&
+                                           !editProductForm.get('price').hasError('required')">
+                                        Base price could not be less than <strong>1</strong>.
                                     </mat-error>
 
 
@@ -337,21 +341,22 @@
                                 <mat-form-field class="example-full-width" class="textarea_kandil">
 
                                     <textarea matInput formControlName="description" placeholder=""></textarea>
-                                    <div class="custom-invalid"
-                                        *ngIf=" submitted && editProductForm.controls['description'].hasError('required')">
+                                    <mat-error *ngIf="editProductForm.controls['description'].hasError('required')">
                                         Description is <strong>required</strong>
-                                    </div>
+                                    </mat-error>
+
                                 </mat-form-field>
                             </li>
                             <li>
                                 <label>Arbic Description <span class="red">*</span></label>
                                 <mat-form-field class="example-full-width" class="textarea_kandil">
 
+
                                     <textarea matInput formControlName="description_ar" placeholder=""></textarea>
-                                    <div class="custom-invalid"
-                                        *ngIf=" submitted && editProductForm.controls['description_ar'].hasError('required')">
+                                    <mat-error *ngIf="editProductForm.controls['description_ar'].hasError('required')">
                                         Arbic Description is <strong>required</strong>
-                                    </div>
+                                    </mat-error>
+
                                 </mat-form-field>
                             </li>
                             <li>
@@ -381,9 +386,13 @@
                                 <table class="table table-bordered" formArrayName="specification">
                                     <tr>
                                         <th colspan="2"> Specification:</th>
-                                        <th width="50px"><button type="button" (click)="addNewSpecification()"
-                                                class="btn btn-primary">Add
-                                                More</button></th>
+                                        <th width="20%">
+                                            <div class="input_button input_button2">
+                                                <button type="button" mat-button (click)="addNewSpecification()"
+                                                    class="btn btn-primary">Add
+                                                    More</button>
+                                            </div>
+                                        </th>
                                     </tr>
                                     <tr *ngFor="let quantity of specification().controls; let i=index"
                                         [formGroupName]="i">
@@ -396,8 +405,7 @@
                                             <input type="text" formControlName="value" class="form-control">
                                         </td>
                                         <td style="width: 20%;">
-                                            <button (click)="removeSpecification(i)"
-                                                class="btn btn-danger">Remove</button>
+                                            <button (click)="removeSpecification(i)" class="btn_grey">Remove</button>
                                         </td>
                                     </tr>
                                 </table>
@@ -414,9 +422,13 @@
                                 <table class="table table-bordered" formArrayName="specification_ar">
                                     <tr>
                                         <th colspan="2"> Arbic Specification:</th>
-                                        <th width="50px"><button type="button" (click)="addNewSpecification_ar()"
-                                                class="btn btn-primary">Add
-                                                More</button></th>
+                                        <th width="20%">
+                                            <div class="input_button input_button2">
+                                                <button type="button" mat-button (click)="addNewSpecification_ar()"
+                                                    class="btn btn-primary">Add
+                                                    More</button>
+                                            </div>
+                                        </th>
                                     </tr>
                                     <tr *ngFor="let quantity of specification_ar().controls; let i=index"
                                         [formGroupName]="i">
@@ -429,8 +441,7 @@
                                             <input type="text" formControlName="value" class="form-control">
                                         </td>
                                         <td style="width: 20%;">
-                                            <button (click)="removeSpecification_ar(i)"
-                                                class="btn btn-danger">Remove</button>
+                                            <button (click)="removeSpecification_ar(i)" class="btn_grey">Remove</button>
                                         </td>
                                     </tr>
                                 </table>
@@ -447,19 +458,21 @@
                                 <table class="table table-bordered" formArrayName="aliases">
                                     <tr>
                                         <th>Search Keywords:</th>
-                                        <th width="50px"><button type="button" (click)="addAlias()"
-                                                class="btn btn-primary">Add
-                                                More</button></th>
+                                        <th width="20%">
+                                            <div class="input_button input_button2">
+                                                <button mat-button type="button" (click)="addAlias()" class="">Add
+                                                    More</button>
+                                            </div>
+                                        </th>
                                     </tr>
                                     <tr *ngFor="let quantity of aliases.controls; let i=index">
-                                        <td style="width: 100%;">
+                                        <td style="width: 80%;">
                                             Keywords :
                                             <input type="text" [formControlName]="i" class="form-control">
                                         </td>
 
                                         <td>
-                                            <button (click)="removeSearchKeywords(i)"
-                                                class="btn btn-danger">Remove</button>
+                                            <button (click)="removeSearchKeywords(i)" class="btn_grey">Remove</button>
                                         </td>
                                     </tr>
 
@@ -511,7 +524,7 @@
 
                                             </figure>
                                             <a class="btn" aria-label="Delete" (click)="deletePhoto(item._id)"> <i
-                                                    class="fa fa-trash-o fa-fw"></i></a>
+                                                    class="fa fa-trash-o fa-fw fa-2x"></i></a>
                                         </div>
                                     </span>
                                 </div>
@@ -554,7 +567,7 @@
     </div>
 </div>
 <div class="loader_bg" *ngIf="progress">
-    <div class="spinner-border" role="status">
+    <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#97334b ;" role="status">
         <span class="sr-only">Loading...</span>
     </div>
 </div>

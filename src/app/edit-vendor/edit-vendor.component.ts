@@ -67,6 +67,7 @@ export class EditVendorComponent implements OnInit {
   Userid: any;
   gotProfile: boolean;
   progress: boolean;
+  dontShowPurpose: boolean = false;
   constructor(private route: Router, private router: ActivatedRoute, private commonService: CommonService, private urlService: UrlService, private apiService: ApiService, private fb: FormBuilder) {
     this.userDetails = JSON.parse(sessionStorage.getItem('Markat_User'));
     console.log("USer", this.userDetails);
@@ -175,6 +176,8 @@ export class EditVendorComponent implements OnInit {
         debugger
         this.Userid = res.data._id
         if (res.data.roles == 'merchant') {
+          debugger
+          this.dontShowPurpose = true
           this.editVendor.controls['celebrityType'].disable({ onlySelf: true });
 
         }
@@ -322,4 +325,7 @@ export class EditVendorComponent implements OnInit {
   }
 
 
+  back() {
+    history.back()
+  }
 }

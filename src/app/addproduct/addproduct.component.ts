@@ -91,7 +91,7 @@ export class AddproductComponent implements OnInit {
       seller: [''],
       //  isfeatured: ['', Validators.required],
       brand: ['', [Validators.required,]],
-      price: ['', [Validators.required, Validators.min(0)]],
+      price: ['', [Validators.required, Validators.min(1)]],
       description: ['', [Validators.required,]],
       description_ar: ['', Validators.required],
       image: ['', [Validators.required]],

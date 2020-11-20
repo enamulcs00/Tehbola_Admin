@@ -95,6 +95,6 @@ export class AddinventoryComponent implements OnInit {
 
 
   goToinventory() {
-    this.router.navigate(['/inventory'])
+    history.back()
   };
 }

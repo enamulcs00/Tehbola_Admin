@@ -1,15 +1,16 @@
-<div class="login_div login_div2">
+<div class=" login_div2">
     <div class="container-fluid">
         <div class="conta_iner">
-
-            <div class="logininner">
-
+            <div class="sub_heading">
+                <h2>Edit Profile</h2>
+                <div class="input_divs2 input_button input_button2">
+                    <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
+                            aria-hidden="true"></i></button>
+                </div>
+            </div>
+            <div>
                 <form [formGroup]="editVendor">
-                    <div class="sub_main_heading">
-                        <h2>Edit Profile</h2>
-                    </div>
-
-                    <ul>
+                    <ul class="pt-5">
 
                         <li class="input_file P_file">
 
@@ -161,21 +162,22 @@
                             </mat-form-field>
                         </li>
                         <li *ngIf="roles !=='merchant'">
-                            <mat-form-field class="example-full-width">
-                                <mat-label>Purpose<span class="red">*</span></mat-label>
+                            <div *ngIf=" dontShowPurpose==false">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Purpose<span class="red">*</span></mat-label>
 
-                                <mat-select placeholder="Placeholder" [(value)]="celebrityType"
-                                    formControlName="celebrityType">
-                                    <mat-option [value]="item.value" *ngFor="let item of celebrityTypeModel">
-                                        {{item.viewValue}}
-                                    </mat-option>
-                                </mat-select>
+                                    <mat-select placeholder="Placeholder" [(value)]="celebrityType"
+                                        formControlName="celebrityType">
+                                        <mat-option [value]="item.value" *ngFor="let item of celebrityTypeModel">
+                                            {{item.viewValue}}
+                                        </mat-option>
+                                    </mat-select>
 
-                                <mat-error *ngIf="editVendor.get('celebrityType').hasError('required')">
-                                    Purpose is <strong>required</strong>
-                                </mat-error>
-                            </mat-form-field>
-
+                                    <mat-error *ngIf="editVendor.get('celebrityType').hasError('required')">
+                                        Purpose is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
                         </li>
                         <!-- <li class="input_file">
                             <label>Certificates </label>
@@ -223,7 +225,7 @@
     </div>
 </div>
 <div class="loader_bg" *ngIf="progress">
-    <div class="spinner-border" role="status">
+    <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#97334b ;" role="status">
         <span class="sr-only">Loading...</span>
     </div>
 </div>

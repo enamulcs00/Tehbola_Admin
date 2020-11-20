@@ -384,6 +384,7 @@ export class ProductComponent implements OnInit {
           if (res.success) {
             this.progress = false
             this.commonService.successToast("Succesfully Deleted")
+            this.getAllProducts()
           } else {
             this.progress = false
             this.commonService.errorToast(res.message)

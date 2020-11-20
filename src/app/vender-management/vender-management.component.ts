@@ -26,11 +26,10 @@ export class VenderManagementComponent implements OnInit {
   srNo: number = 1;
   roles: any = 'merchant';
   categoryList: any[];
-  selectedCategory: any;
+  selectedCategory = [];
   body: { model: string; id: any; status: number; };
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) {
 
-    this.getCategoryList()
   }
 
   ngOnInit() {
@@ -308,43 +307,18 @@ export class VenderManagementComponent implements OnInit {
     this.router.navigate(['product'], { queryParams: { "id": id, "name": name } })
   }
 
-  goToViewCategory(id) {
+  goToViewCategory(categories) {
     // alert(id);
     this.selectedCategory = []
-    for (let item in this.categoryList) {
-      for (let category in id) {
-        if (this.categoryList[item].id = id[category]) {
-          this.selectedCategory.push(this.categoryList[item])
-        }
-      }
+    for (let i in categories) {
+      this.selectedCategory.push(categories[i].name)
     }
-
-
   }
   viewDocument(id) {
 
     this.router.navigate(['document'], { queryParams: { 'id': id, 'role': 'vendor' } })
   }
 
-  getCategoryList() {
-
-    let temp = []
-    this.categoryList = []
-    let page = 1;
-    let count = 200;
-
-    this.apiService.getAllCategories().subscribe(res => {
-
-      if (res.success) {
-
-        console.log(res)
-        this.categoryList = res.data
-
-      }
-
-    }
-    );
-  }
 
   back() {
     window.history.back()

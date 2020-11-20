@@ -105,7 +105,7 @@ export class EditProductComponent implements OnInit {
       // seller: [''],
       isfeatured: ['', Validators.required],
       brand: ['', [Validators.required,]],
-      price: ['', [Validators.required, Validators.min(0)]],
+      price: ['', [Validators.required, Validators.min(1)]],
       description: ['', [Validators.required,]],
       description_ar: ['', Validators.required],
       image: ['',],
@@ -372,7 +372,7 @@ export class EditProductComponent implements OnInit {
     console.log("check", this.editProductForm)
     this.submitted = true;
 
-    if (this.submitted && this.editProductForm.valid) {
+    if (this.submitted && this.editProductForm.valid && (this.previewImage.length > 0 || this.images.length > 0)) {
       const body = new FormData();
       body.append('id', this.id);
 

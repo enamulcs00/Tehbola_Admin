@@ -12,6 +12,7 @@ declare var $: any;
 export class SidebarComponent implements OnInit {
   user: any;
   roles: string;
+  celebrityType: any;
 
   constructor(private router: Router, private apiService: ApiService) {
 
@@ -20,6 +21,9 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.roles = this.user.roles
+    if (this.roles == 'celebrity') {
+      this.celebrityType = this.user.celebrityType
+    }
     // if (this.roles == 'admin') {
     //   alert('Admin')
 

@@ -72,8 +72,9 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid && this.submitted) {
       const data = this.loginForm.value;
       this.progress = false
-      this, this.apiService.singIn(data).subscribe(res => {
+      this.apiService.singIn(data).subscribe(res => {
         if (res.success) {
+          console.log(res);
 
           this.progress = false
 
@@ -83,6 +84,7 @@ export class LoginComponent implements OnInit {
             lastName: res.data.lastName,
             roles: res.data.roles,
             lang: res.data.lang,
+            celebrityType: res.data.celebrityType,
             email: res.data.email,
             status: res.data.status,
             isVerified: res.data.isVerified,

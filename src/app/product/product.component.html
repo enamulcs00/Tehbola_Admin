@@ -8,8 +8,8 @@
                     <h1>All Products</h1>
                     <div class="input_divs2 input_button input_button2">
                         <button mat-button (click)="goToaddProduct()"><span>+</span>Add Product</button>
-                        <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
-                                aria-hidden="true"></i></button>
+                        <!-- <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
+                                aria-hidden="true"></i></button> -->
                     </div>
 
                 </div>
@@ -26,10 +26,10 @@
                                     </mat-option>
 
                                     <mat-option value="active">
-                                        Unblocked
+                                        Active
                                     </mat-option>
                                     <mat-option value="inactive">
-                                        Blocked
+                                        Inactive
                                     </mat-option>
 
                                 </mat-select>
@@ -48,7 +48,7 @@
                                     <mat-option value="true">
                                         Approved
                                     </mat-option>
-                                    <mat-option value="inactive">
+                                    <mat-option value="false">
                                         not Approved
                                     </mat-option>
 
@@ -94,6 +94,7 @@
                                 <th> Minimum quantity</th>
                                 <th>Price </th>
                                 <th>Product Description</th>
+                                <th *ngIf="user.roles=='admin'">Seller Name</th>
                                 <th *ngIf="user.roles=='admin'">Is Featured</th>
                                 <th *ngIf="user.roles=='merchant'">Available to Endorsement</th>
                                 <th class="action_bx">Status</th>
@@ -126,10 +127,12 @@
                                 </td>
                                 <td>{{ product.productQuantity }}</td>
                                 <td>{{ product.purchaseQuantity }}</td>
-                                <td>$ {{ product.price }}</td>
+                                <td>KD {{ product.price }}</td>
                                 <td>{{ product.description.length < 24 ?
                             product.description :
                             product.description.slice(0,24)+ "..." }}</td>
+                                <td *ngIf="user.roles=='admin'">{{product.seller.firstName}} {{product.seller.lastName}}
+                                </td>
                                 <td *ngIf="user.roles=='admin'">
                                     <div class="enable_disable">
                                         <mat-slide-toggle [checked]="product.isFeatured"
@@ -203,7 +206,7 @@
         </div>
     </div>
     <div class="loader_bg" *ngIf="progress">
-        <div class="spinner-border" role="status">
+        <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#97334b ;" role="status">
             <span class="sr-only">Loading...</span>
         </div>
     </div>

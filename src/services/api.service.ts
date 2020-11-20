@@ -38,6 +38,7 @@ export class ApiService {
       addSubCategory: 'admin/subCategory',
       softdelete: 'common/delete',
       getList: 'admin/getUsers',
+      getVendorListForEndorsement: 'panel/getMerchantList',
       viewDocument: 'admin/documents',
       getBrandList: 'admin/getAllBrand',
       getsubcategoryList: 'admin/subCategories',
@@ -169,6 +170,10 @@ export class ApiService {
 
   getList(body): Observable<any> {
     return this.http.post<any>(this.apiEndPoints.getList, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  getVendorListForEndorsement(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.getVendorListForEndorsement, body, this.getHeaders()).pipe(catchError(this.handleError()))
   }
   getCelebList(search, roles): Observable<any> {
     return this.http.get<any>(`${this.apiEndPoints.getList}?search=${search}&roles=${roles}`, this.getHeaders()).pipe(catchError(this.handleError()))

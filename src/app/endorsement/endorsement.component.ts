@@ -78,7 +78,7 @@ export class EndorsementComponent implements OnInit {
       count: this.pageSize
     }
     this.progress = true
-    this.apiService.getList(body).subscribe((res) => {
+    this.apiService.getVendorListForEndorsement(body).subscribe((res) => {
       if (res.success) {
         this.progress = false
         console.log(res);
@@ -124,9 +124,10 @@ export class EndorsementComponent implements OnInit {
   }
 
 
-  acceptRequest(id) {
+  acceptRequest(id, status) {
     let body = {
-      id: id
+      id: id,
+      status: status
     }
     this.progress = true
     this.apiService.approveEndorsementRequest(body).subscribe(res => {

@@ -31,10 +31,10 @@
                                     </mat-option>
 
                                     <mat-option value="active">
-                                        Unblocked
+                                        Active
                                     </mat-option>
                                     <mat-option value="inactive">
-                                        Blocked
+                                        Inactive
                                     </mat-option>
 
                                 </mat-select>
@@ -131,7 +131,7 @@
                                 </td>
                                 <td>{{ product.productQuantity }}</td>
                                 <td>{{ product.purchaseQuantity }}</td>
-                                <td>$ {{ product.price }}</td>
+                                <td>KD {{ product.price }}</td>
                                 <td>{{ product.description.length < 24 ?
                             product.description :
                             product.description.slice(0,24)+ "..." }}</td>
@@ -209,7 +209,8 @@
         </div>
     </div>
     <div class="loader_bg" *ngIf="progress">
-        <div class="spinner-border" role="status">
+        <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#97334b ;" role="status">
             <span class="sr-only">Loading...</span>
         </div>
     </div>
+</div>

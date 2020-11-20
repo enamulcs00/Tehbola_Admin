@@ -153,21 +153,16 @@
                             </mat-form-field>
 
                         </li>
-                        <li>
+                        <li class="pb-3">
                             <mat-label>Specialities<span class="red">*</span></mat-label>
                             <ng-multiselect-dropdown [placeholder]="" [data]="categoryList"
                                 [(ngModel)]="selectedCategoryItem" [ngModelOptions]="{standalone: true}"
                                 [settings]="categoryDropDownSettings" (onSelect)="onCategorySelect($event)"
                                 (onSelectAll)="onSelectAll($event)">
                             </ng-multiselect-dropdown>
-                            <!-- <div *ngIf="submitted && f.brnNumber.errors" class="custom-invalid">
-                            <div *ngIf="f.brnNumber.errors.required">
-                                BRN number is required.
-                            </div>
 
-
-                        </div> -->
                         </li>
+
                         <li *ngIf="roles !=='merchant'">
                             <mat-form-field class="example-full-width">
                                 <mat-label>Purpose<span class="red">*</span></mat-label>
@@ -236,7 +231,7 @@
     </div>
 </div>
 <div class="loader_bg" *ngIf="progress">
-    <div class="spinner-border" role="status">
+    <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#97334b ;" role="status">
         <span class="sr-only">Loading...</span>
     </div>
 </div>

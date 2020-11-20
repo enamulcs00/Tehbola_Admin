@@ -315,7 +315,7 @@ export class ViewProductComponent implements OnInit {
         console.log(res);
         if (res.data) {
           this.categoryList = res.data
-          this.getAllSubcategory(this.selectedCategory);
+          //this.getAllSubcategory(this.selectedCategory);
         }
       }
 
