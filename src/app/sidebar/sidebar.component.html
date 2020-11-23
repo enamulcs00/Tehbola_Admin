@@ -54,18 +54,19 @@
             <li (click)="goToProduct()">Product Management </li>
             <!-- *ngIf="roles =='celebrity || merchant'" -->
             <li (click)="goTovendermanagement()" *ngIf="roles =='admin'">Vendor Management</li>
-            <li (click)="goToCelebritymanagement()" *ngIf="roles =='admin'">Celebrity Management</li>
-            <li (click)="goToBrand()" *ngIf="roles=='admin'">Brand Management</li>
+            <!-- <li (click)="goToCelebritymanagement()" *ngIf="roles =='admin'">Celebrity Management</li> -->
             <li (click)="goTocategory()" *ngIf="roles=='admin'">Category</li>
-            <div *ngIf="roles!='admin'">
+            <li (click)="goToBrand()" *ngIf="roles=='admin'">Raw Item Management</li>
+
+            <!-- <div *ngIf="roles!='admin'">
                 <li (click)="goToEndorsement()" *ngIf="celebrityType!=2">
 
                     Endorsement</li>
-            </div>
+            </div> -->
             <!-- <li (click)="goTosubcategory()">Sub-Category</li>-->
-            <li (click)="goToinventry()">Inventory Management</li>
+            <!-- <li (click)="goToinventry()">Inventory Management</li> -->
             <!-- <li (click)="goToordermanagement()">Sales </li> -->
-            <li (click)="goToofferdeals()">Banner Manegement</li>
+            <!-- <li (click)="goToofferdeals()">Banner Manegement</li> -->
         </ul>
     </div>
     <div id="core3" class="core">

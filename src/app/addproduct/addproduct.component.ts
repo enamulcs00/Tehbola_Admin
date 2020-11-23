@@ -50,10 +50,10 @@ export class AddproductComponent implements OnInit {
     console.log(this.user);
 
     if (this.user.roles == 'admin') {
-      this.sellerId = null
-    } else {
       this.sellerId = this.user._id
-      this.getAllCategory(this.sellerId)
+    } else {
+      // this.sellerId = this.user._id
+      // this.getAllCategory(this.sellerId)
     }
 
   }
@@ -72,11 +72,11 @@ export class AddproductComponent implements OnInit {
 
 
     this.addProductForm = this.fb.group({
-      celebritySeller: ['', Validators.required],
-      merchantSeller: ['', Validators.required],
+      // celebritySeller: ['', Validators.required],
+      // merchantSeller: ['', Validators.required],
       name: ['', [Validators.required,]],
       name_ar: ['', Validators.required],
-      gender: ['', Validators.required],
+      gender: ['',],
       category: ['', Validators.required],
       subCategory: ['', Validators.required],
       // skuNumber: ['', [Validators.required, Validators.min(0)]],
@@ -90,7 +90,7 @@ export class AddproductComponent implements OnInit {
       highlights_ar: [''],
       seller: [''],
       //  isfeatured: ['', Validators.required],
-      brand: ['', [Validators.required,]],
+      brand: ['',],
       price: ['', [Validators.required, Validators.min(1)]],
       description: ['', [Validators.required,]],
       description_ar: ['', Validators.required],

@@ -3,7 +3,9 @@
         <div class="logininner">
 
             <form [formGroup]="loginForm">
-                <div class="logo">
+
+                <h1>TehBola</h1>
+                <!-- <div class="logo">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 1185 1185">
                         <g id="Group_63948" data-name="Group 63948" transform="translate(-87 -228)">
@@ -137,11 +139,11 @@
                         </g>
                     </svg>
 
-                    <!-- <figure>
+                     <figure>
                         <img src="assets/images/Icon-512.png" width="120px" height="120px" alt="">
-                    </figure> -->
+                    </figure> 
 
-                </div>
+                </div> -->
 
                 <div class="sub_main_heading">
                     <h2>Login</h2>
@@ -181,10 +183,10 @@
                 <div class="input_divs input_button">
                     <button (click)="onLogin()" [disabled]="!loginForm.valid" mat-button>Login</button>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <a [routerLink]="['/sign-Up']" class="login_anchor">Not a admin Yet, Register
                         Now</a>
-                </div>
+                </div> -->
             </form>
         </div>
     </div>

@@ -401,6 +401,16 @@ li.show i {
     margin-right: 5px;
 }
 
+li.show i.fa-check {
+    color: #00ce68;
+}
+
+.edit i.fa-times {
+    color: red;
+}
+
+
+
 .Booking_status select {
     width: 100%;
     padding: 7px 25px 7px 7px;
@@ -1045,6 +1055,14 @@ button.mat-button.mat-button-base {
     vertical-align: middle;
 }
 
+body:not(.modal-open) {
+    padding-right: 0px !important;
+}
+
+.divAboveTable {
+    height: 280px;
+    overflow-y: scroll;
+}
 
 @media(max-width:1500px) {
     .sub_heading {
@@ -1068,7 +1086,7 @@ button.mat-button.mat-button-base {
     }
 
     .divAboveTable {
-        height: 300px;
+        height: 270px;
         overflow-y: scroll;
     }
 

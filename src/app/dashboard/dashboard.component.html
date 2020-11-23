@@ -16,7 +16,7 @@
                             <div class="card-body">
                                 <div class="left_card">
                                     <div class="left_heading">
-                                        <h3>Total Products </h3>
+                                        <h3>Total User </h3>
                                     </div>
                                     <div class="bottom_numbers">
                                         <p>{{dashboardData?.totalVendors}}</p>
@@ -32,7 +32,7 @@
                             <div class="card-body" (click)="goTosalesgraph()">
                                 <div class="left_card">
                                     <div class="left_heading">
-                                        <h3>Total Users</h3>
+                                        <h3>Total Order</h3>
                                     </div>
                                     <div class="bottom_numbers">
                                         <p>{{dashboardData?.salesTotal}}</p>
@@ -46,10 +46,10 @@
                             </div>
                         </div>
                         <div class="card border-left-info shadow">
-                            <div class="card-body" (click)="goToreveuegraph()">
+                            <div class="card-body">
                                 <div class="left_card">
                                     <div class="left_heading">
-                                        <h3>Total Revenue</h3>
+                                        <h3>New User</h3>
                                     </div>
                                     <div class="bottom_numbers">
                                         <p>{{dashboardData?.revenue}}</p>
@@ -60,7 +60,21 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="card border-left-warning shadow">
+                            <div class="card-body">
+                                <div class="left_card">
+                                    <div class="left_heading">
+                                        <h3>New Order</h3>
+                                    </div>
+                                    <div class="bottom_numbers">
+                                        <p>{{dashboardData?.revenue}}</p>
+                                    </div>
+                                </div>
+                                <div class="right_card">
+                                    <i class="fa fa-line-chart fa-2x"></i>
+                                </div>
+                            </div>
+                        </div>
 
 
                     </div>

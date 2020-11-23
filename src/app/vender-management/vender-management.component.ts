@@ -27,7 +27,7 @@ export class VenderManagementComponent implements OnInit {
   roles: any = 'merchant';
   categoryList: any[];
   selectedCategory = [];
-  body: { model: string; id: any; status: number; };
+  body2: any;
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) {
 
   }
@@ -113,21 +113,21 @@ export class VenderManagementComponent implements OnInit {
     for (let i = 0; i <= this.vendorList.length; i++) {
       if (this.vendorList[i]._id == temp) {
         if (status == 1) {
-          this.body = {
+          this.body2 = {
             "model": "User",
             "id": temp,
             "status": 0
           }
         } else {
-          this.body = {
+          this.body2 = {
             "model": "User",
             "id": temp,
             "status": 1
           }
         }
-        console.log(this.body)
+        console.log(this.body2)
         this.progress = false
-        this.apiService.changeUserStatus(this.body).subscribe((res) => {
+        this.apiService.changeUserStatus(this.body2).subscribe((res) => {
           console.log(res)
           if (res.success) {
             this.progress = false

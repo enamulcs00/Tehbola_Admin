@@ -21,7 +21,7 @@ export class DeliveryAddressComponent implements OnInit {
   flag: boolean = false;
   editId: any;
   phone: any;
-  flagData: boolean;
+  flagData: boolean = false;
   ngOnInit() {
     this.sub = this.route
       .queryParams
