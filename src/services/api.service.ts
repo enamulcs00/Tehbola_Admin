@@ -460,7 +460,7 @@ export class ApiService {
 
   getProducts(page, count, filter, isApproved, search, seller, ) {
     // console.log(id);
-    return this.http.get<any>(`${this.apiEndPoints.getProducts}?page=${page}&count=${count}&status=${filter}&isApproved=${isApproved}&search=${search}&seller=${seller}`,
+    return this.http.get<any>(`${this.apiEndPoints.getProducts}?page=${page}&count=${count}&filter=${filter}&isApproved=${isApproved}&search=${search}&seller=${seller}`,
       this.getHeaders()
     ).pipe(
       catchError(this.handleError<any>('Get Vendor Products'))
@@ -471,7 +471,7 @@ export class ApiService {
 
   getProductsforBanner(page, count, filter, isApproved, search, seller, category, subCategory, brand) {
     // console.log(id);
-    return this.http.get<any>(`${this.apiEndPoints.getProducts}?page=${page}&count=${count}&status=${filter}&isApproved=${isApproved}&search=${search}&seller=${seller}&category=${category}&subCategory=${subCategory}&brand=${brand}`,
+    return this.http.get<any>(`${this.apiEndPoints.getProducts}?page=${page}&count=${count}&filter=${filter}&isApproved=${isApproved}&search=${search}&seller=${seller}&category=${category}&subCategory=${subCategory}&brand=${brand}`,
       this.getHeaders()
     ).pipe(
       catchError(this.handleError<any>('Get Vendor Products'))
@@ -481,7 +481,7 @@ export class ApiService {
 
   getProductsForEndorsement(page, count, filter, isApproved, search, seller, isEndorse) {
     // console.log(id);
-    return this.http.get<any>(`${this.apiEndPoints.getProducts}?page=${page}&count=${count}&status=${filter}&isApproved=${isApproved}&search=${search}&seller=${seller}&isEndorse=${isEndorse}`,
+    return this.http.get<any>(`${this.apiEndPoints.getProducts}?page=${page}&count=${count}&filter=${filter}&isApproved=${isApproved}&search=${search}&seller=${seller}&isEndorse=${isEndorse}`,
       this.getHeaders()
     ).pipe(
       catchError(this.handleError<any>('Get Vendor Products'))
@@ -499,7 +499,7 @@ export class ApiService {
 
   getProductsWithoutApproved(page, count, filter, search, seller, ) {
     // console.log(id);
-    return this.http.get<any>(`${this.apiEndPoints.getProducts}?page=${page}&count=${count}&status=${filter}&search=${search}&seller=${seller}`,
+    return this.http.get<any>(`${this.apiEndPoints.getProducts}?page=${page}&count=${count}&filter=${filter}&search=${search}&seller=${seller}`,
       this.getHeaders()
     ).pipe(
       catchError(this.handleError<any>('Get Vendor Products'))

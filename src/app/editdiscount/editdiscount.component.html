@@ -241,20 +241,19 @@
 
 
                                 </div>
-                                <div class="user_img">
-                                    <ng-container *ngIf="urlImage==true; else elseTemplate1">
-                                        <figure class="figure">
-                                            <img style="max-width: 200px; max-height: 200px;"
-                                                [src]="imageUrl+previewImage" />
-                                        </figure>
-                                    </ng-container>
-                                    <ng-template #elseTemplate1>
-                                        <figure class="figure">
-                                            <img style="max-width: 150px;" [src]="previewImage" />
-                                        </figure>
-                                    </ng-template>
-
-                                </div>
+                            </li>
+                            <li class="user_img">
+                                <ng-container *ngIf="urlImage==true; else elseTemplate1">
+                                    <figure class="figure">
+                                        <img style="max-width: 200px; max-height: 200px;"
+                                            [src]="imageUrl+previewImage" />
+                                    </figure>
+                                </ng-container>
+                                <ng-template #elseTemplate1>
+                                    <figure class="figure">
+                                        <img style="max-width: 150px;" [src]="previewImage" />
+                                    </figure>
+                                </ng-template>
 
                             </li>
 

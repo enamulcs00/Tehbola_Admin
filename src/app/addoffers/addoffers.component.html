@@ -39,7 +39,7 @@
                                 <label>Select Category<span class="red">*</span></label>
                                 <mat-form-field *ngIf="singleCategorySelection">
                                     <mat-select (selectionChange)="categorySelected($event.value)">
-                                        <input matInput placeholder="Seaarch Category"
+                                        <input matInput placeholder="Search Category"
                                             (keyup)="onKeyInCategory($event.target.value)">
                                         <mat-option>None</mat-option>
                                         <mat-option *ngFor="let body of categoryList" [value]="body.id">{{body.name}}
@@ -240,11 +240,11 @@
                                     </div>
 
                                 </div>
-                                <div class="user_img">
-                                    <figure class="figure2" *ngIf="previewImage">
-                                        <img [src]="previewImage" />
-                                    </figure>
-                                </div>
+                            </li>
+                            <li class="user_img">
+                                <figure class="figure2" *ngIf="previewImage">
+                                    <img [src]="previewImage" />
+                                </figure>
 
                             </li>
 

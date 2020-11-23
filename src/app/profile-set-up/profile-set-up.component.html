@@ -9,7 +9,7 @@
                         <h2>Set-Up Profile</h2>
                     </div>
 
-                    <ul>
+                    <ul class="form_2">
 
                         <li class="input_file P_file">
 
@@ -104,7 +104,7 @@
                         <li>
                             <!-- <label><span class="red">*</span></label> -->
                             <div class="cardList">
-                                <mat-form-field style="width: 20%;" class="example-full-width">
+                                <mat-form-field style="width: 40%;" class="example-full-width">
                                     <mat-label>Country Code<span class="red">*</span></mat-label>
                                     <input type="text" list="browsers" aria-label="Number" matInput
                                         formControlName="countryCode">
@@ -113,18 +113,22 @@
                                             {{body.name}}
                                         </option>
                                     </datalist>
-                                    <mat-error *ngIf="setUpProfile.get('countryCode').hasError('required')">
-                                        Country Code is <strong>required</strong>
+                                    <mat-error *ngIf="setUpProfile.get('phone').hasError('required')">
+                                        Country code is <strong>required</strong>
                                     </mat-error>
+                                    <!-- <mat-error *ngIf="setUpProfile.get('countryCode').hasError('required')">
+                                        Country Code is <strong>required</strong>
+                                    </mat-error> -->
 
                                 </mat-form-field>
 
-                                <mat-form-field style="width: 80%;" class="example-full-width">
+                                <mat-form-field style="width: 60%;" class="example-full-width">
                                     <mat-label>Phone Number<span class="red">*</span></mat-label>
                                     <input matInput type="number" min="0" id="secondInput" formControlName="phone"
                                         name="phone">
-                                    <mat-error *ngIf="setUpProfile.get('phone').hasError('required')">
-                                        Phone Number is <strong>required</strong>
+                                    <mat-error style="width: 100%;"
+                                        *ngIf="setUpProfile.get('phone').hasError('required')">
+                                        Phone No. is <strong>required</strong>
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -153,7 +157,7 @@
                             </mat-form-field>
 
                         </li>
-                        <li class="pb-3">
+                        <li>
                             <mat-label>Specialities<span class="red">*</span></mat-label>
                             <ng-multiselect-dropdown [placeholder]="" [data]="categoryList"
                                 [(ngModel)]="selectedCategoryItem" [ngModelOptions]="{standalone: true}"

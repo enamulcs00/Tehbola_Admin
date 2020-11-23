@@ -138,7 +138,7 @@ export class ProductComponent implements OnInit {
   }
 
   getAllProducts() {
-
+    debugger
     if (this.isApproved) { //Method if isApproved is selected for some value
       this.progress = true
       this.apiService.getProducts(this.page, this.pageSize, this.filterBy, this.isApproved, this.search,

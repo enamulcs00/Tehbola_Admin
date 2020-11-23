@@ -20,6 +20,7 @@ export class EndorsementComponent implements OnInit {
   pageEvent: PageEvent;
   filterBy = '';
   search = '';
+
   vendorList: any;
   status: any
   selectOption: string
@@ -33,6 +34,8 @@ export class EndorsementComponent implements OnInit {
   isApproved: any;
   endorsementProductList: any;
   progress: boolean;
+  flagApproved: boolean;
+  noData: boolean = false;
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) {
     this.user = JSON.parse(sessionStorage.getItem('Markat_User'));
     console.log(this.user);
@@ -67,6 +70,22 @@ export class EndorsementComponent implements OnInit {
     }
   }
 
+  isApprovedSelected(e) {
+
+
+    if (this.isApproved) {
+      this.flagApproved = true
+    }
+    else {
+      this.flagApproved = false
+
+    }
+    this.isApproved = e.value
+
+    this.getEndorsement()
+
+  }
+
 
   showVendorList() {
     console.log("inside get vendor")
@@ -81,9 +100,14 @@ export class EndorsementComponent implements OnInit {
     this.apiService.getVendorListForEndorsement(body).subscribe((res) => {
       if (res.success) {
         this.progress = false
-        console.log(res);
-        this.vendorList = res.data;
-        this.length = res.total;
+        if (res.data.length > 0) {
+          console.log(res);
+          this.noData = false
+          this.vendorList = res.data;
+          this.length = res.total;
+        } else {
+          this.noData = true
+        }
       } else {
         this.progress = false
         this.commonService.errorToast(res.message)
@@ -94,7 +118,7 @@ export class EndorsementComponent implements OnInit {
 
   getEndorsement() {
     let body = {
-      isApproved: this.isApproved,
+      isApproved: this.isApproved,        //isApproved-  1= accepted, 2= pending, 3=rejected
       filter: this.filterBy,
       search: this.search,
       page: this.page,
@@ -105,8 +129,14 @@ export class EndorsementComponent implements OnInit {
       console.log(res);
       if (res.success) {
         this.progress = false
-        this.endorsementProductList = res.data;
-        this.length = res.total;
+        if (res.data.length > 0) {
+          this.noData = false
+          this.endorsementProductList = res.data;
+          this.length = res.total;
+        } else {
+          this.noData = true
+
+        }
       } else {
         this.progress = false
         this.commonService.errorToast(res.message)
@@ -125,6 +155,7 @@ export class EndorsementComponent implements OnInit {
 
 
   acceptRequest(id, status) {
+    debugger
     let body = {
       id: id,
       status: status

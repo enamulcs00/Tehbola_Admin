@@ -616,7 +616,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
             }
             this.typeCategory(checkOffer, selectedCategory);
           } else {
-            this.commonService.errorToast("Please Select a category ")
+            this.commonService.errorToast("Please Select a Category ")
           }
 
         }
@@ -629,11 +629,15 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
         if (this.selectedItem.length > 0) {
           this.typeSubcategory(checkOffer, this.selectedItem);
         } else {
-          let selectedSubCategory = [];
-          for (let i = 0; i < this.selectedSubcategoryItem.length; i++) {
-            selectedSubCategory.push(this.selectedSubcategoryItem[i].id)
+          if (this.selectedCategoryItem.length > 0) {
+            let selectedSubCategory = [];
+            for (let i = 0; i < this.selectedSubcategoryItem.length; i++) {
+              selectedSubCategory.push(this.selectedSubcategoryItem[i].id)
+            }
+            this.typeSubcategory(checkOffer, selectedSubCategory);
+          } else {
+            this.commonService.errorToast("Please Select a Sub-category ")
           }
-          this.typeSubcategory(checkOffer, selectedSubCategory);
         }
       }
 
@@ -643,12 +647,16 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
         if (this.selectedItem.length > 0) {
           this.typeVendor(checkOffer, this.selectedItem);
         } else {
-          let selectedVendor = [];
-          for (let i = 0; i < this.selectedVendorItem.length; i++) {
-            selectedVendor.push(this.selectedVendorItem[i].id)
-          }
+          if (this.selectedVendorItem.length > 0) {
+            let selectedVendor = [];
+            for (let i = 0; i < this.selectedVendorItem.length; i++) {
+              selectedVendor.push(this.selectedVendorItem[i].id)
+            }
 
-          this.typeVendor(checkOffer, selectedVendor);
+            this.typeVendor(checkOffer, selectedVendor);
+          } else {
+            this.commonService.errorToast("Please Select a Brand ")
+          }
         }
       }
 
@@ -658,11 +666,15 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
         if (this.selectedItem.length > 0) {
           this.typeProduct(checkOffer, this.selectedItem);
         } else {
-          let selectedProduct = [];
-          for (let i = 0; i < this.selectedProductItem.length; i++) {
-            selectedProduct.push(this.selectedProductItem[i].id)
+          if (this.selectedProductItem.length > 0) {
+            let selectedProduct = [];
+            for (let i = 0; i < this.selectedProductItem.length; i++) {
+              selectedProduct.push(this.selectedProductItem[i].id)
+            }
+            this.typeProduct(checkOffer, selectedProduct);
+          } else {
+            this.commonService.errorToast("Please Select a Product ")
           }
-          this.typeProduct(checkOffer, selectedProduct);
         }
       }
 

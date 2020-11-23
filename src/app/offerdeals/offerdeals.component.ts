@@ -86,6 +86,7 @@ export class OfferdealsComponent implements OnInit {
 
   flag = false
   filterSelected(e) {
+    debugger
     if (this.filterBy) {
       this.flag = true
     }
@@ -93,8 +94,8 @@ export class OfferdealsComponent implements OnInit {
       this.flag = false
 
     }
-    console.log(e.target.value);
-    this.filterBy = e.target.value;
+    console.log(e.value);
+    this.filterBy = e.value;
     this.getAllDiscount(this.bannerType, this.sellerId, this.isApproved, this.page, this.pageSize, this.search, this.filterBy)
 
 

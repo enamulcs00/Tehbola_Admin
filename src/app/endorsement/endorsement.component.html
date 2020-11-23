@@ -15,7 +15,7 @@
                 </div>
                 <div class="outer_table">
                     <div class="search_fields">
-                        <div class="filters Booking_status">
+                        <div class="filters Booking_status" *ngIf="user.roles=='merchant'">
                             <mat-form-field class="example-full-width">
                                 <mat-label>Filter<span class="red">*</span></mat-label>
 
@@ -30,6 +30,30 @@
                                     </mat-option>
                                     <mat-option value="inactive">
                                         Inactive
+                                    </mat-option>
+
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="filters Booking_status pl-2" *ngIf="user.roles=='merchant'">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Is Approved<span class="red">*</span></mat-label>
+
+                                <mat-select placeholder="Filter" [(ngModel)]="isApproved"
+                                    (selectionChange)="isApprovedSelected($event)">
+                                    <mat-option *ngIf="flagApproved==true" value="">
+                                        Remove Filter
+                                    </mat-option>
+
+                                    <mat-option value="1">
+                                        Approved
+                                    </mat-option>
+                                    <mat-option value="3">
+                                        Rejeted
+                                    </mat-option>
+                                    <mat-option value="2">
+                                        Pending
                                     </mat-option>
 
                                 </mat-select>
@@ -53,8 +77,14 @@
 
                         </div>
                     </div>
+                    <div *ngIf="noData==true">
+                        <h1>
+                            No Data found
+                        </h1>
+                    </div>
+
                     <div *ngIf="user.roles=='celebrity'" class="table-responsive">
-                        <table>
+                        <table *ngIf="noData==false">
                             <tr>
                                 <th>Sr.no</th>
                                 <th>Name</th>
@@ -77,7 +107,7 @@
                         </table>
                     </div>
                     <div *ngIf="user.roles=='merchant'" class="table-responsive">
-                        <table>
+                        <table *ngIf="noData==false">
                             <tr>
                                 <th>Sr.no</th>
                                 <th>Product Name</th>
