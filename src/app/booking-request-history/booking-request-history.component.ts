@@ -165,7 +165,7 @@ export class BookingRequestHistoryComponent implements OnInit {
 
 
 
-  goTomanageUser() {
+  back() {
     this.router.navigate(['manageUser']);
   }
 }

@@ -51,7 +51,7 @@
             <li (click)="goTodashboard()">Dashboard</li>
             <!-- <li (click)="goToreportpage()">Reporting</li> -->
             <li (click)="goTomanageUser()" *ngIf="roles =='admin'">User Management </li>
-            <li (click)="goToProduct()">Product Management </li>
+            <li *ngIf="false" (click)="goToProduct()">Product Management </li>
             <!-- *ngIf="roles =='celebrity || merchant'" -->
             <li (click)="goTovendermanagement()" *ngIf="roles =='admin'">Vendor Management</li>
             <!-- <li (click)="goToCelebritymanagement()" *ngIf="roles =='admin'">Celebrity Management</li> -->

@@ -5,8 +5,8 @@ import { Injectable } from "@angular/core";
 })
 export class UrlService {
   baseUrl = "";
-  imageUrl = "https://appgrowthcompany.com:9079/";
-  SERVER_URL = "https://appgrowthcompany.com:9079"
+  imageUrl = "https://test.webdevelopmentsolution.net:9085/";
+  SERVER_URL = "https://test.webdevelopmentsolution.net:9085"
   constructor() { }
   login = `${this.baseUrl}/login`;
 }

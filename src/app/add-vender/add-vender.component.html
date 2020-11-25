@@ -127,7 +127,7 @@
 
                                             </mat-form-field>
 
-                                            <mat-form-field style="width: 80%;" class="example-full-width">
+                                            <mat-form-field style="width: 80%;" class="example-full-width pl-3">
                                                 <mat-label>Phone Number<span class="red">*</span></mat-label>
                                                 <input matInput type="number" min="0" id="secondInput"
                                                     formControlName="phone" name="phone">
@@ -137,8 +137,8 @@
                                             </mat-form-field>
                                         </div>
                                     </li>
-                                    <li>
-                                        <!-- <label>Address<span class="red">*</span></label> -->
+                                    <!-- <li>
+                                       
                                         <mat-form-field class="example-full-width">
                                             <mat-label>Address<span class="red">*</span></mat-label>
 
@@ -150,9 +150,9 @@
                                                 Address is <strong>required</strong>
                                             </mat-error>
                                         </mat-form-field>
-                                    </li>
+                                    </li> -->
                                     <!-- {{ formattedaddress }} -->
-                                    <li>
+                                    <!-- <li>
                                         <mat-form-field class="example-full-width">
 
                                             <mat-label>Bio</mat-label>
@@ -160,8 +160,8 @@
                                                 formControlName="bio"></textarea>
                                         </mat-form-field>
 
-                                    </li>
-                                    <li>
+                                    </li> -->
+                                    <!-- <li>
                                         <mat-label>Specialities<span class="red">*</span></mat-label>
                                         <ng-multiselect-dropdown [placeholder]="" [data]="categoryList"
                                             [(ngModel)]="selectedCategoryItem" [ngModelOptions]="{standalone: true}"
@@ -173,8 +173,8 @@
                                             Specialities is <strong>required</strong>
                                         </mat-error>
 
-                                    </li>
-                                    <li *ngIf="roles !=='merchant'">
+                                    </li> -->
+                                    <!-- <li *ngIf="roles !=='merchant'">
                                         <mat-form-field class="example-full-width">
                                             <mat-label>Purpose<span class="red">*</span></mat-label>
 
@@ -195,7 +195,7 @@
                                             </mat-error>
                                         </mat-form-field>
 
-                                    </li>
+                                    </li> -->
                                     <li class="input_file">
                                         <label>Certificates </label>
 
@@ -246,7 +246,7 @@
     </div>
 </div>
 <div class="loader_bg" *ngIf="progress">
-    <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#97334b ;" role="status">
+    <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#ffa200 ;" role="status">
         <span class="sr-only">Loading...</span>
     </div>
 </div>

@@ -17,9 +17,9 @@
                     <div class="add_user_list">
                         <ul>
                             <li *ngIf="user.roles=='admin'">
-                                <p *ngIf="sellerDetails">
+                                <!-- <p *ngIf="sellerDetails">
                                     Seller name: {{sellerDetails.firstName}} {{sellerDetails.lastName}}
-                                </p>
+                                </p> -->
                                 <!--  <fieldset>
                                     Celebrity
                                     <input type="radio" formControlName="seller" name="seller"
@@ -83,11 +83,11 @@
                             </li>
                             <li>
                                 <mat-form-field class="example-full-width">
-                                    <mat-label>Arbic Name <span class="red">*</span></mat-label>
+                                    <mat-label>Malay Name <span class="red">*</span></mat-label>
                                     <input matInput type="text" placeholder="Arabic Name" formControlName="name_ar"
                                         placeholder="" name="name">
                                     <mat-error *ngIf="editProductForm.get('name_ar').hasError('required')">
-                                        Arabic Name is <strong>required</strong>
+                                        Malay Name is <strong>required</strong>
                                     </mat-error>
                                 </mat-form-field>
                             </li>
@@ -135,7 +135,7 @@
                                 </mat-form-field>
                             </li>
 
-                            <li>
+                            <!-- <li>
 
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Brand <span class="red">*</span></mat-label>
@@ -148,8 +148,8 @@
                                     </mat-error>
                                 </mat-form-field>
 
-                            </li>
-                            <li>
+                            </li> -->
+                            <!-- <li>
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Best suited for <span class="red">*</span></mat-label>
                                     <mat-select formControlName="gender" multiple>
@@ -165,7 +165,7 @@
                                         Please Select the gender this suits for
                                     </mat-error>
                                 </mat-form-field>
-                            </li>
+                            </li> -->
 
                             <!-- <li>
                                 <label>SKU number <span class="red">*</span></label>
@@ -307,7 +307,7 @@
 
                                 </mat-form-field>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <label>Featured <span class="red">*</span></label>
 
                                 <mat-form-field>
@@ -325,7 +325,7 @@
 
                                 </mat-form-field>
 
-                            </li>
+                            </li> -->
 
 
                             <!-- <li>
@@ -348,13 +348,13 @@
                                 </mat-form-field>
                             </li>
                             <li>
-                                <label>Arbic Description <span class="red">*</span></label>
+                                <label>Malay Description <span class="red">*</span></label>
                                 <mat-form-field class="example-full-width" class="textarea_kandil">
 
 
                                     <textarea matInput formControlName="description_ar" placeholder=""></textarea>
                                     <mat-error *ngIf="editProductForm.controls['description_ar'].hasError('required')">
-                                        Arbic Description is <strong>required</strong>
+                                        Malay Description is <strong>required</strong>
                                     </mat-error>
 
                                 </mat-form-field>
@@ -371,13 +371,13 @@
                                 </mat-form-field>
                             </li>
                             <li>
-                                <label>Arbic Highlights </label>
+                                <label>Malay Highlights </label>
                                 <mat-form-field class="example-full-width" class="textarea_kandil">
 
                                     <textarea matInput formControlName="highlights_ar" placeholder=""></textarea>
                                     <div class="custom-invalid"
                                         *ngIf=" submitted && editProductForm.controls['highlights_ar'].hasError('required')">
-                                        Arbic Highlights is <strong>required</strong>
+                                        Malay Highlights is <strong>required</strong>
                                     </div>
                                 </mat-form-field>
                             </li>
@@ -418,10 +418,10 @@
                                 </div> -->
                             </li>
                             <li>
-                                <label> Add Arbic Specification</label>
+                                <label> Add Malay Specification</label>
                                 <table class="table table-bordered" formArrayName="specification_ar">
                                     <tr>
-                                        <th colspan="2"> Arbic Specification:</th>
+                                        <th colspan="2"> Malay Specification:</th>
                                         <th width="20%">
                                             <div class="input_button input_button2">
                                                 <button type="button" mat-button (click)="addNewSpecification_ar()"
@@ -446,7 +446,7 @@
                                     </tr>
                                 </table>
                                 <mat-error *ngIf="editProductForm.get('specification_ar').hasError('required')">
-                                    Arabic Specifications are <strong>required</strong>
+                                    Malay Specifications are <strong>required</strong>
                                 </mat-error>
                                 <!-- <div class="custom-invalid"
                                     *ngIf="submitted && editProductForm.controls['specification_ar'].hasError('required')">
@@ -529,7 +529,7 @@
                                     </span>
                                 </div>
                             </li>
-                            <li>
+                            <!-- <li>
 
                                 <section class="example-section">
                                     <mat-checkbox class="example-margin checkBoxLabel"
@@ -544,7 +544,7 @@
                                     </mat-checkbox>
 
                                 </section>
-                            </li>
+                            </li> -->
 
                         </ul>
                         <div class="update_button">
@@ -567,7 +567,7 @@
     </div>
 </div>
 <div class="loader_bg" *ngIf="progress">
-    <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#97334b ;" role="status">
+    <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#ffa200 ;" role="status">
         <span class="sr-only">Loading...</span>
     </div>
 </div>

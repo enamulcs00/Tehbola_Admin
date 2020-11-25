@@ -68,10 +68,17 @@ export class CategoryComponent implements OnInit {
     });
   }
   getAllCategories() {
+    this.progress = true
     this.apiService.getAllCategories().subscribe(res => {
-      this.categories = res.data;
-      console.log(this.categories);
-      this.submitted = false;
+      if (res.success) {
+        this.progress = false
+        this.categories = res.data;
+        console.log(this.categories);
+        this.submitted = false;
+      } else {
+        this.progress = false
+        this.commonService.errorToast(res.message)
+      }
     })
   }
 

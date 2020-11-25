@@ -148,7 +148,7 @@ export class ManageUserComponent implements OnInit {
     this.progress = true
     this.apiService.getList(body).subscribe(res => {
       console.log(res);
-
+      debugger
       if (res.success) {
         this.progress = false
         if (res.data.length > 0) {
@@ -157,7 +157,7 @@ export class ManageUserComponent implements OnInit {
           this.length = res.total;
           console.log(this.userList);
         } else {
-
+          this.progress = false
           this.flagData = true
         }
 

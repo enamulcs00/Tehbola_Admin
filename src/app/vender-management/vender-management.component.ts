@@ -14,6 +14,7 @@ export class VenderManagementComponent implements OnInit {
   progress: boolean
   length = 100;
   pageSize = 10;
+  noDataFound = false
   page = 1
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pageEvent: PageEvent;
@@ -54,7 +55,7 @@ export class VenderManagementComponent implements OnInit {
   showVendorList() {
     console.log("inside get vendor")
     let body = {
-      roles: this.roles,
+      roles: 'user',
       filter: this.filterBy,
       search: this.search,
       page: this.page,
@@ -64,9 +65,15 @@ export class VenderManagementComponent implements OnInit {
     this.apiService.getList(body).subscribe((res) => {
       if (res.success) {
         console.log(res);
-        this.vendorList = res.data;
-        this.length = res.total;
-        this.progress = false
+        if (res.data.length > 0) {
+          this.vendorList = res.data;
+          this.length = res.total;
+          this.progress = false
+          this.noDataFound = false
+        } else {
+          this.progress = false
+          this.noDataFound = true
+        }
       } else {
         this.progress = false
         this.commonService.errorToast(res.message)
@@ -77,10 +84,10 @@ export class VenderManagementComponent implements OnInit {
   acceptVendor(id) {
     Swal.fire({
       title: "Are you sure?",
-      text: "What will be the Commission percentage for the Vendor",
+      text: "You are allowing this vendor to use the platform",
       icon: "info",
       showCancelButton: true,
-      input: 'number',
+
       confirmButtonColor: "#3085D6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes",
@@ -92,7 +99,6 @@ export class VenderManagementComponent implements OnInit {
           let body = {
             id: id,
             sellerProfileStatus: 1,
-            commission: result.value,
           }
           this.acceptReject(body)
         } else {

@@ -16,14 +16,15 @@
                             <div class="card-body">
                                 <div class="left_card">
                                     <div class="left_heading">
-                                        <h3>Total User </h3>
+                                        <h3>Total Users </h3>
                                     </div>
                                     <div class="bottom_numbers">
                                         <p>{{dashboardData?.totalVendors}}</p>
                                     </div>
                                 </div>
                                 <div class="right_card">
-                                    <i class="fa fa-product-hunt fa-2x" aria-hidden="true"></i>
+                                    <i class="fa fa-user fa-2x"></i>
+
 
                                 </div>
                             </div>
@@ -32,7 +33,7 @@
                             <div class="card-body" (click)="goTosalesgraph()">
                                 <div class="left_card">
                                     <div class="left_heading">
-                                        <h3>Total Order</h3>
+                                        <h3>Total Orders</h3>
                                     </div>
                                     <div class="bottom_numbers">
                                         <p>{{dashboardData?.salesTotal}}</p>
@@ -41,7 +42,7 @@
                                 <!-- https://gitlab.com/varuntyagi/markat.git
  -->
                                 <div class="right_card">
-                                    <i class="fa fa-user fa-2x"></i>
+                                    <i class="fa fa-product-hunt fa-2x" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +50,7 @@
                             <div class="card-body">
                                 <div class="left_card">
                                     <div class="left_heading">
-                                        <h3>New User</h3>
+                                        <h3>New Users</h3>
                                     </div>
                                     <div class="bottom_numbers">
                                         <p>{{dashboardData?.revenue}}</p>
@@ -64,14 +65,14 @@
                             <div class="card-body">
                                 <div class="left_card">
                                     <div class="left_heading">
-                                        <h3>New Order</h3>
+                                        <h3>New Orders</h3>
                                     </div>
                                     <div class="bottom_numbers">
                                         <p>{{dashboardData?.revenue}}</p>
                                     </div>
                                 </div>
                                 <div class="right_card">
-                                    <i class="fa fa-line-chart fa-2x"></i>
+                                    <i class="fa fa-bar-chart fa-2x"></i>
                                 </div>
                             </div>
                         </div>
@@ -169,34 +170,48 @@
                     </div>
                     <div class="outer_table">
                         <div class="search_fields">
-                            <div class="filters Booking_status">
-                                <label>Filter</label>
-                                <select [(ngModel)]="filterBy" (change)="filterSelected($event)">
-                                    <option *ngIf="flag==true" value="">Remove Filter</option>
-                                    <option *ngIf="flag==false" value=""></option>
-                                    <option *ngFor="let item of filterList" value="{{item.value}}">
-                                        {{item.viewValue}}
-                                    </option>
 
-                                    <!-- <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option> -->
-                                    <!-- <option value="lastName"></option> -->
-                                </select>
-                            </div>
-                            <div class="search_inner_fiels">
+                            <div class="search_fields">
                                 <div class="filters Booking_status">
-                                    <label>Search</label>
-                                    <div class="search_with_icons">
-                                        <mat-form-field [floatLabel]="'never'">
-                                            <input matInput type="text" [(ngModel)]="search" placeholder="">
-                                        </mat-form-field>
-                                        <i *ngIf="flagSearch==true" class="fa fa-search" aria-hidden="true"
-                                            (click)="searchMethod()"></i>
-                                        <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
-                                            (click)="clearSearch()"></i>
-                                    </div>
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Filter<span class="red">*</span></mat-label>
+
+                                        <mat-select placeholder="Filter" [(ngModel)]="filterBy"
+                                            (selectionChange)="filterSelected($event)">
+                                            <mat-option *ngIf="flag==true" value="">
+                                                Remove Filter
+                                            </mat-option>
+
+                                            <mat-option value="active">
+                                                Active
+                                            </mat-option>
+                                            <mat-option value="inactive">
+                                                Inactive
+                                            </mat-option>
+
+                                        </mat-select>
+                                    </mat-form-field>
                                 </div>
 
+
+                                <div class="search_inner_fiels">
+                                    <div class="filters Booking_status">
+                                        <div class="search_with_icons">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Search</mat-label>
+
+                                                <input matInput type="text" [(ngModel)]="search" placeholder="">
+                                            </mat-form-field>
+                                            <button mat-button matSuffix mat-icon-button> <i *ngIf="flagSearch==true"
+                                                    class="fa fa-search" aria-hidden="true"
+                                                    (click)="searchMethod()"></i>
+                                                <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
+                                                    (click)="clearSearch()"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                         <div class="table-responsive">

@@ -97,11 +97,8 @@ export class EditVendorComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       countryCode: ['', Validators.required],
       phone: ['', Validators.required],
-      bio: [''],
-      address: ['', Validators.required],
-      celebrityType: ['', Validators.required],
-      profilePhoto: ['',],
-      category: ['', Validators.required]
+      profilePhoto: ['',]
+
 
     });
     this.getProfile();
@@ -199,20 +196,6 @@ export class EditVendorComponent implements OnInit {
           this.editVendor.get('phone').setValue(res.data.phone),
           this.editVendor.controls['countryCode'].disable({ onlySelf: true });
         this.editVendor.controls['phone'].disable({ onlySelf: true });
-        this.editVendor.get('bio').setValue(res.data.bio),
-          this.editVendor.get('address').setValue(res.data.address);
-        this.formattedaddress = res.data.address
-        this.lat = res.data.lat;
-        this.lng = res.data.lng;
-        this.country = res.data.country
-        this.editVendor.get('celebrityType').setValue(res.data.celebrityType);
-        this.celebrityType = res.data.celebrityType
-        let selectedCategory = []
-        for (let i in res.data.categories) {
-
-          selectedCategory.push(res.data.categories[i]._id)
-        }
-        this.editVendor.get('category').setValue(selectedCategory)
 
 
         //  this.viewVendor.get('firstName').setValue(res.data.firstName),
@@ -240,7 +223,7 @@ export class EditVendorComponent implements OnInit {
     this.lat = address.geometry.location.lat()
     this.lng = address.geometry.location.lng()
     this.formattedaddress = address.formatted_address
-    this.editVendor.get('address').setValue(this.formattedaddress)
+    //  this.editVendor.get('address').setValue(this.formattedaddress)
     let length = address.address_components.length
     this.country = address.address_components[length - 1].long_name;
 
@@ -268,11 +251,7 @@ export class EditVendorComponent implements OnInit {
     console.log("image", this.profileImage);
     if (this.editVendor.valid) {
       let temp = []
-      temp = this.editVendor.get('category').value;
-      let selectedCategory = []
-      for (let i = 0; i < temp.length; i++) {
-        selectedCategory.push(temp[i])
-      }
+
 
       let formData = new FormData;
       if (this.imageFile) {
@@ -284,15 +263,10 @@ export class EditVendorComponent implements OnInit {
       formData.append('lastName', this.editVendor.get('lastName').value)
       formData.append('email', this.editVendor.get('email').value)
       formData.append('phone', this.editVendor.get('phone').value);
-      formData.append('bio', this.editVendor.get('bio').value);
       formData.append('country', this.country)
       formData.append('address', this.formattedaddress)
       formData.append('countryCode', this.editVendor.get('countryCode').value)
-      formData.append('categories', JSON.stringify(selectedCategory))
-      formData.append('celebrityType', this.editVendor.get('celebrityType').value)
       formData.append('gender', this.editVendor.get('gender').value)
-      formData.append('lat', this.lat)
-      formData.append('lng', this.lng)
 
       formData.forEach((value, key) => {
         console.log(key + " " + value)

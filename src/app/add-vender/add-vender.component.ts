@@ -100,10 +100,10 @@ export class AddVenderComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       countryCode: ['', Validators.required],
       phone: ['', Validators.required],
-      address: ['', Validators.required],
-      bio: ['',],
-      Specialities: ['', Validators.required],
-      celebrityType: ['', Validators.required],
+      //   address: ['', Validators.required],
+      //   bio: ['',],
+      //  Specialities: ['', Validators.required],
+      //  celebrityType: ['', Validators.required],
       profilePhoto: [''],
       gender: ['', Validators.required]
     })

@@ -23,7 +23,7 @@ body {
 }
 
 .thm_color {
-    background: #97334b !important;
+    background: #ffa200 !important;
     color: #ffffff;
 }
 
@@ -34,18 +34,18 @@ body {
 
 .mat-checkbox-checked.mat-accent .mat-checkbox-background,
 .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
-    background: #97334b !important;
+    background: #ffa200 !important;
 }
 
 .mat-radio-button.mat-accent .mat-radio-inner-circle,
 .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple),
 .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
 .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
-    background: #97334b !important;
+    background: #ffa200 !important;
 }
 
 .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
-    border-color: #97334b;
+    border-color: #ffa200;
 }
 
 .topbar .nav-item .nav-link .img-profile {
@@ -122,7 +122,7 @@ table th {
     border-radius: 4px;
     text-transform: capitalize;
     color: #404553 !important;
-    background: #97334b !important;
+    background: #ffa200 !important;
     border: unset !important;
     box-shadow: unset;
     text-shadow: unset;
@@ -174,7 +174,7 @@ th.profile_bx {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #97334b;
+    background-color: #ffa200;
     padding: 40px 0px;
     overflow-y: auto;
 }
@@ -246,7 +246,7 @@ b .input_divs {
 .input_divs.input_button {
     text-align: center;
     margin: 30px 0 0;
-    color: #97334b;
+    color: #ffa200;
 }
 
 .input_divs2.input_button2 {
@@ -866,15 +866,15 @@ textarea {
 // }
 
 .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
-    background-color: #97334b !important;
+    background-color: #ffa200 !important;
 }
 
 .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
-    background-color: #97334b91 !important;
+    background-color: #ffa200 !important;
 }
 
 .mat-slide-toggle.mat-checked .mat-ripple-element {
-    background-color: #97334b !important;
+    background-color: #ffa200 !important;
 }
 
 .tab-pane.fade.active.in {
@@ -972,7 +972,7 @@ button.mat-button.mat-button-base {
     font-size: 12px;
     font-weight: bolder;
     line-height: normal;
-    background: #97334b;
+    background: #ffa200;
     color: #fff !important;
     border-radius: 25px;
 }

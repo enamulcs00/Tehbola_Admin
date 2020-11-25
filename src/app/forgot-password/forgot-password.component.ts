@@ -18,6 +18,8 @@ export class ForgotPasswordComponent implements OnInit {
   gotPhoneNumber: boolean = false
   showPage: boolean = true
   otp: any;
+  progress: boolean;
+
   constructor(private router: Router, private formBuilder: FormBuilder, private apiService: ApiService, private commonService: CommonService) { }
   binding: string
 
@@ -35,7 +37,7 @@ export class ForgotPasswordComponent implements OnInit {
 
 
   clickOnCheckBox(e) {
-    
+
     this.binding = e.value
     if (e.value == 'number') {
       this.forgetPasswordForm.get('phone').setValidators([Validators.required])
@@ -67,7 +69,7 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   goToLogin() {
-    
+
     this.submitted = true
     let data
     if (this.submitted && this.forgetPasswordForm.valid) {
@@ -81,16 +83,18 @@ export class ForgotPasswordComponent implements OnInit {
           phone: this.forgetPasswordForm.controls['phone'].value
         }
       }
-
+      this.progress = true
       this.apiService.forgetPassword(data).subscribe((res) => {
         console.log(res)
         if (res.success) {
+          this.progress = false
           if (this.binding === 'number') {
             this.showPage = false;
             this.gotPhoneNumber = true;
             this.commonService.successToast(res.message)
           }
           if (this.binding === 'email') {
+            this.progress = false
             this.router.navigate(['']);
             this.commonService.successToast(res.message)
 
@@ -98,6 +102,7 @@ export class ForgotPasswordComponent implements OnInit {
 
           this.commonService.successToast(res.message)
         } else {
+          this.progress = false
           this.commonService.errorToast(res.message)
         }
       })
@@ -117,12 +122,15 @@ export class ForgotPasswordComponent implements OnInit {
       type: 'normal'
     }
     console.log(body);
+    this.progress = true
     this.apiService.verifyPhone(body).subscribe(res => {
       console.log(res);
       if (res.success) {
+        this.progress = false
         this.commonService.successToast(res.message)
         this.router.navigate(['resetPassword'], { queryParams: { 'phone': body.phone, 'countryCode': body.countryCode } })
       } else {
+        this.progress = false
         this.commonService.errorToast(res.message)
       }
     })

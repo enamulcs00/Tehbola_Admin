@@ -28,7 +28,7 @@ export class ApiService {
       //Admin Account
       signUp: 'panel/signup',
       verifyPhoneNo: 'app/verifyPhone',
-      adminLogin: 'panel/signin',
+      adminLogin: 'admin/signin',
       forgotPassword: 'panel/forgotPassword',
       resetPasswordPhone: 'panel/resetPasswordPhone',
       getCategoryList: 'admin/getAllCategories',
@@ -40,11 +40,11 @@ export class ApiService {
       getList: 'admin/getUsers',
       getVendorListForEndorsement: 'panel/getMerchantList',
       viewDocument: 'admin/documents',
-      getBrandList: 'admin/getAllBrand',
+      getBrandList: 'admin/getAllItem',
       getsubcategoryList: 'admin/subCategories',
-      addBrand: 'admin/addBrand',
-      viewBrand: 'admin/viewBrand',
-      editBrand: 'admin/editBrand',
+      addBrand: 'admin/addItem',
+      viewBrand: 'admin/viewItem',
+      editBrand: 'admin/editItem',
       approveReject: 'admin/approveReject',
       editUser: 'admin/editUser',
       changePassword: 'panel/changePassword',
@@ -768,7 +768,7 @@ export class ApiService {
       if (error.status == 400) {
         this.comm.errorToast(error.error.message)
         // localStorage.clear();
-        // this.router.navigateByUrl("/login");
+        this.router.navigateByUrl("/login");
       }
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
