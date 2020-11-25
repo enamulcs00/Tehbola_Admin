@@ -78,10 +78,7 @@ export class ViewVendorComponent implements OnInit {
       email: ['',],
       countryCode: ['',],
       phone: ['',],
-      bio: [''],
-      address: ['',],
-      celebrityType: ['']
-
+      last4Digits: ['']
 
 
     });
@@ -108,18 +105,12 @@ export class ViewVendorComponent implements OnInit {
         this.viewVendor.get('email').setValue(res.data.email),
           this.viewVendor.get('countryCode').setValue(res.data.countryCode),
           this.viewVendor.get('phone').setValue(res.data.phone),
-          this.viewVendor.get('bio').setValue(res.data.bio),
-          this.viewVendor.get('address').setValue(res.data.address);
-        this.viewVendor.get('celebrityType').setValue(res.data.celebrityType);
-        this.celebrityType = res.data.celebrityType
+          this.viewVendor.get('last4Digits').setValue(res.data.last4Digits),
 
-        //  this.viewVendor.get('firstName').setValue(res.data.firstName),
-        this.userRole = res.data.roles
-        this.profileImage = res.data.profilePic;
-        this.categories = res.data.categories
+
+          this.profileImage = res.data.profilePic;
 
         this.viewVendor.disable()
-
       } else {
         this.progress = false
         this.commonService.errorToast(res.message)

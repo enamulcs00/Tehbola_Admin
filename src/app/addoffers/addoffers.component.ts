@@ -66,7 +66,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
 
 
   setradio(e: string) {
-    debugger
+
     this.singleCategorySelection = true;
     this.singleSubCategorySelection = true;
     this.singleVendorSelection = true;
@@ -464,7 +464,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
 
   selectedCategory = ''
   categorySelected(id) {
-    debugger
+
     console.log("category :", id);
     this.selectedCategory = id;
     this.getAllSubcategory(id);
@@ -685,7 +685,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
 
 
   typeCategory(checkOffer, selectedCategoryItem) {
-    debugger
+
 
     let startDate = moment(this.addDiscountForm.controls['startDate'].value).toLocaleString();
     let endDate = moment(this.addDiscountForm.controls['endDate'].value).toLocaleString()
@@ -760,7 +760,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   }
   typeProduct(checkOffer, selectedItem) {
 
-    debugger
+
     let startDate = moment(this.addDiscountForm.controls['startDate'].value).toLocaleString();
     let endDate = moment(this.addDiscountForm.controls['endDate'].value).toLocaleString();
     let offer = {
@@ -790,7 +790,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
 
 
   addbanner(body) {
-    debugger
+    
     this.tempArray = []
     this.tempArray.push(body);
     //  console.log(body)

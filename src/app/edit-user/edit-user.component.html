@@ -6,110 +6,75 @@
             <div class="container-fluid">
                 <div class="sub_heading">
                     <h1>Edit User </h1>
-                    <a (click)="goTomanageUser()">Back To List</a>
+                    <div class="input_divs2 input_button input_button2">
+                        <button class="btn_back" mat-button (click)="goTomanageUser()"><i class="fa fa-long-arrow-left"
+                                aria-hidden="true"></i></button>
+                    </div>
                 </div>
                 <!-----start input fields------>
                 <div class="add_user_list">
                     <form [formGroup]="editUserForm">
                         <ul>
                             <li>
-                                <label>First Name<span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>First Name<span class="red">*</span></mat-label>
                                     <input matInput type="text" placeholder="First Name" formControlName="firstName"
                                         name="name">
-                                    <div *ngIf="submitted && f.firstName.errors" class="custom-invalid">
-                                        <div *ngIf="f.firstName.errors.required">
-                                            First Name is required.
-                                        </div>
-                                    </div>
+                                    <mat-error *ngIf="editUserForm.get('firstName').hasError('required')">
+                                        First Name <strong>required</strong>
+                                    </mat-error>
                                 </mat-form-field>
                             </li>
                             <li>
-                                <label>Last Name<span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Last Name<span class="red">*</span></mat-label>
                                     <input matInput type="text" placeholder="Last Name" formControlName="lastName"
                                         name="name">
-                                    <div *ngIf="submitted && f.lastName.errors" class="custom-invalid">
-                                        <div *ngIf="f.adlastNamedress.errors.required">
-                                            Last Name is required.
-                                        </div>
-                                    </div>
+                                    <mat-error *ngIf="editUserForm.get('lastName').hasError('required')">
+                                        Last Name is <strong>required</strong>
+                                    </mat-error>
                                 </mat-form-field>
                             </li>
                             <li>
-                                <label>Email<span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Email<span class="red">*</span></mat-label>
                                     <input matInput type="text" placeholder="User Email" formControlName="UserEmail"
                                         name="name" name="name">
-                                    <div *ngIf="submitted && f.UserEmail.errors" class="custom-invalid">
-                                        <div *ngIf="f.UserEmail.errors.required">
-                                            Email is required.
-                                        </div>
-                                        <div *ngIf="f.UserEmail.errors.email">
-                                            Valid Email is required.
-                                        </div>
-                                    </div>
+                                    <mat-error *ngIf="editUserForm.get('UserEmail').hasError('required')">
+                                        Email is <strong>required</strong>
+                                    </mat-error>
                                 </mat-form-field>
                             </li>
 
                             <li>
-                                <label> Phone number <span class="red">*</span></label>
+
                                 <div class="cardList">
-                                    <mat-form-field style="width: 20%;" [floatLabel]="'never'">
-                                        <input matInput type="text" placeholder="" id="firstInput"
-                                            formControlName="userCountryCode" name="countryCode" name="name">
-                                        <div *ngIf="submitted && f.userCountryCode.errors" class="custom-invalid">
-                                            <div *ngIf="f.userCountryCode.errors.required">
-                                                Country Code is required.
-                                            </div>
-                                        </div>
+                                    <mat-form-field style="width: 20%;" class="example-full-width">
+                                        <mat-label>Country Code<span class="red">*</span></mat-label>
+                                        <input type="text" list="browsers" aria-label="Number" matInput
+                                            formControlName="userCountryCode">
+                                        <datalist id="browsers">
+                                            <option *ngFor="let body of countryList" value="{{body.dial_code}}">
+                                                {{body.name}}
+                                            </option>
+                                        </datalist>
+                                        <mat-error *ngIf="editUserForm.get('userCountryCode').hasError('required')">
+                                            Country Code is <strong>required</strong>
+                                        </mat-error>
+
                                     </mat-form-field>
-                                    <mat-form-field style="width: 80%;" [floatLabel]="'never'">
-                                        <input matInput type="text" placeholder="Phone Number"
-                                            formControlName="UserPhoneNumber" id="secondInput" name="name" name="name">
 
-
-                                        <div *ngIf="submitted && f.UserPhoneNumber.errors" class="custom-invalid">
-                                            <div *ngIf="f.UserPhoneNumber.errors.required">
-                                                Phone Number is required.
-                                            </div>
-                                        </div>
+                                    <mat-form-field style="width: 80%;" class="example-full-width pl-3">
+                                        <mat-label>Phone Number<span class="red">*</span></mat-label>
+                                        <input matInput type="number" min="0" id="secondInput"
+                                            formControlName="UserPhoneNumber" name="phone">
+                                        <mat-error *ngIf="editUserForm.get('UserPhoneNumber').hasError('required')">
+                                            Phone Number is <strong>required</strong>
+                                        </mat-error>
                                     </mat-form-field>
                                 </div>
                             </li>
 
-                            <li>
-                                <label>Number of Order <span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="text" readonly formControlName="numberOfOrder"
-                                        placeholder="Number of Order" name="numberOfOrder">
-
-                                </mat-form-field>
-                            </li>
-                            <li>
-                                <label>Completed Order <span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="text" readonly formControlName="completedOrder"
-                                        placeholder="Completed Order" name="name" name="name">
-
-                                </mat-form-field>
-                            </li>
-                            <li>
-                                <label>Rejected Order <span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="text" readonly formControlName="rejectedOrder"
-                                        placeholder="Rejected Order" name="name" name="name">
-
-                                </mat-form-field>
-                            </li>
-                            <li>
-                                <label>Total amount paid <span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="text" readonly formControlName="totalAmountPaid"
-                                        placeholder="Total Amount Paid" name="name" name="name">
-
-                                </mat-form-field>
-                            </li>
 
                         </ul>
                         <div class="update_button">

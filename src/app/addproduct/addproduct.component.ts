@@ -110,7 +110,7 @@ export class AddproductComponent implements OnInit {
         validator: MoreThan('quantity', 'purchaseQuantity')
       }
     )
-    debugger
+
     if (this.user.roles == 'admin') {
 
     } else {
@@ -126,7 +126,7 @@ export class AddproductComponent implements OnInit {
 
 
   generateProductId(roles) {
-    debugger
+    
     let timestamp
     if (roles == 'celebrity') {
       timestamp = Date.now()
@@ -333,7 +333,7 @@ export class AddproductComponent implements OnInit {
   }
   progress: boolean
   onSubmit() {
-    debugger
+    
     console.log("check", this.addProductForm)
     this.submitted = true;
 

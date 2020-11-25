@@ -97,7 +97,8 @@ export class EditVendorComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       countryCode: ['', Validators.required],
       phone: ['', Validators.required],
-      profilePhoto: ['',]
+      profilePhoto: ['',],
+      last4Digits: ['', [Validators.required, Validators.maxLength(4)]]
 
 
     });
@@ -170,10 +171,10 @@ export class EditVendorComponent implements OnInit {
     this.apiService.viewUser(this.id).subscribe(res => {
       console.log(res);
       if (res.success) {
-        debugger
+
         this.Userid = res.data._id
         if (res.data.roles == 'merchant') {
-          debugger
+
           this.dontShowPurpose = true
           this.editVendor.controls['celebrityType'].disable({ onlySelf: true });
 
@@ -191,12 +192,9 @@ export class EditVendorComponent implements OnInit {
 
         }
         this.editVendor.get('email').setValue(res.data.email),
-          this.editVendor.controls['email'].disable({ onlySelf: true });
-        this.editVendor.get('countryCode').setValue(res.data.countryCode),
+          this.editVendor.get('countryCode').setValue(res.data.countryCode),
           this.editVendor.get('phone').setValue(res.data.phone),
-          this.editVendor.controls['countryCode'].disable({ onlySelf: true });
-        this.editVendor.controls['phone'].disable({ onlySelf: true });
-
+          this.editVendor.get('last4Digits').setValue(res.data.last4Digits);
 
         //  this.viewVendor.get('firstName').setValue(res.data.firstName),
         this.userRole = res.data.roles
@@ -246,7 +244,7 @@ export class EditVendorComponent implements OnInit {
   }
 
   onUpdate() {
-    debugger
+    
     console.log("Form", this.editVendor.value);
     console.log("image", this.profileImage);
     if (this.editVendor.valid) {
@@ -267,6 +265,8 @@ export class EditVendorComponent implements OnInit {
       formData.append('address', this.formattedaddress)
       formData.append('countryCode', this.editVendor.get('countryCode').value)
       formData.append('gender', this.editVendor.get('gender').value)
+      formData.append('last4Digits', this.editVendor.get('last4Digits').value)
+
 
       formData.forEach((value, key) => {
         console.log(key + " " + value)

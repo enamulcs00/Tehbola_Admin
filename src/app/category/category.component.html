@@ -24,11 +24,11 @@
                             </div>
 
                             <div class="add_location_name">
-                                <a href="javascript:;" class="button-border add_state" data-toggle="modal"
-                                    data-target="#Add_State">
+                                <a href="javascript:;" matRipple [matRippleColor]="'#dbdddf'" [matRippleRadius]="50"
+                                    class="button-border add_state" data-toggle="modal" data-target="#Add_State">
                                     <i class="fa fa-plus"></i> Add Category</a>
                             </div>
-
+                            <!-- #585b5e -->
                             <div class="state-list button-border" *ngFor="let category of categories; let i=index">
                                 <div class="state">
                                     <div class="country_name">
@@ -50,9 +50,9 @@
                                         </a>
 
 
-                                        <a href="javascript:;">
+                                        <!-- <a href="javascript:;">
                                             <i class="fa fa-compress" aria-hidden="true"></i>
-                                        </a>
+                                        </a> -->
                                     </div>
                                     <div class="mobille_list">
                                         <ul>
@@ -76,7 +76,8 @@
                                     <div class="state-list state-list-li">
 
                                         <div class="actions">
-                                            <a href="javascript:;" class="button-pad add_city" data-toggle="modal"
+                                            <a href="javascript:;" matRipple [matRippleColor]="'#dbdddf'"
+                                                [matRippleRadius]="50" class="button-pad add_city" data-toggle="modal"
                                                 data-target="#Add_city" (click)="onAddSubCategoryBtn(category._id)">
                                                 <i class="fa fa-plus"></i>
                                                 Add New Sub Category </a>

@@ -124,7 +124,7 @@ export class EndorsedProductComponent implements OnInit {
 
 
   onChangeStatus(id, status) {
-    debugger
+
     let body
     if (status == 0) {
       body = {

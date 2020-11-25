@@ -148,7 +148,7 @@ export class ManageUserComponent implements OnInit {
     this.progress = true
     this.apiService.getList(body).subscribe(res => {
       console.log(res);
-      debugger
+
       if (res.success) {
         this.progress = false
         if (res.data.length > 0) {
@@ -192,16 +192,8 @@ export class ManageUserComponent implements OnInit {
   goToUserAddress(id) {
     this.router.navigate(['deliveryAddress'], { queryParams: { "id": id } })
   }
-  goToeditUser(i) {
-    let id: any
-    // console.log(i);
-    for (let j = 0; j <= this.userList.length; j++) {
-      if (i == j) {
-        // console.log(this.userList[j]._id);
-        id = this.userList[j]._id
+  goToeditUser(id) {
 
-      }
-    }
     this.router.navigate(['editUser'], { queryParams: { "id": id } })
   }
 

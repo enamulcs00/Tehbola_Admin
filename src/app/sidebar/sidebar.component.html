@@ -48,15 +48,24 @@
     <div id="core1" class="core active">
         <h3>Core</h3>
         <ul>
-            <li (click)="goTodashboard()">Dashboard</li>
+            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goTodashboard()">Dashboard
+            </li>
             <!-- <li (click)="goToreportpage()">Reporting</li> -->
-            <li (click)="goTomanageUser()" *ngIf="roles =='admin'">User Management </li>
+            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goTomanageUser()"
+                *ngIf="roles =='admin'">User
+                Management </li>
+
             <li *ngIf="false" (click)="goToProduct()">Product Management </li>
             <!-- *ngIf="roles =='celebrity || merchant'" -->
-            <li (click)="goTovendermanagement()" *ngIf="roles =='admin'">Vendor Management</li>
+            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goTovendermanagement()"
+                *ngIf="roles =='admin'">Vendor
+                Management</li>
             <!-- <li (click)="goToCelebritymanagement()" *ngIf="roles =='admin'">Celebrity Management</li> -->
-            <li (click)="goTocategory()" *ngIf="roles=='admin'">Category</li>
-            <li (click)="goToBrand()" *ngIf="roles=='admin'">Raw Item Management</li>
+            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goTocategory()"
+                *ngIf="roles=='admin'">Category</li>
+            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToBrand()"
+                *ngIf="roles=='admin'">Raw Item Management
+            </li>
 
             <!-- <div *ngIf="roles!='admin'">
                 <li (click)="goToEndorsement()" *ngIf="celebrityType!=2">

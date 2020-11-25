@@ -100,14 +100,7 @@ import { EndorsementComponent } from './endorsement/endorsement.component';
 import { EndorsementProductComponent } from './endorsement-product/endorsement-product.component';
 import { EndorsedProductComponent } from './endorsed-product/endorsed-product.component';
 
-// import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-// import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-
-
-// export function HttpLoaderFactory(http: HttpClient) {
-//   return new TranslateHttpLoader(http);
-// }
 @NgModule({
   declarations: [
     AppComponent,
@@ -210,14 +203,6 @@ import { EndorsedProductComponent } from './endorsed-product/endorsed-product.co
     ToastrModule.forRoot(),
     NgOtpInputModule,
     NgMultiSelectDropDownModule.forRoot(),
-    // TranslateModule.forRoot({
-    //   loader: {
-    //     provide: TranslateLoader,
-    //     useFactory: HttpLoaderFactory,
-    //     deps: [HttpClient]
-    //   }
-    // })
-
 
   ],
   providers: [DatePipe, NotificationService],

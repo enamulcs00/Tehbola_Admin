@@ -125,7 +125,7 @@ export class ManageCelebrityComponent implements OnInit {
       cancelButtonText: "Cancel",
       allowOutsideClick: true
     }).then(result => {
-      debugger
+
       if (result.isConfirmed) {
 
 
@@ -228,7 +228,7 @@ export class ManageCelebrityComponent implements OnInit {
   }
 
   acceptReject(body) {
-    debugger
+
     this.progress = true
     this.apiService.approveReject(body).subscribe(res => {
       console.log(res);

@@ -81,7 +81,7 @@ export class BrandlistComponent implements OnInit {
 
 
   categorySelected(e) {
-    debugger
+    
     console.log(e.value);
     // let id = e
     this.apiService.getSubcategoryList(e).subscribe(res => {
@@ -191,7 +191,7 @@ export class BrandlistComponent implements OnInit {
 
 
   onAddBrand() {
-    debugger
+    
     this.submitted = true
     if (this.submitted && this.addBrandForm.valid) {
       let body = this.addBrandForm.value
@@ -232,7 +232,7 @@ export class BrandlistComponent implements OnInit {
   }
 
   onUpdateBrand() {
-    debugger
+    
     this.submitted = true
     if (this.submitted && this.editBrandForm.valid) {
       let formData = new FormData();

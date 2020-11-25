@@ -46,44 +46,36 @@ export class AddVenderComponent implements OnInit {
     this.readCountryCode();
     this.userDetails = JSON.parse(sessionStorage.getItem('Markat_User'));
     console.log("USer", this.userDetails);
-    this.getCategoryList()
-    debugger
 
-    this.sub = this.router
-      .queryParams
-      .subscribe(params => {
-        // Defaults to 0 if no query param provided.
-        this.roles = params['check'];
 
-      });
   }
 
-  getCategoryList() {
+  // getCategoryList() {
 
-    let temp = []
-    this.categoryList = []
-    let page = 1;
-    let count = 200;
+  //   let temp = []
+  //   this.categoryList = []
+  //   let page = 1;
+  //   let count = 200;
 
-    this.apiService.getAllCategories().subscribe(res => {
+  //   this.apiService.getAllCategories().subscribe(res => {
 
-      if (res.success) {
+  //     if (res.success) {
 
-        console.log(res)
-        if (res.data) {
-          for (let i = 0; i < res.data.length; i++) {
-            let body = {
-              'id': res.data[i].id,
-              'text': res.data[i].name
-            }
-            temp.push(body);
-          }
-        }
-      }
-      this.categoryList = temp;
-    }
-    );
-  }
+  //       console.log(res)
+  //       if (res.data) {
+  //         for (let i = 0; i < res.data.length; i++) {
+  //           let body = {
+  //             'id': res.data[i].id,
+  //             'text': res.data[i].name
+  //           }
+  //           temp.push(body);
+  //         }
+  //       }
+  //     }
+  //     this.categoryList = temp;
+  //   }
+  //   );
+  // }
 
   readCountryCode() {
     this.apiService.getCountryCode().subscribe(res => {
@@ -100,7 +92,8 @@ export class AddVenderComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       countryCode: ['', Validators.required],
       phone: ['', Validators.required],
-      //   address: ['', Validators.required],
+      last4Digits: ['', [Validators.required, Validators.maxLength(4)]],
+      //address: ['', Validators.required],
       //   bio: ['',],
       //  Specialities: ['', Validators.required],
       //  celebrityType: ['', Validators.required],
@@ -124,30 +117,30 @@ export class AddVenderComponent implements OnInit {
 
   }
 
-  onCategorySelect(e) {
+  // onCategorySelect(e) {
 
-    console.log(e.id);
-    let temp
-    const index = this.selectedCategoryItem.findIndex(o => o.id.toString() == e.id.toString());
-    if (index < 0) {
-      this.selectedCategoryItem.push(e.id);
-    }
-    for (let item in this.selectedCategoryItem) {
-      this.selectedCategoryId.push(this.selectedCategoryItem[item].id)
+  //   console.log(e.id);
+  //   let temp
+  //   const index = this.selectedCategoryItem.findIndex(o => o.id.toString() == e.id.toString());
+  //   if (index < 0) {
+  //     this.selectedCategoryItem.push(e.id);
+  //   }
+  //   for (let item in this.selectedCategoryItem) {
+  //     this.selectedCategoryId.push(this.selectedCategoryItem[item].id)
 
-    }
-    this.setUpProfile.get('Specialities').setValue(this.selectedCategoryId)
-  }
-  onSelectAll(e) {
+  //   }
+  //   this.setUpProfile.get('Specialities').setValue(this.selectedCategoryId)
+  // }
+  // onSelectAll(e) {
 
-    let temp
-    console.log(e)
-    for (let i = 0; i < e.length; i++) {
-      this.selectedCategoryId.push(e[i].id)
-    }
+  //   let temp
+  //   console.log(e)
+  //   for (let i = 0; i < e.length; i++) {
+  //     this.selectedCategoryId.push(e[i].id)
+  //   }
 
-    this.setUpProfile.get('Specialities').setValue(this.selectedCategoryId)
-  }
+  //   this.setUpProfile.get('Specialities').setValue(this.selectedCategoryId)
+  // }
 
   public AddressChange(address: any) {
 
@@ -163,33 +156,33 @@ export class AddVenderComponent implements OnInit {
   }
 
 
-  onFileChange(e) {
-    console.log(e);
-    let temp = []
+  // onFileChange(e) {
+  //   console.log(e);
+  //   let temp = []
 
-    if (e.target.files && e.target.files[0] && this.document.length < 6) {
-      for (let i = 0; i < e.target.files.length; i++) {
-        var reader = new FileReader();
-        let name = e.target.files[i].name;
-        this.document.push(e.target.files[i]);
+  //   if (e.target.files && e.target.files[0] && this.document.length < 6) {
+  //     for (let i = 0; i < e.target.files.length; i++) {
+  //       var reader = new FileReader();
+  //       let name = e.target.files[i].name;
+  //       this.document.push(e.target.files[i]);
 
-        reader.readAsDataURL(e.target.files[i]);
-        reader.onload = (event: any) => {
-          let body = {
-            name: name,
-            document: event.target.result
-          }
-          this.urls.push(body);
-          this.setUpProfile.controls['profilePhoto'].patchValue(this.imageFile);
-          // need to run CD since file load runs outside of zone
-          this.cd.markForCheck();
-        };
-      }
-    } else {
-      this.commonService.errorToast('Only Document can be uploaded')
-    }
+  //       reader.readAsDataURL(e.target.files[i]);
+  //       reader.onload = (event: any) => {
+  //         let body = {
+  //           name: name,
+  //           document: event.target.result
+  //         }
+  //         this.urls.push(body);
+  //         this.setUpProfile.controls['profilePhoto'].patchValue(this.imageFile);
+  //         // need to run CD since file load runs outside of zone
+  //         this.cd.markForCheck();
+  //       };
+  //     }
+  //   } else {
+  //     this.commonService.errorToast('Only Document can be uploaded')
+  //   }
 
-  }
+  // }
 
   onProfileChange(e) {
     this.uploaded = true
@@ -226,10 +219,10 @@ export class AddVenderComponent implements OnInit {
 
   onProfileSetUp() {
     this.submitted = true
-    debugger
+    
     console.log("Form", this.setUpProfile.value);
     console.log("image", this.profileImage);
-    console.log("document", this.document);
+    // console.log("document", this.document);
     if (this.setUpProfile.valid) {
       let temp
 
@@ -237,29 +230,28 @@ export class AddVenderComponent implements OnInit {
       if (this.imageFile) {
         formData.append('profilePic', this.imageFile, this.imageFile.name);
       }
-      if (this.document.length) {
-        for (let item in this.document) {
-          formData.append('documentOne', this.document[item], this.document[item].name);
-        }
-      }
+      // if (this.document.length) {
+      //   for (let item in this.document) {
+      //     formData.append('documentOne', this.document[item], this.document[item].name);
+      //   }
+      // }
       formData.append('firstName', this.setUpProfile.get('firstName').value);
       formData.append('lastName', this.setUpProfile.get('lastName').value)
       formData.append('email', this.setUpProfile.get('email').value)
       formData.append('phone', this.setUpProfile.get('phone').value);
-      formData.append('bio', this.setUpProfile.get('bio').value);
-      formData.append('country', this.country)
-      if (this.roles == 'celebrity') {
-        // formData.append('isFeatured', '')
-        formData.append('celebrityType', this.setUpProfile.get('celebrityType').value)
+      formData.append('last4Digits', this.setUpProfile.get('last4Digits').value)
+      // // if (this.roles == 'celebrity') {
+      //   // formData.append('isFeatured', '')
+      //   formData.append('celebrityType', this.setUpProfile.get('celebrityType').value)
 
-      }
-      formData.append('address', this.formattedaddress)
+      // }
+      // formData.append('address', this.formattedaddress)
       formData.append('countryCode', this.setUpProfile.get('countryCode').value)
-      formData.append('categories', JSON.stringify(this.selectedCategoryId))
+      // // formData.append('categories', JSON.stringify(this.selectedCategoryId))
       formData.append('gender', this.setUpProfile.get('gender').value)
-      formData.append('lat', this.lat)
-      formData.append('lng', this.lng)
-      formData.append('roles', this.roles)
+      // formData.append('lat', this.lat)
+      // formData.append('lng', this.lng)
+      // formData.append('roles', this.roles)
 
       formData.forEach((value, key) => {
         console.log(key + " " + value)
@@ -270,12 +262,7 @@ export class AddVenderComponent implements OnInit {
         if (res.success) {
           this.commonService.successToast(res.message);
           this.progress = false
-          if (this.roles == 'merchant') {
-            this.route.navigate(['/venderManagement']);
-          } {
-            this.route.navigate(['/manageCelebrity']);
-
-          }
+          this.route.navigate(['/venderManagement']);
         } else {
           this.commonService.errorToast(res.message);
           this.progress = false

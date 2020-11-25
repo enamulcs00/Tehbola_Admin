@@ -21,6 +21,7 @@ export class VenderManagementComponent implements OnInit {
   filterBy = '';
   search = '';
   vendorList: any;
+  isApproved: any
   status: any
   selectOption: string
   flagUserList: boolean = false;
@@ -29,6 +30,7 @@ export class VenderManagementComponent implements OnInit {
   categoryList: any[];
   selectedCategory = [];
   body2: any;
+  flagapproval: boolean;
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) {
 
   }
@@ -95,15 +97,14 @@ export class VenderManagementComponent implements OnInit {
       allowOutsideClick: true
     }).then(result => {
       if (result.isConfirmed) {
-        if (result.value) {
-          let body = {
-            id: id,
-            sellerProfileStatus: 1,
-          }
-          this.acceptReject(body)
-        } else {
-          this.commonService.errorToast('Please add commission')
+
+        let body = {
+          id: id,
+          sellerProfileStatus: 1,
         }
+        this.acceptReject(body)
+
+
       } else {
         console.log("nothing changed");
 
@@ -112,6 +113,21 @@ export class VenderManagementComponent implements OnInit {
     })
   }
 
+
+  approvedSelected(e) {
+
+    if (this.isApproved) {
+      this.flagapproval = true
+    }
+    else {
+      this.flagapproval = false
+
+    }
+    console.log(e.value);
+    this.isApproved = e.value;
+
+    this.showVendorList()
+  }
 
   changeUserStatus(id, status) {
 
@@ -152,7 +168,7 @@ export class VenderManagementComponent implements OnInit {
   }
 
   declinedVendor(id) {
-    debugger
+
     Swal.fire({
       title: "Are you sure?",
       text: "Please Provide the reason to decline this request!",
@@ -187,7 +203,7 @@ export class VenderManagementComponent implements OnInit {
   }
 
   acceptReject(body) {
-    debugger
+
     this.progress = true
     this.apiService.approveReject(body).subscribe(res => {
       console.log(res);
@@ -291,7 +307,7 @@ export class VenderManagementComponent implements OnInit {
   }
 
   goToaddVender() {
-    this.router.navigate(['add'], { queryParams: { 'check': 'merchant' } })
+    this.router.navigate(['add'])
   }
   goToviewVendor(id) {
     this.router.navigate(['view'], { queryParams: { 'id': id } })

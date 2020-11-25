@@ -73,7 +73,7 @@ export class EditdiscountComponent implements OnInit {
 
 
   setradio(e: string) {
-    debugger
+
     this.singleCategorySelection = true;
     this.singleSubCategorySelection = true;
     this.singleVendorSelection = true;
@@ -250,7 +250,7 @@ export class EditdiscountComponent implements OnInit {
 
 
   getDiscount(id) {
-    debugger
+
 
     this.apiService.getDisountDetails(id).subscribe(res => {
       if (res.success) {
@@ -543,7 +543,7 @@ export class EditdiscountComponent implements OnInit {
   }
 
   onSelectAll(items: any) {
-    debugger
+
     console.log("selectedAll", items)
     for (let i = 0; i < items.length; i++) {
       this.selectedItem.push(items[i].id)
@@ -558,7 +558,7 @@ export class EditdiscountComponent implements OnInit {
   ];
 
   getAllCategoryForAdmin() {
-    debugger
+
     let temp = []
     this.categoryList = []
 
@@ -621,7 +621,7 @@ export class EditdiscountComponent implements OnInit {
 
   selectedCategory = ''
   categorySelected(id) {
-    debugger
+
     console.log("category :", id);
     this.selectedCategory = id;
     this.getAllSubcategory(id);
@@ -810,7 +810,7 @@ export class EditdiscountComponent implements OnInit {
 
 
   checkBanner() {
-    debugger
+
     this.submitted = true
     console.log(this.editDiscountForm);
     let checkOffer = this.editDiscountForm.controls['dicountOn'].value;
@@ -884,7 +884,7 @@ export class EditdiscountComponent implements OnInit {
 
 
   typeCategory(checkOffer, selectedCategoryItem) {
-    debugger
+    
 
     let startDate = moment(this.editDiscountForm.controls['startDate'].value).toLocaleString();
     let endDate = moment(this.editDiscountForm.controls['endDate'].value).toLocaleString()
@@ -996,7 +996,7 @@ export class EditdiscountComponent implements OnInit {
 
 
   editBanner(body) {
-    debugger
+    
     this.tempArray = []
     this.tempArray.push(body);
     //  console.log(body)

@@ -1060,8 +1060,8 @@ body:not(.modal-open) {
 }
 
 .divAboveTable {
-    height: 280px;
-    overflow-y: scroll;
+    max-height: 280px;
+    overflow-y: auto;
 }
 
 @media(max-width:1500px) {

@@ -25,13 +25,13 @@ export class ForgotPasswordComponent implements OnInit {
 
   ngOnInit() {
     this.forgetPasswordForm = this.formBuilder.group({
-      email: [''],
+      email: ['', [Validators.required, Validators.email]],
       phone: [''],
       countryCode: ['']
     })
 
     this.readCountryCode()
-
+    this.binding = 'email'
 
   }
 
@@ -73,34 +73,21 @@ export class ForgotPasswordComponent implements OnInit {
     this.submitted = true
     let data
     if (this.submitted && this.forgetPasswordForm.valid) {
-      if (this.binding === 'email') {
-        data = {
-          email: this.forgetPasswordForm.controls['email'].value
-        }
-      } else if (this.binding === 'number') {
-        data = {
-          countryCode: this.forgetPasswordForm.controls['countryCode'].value,
-          phone: this.forgetPasswordForm.controls['phone'].value
-        }
+      data = {
+        email: this.forgetPasswordForm.controls['email'].value
       }
+
       this.progress = true
       this.apiService.forgetPassword(data).subscribe((res) => {
         console.log(res)
         if (res.success) {
           this.progress = false
-          if (this.binding === 'number') {
-            this.showPage = false;
-            this.gotPhoneNumber = true;
-            this.commonService.successToast(res.message)
-          }
-          if (this.binding === 'email') {
-            this.progress = false
-            this.router.navigate(['']);
-            this.commonService.successToast(res.message)
-
-          }
-
+          this.router.navigate(['']);
           this.commonService.successToast(res.message)
+
+
+
+
         } else {
           this.progress = false
           this.commonService.errorToast(res.message)

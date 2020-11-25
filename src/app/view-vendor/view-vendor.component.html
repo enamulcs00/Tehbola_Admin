@@ -1,196 +1,193 @@
-<div class="login_div login_div2">
-    <div class="container-fluid">
-        <div class="conta_iner">
+<div class="loader_bg" *ngIf="progress">
+    <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#ffa200 ;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
 
-            <div class="logininner">
 
-                <form [formGroup]="viewVendor">
-                    <div class="sub_main_heading">
-                        <h2>View Profile</h2>
+
+<div id="wrapper">
+    <app-navbar></app-navbar>
+    <div id="content-wrapper" class="">
+        <div id="content">
+            <app-sidebar></app-sidebar>
+            <div class="login_div2">
+                <div class="container-fluid">
+                    <div class="sub_heading">
+                        <h2>Edit Profile</h2>
+                        <div class="input_divs2 input_button input_button2">
+                            <button class="btn_back" mat-button (click)="goTovendermanagement()"><i
+                                    class="fa fa-long-arrow-left" aria-hidden="true"></i></button>
+                        </div>
                     </div>
+                    <div>
+                        <form [formGroup]="viewVendor">
+                            <ul class="pt-3">
 
-                    <ul>
+                                <li class="input_file P_file">
 
-                        <li class="input_file P_file">
-
-                            <!-- <input type="file" placeholder="" id="file" (change)="onProfileChange($event) "
-                                formControlName="profilePhoto" name="documentOne"> -->
-
-                            <div class="user_img">
+                                    <div class="user_img">
 
 
-                                <ng-container *ngIf="profileImage; else elseTemplate">
-                                    <figure>
-                                        <img style="height: 100%;width: 100%" [src]="imageUrl+profileImage" />
-                                    </figure>
-                                </ng-container>
-                                <ng-template #elseTemplate>
-                                    <img src="assets/profileImage" alt="">
-                                </ng-template>
+                                        <ng-container *ngIf="profileImage; else elseTemplate">
+                                            <figure>
+                                                <img style="height: 100%;width: 100%" [src]="imageUrl+profileImage" />
+                                            </figure>
+                                        </ng-container>
+                                        <ng-template #elseTemplate>
+                                            <img src="assets/profileImage" alt="">
+                                        </ng-template>
 
-                            </div>
-
-                        </li>
-
-                        <li>
-
-
-                            <mat-form-field class="example-full-width">
-                                <mat-label>First Name<span class="red">*</span></mat-label>
-                                <input type="email" matInput formControlName="firstName" placeholder="First Name">
-
-                                <mat-error *ngIf="viewVendor.get('firstName').hasError('required')">
-                                    First Name <strong>required</strong>
-                                </mat-error>
-                            </mat-form-field>
-
-                        </li>
-                        <li>
-                            <mat-form-field class="example-full-width">
-                                <mat-label>Last Name<span class="red">*</span></mat-label>
-                                <input matInput type="text" placeholder="" formControlName="lastName" name="lastName">
-                                <mat-error *ngIf="viewVendor.get('lastName').hasError('required')">
-                                    Last Name <strong>required</strong>
-                                </mat-error>
-                            </mat-form-field>
-
-                        </li>
-                        <li>
-                            <!-- <label>Address<span class="red">*</span></label> -->
-                            <mat-form-field class="example-full-width">
-                                <mat-label>Gender<span class="red">*</span></mat-label>
-                                <input matInput type="text" placeholder="" formControlName="gender" name="gender">
-                                <!-- <mat-select placeholder="Placeholder" formControlName="gender">
-                                    <mat-option value="M">
-                                        Male
-                                    </mat-option>
-                                    <mat-option value="F">
-                                        Female
-                                    </mat-option>
-                                </mat-select>
-
-                                <mat-error *ngIf="viewVendor.get('gender').hasError('required')">
-                                    Gender is <strong>required</strong>
-                                </mat-error> -->
-                            </mat-form-field>
-                        </li>
-
-                        <li>
-                            <mat-form-field class="example-full-width">
-                                <mat-label>Email<span class="red">*</span></mat-label>
-                                <input matInput type="email" placeholder="" formControlName="email" name="email">
-                                <mat-error *ngIf="viewVendor.get('email').hasError('required')">
-                                    Email is <strong>required</strong>
-                                </mat-error>
-                            </mat-form-field>
-
-                        </li>
-                        <!-- <li>
-
-
-
-                                <label>Vendor Country Code<span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="text" placeholder="" ng-intl-tel-input
-                                        formControlName="countryCode" name="countryCode">
-                                </mat-form-field>
-                                <div *ngIf="submitted && f.countryCode.errors" class="custom-invalid">
-                                    <div *ngIf="f.countryCode.errors.required">
-                                        Confirm Password is required.
                                     </div>
 
+                                </li>
 
-                                </div>
-                            </li> -->
-                        <li>
-                            <!-- <label><span class="red">*</span></label> -->
-                            <div class="cardList">
-                                <mat-form-field style="width: 20%;" class="example-full-width">
-                                    <mat-label>Country Code<span class="red">*</span></mat-label>
-                                    <input type="text" list="browsers" aria-label="Number" matInput
-                                        formControlName="countryCode">
-                                    <!-- <datalist id="browsers">
+                                <li>
+
+
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>First Name<span class="red">*</span></mat-label>
+                                        <input type="email" matInput formControlName="firstName"
+                                            placeholder="First Name">
+
+                                        <mat-error *ngIf="viewVendor.get('firstName').hasError('required')">
+                                            First Name <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+
+                                </li>
+                                <li>
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Last Name<span class="red">*</span></mat-label>
+                                        <input matInput type="text" placeholder="" formControlName="lastName"
+                                            name="lastName">
+                                        <mat-error *ngIf="viewVendor.get('lastName').hasError('required')">
+                                            Last Name <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+
+                                </li>
+                                <li>
+                                    <!-- <label>Address<span class="red">*</span></label> -->
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Gender<span class="red">*</span></mat-label>
+                                        <input matInput type="text" placeholder="" formControlName="gender"
+                                            name="gender">
+
+                                    </mat-form-field>
+                                </li>
+
+                                <li>
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Email<span class="red">*</span></mat-label>
+                                        <input matInput type="email" placeholder="" formControlName="email"
+                                            name="email">
+                                        <mat-error *ngIf="viewVendor.get('email').hasError('required')">
+                                            Email is <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+
+                                </li>
+
+                                <li>
+                                    <!-- <label><span class="red">*</span></label> -->
+                                    <div class="cardList">
+                                        <mat-form-field style="width: 20%;" class="example-full-width">
+                                            <mat-label>Country Code<span class="red">*</span></mat-label>
+                                            <input type="text" list="browsers" aria-label="Number" matInput
+                                                formControlName="countryCode">
+                                            <!-- <datalist id="browsers">
                                         <option *ngFor="let body of countryList" value="{{body.dial_code}}">
                                             {{body.name}}
                                         </option>
                                     </datalist> -->
-                                    <!-- <mat-error *ngIf="viewVendor.get('countryCode').hasError('required')">
+                                            <!-- <mat-error *ngIf="viewVendor.get('countryCode').hasError('required')">
                                         Country Code is <strong>required</strong>
                                     </mat-error> -->
 
-                                </mat-form-field>
+                                        </mat-form-field>
 
-                                <mat-form-field style="width: 80%;" class="example-full-width">
-                                    <mat-label>Phone Number<span class="red">*</span></mat-label>
-                                    <input matInput type="number" min="0" id="secondInput" formControlName="phone"
-                                        name="phone">
-                                    <mat-error *ngIf="viewVendor.get('phone').hasError('required')">
-                                        Phone Number is <strong>required</strong>
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
-                        </li>
-                        <li>
-                            <!-- <label>Address<span class="red">*</span></label> -->
-                            <mat-form-field class="example-full-width">
-                                <mat-label>Address<span class="red">*</span></mat-label>
-
-                                <input matInput formControlName="address" [options]="options"
-                                    ngx-google-places-autocomplete #placesRef="ngx-places"
-                                    (onAddressChange)="AddressChange($event)" />
-
-                                <mat-error *ngIf="viewVendor.get('address').hasError('required')">
-                                    Address is <strong>required</strong>
-                                </mat-error>
-                            </mat-form-field>
-                        </li>
-                        <!-- {{ formattedaddress }} -->
-                        <li>
-                            <mat-form-field class="example-full-width">
-
-                                <mat-label>Bio</mat-label>
-                                <textarea matInput placeholder="Tell us something about your self"
-                                    formControlName="bio"></textarea>
-                            </mat-form-field>
-
-                        </li>
-                        <li>
-                            <mat-label>Specialities<span class="red">*</span></mat-label>
-                            <!-- <ng-multiselect-dropdown [placeholder]="" [data]="categoryList"
-                                [(ngModel)]="selectedCategoryItem" [ngModelOptions]="{standalone: true}"
-                                [settings]="categoryDropDownSettings" (onSelect)="onCategorySelect($event)"
-                                (onSelectAll)="onSelectAll($event)">
-                            </ng-multiselect-dropdown> -->
-                            <!-- <div *ngIf="submitted && f.brnNumber.errors" class="custom-invalid">
-                            <div *ngIf="f.brnNumber.errors.required">
-                                BRN number is required.
-                            </div>
-                        </div> -->
-                            <ul>
-                                <li *ngFor="let item of categories; let i=index">
-                                    {{i+1}}- {{item.name}}
+                                        <mat-form-field style="width: 80%;" class="example-full-width">
+                                            <mat-label>Phone Number<span class="red">*</span></mat-label>
+                                            <input matInput type="number" min="0" id="secondInput"
+                                                formControlName="phone" name="phone">
+                                            <mat-error *ngIf="viewVendor.get('phone').hasError('required')">
+                                                Phone Number is <strong>required</strong>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
                                 </li>
-                            </ul>
-                        </li>
-                        <li *ngIf="userRole !=='merchant'">
-                            <mat-form-field class="example-full-width">
-                                <mat-label>Purpose<span class="red">*</span></mat-label>
+                                <li>
 
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Last 4 Digit of DL<span class="red">*</span></mat-label>
 
-                                <mat-select placeholder="Placeholder" [(value)]="celebrityType"
-                                    formControlName="celebrityType">
-                                    <mat-option [value]="item.value" *ngFor="let item of celebrityTypeModel">
-                                        {{item.viewValue}}
-                                    </mat-option>
-                                </mat-select>
-                                <!-- 
-                                <mat-error *ngIf="viewVendor.get('celebrityType').hasError('required')">
-                                    Purpose is <strong>required</strong>
-                                </mat-error>-->
-                            </mat-form-field>
+                                        <input matInput type="number" formControlName="last4Digits" />
 
-                        </li>
-                        <!-- <li class="input_file">
+                                        <mat-error *ngIf="viewVendor.get('last4Digits').hasError('required')">
+                                            Last Four Digits of DL are <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </li>
+                                <!-- <li>
+                                   
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Address<span class="red">*</span></mat-label>
+
+                                        <input matInput formControlName="address" [options]="options"
+                                            ngx-google-places-autocomplete #placesRef="ngx-places"
+                                            (onAddressChange)="AddressChange($event)" />
+
+                                        <mat-error *ngIf="viewVendor.get('address').hasError('required')">
+                                            Address is <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </li> -->
+
+                                <!-- <li>
+                                    <mat-form-field class="example-full-width">
+
+                                        <mat-label>Bio</mat-label>
+                                        <textarea matInput placeholder="Tell us something about your self"
+                                            formControlName="bio"></textarea>
+                                    </mat-form-field>
+
+                                </li> -->
+                                <!-- <li>
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Specialities<span class="red">*</span></mat-label>
+                                  
+                                        <mat-select formControlName="category" multiple>
+                                            <mat-option *ngFor="let topping of categoryList" [value]="topping._id">
+                                                {{topping.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="viewVendor.get('category').hasError('required')">
+                                            Specialities is <strong>required</strong>
+                                        </mat-error>
+
+                                    </mat-form-field>
+                                </li> -->
+                                <!-- <li *ngIf="roles !=='merchant'">
+                                    <div *ngIf=" dontShowPurpose==false">
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>Purpose<span class="red">*</span></mat-label>
+
+                                            <mat-select placeholder="Placeholder" [(value)]="celebrityType"
+                                                formControlName="celebrityType">
+                                                <mat-option [value]="item.value"
+                                                    *ngFor="let item of celebrityTypeModel">
+                                                    {{item.viewValue}}
+                                                </mat-option>
+                                            </mat-select>
+
+                                            <mat-error *ngIf="viewVendor.get('celebrityType').hasError('required')">
+                                                Purpose is <strong>required</strong>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                </li> -->
+                                <!-- <li class="input_file">
                             <label>Certificates </label>
 
                             <input type="file" placeholder="Add Contract" id="file" (change)="onFileChange($event) "
@@ -211,7 +208,7 @@
 
 
 
-                        <!-- <li>
+                                <!-- <li>
                             <label>Status<span class="red">*</span></label>
                             <mat-form-field>
                                 <mat-select>
@@ -224,20 +221,15 @@
 
 
 
-                    </ul>
+                            </ul>
 
-                    <!-- <div class="input_divs input_button">
-                        <button (click)="onProfileSetUp()" mat-button>Save</button>
-                    </div> -->
 
-                </form>
+
+                        </form>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
 
-<div class="loader_bg" *ngIf="progress">
-    <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#ffa200 ;" role="status">
-        <span class="sr-only">Loading...</span>
+        </div>
     </div>
 </div>

@@ -66,7 +66,7 @@ export class AddinventoryComponent implements OnInit {
 
   }
   onSubmit() {
-    debugger
+    
     this.submitted = true;
 
     if (this.submitted && this.updateInventoryForm.valid) {

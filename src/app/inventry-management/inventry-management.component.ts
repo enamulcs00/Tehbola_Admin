@@ -29,7 +29,7 @@ export class InventryManagementComponent implements OnInit {
   progress: boolean;
 
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService, private urlService: UrlService) {
-    debugger
+
     this.user = JSON.parse(sessionStorage.getItem('Markat_User'))
     this.imageUrl = this.urlService.imageUrl
     if (this.user.roles != 'admin') {

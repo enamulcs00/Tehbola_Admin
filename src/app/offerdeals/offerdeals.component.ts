@@ -86,7 +86,7 @@ export class OfferdealsComponent implements OnInit {
 
   flag = false
   filterSelected(e) {
-    debugger
+
     if (this.filterBy) {
       this.flag = true
     }

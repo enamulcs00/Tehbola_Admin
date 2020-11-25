@@ -138,7 +138,7 @@ export class ProductComponent implements OnInit {
   }
 
   getAllProducts() {
-    debugger
+
     if (this.isApproved) { //Method if isApproved is selected for some value
       this.progress = true
       this.apiService.getProducts(this.page, this.pageSize, this.filterBy, this.isApproved, this.search,
@@ -270,7 +270,7 @@ export class ProductComponent implements OnInit {
 
   onChangeFeatured(id, featured) {
 
-    debugger
+
     console.log(id, featured)
     let data: any
     let temp = id
@@ -309,7 +309,7 @@ export class ProductComponent implements OnInit {
 
 
   onChangeEndorse(id, endorse) {
-    debugger
+
     console.log(id, endorse)
     let data: any
     let temp = id

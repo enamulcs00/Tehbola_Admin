@@ -155,7 +155,7 @@ export class EndorsementComponent implements OnInit {
 
 
   acceptRequest(id, status) {
-    debugger
+
     let body = {
       id: id,
       status: status
@@ -182,7 +182,7 @@ export class EndorsementComponent implements OnInit {
 
 
   onChangeStatus(id, status) {
-    debugger
+
     let body
     if (status == 0) {
       body = {

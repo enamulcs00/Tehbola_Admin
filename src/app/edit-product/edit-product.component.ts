@@ -149,7 +149,7 @@ export class EditProductComponent implements OnInit {
 
   }
   setValue(data: any) {
-    debugger
+
     this.selectedCategory = data.category._id
     this.productId = data.productId
     data.subCategory.forEach(element => {
@@ -292,7 +292,7 @@ export class EditProductComponent implements OnInit {
 
   getAllCategory(id) {
 
-    debugger
+
     this.categoryList = []
 
     this.apiService.getCategoryByUser(id).subscribe(res => {
@@ -368,7 +368,7 @@ export class EditProductComponent implements OnInit {
   }
 
   onSubmit() {
-    debugger
+
     console.log("check", this.editProductForm)
     this.submitted = true;
 

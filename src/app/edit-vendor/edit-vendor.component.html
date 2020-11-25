@@ -125,6 +125,22 @@
                                         </mat-form-field>
                                     </div>
                                 </li>
+                                <li>
+
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Last 4 Digit of DL<span class="red">*</span></mat-label>
+
+                                        <input matInput type="text" formControlName="last4Digits" />
+
+                                        <mat-error *ngIf="editVendor.get('last4Digits').hasError('required')">
+                                            Last Four Digits of DL are <strong>required</strong>
+                                        </mat-error>
+                                        <mat-error
+                                            *ngIf="editVendor.get('last4Digits').hasError('maxlength') && !editVendor.get('last4Digits').hasError('required')">
+                                            Last Four Digits of DL can be max <strong>4 Digits</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </li>
                                 <!-- <li>
                                    
                                     <mat-form-field class="example-full-width">

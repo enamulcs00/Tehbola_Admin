@@ -6,11 +6,22 @@
             <div class="container-fluid">
                 <div class="sub_heading">
                     <h1>Vendor Management</h1>
-                    <!-- <div class="input_divs2 input_button input_button2">
-                        <button mat-button (click)="goToaddVender()">Add Vendor</button>
-                         <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
-                                aria-hidden="true"></i></button> 
+                    <div class="input_divs2 input_button ">
+                        <!-- <button mat-button>Add Vendor</button>
+                        <button class="btn_back" mat-button>Download CSV</button> -->
+
+                        <!-- <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
+                                aria-hidden="true"></i></button>  -->
+                    </div>
+                    <!-- <div class="top_subheading_add">
+                        <button class="btn_back" mat-button>Add </button>
                     </div> -->
+                    <div class="top_subheading_add ">
+                        <button mat-button matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20"
+                            (click)="goToaddVender()">Add Vendor</button>
+                        <button class="btn_back ml-2" matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20"
+                            mat-button>Download CSV</button>
+                    </div>
 
                 </div>
                 <div class="outer_table">
@@ -30,6 +41,26 @@
                                     </mat-option>
                                     <mat-option value="inactive">
                                         Inactive
+                                    </mat-option>
+
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="filters Booking_status pl-3">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Vendor Approval</mat-label>
+
+                                <mat-select placeholder="Filter" [(ngModel)]="isApproved"
+                                    (selectionChange)="approvedSelected($event)">
+                                    <mat-option *ngIf="flagapproval==true" value="">
+                                        Remove Filter
+                                    </mat-option>
+
+                                    <mat-option value="true">
+                                        Approved
+                                    </mat-option>
+                                    <mat-option value="false">
+                                        not Approved
                                     </mat-option>
 
                                 </mat-select>
@@ -60,7 +91,7 @@
                         </div>
                     </div>
                     <div class="col-12" *ngIf="noDataFound">
-                        <p style="font-size: 60px; font-family: sans-serif;"> No Data Found </p>
+                        <p style="font-size: 40px; font-family: sans-serif;"> No Data Found </p>
                     </div>
 
                     <div *ngIf="!progress && !noDataFound" class="table-responsive divAboveTable">
@@ -77,7 +108,7 @@
                                 <!-- <th>Product List</th> -->
                                 <th>Total number of order</th>
                                 <th>Total revenue generated</th>
-                                <th>Document</th>
+                                <th>Last 4 digit of DL</th>
                                 <th class="action_bx">Action</th>
                             </tr>
                             <tr *ngFor="let item of vendorList; index as i ">
@@ -105,11 +136,7 @@
                                 <td>{{item.totalOrders}}</td>
                                 <td>{{item.totalRevenue}}</td>
                                 <td>
-                                    <ul>
-                                        <li class="delete" (click)="viewDocument(item._id)"><i
-                                                class="fa fa-eye fa-fw"></i>
-                                        </li>
-                                    </ul>
+                                    {{item?.last4Digits}}
                                 </td>
                                 <td>
                                     <div class="action">

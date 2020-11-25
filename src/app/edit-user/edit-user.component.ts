@@ -33,6 +33,7 @@ export class EditUserComponent implements OnInit {
   editUserForm: FormGroup
   submitted: boolean;
   progress: boolean;
+  countryList: any;
 
   constructor(private router: Router, private fb: FormBuilder, private commonService: CommonService, private route: ActivatedRoute, private apiService: ApiService,
     private datePipe: DatePipe) {
@@ -43,21 +44,24 @@ export class EditUserComponent implements OnInit {
       UserEmail: ['', [Validators.required, Validators.email]],
       userCountryCode: ['', Validators.required],
       UserPhoneNumber: ['', Validators.required],
-      numberOfOrder: ['', Validators.required],
-      completedOrder: ['', Validators.required],
-      rejectedOrder: ['', Validators.required],
-      totalAmountPaid: ['', Validators.required],
-
 
 
     })
-
+    this.readCountryCode();
 
   }
 
 
   get f() {
     return this.editUserForm.controls;
+  }
+
+
+  readCountryCode() {
+    this.apiService.getCountryCode().subscribe(res => {
+      console.log(res);
+      this.countryList = res;
+    })
   }
 
   ngOnInit() {
@@ -80,20 +84,7 @@ export class EditUserComponent implements OnInit {
         this.editUserForm.controls['UserEmail'].setValue(res.data.email);
         this.editUserForm.controls['userCountryCode'].setValue(res.data.countryCode);
         this.editUserForm.controls['UserPhoneNumber'].setValue(res.data.phone);
-        this.editUserForm.controls['numberOfOrder'].setValue(res.data.totalOrders);
-        this.editUserForm.controls['completedOrder'].setValue(res.data.completedOrders);
-        this.editUserForm.controls['rejectedOrder'].setValue(res.data.rejectedOrders);
-        this.editUserForm.controls['totalAmountPaid'].setValue(res.data.totalPaid);
-        // this.firstName = res.data.firstName;
-        // this.lastName = res.data.lastName;
-        // this.userCountryCode = res.data.countryCode;
-        // this.UserEmail = res.data.email;
-        // this.UserPhoneNumber = res.data.phone;
-        //this.status = res.data.status;
-        this.numberOfOrder = res.data.totalOrders;
-        this.completedOrder = res.data.completedOrders;
-        this.rejectedOrder = res.data.rejectedOrders;
-        this.totalAmountPaid = res.data.totalPaid
+
 
         if (this.status === "0") {
           this.status = this.pick[1].value
@@ -112,6 +103,7 @@ export class EditUserComponent implements OnInit {
 
 
   updateUser() {
+
     let userUpdate = {}
     this.submitted = true
     console.log(this.id)
@@ -130,10 +122,6 @@ export class EditUserComponent implements OnInit {
         email: this.editUserForm.get('UserEmail').value,
         countryCode: this.editUserForm.get('userCountryCode').value,
         phone: this.editUserForm.get('UserPhoneNumber').value,
-        totalOrders: this.editUserForm.get('numberOfOrder').value,
-        completedOrders: this.editUserForm.get('completedOrder').value,
-        rejectedOrders: this.editUserForm.get('rejectedOrder').value,
-        totalPaid: this.editUserForm.get('totalAmountPaid').value,
 
       }
       this.progress = true

@@ -6,13 +6,13 @@
             <div class="container-fluid">
                 <div class="sub_heading">
                     <h1>User Management</h1>
-                    <div class="input_divs2 input_button input_button2">
-                        <!-- <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
-                                aria-hidden="true"></i></button> -->
+                    <!-- <div class="input_divs2 input_button input_button2">
+                        <button class="btn_back" mat-button>Download CSV</button>
+                    </div> -->
+                    <div class="top_subheading_add">
+                        <button class="btn_back" matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20"
+                            mat-button>Download CSV</button>
                     </div>
-                    <!-- <div class="top_subheading_add">
-<a (click)="goToadduser()"><span>+</span>Add User</a>
-</div> -->
                 </div>
                 <div class="outer_table">
                     <div class="search_fields">
@@ -59,7 +59,7 @@
                     </div>
                     <div class="table-responsive">
                         <div *ngIf="flagData==true">
-                            <p style="font-size: 60px; font-family: sans-serif;"> No Data Found </p>
+                            <p style="font-size: 40px; font-family: sans-serif;"> No Data Found </p>
                         </div>
 
                         <div class="divAboveTable" *ngIf="flagData==false">
@@ -100,7 +100,8 @@
                                     <td>{{item?.totalPaid}}</td>
                                     <td>
                                         <div class="top_subheading_add">
-                                            <button mat-button
+                                            <button mat-button matRipple [matRippleColor]="'#9e8221'"
+                                                [matRippleRadius]="20"
                                                 (click)="goToUserAddress(item._id)"><span></span>View</button>
                                         </div>
                                     </td>
@@ -112,9 +113,9 @@
                                             <ul>
                                                 <li class="show" (click)="goTobookingRequestHistory(i)"><i
                                                         class="fa fa-eye"></i></li>
-                                                <!-- <li class="edit" (click)="goToeditUser(i)"><i
+                                                <li class="edit" (click)="goToeditUser(item._id)"><i
                                                         class="fa fa-pencil fa-fw"></i>
-                                                </li> -->
+                                                </li>
                                                 <li class="delete" (click)="deleteUser(item._id)"><i
                                                         class="fa fa-trash-o fa-fw"></i></li>
                                             </ul>
