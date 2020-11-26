@@ -23,7 +23,8 @@ export class RevenuereportComponent implements OnInit {
   srNo: number = 1;
   flagData: boolean;
   revenueReport: any;
-
+  today: any;
+  tommorow: any
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) { }
 
   ngOnInit() {

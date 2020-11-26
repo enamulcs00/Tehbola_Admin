@@ -5,10 +5,10 @@
             <app-sidebar></app-sidebar>
             <div class="container-fluid">
                 <div class="sub_heading">
-                    <h1>Sales</h1>
-                    <div class="right_side_buttons">
-                        <a (click)="back()">Go Back</a>
-
+                    <h1>Booking Request Management</h1>
+                    <div class="top_subheading_add">
+                        <button class="btn_back" matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20"
+                            mat-button>Download CSV</button>
                     </div>
                     <!-- <div class="top_subheading_add">
                         <a (click)="goToaddsale()"><span>+</span>Add Sale</a>
@@ -19,37 +19,50 @@
                         <div class="inner_content">
                             <div class="outer_table">
                                 <div class="search_fields">
-                                    <div class="filters Booking_status">
-                                        <label>Filter</label>
-                                        <select [(ngModel)]="filterBy" (change)="filterSelected($event)">
-                                            <option *ngIf="flag==true" value="">Remove Filter</option>
-                                            <option *ngIf="flag==false" value=""></option>
-                                            <option *ngFor="let item of filterList" value="{{item.value}}">
-                                                {{item.viewValue}}
-                                            </option>
-                                            <!-- <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option> -->
-                                            <!-- <option value="lastName"></option> -->
-                                        </select>
+                                    <div class="">
+
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>Filter<span class="red">*</span></mat-label>
+
+                                            <mat-select placeholder="Filter" [(ngModel)]="filterBy"
+                                                (selectionChange)="filterSelected($event)">
+                                                <mat-option *ngIf="flag==true" value="">
+                                                    Remove Filter
+                                                </mat-option>
+                                                <!--  <mat-option *ngIf="flag==false" value="">
+
+                                    </mat-option> -->
+                                                <mat-option value="active">
+                                                    Active
+                                                </mat-option>
+                                                <mat-option value="inactive">
+                                                    Inactive
+                                                </mat-option>
+
+                                            </mat-select>
+                                        </mat-form-field>
                                     </div>
                                     <div class="search_inner_fiels">
-                                        <div class="filters Booking_status">
-                                            <label>Search</label>
+                                        <div class="">
+
                                             <div class="search_with_icons">
-                                                <mat-form-field [floatLabel]="'never'">
+                                                <mat-form-field class="example-full-width">
+                                                    <mat-label>Search</mat-label>
                                                     <input matInput type="text" [(ngModel)]="search" placeholder="">
                                                 </mat-form-field>
-                                                <i *ngIf="flagSearch==true" class="fa fa-search" aria-hidden="true"
-                                                    (click)="searchMethod()"></i>
-                                                <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
-                                                    (click)="clearSearch()"></i>
+                                                <button mat-button matSuffix mat-icon-button> <i
+                                                        *ngIf="flagSearch==true" class="fa fa-search" aria-hidden="true"
+                                                        (click)="searchMethod()"></i>
+                                                    <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
+                                                        (click)="clearSearch()"></i>
+                                                </button>
                                             </div>
                                         </div>
 
                                     </div>
                                 </div>
                                 <div class="table-responsive">
-                                    <table>
+                                    <!-- <table>
                                         <tr>
                                             <th>Order Id</th>
                                             <th>Product Name</th>
@@ -98,9 +111,169 @@
                                                     <ul>
                                                         <li class="show" (click)="goToviewOrder(item._id)"><i
                                                                 class="fa fa-eye"></i></li>
-                                                        <!-- <li class="edit" (click)="goToeditOrder()"><i
-                                                                class="fa fa-pencil fa-fw"></i></li> -->
-                                                        <!-- <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li> -->
+                                                       <li class="edit" (click)="goToeditOrder()"><i
+                                                                class="fa fa-pencil fa-fw"></i></li> 
+                                                        < <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li> 
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table> -->
+                                    <table>
+                                        <tr>
+                                            <th>Order Id</th>
+                                            <th>Customer Name</th>
+                                            <th>Order Items</th>
+                                            <th>Customer Contact</th>
+                                            <th>Booking Status</th>
+                                            <th>Booking Notes</th>
+                                            <th>Expected Time</th>
+                                            <th class="action_bx">Action</th>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>John</td>
+                                            <td>Cloth</td>
+                                            <td>1234567</td>
+                                            <td class="Booking_status">
+                                                <select>
+                                                    <option value="">ConFirm</option>
+                                                    <option value="">Cancel</option>
+                                                    <option value="">Ready To Pickup</option>
+                                                    <option value="">Completed</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                            </td>
+                                            <td class="Booking_status">
+                                                <select>
+                                                    <option value="">5 Days</option>
+                                                    <option value="">1 Day</option>
+                                                    <option value="">2 Days</option>
+                                                    <option value="">3 Days</option>
+                                                </select>
+                                            </td>
+
+                                            <td>
+                                                <div class="action">
+                                                    <ul>
+                                                        <li class="show" (click)=" goToviewOrder()"><i
+                                                                class="fa fa-eye"></i></li>
+                                                        <li class="edit" (click)="goToeditOrder()"><i
+                                                                class="fa fa-pencil fa-fw"></i></li>
+                                                        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>John</td>
+                                            <td>Cloth</td>
+                                            <td>1234567</td>
+                                            <td class="Booking_status">
+                                                <select>
+                                                    <option value="">ConFirm</option>
+                                                    <option value="">Cancel</option>
+                                                    <option value="">Ready To Pickup</option>
+                                                    <option value="">Completed</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                            </td>
+                                            <td class="Booking_status">
+                                                <select>
+                                                    <option value="">5 Days</option>
+                                                    <option value="">1 Day</option>
+                                                    <option value="">2 Days</option>
+                                                    <option value="">3 Days</option>
+                                                </select>
+                                            </td>
+
+                                            <td>
+                                                <div class="action">
+                                                    <ul>
+                                                        <li class="show" (click)=" goToviewOrder()"><i
+                                                                class="fa fa-eye"></i></li>
+                                                        <li class="edit" (click)="goToeditOrder()"><i
+                                                                class="fa fa-pencil fa-fw"></i></li>
+                                                        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>John</td>
+                                            <td>Cloth</td>
+                                            <td>1234567</td>
+                                            <td class="Booking_status">
+                                                <select>
+                                                    <option value="">ConFirm</option>
+                                                    <option value="">Cancel</option>
+                                                    <option value="">Ready To Pickup</option>
+                                                    <option value="">Completed</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                            </td>
+                                            <td class="Booking_status">
+                                                <select>
+                                                    <option value="">5 Days</option>
+                                                    <option value="">1 Day</option>
+                                                    <option value="">2 Days</option>
+                                                    <option value="">3 Days</option>
+                                                </select>
+                                            </td>
+
+                                            <td>
+                                                <div class="action">
+                                                    <ul>
+                                                        <li class="show" (click)=" goToviewOrder()"><i
+                                                                class="fa fa-eye"></i></li>
+                                                        <li class="edit" (click)="goToeditOrder()"><i
+                                                                class="fa fa-pencil fa-fw"></i></li>
+                                                        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>John</td>
+                                            <td>Cloth</td>
+                                            <td>1234567</td>
+                                            <td class="Booking_status">
+                                                <select>
+                                                    <option value="">ConFirm</option>
+                                                    <option value="">Cancel</option>
+                                                    <option value="">Ready To Pickup</option>
+                                                    <option value="">Completed</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                            </td>
+                                            <td class="Booking_status">
+                                                <select>
+                                                    <option value="">5 Days</option>
+                                                    <option value="">1 Day</option>
+                                                    <option value="">2 Days</option>
+                                                    <option value="">3 Days</option>
+                                                </select>
+                                            </td>
+
+                                            <td>
+                                                <div class="action">
+                                                    <ul>
+                                                        <li class="show" (click)=" goToviewOrder()"><i
+                                                                class="fa fa-eye"></i></li>
+                                                        <li class="edit" (click)="goToeditOrder()"><i
+                                                                class="fa fa-pencil fa-fw"></i></li>
+                                                        <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
                                                     </ul>
                                                 </div>
                                             </td>

@@ -13,6 +13,29 @@
     margin-bottom: 10px;
 }
 
+.hover {
+    display: block;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
+        0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+
+    &:hover {
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+            0 10px 10px rgba(0, 0, 0, 0.22)
+    }
+}
+
+mat-card img {
+    margin: 0px;
+    object-fit: contain;
+    /*this makes the image in src fit to the size specified below*/
+    width: 100%;
+    /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+    height: 80%;
+}
+
+
 .button-border {
     display: block;
     border: 1px solid #e0e0e0;

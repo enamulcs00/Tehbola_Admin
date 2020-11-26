@@ -978,8 +978,8 @@ button.mat-button.mat-button-base {
 }
 
 .C_file {
-    width: 50px;
-    height: 50px;
+    width: 50px !important;
+    height: 50px !important;
     background: url('../src/assets/images/choose_file.png');
     background-size: 100%;
 

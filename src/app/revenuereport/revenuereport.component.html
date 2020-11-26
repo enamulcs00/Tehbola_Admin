@@ -5,74 +5,170 @@
             <app-sidebar></app-sidebar>
             <div class="container-fluid">
                 <div class="sub_heading">
-                    <h1>Report of Revenue</h1>
+                    <h1>Revenue Management</h1>
                     <div class="top_subheading_add">
-                        <a (click)="goToreveuegraph()">View Revenue Graph</a>
-                        <a style="margin-left: 1em;" (click)="back()">Go Back</a>
+                        <!-- <a (click)="goToreveuegraph()">View Revenue Graph</a> -->
+                        <!-- <a style="margin-left: 1em;" (click)="back()">Go Back</a> -->
                     </div>
                 </div>
-                <div class="tab-content">
-                    <div id="allOrders" class="tab-pane fade in active">
-                        <div class="inner_content">
-                            <div class="outer_table">
-                                <div class="search_fields">
-                                    <div class="filters Booking_status">
-                                        <label>Filter</label>
-                                        <select [(ngModel)]="filterBy" (change)="filterSelected($event)">
-                                            <option *ngIf="flag==true" value="">Remove Filter</option>
-                                            <option *ngIf="flag==false" value=""></option>
-                                            <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option>
-                                        </select>
-                                    </div>
-                                    <div class="search_inner_fiels">
-                                        <div class="filters Booking_status">
-                                            <label>Search</label>
-                                            <div class="search_with_icons">
-                                                <mat-form-field [floatLabel]="'never'">
-                                                    <input matInput type="text" [(ngModel)]="search" placeholder="">
-                                                </mat-form-field>
-                                                <i *ngIf="flagSearch==true" class="fa fa-search" aria-hidden="true"
-                                                    (click)="searchMethod()"></i>
-                                                <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
-                                                    (click)="clearSearch()"></i>
+
+
+                <mat-tab-group mat-align-tabs="start">
+                    <mat-tab label="Customer">
+                        <div class="tab-content">
+                            <div id="allOrders" class="tab-pane fade in active">
+                                <div class="inner_content">
+                                    <div class="row m-5">
+                                        <div class="card h-100">
+                                            <div class="card-header">
+                                                Total Payment Received via Cash
+                                            </div>
+                                            <div class="card-footer">
+                                                150000$
                                             </div>
                                         </div>
-
+                                        <div class="card h-100">
+                                            <div class="card-header">Total Payment Received via Cash</div>
+                                            <div class="card-footer">
+                                                150000$
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="table-responsive">
-                                    <table>
-                                        <tr>
-                                            <th>Sr.no</th>
-                                            <th>Vendor</th>
-                                            <th>Total Price</th>
-                                            <th>Total Tax</th>
-                                            <th>Total Commission Earned</th>
 
-                                        </tr>
-                                        <tr *ngFor="let item of revenueReport; let i=index">
-                                            <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
-                                            <td *ngIf="flagUserList==false">{{i+1}}</td>
-                                            <td>{{item.seller.firstName}} {{item.seller.lastName}}</td>
-                                            <td>{{item.totalPrice|number}}</td>
-                                            <td>{{item.tax|number}}</td>
-                                            <td>{{item.commission|number}}</td>
-
-                                        </tr>
-
-                                    </table>
+                                    <!-----end pagination-->
                                 </div>
                             </div>
-                            <!-----start pagination-->
-                            <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-                                (page)="pageEvent = revenueReportListAfterPageSizeChanged($event)">
-                            </mat-paginator>
-                            <!-----end pagination-->
-                        </div>
-                    </div>
 
-                </div>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Vendor">
+                        <div class="tab-content">
+                            <div id="allOrders" class="tab-pane fade in active">
+                                <div class="inner_content">
+                                    <div class="outer_table">
+                                        <div class="search_fields">
+                                            <div class="filters Booking_status">
+                                                <label></label>
+                                                <div class="row ">
+                                                    <mat-form-field appearance="fill" class="mr-2">
+                                                        <mat-label>Choose a Start date</mat-label>
+                                                        <input matInput [matDatepicker]="picker1">
+                                                        <mat-datepicker-toggle matSuffix [for]="picker1">
+                                                        </mat-datepicker-toggle>
+                                                        <mat-datepicker #picker1></mat-datepicker>
+                                                    </mat-form-field>
+                                                    <mat-form-field appearance="fill" class="ml-2 mr-2">
+                                                        <mat-label>Choose a End date</mat-label>
+                                                        <input matInput [matDatepicker]="picker2">
+                                                        <mat-datepicker-toggle matSuffix [for]="picker2">
+                                                        </mat-datepicker-toggle>
+                                                        <mat-datepicker #picker2></mat-datepicker>
+                                                    </mat-form-field>
+                                                    <div class="search_inner_fiels"
+                                                        style="    margin-top: 0.7rem!important;">
+                                                        <div class="">
+
+                                                            <div class="search_with_icons">
+                                                                <mat-form-field class="example-full-width">
+                                                                    <mat-label>Search</mat-label>
+                                                                    <input matInput type="text" [(ngModel)]="search"
+                                                                        placeholder="">
+                                                                </mat-form-field>
+                                                                <button mat-button matSuffix mat-icon-button> <i
+                                                                        *ngIf="flagSearch==true" class="fa fa-search"
+                                                                        aria-hidden="true" (click)="searchMethod()"></i>
+                                                                    <i *ngIf="flagSearch==false" class="fa fa-times"
+                                                                        aria-hidden="true" (click)="clearSearch()"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table>
+                                                <tr>
+                                                    <th>Sr.no</th>
+                                                    <th>Vendor</th>
+                                                    <th>Total Order </th>
+                                                    <th>Total Earning</th>
+                                                    <th>History of payment request</th>
+
+                                                </tr>
+                                                <!-- <tr *ngFor="let item of revenueReport; let i=index">
+                                                    <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
+                                                    <td *ngIf="flagUserList==false">{{i+1}}</td>
+                                                    <td>{{item.seller.firstName}} {{item.seller.lastName}}</td>
+                                                    <td>{{item.totalPrice|number}}</td>
+                                                    <td>{{item.tax|number}}</td>
+                                                    <td>{{item.commission|number}}</td>
+
+                                                </tr> -->
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>Vendor 1</td>
+                                                    <td>150</td>
+                                                    <td>15000$</td>
+                                                    <td>
+                                                        <li class="show"><i class="fa fa-eye"></i></li>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Vendor 2</td>
+                                                    <td>150</td>
+                                                    <td>15000$</td>
+                                                    <td>
+                                                        <li class="show"><i class="fa fa-eye"></i></li>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>Vendor 3</td>
+                                                    <td>150</td>
+                                                    <td>15000$</td>
+                                                    <td>
+                                                        <li class="show"><i class="fa fa-eye"></i></li>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>4</td>
+                                                    <td>Vendor 4</td>
+                                                    <td>150</td>
+                                                    <td>15000$</td>
+                                                    <td>
+                                                        <li class="show"><i class="fa fa-eye"></i></li>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>5</td>
+                                                    <td>Vendor 5</td>
+                                                    <td>150</td>
+                                                    <td>15000$</td>
+                                                    <td>
+                                                        <li class="show"><i class="fa fa-eye"></i></li>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <!-----start pagination-->
+                                    <mat-paginator [length]="length" [pageSize]="pageSize"
+                                        [pageSizeOptions]="pageSizeOptions"
+                                        (page)="pageEvent = revenueReportListAfterPageSizeChanged($event)">
+                                    </mat-paginator>
+                                    <!-----end pagination-->
+                                </div>
+                            </div>
+
+                        </div>
+                    </mat-tab>
+
+                </mat-tab-group>
+
             </div>
         </div>
     </div>

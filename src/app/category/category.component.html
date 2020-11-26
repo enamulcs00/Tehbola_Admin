@@ -15,12 +15,11 @@
                    <a (click)="goToaddcategory()"><span>+</span>Add Category</a>
                    </div> -->
                 </div>
-                <div class="content_sec_comman">
+                <!-- <div class="content_sec_comman">
                     <div class="content_wrap">
                         <div class="outer_loaction">
                             <div class="location_name">
-                                <!-- <h3>Electronics</h3> -->
-                                <!-- <p><i class="fa fa-compress" aria-hidden="true"></i></p> -->
+                      
                             </div>
 
                             <div class="add_location_name">
@@ -28,7 +27,7 @@
                                     class="button-border add_state" data-toggle="modal" data-target="#Add_State">
                                     <i class="fa fa-plus"></i> Add Category</a>
                             </div>
-                            <!-- #585b5e -->
+                      
                             <div class="state-list button-border" *ngFor="let category of categories; let i=index">
                                 <div class="state">
                                     <div class="country_name">
@@ -42,17 +41,12 @@
                                             <i class="fa fa-edit" (click)="editCategory(category._id)"></i>
                                         </a>
 
-                                        <!-- <a href="javascript:;" data-toggle="modal" data-target="#Add_city">
-                                            <i class="fa fa-plus"></i>
-                                        </a> -->
                                         <a href="javascript:;">
                                             <i class="fa fa-trash" (click)="deleteCategory(category._id)"></i>
                                         </a>
 
 
-                                        <!-- <a href="javascript:;">
-                                            <i class="fa fa-compress" aria-hidden="true"></i>
-                                        </a> -->
+                                       
                                     </div>
                                     <div class="mobille_list">
                                         <ul>
@@ -83,15 +77,87 @@
                                                 Add New Sub Category </a>
                                         </div>
                                     </div>
-                                    <!-- state-list-->
+                                  
                                 </div>
-                                <!--state-->
+                              
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-----start pagination-->
+                <mat-accordion>
+                    <div class="add_location_name">
+                        <a href="javascript:;" matRipple [matRippleColor]="'#dbdddf'" [matRippleRadius]="50"
+                            class="button-border add_state" data-toggle="modal" data-target="#Add_State">
+                            <i class="fa fa-plus"></i> Add Category</a>
+                    </div>
+                    <mat-expansion-panel hideToggle *ngFor="let category of categories; let i=index" class="p-3">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <div class="country_name">
+                                    <figure><img src={{imageUrl+category.image}}></figure>
+                                    <span>
+                                        <b>{{ i+1 }}. {{ category.name }} </b>
+                                        <p>Commission:{{category.commission}}</p>
+                                    </span>
+
+
+
+                                    <!-- <a href="javascript:;">
+                                            <i class="fa fa-compress" aria-hidden="true"></i>
+                                        </a> -->
+                                </div>
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                <div class="m-3">
+                                    <a href="javascript:;" class="p-4" data-toggle="modal"
+                                        data-target="#Add_State_delete">
+                                        <i class="fa fa-edit" (click)="editCategory(category._id)"></i>
+                                    </a>
+
+                                    <!-- <a href="javascript:;" data-toggle="modal" data-target="#Add_city">
+                                            <i class="fa fa-plus"></i>
+                                        </a> -->
+                                    <a href="javascript:;">
+                                        <i class="fa fa-trash" (click)="deleteCategory(category._id)"></i>
+                                    </a>
+                                </div>
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+
+                        <div class="mobille_list">
+                            <p *ngIf="category.subCatList.length>0">Sub-category list</p>
+                            <ul>
+                                <li *ngFor="let subcategory of category.subCatList; let j=index ">
+                                    <span class="sub_category_image">
+                                        <figure><img src={{imageUrl+subcategory.image}}></figure>
+                                    </span> <span>{{j+1}}. {{subcategory.name}}</span>
+                                    <a style="margin-left:25px ;" href="javascript:;" data-toggle="modal"
+                                        data-target="#EditSubcategory">
+                                        <i class="fa fa-edit" (click)="editSubCategory(subcategory._id)"></i>
+                                    </a>
+
+                                    <a style="margin-left: 20px;" href="javascript:;">
+                                        <i class="fa fa-trash" (click)="deleteSubcategory(subcategory._id)"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="state-list state-list-li">
+
+                            <div class="actions">
+                                <a href="javascript:;" matRipple [matRippleColor]="'#dbdddf'" [matRippleRadius]="50"
+                                    class="button-pad add_city" data-toggle="modal" data-target="#Add_city"
+                                    (click)="onAddSubCategoryBtn(category._id)">
+                                    <i class="fa fa-plus"></i>
+                                    Add New Sub Category </a>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+
+                </mat-accordion>
 
                 <!-----end pagination-->
             </div>

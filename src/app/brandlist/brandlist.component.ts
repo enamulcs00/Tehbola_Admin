@@ -43,6 +43,9 @@ export class BrandlistComponent implements OnInit {
       category: ['', [Validators.required, Validators.maxLength(25)]],
       subCategory: ['', [Validators.required, Validators.maxLength(25)]],
       image: ['', [Validators.required, Validators.maxLength(25)]],
+      totalUnits: ['', Validators.required],
+      unitPrice: ['', Validators.required],
+      description: [''],
     });
     this.editBrandForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(25)]],
@@ -50,6 +53,9 @@ export class BrandlistComponent implements OnInit {
       category: ['', [Validators.required, Validators.maxLength(25)]],
       subCategory: ['', [Validators.required, Validators.maxLength(25)]],
       image: ['',],
+      totalUnits: ['', Validators.required],
+      unitPrice: ['', Validators.required],
+      description: [''],
     })
   }
 
@@ -81,12 +87,13 @@ export class BrandlistComponent implements OnInit {
 
 
   categorySelected(e) {
-    
+
     console.log(e.value);
     // let id = e
     this.apiService.getSubcategoryList(e).subscribe(res => {
       console.log(res)
       if (res.success == true) {
+        this.editBrandForm.get('subCategory').reset()
         console.log(res.data);
         this.subcategoryList = res.data
       }
@@ -128,16 +135,25 @@ export class BrandlistComponent implements OnInit {
             console.log(res.data);
             this.subcategoryList = res.data
           }
-        })
+        });
+        debugger
         console.log(res)
         this.editableBrandId = res.data._id
         this.editBrandForm.controls['name'].setValue(res.data.name);
 
         this.editBrandForm.controls['name_ar'].setValue(res.data.name_ar);
         this.editBrandForm.controls['category'].setValue(res.data.category.id);
+        let selectedCategory = []
+        for (let i in res.data.subCategory) {
 
-        this.editBrandForm.controls['subCategory'].setValue(res.data.subCategory.id);
+          selectedCategory.push(res.data.subCategory[i]._id)
+        }
+        this.editBrandForm.controls['subCategory'].setValue(selectedCategory);
         this.editBrandForm.controls['image'].setValue(res.data.image.name)
+        this.editBrandForm.controls['totalUnits'].setValue(res.data.totalUnits)
+        this.editBrandForm.controls['unitPrice'].setValue(res.data.unitPrice)
+        this.editBrandForm.controls['description'].setValue(res.data.description)
+
 
         let data = res.data
         //  this.image = data.image
@@ -154,7 +170,7 @@ export class BrandlistComponent implements OnInit {
     // Swal.clickCancel();
     Swal.fire({
       title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this Brand!",
+      text: "Once deleted, you will not be able to recover this Raw Item!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085D6",
@@ -167,7 +183,7 @@ export class BrandlistComponent implements OnInit {
         console.log(id)
         const data = {
           "id": id,
-          "model": "Brand"
+          "model": "Raw Item"
         }
 
         console.log(data)
@@ -191,7 +207,7 @@ export class BrandlistComponent implements OnInit {
 
 
   onAddBrand() {
-    
+    debugger
     this.submitted = true
     if (this.submitted && this.addBrandForm.valid) {
       let body = this.addBrandForm.value
@@ -201,7 +217,10 @@ export class BrandlistComponent implements OnInit {
       formData.append('name', this.addBrandForm.get('name').value);
       formData.append('name_ar', this.addBrandForm.get('name_ar').value);
       formData.append('category', this.addBrandForm.get('category').value);
-      formData.append('subCategory', this.addBrandForm.get('subCategory').value);
+      formData.append('subCategory', JSON.stringify(this.addBrandForm.get('subCategory').value));
+      formData.append('totalUnits', this.addBrandForm.get('totalUnits').value);
+      formData.append('unitPrice', this.addBrandForm.get('unitPrice').value);
+      formData.append('description', this.addBrandForm.get('description').value);
       formData.append('image', this.imageFile, this.imageFile.name);
       this.progress = true
       this.apiService.addBrand(formData).subscribe(res => {
@@ -219,6 +238,8 @@ export class BrandlistComponent implements OnInit {
           this.submitted = false
         }
       })
+    } else {
+      this.commonService.errorToast('Failed to add the Item.')
     }
 
   }
@@ -232,7 +253,7 @@ export class BrandlistComponent implements OnInit {
   }
 
   onUpdateBrand() {
-    
+    debugger
     this.submitted = true
     if (this.submitted && this.editBrandForm.valid) {
       let formData = new FormData();
@@ -240,7 +261,10 @@ export class BrandlistComponent implements OnInit {
       formData.append('name', this.editBrandForm.get('name').value);
       formData.append('name_ar', this.editBrandForm.get('name_ar').value);
       formData.append('category', this.editBrandForm.get('category').value);
-      formData.append('subCategory', this.editBrandForm.get('subCategory').value);
+      formData.append('subCategory', JSON.stringify(this.editBrandForm.get('subCategory').value));
+      formData.append('totalUnits', this.editBrandForm.get('totalUnits').value);
+      formData.append('unitPrice', this.editBrandForm.get('unitPrice').value);
+      formData.append('description', this.editBrandForm.get('description').value);
       if (this.imageFile) {
         formData.append('image', this.imageFile, this.imageFile.name);
       }
@@ -258,6 +282,8 @@ export class BrandlistComponent implements OnInit {
           this.submitted = false
         }
       })
+    } else {
+      this.commonService.errorToast('Failed to update Raw Item')
     }
 
   }

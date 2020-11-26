@@ -190,7 +190,7 @@ export class VenderManagementComponent implements OnInit {
           }
           this.acceptReject(body)
         } else {
-          this.commonService.errorToast("Please add commission")
+          this.commonService.errorToast("Please add reason for declining the request")
         }
       } else {
         console.log("nothing changed");

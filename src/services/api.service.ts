@@ -768,7 +768,7 @@ export class ApiService {
       if (error.status == 400) {
         this.comm.errorToast(error.error.message)
         // localStorage.clear();
-        this.router.navigateByUrl("/login");
+        // this.router.navigateByUrl("/login");
       }
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
