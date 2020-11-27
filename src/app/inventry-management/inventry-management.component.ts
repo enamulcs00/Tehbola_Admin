@@ -22,7 +22,7 @@ export class InventryManagementComponent implements OnInit {
   page = 1
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pageEvent: PageEvent;
-  flagData: boolean;
+  flagData: boolean = false;
   productList: any;
   isApproved: any = true;
   imageUrl: string;
@@ -96,11 +96,16 @@ export class InventryManagementComponent implements OnInit {
     this.getInventory()
 
   }
+
+
+  goToViewIngredient() {
+
+  }
   goToviewinventory() {
     this.router.navigate(['viewinventory'])
   }
   ngOnInit() {
-    this.getInventory()
+
   }
 
   getInventory() {

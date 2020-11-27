@@ -53,21 +53,91 @@
                     <table>
                         <tr>
                             <th>Sr. No.</th>
-                            <th>Product Id</th>
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th *ngIf="user.roles=='admin'">Seller</th>
-                            <th *ngIf="user.roles=='admin'">View</th>
-                            <th>Normal Stock</th>
-                            <th>Over Stock</th>
+                            <th>Food Id</th>
+                            <th>Food Name</th>
+                            <th>Food Cost</th>
                             <th>Current Quantity</th>
-                            <th> Minimum puchase quantity</th>
-                            <th>Price </th>
-                            <th *ngIf="user.roles!='admin'">Action</th>
+                            <th>Food quantity limit for purchase</th>
+                            <th>Total Available Ingredient</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>1652443DR</td>
+                            <td>Banana Shake</td>
+                            <td>15</td>
+                            <td>10</td>
+                            <td>2</td>
+                            <ul>
+                                <li class="show" (click)="goToViewIngredient()"><i class="fa fa-eye"></i>
+                                </li>
+
+
+                            </ul>
+
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>1652443DR</td>
+                            <td>Oreo Shake</td>
+                            <td>15</td>
+                            <td>10</td>
+                            <td>2</td>
+                            <ul>
+                                <li class="show" (click)="goToViewIngredient()"><i class="fa fa-eye"></i>
+                                </li>
+
+
+                            </ul>
+
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>1652443DR</td>
+                            <td>Pineapple Shake</td>
+                            <td>15</td>
+                            <td>10</td>
+                            <td>2</td>
+                            <ul>
+                                <li class="show" (click)="goToViewIngredient()"><i class="fa fa-eye"></i>
+                                </li>
+
+
+                            </ul>
+
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>1652443DR</td>
+                            <td>Lichi Shake</td>
+                            <td>15</td>
+                            <td>10</td>
+                            <td>2</td>
+                            <ul>
+                                <li class="show" (click)="goToViewIngredient()"><i class="fa fa-eye"></i>
+                                </li>
+
+
+                            </ul>
+
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>1652443DR</td>
+                            <td>Cheery Shake</td>
+                            <td>15</td>
+                            <td>10</td>
+                            <td>2</td>
+                            <ul>
+                                <li class="show" (click)="goToViewIngredient()"><i class="fa fa-eye"></i>
+                                </li>
+
+
+                            </ul>
 
                         </tr>
 
-                        <tr *ngFor="let product of productList;  let i = index">
+
+                        <!-- <tr *ngFor="let product of productList;  let i = index">
                             <td *ngIf="flagUserList==false">{{i+1}}</td>
                             <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
                             <td>
@@ -91,7 +161,7 @@
                                             class="fa fa-pencil fa-fw"></i></li>
                                 </ul>
                             </td>
-                        </tr>
+                        </tr> -->
                     </table>
                     <!-----start pagination-->
                     <mat-paginator #paginator [length]="length" [pageSize]="pageSize"

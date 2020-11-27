@@ -99,7 +99,12 @@ import { DocumentComponent } from './document/document.component';
 import { EndorsementComponent } from './endorsement/endorsement.component';
 import { EndorsementProductComponent } from './endorsement-product/endorsement-product.component';
 import { EndorsedProductComponent } from './endorsed-product/endorsed-product.component';
-
+import { GeofenceComponent } from './geofence/geofence.component';
+import { AddGeofenceComponent } from './add-geofence/add-geofence.component';
+import { AgmCoreModule } from '@agm/core';
+import { FoodTruckManagementComponent } from './food-truck-management/food-truck-management.component';
+import { AssignmentManagementComponent } from './assignment-management/assignment-management.component';
+import { ModalIngredientsComponent } from './modal/modal-ingredients/modal-ingredients.component';
 
 @NgModule({
   declarations: [
@@ -188,6 +193,11 @@ import { EndorsedProductComponent } from './endorsed-product/endorsed-product.co
     EndorsementComponent,
     EndorsementProductComponent,
     EndorsedProductComponent,
+    GeofenceComponent,
+    AddGeofenceComponent,
+    FoodTruckManagementComponent,
+    AssignmentManagementComponent,
+    ModalIngredientsComponent,
 
 
 
@@ -198,6 +208,9 @@ import { EndorsedProductComponent } from './endorsed-product/endorsed-product.co
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBk2rgLIfPJupf0n1TAx9jcnGRqiI3q1j0'
+    }),
     GooglePlaceModule,
     ChartsModule, CKEditorModule, FormsModule, ReactiveFormsModule,
     ToastrModule.forRoot(),
@@ -206,7 +219,10 @@ import { EndorsedProductComponent } from './endorsed-product/endorsed-product.co
 
   ],
   providers: [DatePipe, NotificationService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    ModalIngredientsComponent
+  ]
 })
 export class AppModule {
 

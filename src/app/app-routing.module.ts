@@ -85,6 +85,10 @@ import { DocumentComponent } from './document/document.component';
 import { EndorsementComponent } from './endorsement/endorsement.component';
 import { EndorsementProductComponent } from './endorsement-product/endorsement-product.component';
 import { EndorsedProductComponent } from './endorsed-product/endorsed-product.component';
+import { GeofenceComponent } from './geofence/geofence.component';
+import { AddGeofenceComponent } from './add-geofence/add-geofence.component';
+import { FoodTruckManagementComponent } from './food-truck-management/food-truck-management.component';
+import { AssignmentManagementComponent } from './assignment-management/assignment-management.component';
 
 const routes: Routes = [
   // {
@@ -487,6 +491,16 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'food-truck-management',
+    component: FoodTruckManagementComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'assignment',
+    component: AssignmentManagementComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'consumerprivacypolicy',
     component: ConsumerprivacypolicyComponent,
     canActivate: [AuthGuard]
@@ -513,6 +527,16 @@ const routes: Routes = [
   {
     path: 'push-notification',
     component: BroadcastComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'geofence',
+    component: GeofenceComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'add-geofence',
+    component: AddGeofenceComponent,
     canActivate: [AuthGuard]
   },
   {

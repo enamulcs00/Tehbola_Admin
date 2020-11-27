@@ -36,11 +36,11 @@
             Hc
         </a>
     </li>
-    <li rel="core6" class="nav_item">
+    <!-- <li rel="core6" class="nav_item">
         <a class="nav-link">
             Cr
         </a>
-    </li>
+    </li> -->
 
 
 </ul>
@@ -67,13 +67,14 @@
                 *ngIf="roles=='admin'">Raw Item Management
             </li>
 
-            <!-- <div *ngIf="roles!='admin'">
-                <li (click)="goToEndorsement()" *ngIf="celebrityType!=2">
+            <div>
+                <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToAssignmentModule()">
 
-                    Endorsement</li>
-            </div> -->
+                    Assignment</li>
+            </div>
             <!-- <li (click)="goTosubcategory()">Sub-Category</li>-->
-            <!-- <li (click)="goToinventry()">Inventory Management</li> -->
+            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToinventry()">Inventory
+                Management</li>
             <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToordermanagement()">Booking
                 Request </li>
             <!-- <li (click)="goToofferdeals()">Banner Manegement</li> -->
@@ -82,7 +83,15 @@
     <div id="core3" class="core">
         <h3>Intel</h3>
         <ul>
-            <li (click)="goTorevenuereport()"> Revenue Management </li>
+            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goTorevenuereport()"> Revenue
+                Management </li>
+            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToGeofence()"> Geofence
+                Management
+            </li>
+
+            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToFoodTruckManagement()">
+                Food Truck management
+            </li>
             <!-- <li (click)="goTopayment()">Payment</li> -->
             <!--<li>Analytics</li>-->
             <!-- <li (click)="goToSettings()">Settings</li> -->

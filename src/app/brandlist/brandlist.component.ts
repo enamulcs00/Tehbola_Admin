@@ -183,7 +183,7 @@ export class BrandlistComponent implements OnInit {
         console.log(id)
         const data = {
           "id": id,
-          "model": "Raw Item"
+          "model": "RawItems"
         }
 
         console.log(data)
@@ -192,6 +192,7 @@ export class BrandlistComponent implements OnInit {
           if (res.success) {
             // this.getAllCategories()
             this.commonService.successToast(res.message);
+            this.getBrandList()
 
           } else {
             this.commonService.errorToast(res.message)

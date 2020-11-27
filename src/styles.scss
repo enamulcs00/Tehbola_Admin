@@ -1111,3 +1111,9 @@ body:not(.modal-open) {
     font-size: 15px;
     font-weight: 500;
 }
+
+.cdk-overlay-pane {
+    margin: 0 auto !important;
+    height: auto !important;
+    width: auto !important;
+}

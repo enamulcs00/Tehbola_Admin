@@ -98,6 +98,18 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['manageCelebrity'])
   }
 
+  goToGeofence() {
+    this.router.navigate(['geofence'])
+  }
+
+  goToAssignmentModule() {
+    this.router.navigate(['assignment'])
+  }
+
+  goToFoodTruckManagement() {
+    this.router.navigate(['food-truck-management'])
+  }
+
   goToProduct() {
     this.router.navigate(['product'])
   }
