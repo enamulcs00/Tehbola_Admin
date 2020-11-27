@@ -36,7 +36,7 @@ export class FoodTruckManagementComponent implements OnInit {
 
   }
   flag: boolean
-  filterSelected() {
+  filterSelected(e) {
 
   }
 
@@ -49,8 +49,8 @@ export class FoodTruckManagementComponent implements OnInit {
 
   }
 
-  vendorListAfterPageSizeChanged() {
-
+  vendorListAfterPageSizeChanged(e) {
+    return e
   }
 
 

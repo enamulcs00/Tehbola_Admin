@@ -27,6 +27,6 @@ export class GeofenceComponent implements OnInit {
     this.router.navigate(['add-geofence'])
   }
 
-  deleteGeofence(id) { }
+  deleteGeofence() { }
 
 }
