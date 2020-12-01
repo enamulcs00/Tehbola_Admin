@@ -55,28 +55,24 @@
                 *ngIf="roles =='admin'">User
                 Management </li>
 
-            <li *ngIf="false" (click)="goToProduct()">Product Management </li>
+            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToProduct()">Product Management
+            </li>
             <!-- *ngIf="roles =='celebrity || merchant'" -->
             <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goTovendermanagement()"
                 *ngIf="roles =='admin'">Vendor
                 Management</li>
             <!-- <li (click)="goToCelebritymanagement()" *ngIf="roles =='admin'">Celebrity Management</li> -->
             <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goTocategory()"
-                *ngIf="roles=='admin'">Category</li>
+                *ngIf="roles=='admin'">Category Management</li>
             <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToBrand()"
                 *ngIf="roles=='admin'">Raw Item Management
             </li>
 
-            <div>
-                <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToAssignmentModule()">
 
-                    Assignment</li>
-            </div>
             <!-- <li (click)="goTosubcategory()">Sub-Category</li>-->
             <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToinventry()">Inventory
                 Management</li>
-            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToordermanagement()">Booking
-                Request </li>
+
             <!-- <li (click)="goToofferdeals()">Banner Manegement</li> -->
         </ul>
     </div>
@@ -88,6 +84,15 @@
             <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToGeofence()"> Geofence
                 Management
             </li>
+
+            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToAssignmentModule()">
+
+                Assignment</li>
+
+
+            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToordermanagement()">
+                Booking
+                Request </li>
 
             <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToFoodTruckManagement()">
                 Food Truck management

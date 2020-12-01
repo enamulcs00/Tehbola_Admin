@@ -13,8 +13,9 @@
                     <div class="add_user_list">
                         <ul>
                             <li>
-                                <label>First Name</label>
+                                <label></label>
                                 <mat-form-field [floatLabel]="'never'">
+                                    <mat-label>First Name</mat-label>
                                     <input matInput type="text" placeholder="" formControlName="firstName"
                                         name="firstName">
                                 </mat-form-field>
@@ -33,6 +34,7 @@
                             <li>
                                 <label>Last Name</label>
                                 <mat-form-field [floatLabel]="'never'">
+                                    <mat-label>First Name</mat-label>
                                     <input matInput type="text" placeholder="" formControlName="lastName"
                                         name="lastName">
                                 </mat-form-field>
@@ -50,9 +52,10 @@
                             </li>
 
                             <li>
-                                <label>Phone Number</label>
+                                <label></label>
                                 <div class="cardList">
-                                    <mat-form-field style="width: 20%;" [floatLabel]="'never'">
+                                    <mat-form-field class="pr-3" style="width: 20%;" [floatLabel]="'never'">
+                                        <mat-label>Country Code</mat-label>
                                         <input matInput type="number" min="0" id="firstInput"
                                             formControlName="countryCode" name="countryCode">
                                         <div *ngIf="submitted && f.countryCode.errors" class="custom-invalid">
@@ -64,6 +67,7 @@
 
                                     </mat-form-field>
                                     <mat-form-field style="width: 80%;" [floatLabel]="'never'">
+                                        <mat-label>Phone Number</mat-label>
                                         <input matInput type="number" min="0" placeholder="" id="secondInput"
                                             formControlName="phone" name="phone">
 
@@ -81,20 +85,7 @@
                                     <input matInput type="text" placeholder="" formControlName="email" name="email">
                                 </mat-form-field>
                             </li> -->
-                            <li>
-                                <label>Location</label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="text" placeholder="" formControlName="address" name="address">
-                                </mat-form-field>
-                                <div *ngIf="submitted && f.address.errors" class="custom-invalid">
-                                    <div *ngIf="f.address.errors.required">
-                                        Address is required.
-                                    </div>
 
-
-
-                                </div>
-                            </li>
                             <li>
                                 <label>Profile Picture</label>
 
@@ -117,7 +108,7 @@
 
                             </li>
 
-                          
+
                         </ul>
 
 
@@ -133,5 +124,11 @@
 
             </div>
         </div>
+    </div>
+</div>
+
+<div class="loader_bg" *ngIf="progress">
+    <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#ffa200;" role="status">
+        <span class="sr-only">Loading...</span>
     </div>
 </div>

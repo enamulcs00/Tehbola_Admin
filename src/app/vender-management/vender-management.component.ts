@@ -5,6 +5,9 @@ import { ApiService } from 'src/services/api.service';
 import { query } from '@angular/animations';
 import Swal from "sweetalert2";
 import { CommonService } from 'src/services/common.service';
+import { UrlService } from 'src/services/url.service';
+import { url } from 'inspector';
+import { saveAs } from 'file-saver';
 @Component({
   selector: 'app-vender-management',
   templateUrl: './vender-management.component.html',
@@ -31,8 +34,11 @@ export class VenderManagementComponent implements OnInit {
   selectedCategory = [];
   body2: any;
   flagapproval: boolean;
-  constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) {
+  baseUrl: string;
+  constructor(private router: Router, private apiService: ApiService, private commonService: CommonService, private urlService: UrlService) {
 
+
+    this.baseUrl = this.urlService.SERVER_URL
   }
 
   ngOnInit() {
@@ -57,11 +63,12 @@ export class VenderManagementComponent implements OnInit {
   showVendorList() {
     console.log("inside get vendor")
     let body = {
-      roles: 'user',
+      roles: 'vendor',
       filter: this.filterBy,
       search: this.search,
       page: this.page,
-      count: this.pageSize
+      count: this.pageSize,
+      sellerProfileStatus: this.isApproved
     }
     this.progress = true
     this.apiService.getList(body).subscribe((res) => {
@@ -81,6 +88,15 @@ export class VenderManagementComponent implements OnInit {
         this.commonService.errorToast(res.message)
       }
     });
+  }
+
+
+  downloadCsv() {
+
+    let url = [this.baseUrl + '/api/admin/vendorCsv',]
+
+    window.open(this.baseUrl + '/api/admin/vendorCsv', '_blank')
+
   }
 
   acceptVendor(id) {

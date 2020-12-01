@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/services/api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UrlService } from 'src/services/url.service';
 import { CommonService } from 'src/services/common.service';
 
@@ -28,8 +28,9 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
   countryCode: any;
   phone: any;
   showProfilePic
+  progress: boolean = false
 
-  constructor(private fb: FormBuilder, private commonService: CommonService, private apiService: ApiService, private route: ActivatedRoute, private urlService: UrlService) {
+  constructor(private fb: FormBuilder, private commonService: CommonService, private apiService: ApiService, private route: ActivatedRoute, private urlService: UrlService, private router: Router) {
     this.sub = this.route
       .queryParams
       .subscribe(params => {
@@ -46,7 +47,6 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
 
       this.firstname = this.profileData.firstName
       this.lastName = this.profileData.lastName
-      this.address = this.profileData.address
       this.countryCode = this.profileData.countryCode
       this.phone = this.profileData.phone
       this.showProfilePic = this.profileData.profilePic
@@ -64,16 +64,9 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
     this.updateProfileForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.maxLength(25)]],
       lastName: ['', [Validators.required, Validators.maxLength(25)]],
-      address: ['', Validators.required],
       countryCode: ['', Validators.required],
       phone: ['', Validators.required],
       profilePic1: ['',],
-      facebook: ['', Validators.required],
-      twitter: ['', Validators.required],
-      instagram: ['', Validators.required],
-      linkedIn: ['', Validators.required],
-      appStoreLink: ['', Validators.required],
-      googlePlayLink: ['', Validators.required],
       profilePic: []
     });
 
@@ -90,16 +83,11 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
   }
 
   setValue() {
-
-
-
     this.updateProfileForm.controls['firstName'].setValue(this.firstname)
     this.updateProfileForm.controls['lastName'].setValue(this.lastName)
-    this.updateProfileForm.controls['address'].setValue(this.address)
     this.updateProfileForm.controls['countryCode'].setValue(this.countryCode)
     this.updateProfileForm.controls['phone'].setValue(this.phone)
     this.updateProfileForm.controls['profilePic1'].setValue(this.showProfilePic)
-
   }
 
   picUploader: boolean
@@ -121,31 +109,29 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
 
 
     this.submitted = true
-
     if (this.submitted && this.updateProfileForm.valid) {
-
       const data = new FormData();
-
-
       if (this.picUploader === true) {
         data.append('profilePic', this.imageFile, this.imageFile.name)
       }
       data.append('firstName', this.updateProfileForm.get('firstName').value),
         data.append('lastName', this.updateProfileForm.get('lastName').value),
         data.append('email', this.profileData.email),
-        data.append('address', this.updateProfileForm.get('address').value),
         data.append('countryCode', this.updateProfileForm.get('countryCode').value),
         data.append('phone', this.updateProfileForm.get('phone').value),
+        this.progress = true
+      this.apiService.updateProfile(data).subscribe((res) => {
+        console.log(res);
+        if (res.success) {
+          this.progress = false
+          this.commonService.successToast(res.message)
+          this.router.navigate(['profile']);
+        } else {
+          this.progress = false
+          this.commonService.errorToast(res.message)
+        }
 
-        this.apiService.updateProfile(data).subscribe((res) => {
-          console.log(res);
-          if (res.success) {
-            this.commonService.successToast(res.message)
-          } else {
-            this.commonService.errorToast(res.message)
-          }
-
-        });
+      });
     } else {
       console.log("invalid")
 

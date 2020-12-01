@@ -79,7 +79,7 @@ export class AddproductComponent implements OnInit {
       gender: ['',],
       category: ['', Validators.required],
       subCategory: ['', Validators.required],
-      // skuNumber: ['', [Validators.required, Validators.min(0)]],
+      ingredient: ['', [Validators.required]],
       // isbnNumber: ['', [Validators.required, Validators.min(0)]],
       quantity: ['', [Validators.required, Validators.min(0)]],
       normalStock: ['', [Validators.required, Validators.min(0)]],
@@ -126,7 +126,7 @@ export class AddproductComponent implements OnInit {
 
 
   generateProductId(roles) {
-    
+
     let timestamp
     if (roles == 'celebrity') {
       timestamp = Date.now()
@@ -333,7 +333,7 @@ export class AddproductComponent implements OnInit {
   }
   progress: boolean
   onSubmit() {
-    
+
     console.log("check", this.addProductForm)
     this.submitted = true;
 

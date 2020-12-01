@@ -87,8 +87,8 @@ export class AddVenderComponent implements OnInit {
   ngOnInit() {
     this.setUpProfile = this.fb.group({
 
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      fullName: ['', Validators.required],
+
       email: ['', [Validators.required, Validators.email]],
       countryCode: ['', Validators.required],
       phone: ['', Validators.required],
@@ -100,47 +100,13 @@ export class AddVenderComponent implements OnInit {
       profilePhoto: [''],
       gender: ['', Validators.required]
     })
-    if (this.roles === 'merchant') {
-      this.setUpProfile.controls['celebrityType'].disable({ onlySelf: true });
 
-    }
 
-    // if (this.userDetails.phone) {
-    //   this.setUpProfile.get('phone').setValue(this.userDetails.phone);
-    //   this.setUpProfile.get('countryCode').setValue(this.userDetails.countryCode);
-    //   this.setUpProfile.controls['countryCode'].disable({ onlySelf: true });
-    //   this.setUpProfile.controls['phone'].disable({ onlySelf: true });
-    // } else if (this.userDetails.email) {
-    //   this.setUpProfile.get('email').setValue(this.userDetails.email);
-    //   this.setUpProfile.controls['email'].disable({ onlySelf: true });
-    // }
 
   }
 
-  // onCategorySelect(e) {
 
-  //   console.log(e.id);
-  //   let temp
-  //   const index = this.selectedCategoryItem.findIndex(o => o.id.toString() == e.id.toString());
-  //   if (index < 0) {
-  //     this.selectedCategoryItem.push(e.id);
-  //   }
-  //   for (let item in this.selectedCategoryItem) {
-  //     this.selectedCategoryId.push(this.selectedCategoryItem[item].id)
 
-  //   }
-  //   this.setUpProfile.get('Specialities').setValue(this.selectedCategoryId)
-  // }
-  // onSelectAll(e) {
-
-  //   let temp
-  //   console.log(e)
-  //   for (let i = 0; i < e.length; i++) {
-  //     this.selectedCategoryId.push(e[i].id)
-  //   }
-
-  //   this.setUpProfile.get('Specialities').setValue(this.selectedCategoryId)
-  // }
 
   public AddressChange(address: any) {
 
@@ -156,33 +122,6 @@ export class AddVenderComponent implements OnInit {
   }
 
 
-  // onFileChange(e) {
-  //   console.log(e);
-  //   let temp = []
-
-  //   if (e.target.files && e.target.files[0] && this.document.length < 6) {
-  //     for (let i = 0; i < e.target.files.length; i++) {
-  //       var reader = new FileReader();
-  //       let name = e.target.files[i].name;
-  //       this.document.push(e.target.files[i]);
-
-  //       reader.readAsDataURL(e.target.files[i]);
-  //       reader.onload = (event: any) => {
-  //         let body = {
-  //           name: name,
-  //           document: event.target.result
-  //         }
-  //         this.urls.push(body);
-  //         this.setUpProfile.controls['profilePhoto'].patchValue(this.imageFile);
-  //         // need to run CD since file load runs outside of zone
-  //         this.cd.markForCheck();
-  //       };
-  //     }
-  //   } else {
-  //     this.commonService.errorToast('Only Document can be uploaded')
-  //   }
-
-  // }
 
   onProfileChange(e) {
     this.uploaded = true
@@ -219,10 +158,9 @@ export class AddVenderComponent implements OnInit {
 
   onProfileSetUp() {
     this.submitted = true
-    
+
     console.log("Form", this.setUpProfile.value);
     console.log("image", this.profileImage);
-    // console.log("document", this.document);
     if (this.setUpProfile.valid) {
       let temp
 
@@ -230,28 +168,16 @@ export class AddVenderComponent implements OnInit {
       if (this.imageFile) {
         formData.append('profilePic', this.imageFile, this.imageFile.name);
       }
-      // if (this.document.length) {
-      //   for (let item in this.document) {
-      //     formData.append('documentOne', this.document[item], this.document[item].name);
-      //   }
-      // }
-      formData.append('firstName', this.setUpProfile.get('firstName').value);
-      formData.append('lastName', this.setUpProfile.get('lastName').value)
+
+      formData.append('fullName', this.setUpProfile.get('fullName').value);
+
       formData.append('email', this.setUpProfile.get('email').value)
       formData.append('phone', this.setUpProfile.get('phone').value);
       formData.append('last4Digits', this.setUpProfile.get('last4Digits').value)
-      // // if (this.roles == 'celebrity') {
-      //   // formData.append('isFeatured', '')
-      //   formData.append('celebrityType', this.setUpProfile.get('celebrityType').value)
 
-      // }
-      // formData.append('address', this.formattedaddress)
       formData.append('countryCode', this.setUpProfile.get('countryCode').value)
-      // // formData.append('categories', JSON.stringify(this.selectedCategoryId))
       formData.append('gender', this.setUpProfile.get('gender').value)
-      // formData.append('lat', this.lat)
-      // formData.append('lng', this.lng)
-      // formData.append('roles', this.roles)
+
 
       formData.forEach((value, key) => {
         console.log(key + " " + value)

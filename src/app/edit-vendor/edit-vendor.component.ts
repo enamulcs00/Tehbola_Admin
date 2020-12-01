@@ -91,8 +91,7 @@ export class EditVendorComponent implements OnInit {
 
     this.editVendor = this.fb.group({
 
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      fullName: ['', Validators.required],
       gender: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       countryCode: ['', Validators.required],
@@ -174,29 +173,22 @@ export class EditVendorComponent implements OnInit {
 
         this.Userid = res.data._id
         if (res.data.roles == 'merchant') {
-
           this.dontShowPurpose = true
           this.editVendor.controls['celebrityType'].disable({ onlySelf: true });
-
         }
-        this.editVendor.get('firstName').setValue(res.data.firstName),
-          this.editVendor.get('lastName').setValue(res.data.lastName);
+        this.editVendor.get('fullName').setValue(res.data.fullName);
         if (res.data.gender == 'M') {
           this.gender = res.data.gender
           this.editVendor.get('gender').setValue('M');
-
-
         } else {
           this.gender = res.data.gender
           this.editVendor.get('gender').setValue('F');
-
         }
         this.editVendor.get('email').setValue(res.data.email),
           this.editVendor.get('countryCode').setValue(res.data.countryCode),
           this.editVendor.get('phone').setValue(res.data.phone),
           this.editVendor.get('last4Digits').setValue(res.data.last4Digits);
-
-        //  this.viewVendor.get('firstName').setValue(res.data.firstName),
+        //  this.viewVendor.get('fullName').setValue(res.data.fullName),
         this.userRole = res.data.roles
         if (res.data.profilePic) {
           this.profileImage = res.data.profilePic;
@@ -244,7 +236,7 @@ export class EditVendorComponent implements OnInit {
   }
 
   onUpdate() {
-    
+
     console.log("Form", this.editVendor.value);
     console.log("image", this.profileImage);
     if (this.editVendor.valid) {
@@ -257,8 +249,8 @@ export class EditVendorComponent implements OnInit {
       }
       formData.append('id', this.Userid);
 
-      formData.append('firstName', this.editVendor.get('firstName').value);
-      formData.append('lastName', this.editVendor.get('lastName').value)
+      formData.append('fullName', this.editVendor.get('fullName').value);
+
       formData.append('email', this.editVendor.get('email').value)
       formData.append('phone', this.editVendor.get('phone').value);
       formData.append('country', this.country)

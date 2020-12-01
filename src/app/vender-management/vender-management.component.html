@@ -19,8 +19,8 @@
                     <div class="top_subheading_add ">
                         <button mat-button matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20"
                             (click)="goToaddVender()">Add Vendor</button>
-                        <button class="btn_back ml-2" matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20"
-                            mat-button>Download CSV</button>
+                        <button (click)="downloadCsv()" class="btn_back ml-2" matRipple [matRippleColor]="'#9e8221'"
+                            [matRippleRadius]="20" mat-button>Download CSV</button>
                     </div>
 
                 </div>
@@ -56,10 +56,10 @@
                                         Remove Filter
                                     </mat-option>
 
-                                    <mat-option value="true">
+                                    <mat-option value="1">
                                         Approved
                                     </mat-option>
-                                    <mat-option value="false">
+                                    <mat-option value="0">
                                         not Approved
                                     </mat-option>
 
@@ -114,7 +114,7 @@
                             <tr *ngFor="let item of vendorList; index as i ">
                                 <td *ngIf="flagUserList==false">{{i+1}}</td>
                                 <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
-                                <td>{{item.firstName}} {{item.lastName}}</td>
+                                <td>{{item.fullName}}</td>
                                 <td>{{item.gender==='M'?"Male":"Female"}}</td>
                                 <td>{{item.countryCode}}-{{item.phone}}</td>
                                 <td>{{item.email}}</td>

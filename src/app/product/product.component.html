@@ -35,26 +35,7 @@
                                 </mat-select>
                             </mat-form-field>
                         </div>
-                        <div class="filters Booking_status pl-3">
-                            <mat-form-field class="example-full-width">
-                                <mat-label>Product Approval</mat-label>
 
-                                <mat-select placeholder="Filter" [(ngModel)]="isApproved"
-                                    (selectionChange)="approvedSelected($event)">
-                                    <mat-option *ngIf="flagapproval==true" value="">
-                                        Remove Filter
-                                    </mat-option>
-
-                                    <mat-option value="true">
-                                        Approved
-                                    </mat-option>
-                                    <mat-option value="false">
-                                        not Approved
-                                    </mat-option>
-
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
                         <div class="search_fields">
 
 
@@ -157,33 +138,21 @@
                                 </td>
                                 <td>
                                     <div class="action">
-                                        <ng-container
-                                            *ngIf="user.roles=='admin' && product.isApproved==false; else elseTemplate">
+
+
+                                        <ng-template>
                                             <ul>
-                                                <li class="show" (click)="acceptProduct(product._id)"><i
-                                                        class="fa fa-check"></i></li>
+                                                <li class="show" (click)="goToviewProduct(product.id)"><i
+                                                        class="fa fa-eye"></i></li>
+                                                <li class="edit" (click)="goToeditProduct(product.id)"><i
+                                                        class="fa fa-pencil fa-fw"></i></li>
+                                                <li class="delete" (click)="deleteProduct(product.id)"><i
+                                                        class="fa fa-trash-o fa-fw"></i></li>
                                             </ul>
-                                        </ng-container>
-                                        <ng-template #elseTemplate>
-                                            <ng-container
-                                                *ngIf="user.roles!='admin' && product.isApproved==false; else elseTemplate">
-
-                                                To be approved by Admin
-
-                                            </ng-container>
-                                            <ng-template #elseTemplate>
-                                                <ul>
-                                                    <li class="show" (click)="goToviewProduct(product.id)"><i
-                                                            class="fa fa-eye"></i></li>
-                                                    <li class="edit" (click)="goToeditProduct(product.id)"><i
-                                                            class="fa fa-pencil fa-fw"></i></li>
-                                                    <li class="delete" (click)="deleteProduct(product.id)"><i
-                                                            class="fa fa-trash-o fa-fw"></i></li>
-                                                </ul>
-                                            </ng-template>
-
-
                                         </ng-template>
+
+
+
 
 
                                     </div>

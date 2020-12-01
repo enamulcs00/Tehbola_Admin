@@ -90,6 +90,7 @@ export class LoginComponent implements OnInit {
             isVerified: res.data.isVerified,
             sellerProfileStatus: res.data.sellerProfileStatus,
             _id: res.data._id,
+            profilePic: res.data.profilePic,
             countryCode: res.data.countryCode,
             phone: res.data.phone,
             loginType: res.data.loginType,

@@ -140,7 +140,7 @@ export class ProductComponent implements OnInit {
   getAllProducts() {
 
     if (this.isApproved) { //Method if isApproved is selected for some value
-      this.progress = true
+      this.progress = false
       this.apiService.getProducts(this.page, this.pageSize, this.filterBy, this.isApproved, this.search,
         this.sellerId)
         .subscribe(res => {
@@ -163,7 +163,7 @@ export class ProductComponent implements OnInit {
 
         })
     } else {  //method for get data with out isApproved in initial stage
-      this.progress = true
+      this.progress = false
       this.apiService.getProductsWithoutApproved(this.page, this.pageSize, this.filterBy, this.search,
         this.sellerId)
         .subscribe(res => {

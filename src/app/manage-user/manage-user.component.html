@@ -10,8 +10,8 @@
                         <button class="btn_back" mat-button>Download CSV</button>
                     </div> -->
                     <div class="top_subheading_add">
-                        <button class="btn_back" matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20"
-                            mat-button>Download CSV</button>
+                        <button (click)="downloadCsv()" class="btn_back" matRipple [matRippleColor]="'#9e8221'"
+                            [matRippleRadius]="20" mat-button>Download CSV</button>
                     </div>
                 </div>
                 <div class="outer_table">

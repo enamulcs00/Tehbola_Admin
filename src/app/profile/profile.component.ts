@@ -17,16 +17,18 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.imageUrl = this.urlService.imageUrl
-    // this.apiService.getProfile().subscribe((res) => {
-    //   console.log(res.data)
-    //   this.profileData = res.data
+    this.apiService.getProfile().subscribe((res) => {
+      console.log("profile Data", res.data)
+      this.profileData = res.data
 
-    // });
+    });
 
   }
-  goToeditprofile(id) {
-    console.log(id)
-    this.router.navigate(['editprofile'], { queryParams: { 'id': id } })
+  goToeditprofile() {
+    
+   
+    //  
+    this.router.navigate(['editprofile'])
 
   }
 }

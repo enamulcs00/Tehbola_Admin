@@ -68,6 +68,10 @@ export class ApiService {
       getAllCategoryForDiscount: 'admin/categoryByVendor',
       addBanner: 'admin/banner',
       viewBanner: 'admin/viewBanner',
+      profile: 'admin/getProfile',
+      updateProfile: 'admin/editProfile',
+      downloadUserCSV: 'admin/userCsv',
+      downloadVendorCSV: 'admin/vendorCsv',
       //commonApi to change status of any user type
       status: 'common/status',
 
@@ -660,6 +664,17 @@ export class ApiService {
       .pipe(
         catchError(this.handleError<any>("get discount(banner)"))
       )
+  }
+
+
+  downloadUserCsv(): Observable<any> {
+    return this.http.get<any>(this.apiEndPoints.downloadUserCSV, this.getHeaders()).pipe(catchError(this.handleError()))
+
+  }
+
+  downloadVendorCsv(): Observable<any> {
+    return this.http.get<any>(this.apiEndPoints.downloadVendorCSV, this.getHeaders()).pipe(catchError(this.handleError()))
+
   }
 
   //Sales Module

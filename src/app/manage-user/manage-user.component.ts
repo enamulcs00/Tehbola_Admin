@@ -5,6 +5,7 @@ import { ApiService } from 'src/services/api.service';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { promise } from 'protractor';
 import Swal from 'sweetalert2';
+import { UrlService } from 'src/services/url.service';
 
 @Component({
   selector: 'app-manage-user',
@@ -27,7 +28,7 @@ export class ManageUserComponent implements OnInit {
   progress: boolean;
   constructor(private router: Router,
     private apiService: ApiService,
-    private commonService: CommonService) { }
+    private commonService: CommonService, private urlService: UrlService) { }
   srNo: number
   ngOnInit() {
     this.ShowAllUser()
@@ -106,7 +107,10 @@ export class ManageUserComponent implements OnInit {
     this.ShowAllUser()
   }
 
+  downloadCsv() {
 
+    window.open(this.urlService.SERVER_URL + '/api/admin/vendorCsv', '_blank')
+  }
 
   UserListAfterPageSizeChanged(e): any {
     //console.log(e);

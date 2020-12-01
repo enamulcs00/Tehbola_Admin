@@ -318,7 +318,13 @@
                 aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{profileData.data?.firstName}}
                     {{profileData.data?.lastName}}</span>
-                <img class="img-profile rounded-circle" src="assets/images/profileImage.png"> </a>
+                <figure>
+                    <img *ngIf="!profileData" class="img-profile rounded-circle" src="assets/images/profileImage.png">
+
+                    <img *ngIf="profileData" class="img-profile rounded-circle"
+                        [src]="imagePath+profileData.profilePic">
+                </figure>
+            </a>
             <!-- Dropdown - User
                     Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in top_header_profile"

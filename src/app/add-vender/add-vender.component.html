@@ -40,27 +40,17 @@
 
 
                                         <mat-form-field class="example-full-width">
-                                            <mat-label>First Name<span class="red">*</span></mat-label>
-                                            <input type="email" matInput formControlName="firstName"
-                                                placeholder="First Name">
+                                            <mat-label>Name<span class="red">*</span></mat-label>
+                                            <input type="text" matInput formControlName="fullName"
+                                                placeholder="Full Name">
 
-                                            <mat-error *ngIf="setUpProfile.get('firstName').hasError('required')">
-                                                First Name <strong>required</strong>
+                                            <mat-error *ngIf="setUpProfile.get('fullName').hasError('required')">
+                                                Name <strong>required</strong>
                                             </mat-error>
                                         </mat-form-field>
 
                                     </li>
-                                    <li>
-                                        <mat-form-field class="example-full-width">
-                                            <mat-label>Last Name<span class="red">*</span></mat-label>
-                                            <input matInput type="text" placeholder="" formControlName="lastName"
-                                                name="lastName">
-                                            <mat-error *ngIf="setUpProfile.get('lastName').hasError('required')">
-                                                Last Name <strong>required</strong>
-                                            </mat-error>
-                                        </mat-form-field>
 
-                                    </li>
                                     <li>
                                         <!-- <label>Address<span class="red">*</span></label> -->
                                         <mat-form-field class="example-full-width">
@@ -149,7 +139,7 @@
                                             </mat-error>
                                             <mat-error *ngIf="setUpProfile.get('last4Digits').hasError('maxlength') &&
                                                 !setUpProfile.get('last4Digits').hasError('required')">
-                                                Last Four Digits of DL can be max <strong>4 Digits</strong>
+                                                Only Last Four Digits of DL is <strong>required</strong>
                                             </mat-error>
                                         </mat-form-field>
                                     </li>

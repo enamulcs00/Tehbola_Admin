@@ -12,14 +12,18 @@
                     <div id="exTab1">
                         <div class="businiess_outer">
                             <div class="profile_image_detail">
-                                <figure><img style="border-radius: 50%; height: 120px; width: 120px;"
+                                <figure><img *ngIf="!profileData"
+                                        style="border-radius: 50%; height: 120px; width: 120px;"
                                         src="assets/images/profileImage.png">
+
+                                    <img *ngIf="profileData" style="border-radius: 50%; height: 120px; width: 120px;"
+                                        [src]="imageUrl+profileData.profilePic">
                                 </figure>
                                 <h2>{{profileData?.firstName}} {{profileData?.lastName}}</h2>
                                 <div class="follow_all">
                                     <ul>
                                         <li class="input_divs input_button "><button mat-button
-                                                (click)="goToeditprofile(profileData._id)">Edit Profile</button></li>
+                                                (click)="goToeditprofile()">Edit Profile</button></li>
                                     </ul>
                                 </div>
                                 <div class="social_icon">
@@ -59,9 +63,7 @@
                                         <li><strong>Phone Number
                                                 :</strong>{{profileData?.countryCode}}-{{profileData?.phone}}</li>
                                         <li><strong>Email :</strong> {{profileData?.email}}</li>
-                                        <li><strong>Location :</strong>
-                                            {{profileData?.address}}
-                                        </li>
+
                                     </ul>
                                 </div>
                             </div>
