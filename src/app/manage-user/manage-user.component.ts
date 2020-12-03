@@ -109,7 +109,7 @@ export class ManageUserComponent implements OnInit {
 
   downloadCsv() {
 
-    window.open(this.urlService.SERVER_URL + '/api/admin/vendorCsv', '_blank')
+    window.open(this.urlService.SERVER_URL + '/api/admin/userCsv', '_blank')
   }
 
   UserListAfterPageSizeChanged(e): any {

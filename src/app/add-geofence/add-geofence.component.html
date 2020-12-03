@@ -18,29 +18,38 @@
 
 
                 <!-----start pagination-->
-                <div class="card">
-                    <mat-form-field class="full-width">
-                        <mat-label>Geofence Name</mat-label>
-                        <input matInput placeholder="Geofence name" type="text">
-                    </mat-form-field>
+
+                <div class="row mb-3">
+                    <div class="col-6">
+
+                        <mat-form-field class="full-width">
+                            <mat-label>Geofence Name</mat-label>
+                            <input matInput placeholder="Geofence name" [formControl]="geofenceName" type="text">
+                            <mat-error *ngIf="geofenceName.hasError('required')">
+                                Please Add Geofence Name
+                            </mat-error>
+                        </mat-form-field>
+
+
+                    </div>
+                    <div class="col-6">
+                        <button mat-button (click)="save()">Save</button>
+                    </div>
                 </div>
 
+                <agm-map [latitude]="lat" [longitude]="lng" (mapReady)="onMapReady($event)">
 
-
-
-                <agm-map [latitude]="lat" [longitude]="lng">
-
+                    <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="false"></agm-marker>
                 </agm-map>
-
-
-
-
-
-
-
 
                 <!-----end pagination-->
             </div>
         </div>
+    </div>
+</div>
+
+<div class="loader_bg" *ngIf="progress">
+    <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#ffa200 ;" role="status">
+        <span class="sr-only">Loading...</span>
     </div>
 </div>

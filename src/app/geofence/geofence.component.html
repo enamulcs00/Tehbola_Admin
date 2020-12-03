@@ -15,6 +15,35 @@
                    <a (click)="goToaddcategory()"><span>+</span>Add Category</a>
                    </div> -->
                 </div>
+                <div class="filters Booking_status">
+                    <div class="col-4">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Geo-fence List</mat-label>
+                            <mat-select placeholder="Select" (selectionChange)="countChanged($event)"
+                                [(ngModel)]="count">
+                                <mat-option value="" *ngIf="flagShow">
+                                    Remove Selected
+                                </mat-option>
+
+                                <mat-option value="5">
+                                    5
+                                </mat-option>
+                                <mat-option value="10">
+                                    10
+                                </mat-option>
+                                <mat-option value="25">
+                                    25
+                                </mat-option>
+                                <mat-option value="100">
+                                    100
+                                </mat-option>
+
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+
 
 
                 <!-----start pagination-->
@@ -27,11 +56,12 @@
                 </div>
                 <mat-accordion class="mt-2">
 
-                    <mat-expansion-panel hideToggle class="p-3">
+                    <mat-expansion-panel *ngFor="let item of geofenceList" hideToggle class="p-3"
+                        (opened)="opened(item.geoPoints)">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 <div class="country_name">
-                                    Geofence 1
+                                    {{item.name}}
                                 </div>
                             </mat-panel-title>
                             <mat-panel-description>
@@ -52,130 +82,9 @@
                         </mat-expansion-panel-header>
 
 
-                        <agm-map [latitude]="lat" [longitude]="lng">
+                        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="8" (mapReady)="onMapReady($event)">
 
-                        </agm-map>
-
-
-
-                        <div class="state-list state-list-li">
-                            <div class="filters Booking_status">
-                                <mat-form-field class="example-full-width">
-                                    <mat-label>Assign Vendor</mat-label>
-                                    <mat-select placeholder="Assign Vendor">
-                                        <mat-option value="">
-                                            Remove All
-                                        </mat-option>
-
-                                        <mat-option value="active">
-                                            Vendor 1
-                                        </mat-option>
-                                        <mat-option value="inactive">
-                                            Vendor 2
-                                        </mat-option>
-                                        <mat-option value="inactive">
-                                            Vendor 3
-                                        </mat-option>
-                                        <mat-option value="inactive">
-                                            Vendor 4
-                                        </mat-option>
-
-                                    </mat-select>
-                                </mat-form-field>
-                            </div>
-
-                        </div>
-                    </mat-expansion-panel>
-
-
-                    <mat-expansion-panel hideToggle class="p-3">
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                <div class="country_name">
-                                    Geofence 2
-                                </div>
-                            </mat-panel-title>
-                            <mat-panel-description>
-                                <div class="m-3">
-                                    <a href="javascript:;" class="p-4" data-toggle="modal"
-                                        data-target="#Add_State_delete">
-                                        <i class="fa fa-edit" (click)="editGeofence()"></i>
-                                    </a>
-
-                                    <!-- <a href="javascript:;" data-toggle="modal" data-target="#Add_city">
-                                            <i class="fa fa-plus"></i>
-                                        </a> -->
-                                    <a href="javascript:;">
-                                        <i class="fa fa-trash" (click)="deleteGeofence()"></i>
-                                    </a>
-                                </div>
-                            </mat-panel-description>
-                        </mat-expansion-panel-header>
-
-
-                        <agm-map [latitude]="lat" [longitude]="lng">
-
-                        </agm-map>
-
-
-
-                        <div class="state-list state-list-li">
-                            <div class="filters Booking_status">
-                                <mat-form-field class="example-full-width">
-                                    <mat-label>Assign Vendor</mat-label>
-                                    <mat-select placeholder="Assign Vendor">
-                                        <mat-option value="">
-                                            Remove All
-                                        </mat-option>
-
-                                        <mat-option value="active">
-                                            Vendor 1
-                                        </mat-option>
-                                        <mat-option value="inactive">
-                                            Vendor 2
-                                        </mat-option>
-                                        <mat-option value="inactive">
-                                            Vendor 3
-                                        </mat-option>
-                                        <mat-option value="inactive">
-                                            Vendor 4
-                                        </mat-option>
-
-                                    </mat-select>
-                                </mat-form-field>
-                            </div>
-
-                        </div>
-                    </mat-expansion-panel>
-
-
-                    <mat-expansion-panel hideToggle class="p-3">
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                <div class="country_name">
-                                    Geofence 3
-                                </div>
-                            </mat-panel-title>
-                            <mat-panel-description>
-                                <div class="m-3">
-                                    <a href="javascript:;" class="p-4" data-toggle="modal"
-                                        data-target="#Add_State_delete">
-                                        <i class="fa fa-edit" (click)="editGeofence()"></i>
-                                    </a>
-
-                                    <!-- <a href="javascript:;" data-toggle="modal" data-target="#Add_city">
-                                            <i class="fa fa-plus"></i>
-                                        </a> -->
-                                    <a href="javascript:;">
-                                        <i class="fa fa-trash" (click)="deleteGeofence()"></i>
-                                    </a>
-                                </div>
-                            </mat-panel-description>
-                        </mat-expansion-panel-header>
-
-
-                        <agm-map [latitude]="lat" [longitude]="lng">
-
+                            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
                         </agm-map>
 
 
@@ -211,65 +120,6 @@
 
 
 
-                    <mat-expansion-panel hideToggle class="p-3">
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                <div class="country_name">
-                                    Geofence 4
-                                </div>
-                            </mat-panel-title>
-                            <mat-panel-description>
-                                <div class="m-3">
-                                    <a href="javascript:;" class="p-4" data-toggle="modal"
-                                        data-target="#Add_State_delete">
-                                        <i class="fa fa-edit" (click)="editGeofence()"></i>
-                                    </a>
-
-                                    <!-- <a href="javascript:;" data-toggle="modal" data-target="#Add_city">
-                                            <i class="fa fa-plus"></i>
-                                        </a> -->
-                                    <a href="javascript:;">
-                                        <i class="fa fa-trash" (click)="deleteGeofence()"></i>
-                                    </a>
-                                </div>
-                            </mat-panel-description>
-                        </mat-expansion-panel-header>
-
-
-                        <agm-map [latitude]="lat" [longitude]="lng">
-
-                        </agm-map>
-
-
-
-                        <div class="state-list state-list-li">
-                            <div class="filters Booking_status">
-                                <mat-form-field class="example-full-width">
-                                    <mat-label>Assign Vendor</mat-label>
-                                    <mat-select placeholder="Assign Vendor">
-                                        <mat-option value="">
-                                            Remove All
-                                        </mat-option>
-
-                                        <mat-option value="active">
-                                            Vendor 1
-                                        </mat-option>
-                                        <mat-option value="inactive">
-                                            Vendor 2
-                                        </mat-option>
-                                        <mat-option value="inactive">
-                                            Vendor 3
-                                        </mat-option>
-                                        <mat-option value="inactive">
-                                            Vendor 4
-                                        </mat-option>
-
-                                    </mat-select>
-                                </mat-form-field>
-                            </div>
-
-                        </div>
-                    </mat-expansion-panel>
 
                 </mat-accordion>
 

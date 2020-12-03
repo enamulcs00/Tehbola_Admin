@@ -14,70 +14,88 @@
                         <ul>
                             <li>
                                 <label></label>
-                                <mat-form-field [floatLabel]="'never'">
+                                <mat-form-field class="example-full-width">
                                     <mat-label>First Name</mat-label>
                                     <input matInput type="text" placeholder="" formControlName="firstName"
                                         name="firstName">
                                 </mat-form-field>
-                                <div *ngIf="submitted && f.firstName.errors" class="custom-invalid">
+
+                                <mat-error *ngIf="updateProfileForm.get('firstName').hasError('required')">
+                                    First Name is required.
+                                </mat-error>
+                                <mat-error *ngIf="updateProfileForm.get('firstName').hasError('maxlength') &&
+                                    !updateProfileForm.get('firstName').hasError('required')">
+                                    First Name should not be more than 25 characters.
+                                </mat-error>
+                                <!-- <div *ngIf="submitted && f.firstName.errors" class="custom-invalid">
                                     <div *ngIf="f.firstName.errors.required">
                                         First Name is required.
                                     </div>
                                     <div *ngIf="f.firstName.errors.maxlength">
                                         First Name should not be more than 25 characters.
                                     </div>
-
-
-
-                                </div>
+                                </div> -->
                             </li>
                             <li>
-                                <label>Last Name</label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <mat-label>First Name</mat-label>
+
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Last Name</mat-label>
                                     <input matInput type="text" placeholder="" formControlName="lastName"
                                         name="lastName">
                                 </mat-form-field>
-                                <div *ngIf="submitted && f.lastName.errors" class="custom-invalid">
-                                    <div *ngIf="f.lastName.errors.required">
-                                        Last Name is required.
-                                    </div>
 
+                                <mat-error *ngIf="updateProfileForm.get('lastName').hasError('required')">
+                                    Last Name is required.
+                                </mat-error>
+                                <mat-error *ngIf="updateProfileForm.get('lastName').hasError('maxlength') &&
+                                    !updateProfileForm.get('lastName').hasError('required')">
+                                    Last Name should not be more than 25 characters.
+                                </mat-error>
+                                <!-- <div *ngIf="submitted && f.lastName.errors" class="custom-invalid">
+                                    <div *ngIf="f.lastName.errors.required">
+                                      
+                                    </div>
                                     <div *ngIf="f.lastName.errors.maxlength">
                                         Last Name should not be more than 25 characters.
                                     </div>
-
-
-                                </div>
+                                </div> -->
                             </li>
 
                             <li>
-                                <label></label>
                                 <div class="cardList">
-                                    <mat-form-field class="pr-3" style="width: 20%;" [floatLabel]="'never'">
-                                        <mat-label>Country Code</mat-label>
+                                    <mat-form-field style="width: 20%;" class="example-full-width">
+                                        <mat-label>Country Code<span class="red">*</span></mat-label>
+
                                         <input matInput type="number" min="0" id="firstInput"
                                             formControlName="countryCode" name="countryCode">
-                                        <div *ngIf="submitted && f.countryCode.errors" class="custom-invalid">
+                                        <mat-error *ngIf="updateProfileForm.get('countryCode').hasError('required')">
+                                            Country Code is required.
+                                        </mat-error>
+                                        <!-- <div *ngIf="submitted && f.countryCode.errors" class="custom-invalid">
                                             <div *ngIf="f.countryCode.errors.required">
-                                                Country Code is required.
                                             </div>
-
-                                        </div>
-
+                                        </div> -->
                                     </mat-form-field>
-                                    <mat-form-field style="width: 80%;" [floatLabel]="'never'">
+
+                                    <mat-form-field style="width: 80%;" class="example-full-width pl-3">
                                         <mat-label>Phone Number</mat-label>
                                         <input matInput type="number" min="0" placeholder="" id="secondInput"
                                             formControlName="phone" name="phone">
-
-                                        <div *ngIf="submitted && f.phone.errors" class="custom-invalid">
+                                        <mat-error *ngIf="updateProfileForm.get('phone').hasError('required')">
+                                            Phone Number is required.
+                                        </mat-error>
+                                        <!-- <div *ngIf="submitted && f.phone.errors" class="custom-invalid">
                                             <div *ngIf="f.phone.errors.required">
                                                 Phone Number is required.
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </mat-form-field>
                                 </div>
+
+
+
+
+
                             </li>
                             <!-- <li>
                                 <label>Email</label>

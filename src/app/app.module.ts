@@ -209,7 +209,8 @@ import { ModalIngredientsComponent } from './modal/modal-ingredients/modal-ingre
     MaterialModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBk2rgLIfPJupf0n1TAx9jcnGRqiI3q1j0'
+      apiKey: 'AIzaSyAi2sN3aJ2k2P6I04FrQpsLuDKMeOrHpJU',
+      libraries: ['places', 'geometry', 'drawing'],
     }),
     GooglePlaceModule,
     ChartsModule, CKEditorModule, FormsModule, ReactiveFormsModule,

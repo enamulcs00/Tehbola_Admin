@@ -72,8 +72,7 @@ export class ViewVendorComponent implements OnInit {
 
     this.viewVendor = this.fb.group({
 
-      firstName: ['',],
-      lastName: ['',],
+      fullName: ['',],
       gender: ['',],
       email: ['',],
       countryCode: ['',],
@@ -93,8 +92,8 @@ export class ViewVendorComponent implements OnInit {
       console.log(res);
       if (res.success) {
         this.progress = false
-        this.viewVendor.get('firstName').setValue(res.data.firstName),
-          this.viewVendor.get('lastName').setValue(res.data.lastName);
+        this.viewVendor.get('fullName').setValue(res.data.fullName);
+
         if (res.data.gender == 'M') {
           this.viewVendor.get('gender').setValue('Male');
 

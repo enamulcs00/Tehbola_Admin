@@ -47,7 +47,7 @@ export class ApiService {
       editBrand: 'admin/editItem',
       approveReject: 'admin/approveReject',
       editUser: 'admin/editUser',
-      changePassword: 'panel/changePassword',
+      changePassword: 'app/changePassword',
       getProducts: 'admin/product',
       editProduct: 'admin/product',
       addProduct: 'admin/product',
@@ -72,6 +72,8 @@ export class ApiService {
       updateProfile: 'admin/editProfile',
       downloadUserCSV: 'admin/userCsv',
       downloadVendorCSV: 'admin/vendorCsv',
+      getAllGeofence: 'admin/getAllGeofence',
+      createGeofence: 'admin/geoFence',
       //commonApi to change status of any user type
       status: 'common/status',
 
@@ -127,6 +129,9 @@ export class ApiService {
     return this.http.post<any>(this.apiEndPoints.verifyPhoneNo, body).pipe(catchError(this.handleError('verify phone')))
   }
 
+
+
+
   singOut(): Observable<any> {
     return this.http
       .post<any>(this.apiEndPoints.adminLogout, {}, this.getHeaders())
@@ -174,6 +179,10 @@ export class ApiService {
 
   getList(body): Observable<any> {
     return this.http.post<any>(this.apiEndPoints.getList, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  getAllGeofence(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.getAllGeofence, body, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
   getVendorListForEndorsement(body): Observable<any> {
@@ -364,6 +373,11 @@ export class ApiService {
     return this.http.post<any>(this.apiEndPoints.addBanner, body, this.getHeaders()).
       pipe(
         catchError(this.handleError<any>("add bannner")))
+  }
+
+
+  createGeoFencing(geofenceData): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.createGeofence, geofenceData, this.getHeaders())
   }
 
   editBanner(body): Observable<any> {
