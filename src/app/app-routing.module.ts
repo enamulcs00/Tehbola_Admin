@@ -89,6 +89,7 @@ import { GeofenceComponent } from './geofence/geofence.component';
 import { AddGeofenceComponent } from './add-geofence/add-geofence.component';
 import { FoodTruckManagementComponent } from './food-truck-management/food-truck-management.component';
 import { AssignmentManagementComponent } from './assignment-management/assignment-management.component';
+import { EditGeofenceComponent } from './edit-geofence/edit-geofence.component';
 
 const routes: Routes = [
   // {
@@ -537,6 +538,11 @@ const routes: Routes = [
   {
     path: 'add-geofence',
     component: AddGeofenceComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'edit-geofence',
+    component: EditGeofenceComponent,
     canActivate: [AuthGuard]
   },
   {

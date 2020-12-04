@@ -3,7 +3,7 @@ import { MapsAPILoader } from '@agm/core';
 import { ApiService } from 'src/services/api.service';
 import { FormControl, Validators } from '@angular/forms';
 import { CommonService } from 'src/services/common.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-geofence',
@@ -24,11 +24,15 @@ export class AddGeofenceComponent implements OnInit {
 
   geofenceName = new FormControl('', Validators.required);
   progress: boolean;
+  sub: any;
+
   constructor(private mapsAPILoader: MapsAPILoader, private router: Router, private apiService: ApiService, private commonService: CommonService) {
     this.setCurrentLocation()
   }
 
   ngOnInit() {
+
+
 
 
     this.mapsAPILoader.load().then(() => {

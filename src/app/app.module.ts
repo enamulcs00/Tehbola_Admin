@@ -105,6 +105,7 @@ import { AgmCoreModule } from '@agm/core';
 import { FoodTruckManagementComponent } from './food-truck-management/food-truck-management.component';
 import { AssignmentManagementComponent } from './assignment-management/assignment-management.component';
 import { ModalIngredientsComponent } from './modal/modal-ingredients/modal-ingredients.component';
+import { EditGeofenceComponent } from './edit-geofence/edit-geofence.component';
 
 @NgModule({
   declarations: [
@@ -198,6 +199,7 @@ import { ModalIngredientsComponent } from './modal/modal-ingredients/modal-ingre
     FoodTruckManagementComponent,
     AssignmentManagementComponent,
     ModalIngredientsComponent,
+    EditGeofenceComponent,
 
 
 

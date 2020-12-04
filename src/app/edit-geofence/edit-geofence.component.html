@@ -37,9 +37,9 @@
                     </div>
                 </div>
 
-                <agm-map [latitude]="lat" [longitude]="lng" (mapReady)="onMapReady($event)">
+                <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapReady)="onMapReady($event)">
 
-                    <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="false"></agm-marker>
+
                 </agm-map>
 
                 <!-----end pagination-->

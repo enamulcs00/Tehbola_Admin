@@ -74,6 +74,8 @@ export class ApiService {
       downloadVendorCSV: 'admin/vendorCsv',
       getAllGeofence: 'admin/getAllGeofence',
       createGeofence: 'admin/geoFence',
+      viewGeofence: 'admin/geoFence',
+      updateGeofence: 'admin/geoFence',
       //commonApi to change status of any user type
       status: 'common/status',
 
@@ -181,9 +183,7 @@ export class ApiService {
     return this.http.post<any>(this.apiEndPoints.getList, body, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
-  getAllGeofence(body): Observable<any> {
-    return this.http.post<any>(this.apiEndPoints.getAllGeofence, body, this.getHeaders()).pipe(catchError(this.handleError()))
-  }
+
 
   getVendorListForEndorsement(body): Observable<any> {
     return this.http.post<any>(this.apiEndPoints.getVendorListForEndorsement, body, this.getHeaders()).pipe(catchError(this.handleError()))
@@ -374,10 +374,24 @@ export class ApiService {
       pipe(
         catchError(this.handleError<any>("add bannner")))
   }
-
+  getAllGeofence(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.getAllGeofence, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
 
   createGeoFencing(geofenceData): Observable<any> {
     return this.http.post<any>(this.apiEndPoints.createGeofence, geofenceData, this.getHeaders())
+  }
+
+  getGeofencing(id): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.viewGeofence}?id=${id}`, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  updateGeofencing(body): Observable<any> {
+    return this.http.put<any>(this.apiEndPoints.updateGeofence, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+  deleteGeofence(id): Observable<any> {
+    return this.http.delete<any>(`${this.apiEndPoints.viewGeofence}/${id}`, this.getHeaders()).pipe(catchError(this.handleError))
+
   }
 
   editBanner(body): Observable<any> {

@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     if (this.loginForm.valid && this.submitted) {
       const data = this.loginForm.value;
-      this.progress = false
+      this.progress = true
       this.apiService.singIn(data).subscribe(res => {
         if (res.success) {
           console.log(res);
