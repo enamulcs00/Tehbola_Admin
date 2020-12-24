@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/services/api.service';
 import { CommonService } from 'src/services/common.service';
 import { FormControl, Validators } from '@angular/forms';
+import { MapsAPILoader } from '@agm/core';
 
 @Component({
   selector: 'app-edit-geofence',
@@ -10,77 +11,210 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./edit-geofence.component.scss']
 })
 export class EditGeofenceComponent implements OnInit {
-  sub: any;
-  id: any;
-  locationPoints: any;
+
+  address: string;
+  driverName: any;
   private geoCoder;
-  name: any;
-  @ViewChild("AgmMap", { static: true }) Map: any;
-  geofenceName = new FormControl('', Validators.required);
+  selectedZoom: number;
+  latitude: number;
+  longitude: number;
+  zoom: number = 11;
+  searchString: any;
+  polyarray: any = [];
+  geoId: any
+  driverId: any
+  drawingManager: any;
   addgeofence: boolean = true;
-
-  mapsAPILoader: any;
-  lat: number;
-  lng: number;
-  zoom: number;
+  fencingList: any = [];
   constructTriangle: any;
-  progress: boolean = false;
+  @ViewChild("AgmMap", { static: true }) Map: any;
+  adminId: any;
+  vacantDriversList: any = [];
+  selected: any[];
+  otherDriversList: any = [];
+  vacantDriverView: boolean = false;
+  fancingDriverName: any;
+  vacantDrivers: any = [];
+  fencingDrivers: any;
+  geoFenceId: any;
+  fencingDriversList: any;
+  geoFenceList: any;
+  formGroup: any;
+  list: any;
+  multiple: any;
+  usersession: any;
+  permissions: any;
+  locationPoints: any;
+  progress: any;
+  sub: any;
 
-  constructor(private route: ActivatedRoute, private router: Router, private apiService: ApiService, private commonService: CommonService) { }
-
+  constructor(private service: ApiService, private mapsAPILoader: MapsAPILoader, private commonService: CommonService,
+    private ngZone: NgZone, private router: Router, private route: ActivatedRoute) {
+    // this.setCurrentLocation();
+  }
+  ngAfterViewInit() { }
   ngOnInit() {
+    debugger
     this.sub = this.route
       .queryParams
       .subscribe(params => {
         // Defaults to 0 if no query param provided.
-        this.id = params['id'];
+        this.geoFenceId = params['id'];
 
       });
+
+    // this.multiple.vacantDrivers.setValue(this.selected);
+
+    // console.log("currentUrl====", this.router.url);
+
+
+
     this.mapsAPILoader.load().then(() => {
 
       this.geoCoder = new google.maps.Geocoder;
     });
-
-    this.getGeonfece()
+    this.getFencing()
   }
 
+  back() {
+    history.back()
+  }
+  getFencing() {
 
+    console.log(this.geoFenceId);
+
+    this.service.getGeofencing(this.geoFenceId).subscribe((res) => {
+      if (res['success'] == true) {
+        console.log(res);
+        this.locationPoints = res['data'].locationPoints;
+        console.log(res, this.locationPoints, this.searchString);
+        this.searchString = res['data'].name
+
+      }
+      this.onEdit(this.locationPoints, this.geoFenceId)
+    });
+  }
+  save() {
+    this.getPolygonCoordinates(this.constructTriangle);
+  }
+  Back() {
+    this.router.navigate(['/geofence'])
+  }
+  // setCurrentLocation() {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition((position) => {
+  //       // console.log("name", position);
+  //       this.latitude = position.coords.latitude;
+  //       this.longitude = position.coords.longitude;
+  //       this.zoom = 11;
+  //       this.getAddress(this.latitude, this.longitude);
+  //     });
+  //   }
+  // }
+
+  markerDragEnd(ev) {
+    // console.log(ev);
+  }
+
+  getAddress(latitude, longitude) {
+    this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
+
+    });
+  }
   onMapReady(map) {
     console.log("DATA")
     this.Map = map;
+    // this.initDrawingManager(this.Map);
+  }
+  onMapReady1(map) {
+    this.Map = map;
+    this.initDrawingManager(this.Map);
+
   }
 
-  getGeonfece() {
-    this.progress = true
-    this.apiService.getGeofencing(this.id).subscribe((res) => {
-      if (res['success'] == true) {
-        this.progress = false
-        debugger
-        console.log(res);
-        this.locationPoints = res['geoFencing'].locationPoints;
-        this.name = res['geoFencing'].name
-        console.log(res, this.locationPoints, this.name);
-        this.geofenceName.setValue(this.name)
-      } else {
-        this.progress = false
-      }
-      this.onEdit(this.locationPoints)
+  initDrawingManager(map: any) {
+    this.drawingManager = new google.maps.drawing.DrawingManager({
+      drawingControl: true,
+      drawingControlOptions: {
+
+        drawingModes: [google.maps.drawing.OverlayType.POLYGON]
+      },
+      polygonOptions: {
+        draggable: true,
+        editable: true
+      },
+      drawingMode: google.maps.drawing.OverlayType.POLYGON
     });
 
+    this.drawingManager.setMap(map);
+
+
+    google.maps.event.addListener(this.drawingManager, 'overlaycomplete',
+      (event) => {
+        if (event.type === google.maps.drawing.OverlayType.POLYGON) { //this is the coordinate, you can assign it to a variable or pass into another function. 
+
+          this.polyarray = event.overlay.getPath().getArray();
+        }
+      });
+
   }
 
-  onEdit(locationPoints) {
-    debugger
+  getPolygonCoordinates(draggablePolygon) {
 
+    const len = draggablePolygon.getPath().getLength();
+    const polyArrayLatLng = [];
+
+    for (let i = 0; i < len; i++) {
+      const vertex = draggablePolygon.getPath().getAt(i);
+      const vertexLatLng = { lat: vertex.lat(), lng: vertex.lng() };
+      polyArrayLatLng.push(vertexLatLng);
+    }
+    console.log(polyArrayLatLng);
+
+    if (this.searchString) {
+      this.addgeofence = false;
+      var geofenceData = {
+        "id": this.geoFenceId,
+        "name": this.searchString,
+        "locationPoints": polyArrayLatLng
+      }
+      console.log("geofencedata", geofenceData)
+      this.service.updateGeofencing(geofenceData).subscribe((res) => {
+
+        if (res['success'] == true) {
+          this.addgeofence = false;
+          this.commonService.successToast(res.message)
+
+          this.router.navigate(['/geofence'])
+        } else {
+          this.commonService.errorToast(res.message)
+        }
+
+      });
+    } else {
+      this.commonService.errorToast('Please Select a region')
+    }
+  }
+
+
+
+
+
+
+  onEdit(locationPoints, geoId) {
+    debugger
+    this.geoFenceId = '';
     // console.log('geoId', geoId);
 
-
+    this.geoFenceId = geoId;
     var drawPolygonArr = [];
     locationPoints.forEach(element => {
       drawPolygonArr.push({
         lat: element.lat,
         lng: element.lng
       })
+      this.latitude = element.lat;
+      this.longitude = element.lng;
     });
     console.log("drawPolygonArr", drawPolygonArr)
     if (this.constructTriangle) {
@@ -111,81 +245,10 @@ export class EditGeofenceComponent implements OnInit {
     //   console.log(event,"ecehkjjk")
     //  this.polyarray = event.latLng.lat()
 
-    //console.log("this.polyarray ", this.polyarray)
+    console.log("this.polyarray ", this.polyarray)
     //   // }
     // });
     // })
   }
-
-
-  setCurrentLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        // console.log("name", position);
-        this.lat = position.coords.latitude;
-        this.lng = position.coords.longitude;
-        this.zoom = 11;
-        this.getAddress(this.lat, this.lng);
-      });
-    }
-  }
-
-  markerDragEnd(ev) {
-    // console.log(ev);
-  }
-
-  getAddress(latitude, longitude) {
-    this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
-
-    });
-  }
-
-  back() {
-    history.back();
-  }
-
-
-  save() {
-    this.getPolygonCoordinates(this.constructTriangle);
-  }
-
-
-
-  getPolygonCoordinates(draggablePolygon) {
-    const len = draggablePolygon.getPath().getLength();
-    const polyArrayLatLng = [];
-
-    for (let i = 0; i < len; i++) {
-      const vertex = draggablePolygon.getPath().getAt(i);
-      const vertexLatLng = { lat: vertex.lat(), lng: vertex.lng() };
-      polyArrayLatLng.push(vertexLatLng);
-    }
-    console.log(polyArrayLatLng);
-
-    if (this.geofenceName.valid) {
-      this.addgeofence = false;
-      var geofenceData = {
-        "geoId": this.id,
-        "name": this.geofenceName.value,
-        "locationPoints": polyArrayLatLng
-      }
-      console.log("geofencedata", geofenceData)
-      this.apiService.updateGeofencing(geofenceData).subscribe((res) => {
-
-        if (res['success'] == true) {
-          this.addgeofence = false;
-          this.commonService.successToast(res.message)
-
-          this.router.navigate(['/admin/geofencing'])
-        } else {
-          this.commonService.errorToast(res.message)
-        }
-
-      });
-    }
-
-  }
-
-
 
 }

@@ -17,8 +17,9 @@
                         <button class="btn_back" mat-button>Add </button>
                     </div> -->
                     <div class="top_subheading_add ">
-                        <button mat-button matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20"
-                            (click)="goToaddfoodTruck()">Add Food Truck</button>
+                        <button data-toggle="modal" data-target="#Add_truck" mat-button matRipple
+                            [matRippleColor]="'#9e8221'" [matRippleRadius]="20">Add Food
+                            Truck</button>
                         <!-- <button class="btn_back ml-2" matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20"
                             mat-button>Download CSV</button> -->
                     </div>
@@ -74,244 +75,56 @@
                     <div class="col-12" *ngIf="noDataFound">
                         <p style="font-size: 40px; font-family: sans-serif;"> No Data Found </p>
                     </div>
+                    <div *ngIf="length==0">
+                        <h2>
+                            No Data Found
+                        </h2>
+                    </div>
 
-                    <div *ngIf="!progress && !noDataFound" class="table-responsive divAboveTable">
+                    <div *ngIf="length>0" class="table-responsive divAboveTable">
                         <table>
                             <tr>
-                                <th>Sr.no</th>
+
                                 <th>Vehicle Number</th>
-                                <th>Driver assigned </th>
-                                <th>Area Assigned</th>
+                                <th>Truck Name </th>
+                                <!-- <th>Area Assigned</th>
 
                                 <th> Equipment Status </th>
 
                                 <th>Ingredient Status</th>
-                                <th class="action_bx">Requests</th>
+                                <th class="action_bx">Requests</th> -->
+                                <th>Status</th>
                                 <th class="action_bx">Actions</th>
                             </tr>
-                            <!-- <tr *ngFor="let item of vendorList; index as i ">
-                                <td *ngIf="flagUserList==false">{{i+1}}</td>
-                                <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
-                                <td>{{item.firstName}} {{item.lastName}}</td>
-                                <td>{{item.gender==='M'?"Male":"Female"}}</td>
-                                <td>{{item.countryCode}}-{{item.phone}}</td>
-                                <td>{{item.email}}</td>
-                               <td class="Booking_status" data-toggle="modal" style="margin-left:25px ;"
-                                    href="javascript:;" (click)="goToViewCategory(item.categories)"
-                                    data-target="#EditSubcategory"><button mat-button class="accept_button">View
-                                    </button>
 
-                                </td> 
+                            <tr *ngFor="let item of foodTruckList">
+                                <td>{{item.vehicleNumber}}</td>
+                                <td>{{item.name}}</td>
                                 <td>
                                     <div class="enable_disable">
-                                        <mat-slide-toggle (change)="changeUserStatus(item._id,item.status)"
-                                            [checked]="item.status=='1'? true:false"></mat-slide-toggle>
+                                        <mat-slide-toggle [checked]="item.status=='1'? true:false"
+                                            (change)="onChangeBlockStatus(item.status,item._id)">
+                                        </mat-slide-toggle>
                                     </div>
-                                </td>
-                                <td>{{item.createdAt | date}}</td>
-                                <td class="Booking_status" (click)="goToproduct(item._id)">
-                                    <button mat-button class="accept_button">View</button></td> 
-                                <td>{{item.totalOrders}}</td>
-                                <td>{{item.totalRevenue}}</td>
-                                <td>
-                                    {{item?.last4Digits}}
-                                </td>
-                                <td>
-                                    <div class="action">
-                                        <ul *ngIf="item.sellerProfileStatus==1">
-                                            <li class="show" (click)="goToviewVendor(item._id)"><i
-                                                    class="fa fa-eye"></i></li>
 
-                                            <li class="edit" (click)="goToeditVendor(item._id)"><i
-                                                    class="fa fa-pencil fa-fw"></i></li>
-                                            <li class="delete" (click)="deleteVendor(item._id)"><i
-                                                    class="fa fa-trash-o fa-fw"></i></li>
-                                        </ul>
-
-
-                                    </div>
-                                </td>
-                            </tr> -->
-                            <tr>
-                                <td>1</td>
-                                <td>
-                                    FoodTruck 1
-                                </td>
-                                <td>
-                                    Vemndor 1
-                                </td>
-                                <td>Geofence 1</td>
-                                <td>
-                                    <ul>
-                                        <li class="show" (click)="goToViewEquipmentStatus()"><i class="fa fa-eye"></i>
-                                        </li>
-
-
-                                    </ul>
-                                </td>
-                                <td>
-                                    <ul>
-                                        <li class="show" (click)="goToViewEquipmentStatus()"><i class="fa fa-eye"></i>
-                                        </li>
-
-
-                                    </ul>
-                                </td>
-                                <td>
-                                    <ul>
-                                        <li class="show" (click)="goToViewEquipmentStatus()"><i class="fa fa-eye"></i>
-                                        </li>
-
-
-                                    </ul>
                                 </td>
                                 <td>
                                     <div class="action">
                                         <ul>
-                                            <li class="show"><i class="fa fa-eye"></i></li>
 
-                                            <li class="edit"><i class="fa fa-pencil fa-fw"></i></li>
-                                            <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
+
+                                            <li class="edit"><a><i class="fa fa-pencil fa-fw" data-toggle="modal"
+                                                        data-target="#edit_truck" (click)="edit(item._id)"></i></a>
+                                            </li>
+                                            <li class="delete"><i class="fa fa-trash-o fa-fw"
+                                                    (click)="delete(item._id)"></i></li>
                                         </ul>
 
 
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>
-                                    FoodTruck 2
-                                </td>
-                                <td>
-                                    Vemndor 2
-                                </td>
-                                <td>Geofence 2</td>
-                                <td>
-                                    <ul>
-                                        <li class="show" (click)="goToViewEquipmentStatus()"><i class="fa fa-eye"></i>
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td>
-                                    <ul>
-                                        <li class="show" (click)="goToViewEquipmentStatus()"><i class="fa fa-eye"></i>
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td>
-                                    <ul>
-                                        <li class="show" (click)="goToViewEquipmentStatus()"><i class="fa fa-eye"></i>
-                                        </li>
 
-
-                                    </ul>
-                                </td>
-                                <td>
-                                    <div class="action">
-                                        <ul>
-                                            <li class="show"><i class="fa fa-eye"></i></li>
-
-                                            <li class="edit"><i class="fa fa-pencil fa-fw"></i></li>
-                                            <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
-                                        </ul>
-
-
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>
-                                    FoodTruck 3
-                                </td>
-                                <td>
-                                    Vemndor 3
-                                </td>
-                                <td>Geofence 3</td>
-                                <td>
-                                    <ul>
-                                        <li class="show" (click)="goToViewEquipmentStatus()"><i class="fa fa-eye"></i>
-                                        </li>
-
-
-                                    </ul>
-                                </td>
-                                <td>
-                                    <ul>
-                                        <li class="show" (click)="goToViewEquipmentStatus()"><i class="fa fa-eye"></i>
-                                        </li>
-
-
-                                    </ul>
-                                </td>
-                                <td>
-                                    <ul>
-                                        <li class="show" (click)="goToViewEquipmentStatus()"><i class="fa fa-eye"></i>
-                                        </li>
-
-
-                                    </ul>
-                                </td>
-                                <td>
-                                    <div class="action">
-                                        <ul>
-                                            <li class="show"><i class="fa fa-eye"></i></li>
-
-                                            <li class="edit"><i class="fa fa-pencil fa-fw"></i></li>
-                                            <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
-                                        </ul>
-
-
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>
-                                    FoodTruck 4
-                                </td>
-                                <td>
-                                    Vemndor 4
-                                </td>
-                                <td>Geofence 4</td>
-                                <td>
-                                    <ul>
-                                        <li class="show" (click)="goToViewEquipmentStatus()"><i class="fa fa-eye"></i>
-                                        </li>
-
-
-                                    </ul>
-                                </td>
-                                <td>
-                                    <ul>
-                                        <li class="show" (click)="goToViewEquipmentStatus()"><i class="fa fa-eye"></i>
-                                        </li>
-
-
-                                    </ul>
-                                </td>
-                                <td>
-                                    <ul>
-                                        <li class="show" (click)="goToViewEquipmentStatus()"><i class="fa fa-eye"></i>
-                                        </li>
-
-
-                                    </ul>
-                                </td>
-                                <td>
-                                    <div class="action">
-                                        <ul>
-                                            <li class="show"><i class="fa fa-eye"></i></li>
-
-                                            <li class="edit"><i class="fa fa-pencil fa-fw"></i></li>
-                                            <li class="delete"><i class="fa fa-trash-o fa-fw"></i></li>
-                                        </ul>
-
-
-                                    </div>
-                                </td>
-                            </tr>
                         </table>
                     </div>
                 </div>
@@ -326,5 +139,185 @@
     </div>
 </div>
 
+<!-- add Food truck form -->
+<div id="Add_truck" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">&times;</button>
+</div> -->
+            <div class="modal-body">
+                <h3> Add Food Truck</h3>
+                <form [formGroup]="addFoodTruckForm">
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <!-- <label for="title">Name of the Category</label>
+                            <div class="input-group">
+                                <input class="form-control" type="text" value="" name="name" formControlName="name">
+                            </div>
+                            <div *ngIf="submitted && addFoodTruckForm.controls.name.errors" class="invalid-feedback">
+                                <div *ngIf="addFoodTruckForm.controls.name.errors.required">
+                                    Category Name is required.
+                                </div>
+                                <div *ngIf="addFoodTruckForm.controls.name.errors.pattern">
+                                    Category Name is not valid.
+                                </div>
+                                <div *ngIf="addFoodTruckForm.controls.name.errors.maxlength">
+                                    Category Name should be max 25 characters long.
+                                </div>
+                            </div> -->
 
-<!-- Edit Sub-category -->
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Name of the Food Truck<span class="red">*</span></mat-label>
+                                <input matInput type="text" placeholder="Food Truck Number" formControlName="name"
+                                    name="password">
+                                <mat-error *ngIf="addFoodTruckForm.get('name').hasError('required')">
+                                    Food Truck Name is <strong>required</strong>
+                                </mat-error>
+                                <mat-error *ngIf=" addFoodTruckForm.get('name').hasError('maxlength') &&
+                              !addFoodTruckForm.get('name').hasError('required')">
+                                    Food Truck Name should be max 20 characters long.
+                                </mat-error>
+                            </mat-form-field>
+
+
+                        </div>
+                        <!-- 
+                        <div class="form-group col-md-12">
+
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Malay Name of the Food Truck<span class="red">*</span></mat-label>
+                                <input matInput type="text" placeholder="Malay Category Name" formControlName="name_ar"
+                                    name="name_ar">
+                                <mat-error *ngIf="addFoodTruckForm.get('name_ar').hasError('required')">
+                                    Malay Category Name is <strong>required</strong>
+                                </mat-error>
+                                <mat-error *ngIf=" addFoodTruckForm.get('name_ar').hasError('maxlength') &&
+                              !addFoodTruckForm.get('name_ar').hasError('required')">
+                                    Malay Category Name should be max 20 characters long.
+                                </mat-error>
+                            </mat-form-field>
+                        </div> -->
+
+                        <div class="form-group col-md-12">
+
+
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Food Truck number<span class="red">*</span></mat-label>
+                                <input matInput type="text" placeholder="Food Truck Number"
+                                    formControlName="vehicleNumber" name="commission">
+                                <mat-error *ngIf="addFoodTruckForm.get('vehicleNumber').hasError('required')">
+                                    Food Truck numberis <strong>required</strong>
+                                </mat-error>
+
+                            </mat-form-field>
+                        </div>
+
+
+                    </div>
+                </form>
+                <div class="model_buttons">
+                    <button class="mat-raised-button thm_color mr-3" data-dismiss="modal" (click)="onAddFoodTruck()">
+                        Save
+                    </button>
+                    <button class="mat-raised-button btn_grey" (click)="cancelClicked() "
+                        data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Edit Food Truck Form -->
+<div id="edit_truck" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">&times;</button>
+</div> -->
+            <div class="modal-body">
+                <h3> Edit Food Truck</h3>
+                <form [formGroup]="editFoodTruckForm">
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <!-- <label for="title">Name of the Category</label>
+                            <div class="input-group">
+                                <input class="form-control" type="text" value="" name="name" formControlName="name">
+                            </div>
+                            <div *ngIf="submitted && addFoodTruckForm.controls.name.errors" class="invalid-feedback">
+                                <div *ngIf="addFoodTruckForm.controls.name.errors.required">
+                                    Category Name is required.
+                                </div>
+                                <div *ngIf="addFoodTruckForm.controls.name.errors.pattern">
+                                    Category Name is not valid.
+                                </div>
+                                <div *ngIf="addFoodTruckForm.controls.name.errors.maxlength">
+                                    Category Name should be max 25 characters long.
+                                </div>
+                            </div> -->
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Name of the Food Truck<span class="red">*</span></mat-label>
+                                <input matInput type="text" placeholder="Food Truck Name" formControlName="name"
+                                    name="password">
+                                <mat-error *ngIf="editFoodTruckForm.get('name').hasError('required')">
+                                    Food Truck Name is <strong>required</strong>
+                                </mat-error>
+                                <mat-error *ngIf=" editFoodTruckForm.get('name').hasError('maxlength') &&
+                              !editFoodTruckForm.get('name').hasError('required')">
+                                    Food Truck Name should be max 20 characters long.
+                                </mat-error>
+                            </mat-form-field>
+
+
+                        </div>
+                        <!-- 
+                        <div class="form-group col-md-12">
+
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Malay Name of the Food Truck<span class="red">*</span></mat-label>
+                                <input matInput type="text" placeholder="Malay Category Name" formControlName="name_ar"
+                                    name="name_ar">
+                                <mat-error *ngIf="addFoodTruckForm.get('name_ar').hasError('required')">
+                                    Malay Category Name is <strong>required</strong>
+                                </mat-error>
+                                <mat-error *ngIf=" addFoodTruckForm.get('name_ar').hasError('maxlength') &&
+                              !addFoodTruckForm.get('name_ar').hasError('required')">
+                                    Malay Category Name should be max 20 characters long.
+                                </mat-error>
+                            </mat-form-field>
+                        </div> -->
+
+                        <div class="form-group col-md-12">
+
+
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Food Truck number<span class="red">*</span></mat-label>
+                                <input matInput type="text" placeholder="Food Truck Number"
+                                    formControlName="vehicleNumber" name="commission">
+                                <mat-error *ngIf="editFoodTruckForm.get('vehicleNumber').hasError('required')">
+                                    Food Truck numberis <strong>required</strong>
+                                </mat-error>
+
+                            </mat-form-field>
+                        </div>
+
+
+                    </div>
+                </form>
+                <div class="model_buttons">
+                    <button class="mat-raised-button thm_color mr-3" data-dismiss="modal" (click)="onEditFoodTruck()">
+                        Save
+                    </button>
+                    <button class="mat-raised-button btn_grey" (click)="cancelClicked() "
+                        data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -5,7 +5,7 @@
             <app-sidebar></app-sidebar>
             <div class="container-fluid">
                 <div class="sub_heading">
-                    <h1>Add Geofence</h1>
+                    <h1>Edit Geofence</h1>
                     <div class="input_divs2 input_button input_button2">
                         <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
                                 aria-hidden="true"></i></button>
@@ -19,29 +19,23 @@
 
                 <!-----start pagination-->
 
-                <div class="row mb-3">
-                    <div class="col-6">
-
-                        <mat-form-field class="full-width">
-                            <mat-label>Geofence Name</mat-label>
-                            <input matInput placeholder="Geofence name" [formControl]="geofenceName" type="text">
-                            <mat-error *ngIf="geofenceName.hasError('required')">
-                                Please Add Geofence Name
-                            </mat-error>
-                        </mat-form-field>
+                <div class="l-main-content">
 
 
+                    <div class="main_map_Page1">
+                        <div class="admin_user geofencing_main_div">
+                            <div class="geofancing_left_sec">
+                                <input type="text" class="ride-location1 highalert txt_active form-control first-name1"
+                                    name="vSourceAddresss" autocapitalize="off" spellcheck="off" autocomplete="off"
+                                    #search [(ngModel)]='searchString'>
+                                <button class="link" (click)="save()">update</button>
+
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-6">
-                        <button mat-button (click)="save()">Save</button>
-                    </div>
+                    <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="14" (mapReady)="onMapReady1($event)">
+                    </agm-map>
                 </div>
-
-                <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapReady)="onMapReady($event)">
-
-
-                </agm-map>
-
                 <!-----end pagination-->
             </div>
         </div>

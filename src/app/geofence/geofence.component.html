@@ -46,21 +46,62 @@
 
 
 
+
                 <!-----start pagination-->
-                <div class="card mb-3 p-2">
-                    <div class="add_location_name">
+                <div class=" shadow m-3 p-2">
+                    <div class="add_location_name ">
                         <a matRipple [matRippleColor]="'#dbdddf'" [matRippleRadius]="10" (click)="addGeofence()"
-                            class="button-border add_state">
+                            class="button-border add_state ml-2">
                             <i class="fa fa-plus"></i> Add Geofence</a>
                     </div>
+                    <hr>
+                    <!-- <div *ngFor="let item of geofenceList;let i=index">
+                        <div class="card shadow d-inline-block m-3 p-4">
+                            <div class="add_location_name">
+                                <div class=" m-2 p-3" matRipple [matRippleColor]="'#dbdddf'" [matRippleRadius]="10"
+                                    (click)="addGeofence()" class="button-border add_state">
+                                    {{i+1}} {{item.name}}
+                                    <a href="javascript:;" class="pl-3 float-right" data-toggle="modal"
+                                        data-target="#Add_State_delete" (click)="editGeofence(item._id)">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a href="javascript:;" class="float-right pl-4">
+                                        <i class="fa fa-trash" (click)="deleteGeofence(item._id)"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <div class="row m-3">
+                        <div class="col-3" *ngFor="let item of geofenceList;let i=index">
+                            <div class="card item-card card-block m-3">
+
+                                <h5 class="item-card-title mt-3 mb-3">{{i+1}} &nbsp;{{item.name}}</h5>
+                                <div class="row ml-3">
+                                    <span class="card-title text-right" (click)="editGeofence(item._id)"><i
+                                            class="material-icons">create</i></span>
+
+                                    <span class="card-title text-right"><i class="material-icons"
+                                            (click)="deleteGeofence(item._id)">delete_forever</i></span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <mat-accordion class="mt-2">
+
+
+
+
+                <!-- <mat-accordion class="mt-2">
 
                     <mat-expansion-panel *ngFor="let item of geofenceList" hideToggle class="p-3">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
                                 <div class="country_name">
                                     {{item.name}}
+
                                 </div>
                             </mat-panel-title>
                             <mat-panel-description>
@@ -70,9 +111,7 @@
                                         <i class="fa fa-edit"></i>
                                     </a>
 
-                                    <!-- <a href="javascript:;" data-toggle="modal" data-target="#Add_city">
-                                            <i class="fa fa-plus"></i>
-                                        </a> -->
+                                 
                                     <a href="javascript:;">
                                         <i class="fa fa-trash" (click)="deleteGeofence(item._id)"></i>
                                     </a>
@@ -94,7 +133,7 @@
 
 
 
-                </mat-accordion>
+                </mat-accordion> -->
 
                 <!-----end pagination-->
             </div>

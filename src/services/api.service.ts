@@ -76,6 +76,7 @@ export class ApiService {
       createGeofence: 'admin/geoFence',
       viewGeofence: 'admin/geoFence',
       updateGeofence: 'admin/geoFence',
+      foodTruck: 'admin/foodTruck',
       //commonApi to change status of any user type
       status: 'common/status',
 
@@ -501,6 +502,25 @@ export class ApiService {
   }
 
 
+  getAllFoodTruck(filter, search, count, page): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.foodTruck}?page=${page}&count=${count}&search=${search}&filter=${filter}`, this.getHeaders()).pipe(catchError(this.handleError()))
+
+  }
+
+  addFoodTruck(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.foodTruck, body, this.getHeaders()).pipe(catchError(this.handleError())).pipe(catchError(this.handleError()))
+  }
+
+  editFoodTruck(body, id): Observable<any> {
+    return this.http.put<any>(`${this.apiEndPoints.foodTruck}/${id}`, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+
+  getFoodTruck(id): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.foodTruck}/${id}`, this.getHeaders()).pipe(catchError(this.handleError())).pipe(catchError(this.handleError()))
+  }
+
+
   getProductsforBanner(page, count, filter, isApproved, search, seller, category, subCategory, brand) {
     // console.log(id);
     return this.http.get<any>(`${this.apiEndPoints.getProducts}?page=${page}&count=${count}&filter=${filter}&isApproved=${isApproved}&search=${search}&seller=${seller}&category=${category}&subCategory=${subCategory}&brand=${brand}`,
@@ -711,7 +731,7 @@ export class ApiService {
   }
 
   updateStatus(body): Observable<any> {
-    return this.http.post<any>(this.apiEndPoints.processOrder, body, this.getHeaders()).pipe(catchError(this.handleError))
+    return this.http.put<any>(this.apiEndPoints.status, body, this.getHeaders()).pipe(catchError(this.handleError))
   }
 
   getSale(id): Observable<any> {

@@ -106,6 +106,9 @@ import { FoodTruckManagementComponent } from './food-truck-management/food-truck
 import { AssignmentManagementComponent } from './assignment-management/assignment-management.component';
 import { ModalIngredientsComponent } from './modal/modal-ingredients/modal-ingredients.component';
 import { EditGeofenceComponent } from './edit-geofence/edit-geofence.component';
+import { AddFoodTruckComponent } from './add-food-truck/add-food-truck.component';
+import { EditFoodTruckComponent } from './edit-food-truck/edit-food-truck.component';
+
 
 @NgModule({
   declarations: [
@@ -200,6 +203,9 @@ import { EditGeofenceComponent } from './edit-geofence/edit-geofence.component';
     AssignmentManagementComponent,
     ModalIngredientsComponent,
     EditGeofenceComponent,
+    AddFoodTruckComponent,
+    EditFoodTruckComponent,
+
 
 
 

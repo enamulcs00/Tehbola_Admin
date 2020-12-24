@@ -51,7 +51,7 @@ export class InventryManagementComponent implements OnInit {
       this.flag = false
 
     }
-    this.getInventory()
+    // this.getInventory()
 
   }
 
@@ -60,13 +60,13 @@ export class InventryManagementComponent implements OnInit {
     this.flagSearch = false
     console.log(this.search);
 
-    this.getInventory()
+    // this.getInventory()
   }
 
   clearSearch() {
     this.flagSearch = true
     this.search = ''
-    this.getInventory();
+    // this.getInventory();
 
   }
 
@@ -93,7 +93,7 @@ export class InventryManagementComponent implements OnInit {
       }
 
     }
-    this.getInventory()
+    // this.getInventory()
 
   }
 

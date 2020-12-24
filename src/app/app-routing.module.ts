@@ -90,6 +90,8 @@ import { AddGeofenceComponent } from './add-geofence/add-geofence.component';
 import { FoodTruckManagementComponent } from './food-truck-management/food-truck-management.component';
 import { AssignmentManagementComponent } from './assignment-management/assignment-management.component';
 import { EditGeofenceComponent } from './edit-geofence/edit-geofence.component';
+import { AddFoodTruckComponent } from './add-food-truck/add-food-truck.component';
+import { EditFoodTruckComponent } from './edit-food-truck/edit-food-truck.component';
 
 const routes: Routes = [
   // {
@@ -545,6 +547,17 @@ const routes: Routes = [
     component: EditGeofenceComponent,
     canActivate: [AuthGuard]
   },
+  {
+    path: 'add-food-truck',
+    component: AddFoodTruckComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'edit-food-truck',
+    component: EditFoodTruckComponent,
+    canActivate: [AuthGuard]
+  },
+
   {
     path: 'Settings',
     component: SettingsComponent,
