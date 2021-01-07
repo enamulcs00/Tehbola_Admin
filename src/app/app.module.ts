@@ -108,6 +108,7 @@ import { ModalIngredientsComponent } from './modal/modal-ingredients/modal-ingre
 import { EditGeofenceComponent } from './edit-geofence/edit-geofence.component';
 import { AddFoodTruckComponent } from './add-food-truck/add-food-truck.component';
 import { EditFoodTruckComponent } from './edit-food-truck/edit-food-truck.component';
+import { EquipmentManagementComponent } from './equipment-management/equipment-management.component';
 
 
 @NgModule({
@@ -205,6 +206,7 @@ import { EditFoodTruckComponent } from './edit-food-truck/edit-food-truck.compon
     EditGeofenceComponent,
     AddFoodTruckComponent,
     EditFoodTruckComponent,
+    EquipmentManagementComponent,
 
 
 

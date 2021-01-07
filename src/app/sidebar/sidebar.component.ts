@@ -115,11 +115,16 @@ export class SidebarComponent implements OnInit {
   }
 
   goToBrand() {
-    this.router.navigate(['brandList'])
+    this.router.navigate(['raw-item-management'])
   }
   goToreportpage() {
     this.router.navigate(['reportpage']);
   }
+
+  goToEquipmentpage() {
+    this.router.navigate(['equipment-management']);
+  }
+  
   goToinventry() {
     this.router.navigate(['inventryManagement'])
   }

@@ -309,7 +309,7 @@ export class ViewProductComponent implements OnInit {
 
     this.categoryList = []
 
-    this.apiService.getCategoryByUser(id).subscribe(res => {
+    this.apiService.getCategoryByUser().subscribe(res => {
 
       if (res.success) {
         console.log(res);

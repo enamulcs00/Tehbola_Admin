@@ -10,6 +10,11 @@ a {
     }
 }
 
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: #ffa200 !important;
+}
+
 * {
     margin: 0;
     padding: 0;

@@ -8,9 +8,12 @@ import { ModalIngredientsComponent } from '../modal/modal-ingredients/modal-ingr
 })
 export class AssignmentManagementComponent implements OnInit {
   progress: boolean
+  date = new Date()
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
+    console.log(this.date);
+
   }
 
   openDialog() {

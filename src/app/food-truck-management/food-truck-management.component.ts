@@ -48,11 +48,13 @@ export class FoodTruckManagementComponent implements OnInit {
     this.getAllFoodTruck()
     this.addFoodTruckForm = this.fb.group({
       vehicleNumber: [''],
+      remark: [''],
       name: [''],
     })
 
     this.editFoodTruckForm = this.fb.group({
       vehicleNumber: [''],
+      remark: [''],
       name: [''],
     })
   }
@@ -170,7 +172,7 @@ export class FoodTruckManagementComponent implements OnInit {
       if (res.success) {
         this.editFoodTruckForm.get('name').setValue(res.data.name);
         this.editFoodTruckForm.get('vehicleNumber').setValue(res.data.vehicleNumber)
-
+        this.editFoodTruckForm.get('remark').setValue(res.data.remark)
       }
 
     })

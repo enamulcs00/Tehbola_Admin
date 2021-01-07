@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from 'src/services/api.service';
 import { CommonService } from 'src/services/common.service';
-import Swal from 'sweetalert2';
 import { UrlService } from 'src/services/url.service';
+import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-brandlist',
-  templateUrl: './brandlist.component.html',
-  styleUrls: ['./brandlist.component.scss']
+  selector: 'app-equipment-management',
+  templateUrl: './equipment-management.component.html',
+  styleUrls: ['./equipment-management.component.scss']
 })
-export class BrandlistComponent implements OnInit {
+export class EquipmentManagementComponent implements OnInit {
 
   addBrandForm: FormGroup;
   editBrandForm: FormGroup

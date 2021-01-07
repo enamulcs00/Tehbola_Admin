@@ -193,8 +193,8 @@ export class ApiService {
     return this.http.get<any>(`${this.apiEndPoints.getList}?search=${search}&roles=${roles}`, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
-  getCategoryByUser(id): Observable<any> {
-    return this.http.get<any>(`${this.apiEndPoints.getCatByUser}?id=${id}`, this.getHeaders()).pipe(catchError(this.handleError()))
+  getCategoryByUser(): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.getCatByUser}`, this.getHeaders()).pipe(catchError(this.handleError()))
   }
   getBrandListBySubcat(catId): Observable<any> {
     return this.http.get<any>(`${this.apiEndPoints.getBrandBySubcat}?category=${catId}`, this.getHeaders()).pipe(catchError(this.handleError()))
@@ -491,9 +491,9 @@ export class ApiService {
     );
   }
 
-  getProducts(page, count, filter, isApproved, search, seller, ) {
+  getProducts(page, count, filter, isApproved, search, ) {
     // console.log(id);
-    return this.http.get<any>(`${this.apiEndPoints.getProducts}?page=${page}&count=${count}&filter=${filter}&isApproved=${isApproved}&search=${search}&seller=${seller}`,
+    return this.http.get<any>(`${this.apiEndPoints.getProducts}?page=${page}&count=${count}&filter=${filter}&isApproved=${isApproved}&search=${search}`,
       this.getHeaders()
     ).pipe(
       catchError(this.handleError<any>('Get Vendor Products'))
@@ -549,9 +549,9 @@ export class ApiService {
     return this.http.post<any>(this.apiEndPoints.endorsementProduct, body, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
-  getProductsWithoutApproved(page, count, filter, search, seller, ) {
+  getProductsWithoutApproved(page, count, filter, search, ) {
     // console.log(id);
-    return this.http.get<any>(`${this.apiEndPoints.getProducts}?page=${page}&count=${count}&filter=${filter}&search=${search}&seller=${seller}`,
+    return this.http.get<any>(`${this.apiEndPoints.getProducts}?page=${page}&count=${count}&filter=${filter}&search=${search}`,
       this.getHeaders()
     ).pipe(
       catchError(this.handleError<any>('Get Vendor Products'))

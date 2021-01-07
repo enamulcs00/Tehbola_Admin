@@ -59,7 +59,7 @@ export class EditProductComponent implements OnInit {
       this.sellerId = null
     } else {
       this.sellerId = this.user._id
-      this.getAllCategory(this.sellerId)
+      this.getAllCategory()
     }
     this.sub = this.route
       .queryParams
@@ -137,7 +137,7 @@ export class EditProductComponent implements OnInit {
         this.progress = false
         this.sellerDetails = res.data.seller
 
-        this.getAllCategory(this.sellerDetails._id)
+        this.getAllCategory()
         this.setValue(res.data)
 
       } else {
@@ -290,12 +290,12 @@ export class EditProductComponent implements OnInit {
   }
 
 
-  getAllCategory(id) {
+  getAllCategory() {
 
 
     this.categoryList = []
 
-    this.apiService.getCategoryByUser(id).subscribe(res => {
+    this.apiService.getCategoryByUser().subscribe(res => {
 
       if (res.success) {
         console.log(res);

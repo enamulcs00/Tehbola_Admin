@@ -117,8 +117,8 @@ export class InventryManagementComponent implements OnInit {
       count: this.pageSize
     }
     this.progress = true
-    this.apiService.getProducts(this.page, this.pageSize, this.filterBy, this.isApproved, this.search,
-      this.sellerId)
+    this.apiService.getProducts(this.page, this.pageSize, this.filterBy, this.isApproved, this.search
+    )
       .subscribe(res => {
         if (res.success) {
           this.progress = false

@@ -21,7 +21,7 @@ export class AddproductComponent implements OnInit {
   parentId = ''
   categoryList: any[];
   selectedCategory: any;
-  subCategoryList: any[];
+  subCategoryList: any[] = ['raw item 1', 'raw item 2', 'raw item 3', 'raw item 4', 'raw item 5', 'raw item 6', 'raw item 7',];
   brandList: any;
   selectedBrand: any;
 
@@ -48,6 +48,7 @@ export class AddproductComponent implements OnInit {
 
     this.user = JSON.parse(sessionStorage.getItem('Markat_User'))
     console.log(this.user);
+    this.getAllCategory()
 
     if (this.user.roles == 'admin') {
       this.sellerId = this.user._id
@@ -111,93 +112,93 @@ export class AddproductComponent implements OnInit {
       }
     )
 
-    if (this.user.roles == 'admin') {
+    // if (this.user.roles == 'admin') {
 
-    } else {
-      this.generateProductId(this.user.roles)
-      this.addProductForm.get('seller').setValue(this.sellerId);
-      this.addProductForm.get('merchantSeller').disable({ onlySelf: true })
-      this.addProductForm.get('celebritySeller').disable({ onlySelf: true })
-      // this.addProductForm.reset()
-    }
+    // } else {
+    //   // // this.generateProductId(this.user.roles)
+    //   // this.addProductForm.get('seller').setValue(this.sellerId);
+    //   // this.addProductForm.get('merchantSeller').disable({ onlySelf: true })
+    //   // this.addProductForm.get('celebritySeller').disable({ onlySelf: true })
+    //   // this.addProductForm.reset()
+    // }
 
 
   }
 
 
-  generateProductId(roles) {
+  // generateProductId(roles) {
 
-    let timestamp
-    if (roles == 'celebrity') {
-      timestamp = Date.now()
-      this.productId = timestamp + 'CE'
-      console.log(this.productId);
+  //   let timestamp
+  //   if (roles == 'celebrity') {
+  //     timestamp = Date.now()
+  //     this.productId = timestamp + 'CE'
+  //     console.log(this.productId);
 
-    } else if (roles == 'merchant') {
-      timestamp = Date.now()
-      this.productId = timestamp + 'ME'
-      console.log(this.productId);
-    }
-  }
+  //   } else if (roles == 'merchant') {
+  //     timestamp = Date.now()
+  //     this.productId = timestamp + 'ME'
+  //     console.log(this.productId);
+  //   }
+  // }
 
-  setradio(user) {
-
-
-    let roles: any
-    let search: any
-    if (user == 'celebrity') {
-      this.showMerchant = false
-
-      roles = 'celebrity';
-      search = ''
-
-      this.apiService.getCelebList(search, roles).subscribe((res) => {
-        if (res.success) {
-          console.log(res);
-          this.vendorList = res.data;
-          this.showCelebrity = true;
-          this.addProductForm.get('merchantSeller').disable()
-          this.addProductForm.get('celebritySeller').enable()
-          this.length = res.total;
-
-        }
-      });
-      this.generateProductId(roles)
-    } else if (user == 'merchant') {
-
-      this.showCelebrity = false
-
-      roles = 'merchant',
-
-        search = '',
+  // setradio(user) {
 
 
-        this.apiService.getCelebList(search, roles).subscribe((res) => {
-          if (res.success) {
-            console.log(res);
-            this.vendorList = res.data;
-            this.showMerchant = true;
-            this.addProductForm.get('merchantSeller').enable()
-            this.addProductForm.get('celebritySeller').disable()
-            this.length = res.total;
-          }
-        });
-      this.generateProductId(roles)
-    }
-  }
-  merchantSelected(id) {
-    console.log(id);
-    this.sellerId = id
-    this.getAllCategory(id)
+  //   let roles: any
+  //   let search: any
+  //   if (user == 'celebrity') {
+  //     this.showMerchant = false
 
-  }
+  //     roles = 'celebrity';
+  //     search = ''
 
-  celebritySelected(id) {
-    console.log(id);
-    this.sellerId = id
-    this.getAllCategory(id);
+  //     this.apiService.getCelebList(search, roles).subscribe((res) => {
+  //       if (res.success) {
+  //         console.log(res);
+  //         this.vendorList = res.data;
+  //         this.showCelebrity = true;
+  //         this.addProductForm.get('merchantSeller').disable()
+  //         this.addProductForm.get('celebritySeller').enable()
+  //         this.length = res.total;
 
-  }
+  //       }
+  //     });
+  //     this.generateProductId(roles)
+  //   } else if (user == 'merchant') {
+
+  //     this.showCelebrity = false
+
+  //     roles = 'merchant',
+
+  //       search = '',
+
+
+  //       this.apiService.getCelebList(search, roles).subscribe((res) => {
+  //         if (res.success) {
+  //           console.log(res);
+  //           this.vendorList = res.data;
+  //           this.showMerchant = true;
+  //           this.addProductForm.get('merchantSeller').enable()
+  //           this.addProductForm.get('celebritySeller').disable()
+  //           this.length = res.total;
+  //         }
+  //       });
+  //     this.generateProductId(roles)
+  //   }
+  // }
+  // merchantSelected(id) {
+  //   console.log(id);
+  //   this.sellerId = id
+  //   // this.getAllCategory(id)
+
+  // }
+
+  // celebritySelected(id) {
+  //   console.log(id);
+  //   this.sellerId = id
+  //   //this.getAllCategory(id);
+
+  // }
   getTax() {
 
     this.apiService.getTax().subscribe(res => {
@@ -260,12 +261,12 @@ export class AddproductComponent implements OnInit {
   }
 
 
-  getAllCategory(id) {
+  getAllCategory() {
 
 
     this.categoryList = []
 
-    this.apiService.getCategoryByUser(id).subscribe(res => {
+    this.apiService.getCategoryByUser().subscribe(res => {
 
       if (res.success) {
         console.log(res);

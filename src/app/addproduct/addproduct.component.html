@@ -80,7 +80,7 @@
 
                         </div>
 
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-12">
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Ingredient<span class="red">*</span></mat-label>
@@ -97,7 +97,7 @@
                                 </mat-form-field>
 
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="row mt-3">
                             <div class="col-6">
@@ -137,7 +137,7 @@
                             </div>
                         </div>
 
-                        <div class="row mt-3">
+                        <!-- <div class="row mt-3">
                             <div class="col-6">
 
 
@@ -171,7 +171,7 @@
                                 </mat-form-field>
 
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="row mt-3">
                             <div class="col-6">
@@ -257,10 +257,10 @@
 
                         <div class="row mt-3">
                             <div class="col-12">
-                                <label> Add Specification</label>
+                                <label> Add Raw Item</label>
                                 <table class="table table-bordered" formArrayName="specification">
                                     <tr>
-                                        <th colspan="2"> Specification:</th>
+                                        <th colspan="2"> Raw Item:</th>
                                         <th width="20%">
                                             <div class="input_button input_button2">
                                                 <button type="button" mat-button (click)="addNewSpecification()"
@@ -272,11 +272,23 @@
                                     <tr *ngFor="let quantity of specification().controls; let i=index"
                                         [formGroupName]="i">
                                         <td style="width: 40%;">
-                                            title :
-                                            <input type="text" formControlName="title" class="form-control">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Ingredient<span class="red">*</span></mat-label>
+                                                <mat-select formControlName="title"
+                                                    (selectionChange)="subCategorySelected($event.value)">
+
+                                                    <mat-option *ngFor="let body of subCategoryList" [value]="body">
+                                                        {{body}}
+                                                    </mat-option>
+                                                </mat-select>
+                                                <mat-error
+                                                    *ngIf="addProductForm.get('ingredient').hasError('required')">
+                                                    Ingredient is <strong>required</strong>
+                                                </mat-error>
+                                            </mat-form-field>
                                         </td>
                                         <td style="width: 40%;">
-                                            Value:
+                                            Quantity:
                                             <input type="text" formControlName="value" class="form-control">
                                         </td>
                                         <td style="width: 20%;">
@@ -290,7 +302,7 @@
                             </div>
                         </div>
 
-
+                        <!-- 
                         <div class="row mt-3">
                             <div class="col-12">
                                 <label> Add Malay Specification</label>
@@ -324,7 +336,7 @@
                                     Malay Specifications are <strong>required</strong>
                                 </mat-error>
                             </div>
-                        </div>
+                        </div> -->
 
 
                         <div class="row mt-3">

@@ -87,6 +87,7 @@
 
                                 <th>Vehicle Number</th>
                                 <th>Truck Name </th>
+                                <th>Remark</th>
                                 <!-- <th>Area Assigned</th>
 
                                 <th> Equipment Status </th>
@@ -100,6 +101,7 @@
                             <tr *ngFor="let item of foodTruckList">
                                 <td>{{item.vehicleNumber}}</td>
                                 <td>{{item.name}}</td>
+                                <td>{{item?.remark}}</td>
                                 <td>
                                     <div class="enable_disable">
                                         <mat-slide-toggle [checked]="item.status=='1'? true:false"
@@ -182,23 +184,21 @@
 
 
                         </div>
-                        <!-- 
+
                         <div class="form-group col-md-12">
 
 
                             <mat-form-field class="example-full-width">
-                                <mat-label>Malay Name of the Food Truck<span class="red">*</span></mat-label>
-                                <input matInput type="text" placeholder="Malay Category Name" formControlName="name_ar"
-                                    name="name_ar">
-                                <mat-error *ngIf="addFoodTruckForm.get('name_ar').hasError('required')">
+                                <mat-label>Remarks<span class="red">*</span></mat-label>
+                                <mat-select formControlName="remark">
+                                    <mat-option value='check this'>This could be anything</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="addFoodTruckForm.get('remark').hasError('required')">
                                     Malay Category Name is <strong>required</strong>
                                 </mat-error>
-                                <mat-error *ngIf=" addFoodTruckForm.get('name_ar').hasError('maxlength') &&
-                              !addFoodTruckForm.get('name_ar').hasError('required')">
-                                    Malay Category Name should be max 20 characters long.
-                                </mat-error>
+
                             </mat-form-field>
-                        </div> -->
+                        </div>
 
                         <div class="form-group col-md-12">
 
@@ -273,6 +273,20 @@
                             </mat-form-field>
 
 
+                        </div>
+                        <div class="form-group col-md-12">
+
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Remarks<span class="red">*</span></mat-label>
+                                <mat-select formControlName="remark">
+                                    <mat-option value='check this'>This could be anything</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="editFoodTruckForm.get('remark').hasError('required')">
+                                    Malay Category Name is <strong>required</strong>
+                                </mat-error>
+
+                            </mat-form-field>
                         </div>
                         <!-- 
                         <div class="form-group col-md-12">

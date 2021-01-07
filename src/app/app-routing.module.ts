@@ -92,6 +92,7 @@ import { AssignmentManagementComponent } from './assignment-management/assignmen
 import { EditGeofenceComponent } from './edit-geofence/edit-geofence.component';
 import { AddFoodTruckComponent } from './add-food-truck/add-food-truck.component';
 import { EditFoodTruckComponent } from './edit-food-truck/edit-food-truck.component';
+import { EquipmentManagementComponent } from './equipment-management/equipment-management.component';
 
 const routes: Routes = [
   // {
@@ -207,8 +208,13 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'brandList',
+    path: 'raw-item-management',
     component: BrandlistComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'equipment-management',
+    component: EquipmentManagementComponent,
     canActivate: [AuthGuard]
   },
   {
