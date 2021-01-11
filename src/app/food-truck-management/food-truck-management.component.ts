@@ -137,7 +137,7 @@ export class FoodTruckManagementComponent implements OnInit {
     this.getAllFoodTruck()
   }
 
-  vendorListAfterPageSizeChanged(e) {
+  vendorListAfterPageSizeChanged(e): any {
     if (e.pageIndex == 0) {
       this.page = 1;
       this.pageSize = e.pageSize
