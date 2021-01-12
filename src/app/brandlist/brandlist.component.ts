@@ -30,6 +30,8 @@ export class BrandlistComponent implements OnInit {
   brandImage: any;
   picUploader: boolean;
   progress: boolean;
+  gram: boolean;
+  litre: boolean;
   constructor(private apiService: ApiService, private fb: FormBuilder, private commonService: CommonService, private urlService: UrlService) {
     this.getBrandList()
     this.getCategoryList()
@@ -45,6 +47,10 @@ export class BrandlistComponent implements OnInit {
       image: ['', [Validators.required]],
       totalUnits: ['', Validators.required],
       unitPrice: ['', Validators.required],
+      quantityPerUnit: ['', Validators.required],
+      measureTypeUnit: ['', Validators.required],
+      measureTypeServing: ['', Validators.required],
+      perServingSize: ['', Validators.required],
       description: [''],
     });
     this.editBrandForm = this.fb.group({
@@ -55,6 +61,10 @@ export class BrandlistComponent implements OnInit {
       image: ['',],
       totalUnits: ['', Validators.required],
       unitPrice: ['', Validators.required],
+      quantityPerUnit: ['', Validators.required],
+      measureTypeUnit: ['', Validators.required],
+      measureTypeServing: ['', Validators.required],
+      perServingSize: ['', Validators.required],
       description: [''],
     })
   }
@@ -73,6 +83,31 @@ export class BrandlistComponent implements OnInit {
         this.commonService.errorToast(res.message)
       }
     })
+  }
+
+
+  unitSelected(e) {
+    if (!this.id) {
+      if (e == 'kg' || e == 'g') {
+        this.gram = true
+        this.litre = false
+        this.addBrandForm.get('perServingSize').reset()
+      } else {
+        this.litre = true
+        this.gram = false
+        this.addBrandForm.get('perServingSize').reset()
+      }
+
+    } else {
+      if (e == 'kg' || e == 'g') {
+        this.gram = true
+        this.litre = false
+      } else {
+        this.litre = true
+        this.gram = false
+      }
+    }
+
   }
 
   getCategoryList() {
@@ -111,6 +146,7 @@ export class BrandlistComponent implements OnInit {
       reader.onload = (event: any) => {
         if (this.id) {
           this.flagImage = true;
+          this.brandImage = ''
           this.previewImage = event.target.result;
           this.editBrandForm.controls['image'].setValue(this.imageFile);
         } else {
@@ -151,7 +187,12 @@ export class BrandlistComponent implements OnInit {
         this.editBrandForm.controls['subCategory'].setValue(selectedCategory);
         this.editBrandForm.controls['image'].setValue(res.data.image.name)
         this.editBrandForm.controls['totalUnits'].setValue(res.data.totalUnits)
+        this.editBrandForm.controls['quantityPerUnit'].setValue(res.data.quantityPerUnit)
+        this.editBrandForm.controls['measureTypeUnit'].setValue(res.data.measureTypeUnit)
+        this.editBrandForm.controls['measureTypeServing'].setValue(res.data.measureTypeServing)
+        this.unitSelected(res.data.measureTypeUnit)
         this.editBrandForm.controls['unitPrice'].setValue(res.data.unitPrice)
+        this.editBrandForm.controls['perServingSize'].setValue(res.data.perServingSize)
         this.editBrandForm.controls['description'].setValue(res.data.description)
 
 
@@ -221,6 +262,10 @@ export class BrandlistComponent implements OnInit {
       formData.append('subCategory', JSON.stringify(this.addBrandForm.get('subCategory').value));
       formData.append('totalUnits', this.addBrandForm.get('totalUnits').value);
       formData.append('unitPrice', this.addBrandForm.get('unitPrice').value);
+      formData.append('quantityPerUnit', this.addBrandForm.get('quantityPerUnit').value)
+      formData.append('measureTypeUnit', this.addBrandForm.get('measureTypeUnit').value)
+      formData.append('measureTypeServing', this.addBrandForm.get('measureTypeServing').value)
+      formData.append('perServingSize', this.addBrandForm.get('perServingSize').value)
       formData.append('description', this.addBrandForm.get('description').value);
       formData.append('image', this.imageFile, this.imageFile.name);
       this.progress = true
@@ -265,6 +310,10 @@ export class BrandlistComponent implements OnInit {
       formData.append('subCategory', JSON.stringify(this.editBrandForm.get('subCategory').value));
       formData.append('totalUnits', this.editBrandForm.get('totalUnits').value);
       formData.append('unitPrice', this.editBrandForm.get('unitPrice').value);
+      formData.append('quantityPerUnit', this.editBrandForm.get('quantityPerUnit').value)
+      formData.append('measureTypeUnit', this.editBrandForm.get('measureTypeUnit').value)
+      formData.append('measureTypeServing', this.editBrandForm.get('measureTypeServing').value)
+      formData.append('perServingSize', this.editBrandForm.get('perServingSize').value)
       formData.append('description', this.editBrandForm.get('description').value);
       if (this.imageFile) {
         formData.append('image', this.imageFile, this.imageFile.name);

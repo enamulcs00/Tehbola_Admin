@@ -40,10 +40,12 @@ export class ApiService {
       getList: 'admin/getUsers',
       getVendorListForEndorsement: 'panel/getMerchantList',
       viewDocument: 'admin/documents',
-      getBrandList: 'admin/getAllItem',
+      getEquipmentList: 'admin/equipments',
       getsubcategoryList: 'admin/subCategories',
       addBrand: 'admin/addItem',
+      addEquipment: 'admin/equipment',
       viewBrand: 'admin/viewItem',
+      viewEquipment: 'admin/equipment',
       editBrand: 'admin/editItem',
       approveReject: 'admin/approveReject',
       editUser: 'admin/editUser',
@@ -65,6 +67,7 @@ export class ApiService {
       getAllBanner: 'admin/banner',
       getAllCategoriesforDiscount: 'admin/subCategories',
       getBrandListByCat: 'admin/getBrands',
+      getBrandList: 'admin/getAllItem',
       getAllCategoryForDiscount: 'admin/categoryByVendor',
       addBanner: 'admin/banner',
       viewBanner: 'admin/viewBanner',
@@ -77,6 +80,10 @@ export class ApiService {
       viewGeofence: 'admin/geoFence',
       updateGeofence: 'admin/geoFence',
       foodTruck: 'admin/foodTruck',
+      getAllEquipmentCategories: 'admin/equipmentCategories',
+      editEquipment: 'admin/equipment',
+      addEquipmentCategory: 'admin/equipmentCategory',
+      editEquipmentCategory: 'admin/editEquipmentCategory',
       //commonApi to change status of any user type
       status: 'common/status',
 
@@ -491,7 +498,7 @@ export class ApiService {
     );
   }
 
-  getProducts(page, count, filter, isApproved, search, ) {
+  getProducts(page, count, filter, isApproved, search,) {
     // console.log(id);
     return this.http.get<any>(`${this.apiEndPoints.getProducts}?page=${page}&count=${count}&filter=${filter}&isApproved=${isApproved}&search=${search}`,
       this.getHeaders()
@@ -549,7 +556,7 @@ export class ApiService {
     return this.http.post<any>(this.apiEndPoints.endorsementProduct, body, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
-  getProductsWithoutApproved(page, count, filter, search, ) {
+  getProductsWithoutApproved(page, count, filter, search,) {
     // console.log(id);
     return this.http.get<any>(`${this.apiEndPoints.getProducts}?page=${page}&count=${count}&filter=${filter}&search=${search}`,
       this.getHeaders()
@@ -599,6 +606,14 @@ export class ApiService {
     return this.http.get<any>(`${this.apiEndPoints.viewBrand}?id=${id}`, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
+
+  viewEquipment(id): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.viewEquipment}/${id}`, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+
+
+
   editUser(userUpdate): Observable<any> {
     console.log(userUpdate)
     return this.http.put<any>(this.apiEndPoints.editUser, userUpdate, this.getHeaders()).pipe(
@@ -620,6 +635,14 @@ export class ApiService {
   getAllCategories() {
     return this.http
       .get<any>(this.apiEndPoints.getAllCategory, this.getHeaders())
+      .pipe(
+        catchError(this.handleError<any>('All Product'))
+      );
+  }
+
+  getAllEquipmentCategories() {
+    return this.http
+      .get<any>(`${this.apiEndPoints.getAllEquipmentCategories}?page=${1}&count=${10000}`, this.getHeaders())
       .pipe(
         catchError(this.handleError<any>('All Product'))
       );
@@ -768,6 +791,11 @@ export class ApiService {
 
   }
 
+  getEquipmentList(): Observable<any> {
+
+    return this.http.get<any>(`${this.apiEndPoints.getEquipmentList}?page=1&count=10000`, this.getHeaders()).pipe(catchError(this.handleError()))
+
+  }
   getBrandList(): Observable<any> {
 
     return this.http.get<any>(`${this.apiEndPoints.getBrandList}?page=1&count=10000`, this.getHeaders()).pipe(catchError(this.handleError()))
@@ -777,9 +805,24 @@ export class ApiService {
   addBrand(body): Observable<any> {
     return this.http.post<any>(this.apiEndPoints.addBrand, body, this.getHeaders()).pipe(catchError(this.handleError()))
   }
+  addEquipment(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.addEquipment, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  addEquipmentCategory(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.addEquipmentCategory, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  EditEquipmentCategory(body): Observable<any> {
+    return this.http.put<any>(this.apiEndPoints.editEquipmentCategory, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
 
   editBrand(body): Observable<any> {
     return this.http.put<any>(this.apiEndPoints.editBrand, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  editEquipment(body, editableBrandId): Observable<any> {
+    return this.http.put<any>(`${this.apiEndPoints.editEquipment}/${editableBrandId}`, body, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
   getNotification(type, page, count): Observable<any> {

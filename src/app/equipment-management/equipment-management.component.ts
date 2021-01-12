@@ -12,10 +12,12 @@ import Swal from 'sweetalert2';
 })
 export class EquipmentManagementComponent implements OnInit {
 
-  addBrandForm: FormGroup;
-  editBrandForm: FormGroup
+  addEquipmentForm: FormGroup;
+  editEquipmentForm: FormGroup;
+  addEquipmentCategory: FormGroup
+  editEquipmentCategory: FormGroup
   submitted: boolean
-  brandList = []
+  equipmentList = []
   result: import("sweetalert2").SweetAlertResult<unknown>;
   editableBrandId: any;
   page: any;
@@ -30,44 +32,58 @@ export class EquipmentManagementComponent implements OnInit {
   brandImage: any;
   picUploader: boolean;
   progress: boolean;
+  editableCategory: any;
   constructor(private apiService: ApiService, private fb: FormBuilder, private commonService: CommonService, private urlService: UrlService) {
-    this.getBrandList()
-    this.getCategoryList()
+
     this.imageUrl = this.urlService.imageUrl;
   }
 
   ngOnInit() {
-    this.addBrandForm = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(25)]],
-      name_ar: ['', [Validators.required, Validators.maxLength(25)]],
-      category: ['', [Validators.required, Validators.maxLength(25)]],
-      subCategory: ['', [Validators.required, Validators.maxLength(25)]],
+    this.getEquipmentList()
+    this.getAllEquipmentCategories()
+    this.addEquipmentForm = this.fb.group({
+      name: ['', [Validators.required,]],
+      name_ar: ['', [Validators.required,]],
+      category: ['', [Validators.required,]],
       image: ['', [Validators.required]],
-      totalUnits: ['', Validators.required],
-      unitPrice: ['', Validators.required],
+      quantity: ['', [Validators.required]],
       description: [''],
     });
-    this.editBrandForm = this.fb.group({
+
+    this.editEquipmentForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(25)]],
       name_ar: ['', [Validators.required, Validators.maxLength(25)]],
       category: ['', [Validators.required, Validators.maxLength(25)]],
-      subCategory: ['', [Validators.required, Validators.maxLength(25)]],
       image: ['',],
-      totalUnits: ['', Validators.required],
-      unitPrice: ['', Validators.required],
+      quantity: ['', [Validators.required]],
       description: [''],
-    })
+    });
+
+    this.addEquipmentCategory = this.fb.group({
+      name: ['', [Validators.required, Validators.maxLength(25)]],
+      name_ar: ['', [Validators.required, Validators.maxLength(25)]],
+      description: [''],
+    });
+
+    this.editEquipmentCategory = this.fb.group({
+      name: ['', [Validators.required, Validators.maxLength(25)]],
+      name_ar: ['', [Validators.required, Validators.maxLength(25)]],
+      description: [''],
+    });
+
   }
 
-  getBrandList() {
+  getEquipmentList() {
+
     //Pagination is applied in the backend. just not using in the front end because of design same as category
     this.progress = true
-    this.apiService.getBrandList().subscribe(res => {
+    this.apiService.getEquipmentList().subscribe(res => {
       console.log(res)
+
       if (res.success) {
         this.progress = false
         console.log(res.data);
-        this.brandList = res.data
+        this.equipmentList = res.data
       } else {
         this.progress = false
         this.commonService.errorToast(res.message)
@@ -75,8 +91,8 @@ export class EquipmentManagementComponent implements OnInit {
     })
   }
 
-  getCategoryList() {
-    this.apiService.getAllCategories().subscribe(res => {
+  getAllEquipmentCategories() {
+    this.apiService.getAllEquipmentCategories().subscribe(res => {
       console.log(res)
       if (res.success == true) {
         console.log(res.data);
@@ -85,22 +101,39 @@ export class EquipmentManagementComponent implements OnInit {
     })
   }
 
+  editEquipmentCat(id) {
 
-  categorySelected(e) {
+    this.submitted = true
+    if (this.submitted && this.editEquipmentCategory.valid) {
+      let body = this.editEquipmentCategory.value
+      console.log(body);
+      let formData = new FormData();
+      formData.append('id', this.editableCategory)
+      formData.append('name', this.editEquipmentCategory.get('name').value);
+      formData.append('name_ar', this.editEquipmentCategory.get('name_ar').value);
+      formData.append('description', this.editEquipmentCategory.get('description').value);
 
-    console.log(e.value);
-    // let id = e
-    this.apiService.getSubcategoryList(e).subscribe(res => {
-      console.log(res)
-      if (res.success == true) {
-        this.editBrandForm.get('subCategory').reset()
-        console.log(res.data);
-        this.subcategoryList = res.data
-      }
-    })
+      this.progress = true
+      this.apiService.EditEquipmentCategory(formData).subscribe(res => {
+        console.log(res)
+        if (res.success == true) {
+          this.progress = false
+          this.commonService.successToast('SuccessFully Added')
+          this.getAllEquipmentCategories()
+          this.addEquipmentForm.reset();
+          this.imageFile = ''
+          this.submitted = false
+        } else {
+          this.progress = false
+          this.commonService.errorToast(res.message)
+          this.submitted = false
+        }
+      })
+    } else {
+      this.commonService.errorToast('Failed to add the Item.')
+    }
 
   }
-
   async profilePic(event) {
 
     this.picUploader = true
@@ -111,11 +144,12 @@ export class EquipmentManagementComponent implements OnInit {
       reader.onload = (event: any) => {
         if (this.id) {
           this.flagImage = true;
+          this.brandImage = ''
           this.previewImage = event.target.result;
-          this.editBrandForm.controls['image'].setValue(this.imageFile);
+          this.editEquipmentForm.controls['image'].setValue(this.imageFile);
         } else {
           this.brandImage = event.target.result;
-          this.addBrandForm.controls['image'].setValue(this.brandImage);
+          this.addEquipmentForm.controls['image'].setValue(this.brandImage);
 
         }
 
@@ -123,54 +157,45 @@ export class EquipmentManagementComponent implements OnInit {
     }
   }
 
-  editBrand(id) {
+  editEquipment(id) {
     this.id = id
-
-    this.apiService.viewBrand(id).subscribe((res) => {
+    debugger
+    this.apiService.viewEquipment(id).subscribe((res) => {
       if (res.data) {
         this.flagImage = false;
-        this.apiService.getSubcategoryList(res.data.category._id).subscribe(res => {
-          console.log(res)
-          if (res.success == true) {
-            console.log(res.data);
-            this.subcategoryList = res.data
-          }
-        });
-        debugger
         console.log(res)
         this.editableBrandId = res.data._id
-        this.editBrandForm.controls['name'].setValue(res.data.name);
-
-        this.editBrandForm.controls['name_ar'].setValue(res.data.name_ar);
-        this.editBrandForm.controls['category'].setValue(res.data.category.id);
-        let selectedCategory = []
-        for (let i in res.data.subCategory) {
-
-          selectedCategory.push(res.data.subCategory[i]._id)
-        }
-        this.editBrandForm.controls['subCategory'].setValue(selectedCategory);
-        this.editBrandForm.controls['image'].setValue(res.data.image.name)
-        this.editBrandForm.controls['totalUnits'].setValue(res.data.totalUnits)
-        this.editBrandForm.controls['unitPrice'].setValue(res.data.unitPrice)
-        this.editBrandForm.controls['description'].setValue(res.data.description)
+        this.editEquipmentForm.get('name').setValue(res.data.name);
+        this.editEquipmentForm.get('name_ar').setValue(res.data.name_ar);
+        this.editEquipmentForm.get('category').setValue(res.data.category.id);
+        this.editEquipmentForm.get('image').setValue('')
+        this.editEquipmentForm.get('quantity').setValue(res.data.quantity)
+        this.editEquipmentForm.get('description').setValue(res.data.description)
 
 
         let data = res.data
-        //  this.image = data.image
         this.brandImage = data.image;
-        //   this.imageName = data.image.name
-        //  console.log(this.image);
       }
     })
 
   }
 
-  deleteBrand(id) {
+
+  editEquipmentCategoryMethod(id, name, name_ar, description) {
+    this.id = id
+    debugger
+    this.editableCategory = id
+    this.editEquipmentCategory.get('name').setValue(name);
+    this.editEquipmentCategory.get('name_ar').setValue(name_ar);
+    this.editEquipmentCategory.get('description').setValue(description)
+  }
+
+  deleteEquipment(id) {
 
     // Swal.clickCancel();
     Swal.fire({
       title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this Raw Item!",
+      text: "Once deleted, you will not be able to recover this Equipment!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085D6",
@@ -183,7 +208,7 @@ export class EquipmentManagementComponent implements OnInit {
         console.log(id)
         const data = {
           "id": id,
-          "model": "RawItems"
+          "model": "Equipment"
         }
 
         console.log(data)
@@ -192,7 +217,7 @@ export class EquipmentManagementComponent implements OnInit {
           if (res.success) {
             // this.getAllCategories()
             this.commonService.successToast(res.message);
-            this.getBrandList()
+            this.getEquipmentList()
 
           } else {
             this.commonService.errorToast(res.message)
@@ -207,30 +232,99 @@ export class EquipmentManagementComponent implements OnInit {
   }
 
 
-  onAddBrand() {
-    debugger
-    this.submitted = true
-    if (this.submitted && this.addBrandForm.valid) {
-      let body = this.addBrandForm.value
-      console.log(body);
+  deleteEquipmentCat(id) {
 
+    // Swal.clickCancel();
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this Equipment Category!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085D6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+      allowOutsideClick: false
+    }).then(result => {
+      if (result.value) {
+        this.result = result;
+        console.log(id)
+        const data = {
+          "id": id,
+          "model": "EquipmentCategory"
+        }
+
+        console.log(data)
+        this.apiService.delete(data).subscribe(res => {
+          console.log(res);
+          if (res.success) {
+            this.commonService.successToast(res.message);
+            this.getAllEquipmentCategories()
+          } else {
+            this.commonService.errorToast(res.message)
+          }
+
+        });
+      } else {
+        console.log("cancelled");
+      }
+    });
+
+  }
+  onAddEquipmentCategory() {
+
+    this.submitted = true
+    if (this.submitted && this.addEquipmentCategory.valid) {
+      let body = this.addEquipmentCategory.value
+      console.log(body);
       let formData = new FormData();
-      formData.append('name', this.addBrandForm.get('name').value);
-      formData.append('name_ar', this.addBrandForm.get('name_ar').value);
-      formData.append('category', this.addBrandForm.get('category').value);
-      formData.append('subCategory', JSON.stringify(this.addBrandForm.get('subCategory').value));
-      formData.append('totalUnits', this.addBrandForm.get('totalUnits').value);
-      formData.append('unitPrice', this.addBrandForm.get('unitPrice').value);
-      formData.append('description', this.addBrandForm.get('description').value);
-      formData.append('image', this.imageFile, this.imageFile.name);
+      formData.append('name', this.addEquipmentCategory.get('name').value);
+      formData.append('name_ar', this.addEquipmentCategory.get('name_ar').value);
+      formData.append('description', this.addEquipmentCategory.get('description').value);
       this.progress = true
-      this.apiService.addBrand(formData).subscribe(res => {
+      this.apiService.addEquipmentCategory(formData).subscribe(res => {
         console.log(res)
         if (res.success == true) {
           this.progress = false
           this.commonService.successToast('SuccessFully Added')
-          this.getBrandList()
-          this.addBrandForm.reset();
+          this.getAllEquipmentCategories()
+          this.addEquipmentForm.reset();
+          this.imageFile = ''
+          this.submitted = false
+        } else {
+          this.progress = false
+          this.commonService.errorToast(res.message)
+          this.submitted = false
+        }
+      })
+    } else {
+      this.commonService.errorToast('Failed to add the Item.')
+    }
+  }
+
+
+
+  onAddEquipment() {
+
+    this.submitted = true
+    if (this.submitted && this.addEquipmentForm.valid) {
+      let body = this.addEquipmentForm.value
+      console.log(body);
+
+      let formData = new FormData();
+      formData.append('name', this.addEquipmentForm.get('name').value);
+      formData.append('name_ar', this.addEquipmentForm.get('name_ar').value);
+      formData.append('category', this.addEquipmentForm.get('category').value);
+      formData.append('quantity', this.addEquipmentForm.get('quantity').value);
+      formData.append('description', this.addEquipmentForm.get('description').value);
+      formData.append('image', this.imageFile, this.imageFile.name);
+      this.progress = true
+      this.apiService.addEquipment(formData).subscribe(res => {
+        console.log(res)
+        if (res.success == true) {
+          this.progress = false
+          this.commonService.successToast('SuccessFully Added')
+          this.getEquipmentList()
+          this.addEquipmentForm.reset();
           this.imageFile = ''
           this.submitted = false
         } else {
@@ -246,8 +340,8 @@ export class EquipmentManagementComponent implements OnInit {
   }
 
   cancelClicked() {
-    this.addBrandForm.reset();
-    this.editBrandForm.reset();
+    this.addEquipmentForm.reset();
+    this.editEquipmentForm.reset();
     this.imageFile = ''
     this.brandImage = ''
 
@@ -256,26 +350,24 @@ export class EquipmentManagementComponent implements OnInit {
   onUpdateBrand() {
     debugger
     this.submitted = true
-    if (this.submitted && this.editBrandForm.valid) {
+    if (this.submitted && this.editEquipmentForm.valid) {
       let formData = new FormData();
-      formData.append('id', this.editableBrandId)
-      formData.append('name', this.editBrandForm.get('name').value);
-      formData.append('name_ar', this.editBrandForm.get('name_ar').value);
-      formData.append('category', this.editBrandForm.get('category').value);
-      formData.append('subCategory', JSON.stringify(this.editBrandForm.get('subCategory').value));
-      formData.append('totalUnits', this.editBrandForm.get('totalUnits').value);
-      formData.append('unitPrice', this.editBrandForm.get('unitPrice').value);
-      formData.append('description', this.editBrandForm.get('description').value);
+
+      formData.append('name', this.editEquipmentForm.get('name').value);
+      formData.append('name_ar', this.editEquipmentForm.get('name_ar').value);
+      formData.append('category', this.editEquipmentForm.get('category').value);
+      formData.append('quantity', this.editEquipmentForm.get('quantity').value);
+      formData.append('description', this.editEquipmentForm.get('description').value);
       if (this.imageFile) {
         formData.append('image', this.imageFile, this.imageFile.name);
       }
       this.progress = true
-      this.apiService.editBrand(formData).subscribe(res => {
+      this.apiService.editEquipment(formData, this.editableBrandId).subscribe(res => {
         console.log(res)
         if (res.success == true) {
           this.progress = false
           this.commonService.successToast('SuccessFully Edited')
-          this.getBrandList()
+          this.getEquipmentList()
           this.submitted = false
         } else {
           this.progress = false
