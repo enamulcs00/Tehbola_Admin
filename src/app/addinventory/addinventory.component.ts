@@ -66,30 +66,30 @@ export class AddinventoryComponent implements OnInit {
 
   }
   onSubmit() {
-    
+
     this.submitted = true;
 
-    if (this.submitted && this.updateInventoryForm.valid) {
-      const body = new FormData();
-      body.append('id', this.id);
-      body.append('productQuantity', this.updateInventoryForm.controls['updateQuantity'].value);
+    // if (this.submitted && this.updateInventoryForm.valid) {
+    //   const body = new FormData();
+    //   body.append('id', this.id);
+    //   body.append('productQuantity', this.updateInventoryForm.controls['updateQuantity'].value);
 
-      body.forEach((value, key) => {
-        console.log(key + " " + value)
-      });
-      this.progress = true
-      this.apiService.updateProduct(body).subscribe((res) => {
-        if (res.success) {
-          this.commonService.successToast(res.message)
-          this.progress = false
-          this.router.navigate(['/inventryManagement'])
-          console.log(res)
-        } else {
-          this.commonService.errorToast(res.message)
-          this.progress = false
-        }
-      })
-    }
+    //   body.forEach((value, key) => {
+    //     console.log(key + " " + value)
+    //   });
+    //   this.progress = true
+    //   this.apiService.updateProduct(body).subscribe((res) => {
+    //     if (res.success) {
+    //       this.commonService.successToast(res.message)
+    //       this.progress = false
+    //       this.router.navigate(['/inventryManagement'])
+    //       console.log(res)
+    //     } else {
+    //       this.commonService.errorToast(res.message)
+    //       this.progress = false
+    //     }
+    //   })
+    // }
   }
 
 

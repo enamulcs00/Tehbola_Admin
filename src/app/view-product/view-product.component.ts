@@ -309,10 +309,11 @@ export class ViewProductComponent implements OnInit {
 
     this.categoryList = []
 
-    this.apiService.getCategoryByUser().subscribe(res => {
+    this.apiService.getCategoryList().subscribe(res => {
 
       if (res.success) {
         console.log(res);
+
         if (res.data) {
           this.categoryList = res.data
           //this.getAllSubcategory(this.selectedCategory);
@@ -338,7 +339,7 @@ export class ViewProductComponent implements OnInit {
     if (this.selectedCategory) {
       this.categoryList.forEach(element => {
         if (element._id === id) {
-          this.subCategoryList = element.subCategory
+          this.subCategoryList = element.subCatList
         }
       });
       this.editProductForm.get('subCategory').setValue(this.selectedSubcategory);
@@ -381,62 +382,62 @@ export class ViewProductComponent implements OnInit {
 
   }
 
-  onSubmit() {
+  // onSubmit() {
 
-    console.log("check", this.editProductForm)
-    this.submitted = true;
+  //   console.log("check", this.editProductForm)
+  //   this.submitted = true;
 
-    if (this.submitted && this.editProductForm.valid) {
-      const body = new FormData();
-      body.append('id', this.id);
+  //   if (this.submitted && this.editProductForm.valid) {
+  //     const body = new FormData();
+  //     body.append('id', this.id);
 
-      body.append('productId', this.productId);
-      body.append('seller', this.sellerDetails._id)
-      body.append('name', this.editProductForm.controls['name'].value);
-      body.append('name_ar', this.editProductForm.controls['name_ar'].value);
-      body.append('description', this.editProductForm.controls['description'].value);
-      body.append('description_ar', this.editProductForm.controls['description_ar'].value);
-      body.append('price', this.editProductForm.controls['price'].value);
-      body.append('category', this.editProductForm.controls['category'].value);
-      body.append('subCategory', JSON.stringify(this.editProductForm.controls['subCategory'].value));
-      body.append('brand', this.editProductForm.controls['brand'].value);
-      body.append('purchaseQuantity', this.editProductForm.controls['purchaseQuantity'].value);
-      body.append('productQuantity', this.editProductForm.controls['quantity'].value);
-      body.append('normalStock', this.editProductForm.controls['normalStock'].value);
-      body.append('overStock', this.editProductForm.controls['overStock'].value);
-      body.append('specifications', JSON.stringify(this.editProductForm.controls['specification'].value));
-      body.append('isFeatured', this.editProductForm.controls['isfeatured'].value);
-      body.append('trustedShipping', JSON.stringify(this.editProductForm.controls['trustedShipping'].value));
-      body.append('easyReturn', JSON.stringify(this.editProductForm.controls['easyReturn'].value));
-      body.append('secureShopping', JSON.stringify(this.editProductForm.controls['secureShopping'].value));
-      body.append('gender', JSON.stringify(this.editProductForm.controls['gender'].value));
-      body.append('searchKeyword', JSON.stringify(this.editProductForm.controls['aliases'].value));
-      body.append('specifications_ar', JSON.stringify(this.editProductForm.controls['specification_ar'].value));
-      for (let i = 0; i < this.images.length; i++) {
-        body.append('images', this.images[i], this.images[i].name);
-      }
-      body.append('highlights', this.editProductForm.controls['highlights'].value)
-      body.append('highlights_ar', this.editProductForm.controls['highlights_ar'].value)
+  //     body.append('productId', this.productId);
+  //     body.append('seller', this.sellerDetails._id)
+  //     body.append('name', this.editProductForm.controls['name'].value);
+  //     body.append('name_ar', this.editProductForm.controls['name_ar'].value);
+  //     body.append('description', this.editProductForm.controls['description'].value);
+  //     body.append('description_ar', this.editProductForm.controls['description_ar'].value);
+  //     body.append('price', this.editProductForm.controls['price'].value);
+  //     body.append('category', this.editProductForm.controls['category'].value);
+  //     body.append('subCategory', JSON.stringify(this.editProductForm.controls['subCategory'].value));
+  //     body.append('brand', this.editProductForm.controls['brand'].value);
+  //     body.append('purchaseQuantity', this.editProductForm.controls['purchaseQuantity'].value);
+  //     body.append('productQuantity', this.editProductForm.controls['quantity'].value);
+  //     body.append('normalStock', this.editProductForm.controls['normalStock'].value);
+  //     body.append('overStock', this.editProductForm.controls['overStock'].value);
+  //     body.append('specifications', JSON.stringify(this.editProductForm.controls['specification'].value));
+  //     body.append('isFeatured', this.editProductForm.controls['isfeatured'].value);
+  //     body.append('trustedShipping', JSON.stringify(this.editProductForm.controls['trustedShipping'].value));
+  //     body.append('easyReturn', JSON.stringify(this.editProductForm.controls['easyReturn'].value));
+  //     body.append('secureShopping', JSON.stringify(this.editProductForm.controls['secureShopping'].value));
+  //     body.append('gender', JSON.stringify(this.editProductForm.controls['gender'].value));
+  //     body.append('searchKeyword', JSON.stringify(this.editProductForm.controls['aliases'].value));
+  //     body.append('specifications_ar', JSON.stringify(this.editProductForm.controls['specification_ar'].value));
+  //     for (let i = 0; i < this.images.length; i++) {
+  //       body.append('images', this.images[i], this.images[i].name);
+  //     }
+  //     body.append('highlights', this.editProductForm.controls['highlights'].value)
+  //     body.append('highlights_ar', this.editProductForm.controls['highlights_ar'].value)
 
-      body.append('discount', this.editProductForm.controls['discount'].value)
+  //     body.append('discount', this.editProductForm.controls['discount'].value)
 
-      body.forEach((value, key) => {
-        console.log(key + " " + value)
-      });
-      this.progress = true
-      this.apiService.updateProduct(body).subscribe((res) => {
-        if (res.success) {
-          this.progress = false
-          this.commonService.successToast("Product Successfully added")
-          this.router.navigate(['/product'])
-          console.log(res)
-        } else {
-          this.progress = false
-          this.commonService.errorToast(res.message)
-        }
-      })
-    }
-  }
+  //     body.forEach((value, key) => {
+  //       console.log(key + " " + value)
+  //     });
+  //     this.progress = true
+  //     this.apiService.updateProduct(body).subscribe((res) => {
+  //       if (res.success) {
+  //         this.progress = false
+  //         this.commonService.successToast("Product Successfully added")
+  //         this.router.navigate(['/product'])
+  //         console.log(res)
+  //       } else {
+  //         this.progress = false
+  //         this.commonService.errorToast(res.message)
+  //       }
+  //     })
+  //   }
+  // }
 
   goToproduct() {
     this.router.navigate(['/product'])

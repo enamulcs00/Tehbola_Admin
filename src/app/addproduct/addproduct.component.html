@@ -80,45 +80,15 @@
 
                         </div>
 
-                        <!-- <div class="row">
-                            <div class="col-12">
-                                <mat-form-field class="example-full-width">
-                                    <mat-label>Ingredient<span class="red">*</span></mat-label>
-                                    <mat-select formControlName="ingredient"
-                                        (selectionChange)="subCategorySelected($event.value)" multiple>
 
-                                        <mat-option *ngFor="let body of subCategoryList" [value]="body._id">
-                                            {{body.name}}
-                                        </mat-option>
-                                    </mat-select>
-                                    <mat-error *ngIf="addProductForm.get('ingredient').hasError('required')">
-                                        Ingredient is <strong>required</strong>
-                                    </mat-error>
-                                </mat-form-field>
-
-                            </div>
-                        </div> -->
 
                         <div class="row mt-3">
-                            <div class="col-6">
-                                <mat-form-field class="example-full-width">
-                                    <mat-label>Quantity <span class="red">*</span></mat-label>
-                                    <input matInput type="number" formControlName="quantity" placeholder="" name="name">
-                                    <mat-error *ngIf="addProductForm.get('quantity').hasError('required')">
-                                        Quantity is <strong>required</strong>
-                                    </mat-error>
-                                    <mat-error
-                                        *ngIf="addProductForm.controls['quantity'].hasError('min') && !addProductForm.controls['quantity'].hasError('required')">
-                                        Quantity should not be less than 0
-                                    </mat-error>
 
-                                </mat-form-field>
-                            </div>
                             <div class="col-6">
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Purchase quantity<span class="red">*</span></mat-label>
-                                    <input matInput type="number" formControlName="purchaseQuantity" placeholder=""
-                                        name="name">
+                                    <input matInput type="number" formControlName="purchaseQuantity"
+                                        placeholder="Max qunatity a customer can buy" name="name">
 
                                     <mat-error *ngIf="addProductForm.get('purchaseQuantity').hasError('required')">
                                         Purchase Quantity is <strong>required</strong>.
@@ -135,65 +105,11 @@
 
                                 </mat-form-field>
                             </div>
-                        </div>
-
-                        <!-- <div class="row mt-3">
-                            <div class="col-6">
-
-
-                                <mat-form-field class="example-full-width">
-                                    <mat-label>Normal Stock <span class="red">*</span></mat-label>
-                                    <input matInput type="number" formControlName="normalStock" placeholder=""
-                                        name="name">
-                                    <mat-error *ngIf="addProductForm.get('normalStock').hasError('required')">
-                                        Normal Stock is <strong>required</strong>
-                                    </mat-error>
-                                    <mat-error *ngIf="addProductForm.controls['normalStock'].hasError('min') &&
-                                         !addProductForm.controls['normalStock'].hasError('required')">
-                                        Normal Stock should not be less than 0
-                                    </mat-error>
-                                </mat-form-field>
-
-                            </div>
-                            <div class="col-6">
-
-                                <mat-form-field class="example-full-width">
-                                    <mat-label>Over Stock <span class="red">*</span></mat-label>
-                                    <input matInput type="number" formControlName="overStock" placeholder=""
-                                        name="name">
-                                    <mat-error *ngIf="addProductForm.get('overStock').hasError('required')">
-                                        Over Stock is <strong>required</strong>
-                                    </mat-error>
-                                    <mat-error *ngIf="addProductForm.controls['overStock'].hasError('min') &&
-                                         !addProductForm.controls['overStock'].hasError('required')">
-                                        Over Stock should not be less than 0
-                                    </mat-error>
-                                </mat-form-field>
-
-                            </div>
-                        </div> -->
-
-                        <div class="row mt-3">
-                            <div class="col-6">
-                                <mat-form-field class="example-full-width">
-                                    <mat-label>Base Price<span class="red">*</span></mat-label>
-                                    <input matInput type="text" min="1" formControlName="price" placeholder=""
-                                        name="name">
-                                    <mat-error *ngIf="addProductForm.get('price').hasError('required')">
-                                        Base Price is <strong>required</strong>.
-                                    </mat-error>
-
-                                    <mat-error *ngIf="addProductForm.get('price').hasError('min')  &&
-                                           !addProductForm.get('price').hasError('required')">
-                                        Base price could not be less than <strong>1</strong>.
-                                    </mat-error>
-
-                                </mat-form-field>
-                            </div>
                             <div class="col-6">
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Discount<span class="red">*</span></mat-label>
-                                    <input matInput type="number" formControlName="discount" placeholder="" name="name">
+                                    <input matInput type="number" formControlName="discount" placeholder="Discount"
+                                        name="name">
 
                                     <mat-error *ngIf="addProductForm.get('discount').hasError('required')">
                                         Discount is <strong>required</strong>
@@ -210,6 +126,28 @@
 
                                 </mat-form-field>
                             </div>
+                        </div>
+
+
+
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Base Price<span class="red">*</span></mat-label>
+                                    <input matInput type="text" min="1" formControlName="price" placeholder=""
+                                        name="name">
+                                    <mat-error *ngIf="addProductForm.get('price').hasError('required')">
+                                        Base Price is <strong>required</strong>.
+                                    </mat-error>
+
+                                    <mat-error *ngIf="addProductForm.get('price').hasError('min')  &&
+                                           !addProductForm.get('price').hasError('required')">
+                                        Base price could not be less than <strong>1</strong>.
+                                    </mat-error>
+
+                                </mat-form-field>
+                            </div>
+
                         </div>
                         <div class="row mt-3">
                             <div class="col-6">
@@ -274,69 +212,37 @@
                                         <td style="width: 40%;">
                                             <mat-form-field class="example-full-width">
                                                 <mat-label>Ingredient<span class="red">*</span></mat-label>
-                                                <mat-select formControlName="title"
+                                                <mat-select formControlName="rawItem"
                                                     (selectionChange)="subCategorySelected($event.value)">
 
-                                                    <mat-option *ngFor="let body of subCategoryList" [value]="body">
-                                                        {{body}}
+                                                    <mat-option *ngFor="let body of brandList" [value]="body._id">
+                                                        {{body.name}}
                                                     </mat-option>
                                                 </mat-select>
                                                 <mat-error
-                                                    *ngIf="addProductForm.get('ingredient').hasError('required')">
+                                                    *ngIf="addProductForm.get('specification').hasError('required')">
                                                     Ingredient is <strong>required</strong>
                                                 </mat-error>
                                             </mat-form-field>
                                         </td>
                                         <td style="width: 40%;">
-                                            Quantity:
-                                            <input type="text" formControlName="value" class="form-control">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label> Quantity:</mat-label>
+                                                <input matInput type="number" min="0" formControlName="quantity">
+                                            </mat-form-field>
                                         </td>
                                         <td style="width: 20%;">
                                             <button class="btn_grey" (click)="removeSpecification(i)">Remove</button>
                                         </td>
                                     </tr>
                                 </table>
-                                <mat-error *ngIf="addProductForm.get('specification').hasError('required')">
-                                    Specifications are <strong>required</strong>
+                                <mat-error
+                                    *ngIf="submitted && addProductForm.get('specification').hasError('required')">
+                                    Raw Item are <strong>required</strong>
                                 </mat-error>
                             </div>
                         </div>
 
-                        <!-- 
-                        <div class="row mt-3">
-                            <div class="col-12">
-                                <label> Add Malay Specification</label>
-                                <table class="table table-bordered" formArrayName="specification_ar">
-                                    <tr>
-                                        <th colspan="2"> Malay Specification:</th>
-                                        <th width="20%">
-                                            <div class="input_button input_button2">
-                                                <button type="button" mat-button (click)="addNewSpecification_ar()"
-                                                    class="btn btn-primary">Add
-                                                    More</button>
-                                            </div>
-                                        </th>
-                                    </tr>
-                                    <tr *ngFor="let quantity of specification_ar().controls; let i=index"
-                                        [formGroupName]="i">
-                                        <td style="width: 40%;">
-                                            title :
-                                            <input type="text" formControlName="title" class="form-control">
-                                        </td>
-                                        <td style="width: 40%;">
-                                            Value:
-                                            <input type="text" formControlName="value" class="form-control">
-                                        </td>
-                                        <td style="width: 20%;">
-                                            <button (click)="removeSpecification_ar(i)" class="btn_grey">Remove</button>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <mat-error *ngIf="addProductForm.get('specification_ar').hasError('required')">
-                                    Malay Specifications are <strong>required</strong>
-                                </mat-error>
-                            </div>
-                        </div> -->
 
 
                         <div class="row mt-3">
@@ -354,8 +260,10 @@
                                     </tr>
                                     <tr *ngFor="let quantity of aliases.controls; let i=index">
                                         <td style="width: 80%;">
-                                            Keywords :
-                                            <input type="text" [formControlName]="i" class="form-control">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label> Keywords :</mat-label>
+                                                <input type="text" matInput [formControlName]="i">
+                                            </mat-form-field>
                                         </td>
                                         <td>
                                             <button (click)="removeSearchKeywords(i)" class="btn_grey">Remove</button>

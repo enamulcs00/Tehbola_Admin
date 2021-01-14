@@ -72,7 +72,7 @@ export class BrandlistComponent implements OnInit {
   getBrandList() {
     //Pagination is applied in the backend. just not using in the front end because of design same as category
     this.progress = true
-    this.apiService.getBrandList().subscribe(res => {
+    this.apiService.getRawItemList().subscribe(res => {
       console.log(res)
       if (res.success) {
         this.progress = false

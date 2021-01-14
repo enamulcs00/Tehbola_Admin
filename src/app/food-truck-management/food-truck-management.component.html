@@ -190,9 +190,11 @@
 
                             <mat-form-field class="example-full-width">
                                 <mat-label>Remarks<span class="red">*</span></mat-label>
-                                <mat-select formControlName="remark">
+                                <input matInput type="text" placeholder="Remarks for food truck"
+                                    formControlName="remark">
+                                <!-- <mat-select formControlName="remark">
                                     <mat-option value='check this'>This could be anything</mat-option>
-                                </mat-select>
+                                </mat-select> -->
                                 <mat-error *ngIf="addFoodTruckForm.get('remark').hasError('required')">
                                     Malay Category Name is <strong>required</strong>
                                 </mat-error>
@@ -279,9 +281,11 @@
 
                             <mat-form-field class="example-full-width">
                                 <mat-label>Remarks<span class="red">*</span></mat-label>
-                                <mat-select formControlName="remark">
+                                <input matInput type="text" placeholder="Remarks for food truck"
+                                    formControlName="remark">
+                                <!-- <mat-select formControlName="remark">
                                     <mat-option value='check this'>This could be anything</mat-option>
-                                </mat-select>
+                                </mat-select> -->
                                 <mat-error *ngIf="editFoodTruckForm.get('remark').hasError('required')">
                                     Malay Category Name is <strong>required</strong>
                                 </mat-error>

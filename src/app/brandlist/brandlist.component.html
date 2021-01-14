@@ -98,8 +98,7 @@
 
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Name of the Item<span class="red">*</span></mat-label>
-                                    <input matInput type="text" placeholder="Brand Name" formControlName="name"
-                                        name="password">
+                                    <input matInput type="text" formControlName="name" name="password">
                                     <mat-error *ngIf="addBrandForm.get('name').hasError('required')">
                                         Item Name is <strong>required</strong>
                                     </mat-error>
@@ -114,14 +113,13 @@
 
                                 <mat-form-field class="example-full-width">
                                     <mat-label> Malay Name of the Item<span class="red">*</span></mat-label>
-                                    <input matInput type="text" placeholder="Malay  Name" formControlName="name_ar"
-                                        name="password">
+                                    <input matInput type="text" formControlName="name_ar" name="password">
                                     <mat-error *ngIf="addBrandForm.get('name_ar').hasError('required')">
-                                        Item Name is <strong>required</strong>
+                                        Malay Item Name is <strong>required</strong>
                                     </mat-error>
                                     <mat-error *ngIf=" addBrandForm.get('name_ar').hasError('maxlength') &&
                               !addBrandForm.get('name_ar').hasError('required')">
-                                        Item Name should be max 20 characters long.
+                                        Malay Item Name should be max 20 characters long.
                                     </mat-error>
                                 </mat-form-field>
 
@@ -133,7 +131,7 @@
                             <mat-form-field class="example-full-width">
                                 <mat-label>Category<span class="red">*</span></mat-label>
 
-                                <mat-select placeholder="Category" (selectionChange)='categorySelected($event.value)'
+                                <mat-select (selectionChange)='categorySelected($event.value)'
                                     formControlName="category">
 
                                     <mat-option>--</mat-option>
@@ -153,7 +151,7 @@
                             <mat-form-field class="example-full-width">
                                 <mat-label>Sub-Category<span class="red">*</span></mat-label>
 
-                                <mat-select placeholder="SubCategory" formControlName="subCategory" multiple>
+                                <mat-select formControlName="subCategory" multiple>
 
                                     <mat-option>--</mat-option>
                                     <mat-option *ngFor="let item of subcategoryList" [value]="item._id">
@@ -189,10 +187,10 @@
                                     <mat-form-field style="width: 80%;" class="example-full-width pl-3">
                                         <mat-label> Quantity Per Packet<span class="red">*</span></mat-label>
 
-                                        <input matInput type="number" min="0" placeholder="Current Units you have"
-                                            formControlName="quantityPerUnit" name="password">
+                                        <input matInput type="number" min="0" formControlName="quantityPerUnit"
+                                            name="password">
                                         <mat-error *ngIf="addBrandForm.get('quantityPerUnit').hasError('required')">
-                                            Current unit is <strong>required</strong>
+                                            Quantity Per Packet is <strong>required</strong>
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
@@ -203,10 +201,9 @@
                             <div class="form-group col-6">
                                 <mat-form-field class="example-full-width">
                                     <mat-label> Total Packet<span class="red">*</span></mat-label>
-                                    <input matInput type="number" min="0" placeholder="Malay Name"
-                                        formControlName="totalUnits" name="password">
+                                    <input matInput type="number" min="0" formControlName="totalUnits" name="password">
                                     <mat-error *ngIf="addBrandForm.get('totalUnits').hasError('required')">
-                                        Price per unit is <strong>required</strong>
+                                        Total Packet is <strong>required</strong>
                                     </mat-error>
 
                                 </mat-form-field>
@@ -215,8 +212,7 @@
 
                                 <mat-form-field class="example-full-width">
                                     <mat-label> Price per Packet<span class="red">*</span></mat-label>
-                                    <input matInput type="number" min="0" placeholder="Malay Name"
-                                        formControlName="unitPrice" name="password">
+                                    <input matInput type="number" min="0" formControlName="unitPrice" name="password">
                                     <mat-error *ngIf="addBrandForm.get('unitPrice').hasError('required')">
                                         Price per unit is <strong>required</strong>
                                     </mat-error>
@@ -245,8 +241,8 @@
                                     </mat-form-field>
                                     <mat-form-field style="width: 80%;" class="example-full-width pl-3">
                                         <mat-label> Serving Size<span class="red">*</span></mat-label>
-                                        <input matInput type="number" min="0" placeholder="Malay Name"
-                                            formControlName="perServingSize" name="password">
+                                        <input matInput type="number" min="0" formControlName="perServingSize"
+                                            name="password">
                                         <mat-error *ngIf="addBrandForm.get('perServingSize').hasError('required')">
                                             Serviing Size is <strong>required</strong>
                                         </mat-error>
@@ -261,8 +257,7 @@
 
                             <mat-form-field class="example-full-width">
                                 <mat-label> Description</mat-label>
-                                <input matInput type="text" placeholder="Description" formControlName="description"
-                                    name="password">
+                                <input matInput type="text" formControlName="description" name="password">
 
                             </mat-form-field>
 
@@ -319,8 +314,7 @@
 
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Name of the Item<span class="red">*</span></mat-label>
-                                    <input matInput type="text" placeholder="Brand Name" formControlName="name"
-                                        name="password">
+                                    <input matInput type="text" formControlName="name" name="password">
                                     <mat-error *ngIf="editBrandForm.get('name').hasError('required')">
                                         Item Name is <strong>required</strong>
                                     </mat-error>
@@ -335,8 +329,7 @@
 
                                 <mat-form-field class="example-full-width">
                                     <mat-label> Malay Name of the Item<span class="red">*</span></mat-label>
-                                    <input matInput type="text" placeholder="Malay  Name" formControlName="name_ar"
-                                        name="password">
+                                    <input matInput type="text" formControlName="name_ar" name="password">
                                     <mat-error *ngIf="editBrandForm.get('name_ar').hasError('required')">
                                         Item Name is <strong>required</strong>
                                     </mat-error>
@@ -354,7 +347,7 @@
                             <mat-form-field class="example-full-width">
                                 <mat-label>Category<span class="red">*</span></mat-label>
 
-                                <mat-select placeholder="Category" (selectionChange)='categorySelected($event.value)'
+                                <mat-select (selectionChange)='categorySelected($event.value)'
                                     formControlName="category">
 
                                     <mat-option>--</mat-option>
@@ -374,7 +367,7 @@
                             <mat-form-field class="example-full-width">
                                 <mat-label>Sub-Category<span class="red">*</span></mat-label>
 
-                                <mat-select placeholder="SubCategory" formControlName="subCategory" multiple>
+                                <mat-select formControlName="subCategory" multiple>
 
                                     <mat-option>--</mat-option>
                                     <mat-option *ngFor="let item of subcategoryList" [value]="item._id">
@@ -410,8 +403,8 @@
                                     <mat-form-field style="width: 80%;" class="example-full-width pl-3">
                                         <mat-label> Quantity Per Packet<span class="red">*</span></mat-label>
 
-                                        <input matInput type="number" min="0" placeholder="Current Units you have"
-                                            formControlName="quantityPerUnit" name="password">
+                                        <input matInput type="number" min="0" formControlName="quantityPerUnit"
+                                            name="password">
                                         <mat-error *ngIf="editBrandForm.get('quantityPerUnit').hasError('required')">
                                             Current unit is <strong>required</strong>
                                         </mat-error>
@@ -424,8 +417,7 @@
                             <div class="form-group col-6">
                                 <mat-form-field class="example-full-width">
                                     <mat-label> Total Packet<span class="red">*</span></mat-label>
-                                    <input matInput type="number" min="0" placeholder="Malay Name"
-                                        formControlName="totalUnits" name="password">
+                                    <input matInput type="number" min="0" formControlName="totalUnits" name="password">
                                     <mat-error *ngIf="editBrandForm.get('totalUnits').hasError('required')">
                                         Price per unit is <strong>required</strong>
                                     </mat-error>
@@ -436,8 +428,7 @@
 
                                 <mat-form-field class="example-full-width">
                                     <mat-label> Price per Packet<span class="red">*</span></mat-label>
-                                    <input matInput type="number" min="0" placeholder="Malay Name"
-                                        formControlName="unitPrice" name="password">
+                                    <input matInput type="number" min="0" formControlName="unitPrice" name="password">
                                     <mat-error *ngIf="editBrandForm.get('unitPrice').hasError('required')">
                                         Price per unit is <strong>required</strong>
                                     </mat-error>
@@ -466,8 +457,8 @@
                                     </mat-form-field>
                                     <mat-form-field style="width: 80%;" class="example-full-width pl-3">
                                         <mat-label> Serving Size<span class="red">*</span></mat-label>
-                                        <input matInput type="number" min="0" placeholder="Malay Name"
-                                            formControlName="perServingSize" name="password">
+                                        <input matInput type="number" min="0" formControlName="perServingSize"
+                                            name="password">
                                         <mat-error *ngIf="editBrandForm.get('perServingSize').hasError('required')">
                                             Serviing Size is <strong>required</strong>
                                         </mat-error>
@@ -482,8 +473,7 @@
 
                             <mat-form-field class="example-full-width">
                                 <mat-label> Description</mat-label>
-                                <input matInput type="text" placeholder="Description" formControlName="description"
-                                    name="password">
+                                <input matInput type="text" formControlName="description" name="password">
 
                             </mat-form-field>
 

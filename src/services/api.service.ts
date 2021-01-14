@@ -58,7 +58,7 @@ export class ApiService {
       getSubcategory: 'admin/subCategories',
       getCatByUser: 'admin/getUserCatAndSubCat',
       getBrandBySubcat: 'admin/getBrands',
-      viewProduct: 'admin/viewProduct',
+      viewProduct: 'admin/product',
       deleteImage: 'admin/deleteImage',
       endorsementRequest: 'panel/endorseProduct',
       endorsementProduct: 'panel/getSellerEndorsements',
@@ -200,8 +200,8 @@ export class ApiService {
     return this.http.get<any>(`${this.apiEndPoints.getList}?search=${search}&roles=${roles}`, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
-  getCategoryByUser(): Observable<any> {
-    return this.http.get<any>(`${this.apiEndPoints.getCatByUser}`, this.getHeaders()).pipe(catchError(this.handleError()))
+  getCategoryList(): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.getAllCategory}`, this.getHeaders()).pipe(catchError(this.handleError()))
   }
   getBrandListBySubcat(catId): Observable<any> {
     return this.http.get<any>(`${this.apiEndPoints.getBrandBySubcat}?category=${catId}`, this.getHeaders()).pipe(catchError(this.handleError()))
@@ -350,8 +350,8 @@ export class ApiService {
     return this.http.post<any>(this.apiEndPoints.addProduct, body, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
-  updateProduct(body): Observable<any> {
-    return this.http.put<any>(this.apiEndPoints.addProduct, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  updateProduct(body, id): Observable<any> {
+    return this.http.put<any>(`${this.apiEndPoints.addProduct}/${id}`, body, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
   getAllProduct(page, count, search) {
@@ -796,7 +796,7 @@ export class ApiService {
     return this.http.get<any>(`${this.apiEndPoints.getEquipmentList}?page=1&count=10000`, this.getHeaders()).pipe(catchError(this.handleError()))
 
   }
-  getBrandList(): Observable<any> {
+  getRawItemList(): Observable<any> {
 
     return this.http.get<any>(`${this.apiEndPoints.getBrandList}?page=1&count=10000`, this.getHeaders()).pipe(catchError(this.handleError()))
 

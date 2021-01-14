@@ -69,15 +69,10 @@
                                 <th>Name</th>
                                 <th>Category</th>
                                 <th>Sub Category</th>
-                                <th>Brand</th>
-                                <th>Perfect For</th>
-                                <th> Quantity</th>
-                                <th> Minimum quantity</th>
+                                <th>Raw Item Needed</th>
+                                <th> Max Purchase Quantity</th>
                                 <th>Price </th>
                                 <th>Product Description</th>
-                                <th *ngIf="user.roles=='admin'">Seller Name</th>
-                                <th *ngIf="user.roles=='admin'">Is Featured</th>
-                                <th *ngIf="user.roles=='merchant'">Available to Endorsement</th>
                                 <th class="action_bx">Status</th>
                                 <th>Action</th>
                             </tr>
@@ -87,47 +82,29 @@
                                 <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
                                 <td class="product_img">
                                     <figure>
-                                        <img *ngIf="!product.images[0]" src="../../assets/images/makeup.png" alt="">
-                                        <img width="50px" height="50px" *ngIf="product.images[0]"
-                                            src={{imageUrl+product?.images[0]?.image}} alt="product.category.name">
+                                        <h5 *ngIf="!product?.images[0]">No image Found</h5>
+                                        <img width="50px" height="50px" *ngIf="product?.images[0]"
+                                            src={{imageUrl+product?.images[0]?.image}} alt="product Image is croupt">
                                     </figure>
                                 </td>
-                                <td>{{ product.name }}</td>
+                                <td>{{ product?.name }}</td>
                                 <td>{{ product.category.name }}</td>
                                 <td>
                                     <span *ngFor="let item of product.subCategory">{{ item.name }},&nbsp;</span>
                                 </td>
-                                <td>{{ product.brand.name }}</td>
                                 <td>
-                                    <p *ngIf="product.gender.length!=2">
-                                        <span *ngFor="let item of product.gender">{{ item=='M'?'Male':'Female' }}</span>
-                                    </p>
-                                    <p *ngIf="product.gender.length==2">
-                                        <span>Male,Female</span>
-                                    </p>
+                                    <span *ngFor="let item of product.rawItems; let i=index">
+                                        {{item?.rawItem?.name}}-{{item?.quantity}},&nbsp;
+                                    </span>
                                 </td>
-                                <td>{{ product.productQuantity }}</td>
+
                                 <td>{{ product.purchaseQuantity }}</td>
-                                <td>KD {{ product.price }}</td>
+                                <td> {{ product.price }}</td>
                                 <td>{{ product.description.length < 24 ?
                             product.description :
                             product.description.slice(0,24)+ "..." }}</td>
-                                <td *ngIf="user.roles=='admin'">{{product.seller.firstName}} {{product.seller.lastName}}
-                                </td>
-                                <td *ngIf="user.roles=='admin'">
-                                    <div class="enable_disable">
-                                        <mat-slide-toggle [checked]="product.isFeatured"
-                                            (change)=onChangeFeatured(product.id,product.isFeatured)>
-                                        </mat-slide-toggle>
-                                    </div>
-                                </td>
-                                <td *ngIf="user.roles=='merchant'">
-                                    <div class="enable_disable">
-                                        <mat-slide-toggle [checked]="product.isEndorse"
-                                            (change)=onChangeEndorse(product.id,product.isEndorse)>
-                                        </mat-slide-toggle>
-                                    </div>
-                                </td>
+
+
 
                                 <td>
                                     <div class="enable_disable">
@@ -139,24 +116,16 @@
                                 <td>
                                     <div class="action">
 
-
-                                        <ng-template>
-                                            <ul>
-                                                <li class="show" (click)="goToviewProduct(product.id)"><i
-                                                        class="fa fa-eye"></i></li>
-                                                <li class="edit" (click)="goToeditProduct(product.id)"><i
-                                                        class="fa fa-pencil fa-fw"></i></li>
-                                                <li class="delete" (click)="deleteProduct(product.id)"><i
-                                                        class="fa fa-trash-o fa-fw"></i></li>
-                                            </ul>
-                                        </ng-template>
-
-
-
-
+                                        <ul>
+                                            <li class="show" (click)="goToviewProduct(product.id)"><i
+                                                    class="fa fa-eye"></i></li>
+                                            <li class="edit" (click)="goToeditProduct(product.id)"><i
+                                                    class="fa fa-pencil fa-fw"></i></li>
+                                            <li class="delete" (click)="deleteProduct(product.id)"><i
+                                                    class="fa fa-trash-o fa-fw"></i></li>
+                                        </ul>
 
                                     </div>
-
                                 </td>
                             </tr>
                         </table>

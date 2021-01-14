@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { FormGroup, FormArray, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormArray, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { ApiService } from 'src/services/api.service';
 import { CommonService } from 'src/services/common.service';
 import { UrlService } from 'src/services/url.service';
 import { MoreThan } from 'src/services/moreThanValidator';
+import { validateHorizontalPosition } from '@angular/cdk/overlay';
 declare var $: any;
 
 @Component({
@@ -21,7 +22,7 @@ export class AddproductComponent implements OnInit {
   parentId = ''
   categoryList: any[];
   selectedCategory: any;
-  subCategoryList: any[] = ['raw item 1', 'raw item 2', 'raw item 3', 'raw item 4', 'raw item 5', 'raw item 6', 'raw item 7',];
+  subCategoryList: any[]
   brandList: any;
   selectedBrand: any;
 
@@ -49,13 +50,8 @@ export class AddproductComponent implements OnInit {
     this.user = JSON.parse(sessionStorage.getItem('Markat_User'))
     console.log(this.user);
     this.getAllCategory()
+    this.getRawItemList()
 
-    if (this.user.roles == 'admin') {
-      this.sellerId = this.user._id
-    } else {
-      // this.sellerId = this.user._id
-      // this.getAllCategory(this.sellerId)
-    }
 
   }
 
@@ -73,132 +69,29 @@ export class AddproductComponent implements OnInit {
 
 
     this.addProductForm = this.fb.group({
-      // celebritySeller: ['', Validators.required],
-      // merchantSeller: ['', Validators.required],
+
       name: ['', [Validators.required,]],
       name_ar: ['', Validators.required],
-      gender: ['',],
       category: ['', Validators.required],
       subCategory: ['', Validators.required],
-      ingredient: ['', [Validators.required]],
-      // isbnNumber: ['', [Validators.required, Validators.min(0)]],
-      quantity: ['', [Validators.required, Validators.min(0)]],
-      normalStock: ['', [Validators.required, Validators.min(0)]],
-      overStock: ['', [Validators.required, Validators.min(0)]],
       purchaseQuantity: ['', [Validators.required, Validators.min(0)]],
       discount: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
       highlights: ['',],
       highlights_ar: [''],
-      seller: [''],
-      //  isfeatured: ['', Validators.required],
-      brand: ['',],
       price: ['', [Validators.required, Validators.min(1)]],
       description: ['', [Validators.required,]],
       description_ar: ['', Validators.required],
       image: ['', [Validators.required]],
-      // isbnNumber: ['', [Validators.required, Validators.min(0)]],
-      // isbnNumber: ['', [Validators.required, Validators.min(0)]],
-      specification: this.fb.array([]),
-      trustedShipping: [false],
-      easyReturn: [false],
-      secureShopping: [false],
-      specification_ar: this.fb.array([]),
+      specification: this.fb.array([], Validators.required),
       aliases: this.fb.array([
-        this.fb.control('')
+        this.fb.control('', Validators.required)
       ])
-    },
-      {
-        validator: MoreThan('quantity', 'purchaseQuantity')
-      }
-    )
+    })
 
-    // if (this.user.roles == 'admin') {
-
-    // } else {
-    //   // // this.generateProductId(this.user.roles)
-    //   // this.addProductForm.get('seller').setValue(this.sellerId);
-    //   // this.addProductForm.get('merchantSeller').disable({ onlySelf: true })
-    //   // this.addProductForm.get('celebritySeller').disable({ onlySelf: true })
-    //   // this.addProductForm.reset()
-    // }
 
 
   }
 
-
-  // generateProductId(roles) {
-
-  //   let timestamp
-  //   if (roles == 'celebrity') {
-  //     timestamp = Date.now()
-  //     this.productId = timestamp + 'CE'
-  //     console.log(this.productId);
-
-  //   } else if (roles == 'merchant') {
-  //     timestamp = Date.now()
-  //     this.productId = timestamp + 'ME'
-  //     console.log(this.productId);
-  //   }
-  // }
-
-  // setradio(user) {
-
-
-  //   let roles: any
-  //   let search: any
-  //   if (user == 'celebrity') {
-  //     this.showMerchant = false
-
-  //     roles = 'celebrity';
-  //     search = ''
-
-  //     this.apiService.getCelebList(search, roles).subscribe((res) => {
-  //       if (res.success) {
-  //         console.log(res);
-  //         this.vendorList = res.data;
-  //         this.showCelebrity = true;
-  //         this.addProductForm.get('merchantSeller').disable()
-  //         this.addProductForm.get('celebritySeller').enable()
-  //         this.length = res.total;
-
-  //       }
-  //     });
-  //     this.generateProductId(roles)
-  //   } else if (user == 'merchant') {
-
-  //     this.showCelebrity = false
-
-  //     roles = 'merchant',
-
-  //       search = '',
-
-
-  //       this.apiService.getCelebList(search, roles).subscribe((res) => {
-  //         if (res.success) {
-  //           console.log(res);
-  //           this.vendorList = res.data;
-  //           this.showMerchant = true;
-  //           this.addProductForm.get('merchantSeller').enable()
-  //           this.addProductForm.get('celebritySeller').disable()
-  //           this.length = res.total;
-  //         }
-  //       });
-  //     this.generateProductId(roles)
-  //   }
-  // }
-  // merchantSelected(id) {
-  //   console.log(id);
-  //   this.sellerId = id
-  //   // this.getAllCategory(id)
-
-  // }
-
-  // celebritySelected(id) {
-  //   console.log(id);
-  //   this.sellerId = id
-  //   //this.getAllCategory(id);
-
-  // }
   getTax() {
 
     this.apiService.getTax().subscribe(res => {
@@ -217,28 +110,18 @@ export class AddproductComponent implements OnInit {
     return this.addProductForm.get('aliases') as FormArray;
   }
 
-  specification_ar(): FormArray {
-    return this.addProductForm.get('specification_ar') as FormArray;
-  }
+
   newSpecifiaction(): FormGroup {
     return this.fb.group({
-      title: '',
-      value: ''
+      rawItem: new FormControl('', Validators.required),
+      quantity: new FormControl('', Validators.required)
     })
   }
   addAlias() {
     this.aliases.push(this.fb.control(''));
   }
 
-  newSpecifiaction_ar(): FormGroup {
-    return this.fb.group({
-      title: '',
-      value: ''
-    })
-  }
-  addNewSpecification_ar() {
-    this.specification_ar().push(this.newSpecifiaction_ar())
-  }
+
   addNewSpecification() {
     this.specification().push(this.newSpecifiaction())
   }
@@ -255,10 +138,7 @@ export class AddproductComponent implements OnInit {
     this.aliases.removeAt(i);
 
   }
-  removeSpecification_ar(i: number) {
-    this.specification_ar().removeAt(i);
 
-  }
 
 
   getAllCategory() {
@@ -266,7 +146,7 @@ export class AddproductComponent implements OnInit {
 
     this.categoryList = []
 
-    this.apiService.getCategoryByUser().subscribe(res => {
+    this.apiService.getCategoryList().subscribe(res => {
 
       if (res.success) {
         console.log(res);
@@ -285,7 +165,23 @@ export class AddproductComponent implements OnInit {
 
     this.selectedCategory = id
     this.getAllSubcategory(id);
-    this.getBrand(id)
+
+  }
+
+  getRawItemList() {
+    //Pagination is applied in the backend. just not using in the front end because of design same as category
+    // this.progress = true
+    this.apiService.getRawItemList().subscribe(res => {
+      console.log(res)
+      if (res.success) {
+        this.progress = false
+        console.log(res.data);
+        this.brandList = res.data
+      } else {
+        this.progress = false
+        this.commonService.errorToast(res.message)
+      }
+    })
   }
 
 
@@ -296,7 +192,7 @@ export class AddproductComponent implements OnInit {
     if (this.selectedCategory) {
       this.categoryList.forEach(element => {
         if (element._id === id) {
-          this.subCategoryList = element.subCategory
+          this.subCategoryList = element.subCatList
         }
       });
     } else {
@@ -314,34 +210,17 @@ export class AddproductComponent implements OnInit {
 
   }
 
-  getBrand(id) {
 
-    this.brandList = []
-    this.apiService.getBrandListBySubcat(id).subscribe(res => {
-      if (res.success) {
-        console.log(res)
-        if (res.data) {
-          this.brandList = res.data;
-        }
-      }
-    })
-  }
 
-  brandSelected(id) {
-    this.selectedBrand = id;
-    console.log(id);
-
-  }
   progress: boolean
   onSubmit() {
 
     console.log("check", this.addProductForm)
     this.submitted = true;
 
-    if (this.submitted && this.addProductForm.valid) {
+    if (this.submitted && this.addProductForm.valid && (this.images.length > 0)) {
       const body = new FormData();
-      body.append('productId', this.productId);
-      body.append('seller', this.sellerId)
+
       body.append('name', this.addProductForm.controls['name'].value);
       body.append('name_ar', this.addProductForm.controls['name_ar'].value);
       body.append('description', this.addProductForm.controls['description'].value);
@@ -349,27 +228,16 @@ export class AddproductComponent implements OnInit {
       body.append('price', this.addProductForm.controls['price'].value);
       body.append('category', this.addProductForm.controls['category'].value);
       body.append('subCategory', JSON.stringify(this.addProductForm.controls['subCategory'].value));
-      body.append('brand', this.addProductForm.controls['brand'].value);
       body.append('purchaseQuantity', this.addProductForm.controls['purchaseQuantity'].value);
-      body.append('productQuantity', this.addProductForm.controls['quantity'].value);
-      body.append('normalStock', this.addProductForm.controls['normalStock'].value);
-      body.append('overStock', this.addProductForm.controls['overStock'].value);
-      body.append('specifications', JSON.stringify(this.addProductForm.controls['specification'].value));
-      body.append('trustedShipping', JSON.stringify(this.addProductForm.controls['trustedShipping'].value));
-      // body.append('isFeatured', JSON.stringify(this.addProductForm.controls['isfeatured'].value));
-      body.append('easyReturn', JSON.stringify(this.addProductForm.controls['easyReturn'].value));
-      body.append('secureShopping', JSON.stringify(this.addProductForm.controls['secureShopping'].value));
-      body.append('gender', JSON.stringify(this.addProductForm.controls['gender'].value));
+      body.append('rawItems', JSON.stringify(this.addProductForm.controls['specification'].value));
 
       body.append('searchKeyword', JSON.stringify(this.addProductForm.controls['aliases'].value));
 
-      body.append('specifications_ar', JSON.stringify(this.addProductForm.controls['specification_ar'].value));
       for (let i = 0; i < this.images.length; i++) {
         body.append('images', this.images[i], this.images[i].name);
       }
       body.append('highlights', this.addProductForm.controls['highlights'].value)
       body.append('highlights_ar', this.addProductForm.controls['highlights_ar'].value)
-
       body.append('discount', this.addProductForm.controls['discount'].value)
 
       body.forEach((value, key) => {

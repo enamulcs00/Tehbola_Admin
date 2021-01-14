@@ -268,82 +268,82 @@ export class ProductComponent implements OnInit {
 
   }
 
-  onChangeFeatured(id, featured) {
+  // onChangeFeatured(id, featured) {
 
 
-    console.log(id, featured)
-    let data: any
-    let temp = id
-    for (let i = 0; i <= this.productList.length; i++) {
-      if (this.productList[i]._id == temp) {
-        if (featured === false) {
+  //   console.log(id, featured)
+  //   let data: any
+  //   let temp = id
+  //   for (let i = 0; i <= this.productList.length; i++) {
+  //     if (this.productList[i]._id == temp) {
+  //       if (featured === false) {
 
-          data = {
+  //         data = {
 
-            "id": temp,
-            "isFeatured": true
-          }
-        } else {
-          data = {
-            "id": temp,
-            "isFeatured": false
-          }
-        }
-        console.log(data)
-        this.progress = true
-        this.apiService.updateProduct(data).subscribe((res) => {
-          if (res.success) {
-            this.progress = false
-            this.commonService.successToast("Product Successfully Updated")
-            this.router.navigate(['/product'])
-            console.log(res)
-          } else {
-            this.progress = false
-            this.commonService.errorToast(res.message)
-          }
-        })
-      }
-    }
+  //           "id": temp,
+  //           "isFeatured": true
+  //         }
+  //       } else {
+  //         data = {
+  //           "id": temp,
+  //           "isFeatured": false
+  //         }
+  //       }
+  //       console.log(data)
+  //       this.progress = true
+  //       this.apiService.updateProduct(data, id).subscribe((res) => {
+  //         if (res.success) {
+  //           this.progress = false
+  //           this.commonService.successToast("Product Successfully Updated")
+  //           this.router.navigate(['/product'])
+  //           console.log(res)
+  //         } else {
+  //           this.progress = false
+  //           this.commonService.errorToast(res.message)
+  //         }
+  //       })
+  //     }
+  //   }
 
-  }
+  // }
 
 
-  onChangeEndorse(id, endorse) {
+  // onChangeEndorse(id, endorse) {
 
-    console.log(id, endorse)
-    let data: any
-    let temp = id
-    for (let i = 0; i <= this.productList.length; i++) {
-      if (this.productList[i]._id == temp) {
-        if (endorse === false) {
+  //   console.log(id, endorse)
+  //   let data: any
+  //   let temp = id
+  //   for (let i = 0; i <= this.productList.length; i++) {
+  //     if (this.productList[i]._id == temp) {
+  //       if (endorse === false) {
 
-          data = {
+  //         data = {
 
-            "id": temp,
-            "isEndorse": true
-          }
-        } else {
-          data = {
-            "id": temp,
-            "isEndorse": false
-          }
-        }
-        console.log(data)
-        this.progress = true
-        this.apiService.updateProduct(data).subscribe((res) => {
-          if (res.success) {
-            this.progress = false
-            this.commonService.successToast("Product Successfully Updated")
-            this.router.navigate(['/product'])
-            console.log(res)
-          } else {
-            this.progress = false
-            this.commonService.errorToast(res.message)
-          }
-        })
-      }
-    }
-  }
+  //           "id": temp,
+  //           "isEndorse": true
+  //         }
+  //       } else {
+  //         data = {
+  //           "id": temp,
+  //           "isEndorse": false
+  //         }
+  //       }
+  //       console.log(data)
+  //       this.progress = true
+  //       this.apiService.updateProduct(data).subscribe((res) => {
+  //         if (res.success) {
+  //           this.progress = false
+  //           this.commonService.successToast("Product Successfully Updated")
+  //           this.router.navigate(['/product'])
+  //           console.log(res)
+  //         } else {
+  //           this.progress = false
+  //           this.commonService.errorToast(res.message)
+  //         }
+  //       })
+  //     }
+  //   }
+  // }
 
   goToaddProduct() {
     this.router.navigate(['/addproduct'])
