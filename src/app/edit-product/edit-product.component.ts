@@ -114,7 +114,7 @@ export class EditProductComponent implements OnInit {
       console.log(res);
       if (res.success) {
         debugger
-        this.progress = false
+
         this.productData = res.data
         this.setValue(this.productData)
       } else {
@@ -143,6 +143,7 @@ export class EditProductComponent implements OnInit {
     this.setSpecifications(data.rawItems)
     this.setSearchKeywords(data.searchKeyword)
     this.previewImage = data.images;
+    this.progress = false
   }
 
 
@@ -154,9 +155,7 @@ export class EditProductComponent implements OnInit {
     return this.editProductForm.get('aliases') as FormArray;
   }
 
-  specification_ar(): FormArray {
-    return this.editProductForm.get('specification_ar') as FormArray;
-  }
+
   newSpecifiaction(): FormGroup {
     return this.fb.group({
       rawItem: new FormControl('', Validators.required),

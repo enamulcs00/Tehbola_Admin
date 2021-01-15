@@ -1,5 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormArray, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { CommonService } from 'src/services/common.service';
+
 
 @Component({
   selector: 'app-modal-ingredients',
@@ -8,9 +11,81 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class ModalIngredientsComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { name: string }) { }
+  dataForm: FormGroup
+  constructor(public dialogRef: MatDialogRef<ModalIngredientsComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, private commonService: CommonService) { }
 
   ngOnInit() {
+    console.log("data on dialog", this.data);
+
+    this.dataForm = this.fb.group({
+      equipment: this.fb.array([]),
+      rawitems: this.fb.array([])
+    })
+
+    this.setEquipment(this.data.data.selectedEquipment);
+    this.setRawItems(this.data.data.selectedRawItems)
   }
 
+
+  equipments(): FormArray {
+    return this.dataForm.get('equipment') as FormArray;
+  }
+
+  rawItems(): FormArray {
+    return this.dataForm.get('rawitems') as FormArray;
+  }
+
+
+  setEquipment(specification) {
+    debugger
+    const formArray = new FormArray([]);
+    for (let x of specification) {
+      formArray.push(this.fb.group({
+        id: new FormControl(x.id, Validators.required),
+        name: new FormControl({ value: x.name, disabled: true }, Validators.required),
+        assignedQuantity: new FormControl('', Validators.required),
+      }, Validators.required));
+    }
+    this.dataForm.setControl('equipment', formArray)
+  }
+
+  setRawItems(specification) {
+    const formArray = new FormArray([]);
+    for (let x of specification) {
+      formArray.push(this.fb.group({
+        rawItem: new FormControl(x.id, Validators.required),
+        name: new FormControl({ value: x.name, disabled: true }, Validators.required),
+        assignedQuantity: new FormControl('', Validators.required),
+      }, Validators.required));
+    }
+    this.dataForm.setControl('rawitems', formArray)
+  }
+
+
+  submit() {
+    debugger
+    // alert('submit method')
+    console.log("value", this.dataForm.value, this.dataForm.invalid);
+    console.log("data", this.data);
+
+
+    if (!this.dataForm.invalid) {
+      let data = this.data
+      delete data.data.selectedEquipment;
+      delete data.data.selectedRawItems
+      let data2 = {};
+      data2['vendor'] = data.data.selectedVendor.id;
+      data2['foodTruck'] = data.data.selectedFoodTruck.id;
+      data2['geoFence'] = data.data.selectedGeofence
+      data2['equipment'] = this.dataForm.get('equipment').value
+      data2['rawItems'] = this.dataForm.get('rawitems').value
+      console.log(data2);
+
+
+      this.dialogRef.close(data2)
+    } else {
+      this.commonService.errorToast('PLease Fill all the details')
+    }
+
+  }
 }

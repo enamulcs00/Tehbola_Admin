@@ -1,55 +1,67 @@
 <h2 mat-dialog-title>Confirm Quantity</h2>
 <mat-dialog-content class="mat-typography">
 
+    <h3> Vendor :- {{this.data.data.selectedVendor.name}}</h3>
+    <h3> Food Truck :- {{this.data.data.selectedFoodTruck.name}}</h3>
+
+
     <ul>
         <div class="row">
-            <div class="col-4">
-                <li>
-                    ingredient 1:
-                    <mat-form-field>
-                        <input type="number" matInput value="2">
-                    </mat-form-field>
-                </li>
-            </div>
-            <div class="col-4">
-                <li>
-                    ingredient 2:<mat-form-field>
-                        <input type="number" matInput value="1">
-                    </mat-form-field>
-                </li>
-            </div>
-            <div class="col-4">
+            <div class="row mt-3">
+                <div class="col-12">
 
-                <li>
-                    ingredient 3: <mat-form-field>
-                        <input type="number" matInput value="4">
-                    </mat-form-field>
-                </li>
-            </div>
-            <div class="col-4">
-                <li>
-                    ingredient 4:<mat-form-field>
-                        <input type="number" matInput value="1">
-                    </mat-form-field>
+                    <form [formGroup]="dataForm">
+                        <table class="table table-bordered" formArrayName="rawitems">
+                            <tr>
+                                <th colspan="2"> Raw Item:</th>
 
-                </li>
-            </div>
-            <div class="col-4">
-                <li>
-                    ingredient 5:
-                    <mat-form-field>
-                        <input type="number" matInput value="6">
-                    </mat-form-field>
+                            </tr>
+                            <tr *ngFor="let quantity of rawItems().controls; let i=index" [formGroupName]="i">
+                                <td style="width: 40%;">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Ingredient<span class="red">*</span></mat-label>
+                                        <input type="text" formControlName="name" matInput>
 
-                </li>
-            </div>
-            <div class="col-4">
-                <li>
-                    ingredient 6:<mat-form-field>
-                        <input type="number" matInput value="1">
-                    </mat-form-field>
+                                    </mat-form-field>
+                                </td>
+                                <td style="width: 40%;">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label> Quantity:</mat-label>
+                                        <input matInput type="number" min="0" formControlName="assignedQuantity">
+                                    </mat-form-field>
+                                </td>
 
-                </li>
+                            </tr>
+                        </table>
+
+
+                        <table class="table table-bordered" formArrayName="equipment">
+                            <tr>
+                                <th colspan="2"> Equipment:</th>
+
+                            </tr>
+                            <tr *ngFor="let quantity of equipments().controls; let i=index" [formGroupName]="i">
+                                <td style="width: 40%;">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Ingredient<span class="red">*</span></mat-label>
+                                        <input type="text" formControlName="name" matInput>
+
+                                    </mat-form-field>
+                                </td>
+                                <td style="width: 40%;">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label> Quantity:</mat-label>
+                                        <input matInput type="number" min="0" formControlName="assignedQuantity">
+                                    </mat-form-field>
+                                </td>
+
+                            </tr>
+                        </table>
+                        <mat-error *ngIf="dataForm.get('rawitems').hasError('required')">
+                            Raw Item are <strong>required</strong>
+                        </mat-error>
+                    </form>
+                </div>
             </div>
 
 
@@ -63,7 +75,7 @@
 
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Confirm</button>
+    <button mat-button [disabled]='dataForm.invalid' (click)="submit()">Confirm</button>
     <button mat-button mat-dialog-close>Reset</button>
 
 </mat-dialog-actions>

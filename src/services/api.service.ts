@@ -84,6 +84,9 @@ export class ApiService {
       editEquipment: 'admin/equipment',
       addEquipmentCategory: 'admin/equipmentCategory',
       editEquipmentCategory: 'admin/editEquipmentCategory',
+      getAssignementData: 'admin/assignmentData',
+      addAssignment: 'admin/assignment',
+      getAssignmentList: 'admin/assignments',
       //commonApi to change status of any user type
       status: 'common/status',
 
@@ -400,6 +403,19 @@ export class ApiService {
   deleteGeofence(id): Observable<any> {
     return this.http.delete<any>(`${this.apiEndPoints.viewGeofence}/${id}`, this.getHeaders()).pipe(catchError(this.handleError))
 
+  }
+
+
+  getAssignementData(): Observable<any> {
+    return this.http.get<any>(this.apiEndPoints.getAssignementData, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  addAssignment(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.addAssignment, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  getAssignmentList(isCompleted, isActive): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.getAssignmentList}?isCompleted=${isCompleted}&status=${isActive}`, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
   editBanner(body): Observable<any> {

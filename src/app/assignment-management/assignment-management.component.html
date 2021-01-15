@@ -22,166 +22,129 @@
                             <h5>{{date | date}}</h5>
                         </div>
                         <div class="card-body">
-                            <ul>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <li>
-                                            <!-- <label>Address<span class="red">*</span></label> -->
-                                            <mat-form-field class="example-full-width">
-                                                <mat-label>Select Vendor<span class="red">*</span></mat-label>
+                            <form [formGroup]="assignmentForm">
+                                <ul>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <li>
+                                                <!-- <label>Address<span class="red">*</span></label> -->
+                                                <mat-form-field class="example-full-width">
+                                                    <mat-label>Select Vendor<span class="red">*</span></mat-label>
+                                                    <mat-select formControlName="selectedVendor">
+                                                        <input matInput type="text" placeholder="Pick one"
+                                                            (keyup)='vendorSearch($event.target.value)'
+                                                            aria-label="Number">
 
-                                                <mat-select>
-                                                    <mat-option>
-                                                        Vendor 1
-                                                    </mat-option>
-                                                    <mat-option>
-                                                        Vendor 2
-                                                    </mat-option>
-                                                    <mat-option>
-                                                        Vendor 3
-                                                    </mat-option>
-                                                    <mat-option>
-                                                        Vendor 4
-                                                    </mat-option>
-                                                    <mat-option>
-                                                        Vendor 5
-                                                    </mat-option>
-
-                                                </mat-select>
+                                                        <mat-option *ngFor="let item of vendorList" [value]='item'>
+                                                            {{item.name}}
+                                                        </mat-option>
+                                                    </mat-select>
 
 
-                                            </mat-form-field>
-                                        </li>
-                                    </div>
-                                    <div class="col-6">
-                                        <li>
-                                            <mat-form-field class="example-full-width">
-                                                <mat-label>Select Food Truck<span class="red">*</span></mat-label>
-
-                                                <mat-select>
-                                                    <mat-option>
-                                                        Food Truck 1
-                                                    </mat-option>
-                                                    <mat-option>
-                                                        Food Truck 2
-                                                    </mat-option>
-                                                    <mat-option>
-                                                        Food Truck 3
-                                                    </mat-option>
-                                                    <mat-option>
-                                                        Food Truck 4
-                                                    </mat-option>
-                                                    <mat-option>
-                                                        Food Truck 5
-                                                    </mat-option>
-
-                                                </mat-select>
 
 
-                                            </mat-form-field>
-                                        </li>
+                                                </mat-form-field>
+                                            </li>
+                                        </div>
+                                        <div class="col-6">
+                                            <li>
+                                                <mat-form-field class="example-full-width">
+                                                    <mat-label>Select Food Truck<span class="red">*</span></mat-label>
+
+                                                    <mat-select formControlName="selectedFoodTruck">
+                                                        <input matInput type="text" placeholder="Pick one"
+                                                            (keyup)='foodTruckSearch($event.target.value)'
+                                                            aria-label="Number">
+                                                        <mat-option *ngFor="let item of truckList" [value]='item'>
+                                                            {{item.name}}-- {{item.truckNumber}}
+                                                        </mat-option>
+
+                                                    </mat-select>
+
+
+                                                </mat-form-field>
+                                            </li>
+                                        </div>
+
+
                                     </div>
 
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <li>
+                                                <mat-form-field class="example-full-width">
+                                                    <mat-label>Select GeoFence<span class="red">*</span></mat-label>
 
-                                </div>
+                                                    <mat-select formControlName="selectedGeofence" multiple>
+                                                        <input matInput type="text" placeholder="Pick one"
+                                                            (keyup)='geofenceSearch($event.target.value)'
+                                                            aria-label="Number">
+                                                        <mat-option *ngFor="let item of geofenceList" [value]='item.id'>
+                                                            {{item.name}}
+                                                        </mat-option>
 
-                                <div class="row">
-                                    <div class="col-6">
-                                        <li>
-                                            <mat-form-field class="example-full-width">
-                                                <mat-label>Select GeoFence<span class="red">*</span></mat-label>
-
-                                                <mat-select>
-                                                    <mat-option>
-                                                        GeoFence 1
-                                                    </mat-option>
-                                                    <mat-option>
-                                                        GeoFence 2
-                                                    </mat-option>
-                                                    <mat-option>
-                                                        GeoFence 3
-                                                    </mat-option>
-                                                    <mat-option>
-                                                        GeoFence 4
-                                                    </mat-option>
-                                                    <mat-option>
-                                                        GeoFence 5
-                                                    </mat-option>
-
-                                                </mat-select>
+                                                    </mat-select>
 
 
-                                            </mat-form-field>
-                                        </li>
+                                                </mat-form-field>
+                                            </li>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <li>
+                                                <mat-form-field class="example-full-width">
+                                                    <mat-label>Select Equipment<span class="red">*</span></mat-label>
+
+                                                    <mat-select formControlName="selectedEquipment" multiple>
+                                                        <input matInput type="text" placeholder="Pick one"
+                                                            (keyup)='equipmentSearch($event.target.value)'
+                                                            aria-label="Number">
+                                                        <mat-option *ngFor="let item of equipmentList" [value]='item'>
+                                                            {{item.name}}--- <b>Quantity Left {{item.quantity}} </b>
+                                                        </mat-option>
+
+                                                    </mat-select>
+
+
+                                                </mat-form-field>
+
+                                            </li>
+                                        </div>
                                     </div>
 
-                                    <div class="col-6">
-                                        <li>
-                                            <mat-form-field class="example-full-width">
-                                                <mat-label>Select Equipment<span class="red">*</span></mat-label>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <li>
+                                                <mat-form-field class="example-full-width">
+                                                    <mat-label>Select Ingredient<span class="red">*</span></mat-label>
 
-                                                <mat-select multiple>
-                                                    <mat-option>
-                                                        Equipment 1
-                                                    </mat-option>
-                                                    <mat-option>
-                                                        Equipment 2
-                                                    </mat-option>
-                                                    <mat-option>
-                                                        Equipment 3
-                                                    </mat-option>
-                                                    <mat-option>
-                                                        Equipment 4
-                                                    </mat-option>
-                                                    <mat-option>
-                                                        Equipment 5
-                                                    </mat-option>
-
-                                                </mat-select>
+                                                    <mat-select formControlName="selectedRawItems" multiple>
+                                                        <input matInput type="text" placeholder="Pick one"
+                                                            (keyup)='rawItemSearch($event.target.value)'
+                                                            aria-label="Number">
+                                                        <mat-option *ngFor="let item of rawItemList" [value]='item'>
+                                                            {{item.name}}--- <b style="float: right;">Please select
+                                                                quantity
+                                                                in multiple of
+                                                                {{item.quantity}}{{item.unit}}<span
+                                                                    class="material-icons">
+                                                                    assignment_late </span> </b>
+                                                        </mat-option>
 
 
-                                            </mat-form-field>
 
-                                        </li>
+                                                    </mat-select>
+                                                </mat-form-field>
+
+                                            </li>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-12">
-                                        <li>
-                                            <mat-form-field class="example-full-width">
-                                                <mat-label>Select Ingredient<span class="red">*</span></mat-label>
-
-                                                <mat-select multiple>
-                                                    <mat-option>
-                                                        Ingredient 1
-
-                                                    </mat-option>
-                                                    <mat-option>
-                                                        Ingredient 2
-                                                    </mat-option>
-                                                    <mat-option>
-                                                        Ingredient 3
-                                                    </mat-option>
-                                                    <mat-option>
-                                                        Ingredient 4
-                                                    </mat-option>
-                                                    <mat-option>
-                                                        Ingredient 5
-                                                    </mat-option>
-
-                                                </mat-select>
-                                            </mat-form-field>
-
-                                        </li>
-                                    </div>
-                                </div>
 
 
 
 
-                            </ul>
-
+                                </ul>
+                            </form>
                         </div>
                         <div class="card-footer">
                             <button mat-button (click)="openDialog()" class="mr-3">Save</button>
@@ -192,145 +155,81 @@
                 </div>
 
                 <div class="mt-5">
+                    <div class="card">
+                        <div class="search_fields">
+                            <div class="filters Booking_status">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Filter<span class="red">*</span></mat-label>
 
-                    <table>
-                        <tr>
-                            <th>Sr.no</th>
-                            <th>Date</th>
-                            <th>Vendor Name</th>
-                            <th>Truck Name</th>
-                            <th>Geofence Name</th>
-                            <th>Equipment Assigned</th>
-                            <th>Ingredient Assigned</th>
-                            <th class="Action">Action</th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>05/01/2021</td>
-                            <td>Vendor 1</td>
-                            <td>Truck 1</td>
-                            <td>Geofence 1</td>
-                            <td>
-                                <ul>
-                                    <li class="show"><i class="fa fa-eye"></i></li>
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li class="show"><i class="fa fa-eye"></i></li>
-                                </ul>
-                            </td>
+                                    <mat-select placeholder="Filter" [(ngModel)]="isCompleted"
+                                        (selectionChange)="filterSelected($event)">
+                                        <mat-option *ngIf="flag==true" value="">
+                                            Remove Filter
+                                        </mat-option>
 
-                            <td>
-                                <ul>
-                                    <li class="show"> <a style="margin-left:25px ;" href="javascript:;"
-                                            data-toggle="modal">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
+                                        <mat-option value="0">
+                                            Not Completed
+                                        </mat-option>
+                                        <mat-option value="1">
+                                            Completed
+                                        </mat-option>
 
-                                        <a style="margin-left: 20px;">
-                                            <i class="fa fa-trash"></i>
-                                        </a></li>
-                                </ul>
-                            </td>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
 
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>05/01/2021</td>
-                            <td>Vendor 2</td>
-                            <td>Truck 2</td>
-                            <td>Geofence 2</td>
-                            <td>
-                                <ul>
-                                    <li class="show"><i class="fa fa-eye"></i></li>
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li class="show"><i class="fa fa-eye"></i></li>
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li class="show"> <a style="margin-left:25px ;" href="javascript:;"
-                                            data-toggle="modal">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
+                        <table>
+                            <tr>
+                                <th>Sr.no</th>
+                                <th>Date</th>
+                                <th>Vendor Name</th>
+                                <th>Truck Name</th>
+                                <th>Geofence Name</th>
+                                <th>Equipment Assigned</th>
+                                <th>Ingredient Assigned</th>
+                                <th class="Action">Action</th>
+                            </tr>
+                            <tr *ngFor="let item of getAssignmentListData; let i=index">
+                                <td>{{i+1}}</td>
+                                <td>{{item.createdAt|date}}</td>
+                                <td>{{item?.vendor?.fullName}}</td>
+                                <td>{{item?.foodTruck?.name}}--{{item?.foodTruck?.vehicleNumber}}</td>
+                                <td>
+                                    <span *ngFor="let item1 of item.geoFence">
+                                        {{item1.name}}
+                                    </span>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li class="show"> <a (click)="getEquipment(item.equipment)"><i
+                                                    class="fa fa-eye"></i></a>
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li class="show"><a (click)="getRawItems(item.rawItems)"> <i
+                                                    class="fa fa-eye"></i></a></li>
+                                    </ul>
+                                </td>
 
-                                        <a style="margin-left: 20px;">
-                                            <i class="fa fa-trash"></i>
-                                        </a></li>
-                                </ul>
-                            </td>
+                                <td>
+                                    <ul>
+                                        <li class="show">
 
+                                            <a style="margin-left: 20px;" (click)="deleteAssignment(item._id)">
+                                                <i class="fa fa-trash"></i>
+                                            </a></li>
+                                    </ul>
+                                </td>
 
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>05/01/2021</td>
-                            <td>Vendor 3</td>
-                            <td>Truck 3</td>
-                            <td>Geofence 3</td>
-                            <td>
-                                <ul>
-                                    <li class="show"><i class="fa fa-eye"></i></li>
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li class="show"><i class="fa fa-eye"></i></li>
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li class="show"> <a style="margin-left:25px ;" href="javascript:;"
-                                            data-toggle="modal">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-
-                                        <a style="margin-left: 20px;">
-                                            <i class="fa fa-trash"></i>
-                                        </a></li>
-                                </ul>
-                            </td>
+                            </tr>
 
 
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>05/01/2021</td>
-                            <td>Vendor 4</td>
-                            <td>Truck 4</td>
-                            <td>Geofence 4 </td>
-                            <td>
-                                <ul>
-                                    <li class="show"><i class="fa fa-eye"></i></li>
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li class="show"><i class="fa fa-eye"></i></li>
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    <li class="show"> <a style="margin-left:25px ;" href="javascript:;"
-                                            data-toggle="modal">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
+                        </table>
 
-                                        <a style="margin-left: 20px;">
-                                            <i class="fa fa-trash"></i>
-                                        </a></li>
-                                </ul>
-                            </td>
-
-
-                        </tr>
-                    </table>
-
-
+                    </div>
 
 
                 </div>
@@ -354,5 +253,41 @@
 <div class="loader_bg" *ngIf="progress">
     <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#ffa200 ;" role="status">
         <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<button id="equipmentButton" style="display:none;" data-toggle="modal" data-target="#viewEquipmentList"></button>
+<div id="viewEquipmentList" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <h3>Category List</h3>
+                <ul>
+                    <li *ngFor="let item of equipmentListForModel; let i=index">
+                        {{i+1}} {{item.name}} {{item.assignedQuantity}}<br>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<button id="rawItemButton" style="display:none;" data-toggle="modal" data-target="#viewRawItemList"></button>
+<div id="viewRawItemList" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <h3>Category List</h3>
+                <ul>
+                    <li *ngFor="let item of rawItemListForModel; let i=index">
+                        {{i+1}} {{item.name}}-- {{item.assignedQuantity}}<br>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
     </div>
 </div>
