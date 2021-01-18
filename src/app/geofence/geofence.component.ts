@@ -39,7 +39,7 @@ export class GeofenceComponent implements OnInit {
 
 
   opened(event) {
-    debugger
+
     // alert('opened')
     console.log('test opened accordian', event);
 
@@ -48,7 +48,7 @@ export class GeofenceComponent implements OnInit {
 
     var drawPolygonArr: Array<google.maps.LatLng> = [];
     this.locationPoints.forEach(element => {
-      debugger
+
       this.lat = element.lat;
       this.lng = element.lng;
       drawPolygonArr.push(

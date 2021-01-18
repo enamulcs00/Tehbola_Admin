@@ -70,7 +70,7 @@ export class AddGeofenceComponent implements OnInit {
 
 
   initDrawingManager(map: any) { // method is used to create POLYGON
-    debugger
+
     const options = {
       drawingControl: true,
       drawingControlOptions: {
@@ -91,7 +91,7 @@ export class AddGeofenceComponent implements OnInit {
 
     google.maps.event.addListener(this.drawingManager, 'overlaycomplete',
       (event) => {
-        debugger
+
         if (event.type === google.maps.drawing.OverlayType.POLYGON) { //this is the coordinate, you can assign it to a variable or pass into another function. 
           this.polyarray = event.overlay.getPath().getArray();
           console.log(this.polyarray);
@@ -104,7 +104,7 @@ export class AddGeofenceComponent implements OnInit {
 
 
   save() {
-    debugger
+    
     if (this.geofenceName.valid && this.polyarray.length > 0) {
 
       this.progress = true

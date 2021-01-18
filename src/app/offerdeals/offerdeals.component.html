@@ -64,7 +64,6 @@
                                 </th> -->
                                 <th>Image</th>
                                 <th>Name</th>
-                                <th>Discount</th>
                                 <th>Status</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
@@ -80,7 +79,6 @@
                                     </figure>
                                 </td>
                                 <td>{{item?.name}}</td>
-                                <td>{{item?.discount}}%</td>
                                 <td>
                                     <div class="enable_disable">
                                         <mat-slide-toggle (change)="changeDiscountStatus(item._id,item?.status)"
@@ -93,53 +91,13 @@
                                 <td><a href="javascript:void(0)" class="button-pad add_city show" data-toggle="modal"
                                         data-target="#Add_city" (click)="getDAta(item._id)"><i style="color: #696969;"
                                             class="fa fa-eye"></i></a>
-                                    <div>
 
-                                        <!-- Modal define loaction edit state  -->
-                                        <div id="Add_city" class="modal fade" role="dialog">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-
-                                                    <div class="modal-body">
-                                                        <div *ngIf="modalData">
-                                                            <table>
-                                                                <tr>
-
-                                                                    <th>Name</th>
-                                                                    <th *ngIf="modalData.type!=='seller'">Arbic Name
-                                                                    </th>
-                                                                    <th *ngIf="modalData.type==='seller'"> Email</th>
-                                                                    <th>type</th>
-
-                                                                </tr>
-
-                                                                <tr *ngFor="let item of modalData.list">
-                                                                    <td *ngIf="item.name">
-                                                                        {{item?.name}}
-                                                                    </td>
-                                                                    <td *ngIf="item.firstName">
-                                                                        {{item?.firstName}} {{item?.lastName}}
-                                                                    </td>
-                                                                    <td *ngIf="item.name_ar">{{item?.name_ar}}</td>
-                                                                    <td *ngIf="item.email">{{item?.email}}</td>
-                                                                    <td>{{modalData?.type}}</td>
-
-
-                                                                </tr>
-
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                 </td>
 
                                 <td>
-                                    <div class="action" *ngIf="userDetails.roles=='admin'">
-                                        <ul *ngIf="item.isAdminAdded==true">
+                                    <div class="action">
+                                        <ul>
                                             <li class="show" (click)="goToviewdiscount(item._id)"><i
                                                     class="fa fa-eye"></i></li>
                                             <li class="edit" (click)="goToeditdiscount(item._id)"><i
@@ -147,42 +105,9 @@
                                             <li class="delete" (click)="deleteDiscount(item._id)"><i
                                                     class="fa fa-trash-o fa-fw"></i></li>
                                         </ul>
-                                        <ul *ngIf="item.isAdminAdded==false">
-                                            <ng-container *ngIf="item.isApproved; else elseTemplate">
-                                                <li class="show" (click)="goToviewdiscount(item._id)"><i
-                                                        class="fa fa-eye"></i></li>
-                                                <li class="delete" (click)="deleteDiscount(item._id)"><i
-                                                        class="fa fa-trash-o fa-fw"></i></li>
-                                            </ng-container>
-                                            <ng-template #elseTemplate>
-                                                <li class="show" (click)="accept(item._id, item.name, item.name_ar)"><i
-                                                        class="fa fa-check"></i>
-                                                </li>
 
-
-                                            </ng-template>
-
-                                            <li></li>
-                                        </ul>
                                     </div>
-                                    <div class="action" *ngIf="userDetails.roles!='admin'">
-                                        <ul *ngIf="item.isAdminAdded==false">
-                                            <ng-container *ngIf="item.isApproved; else elseTemplate">
-                                                <li class="show" (click)="goToviewdiscount(item._id)"><i
-                                                        class="fa fa-eye"></i></li>
-                                                <li class="edit" (click)="goToeditdiscount(item._id)"><i
-                                                        class="fa fa-pencil fa-fw"></i></li>
-                                                <li class="delete" (click)="deleteDiscount(item._id)"><i
-                                                        class="fa fa-trash-o fa-fw"></i></li>
-                                            </ng-container>
-                                            <ng-template #elseTemplate>
-                                                <p>Waiting For Approval</p>
 
-                                            </ng-template>
-
-                                            <li></li>
-                                        </ul>
-                                    </div>
 
                                 </td>
                             </tr>
@@ -204,5 +129,53 @@
 <div class="loader_bg" *ngIf="progress">
     <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#ffa200 ;" role="status">
         <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+
+
+<div id="Add_city" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div *ngIf="modalData">
+
+                    <ng-container *ngIf="modalData.type=='ad'; else elseTemplate">
+                        <h3>This banner is only for Advertisement</h3>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        <table>
+                            <tr>
+
+                                <th>Name</th>
+                                <th *ngIf="modalData.type!=='seller'">Arbic Name
+                                </th>
+                                <th *ngIf="modalData.type==='seller'"> Email</th>
+                                <th>type</th>
+
+                            </tr>
+                            <tr *ngFor="let item of modalData.list">
+                                <td *ngIf="item.name">
+                                    {{item?.name}}
+                                </td>
+                                <td *ngIf="item.fullName">
+                                    {{item?.fullName}}
+                                </td>
+                                <td *ngIf="item.name_ar">{{item?.name_ar}}</td>
+                                <td *ngIf="item.email">{{item?.email}}</td>
+                                <td>{{modalData?.type}}</td>
+
+
+                            </tr>
+                        </table>
+                    </ng-template>
+
+
+
+
+                </div>
+            </div>
+        </div>
     </div>
 </div>

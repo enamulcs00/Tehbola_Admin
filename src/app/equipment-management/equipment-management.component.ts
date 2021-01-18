@@ -159,7 +159,7 @@ export class EquipmentManagementComponent implements OnInit {
 
   editEquipment(id) {
     this.id = id
-    debugger
+
     this.apiService.viewEquipment(id).subscribe((res) => {
       if (res.data) {
         this.flagImage = false;
@@ -183,7 +183,7 @@ export class EquipmentManagementComponent implements OnInit {
 
   editEquipmentCategoryMethod(id, name, name_ar, description) {
     this.id = id
-    debugger
+
     this.editableCategory = id
     this.editEquipmentCategory.get('name').setValue(name);
     this.editEquipmentCategory.get('name_ar').setValue(name_ar);
@@ -348,7 +348,7 @@ export class EquipmentManagementComponent implements OnInit {
   }
 
   onUpdateBrand() {
-    debugger
+    
     this.submitted = true
     if (this.submitted && this.editEquipmentForm.valid) {
       let formData = new FormData();

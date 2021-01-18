@@ -15,6 +15,21 @@ interface Ready {
   value: string;
   viewValue: string;
 }
+
+interface goefence {
+  id: string;
+  name: string;
+}
+
+interface vendor {
+  id: string;
+  name: string;
+}
+
+interface Ready {
+  value: string;
+  viewValue: string;
+}
 @Component({
   selector: 'app-editdiscount',
   templateUrl: './editdiscount.component.html',
@@ -22,13 +37,15 @@ interface Ready {
 })
 export class EditdiscountComponent implements OnInit {
 
-  showCategory: boolean = false
-  showSubcategory: boolean
+
+
   showVendor: boolean
   showProduct: boolean
   categoryList = [];
   subCategoryList = [];
-  vendorList = [];
+  vendorList: Array<vendor> = [];
+  defaultVendorList: vendor[];
+
   productList = [];
   selectedItem = [];
   selectedCategoryItem = []
@@ -54,340 +71,106 @@ export class EditdiscountComponent implements OnInit {
   imageNotAccepted: boolean = true
   tempArray: any[];
   images: any = [];
+  progress: boolean;
+  geofenceList: Array<goefence> = [];
+  defaultGeofenceData: goefence[];
+  defaultProductList: any[];
+  discountDetails: any;
   sub: any;
   id: any;
-  discountDetails: any;
-  imageUrl: string;
   urlImage: boolean;
-  progress: boolean;
+  imageUrl: any;
+  ;
 
-
-  constructor(private router: Router, private route: ActivatedRoute, private apiService: ApiService, private fb: FormBuilder, private urlService: UrlService, private commonService: CommonService) {
+  constructor(private router: Router, private apiService: ApiService, private urlService: UrlService, private route: ActivatedRoute, private fb: FormBuilder, private commonService: CommonService) {
 
     this.userDetails = JSON.parse(sessionStorage.getItem('Markat_User'))
-    this.imageUrl = this.urlService.imageUrl
 
+    this.sub = this.route
+      .queryParams
+      .subscribe(params => {
+        // Defaults to 0 if no query param provided.
+        this.id = params['id'];
+
+      });
+
+    this.imageUrl = this.urlService.imageUrl
   }
 
-  showMultiCategory: boolean = false
+
 
 
   setradio(e: string) {
 
-    this.singleCategorySelection = true;
-    this.singleSubCategorySelection = true;
-    this.singleVendorSelection = true;
-    this.singleProductSelection = true;
+
     switch (e) {
-      case "category":
-        this.singleCategorySelection = false;
-        this.showCategory = true;
-        this.showSubcategory = false;
-        this.showVendor = false;
+      case "advertisment":
+        this.showVendor = false
         this.showProduct = false
-        console.log("category");
+        this.editDiscountForm.get('category').disable()
+        this.editDiscountForm.get('product').disable()
+        this.editDiscountForm.get('vendor').disable()
+        this.editDiscountForm.get('geofence').disable()
         break;
-      case "subcategory":
-        this.singleSubCategorySelection = false
-        this.showCategory = true;
-        this.showSubcategory = true;
-        this.showVendor = false;
-        this.showProduct = false
-        console.log("subcategory");
-        break;
-      case "brand":
+
+      case "vendor":
         this.singleVendorSelection = false
-        this.showCategory = true;
-        this.showSubcategory = true;
         this.showVendor = true;
-        this.showProduct = false
-        // this.selectedCategory = '';
-        // this.selectedSubCategory = '';
-        // console.log("brand");
+        this.showProduct = false;
+        this.editDiscountForm.get('category').disable()
+        this.editDiscountForm.get('product').disable()
+        this.editDiscountForm.get('vendor').enable()
+        this.editDiscountForm.get('geofence').enable()
         break;
       case "product":
-        this.singleProductSelection = false
-        this.showCategory = true;
-        this.showSubcategory = true;
-        this.showVendor = true;
+
         this.showProduct = true
+        this.showVendor = false;
+        this.editDiscountForm.get('category').enable()
+        this.editDiscountForm.get('product').enable()
+        this.editDiscountForm.get('vendor').disable()
+        this.editDiscountForm.get('geofence').disable()
+
         console.log("product");
         break;
     }
   }
 
 
-  // Receive user input and send to search method**
-  onKeyInCategory(value) {
-    // this.selectedItem = [];
-    this.selectedCategory = this.searchCategory(value).toString();
-  }
-
-  onKeyInSubCategory(value) {
-    // this.selectedItem = [];
-    this.selectedSubCategory = this.searchSubcategory(value).toString();
-  }
-  onKeyInVendor(value) {
-    // this.selectedItem = [];
-    this.selectedBrand = this.searchVendor(value).toString();
-  }
-  onKeyInProduct(value) {
-    //  this.selectedItem = [];
-    this.selectedProduct = this.searchProduct(value).toString();
-  }
 
 
-  searchCategory(value: string) {
-    let filter = value.toLowerCase();
-    return this.categoryList.filter(option => option.toLowerCase().startsWith(filter));
-  }
-  searchSubcategory(value: string) {
-    let filter = value.toLowerCase();
-    return this.subCategoryList.filter(option => option.toLowerCase().startsWith(filter));
-  }
-  searchVendor(value: string) {
-    let filter = value.toLowerCase();
-    return this.vendorList.filter(option => option.toLowerCase().startsWith(filter));
-  }
-  searchProduct(value: string) {
-    let filter = value.toLowerCase();
-    return this.productList.filter(option => option.toLowerCase().startsWith(filter));
-  }
+
   today
   endTommorow
-
   ngOnInit() {
-    this.sub = this.route
-      .queryParams
-      .subscribe(params => {
-        // Defaults to 0 if no query param provided.
-        this.id = params['id'];
-      });
-
-
+    this.getAssignmentdata();
+    this.getAllCategoryForAdmin()
+    this.getDiscount(this.id)
     this.today = moment(new Date()).format('YYYY-MM-DD');
-    // let currentDate = new Date().getDate();
-    // let currentMonth = new Date().getMonth();
-    // let year = new Date().getFullYear();
-    // //console.log(new Date(year, currentMonth, currentDate + 1))
-
-    // this.endTommorow = moment(new Date(year, currentMonth, currentDate + 1)).format('YYYY-MM-DD');
+    let currentDate = new Date().getDate();
+    let currentMonth = new Date().getMonth();
+    let year = new Date().getFullYear();
+    //console.log(new Date(year, currentMonth, currentDate + 1))
 
 
     this.editDiscountForm = this.fb.group({
-      disount: ['', [Validators.required, Validators.min(0)]],
+      // disount: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
-      type: ['', Validators.required],
-      dicountOn: ['',],
+      startTime: ['', Validators.required],
+      endTime: ['', Validators.required],
+      type: ['Home', Validators.required],
+      dicountOn: ['', Validators.required],
       name: ['', [Validators.required, Validators.maxLength(25)]],
-      name_ar: ['',],
-      gender: ['', Validators.required],
+      name_ar: ['', Validators.required],
+      vendor: ['', Validators.required],
+      geofence: ['', Validators.required],
+      category: ['', Validators.required],
+      product: ['', Validators.required],
+      //   gender: ['', Validators.required],
       bannerImage: ['',]
     })
-
-    if (this.userDetails.roles == 'admin') {
-      this.getAllCategoryForAdmin();
-      this.sellerId = ''
-    } else {
-      this.getAllCategory();
-      this.sellerId = this.userDetails._id
-      //  this.setradio('product');
-      this.editDiscountForm.get('dicountOn').setValue('product');
-
-    }
-    this.editDiscountForm.get('bannerImage').disable()
-
-    this.getDiscount(this.id);
-
-    this.categoryDropDownSettings = {
-
-      singleSelection: this.singleCategorySelection,
-      idField: 'id',
-      textField: 'name',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 10,
-      allowSearchFilter: true
-    }
-
-    this.subcategoryDropDownSettings = {
-
-      singleSelection: this.singleSubCategorySelection,
-      idField: 'id',
-      textField: 'name',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 10,
-      allowSearchFilter: true
-    }
-
-    this.vendorDropDownSettings = {
-
-      singleSelection: this.singleVendorSelection,
-      idField: 'id',
-      textField: 'name',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 10,
-      allowSearchFilter: true
-    }
-
-    this.productDropDownSettings = {
-
-      singleSelection: this.singleProductSelection,
-      idField: 'id',
-      textField: 'name',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 10,
-      allowSearchFilter: true
-    }
-
-
-
   }
-
-
-  getDiscount(id) {
-
-
-    this.apiService.getDisountDetails(id).subscribe(res => {
-      if (res.success) {
-        this.discountDetails = res.data;
-        console.log(this.discountDetails);
-        // this.editDiscountForm.controls['dicountOn'].setValue(this.discountDetails.onModel);
-        if (this.discountDetails.offer.type === "category") {
-          let lookForCategory = []
-          for (let i = 0; i < this.discountDetails.offer.list.length; i++) {
-            lookForCategory.push(this.discountDetails.offer.list[i].id)
-
-          }
-
-          this.lookUpForCategory(lookForCategory);
-        }
-        if (this.discountDetails.offer.type === "subCategory") {
-          let lookForSubCategory = []
-          for (let i = 0; i < this.discountDetails.offer.list.length; i++) {
-            lookForSubCategory.push(this.discountDetails.offer.list[i].id)
-
-          }
-          this.lookUpForSubCategory(lookForSubCategory, this.discountDetails.category);
-        }
-        if (this.discountDetails.offer.type === "brand") {
-          let lookForVendor = []
-          for (let i = 0; i < this.discountDetails.offer.list.length; i++) {
-            lookForVendor.push(this.discountDetails.offer.list[i]._id)
-
-          }
-
-          this.lookUpForVendor(lookForVendor, this.discountDetails.subCategory.id, this.discountDetails.category.id);
-        }
-        if (this.discountDetails.offer.type === "product") {
-          let lookForProduct = []
-          for (let i = 0; i < this.discountDetails.offer.list.length; i++) {
-            lookForProduct.push(this.discountDetails.offer.list[i].id)
-
-          }
-          this.lookUpForProduct(lookForProduct, this.discountDetails.subCategory.id, this.discountDetails.category.id, this.discountDetails.brand._id);
-
-        }
-
-
-
-        this.editDiscountForm.controls['endDate'].setValue(moment(this.discountDetails.endDate).format("YYYY-MM-DD"));
-        this.editDiscountForm.controls['type'].setValue(this.discountDetails.type);
-        this.imageNotAccepted = false
-        this.editDiscountForm.get('bannerImage').enable()
-
-        this.editDiscountForm.controls['startDate'].setValue(moment(this.discountDetails.startDate).format("YYYY-MM-DD"));
-        this.editDiscountForm.controls['disount'].setValue(this.discountDetails.discount);
-        this.editDiscountForm.controls['name_ar'].setValue(this.discountDetails.name_ar);
-        this.editDiscountForm.controls['name'].setValue(this.discountDetails.name);
-        this.editDiscountForm.controls['gender'].setValue(this.discountDetails.gender);
-
-        this.editDiscountForm.controls['dicountOn'].setValue(this.discountDetails.onModel.toLowerCase());
-        // this.editDiscountForm.controls['dicountOn'].setValue(this.discountDetails.onModel);
-        this.setradio(this.discountDetails.offer.type);
-        this.urlImage = true
-        this.previewImage = this.discountDetails.image;
-        this.imageFile = this.discountDetails.image;
-      }
-    })
-
-
-
-  }
-  typeSelected(e) {
-    console.log(e);
-    this.editDiscountForm.get('bannerImage').enable()
-    //  this.previewImage = ''
-    this.urlImage = false
-  }
-
-
-
-  lookUpForCategory(selectedList) {
-
-    console.log(selectedList)
-    let temp = []
-
-    for (let i = 0; i < this.categoryList.length; i++) {
-      for (let j = 0; j < selectedList.length; j++) {
-        if (selectedList[j] === this.categoryList[i].id) {
-          let body = {
-            'id': this.categoryList[i].id,
-            'name': this.categoryList[i].name,
-          }
-          temp.push(body);
-        }
-      }
-    }
-    this.selectedCategoryItem = temp;
-  }
-
-  categoryId: any
-  selectedSubcategoryList: any
-  lookUpForSubCategory(ls, la) {
-
-    this.selectedSubcategoryList = ls
-    this.categoryId = la.id
-    this.selectedCategory = la
-
-    this.getAllSubcategory(this.categoryId);
-
-
-  }
-  subCategoryId: any
-  selectedVendorList: any
-  lookUpForVendor(ls, subcategoryId, categoryId) {
-    console.log(ls);
-    this.selectedVendorList = ls
-    this.categoryId = categoryId;
-    this.subCategoryId = subcategoryId;
-    this.selectedCategory = this.categoryId;
-    this.selectedSubCategory = subcategoryId
-
-    this.getAllSubcategory(this.categoryId)
-    this.getAllVendor();
-
-  }
-  selectedProductList: any
-  lookUpForProduct(ls, subcategoryId, categoryId, brandId) {
-    console.log(ls)
-    this.selectedProductList = ls;
-    this.selectedCategory = categoryId;
-    this.selectedSubCategory = subcategoryId;
-    this.selectedBrand = brandId
-    this.getAllSubcategory(categoryId)
-    this.getAllVendor()
-    this.getAllProduct();
-    // this.selectedCategory = categoryId;
-    // this.selectedSubCategory = subcategoryId;
-
-  }
-
-
 
   ngAfterViewChecked(): void {
 
@@ -396,61 +179,54 @@ export class EditdiscountComponent implements OnInit {
     let thisMonth = done.month();
     let thisYear = done.year()
     let temp = new Date(thisYear, thisMonth, today + 1)
-    this.endTommorow = moment(temp).format('YYYY-MM-DD')
+    this.endTommorow = moment(temp).format('YYYY-MM-DD');
+
+
+    let startTime = moment(this.editDiscountForm.get('startTime').value, 'HH:mm').format('HHmm');
+
 
   }
 
 
+  vendorSearch(value) {
 
-  ngAfterContentChecked() {
+    console.log(value);
+    if (value.length > 0) {
 
+      this.vendorList = this.vendorList.filter((unit) => unit.name.indexOf(value) > -1);
 
-    this.categoryDropDownSettings = {
-
-      singleSelection: this.singleCategorySelection,
-      idField: 'id',
-      textField: 'name',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 10,
-      allowSearchFilter: true
+    } else {
+      this.vendorList = this.defaultVendorList
     }
-
-    this.subcategoryDropDownSettings = {
-
-      singleSelection: this.singleSubCategorySelection,
-      idField: 'id',
-      textField: 'name',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 10,
-      allowSearchFilter: true
-    }
-
-    this.vendorDropDownSettings = {
-
-      singleSelection: this.singleVendorSelection,
-      idField: 'id',
-      textField: 'name',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 10,
-      allowSearchFilter: true
-    }
-
-    this.productDropDownSettings = {
-
-      singleSelection: this.singleProductSelection,
-      idField: 'id',
-      textField: 'name',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 10,
-      allowSearchFilter: true
-    }
-
   }
+
+
+
+  geofenceSearch(value) {
+    this.defaultGeofenceData = this.geofenceList
+    console.log(value);
+    if (value.length > 0) {
+      this.geofenceList = this.geofenceList.filter((unit) => unit.name.indexOf(value) > -1);
+    } else {
+      this.geofenceList = this.defaultGeofenceData
+    }
+  }
+
+
+  productSearch(value) {
+
+    this.defaultProductList = this.productList
+    console.log(value);
+    if (value.length > 0) {
+      this.productList = this.productList.filter((unit) => unit.name.indexOf(value) > -1);
+    } else {
+      this.productList = this.defaultProductList
+    }
+  }
+
+
   async bannerImageEvent(event) {
+    debugger
     let tempfile: any
     let imageOk: boolean = true
     var img = new Image;
@@ -468,10 +244,10 @@ export class EditdiscountComponent implements OnInit {
           image: event.target.result
         }
         img.onload = () => {
-
+          debugger
           var height = img.height;
           var width = img.width;
-          if (this.editDiscountForm.get('type').value == 'Home Banner') {
+          if (this.editDiscountForm.get('type').value == 'Home') {
             if (height != width / 2) {
               this.commonService.errorToast("Image should be a Square size");
               imageOk = false
@@ -480,6 +256,7 @@ export class EditdiscountComponent implements OnInit {
             } else {
               this.commonService.successToast("Image Size is Ok");
               imageOk = true
+              this.urlImage = false
               this.previewImage = temp.image;
               this.images = tempfile
               return imageOk
@@ -494,7 +271,6 @@ export class EditdiscountComponent implements OnInit {
               this.commonService.successToast("Image Size is Ok");
               imageOk = true
               this.previewImage = temp.image;
-              this.urlImage = false
               this.images = tempfile;
 
               return imageOk
@@ -516,39 +292,107 @@ export class EditdiscountComponent implements OnInit {
     this.router.navigate(['offerdeals'])
   }
 
-  onCategorySelect(item: any) {
-    console.log(item.id);
 
-    const index = this.selectedCategoryItem.findIndex(o => o.id.toString() == item.id.toString());
-    if (index < 0) this.selectedCategoryItem.push(item);
+  getAssignmentdata() {
+    this.progress = true;
+    this.apiService.getAssignementData().subscribe(res => {
+      console.log(res);
+
+
+      this.progress = false
+      if (res.success) {
+        res.data.vendor.forEach(element => {
+          this.vendorList.push(
+            {
+              id: element._id,
+              name: element.fullName
+            })
+        });
+
+
+
+
+        res.data.geoFence.forEach(element => {
+          this.geofenceList.push(
+            {
+              id: element._id,
+              name: element.name,
+
+            })
+        });
+
+        this.defaultVendorList = this.vendorList
+        this.defaultGeofenceData = this.geofenceList
+
+      } else {
+        this.commonService.errorToast(res.message)
+      }
+
+    })
+  }
+
+
+
+
+  getDiscount(id) {
+
+
+    this.apiService.getDisountDetails(id).subscribe(res => {
+      if (res.success) {
+        debugger
+        this.discountDetails = res.data;
+        console.log(this.discountDetails);
+        // this.editDiscountForm.controls['dicountOn'].setValue(this.discountDetails.onModel);
+
+        if (this.discountDetails.offer.type === "ad") {
+          this.setradio('advertisment');
+          this.editDiscountForm.get('dicountOn').setValue('advertisment')
+
+        }
+        if (this.discountDetails.offer.type === "seller") {
+          this.setradio('vendor');
+          this.editDiscountForm.get('dicountOn').setValue('vendor');
+          this.editDiscountForm.get('vendor').setValue(this.discountDetails.vendor._id);
+          this.editDiscountForm.get('geofence').setValue(this.discountDetails.geoFence);
+        }
+        if (this.discountDetails.offer.type === "product") {
+          this.setradio('product');
+          let productList = []
+          this.categorySelected(this.discountDetails.category._id)
+          this.editDiscountForm.get('dicountOn').setValue('product');
+          this.discountDetails.offer.list.forEach(element => {
+            productList.push(element._id)
+          });
+          this.editDiscountForm.get('product').setValue(productList);
+          this.editDiscountForm.get('category').setValue(this.discountDetails.category._id);
+        }
+
+        this.editDiscountForm.controls['endDate'].setValue(moment(this.discountDetails.endDate).format("YYYY-MM-DD"));
+        this.editDiscountForm.controls['type'].setValue(this.discountDetails.type);
+        this.imageNotAccepted = false
+        this.editDiscountForm.get('bannerImage').enable()
+        this.editDiscountForm.get('startTime').setValue(moment(this.discountDetails.startTime, 'HHmm').format('HH:mm'))
+        this.editDiscountForm.get('endTime').setValue(moment(this.discountDetails.endTime, 'HHmm').format('HH:mm'))
+        this.editDiscountForm.controls['startDate'].setValue(moment(this.discountDetails.startDate).format("YYYY-MM-DD"));
+        this.editDiscountForm.controls['name_ar'].setValue(this.discountDetails.name_ar);
+        this.editDiscountForm.controls['name'].setValue(this.discountDetails.name);
+
+        this.editDiscountForm.controls['dicountOn'].setValue(this.discountDetails.onModel.toLowerCase());
+        // this.editDiscountForm.controls['dicountOn'].setValue(this.discountDetails.onModel);
+        //  this.setradio(this.discountDetails.offer.type);
+        this.urlImage = true
+        this.previewImage = this.discountDetails.image;
+        this.imageFile = this.discountDetails.image;
+      }
+    })
+
+
 
   }
 
-  onSubcategorySelect(item: any) {
 
-    const index = this.selectedSubcategoryItem.findIndex(o => o.id.toString() == item.id.toString());
-    if (index < 0) this.selectedSubcategoryItem.push(item)
-  }
 
-  onVendorSelect(item: any) {
 
-    const index = this.selectedVendorItem.findIndex(o => o.id.toString() == item.id.toString());
-    if (index < 0) this.selectedVendorItem.push(item)
-  }
-
-  onProductSelect(item: any) {
-
-    const index = this.selectedProductItem.findIndex(o => o.id.toString() == item.id.toString());
-    if (index < 0) this.selectedProductItem.push(item)
-  }
-
-  onSelectAll(items: any) {
-
-    console.log("selectedAll", items)
-    for (let i = 0; i < items.length; i++) {
-      this.selectedItem.push(items[i].id)
-    }
-  }
   type: Ready[] = [
     { value: 'Home Banner', viewValue: 'Home Banner' },
     { value: 'Home', viewValue: 'Banner' },
@@ -558,7 +402,6 @@ export class EditdiscountComponent implements OnInit {
   ];
 
   getAllCategoryForAdmin() {
-
     let temp = []
     this.categoryList = []
 
@@ -573,13 +416,11 @@ export class EditdiscountComponent implements OnInit {
               'id': res.data[i].id,
               'name': res.data[i].name
             }
-            temp.push(body);
+            this.categoryList.push(body)
+
 
           }
-          // this.editDiscountForm.controls['disount'].setValue('category');
-          this.categoryList = temp;
-          // this.setradio('category')
-          // this.editDiscountForm.controls['disountOn'].setValue('category');
+
         }
       }
     });
@@ -624,177 +465,28 @@ export class EditdiscountComponent implements OnInit {
 
     console.log("category :", id);
     this.selectedCategory = id;
-    this.getAllSubcategory(id);
-  }
-
-  getAllSubcategory(id) {
-
-    let temp = []
-    this.subCategoryList = []
-    if (this.selectedCategory) {
-      this.apiService.getAllSubCategoriesForDiscount(id).subscribe(res => {
-        if (res.success) {
-
-          console.log("subCategoryList", res)
-          if (res.data) {
-
-            for (let i = 0; i < res.data.length; i++) {
-              let body = {
-                'id': res.data[i].id,
-                'name': res.data[i].name
-              }
-              temp.push(body)
-            }
-
-          }
-        }
-        this.subCategoryList = temp;
-        if (this.categoryId) {
-          let temp1 = []
-
-          for (let i = 0; i < this.subCategoryList.length; i++) {
-            for (let j = 0; j < this.selectedSubcategoryList.length; j++) {
-              if (this.selectedSubcategoryList[j] === this.subCategoryList[i].id) {
-                let body = {
-                  'id': this.subCategoryList[i].id,
-                  'name': this.subCategoryList[i].name,
-                }
-                temp1.push(body);
-              }
-
-            }
-
-
-          }
-          this.selectedSubcategoryItem = temp1;
-        }
-      });
-
-    } else {
-      this.commonService.errorToast("Please Select a category.");
-
-    }
-
+    this.getAllProduct();
   }
 
 
-  selectedSubCategory = ''
-  subCategorySelected(id) {
-    console.log("subcategory:", id)
-    this.selectedSubCategory = id
-
-    this.getAllVendor();
-
-  }
-
-  getAllVendor() {
-
-    this.vendorList = []
-    let temp = []
-    if (this.selectedSubCategory) {
-
-
-      this.apiService.getBrandListbyCat(this.selectedCategory, this.selectedSubCategory).subscribe(res => {
-
-        if (res.success) {
-
-
-          console.log("brnadlist", res)
-          if (res.data) {
-            for (let i = 0; i < res.data.length; i++) {
-              let body = {
-                'id': res.data[i]._id,
-                'name': res.data[i].name
-
-              }
-              temp.push(body)
-            }
-          }
-
-        }
-        this.vendorList = temp
-        if (this.subCategoryId) {
-          let temp1 = []
-
-          for (let i = 0; i < this.vendorList.length; i++) {
-            for (let j = 0; j < this.selectedVendorList.length; j++) {
-              if (this.selectedVendorList[j] === this.vendorList[i].id) {
-                let body = {
-                  'id': this.vendorList[i].id,
-                  'name': this.vendorList[i].name,
-                }
-                temp1.push(body);
-              }
-
-            }
-
-
-          }
-          this.selectedVendorItem = temp1;
-
-        }
-      });
-    } else {
-      this.commonService.errorToast("Please Select a sub category first")
-    }
-  }
-
-  selectedBrand = ''
-  vendorSelected(e) {
-
-    console.log("vendor:", e)
-    this.selectedBrand = e
-    this.getAllProduct()
-  }
 
   getAllProduct() {
 
     this.productList = [];
     let temp = []
-    if (this.selectedSubCategory) {
-      let body = {
-        'categories': [this.selectedCategory],
-        'subCategories': [this.selectedSubCategory],
+    if (this.selectedCategory) {
 
-      }
-
-      this.apiService.getProductsforBanner(1, 10000, 'active', true, '', this.sellerId, this.selectedCategory, this.selectedSubCategory, this.selectedBrand).subscribe(res => {
+      this.apiService.getProductsforBanner(this.selectedCategory).subscribe(res => {
 
         if (res.success) {
           console.log("ProductList", res);
 
           if (res.data) {
-            for (let i = 0; i < res.data.length; i++) {
-              let body = {
-                'id': res.data[i].id,
-                'name': res.data[i].name,
-
-              }
-              temp.push(body)
-            }
+            this.productList = res.data
+            this.defaultProductList = this.productList;
           }
         }
-        this.productList = temp
-        if (this.selectedBrand) {
-          let temp1 = []
 
-          for (let i = 0; i < this.productList.length; i++) {
-            for (let j = 0; j < this.selectedProductList.length; j++) {
-              if (this.selectedProductList[j] === this.productList[i].id) {
-                let body = {
-                  'id': this.productList[i].id,
-                  'name': this.productList[i].name,
-                }
-                temp1.push(body);
-              }
-
-            }
-
-
-          }
-          this.selectedProductItem = temp1;
-
-        }
       });
     } else {
       this.commonService.errorToast("PLease select a vendor First")
@@ -808,195 +500,123 @@ export class EditdiscountComponent implements OnInit {
 
   }
 
+  typeSelected(e) {
+    console.log(e);
+    this.editDiscountForm.get('bannerImage').enable()
+
+  }
 
   checkBanner() {
-
+    debugger
     this.submitted = true
     console.log(this.editDiscountForm);
     let checkOffer = this.editDiscountForm.controls['dicountOn'].value;
-    if (checkOffer == "category") {
 
+
+    if (checkOffer == 'advertisment') {
       if (this.submitted && this.editDiscountForm.valid) {
-        if (this.selectedItem.length > 0) {
-          this.typeCategory(checkOffer, this.selectedItem);
-        } else {
-          if (this.selectedCategoryItem.length > 0) {
-            let selectedCategory = []
-            for (let i = 0; i < this.selectedCategoryItem.length; i++) {
-              selectedCategory.push(this.selectedCategoryItem[i].id)
-            }
-            this.typeCategory(checkOffer, selectedCategory);
-          } else {
-            this.commonService.errorToast("Please Select a category ")
-          }
-
-        }
+        this.typeAdvertisement();
       }
     }
-
-    if (checkOffer == 'subCategory') {
-      if (this.submitted && this.editDiscountForm.valid) {
-
-        if (this.selectedItem.length > 0) {
-          this.typeSubcategory(checkOffer, this.selectedItem);
-        } else {
-          let selectedSubCategory = [];
-          for (let i = 0; i < this.selectedSubcategoryItem.length; i++) {
-            selectedSubCategory.push(this.selectedSubcategoryItem[i].id)
-          }
-          this.typeSubcategory(checkOffer, selectedSubCategory);
-        }
-      }
-
-    }
-    if (checkOffer == 'brand') {
-      if (this.submitted && this.editDiscountForm.valid) {
-        if (this.selectedItem.length > 0) {
-          this.typeVendor(checkOffer, this.selectedItem);
-        } else {
-          let selectedVendor = [];
-          for (let i = 0; i < this.selectedVendorItem.length; i++) {
-            selectedVendor.push(this.selectedVendorItem[i].id)
-          }
-
-          this.typeVendor(checkOffer, selectedVendor);
-        }
-      }
-
+    if (checkOffer == 'vendor') {
+      this.typeVendor();
     }
     if (checkOffer == 'product') {
-      if (this.submitted && this.editDiscountForm.valid) {
-        if (this.selectedItem.length > 0) {
-          this.typeProduct(checkOffer, this.selectedItem);
-        } else {
-          let selectedProduct = [];
-          for (let i = 0; i < this.selectedProductItem.length; i++) {
-            selectedProduct.push(this.selectedProductItem[i].id)
-          }
-          this.typeProduct(checkOffer, selectedProduct);
-        }
-      }
-
+      this.typeProduct();
     }
 
 
   }
 
 
-  typeCategory(checkOffer, selectedCategoryItem) {
-    
+
+  typeAdvertisement() {
+    debugger
+    let startDate = moment(this.editDiscountForm.controls['startDate'].value).toLocaleString();
+    let endDate = moment(this.editDiscountForm.controls['endDate'].value).toLocaleString();
+    let startTime = moment(this.editDiscountForm.get('startTime').value, 'HH:mm').format('HHmm')
+    let endTime = moment(this.editDiscountForm.get('endTime').value, 'HH:mm').format('HHmm')
+    console.log(startDate, endDate, startTime, endTime);
+
+    let offer = {
+      'list': [""], 'type': 'ad'
+    }
+    const body = new FormData();
+    body.append('id', this.id);
+    body.append('name', this.editDiscountForm.controls['name'].value);
+    body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
+    body.append('image', this.images, this.images.name);
+    body.append('offer', JSON.stringify(offer));
+    body.append('type', this.editDiscountForm.controls['type'].value);
+    body.append('startDate', JSON.stringify(startDate));
+    body.append('endDate', JSON.stringify(endDate));
+    body.append('startTime', startTime);
+    body.append('endTime', endTime);
+    //Add banner method is getting called
+    this.addbanner(body);
+  }
+  typeVendor() { //
 
     let startDate = moment(this.editDiscountForm.controls['startDate'].value).toLocaleString();
-    let endDate = moment(this.editDiscountForm.controls['endDate'].value).toLocaleString()
+    let endDate = moment(this.editDiscountForm.controls['endDate'].value).toLocaleString();
+    let startTime = moment(this.editDiscountForm.get('startTime').value, 'HH:mm').format('HHmm')
+    let endTime = moment(this.editDiscountForm.get('endTime').value, 'HH:mm').format('HHmm')
     let offer = {
-      'list': selectedCategoryItem, 'type': checkOffer
+      'list': [this.editDiscountForm.get('vendor').value], 'type': 'seller'
     }
 
     const body = new FormData();
-    body.append('id', this.id)
+    body.append('id', this.id);
     body.append('name', this.editDiscountForm.controls['name'].value);
     body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
-    if (this.images.length > 0) {
-      body.append('image', this.images, this.images.name);
-    }
-    body.append('gender', JSON.stringify(this.editDiscountForm.controls['gender'].value));
+
+    body.append('image', new Blob([this.images], { type: 'image/*' }), this.images.name);
 
     body.append('type', this.editDiscountForm.controls['type'].value);
-    body.append('discount', this.editDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
+    body.append('geoFence', JSON.stringify(this.editDiscountForm.controls['geofence'].value));
+    body.append('vendor', this.editDiscountForm.get('vendor').value);
     body.append('startDate', JSON.stringify(startDate));
-    body.append('endDate', JSON.stringify(endDate))
+    body.append('endDate', JSON.stringify(endDate));
+    body.append('startTime', startTime);
+    body.append('endTime', endTime);
 
-
-    this.editBanner(body);
+    this.addbanner(body);
   }
+  typeProduct() {
 
-
-  typeSubcategory(checkOffer, selectedSubcategoryItem) {
 
     let startDate = moment(this.editDiscountForm.controls['startDate'].value).toLocaleString();
     let endDate = moment(this.editDiscountForm.controls['endDate'].value).toLocaleString();
+    let startTime = moment(this.editDiscountForm.get('startTime').value, 'HH:mm').format('HHmm')
+    let endTime = moment(this.editDiscountForm.get('endTime').value, 'HH:mm').format('HHmm')
     let offer = {
-      'list': selectedSubcategoryItem, 'type': checkOffer
+      'list': this.editDiscountForm.get('product').value, 'type': 'product'
     }
-
     const body = new FormData();
-    body.append('id', this.id)
-    body.append('category', this.selectedCategory)
+    body.append('id', this.id);
+    body.append('category', this.editDiscountForm.get('category').value);
     body.append('name', this.editDiscountForm.controls['name'].value);
     body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
-    if (this.images.length > 0) {
-      body.append('image', this.images, this.images.name);
-    } body.append('gender', JSON.stringify(this.editDiscountForm.controls['gender'].value));
-
+    debugger
+    body.append('image', this.images, this.images.name);
     body.append('type', this.editDiscountForm.controls['type'].value);
-    body.append('discount', this.editDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
+    //body.append('product', this.editDiscountForm.controls['product'].value);
     body.append('startDate', JSON.stringify(startDate));
     body.append('endDate', JSON.stringify(endDate));
+    body.append('startTime', startTime);
+    body.append('endTime', endTime);
 
-    this.editBanner(body);
-  }
-  typeVendor(checkOffer, selectedVendorItem) { //vendor is reused as brand
-
-    let startDate = moment(this.editDiscountForm.controls['startDate'].value).toLocaleString();
-    let endDate = moment(this.editDiscountForm.controls['endDate'].value).toLocaleString();
-    let offer = {
-      'list': selectedVendorItem, 'type': 'brand'
-    }
-
-    const body = new FormData();
-    body.append('id', this.id)
-    body.append('category', this.selectedCategory);
-    body.append('subCategory', this.selectedSubCategory);
-    body.append('name', this.editDiscountForm.controls['name'].value);
-    body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
-    body.append('gender', JSON.stringify(this.editDiscountForm.controls['gender'].value));
-
-    if (this.images.length > 0) {
-      body.append('image', this.images, this.images.name);
-    } body.append('type', this.editDiscountForm.controls['type'].value);
-    body.append('discount', this.editDiscountForm.controls['disount'].value);
-    body.append('offer', JSON.stringify(offer));
-    body.append('startDate', JSON.stringify(startDate));
-    body.append('endDate', JSON.stringify(endDate));
-
-    this.editBanner(body);
-  }
-  typeProduct(checkOffer, selectedItem) {
-
-    let startDate = moment(this.editDiscountForm.controls['startDate'].value).toLocaleString();
-    let endDate = moment(this.editDiscountForm.controls['endDate'].value).toLocaleString();
-    let offer = {
-      'list': selectedItem, 'type': checkOffer
-    }
-
-    const body = new FormData();
-    body.append('id', this.id)
-    body.append('category', this.selectedCategory);
-    body.append('subCategory', this.selectedSubCategory);
-    body.append('brand', this.selectedBrand);
-    body.append('gender', JSON.stringify(this.editDiscountForm.controls['gender'].value));
-
-    body.append('name', this.editDiscountForm.controls['name'].value);
-    body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
-    if (this.images.length > 0) {
-      body.append('image', this.images, this.images.name);
-    } body.append('type', this.editDiscountForm.controls['type'].value);
-    body.append('discount', this.editDiscountForm.controls['disount'].value);
-    body.append('offer', JSON.stringify(offer));
-    body.append('startDate', JSON.stringify(startDate));
-    body.append('endDate', JSON.stringify(endDate));
-
-    this.editBanner(body);
+    this.addbanner(body);
   }
 
 
 
 
 
-  editBanner(body) {
-    
+  addbanner(body) {
+
     this.tempArray = []
     this.tempArray.push(body);
     //  console.log(body)
@@ -1009,14 +629,20 @@ export class EditdiscountComponent implements OnInit {
       if (res.success) {
         this.progress = false
         this.router.navigateByUrl('offerdeals');
+
       } else {
-        this.progress = false
         this.commonService.errorToast(res.message)
+        this.progress = false
       }
     })
 
 
   }
 
-
 }
+
+
+
+
+
+

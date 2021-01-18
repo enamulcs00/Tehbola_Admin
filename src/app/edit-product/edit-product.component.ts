@@ -113,7 +113,7 @@ export class EditProductComponent implements OnInit {
     this.apiService.viewProduct(id).subscribe(res => {
       console.log(res);
       if (res.success) {
-        debugger
+
 
         this.productData = res.data
         this.setValue(this.productData)
@@ -126,7 +126,7 @@ export class EditProductComponent implements OnInit {
 
   }
   setValue(data: any) {
-    debugger
+    
     this.productId = data.productId
     this.editProductForm.get('name').setValue(data.name);
     this.editProductForm.get('name_ar').setValue(data.name_ar);
@@ -268,7 +268,7 @@ export class EditProductComponent implements OnInit {
 
 
   getAllSubcategory(id) {
-    debugger
+
     let temp = []
     this.subCategoryList = []
     if (this.selectedCategory) {

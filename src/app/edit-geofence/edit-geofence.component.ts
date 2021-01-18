@@ -54,7 +54,7 @@ export class EditGeofenceComponent implements OnInit {
   }
   ngAfterViewInit() { }
   ngOnInit() {
-    debugger
+
     this.sub = this.route
       .queryParams
       .subscribe(params => {
@@ -202,7 +202,7 @@ export class EditGeofenceComponent implements OnInit {
 
 
   onEdit(locationPoints, geoId) {
-    debugger
+
     this.geoFenceId = '';
     // console.log('geoId', geoId);
 

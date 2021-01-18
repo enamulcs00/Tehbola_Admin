@@ -228,7 +228,7 @@ export class FoodTruckManagementComponent implements OnInit {
   }
 
   onChangeBlockStatus(status, id) {
-    debugger
+    
     let body
     let temp = id
     for (let i = 0; i <= this.foodTruckList.length; i++) {

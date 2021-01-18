@@ -166,7 +166,8 @@ export class AssignmentManagementComponent implements OnInit {
 
 
   getRawItems(rawItemList) {
-    this.equipmentListForModel = ''
+
+    this.rawItemListForModel = ''
     this.rawItemListForModel = rawItemList
     console.log("modal list", this.rawItemListForModel);
 
@@ -180,7 +181,7 @@ export class AssignmentManagementComponent implements OnInit {
     this.progress = true;
     this.apiService.getAssignementData().subscribe(res => {
       console.log(res);
-      debugger
+
 
       this.progress = false
       if (res.success) {
@@ -259,7 +260,7 @@ export class AssignmentManagementComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      debugger
+
       console.log(`Dialog result: ${result}`);
       let tmp = result;
       console.log(tmp);
@@ -276,6 +277,7 @@ export class AssignmentManagementComponent implements OnInit {
       if (res.success) {
         this.getAssignmentList()
         this.commonService.successToast(res.message)
+        this.assignmentForm.reset()
       } else {
         this.commonService.errorToast(res.message)
       }

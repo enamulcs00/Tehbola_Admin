@@ -51,6 +51,7 @@ export class ApiService {
       editUser: 'admin/editUser',
       changePassword: 'app/changePassword',
       getProducts: 'admin/product',
+      getProductForBanner: 'admin/catProducts',
       editProduct: 'admin/product',
       addProduct: 'admin/product',
       getUser: 'admin/viewUser',
@@ -70,7 +71,7 @@ export class ApiService {
       getBrandList: 'admin/getAllItem',
       getAllCategoryForDiscount: 'admin/categoryByVendor',
       addBanner: 'admin/banner',
-      viewBanner: 'admin/viewBanner',
+      viewBanner: 'admin/banner',
       profile: 'admin/getProfile',
       updateProfile: 'admin/editProfile',
       downloadUserCSV: 'admin/userCsv',
@@ -436,7 +437,7 @@ export class ApiService {
   }
 
   getDisountDetails(id): Observable<any> {
-    return this.http.get<any>(`${this.apiEndPoints.viewBanner}?id=${id}`, this.getHeaders()).
+    return this.http.get<any>(`${this.apiEndPoints.viewBanner}/${id}`, this.getHeaders()).
       pipe(
         catchError(this.handleError<any>('get discount details')))
   }
@@ -544,9 +545,9 @@ export class ApiService {
   }
 
 
-  getProductsforBanner(page, count, filter, isApproved, search, seller, category, subCategory, brand) {
+  getProductsforBanner(category) {
     // console.log(id);
-    return this.http.get<any>(`${this.apiEndPoints.getProducts}?page=${page}&count=${count}&filter=${filter}&isApproved=${isApproved}&search=${search}&seller=${seller}&category=${category}&subCategory=${subCategory}&brand=${brand}`,
+    return this.http.get<any>(`${this.apiEndPoints.getProductForBanner}?category=${category}`,
       this.getHeaders()
     ).pipe(
       catchError(this.handleError<any>('Get Vendor Products'))

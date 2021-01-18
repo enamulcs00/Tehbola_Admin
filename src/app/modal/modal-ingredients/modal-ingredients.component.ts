@@ -37,7 +37,7 @@ export class ModalIngredientsComponent implements OnInit {
 
 
   setEquipment(specification) {
-    debugger
+
     const formArray = new FormArray([]);
     for (let x of specification) {
       formArray.push(this.fb.group({
@@ -63,7 +63,7 @@ export class ModalIngredientsComponent implements OnInit {
 
 
   submit() {
-    debugger
+
     // alert('submit method')
     console.log("value", this.dataForm.value, this.dataForm.invalid);
     console.log("data", this.data);

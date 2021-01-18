@@ -172,7 +172,7 @@ export class BrandlistComponent implements OnInit {
             this.subcategoryList = res.data
           }
         });
-        debugger
+
         console.log(res)
         this.editableBrandId = res.data._id
         this.editBrandForm.controls['name'].setValue(res.data.name);
@@ -249,7 +249,7 @@ export class BrandlistComponent implements OnInit {
 
 
   onAddBrand() {
-    debugger
+
     this.submitted = true
     if (this.submitted && this.addBrandForm.valid) {
       let body = this.addBrandForm.value
@@ -299,7 +299,7 @@ export class BrandlistComponent implements OnInit {
   }
 
   onUpdateBrand() {
-    debugger
+
     this.submitted = true
     if (this.submitted && this.editBrandForm.valid) {
       let formData = new FormData();

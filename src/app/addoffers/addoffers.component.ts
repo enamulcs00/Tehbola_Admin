@@ -11,22 +11,33 @@ interface Ready {
   value: string;
   viewValue: string;
 }
+
+interface goefence {
+  id: string;
+  name: string;
+}
+
+interface vendor {
+  id: string;
+  name: string;
+}
 @Component({
   selector: 'app-addoffers',
   changeDetection: ChangeDetectionStrategy.Default,
   templateUrl: './addoffers.component.html',
   styleUrls: ['./addoffers.component.scss']
 })
-export class AddoffersComponent implements OnInit, AfterContentChecked, AfterViewChecked {
+export class AddoffersComponent implements OnInit, AfterViewChecked {
 
 
-  showCategory: boolean = false
-  showSubcategory: boolean
+
   showVendor: boolean
   showProduct: boolean
   categoryList = [];
   subCategoryList = [];
-  vendorList = [];
+  vendorList: Array<vendor> = [];
+  defaultVendorList: vendor[];
+
   productList = [];
   selectedItem = [];
   selectedCategoryItem = []
@@ -53,105 +64,66 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   tempArray: any[];
   images: any = [];
   progress: boolean;
-
+  geofenceList: Array<goefence> = [];
+  defaultGeofenceData: goefence[];
+  defaultProductList: any[];
+  limitTime: string;
+  ;
 
   constructor(private router: Router, private apiService: ApiService, private fb: FormBuilder, private commonService: CommonService) {
 
     this.userDetails = JSON.parse(sessionStorage.getItem('Markat_User'))
 
-
   }
 
-  showMultiCategory: boolean = false
+
 
 
   setradio(e: string) {
 
-    this.singleCategorySelection = true;
-    this.singleSubCategorySelection = true;
-    this.singleVendorSelection = true;
-    this.singleProductSelection = true;
+
     switch (e) {
-      case "category":
-        this.singleCategorySelection = false;
-        this.showCategory = true;
-        this.showSubcategory = false;
-        this.showVendor = false;
+      case "advertisment":
+        this.showVendor = false
         this.showProduct = false
-        console.log("category");
+        this.addDiscountForm.get('category').disable()
+        this.addDiscountForm.get('product').disable()
+        this.addDiscountForm.get('vendor').disable()
+        this.addDiscountForm.get('geofence').disable()
         break;
-      case "subcategory":
-        this.singleSubCategorySelection = false
-        this.showCategory = true;
-        this.showSubcategory = true;
-        this.showVendor = false;
-        this.showProduct = false
-        console.log("subcategory");
-        break;
-      case "brand":
+
+      case "vendor":
         this.singleVendorSelection = false
-        this.showCategory = true;
-        this.showSubcategory = true;
         this.showVendor = true;
-        this.showProduct = false
-        this.selectedCategory = '';
-        this.selectedSubCategory = '';
-        console.log("brand");
+        this.showProduct = false;
+        this.addDiscountForm.get('category').disable()
+        this.addDiscountForm.get('product').disable()
+        this.addDiscountForm.get('vendor').enable()
+        this.addDiscountForm.get('geofence').enable()
         break;
       case "product":
-        this.singleProductSelection = false
-        this.showCategory = true;
-        this.showSubcategory = true;
-        this.showVendor = true;
+
         this.showProduct = true
-        this.selectedCategory = '';
-        this.selectedSubCategory = '';
+        this.showVendor = false;
+        this.addDiscountForm.get('category').enable()
+        this.addDiscountForm.get('product').enable()
+        this.addDiscountForm.get('vendor').disable()
+        this.addDiscountForm.get('geofence').disable()
+
         console.log("product");
         break;
     }
   }
 
 
-  // Receive user input and send to search method**
-  onKeyInCategory(value) {
-    // this.selectedItem = [];
-    this.selectedCategory = this.searchCategory(value).toString();
-  }
-
-  onKeyInSubCategory(value) {
-    // this.selectedItem = [];
-    this.selectedSubCategory = this.searchSubcategory(value).toString();
-  }
-  onKeyInVendor(value) {
-    // this.selectedItem = [];
-    this.selectedBrand = this.searchVendor(value).toString();
-  }
-  onKeyInProduct(value) {
-    //  this.selectedItem = [];
-    this.selectedProduct = this.searchProduct(value).toString();
-  }
 
 
-  searchCategory(value: string) {
-    let filter = value.toLowerCase();
-    return this.categoryList.filter(option => option.toLowerCase().startsWith(filter));
-  }
-  searchSubcategory(value: string) {
-    let filter = value.toLowerCase();
-    return this.subCategoryList.filter(option => option.toLowerCase().startsWith(filter));
-  }
-  searchVendor(value: string) {
-    let filter = value.toLowerCase();
-    return this.vendorList.filter(option => option.toLowerCase().startsWith(filter));
-  }
-  searchProduct(value: string) {
-    let filter = value.toLowerCase();
-    return this.productList.filter(option => option.toLowerCase().startsWith(filter));
-  }
+
   today
   endTommorow
   ngOnInit() {
-
+    this.getAssignmentdata();
+    this.getAllCategoryForAdmin()
 
     this.today = moment(new Date()).format('YYYY-MM-DD');
     let currentDate = new Date().getDate();
@@ -161,30 +133,24 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
 
 
     this.addDiscountForm = this.fb.group({
-      disount: ['', Validators.required],
+      // disount: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
-      type: ['', Validators.required],
+      startTime: ['', Validators.required],
+      endTime: ['', Validators.required],
+      type: ['Home', Validators.required],
       dicountOn: ['', Validators.required],
       name: ['', [Validators.required, Validators.maxLength(25)]],
       name_ar: ['', Validators.required],
-      gender: ['', Validators.required],
+      vendor: ['', Validators.required],
+      geofence: ['', Validators.required],
+      category: ['', Validators.required],
+      product: ['', Validators.required],
+      //   gender: ['', Validators.required],
       bannerImage: ['',]
     })
-
-    if (this.userDetails.roles == 'admin') {
-      this.getAllCategoryForAdmin();
-      this.sellerId = ''
-    } else {
-      this.getAllCategory();
-      this.sellerId = this.userDetails._id
-      //  this.setradio('product');
-      this.addDiscountForm.get('dicountOn').setValue('product');
-
-    }
-    this.addDiscountForm.get('bannerImage').disable()
-
   }
+
   ngAfterViewChecked(): void {
 
     let done = moment(this.addDiscountForm.controls['startDate'].value)
@@ -192,68 +158,64 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
     let thisMonth = done.month();
     let thisYear = done.year()
     let temp = new Date(thisYear, thisMonth, today + 1)
-    this.endTommorow = moment(temp).format('YYYY-MM-DD')
+    this.endTommorow = moment(temp).format('YYYY-MM-DD');
+
+
+
+
 
   }
 
-  // addEvent(event: MatDatepickerInputEvent<Date>) {
-  //   console.log(event)
-  //   let temp = moment(event.value).toDate();
-  //   let date = temp.getDate()
-  //   let mindate = date + 1
-  //   this.endTommorow = new Date(temp.getFullYear() + temp.getMonth() + mindate);
-  //   console.log(this.endTommorow)
-  // }
+  startTimeSelected() {
+    debugger
+    let startTime = moment(this.addDiscountForm.get('startTime').value, 'HH:mm');
+    let hours = startTime.hour();
+    let minute = startTime.minute();
+    let nextMinute = minute + 1
+    this.limitTime = hours + ':' + nextMinute;
+    console.log(this.limitTime);
 
-
-  ngAfterContentChecked() {
-
-
-    this.categoryDropDownSettings = {
-
-      singleSelection: this.singleCategorySelection,
-      idField: 'id',
-      textField: 'name',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 10,
-      allowSearchFilter: true
-    }
-
-    this.subcategoryDropDownSettings = {
-
-      singleSelection: this.singleSubCategorySelection,
-      idField: 'id',
-      textField: 'name',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 10,
-      allowSearchFilter: true
-    }
-
-    this.vendorDropDownSettings = {
-
-      singleSelection: this.singleVendorSelection,
-      idField: 'id',
-      textField: 'name',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 10,
-      allowSearchFilter: true
-    }
-
-    this.productDropDownSettings = {
-
-      singleSelection: this.singleProductSelection,
-      idField: 'id',
-      textField: 'name',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 10,
-      allowSearchFilter: true
-    }
-
+    console.log(hours);
   }
+
+
+  vendorSearch(value) {
+
+    console.log(value);
+    if (value.length > 0) {
+
+      this.vendorList = this.vendorList.filter((unit) => unit.name.indexOf(value) > -1);
+
+    } else {
+      this.vendorList = this.defaultVendorList
+    }
+  }
+
+
+
+  geofenceSearch(value) {
+    this.defaultGeofenceData = this.geofenceList
+    console.log(value);
+    if (value.length > 0) {
+      this.geofenceList = this.geofenceList.filter((unit) => unit.name.indexOf(value) > -1);
+    } else {
+      this.geofenceList = this.defaultGeofenceData
+    }
+  }
+
+
+  productSearch(value) {
+
+    this.defaultProductList = this.productList
+    console.log(value);
+    if (value.length > 0) {
+      this.productList = this.productList.filter((unit) => unit.name.indexOf(value) > -1);
+    } else {
+      this.productList = this.defaultProductList
+    }
+  }
+
+
   async bannerImageEvent(event) {
     let tempfile: any
     let imageOk: boolean = true
@@ -272,10 +234,10 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
           image: event.target.result
         }
         img.onload = () => {
-
+          debugger
           var height = img.height;
           var width = img.width;
-          if (this.addDiscountForm.get('type').value == 'Home Banner') {
+          if (this.addDiscountForm.get('type').value == 'Home') {
             if (height != width / 2) {
               this.commonService.errorToast("Image should be a Square size");
               imageOk = false
@@ -314,85 +276,55 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
 
 
 
-    // if (event.target.files && event.target.files[0]) {
-    //   var filesAmount = event.target.files.length;
-    //   for (let i = 0; i < filesAmount; i++) {
-    //     let name = event.target.files[i].name;
-    //     tempfile = event.target.files[i]
-    //     console.log("check image", event.target.files[i].size);
-    //     var reader = new FileReader();
-    //     let toasterService = this.commonService
-
-    //     reader.readAsDataURL(event.target.files[i])
-    //     reader.onload = (event: any) => {
-    //       img.src = event.target.result;
-    //       console.log(event.target.result);
-
-    //       let temp = {
-    //         name: name,
-    //         image: event.target.result
-    //       }
-
-    //       img.onload = () => {
-
-    //         var height = img.height;
-    //         var width = img.width;
-    //         if (height != width) {
-    //           toasterService.errorToast("Image should be a Square size");
-    //           imageOk = false
-    //           // this.pushImage();
-    //           return imageOk
-    //         } else {
-    //           toasterService.successToast("Image Size is Ok");
-    //           imageOk = true
-    //           this.previewImage = temp.image;
-    //           this.images.push(tempfile);
-
-    //           return imageOk
-    //         }
-
-    //       };
-    //     }
-    //   }
-    // }
-
   }
   goToofferdeals() {
     this.router.navigate(['offerdeals'])
   }
 
-  onCategorySelect(item: any) {
-    console.log(item.id);
 
-    const index = this.selectedCategoryItem.findIndex(o => o.id.toString() == item.id.toString());
-    if (index < 0) this.selectedCategoryItem.push(item);
+  getAssignmentdata() {
+    this.progress = true;
+    this.apiService.getAssignementData().subscribe(res => {
+      console.log(res);
 
+
+      this.progress = false
+      if (res.success) {
+        res.data.vendor.forEach(element => {
+          this.vendorList.push(
+            {
+              id: element._id,
+              name: element.fullName
+            })
+        });
+
+
+
+
+        res.data.geoFence.forEach(element => {
+          this.geofenceList.push(
+            {
+              id: element._id,
+              name: element.name,
+
+            })
+        });
+
+        this.defaultVendorList = this.vendorList
+        this.defaultGeofenceData = this.geofenceList
+
+      } else {
+        this.commonService.errorToast(res.message)
+      }
+
+    })
   }
 
-  onSubcategorySelect(item: any) {
 
-    const index = this.selectedSubcategoryItem.findIndex(o => o.id.toString() == item.id.toString());
-    if (index < 0) this.selectedSubcategoryItem.push(item)
-  }
 
-  onVendorSelect(item: any) {
 
-    const index = this.selectedVendorItem.findIndex(o => o.id.toString() == item.id.toString());
-    if (index < 0) this.selectedVendorItem.push(item)
-  }
 
-  onProductSelect(item: any) {
 
-    const index = this.selectedProductItem.findIndex(o => o.id.toString() == item.id.toString());
-    if (index < 0) this.selectedProductItem.push(item)
-  }
-  onSelectAll(items: any) {
-
-    console.log(items)
-    for (let i = 0; i < items.length; i++) {
-      this.selectedItem.push(items[i].id)
-    }
-  }
   type: Ready[] = [
     { value: 'Home Banner', viewValue: 'Home Banner' },
     { value: 'Home', viewValue: 'Banner' },
@@ -416,18 +348,16 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
               'id': res.data[i].id,
               'name': res.data[i].name
             }
-            temp.push(body);
+            this.categoryList.push(body)
+
 
           }
-          // this.addDiscountForm.controls['disount'].setValue('category');
 
-          // this.setradio('category')
-          // this.addDiscountForm.controls['disountOn'].setValue('category');
         }
       }
     });
 
-    this.categoryList = temp;
+
 
   }
 
@@ -467,118 +397,28 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
 
     console.log("category :", id);
     this.selectedCategory = id;
-    this.getAllSubcategory(id);
-  }
-
-  getAllSubcategory(id) {
-
-    let temp = []
-    this.subCategoryList = []
-    if (this.selectedCategory) {
-      this.apiService.getAllSubCategoriesForDiscount(id).subscribe(res => {
-        if (res.success) {
-
-          console.log("subCategoryList", res)
-          if (res.data) {
-
-            for (let i = 0; i < res.data.length; i++) {
-              let body = {
-                'id': res.data[i].id,
-                'name': res.data[i].name
-              }
-              temp.push(body)
-            }
-
-          }
-        }
-        this.subCategoryList = temp;
-      });
-
-    } else {
-      this.commonService.errorToast("Please Select a category.");
-
-    }
-
+    this.getAllProduct();
   }
 
 
-  selectedSubCategory = ''
-  subCategorySelected(id) {
-    console.log("subcategory:", id)
-    this.selectedSubCategory = id
-
-    this.getAllVendor();
-
-  }
-
-  getAllVendor() {
-
-    this.vendorList = []
-    let temp = []
-    if (this.selectedSubCategory) {
-
-
-      this.apiService.getBrandListbyCat(this.selectedCategory, this.selectedSubCategory).subscribe(res => {
-
-        if (res.success) {
-
-
-          console.log("brnadlist", res)
-          if (res.data) {
-            for (let i = 0; i < res.data.length; i++) {
-              let body = {
-                'id': res.data[i]._id,
-                'name': res.data[i].name
-
-              }
-              temp.push(body)
-            }
-          }
-
-        }
-        this.vendorList = temp
-      });
-    } else {
-      this.commonService.errorToast("Please Select a sub category first")
-    }
-  }
-
-  selectedBrand = ''
-  vendorSelected(e) {
-
-    console.log("vendor:", e)
-    this.selectedBrand = e
-    this.getAllProduct()
-  }
 
   getAllProduct() {
 
     this.productList = [];
     let temp = []
-    if (this.selectedSubCategory) {
-      let body = {
-        'categories': [this.selectedCategory],
-        'subCategories': [this.selectedSubCategory],
+    if (this.selectedCategory) {
 
-      }
-
-      this.apiService.getProductsforBanner(1, 10000, 'active', true, '', this.sellerId, this.selectedCategory, this.selectedSubCategory, this.selectedBrand).subscribe(res => {
+      this.apiService.getProductsforBanner(this.selectedCategory).subscribe(res => {
 
         if (res.success) {
           console.log("ProductList", res);
 
           if (res.data) {
-            for (let i = 0; i < res.data.length; i++) {
-              let body = {
-                'id': res.data[i].id,
-                'name': res.data[i].name,
-
-              }
-              temp.push(body)
-            }
+            this.productList = res.data
+            this.defaultProductList = this.productList;
           }
         }
-        this.productList = temp
+
       });
     } else {
       this.commonService.errorToast("PLease select a vendor First")
@@ -599,188 +439,146 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
   }
 
   checkBanner() {
-
+    debugger
     this.submitted = true
     console.log(this.addDiscountForm);
     let checkOffer = this.addDiscountForm.controls['dicountOn'].value;
-    if (checkOffer == "category") {
+    // if (checkOffer == "category") {
 
+    //   if (this.submitted && this.addDiscountForm.valid) {
+    //     if (this.selectedItem.length > 0) {
+    //       this.typeCategory(checkOffer, this.selectedItem);
+    //     } else {
+    //       if (this.selectedCategoryItem.length > 0) {
+    //         let selectedCategory = []
+    //         for (let i = 0; i < this.selectedCategoryItem.length; i++) {
+    //           selectedCategory.push(this.selectedCategoryItem[i].id)
+    //         }
+    //         this.typeCategory(checkOffer, selectedCategory);
+    //       } else {
+    //         this.commonService.errorToast("Please Select a Category ")
+    //       }
+
+    //     }
+    //   }
+    // }
+
+    if (checkOffer == 'advertisment') {
       if (this.submitted && this.addDiscountForm.valid) {
-        if (this.selectedItem.length > 0) {
-          this.typeCategory(checkOffer, this.selectedItem);
-        } else {
-          if (this.selectedCategoryItem.length > 0) {
-            let selectedCategory = []
-            for (let i = 0; i < this.selectedCategoryItem.length; i++) {
-              selectedCategory.push(this.selectedCategoryItem[i].id)
-            }
-            this.typeCategory(checkOffer, selectedCategory);
-          } else {
-            this.commonService.errorToast("Please Select a Category ")
-          }
-
-        }
+        this.typeAdvertisement();
       }
     }
-
-    if (checkOffer == 'subCategory') {
-      if (this.submitted && this.addDiscountForm.valid) {
-
-        if (this.selectedItem.length > 0) {
-          this.typeSubcategory(checkOffer, this.selectedItem);
-        } else {
-          if (this.selectedCategoryItem.length > 0) {
-            let selectedSubCategory = [];
-            for (let i = 0; i < this.selectedSubcategoryItem.length; i++) {
-              selectedSubCategory.push(this.selectedSubcategoryItem[i].id)
-            }
-            this.typeSubcategory(checkOffer, selectedSubCategory);
-          } else {
-            this.commonService.errorToast("Please Select a Sub-category ")
-          }
-        }
-      }
-
-    }
-    if (checkOffer == 'brand') {
-      if (this.submitted && this.addDiscountForm.valid) {
-        if (this.selectedItem.length > 0) {
-          this.typeVendor(checkOffer, this.selectedItem);
-        } else {
-          if (this.selectedVendorItem.length > 0) {
-            let selectedVendor = [];
-            for (let i = 0; i < this.selectedVendorItem.length; i++) {
-              selectedVendor.push(this.selectedVendorItem[i].id)
-            }
-
-            this.typeVendor(checkOffer, selectedVendor);
-          } else {
-            this.commonService.errorToast("Please Select a Brand ")
-          }
-        }
-      }
-
+    if (checkOffer == 'vendor') {
+      this.typeVendor();
     }
     if (checkOffer == 'product') {
-      if (this.submitted && this.addDiscountForm.valid) {
-        if (this.selectedItem.length > 0) {
-          this.typeProduct(checkOffer, this.selectedItem);
-        } else {
-          if (this.selectedProductItem.length > 0) {
-            let selectedProduct = [];
-            for (let i = 0; i < this.selectedProductItem.length; i++) {
-              selectedProduct.push(this.selectedProductItem[i].id)
-            }
-            this.typeProduct(checkOffer, selectedProduct);
-          } else {
-            this.commonService.errorToast("Please Select a Product ")
-          }
-        }
-      }
-
+      this.typeProduct();
     }
 
 
   }
 
 
-  typeCategory(checkOffer, selectedCategoryItem) {
+  // typeCategory(checkOffer, selectedCategoryItem) {
 
 
+  //   let startDate = moment(this.addDiscountForm.controls['startDate'].value).toLocaleString();
+  //   let endDate = moment(this.addDiscountForm.controls['endDate'].value).toLocaleString()
+  //   let offer = {
+  //     'list': selectedCategoryItem, 'type': checkOffer
+  //   }
+
+  //   const body = new FormData();
+  //   body.append('name', this.addDiscountForm.controls['name'].value);
+  //   body.append('name_ar', this.addDiscountForm.controls['name_ar'].value);
+
+  //   body.append('image', this.images, this.images.name);
+  //   body.append('gender', JSON.stringify(this.addDiscountForm.controls['gender'].value));
+
+  //   body.append('type', this.addDiscountForm.controls['type'].value);
+  //   body.append('discount', this.addDiscountForm.controls['disount'].value);
+  //   body.append('offer', JSON.stringify(offer));
+  //   body.append('startDate', JSON.stringify(startDate));
+  //   body.append('endDate', JSON.stringify(endDate))
+
+
+  //   this.addbanner(body);
+  // }
+
+
+  typeAdvertisement() {
+    debugger
     let startDate = moment(this.addDiscountForm.controls['startDate'].value).toLocaleString();
-    let endDate = moment(this.addDiscountForm.controls['endDate'].value).toLocaleString()
-    let offer = {
-      'list': selectedCategoryItem, 'type': checkOffer
-    }
+    let endDate = moment(this.addDiscountForm.controls['endDate'].value).toLocaleString();
+    let startTime = moment(this.addDiscountForm.get('startTime').value, 'HH:mm').format('HHmm')
+    let endTime = moment(this.addDiscountForm.get('endTime').value, 'HH:mm').format('HHmm')
+    console.log(startDate, endDate, startTime, endTime);
 
+    let offer = {
+      'list': [""], 'type': 'ad'
+    }
     const body = new FormData();
     body.append('name', this.addDiscountForm.controls['name'].value);
     body.append('name_ar', this.addDiscountForm.controls['name_ar'].value);
-
     body.append('image', this.images, this.images.name);
-    body.append('gender', JSON.stringify(this.addDiscountForm.controls['gender'].value));
-
-    body.append('type', this.addDiscountForm.controls['type'].value);
-    body.append('discount', this.addDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
+    body.append('type', this.addDiscountForm.controls['type'].value);
     body.append('startDate', JSON.stringify(startDate));
-    body.append('endDate', JSON.stringify(endDate))
-
-
+    body.append('endDate', JSON.stringify(endDate));
+    body.append('startTime', startTime);
+    body.append('endTime', endTime);
+    //Add banner method is getting called
     this.addbanner(body);
   }
-
-
-  typeSubcategory(checkOffer, selectedSubcategoryItem) {
+  typeVendor() { //
 
     let startDate = moment(this.addDiscountForm.controls['startDate'].value).toLocaleString();
     let endDate = moment(this.addDiscountForm.controls['endDate'].value).toLocaleString();
+    let startTime = moment(this.addDiscountForm.get('startTime').value, 'HH:mm').format('HHmm')
+    let endTime = moment(this.addDiscountForm.get('endTime').value, 'HH:mm').format('HHmm')
     let offer = {
-      'list': selectedSubcategoryItem, 'type': checkOffer
+      'list': [this.addDiscountForm.get('vendor').value], 'type': 'seller'
     }
 
     const body = new FormData();
-    body.append('category', this.selectedCategory)
     body.append('name', this.addDiscountForm.controls['name'].value);
     body.append('name_ar', this.addDiscountForm.controls['name_ar'].value);
+
     body.append('image', this.images, this.images.name);
-    body.append('gender', JSON.stringify(this.addDiscountForm.controls['gender'].value));
 
     body.append('type', this.addDiscountForm.controls['type'].value);
-    body.append('discount', this.addDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
+    body.append('geoFence', JSON.stringify(this.addDiscountForm.controls['geofence'].value));
+    body.append('vendor', this.addDiscountForm.get('vendor').value);
     body.append('startDate', JSON.stringify(startDate));
     body.append('endDate', JSON.stringify(endDate));
+    body.append('startTime', startTime);
+    body.append('endTime', endTime);
 
     this.addbanner(body);
   }
-  typeVendor(checkOffer, selectedVendorItem) { //vendor is reused as brand
-
-    let startDate = moment(this.addDiscountForm.controls['startDate'].value).toLocaleString();
-    let endDate = moment(this.addDiscountForm.controls['endDate'].value).toLocaleString();
-    let offer = {
-      'list': selectedVendorItem, 'type': 'brand'
-    }
-
-    const body = new FormData();
-    body.append('category', this.selectedCategory);
-    body.append('subCategory', this.selectedSubCategory);
-    body.append('name', this.addDiscountForm.controls['name'].value);
-    body.append('name_ar', this.addDiscountForm.controls['name_ar'].value);
-    body.append('gender', JSON.stringify(this.addDiscountForm.controls['gender'].value));
-
-    body.append('image', this.images, this.images.name);
-    body.append('type', this.addDiscountForm.controls['type'].value);
-    body.append('discount', this.addDiscountForm.controls['disount'].value);
-    body.append('offer', JSON.stringify(offer));
-    body.append('startDate', JSON.stringify(startDate));
-    body.append('endDate', JSON.stringify(endDate));
-
-    this.addbanner(body);
-  }
-  typeProduct(checkOffer, selectedItem) {
+  typeProduct() {
 
 
     let startDate = moment(this.addDiscountForm.controls['startDate'].value).toLocaleString();
     let endDate = moment(this.addDiscountForm.controls['endDate'].value).toLocaleString();
+    let startTime = moment(this.addDiscountForm.get('startTime').value, 'HH:mm').format('HHmm')
+    let endTime = moment(this.addDiscountForm.get('endTime').value, 'HH:mm').format('HHmm')
     let offer = {
-      'list': selectedItem, 'type': checkOffer
+      'list': this.addDiscountForm.get('product').value, 'type': 'product'
     }
-
     const body = new FormData();
-    body.append('category', this.selectedCategory);
-    body.append('subCategory', this.selectedSubCategory);
-    body.append('brand', this.selectedBrand);
-    body.append('gender', JSON.stringify(this.addDiscountForm.controls['gender'].value));
-
+    body.append('category', this.addDiscountForm.get('category').value);
     body.append('name', this.addDiscountForm.controls['name'].value);
     body.append('name_ar', this.addDiscountForm.controls['name_ar'].value);
     body.append('image', this.images, this.images.name);
     body.append('type', this.addDiscountForm.controls['type'].value);
-    body.append('discount', this.addDiscountForm.controls['disount'].value);
     body.append('offer', JSON.stringify(offer));
+    //body.append('product', this.addDiscountForm.controls['product'].value);
     body.append('startDate', JSON.stringify(startDate));
     body.append('endDate', JSON.stringify(endDate));
+    body.append('startTime', startTime);
+    body.append('endTime', endTime);
 
     this.addbanner(body);
   }
@@ -790,7 +588,7 @@ export class AddoffersComponent implements OnInit, AfterContentChecked, AfterVie
 
 
   addbanner(body) {
-    
+
     this.tempArray = []
     this.tempArray.push(body);
     //  console.log(body)

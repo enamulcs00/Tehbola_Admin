@@ -5,109 +5,282 @@
             <app-sidebar></app-sidebar>
             <div class="container-fluid">
                 <div class="sub_heading">
-                    <h1>View Discount</h1>
-                    <a (click)="goToofferdeals()">Back To List</a>
+                    <h1>Add Banner</h1>
+                    <div class="input_divs2 input_button input_button2">
+                        <button class="btn_back" mat-button (click)="goToofferdeals()"><i class="fa fa-long-arrow-left"
+                                aria-hidden="true"></i></button>
+                    </div>
                 </div>
-                <!-----start input fields------>
-                <div class="add_user_list">
-                    <ul>
-                        <li>
-                            <label>Name<span class="red">*</span></label>
+                <form [formGroup]="editDiscountForm">
+                    <!-----start input fields------>
+                    <div class="add_user_list">
+                        <div>
+                            <fieldset>
+
+                                Advertisment Banner
+                                <input type="radio" formControlName="dicountOn" name="dicountOn"
+                                    (click)="setradio('advertisment')" value="advertisment">&nbsp;&nbsp;
+                                Vednor
+                                <input type="radio" formControlName="dicountOn" name="dicountOn"
+                                    (click)="setradio('vendor')" value="vendor">&nbsp;&nbsp;
+                                Product
+                                <input type="radio" formControlName="dicountOn" name="dicountOn"
+                                    (click)="setradio('product')" value="product">&nbsp;&nbsp;
+                            </fieldset>
+                            <mat-error *ngIf="submitted && editDiscountForm.controls['dicountOn'].hasError('required')">
+                                Offer type is <strong>required</strong>
+                            </mat-error>
+                        </div>
+                        <ul>
+                            <li *ngIf="showProduct">
+
+                                <mat-form-field>
+                                    <mat-label>Select Category<span class="red">*</span></mat-label>
+                                    <mat-select formControlName="category"
+                                        (selectionChange)="categorySelected($event.value)">
+                                        <input matInput placeholder="Search Category">
+                                        <mat-option *ngFor="let body of categoryList" [value]="body.id">{{body.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                            </li>
+
+                            <li *ngIf="showVendor">
+
+                                <mat-form-field>
+                                    <mat-label>Select Vendor<span class="red">*</span></mat-label>
+                                    <mat-select formControlName="vendor">
+                                        <input matInput type="text" placeholder="Pick one"
+                                            (keyup)='vendorSearch($event.target.value)' aria-label="Number">
+
+                                        <mat-option *ngFor="let body of vendorList" [value]="body.id">
+                                            {{body.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                            </li>
+                            <li *ngIf="showVendor">
+
+                                <mat-form-field>
+                                    <mat-label>Select Geofence<span class="red">*</span></mat-label>
+                                    <mat-select formControlName="geofence" multiple>
+                                        <input matInput type="text" placeholder="Pick one"
+                                            (keyup)='geofenceSearch($event.target.value)' aria-label="Number">
+
+                                        <mat-option *ngFor="let body of geofenceList" [value]="body.id">
+                                            {{body.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                            </li>
+                            <li *ngIf="showProduct">
+
+                                <mat-form-field>
+                                    <mat-label>Select Product<span class="red">*</span></mat-label>
+                                    <mat-select formControlName="product" multiple>
+                                        <input matInput type="text" placeholder="Pick one"
+                                            (keyup)='productSearch($event.target.value)' aria-label="Number">
+
+                                        <mat-option *ngFor="let body of productList" [value]="body.id">{{body.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                            </li>
+                            <li>
+                                <!-- <label> Name <span class="red">*</span></label> -->
+                                <mat-form-field>
+                                    <mat-label>Name<span class="red">*</span></mat-label>
+                                    <input matInput formControlName="name" type="text" placeholder="Name" name="name">
+                                    <div class="custom-invalid"
+                                        *ngIf=" submitted && editDiscountForm.controls['name'].hasError('required')">
+                                        Name is <strong>required</strong>
+                                    </div>
+                                    <mat-error *ngIf="editDiscountForm.get('name').hasError('required')">
+                                        Name is <strong>required</strong>
+                                    </mat-error>
+
+                                </mat-form-field>
+                            </li>
+                            <li>
+                                <!-- <label> Arbic Name </label> -->
+                                <mat-form-field>
+                                    <mat-label>Malay Name<span class="red">*</span></mat-label>
+                                    <input matInput formControlName="name_ar" type="text" placeholder="Arbic Name"
+                                        name="name_ar">
+                                    <div class="custom-invalid"
+                                        *ngIf=" submitted && editDiscountForm.controls['name_ar'].hasError('required')">
+                                        Malay Name is <strong>required</strong>
+                                    </div>
+
+                                    <mat-error *ngIf="editDiscountForm.get('name_ar').hasError('required')">
+                                        Malay Name is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+                            <!-- <li>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Best suited for <span class="red">*</span></mat-label>
+                                    <mat-select formControlName="gender" multiple>
+
+                                        <mat-option value="M">
+                                            Male
+                                        </mat-option>
+                                        <mat-option value="F">
+                                            Female
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="editDiscountForm.get('gender').hasError('required')">
+                                        Please Select the gender this suits for
+                                    </mat-error>
+                                </mat-form-field>
+                            </li> -->
+                            <!-- <li>
+                            \
+                                <mat-form-field>
+                                    <mat-label>Discount<span class="red">*</span></mat-label>
+                                    <input matInput formControlName="disount" min="0" max="100" type="number"
+                                        placeholder="" name="name">
+
+                                    <mat-error *ngIf="editDiscountForm.get('disount').hasError('required')">
+                                        Discount percentage is <strong>required</strong>
+                                    </mat-error>
+                                    <mat-error *ngIf="editDiscountForm.controls['disount'].hasError('min')">
+                                        Discount percentage should not be <strong>less than zero</strong>
+                                    </mat-error>
+
+                                </mat-form-field>
+                            </li> -->
+                            <!-- <li>
+                            <label>Timeline for Discount<span class="red">*</span></label>
                             <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" value="{{bannerDetails.name}}" name="name"
-                                    disabled name="name">
-                            </mat-form-field>
-                        </li>
-                        <li>
-                            <label>Name_ar<span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" value="{{bannerDetails.name_ar}}" placeholder="" disabled
-                                    name="name">
-                            </mat-form-field>
-                        </li>
-                        <!-- <li>
-                            <label>Category<span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" value="{{bannerDetails.categoryName}}" placeholder=""
-                                    name="name" disabled name="name">
+                                <input matInput type="date" placeholder="" name="name">
                             </mat-form-field>
                         </li> -->
-                        <li>
-                            <label>Type<span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" value="{{bannerDetails.type}}" placeholder="" name="name"
-                                    disabled>
-                            </mat-form-field>
-                        </li>
-                        <!-- <li>
-                            <label>Category<span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name" disabled name="name"
-                                    value="">
-                            </mat-form-field>
-                        </li> -->
+                            <li>
+                                <!-- <label>Start Date <span class="red">*</span></label> -->
+                                <mat-form-field>
+                                    <mat-label>Start Date<span class="red">*</span></mat-label>
+                                    <input matInput formControlName="startDate" type="date" [min]="today"
+                                        placeholder="Start Date" name="name">
 
-                        <li>
-                            <label> Discount <span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name"
-                                    value="{{bannerDetails.discount}}" disabled name="name">
-                            </mat-form-field>
-                        </li>
+                                    <mat-error *ngIf="editDiscountForm.get('startDate').hasError('required')">
+                                        Start Date is <strong>required</strong>
+                                    </mat-error>
 
-                        <li>
-                            <label> Start Date<span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name"
-                                    value="{{bannerDetails.startDate | date}}" disabled name="name">
-                            </mat-form-field>
-                        </li>
-                        <li>
-                            <label> End Date<span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name"
-                                    value="{{bannerDetails.endDate | date}}" disabled name="name">
-                            </mat-form-field>
-                        </li>
-                        <li class="banner_image">
-                            <label> Banner image</label>
+                                </mat-form-field>
+                            </li>
 
-                            <div class="show_product_imges pt-3">
-                                <span>
-                                    <figure>
-                                        <img src="{{imagePath+bannerDetails.image}}" width="200px" height="200px"
-                                            alt="">
+                            <li>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <mat-form-field>
+                                            <mat-label>Start Time<span class="red">*</span></mat-label>
+                                            <input matInput formControlName="startTime" type="time"
+                                                placeholder="Start Time" name="name">
+
+                                            <mat-error *ngIf="editDiscountForm.get('startTime').hasError('required')">
+                                                Start Time is <strong>required</strong>
+                                            </mat-error>
+
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-6">
+                                        <mat-form-field>
+                                            <mat-label>End Time<span class="red">*</span></mat-label>
+                                            <input matInput formControlName="endTime" type="time" placeholder="End Time"
+                                                name="name">
+
+                                            <mat-error *ngIf="editDiscountForm.get('endTime').hasError('required')">
+                                                End Time is <strong>required</strong>
+                                            </mat-error>
+
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+                                <!-- <label>End Date <span class="red">*</span></label> -->
+                                <mat-form-field>
+                                    <mat-label>End Date<span class="red">*</span></mat-label>
+                                    <input matInput formControlName="endDate" type="date" [min]="endTommorow"
+                                        placeholder="End Date" name="name">
+                                    <mat-error *ngIf="editDiscountForm.get('endDate').hasError('required')">
+                                        End Date is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </li>
+                            <!-- <li>
+                                <mat-form-field>
+                                    <mat-label>Select Type<span class="red">*</span></mat-label>
+                                    <mat-select (selectionChange)='typeSelected($event.value)' formControlName="type">
+
+                                        <mat-option>None</mat-option>
+                                        <mat-option *ngFor="let ready of type" [value]="ready.value">{{ready.viewValue}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="editDiscountForm.get('type').hasError('required')">
+                                        Deal Type is <strong>required</strong>
+                                    </mat-error>
+                                    <div class="custom-invalid"
+                                        *ngIf=" submitted && editDiscountForm.controls['type'].hasError('required')">
+                                        Deal Type is <strong>required</strong>
+                                    </div> 
+                                </mat-form-field>
+                            </li> -->
+                            <li class="banner_image">
+                                <label>Add Banner image</label>
+
+                                <div class="product_image_upload">
+
+
+                                    <input type='file' [disabled]='imageNotAccepted' (change)="bannerImageEvent($event)"
+                                        accept="image/*" formControlName="bannerImage" placeholder="choosefile"
+                                        class="images_uploader">
+
+                                    <span>Choose File</span>
+
+
+                                </div>
+                            </li>
+                            <li class="user_img">
+                                <ng-container *ngIf="urlImage==true; else elseTemplate1">
+                                    <figure class="figure">
+                                        <img style="max-width: 200px; max-height: 200px;"
+                                            [src]="imageUrl+previewImage" />
                                     </figure>
-                                </span>
-                            </div>
-                            <!-- <span>
-                                    <figure>
-                                        <img src="../../assets/images/makeup.png" alt="">
+                                </ng-container>
+                                <ng-template #elseTemplate1>
+                                    <figure class="figure">
+                                        <img style="max-width: 150px;" [src]="previewImage" />
                                     </figure>
+                                </ng-template>
+
+                            </li>
+
+
+
+                        </ul>
+                        <!-- <div class="update_button">
+                            <button mat-button (click)="checkBanner()">
+                                <span><i class="fa fa-window-restore"></i>
                                 </span>
+                                Update
+                            </button>
+                        </div> -->
+                    </div>
 
-
-                             -->
-                        </li>
-
-                    </ul>
-                    <!-- <div class="update_button">
-                        <button mat-button>
-                            <span><i class="fa fa-window-restore"></i>
-                            </span>
-                            Add
-                        </button>
-                    </div> -->
-                </div>
-
-
+                </form>
                 <!-----End input fields------>
 
             </div>
         </div>
     </div>
 </div>
-
 <div class="loader_bg" *ngIf="progress">
     <div class="spinner-grow " style="width: 5rem; height: 5rem; color:#ffa200 ;" role="status">
         <span class="sr-only">Loading...</span>

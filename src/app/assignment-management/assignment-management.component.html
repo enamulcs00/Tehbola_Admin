@@ -139,16 +139,12 @@
                                             </li>
                                         </div>
                                     </div>
-
-
-
-
                                 </ul>
                             </form>
                         </div>
                         <div class="card-footer">
                             <button mat-button (click)="openDialog()" class="mr-3">Save</button>
-                            <button mat-button>Reset</button>
+                            <button mat-button (click)="assignmentForm.reset()">Reset</button>
                         </div>
                     </div>
 
@@ -185,6 +181,7 @@
                                 <th>Date</th>
                                 <th>Vendor Name</th>
                                 <th>Truck Name</th>
+                                <th>Truck Number</th>
                                 <th>Geofence Name</th>
                                 <th>Equipment Assigned</th>
                                 <th>Ingredient Assigned</th>
@@ -194,10 +191,11 @@
                                 <td>{{i+1}}</td>
                                 <td>{{item.createdAt|date}}</td>
                                 <td>{{item?.vendor?.fullName}}</td>
-                                <td>{{item?.foodTruck?.name}}--{{item?.foodTruck?.vehicleNumber}}</td>
+                                <td>{{item?.foodTruck?.name}}</td>
+                                <td>{{item?.foodTruck?.vehicleNumber}}</td>
                                 <td>
                                     <span *ngFor="let item1 of item.geoFence">
-                                        {{item1.name}}
+                                        {{item1.name}}<br>
                                     </span>
                                 </td>
                                 <td>
@@ -262,12 +260,25 @@
         <div class="modal-content">
 
             <div class="modal-body">
-                <h3>Category List</h3>
-                <ul>
-                    <li *ngFor="let item of equipmentListForModel; let i=index">
-                        {{i+1}} {{item.name}} {{item.assignedQuantity}}<br>
-                    </li>
-                </ul>
+                <h3>Equipment Assigned</h3>
+                <!-- <ul >
+                 <li *ngFor="let item of equipmentListForModel; let i=index">
+                        {{i+1}}  {{item?.assignedQuantity}}<br>
+                    </li> 
+                  
+                </ul> -->
+                <table *ngIf="equipmentListForModel">
+                    <tr>
+                        <th>Sr.No</th>
+                        <th>Equipement Name</th>
+                        <th>Assigned Quantity</th>
+                    </tr>
+                    <tr *ngFor="let item of equipmentListForModel; let i=index">
+                        <td>{{i+1}}</td>
+                        <td>{{item?.id?.name}}</td>
+                        <td>{{item?.assignedQuantity}}</td>
+                    </tr>
+                </table>
 
             </div>
         </div>
@@ -280,12 +291,25 @@
         <div class="modal-content">
 
             <div class="modal-body">
-                <h3>Category List</h3>
-                <ul>
+                <h3>Raw Item Assigned</h3>
+                <!-- <ul *ngIf="rawItemListForModel">
                     <li *ngFor="let item of rawItemListForModel; let i=index">
-                        {{i+1}} {{item.name}}-- {{item.assignedQuantity}}<br>
+                        {{i+1}} {{item?.rawItem.name}}-- {{item?.assignedQuantity}}<br>
                     </li>
-                </ul>
+                </ul> -->
+
+                <table *ngIf="rawItemListForModel">
+                    <tr>
+                        <th>Sr.No</th>
+                        <th>Raw Item Name</th>
+                        <th>Assigned Quantity</th>
+                    </tr>
+                    <tr *ngFor="let item of rawItemListForModel; let i=index">
+                        <td>{{i+1}}</td>
+                        <td>{{item?.rawItem.name}}</td>
+                        <td>{{item?.assignedQuantity}}</td>
+                    </tr>
+                </table>
 
             </div>
         </div>

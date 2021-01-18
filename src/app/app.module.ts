@@ -218,6 +218,7 @@ import { EquipmentManagementComponent } from './equipment-management/equipment-m
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
+
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAi2sN3aJ2k2P6I04FrQpsLuDKMeOrHpJU',
       libraries: ['places', 'geometry', 'drawing'],

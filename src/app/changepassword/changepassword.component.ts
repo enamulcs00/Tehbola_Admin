@@ -38,7 +38,7 @@ export class ChangepasswordComponent implements OnInit {
   get f() { return this.changePassForm.controls; }
   onChangePassword() {
 
-    debugger
+
     this.submitted = true;
     if (this.changePassForm.valid && this.submitted) {
       this.progress = false
