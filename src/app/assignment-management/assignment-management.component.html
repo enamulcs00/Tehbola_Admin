@@ -18,12 +18,21 @@
                 <div>
                     <div class="card">
                         <div class="card-header">
-                            Daily Assignment <br>
-                            <h5>{{date | date}}</h5>
+                            <h2>Daily Assignment</h2> <br>
                         </div>
+
                         <div class="card-body">
                             <form [formGroup]="assignmentForm">
                                 <ul>
+
+
+                                    <mat-form-field>
+                                        <mat-label>Choose a date</mat-label>
+                                        <input matInput [min]="date" formControlName="selectedDate"
+                                            [matDatepicker]="picker" disabled>
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker disabled="false"></mat-datepicker>
+                                    </mat-form-field>
                                     <div class="row">
                                         <div class="col-6">
                                             <li>
@@ -153,6 +162,17 @@
                 <div class="mt-5">
                     <div class="card">
                         <div class="search_fields">
+                            <div class="filters Booking_status mr-3">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Date<span class="red">*</span></mat-label>
+
+                                    <input matInput [(ngModel)]="filterDate" [matDatepicker]="picker2">
+                                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker2></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+
+
                             <div class="filters Booking_status">
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Filter<span class="red">*</span></mat-label>

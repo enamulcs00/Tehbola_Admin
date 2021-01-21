@@ -89,7 +89,8 @@
                 <mat-accordion>
                     <div class="add_location_name">
                         <a href="javascript:;" matRipple [matRippleColor]="'#dbdddf'" [matRippleRadius]="50"
-                            class="button-border add_state" data-toggle="modal" data-target="#Add_State">
+                            class="button-border add_state" (click)="clearData()" data-toggle="modal"
+                            data-target="#Add_State">
                             <i class="fa fa-plus"></i> Add Category</a>
                     </div>
                     <mat-expansion-panel hideToggle *ngFor="let category of categories; let i=index" class="p-3">
@@ -418,7 +419,7 @@
                         <div class="form-group col-md-12">
                             <label for="title">Add Image</label>
                             <div class="user_img">
-                                <figure *ngIf="subCategoryImage">
+                                <figure *ngIf="flagImage">
                                     <img style="height: 50px;width: 50px" [src]="subCategoryImage" />
                                 </figure>
                             </div>
@@ -497,8 +498,11 @@
                         <div class="form-group col-md-12">
                             <label for="title">Add Image</label>
                             <div class="user_img">
-                                <figure *ngIf="subCategoryImage">
+                                <figure *ngIf="flagImage">
                                     <img style="height: 50px;width: 50px" [src]="subCategoryImage" />
+                                </figure>
+                                <figure *ngIf="!flagImage">
+                                    <img style="height: 50px;width: 50px" [src]="imageUrl+subCategoryImage" />
                                 </figure>
                             </div>
                             <div class="input-group">

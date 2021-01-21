@@ -52,7 +52,8 @@ export class AssignmentManagementComponent implements OnInit {
   progress: boolean
   date = new Date();
   isCompleted: string = '';
-  status = ''
+  status = '';
+  filterDate: any = '';
   assignmentForm: FormGroup;
   equipmentList: Array<equipement> = [];
   truckList: Array<foodTruck> = [];
@@ -62,6 +63,7 @@ export class AssignmentManagementComponent implements OnInit {
   getAssignmentListData: any;
   equipmentListForModel: any;
   rawItemListForModel: any;
+  backDropClick: boolean;
   constructor(public dialog: MatDialog, private apiService: ApiService, private commonService: CommonService, private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -69,6 +71,7 @@ export class AssignmentManagementComponent implements OnInit {
 
     this.getAssignmentdata()
     this.assignmentForm = this.fb.group({
+      selectedDate: ['', Validators.required],
       selectedVendor: ['', Validators.required],
       selectedFoodTruck: ['', Validators.required],
       selectedEquipment: ['', Validators.required],
@@ -259,12 +262,19 @@ export class AssignmentManagementComponent implements OnInit {
       data: { data: this.assignmentForm.value },
     });
 
+    dialogRef.backdropClick().subscribe((result) => {
+      this.commonService.errorToast('Assignment not Complete. Need to do that again.')
+      this.backDropClick = true
+    })
+
     dialogRef.afterClosed().subscribe(result => {
 
       console.log(`Dialog result: ${result}`);
       let tmp = result;
       console.log(tmp);
-      this.addAssignment(tmp)
+      if (!this.backDropClick) {
+        this.addAssignment(tmp)
+      }
 
     });
   }

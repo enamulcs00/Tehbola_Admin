@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Confirm Quantity</h2>
 <mat-dialog-content class="mat-typography">
-
+    <h3>Date:- {{this.data.data.selectedDate|date}}</h3>
     <h3> Vendor :- {{this.data.data.selectedVendor.name}}</h3>
     <h3> Food Truck :- {{this.data.data.selectedFoodTruck.name}}</h3>
 
@@ -75,7 +75,7 @@
 
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-button [disabled]='dataForm.invalid' (click)="submit()">Confirm</button>
-    <button mat-button mat-dialog-close>Reset</button>
+    <button mat-button type="button" [disabled]='dataForm.invalid' (click)="submit()">Confirm</button>
+    <!-- <button mat-button mat-dialog-close>Reset</button> -->
 
 </mat-dialog-actions>

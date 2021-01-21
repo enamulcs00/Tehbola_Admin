@@ -82,6 +82,19 @@ export class CategoryComponent implements OnInit {
     })
   }
 
+
+  clearData() {
+    this.addCategoryForm.reset();
+    this.addSubcategoryForm.reset();
+    this.editCategoryForm.reset();
+    this.editSubcategoryForm.reset();
+    this.imageFile = [];
+    this.previewImage = ''
+    this.categoryImage = '';
+    this.subCategoryImage = ''
+
+  }
+
   goToaddcategory() {
     this.router.navigate(['addcategory'])
   }
@@ -120,7 +133,7 @@ export class CategoryComponent implements OnInit {
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (event: any) => {
-
+        this.flagImage=true
         this.subCategoryImage = event.target.result;
         this.addSubcategoryForm.controls['image'].patchValue(this.imageFile);
       };
@@ -369,6 +382,7 @@ export class CategoryComponent implements OnInit {
   }
 
   viewSubCategory(id) {
+    debugger
     this.picUploader = false
 
     this.apiService.viewCategory(id).subscribe((res) => {
@@ -380,7 +394,7 @@ export class CategoryComponent implements OnInit {
         this.editSubcategoryForm.controls['name_ar'].setValue(res.data.name_ar);
         let data = res.data
         this.image = data.image
-        this.imageFile = data.image;
+        this.subCategoryImage = data.image;
         this.imageName = data.image.name
         console.log(this.image);
 

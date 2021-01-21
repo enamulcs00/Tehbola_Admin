@@ -109,7 +109,7 @@ import { EditGeofenceComponent } from './edit-geofence/edit-geofence.component';
 import { AddFoodTruckComponent } from './add-food-truck/add-food-truck.component';
 import { EditFoodTruckComponent } from './edit-food-truck/edit-food-truck.component';
 import { EquipmentManagementComponent } from './equipment-management/equipment-management.component';
-
+import { MatDatepickerModule } from '@angular/material/datepicker'
 
 @NgModule({
   declarations: [
@@ -218,6 +218,7 @@ import { EquipmentManagementComponent } from './equipment-management/equipment-m
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
+
 
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAi2sN3aJ2k2P6I04FrQpsLuDKMeOrHpJU',

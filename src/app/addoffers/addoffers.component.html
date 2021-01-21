@@ -241,10 +241,10 @@
                                 <label>Add Banner image</label>
                                 <div class="product_image_upload">
                                     <ng-container *ngIf="addDiscountForm.get('type').value=='Home' ">
-                                        <p>Please Upload image which is in the aspect ratio of 2:1</p>
+                                        <p>Please Upload image which is in the aspect ratio of 5 : 2</p>
                                     </ng-container>
                                     <ng-template #elseTemplate>
-                                        <div *ngIf="addDiscountForm.get('type').value=='Home' ||
+                                        <div *ngIf="addDiscountForm.get('type').value=='Home2' ||
                                         addDiscountForm.get('type').value=='Offer'">
                                             <p>Please Upload image which is in the aspect ratio of 1:1</p>
                                         </div>

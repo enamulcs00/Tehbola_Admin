@@ -167,7 +167,7 @@ export class AddoffersComponent implements OnInit, AfterViewChecked {
   }
 
   startTimeSelected() {
-    debugger
+
     let startTime = moment(this.addDiscountForm.get('startTime').value, 'HH:mm');
     let hours = startTime.hour();
     let minute = startTime.minute();
@@ -234,12 +234,11 @@ export class AddoffersComponent implements OnInit, AfterViewChecked {
           image: event.target.result
         }
         img.onload = () => {
-          debugger
           var height = img.height;
           var width = img.width;
           if (this.addDiscountForm.get('type').value == 'Home') {
-            if (height != width / 2) {
-              this.commonService.errorToast("Image should be a Square size");
+            if (width / height != 5 / 2) {
+              this.commonService.errorToast("Image Should be in the size of 5:2");
               imageOk = false
               // this.pushImage();
               return imageOk
@@ -250,21 +249,22 @@ export class AddoffersComponent implements OnInit, AfterViewChecked {
               this.images = tempfile
               return imageOk
             }
-          } else {
-            if (height != width) {
-              this.commonService.errorToast("Image should be a Square size");
-              imageOk = false
-              // this.pushImage();
-              return imageOk
-            } else {
-              this.commonService.successToast("Image Size is Ok");
-              imageOk = true
-              this.previewImage = temp.image;
-              this.images = tempfile;
-
-              return imageOk
-            }
           }
+          //else {
+          //   if (height != width) {
+          //     this.commonService.errorToast("Image should be a Square size");
+          //     imageOk = false
+          //     // this.pushImage();
+          //     return imageOk
+          //   } else {
+          //     this.commonService.successToast("Image Size is Ok");
+          //     imageOk = true
+          //     this.previewImage = temp.image;
+          //     this.images = tempfile;
+
+          //     return imageOk
+          //   }
+          // }
 
         };
         // this.previewImage = event.target.result;
@@ -439,7 +439,7 @@ export class AddoffersComponent implements OnInit, AfterViewChecked {
   }
 
   checkBanner() {
-    debugger
+
     this.submitted = true
     console.log(this.addDiscountForm);
     let checkOffer = this.addDiscountForm.controls['dicountOn'].value;
@@ -507,7 +507,7 @@ export class AddoffersComponent implements OnInit, AfterViewChecked {
 
 
   typeAdvertisement() {
-    debugger
+
     let startDate = moment(this.addDiscountForm.controls['startDate'].value).toLocaleString();
     let endDate = moment(this.addDiscountForm.controls['endDate'].value).toLocaleString();
     let startTime = moment(this.addDiscountForm.get('startTime').value, 'HH:mm').format('HHmm')

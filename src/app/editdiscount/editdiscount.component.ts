@@ -226,7 +226,7 @@ export class EditdiscountComponent implements OnInit {
 
 
   async bannerImageEvent(event) {
-    debugger
+
     let tempfile: any
     let imageOk: boolean = true
     var img = new Image;
@@ -244,12 +244,12 @@ export class EditdiscountComponent implements OnInit {
           image: event.target.result
         }
         img.onload = () => {
-          debugger
+
           var height = img.height;
           var width = img.width;
           if (this.editDiscountForm.get('type').value == 'Home') {
-            if (height != width / 2) {
-              this.commonService.errorToast("Image should be a Square size");
+            if (width / height != 5 / 2) {
+              this.commonService.errorToast("Image should be in aspect ratio 5:2");
               imageOk = false
               // this.pushImage();
               return imageOk
@@ -339,7 +339,7 @@ export class EditdiscountComponent implements OnInit {
 
     this.apiService.getDisountDetails(id).subscribe(res => {
       if (res.success) {
-        debugger
+
         this.discountDetails = res.data;
         console.log(this.discountDetails);
         // this.editDiscountForm.controls['dicountOn'].setValue(this.discountDetails.onModel);
@@ -371,13 +371,17 @@ export class EditdiscountComponent implements OnInit {
         this.editDiscountForm.controls['type'].setValue(this.discountDetails.type);
         this.imageNotAccepted = false
         this.editDiscountForm.get('bannerImage').enable()
-        this.editDiscountForm.get('startTime').setValue(moment(this.discountDetails.startTime, 'HHmm').format('HH:mm'))
-        this.editDiscountForm.get('endTime').setValue(moment(this.discountDetails.endTime, 'HHmm').format('HH:mm'))
+        let startTime = this.discountDetails.startTime < 1000 ? '0' + this.discountDetails.startTime : "" + this.discountDetails.startTime;
+        this.editDiscountForm.get('startTime').setValue(moment(startTime, 'HHmm').format('HH:mm'))
+
+        let endTime = this.discountDetails.endTime < 1000 ? '0' + this.discountDetails.endTime : "" + this.discountDetails.endTime;
+
+        this.editDiscountForm.get('endTime').setValue(moment(endTime, 'HHmm').format('HH:mm'))
         this.editDiscountForm.controls['startDate'].setValue(moment(this.discountDetails.startDate).format("YYYY-MM-DD"));
         this.editDiscountForm.controls['name_ar'].setValue(this.discountDetails.name_ar);
         this.editDiscountForm.controls['name'].setValue(this.discountDetails.name);
 
-        this.editDiscountForm.controls['dicountOn'].setValue(this.discountDetails.onModel.toLowerCase());
+        // this.editDiscountForm.controls['dicountOn'].setValue(this.discountDetails.onModel.toLowerCase());
         // this.editDiscountForm.controls['dicountOn'].setValue(this.discountDetails.onModel);
         //  this.setradio(this.discountDetails.offer.type);
         this.urlImage = true
@@ -507,7 +511,7 @@ export class EditdiscountComponent implements OnInit {
   }
 
   checkBanner() {
-    debugger
+
     this.submitted = true
     console.log(this.editDiscountForm);
     let checkOffer = this.editDiscountForm.controls['dicountOn'].value;
@@ -531,7 +535,7 @@ export class EditdiscountComponent implements OnInit {
 
 
   typeAdvertisement() {
-    debugger
+
     let startDate = moment(this.editDiscountForm.controls['startDate'].value).toLocaleString();
     let endDate = moment(this.editDiscountForm.controls['endDate'].value).toLocaleString();
     let startTime = moment(this.editDiscountForm.get('startTime').value, 'HH:mm').format('HHmm')
@@ -598,7 +602,7 @@ export class EditdiscountComponent implements OnInit {
     body.append('category', this.editDiscountForm.get('category').value);
     body.append('name', this.editDiscountForm.controls['name'].value);
     body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
-    debugger
+
     body.append('image', this.images, this.images.name);
     body.append('type', this.editDiscountForm.controls['type'].value);
     body.append('offer', JSON.stringify(offer));

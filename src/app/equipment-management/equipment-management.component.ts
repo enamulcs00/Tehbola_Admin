@@ -101,7 +101,7 @@ export class EquipmentManagementComponent implements OnInit {
     })
   }
 
-  editEquipmentCat(id) {
+  editEquipmentCat() {
 
     this.submitted = true
     if (this.submitted && this.editEquipmentCategory.valid) {
@@ -348,7 +348,7 @@ export class EquipmentManagementComponent implements OnInit {
   }
 
   onUpdateBrand() {
-    
+
     this.submitted = true
     if (this.submitted && this.editEquipmentForm.valid) {
       let formData = new FormData();

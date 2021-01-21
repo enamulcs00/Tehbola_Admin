@@ -40,10 +40,10 @@ export class BrandlistComponent implements OnInit {
 
   ngOnInit() {
     this.addBrandForm = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(25)]],
-      name_ar: ['', [Validators.required, Validators.maxLength(25)]],
-      category: ['', [Validators.required, Validators.maxLength(25)]],
-      subCategory: ['', [Validators.required, Validators.maxLength(25)]],
+      name: ['', [Validators.required,]],
+      name_ar: ['', [Validators.required,]],
+      category: ['', [Validators.required,]],
+      subCategory: ['', [Validators.required,]],
       image: ['', [Validators.required]],
       totalUnits: ['', Validators.required],
       unitPrice: ['', Validators.required],
@@ -54,10 +54,10 @@ export class BrandlistComponent implements OnInit {
       description: [''],
     });
     this.editBrandForm = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(25)]],
-      name_ar: ['', [Validators.required, Validators.maxLength(25)]],
-      category: ['', [Validators.required, Validators.maxLength(25)]],
-      subCategory: ['', [Validators.required, Validators.maxLength(25)]],
+      name: ['', [Validators.required,]],
+      name_ar: ['', [Validators.required,]],
+      category: ['', [Validators.required,]],
+      subCategory: ['', [Validators.required,]],
       image: ['',],
       totalUnits: ['', Validators.required],
       unitPrice: ['', Validators.required],
