@@ -78,6 +78,10 @@
                             <div class="card item-card card-block m-3">
 
                                 <h5 class="item-card-title mt-3 mb-3">{{i+1}} &nbsp;{{item.name}}</h5>
+                                <span>
+                                    <p>City: {{item.city}},<br></p>
+                                    <p>State:{{item?.state}}</p>
+                                </span>
                                 <div class="row ml-3">
                                     <span class="card-title text-right" (click)="editGeofence(item._id)"><i
                                             class="material-icons">create</i></span>

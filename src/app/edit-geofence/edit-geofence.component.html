@@ -18,24 +18,69 @@
 
 
                 <!-----start pagination-->
+                <form [formGroup]="geofenceForm">
+                    <div class="row mb-3">
 
-                <div class="l-main-content">
+                        <div class="col-4">
+
+                            <mat-form-field class="full-width">
+                                <mat-label>Geofence Name</mat-label>
+                                <input matInput placeholder="Geofence name" formControlName="geofenceName" type="text">
+                                <mat-error *ngIf="geofenceForm.get('geofenceName').hasError('required')">
+                                    Please Add Geofence Name
+                                </mat-error>
+                            </mat-form-field>
 
 
-                    <div class="main_map_Page1">
+                        </div>
+                        <div class="col-4">
+
+                            <mat-form-field class="full-width">
+                                <mat-label> City Name</mat-label>
+                                <input matInput placeholder="Geofence City Name" formControlName="geofenceCity"
+                                    type="text">
+                                <mat-error *ngIf="geofenceForm.get('geofenceCity').hasError('required')">
+                                    Please Add City Name
+                                </mat-error>
+                            </mat-form-field>
+
+
+                        </div>
+                        <div class="col-4">
+
+                            <mat-form-field class="full-width">
+                                <mat-label> State Name</mat-label>
+                                <input matInput placeholder="Geofence Country Name" formControlName="geofenceState"
+                                    type="text">
+                                <mat-error *ngIf="geofenceForm.get('geofenceState').hasError('required')">
+                                    Please Add State Name
+                                </mat-error>
+                            </mat-form-field>
+
+
+                        </div>
+
+                        <div class="col-6">
+                            <button mat-button (click)="save()">Save</button>
+                        </div>
+
+                    </div>
+                </form>
+
+                <!-- <div class="main_map_Page1">
                         <div class="admin_user geofencing_main_div">
                             <div class="geofancing_left_sec">
                                 <input type="text" class="ride-location1 highalert txt_active form-control first-name1"
                                     name="vSourceAddresss" autocapitalize="off" spellcheck="off" autocomplete="off"
                                     #search [(ngModel)]='searchString'>
-                                <button class="link" (click)="save()">update</button>
+                                <button class="link" class="btn_back" mat-button (click)="save()">update</button>
 
                             </div>
                         </div>
-                    </div>
-                    <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="14" (mapReady)="onMapReady1($event)">
-                    </agm-map>
-                </div>
+                    </div> -->
+                <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="14" (mapReady)="onMapReady1($event)">
+                </agm-map>
+
                 <!-----end pagination-->
             </div>
         </div>

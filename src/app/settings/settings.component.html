@@ -7,11 +7,11 @@
                 <div class="sub_heading">
                     <h1>Settings</h1>
                     <div class="top_subheading_add">
-                        <a style="margin-left: 1em;" (click)="back()">Go Back</a>
+                        <!-- <a style="margin-left: 1em;" (click)="back()">Go Back</a> -->
                     </div>
                 </div>
                 <div class="add_user_list">
-                    <form [formGroup]="updateSetting">
+                    <form [formGroup]="updateSetting" *ngIf="false">
                         <ul class="card">
                             <li class="social_links_name"> Social Links Information</li>
 
@@ -82,44 +82,28 @@
                             </li>
 
 
-
-                            <li class="col-md-4">
-                                <label>Tax Percentage<span class="red">*</span></label>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <input matInput type="number" placeholder="" name="name" formControlName="tax">
-                                </mat-form-field>
-                            </li>
-
-                            <li class="col-md-4">
-                                <label>Apply Tax<span class="red">*</span></label>
-                                <div>
-                                    <input type="checkbox" placeholder="" name="name" formControlName="applyTax">
-                                    {{updateSetting.controls['applyTax'].value==true?"Applied":""}}
-                                </div>
-
-                            </li>
                             <li class="col-md-2">
-                                <button mat-button class="button" (click)="updateTax()">Update Tax</button>
+                                <button mat-button class="button" (click)="updateTax()">Update URLs</button>
                             </li>
                         </ul>
                     </form>
 
-
+                    <!--Table for Size  -->
                     <ul class="card">
 
 
                         <li class="row">
                             <div class="row">
                                 <div class="col-md-10">
-                                    <label>Shipping Rates<span class="red">*</span></label>
+                                    <label>Size Chart<span class="red">*</span></label>
                                 </div>
 
                                 <div class="col-md-2 pb-2">
                                     <div class="top_subheading_add">
-                                        <button mat-button (click)="openPopUp()" data-toggle="modal"
-                                            data-target="#largeModal"><i class="fa fa-plus"></i> Add
-                                            Shipping
-                                            Rate</button>
+                                        <button mat-button data-toggle="modal" data-target="#largeModal"><i
+                                                class="fa fa-plus"></i> Add
+                                            Size
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -127,43 +111,111 @@
                                 <table>
                                     <tr>
 
-                                        <th>Country</th>
-                                        <th>Price range</th>
-                                        <th>Shipping charges in this range</th>
-                                        <th>Shipping charges below this range</th>
-                                        <th>Shipping charges above this range</th>
+                                        <th>Size Name</th>
+                                        <th>Size name malay</th>
                                         <th>Action</th>
 
                                     </tr>
-                                    <tr *ngFor="let item of shippingChargesList; let i=index">
-                                        <td>{{item.country}}</td>
-                                        <td>{{item.minPrice}}-{{item.maxPrice}}</td>
-                                        <td>{{item.rangePrice}}</td>
-                                        <td>{{item.belowPrice}}</td>
-                                        <td>{{item.abovePrice}}</td>
+                                    <tr *ngFor="let item of sizeList; let i=index">
+                                        <td>{{item.name}}</td>
+                                        <td>{{item.name_ar}}</td>
                                         <td>
                                             <!-- <a href="javascript:;" data-toggle="modal"
                                                 (click)="editShippingCharge(item._id)" data-target=" #editlargeModal">
                                                 <i class="fa fa-edit"></i>
                                             </a> -->
                                             <button style="background-color: transparent !important;"
-                                                (click)="editShippingCharge(item._id)" data-toggle="modal"
+                                                (click)="editSize(item._id)" data-toggle="modal"
                                                 data-target="#editlargeModal"> <i class="fa fa-edit"></i></button>
-                                            <button (click)="deleteShippingCharge(item._id)"> <i
+                                            <button (click)="deleteSize(item._id)"> <i class="fa fa-trash"></i></button>
+                                    </tr>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                    <!--Table for Size ends -->
+                    <!--Table for Tea Type  -->
+                    <ul class="card">
+
+
+                        <li class="row">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <label>Tea Type Chart<span class="red">*</span></label>
+                                </div>
+
+                                <div class="col-md-2 pb-2">
+                                    <div class="top_subheading_add">
+                                        <button mat-button data-toggle="modal" data-target="#TealargeModal"><i
+                                                class="fa fa-plus"></i> Add
+                                            Tea Type
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <table>
+                                    <tr>
+                                        <th>Tea Name</th>
+                                        <th>Tea name malay</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    <tr *ngFor="let item of teaTypeList; let i=index">
+                                        <td>{{item.name}}</td>
+                                        <td>{{item.name_ar}}</td>
+                                        <td>
+                                            <button style="background-color: transparent !important;"
+                                                (click)=" editTeaType(item._id)" data-toggle="modal"
+                                                data-target="#editTealargeModal"> <i class="fa fa-edit"></i></button>
+                                            <button (click)="deleteTeaType(item._id)"> <i
                                                     class="fa fa-trash"></i></button>
                                     </tr>
                                 </table>
                             </div>
-
                         </li>
+                    </ul>
+                    <!--Table for  ends -->
+                    <!-- table for sugar level -->
+                    <ul class="card">
 
 
+                        <li class="row">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <label>Sugar level Chart<span class="red">*</span></label>
+                                </div>
+
+                                <div class="col-md-2 pb-2">
+                                    <div class="top_subheading_add">
+                                        <button mat-button data-toggle="modal" data-target="#sugarlargeModal"><i
+                                                class="fa fa-plus"></i> Add
+                                            Sugar Level
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <table>
+                                    <tr>
+                                        <th>Sugar Level Name</th>
+                                        <th>Sugar Level name malay</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    <tr *ngFor="let item of sugarLevelList; let i=index">
+                                        <td>{{item.name}}</td>
+                                        <td>{{item.name_ar}}</td>
+                                        <td>
+                                            <button style="background-color: transparent !important;"
+                                                (click)=" editSugarLevel(item._id)" data-toggle="modal"
+                                                data-target="#editSugarlargeModal"> <i class="fa fa-edit"></i></button>
+                                            <button (click)="deleteSugarLevel(item._id)"> <i
+                                                    class="fa fa-trash"></i></button>
+                                    </tr>
+                                </table>
+                            </div>
+                        </li>
                     </ul>
                 </div>
-
-
-
-
             </div>
         </div>
     </div>
@@ -176,211 +228,285 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add Shipping rate</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h5 class="modal-title">Add Size</h5>
+                <button type="button" id="closeAddSizeForm" class="close" data-dismiss="modal"
+                    aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body add_user_list">
-                <form [formGroup]="zoneFormGroup">
+                <form [formGroup]="sizeFormGroup">
                     <ul>
 
                         <li>
 
-                            <label>Country<span class="red">*</span></label>
 
 
                             <mat-form-field>
-                                <input type="text" list="browsers" (keyup)="onKey($event.target.value)"
-                                    aria-label="Number" matInput formControlName="selectedCountry">
-                                <datalist id="browsers">
-                                    <option *ngFor="let body of showCountryList" value="{{body.name}}">
-                                        {{body.name}}
-                                    </option>
-                                </datalist>
-
+                                <mat-label>Name</mat-label>
+                                <input type="text" aria-label="Number" matInput formControlName="name">
+                                <mat-error *ngIf="sizeFormGroup.controls['name'].hasError('required')">
+                                    Name is <strong>required</strong>
+                                </mat-error>
                             </mat-form-field>
 
-
-                            <div class="custom-invalid"
-                                *ngIf="submitted && zoneFormGroup.controls['selectedCountry'].hasError('required')">
-                                Country is <strong>required</strong>
-                            </div>
 
 
                         </li>
 
                         <li class="row">
                             <mat-form-field [floatLabel]="'never'">
-                                <label>Shipping charges below this range<span class="red">*</span></label>
-                                <div>
-                                    <input matInput matInput type="number" placeholder=""
-                                        formControlName="belowMinValue" name="name">
-                                </div>
-                                <div class="custom-invalid"
-                                    *ngIf="submitted && zoneFormGroup.controls['belowMinValue'].hasError('required')">
-                                    Shipping charges below this range is <strong>required</strong>
-                                </div>
+                                <mat-label>Malay Name</mat-label>
+                                <input type="text" aria-label="text" matInput formControlName="name_ar">
+                                <mat-error *ngIf="sizeFormGroup.controls['name_ar'].hasError('required')">
+                                    Malay Name is <strong>required</strong>
+                                </mat-error>
                             </mat-form-field>
                         </li>
-                        <li>
-
-                            <div class="row">
-                                <mat-form-field [floatLabel]="'never'">
-                                    <div class="col-lg-3">
-                                        <label>Product min value<span class="red">*</span></label>
-                                        <input matInput type="number" class="form-controll" placeholder=""
-                                            formControlName="minValue" name="name">
-                                    </div>
-                                    <div class="custom-invalid"
-                                        *ngIf=" submitted && zoneFormGroup.controls['minValue'].hasError('required')">
-                                        Product min value is <strong>required</strong>
-                                    </div>
-                                </mat-form-field>
-                                <mat-form-field [floatLabel]="'never'">
-                                    <div class="col-lg-3 offset-lg-1">
-                                        <label>Product max value<span class="red">*</span></label>
-                                        <input matInput type="number" placeholder="" formControlName="maxValue"
-                                            name="name">
-
-                                    </div>
-                                    <div class="custom-invalid"
-                                        *ngIf=" submitted && zoneFormGroup.controls['maxValue'].hasError('required')">
-                                        Product max value is <strong>required</strong>
-                                    </div>
-                                </mat-form-field>
-
-                            </div>
-                        </li>
-
-                        <li class="row">
-                            <mat-form-field [floatLabel]="'never'">
-                                <label>Shipping charges in this range<span class="red">*</span></label>
-                                <div>
-                                    <input matInput type="number" placeholder="" formControlName="rangePrice"
-                                        name="name">
-
-                                </div>
-                                <div class="custom-invalid"
-                                    *ngIf=" submitted && zoneFormGroup.controls['rangePrice'].hasError('required')">
-                                    Shipping charges in this range is <strong>required</strong>
-                                </div>
-                            </mat-form-field>
-                        </li>
-
-
-                        <li class="row">
-                            <mat-form-field [floatLabel]="'never'">
-                                <label>Price above max value<span class="red">*</span></label>
-                                <div>
-                                    <input matInput type="number" placeholder="" formControlName="aboveMaxValue"
-                                        name="name">
-
-                                </div>
-                                <div class="custom-invalid"
-                                    *ngIf=" submitted && zoneFormGroup.controls['aboveMaxValue'].hasError('required')">
-                                    Price above max value is <strong>required</strong>
-                                </div>
-                            </mat-form-field>
-                        </li>
-
 
                     </ul>
                 </form>
             </div>
             <div class="modal-footer">
 
-                <button mat-button class="button" (click)="saveZone()">Save</button>
+                <button mat-button class="button" (click)="saveSize()">Save</button>
 
             </div>
         </div>
     </div>
 </div>
 <!-- MOdal ends here -->
+<div id="TealargeModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Tea Type</h5>
+                <button type="button" id="closeAddTeaTypeForm" class="close" data-dismiss="modal"
+                    aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body add_user_list">
+                <form [formGroup]="teaTypeGroup">
+                    <ul>
+
+                        <li>
 
 
-<!--edit shipping Charges Modal Start From here -->
+
+                            <mat-form-field>
+                                <mat-label>Name</mat-label>
+                                <input type="text" aria-label="Number" matInput formControlName="name">
+                                <mat-error *ngIf="teaTypeGroup.controls['name'].hasError('required')">
+                                    Name is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+
+
+
+                        </li>
+
+                        <li class="row">
+                            <mat-form-field [floatLabel]="'never'">
+                                <mat-label>Malay Name</mat-label>
+                                <input type="text" aria-label="text" matInput formControlName="name_ar">
+                                <mat-error *ngIf="teaTypeGroup.controls['name_ar'].hasError('required')">
+                                    Malay Name is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </li>
+
+                    </ul>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+                <button mat-button class="button" (click)="saveTeaType()">Save</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- tea type modal ends here -->
+<!-- sugar level modal starts here -->
+<div id="sugarlargeModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Sugar Level</h5>
+                <button type="button" id="closeSugarLevelForm" class="close" data-dismiss="modal"
+                    aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body add_user_list">
+                <form [formGroup]="sugarlevelForm">
+                    <ul>
+
+                        <li>
+
+
+
+                            <mat-form-field>
+                                <mat-label>Name</mat-label>
+                                <input type="text" aria-label="Number" matInput formControlName="name">
+                                <mat-error *ngIf="teaTypeGroup.controls['name'].hasError('required')">
+                                    Name is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+
+
+
+                        </li>
+
+                        <li class="row">
+                            <mat-form-field [floatLabel]="'never'">
+                                <mat-label>Malay Name</mat-label>
+                                <input type="text" aria-label="text" matInput formControlName="name_ar">
+                                <mat-error *ngIf="teaTypeGroup.controls['name_ar'].hasError('required')">
+                                    Malay Name is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </li>
+
+                    </ul>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+                <button mat-button class="button" (click)="saveSugarLevel()">Save</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--edit Size Charges Modal Start From here -->
 
 <div id="editlargeModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit Shipping rate</h5>
+                <h5 class="modal-title">Edit Size </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body add_user_list">
-                <form [formGroup]="zoneEditFormGroup">
+                <form [formGroup]="sizeEditFormGroup">
                     <ul>
-                        <!-- <li>
-                            <label>Zone Name<span class="red">*</span></label>
-                            <mat-form-field [floatLabel]="'never'">
-                                <input matInput type="text" placeholder="" name="name" formControlName="zoneName">
+
+                        <li>
+
+
+
+
+                            <mat-form-field>
+                                <mat-label>Name</mat-label>
+                                <input type="text" aria-label="Number" matInput formControlName="name">
+                                <mat-error *ngIf="sizeEditFormGroup.controls['name'].hasError('required')">
+                                    Name is <strong>required</strong>
+                                </mat-error>
                             </mat-form-field>
-                        </li> -->
-                        <li>
-                            <label>Country<span class="red">*</span></label>
-                            <input readonly matInput formControlName="selectedCountry" id="browser">
 
-                            <!-- <select (selectionChange)="countrySelected($event.value)">
-                            <input class="form-controll" placeholder="Search Product"
-                                (keyup)="onKeyInCountry($event.target.value)">
-                            <option>None</option>
-                            <option *ngFor="let body of countryList" [value]="body.code">{{body.name}}
-                            </option>
-                        </select> -->
+
 
                         </li>
 
                         <li class="row">
-                            <label>Shipping charges below this range<span class="red">*</span></label>
-                            <div>
-                                <input type="number" placeholder="" formControlName="belowMinValue" name="name">
-
-                            </div>
-
+                            <mat-form-field [floatLabel]="'never'">
+                                <mat-label>Malay Name</mat-label>
+                                <input type="text" aria-label="text" matInput formControlName="name_ar">
+                                <mat-error *ngIf="sizeEditFormGroup.controls['name_ar'].hasError('required')">
+                                    Malay Name is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
                         </li>
-                        <li>
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <label>Product min value<span class="red">*</span></label>
-                                    <input type="number" class="form-controll" placeholder="" formControlName="minValue"
-                                        name="name">
-                                </div>
-                                <div class="col-lg-3 offset-lg-1">
-                                    <label>Product max value<span class="red">*</span></label>
-                                    <input type="number" placeholder="" formControlName="maxValue" name="name">
-                                </div>
-
-                            </div>
-                        </li>
-
-                        <li class="row">
-                            <label>Shipping charges in this range<span class="red">*</span></label>
-                            <div>
-                                <input type="number" placeholder="" formControlName="rangePrice" name="name">
-
-                            </div>
-
-                        </li>
-
-
-                        <li class="row">
-                            <label>Price above max value<span class="red">*</span></label>
-                            <div>
-                                <input type="number" placeholder="" formControlName="aboveMaxValue" name="name">
-
-                            </div>
-
-                        </li>
-
 
                     </ul>
                 </form>
             </div>
             <div class="modal-footer">
 
-                <button mat-button data-dismiss="modal" class="button" (click)="updateShippingRate()">Save</button>
+                <button mat-button data-dismiss="modal" class="button" (click)="updateSize()">Save</button>
 
             </div>
         </div>
     </div>
 </div>
 <!-- MOdal ends here -->
+<!-- Edit tea level modal -->
+<div id="editTealargeModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Tea Type</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body add_user_list">
+                <form [formGroup]="teaTypeEditForm">
+                    <ul>
+                        <li>
+                            <mat-form-field>
+                                <mat-label>Name</mat-label>
+                                <input type="text" aria-label="Number" matInput formControlName="name">
+                                <mat-error *ngIf="teaTypeEditForm.controls['name'].hasError('required')">
+                                    Name is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </li>
+                        <li class="row">
+                            <mat-form-field [floatLabel]="'never'">
+                                <mat-label>Malay Name</mat-label>
+                                <input type="text" aria-label="text" matInput formControlName="name_ar">
+                                <mat-error *ngIf="teaTypeEditForm.controls['name_ar'].hasError('required')">
+                                    Malay Name is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+                <button mat-button data-dismiss="modal" class="button" (click)="updateTeaType()">Save</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal end here -->
+<!-- sugar level edit modal -->
+<div id="editSugarlargeModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Sugar Level</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body add_user_list">
+                <form [formGroup]="sugarLevelEditForm">
+                    <ul>
+                        <li>
+                            <mat-form-field>
+                                <mat-label>Name</mat-label>
+                                <input type="text" aria-label="Number" matInput formControlName="name">
+                                <mat-error *ngIf="teaTypeEditForm.controls['name'].hasError('required')">
+                                    Name is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </li>
+                        <li class="row">
+                            <mat-form-field [floatLabel]="'never'">
+                                <mat-label>Malay Name</mat-label>
+                                <input type="text" aria-label="text" matInput formControlName="name_ar">
+                                <mat-error *ngIf="teaTypeEditForm.controls['name_ar'].hasError('required')">
+                                    Malay Name is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+                <button mat-button data-dismiss="modal" class="button" (click)="updateSugarLevel()">Save</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- sugar level modal ends here -->

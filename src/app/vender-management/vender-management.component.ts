@@ -35,10 +35,12 @@ export class VenderManagementComponent implements OnInit {
   body2: any;
   flagapproval: boolean;
   baseUrl: string;
+  imageUrl: string;
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService, private urlService: UrlService) {
 
 
     this.baseUrl = this.urlService.SERVER_URL
+    this.imageUrl = this.urlService.imageUrl
   }
 
   ngOnInit() {

@@ -205,7 +205,7 @@ export class ViewProductComponent implements OnInit {
   getRawItemList() {
     //Pagination is applied in the backend. just not using in the front end because of design same as category
     // this.progress = true
-    this.apiService.getRawItemList().subscribe(res => {
+    this.apiService.getRawItemList(1, 10000000, '').subscribe(res => {
       console.log(res)
       if (res.success) {
         this.progress = false

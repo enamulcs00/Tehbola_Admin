@@ -39,7 +39,7 @@ import { EditVendorComponent } from './edit-vendor/edit-vendor.component';
 import { ViewVendorComponent } from './view-vendor/view-vendor.component';
 import { DealsComponent } from './deals/deals.component';
 import { CategoryComponent } from './category/category.component';
-import { BannerComponent } from './banner/banner.component';
+
 import { AddcategoryComponent } from './addcategory/addcategory.component';
 import { ViewcategoryComponent } from './viewcategory/viewcategory.component';
 import { EditcategoryComponent } from './editcategory/editcategory.component';
@@ -149,7 +149,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker'
     ViewVendorComponent,
     DealsComponent,
     CategoryComponent,
-    BannerComponent,
+
     AddcategoryComponent,
     ViewcategoryComponent,
     EditcategoryComponent,

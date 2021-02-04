@@ -10,12 +10,50 @@
                         <div class="sub_heading">
                             <h1>Equipment List</h1>
                             <div class="input_divs2 input_button input_button2">
+                                <div class="search_fields">
+                                    <div class="">
 
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>Filter<span class="red">*</span></mat-label>
+
+                                            <mat-select placeholder="Filter" [(ngModel)]='filterBy'
+                                                (selectionChange)="filterSelected($event)">
+                                                <mat-option *ngIf="flag==true" value="">
+                                                    Remove Filter
+                                                </mat-option>
+                                                <mat-option *ngFor="let item of categoryList" [value]="item._id">
+                                                    {{item.name}}
+                                                </mat-option>
+
+
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="search_inner_fiels">
+                                        <div class="filters Booking_status">
+                                            <div class="search_with_icons">
+                                                <mat-form-field class="example-full-width">
+                                                    <mat-label>Search</mat-label>
+
+                                                    <input matInput type="text" [(ngModel)]="search" placeholder="">
+                                                </mat-form-field>
+                                                <button mat-button matSuffix mat-icon-button> <i
+                                                        *ngIf="flagSearch==true" class="fa fa-search" aria-hidden="true"
+                                                        (click)="searchMethod()"></i>
+                                                    <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
+                                                        (click)="clearSearch()"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
                         <div class="content_sec_comman">
                             <div class="content_wrap">
+
                                 <div class="outer_loaction">
                                     <div class="location_name">
 
@@ -78,6 +116,7 @@
                                     <div class="location_name">
                                         <!-- <h3>Electronics</h3> -->
                                         <!-- <p><i class="fa fa-compress" aria-hidden="true"></i></p> -->
+
                                     </div>
 
                                     <div class="add_location_name">

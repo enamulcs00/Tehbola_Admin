@@ -18,7 +18,7 @@ export class EquipmentManagementComponent implements OnInit {
   editEquipmentCategory: FormGroup
   submitted: boolean
   equipmentList = []
-  result: import("sweetalert2").SweetAlertResult<unknown>;
+  result: any
   editableBrandId: any;
   page: any;
   count: any;
@@ -27,16 +27,23 @@ export class EquipmentManagementComponent implements OnInit {
   subcategoryList: any;
   imageFile: any;
   id: any;
+  filterBy = ''
   flagImage: boolean;
   previewImage: any;
   brandImage: any;
   picUploader: boolean;
   progress: boolean;
   editableCategory: any;
+  search: string = '';
+  flagSearch: boolean = true;
+  flag: boolean;
   constructor(private apiService: ApiService, private fb: FormBuilder, private commonService: CommonService, private urlService: UrlService) {
 
     this.imageUrl = this.urlService.imageUrl;
   }
+
+
+
 
   ngOnInit() {
     this.getEquipmentList()
@@ -73,11 +80,46 @@ export class EquipmentManagementComponent implements OnInit {
 
   }
 
+
+
+  filterSelected(e) {
+    console.log(e);
+
+    if (this.filterBy) {
+      this.flag = true
+    }
+    else {
+      this.flag = false
+    }
+    console.log(e.value);
+
+    this.filterBy = e.value
+
+    this.getEquipmentList()
+
+  }
+
+
+
+  searchMethod() {
+    this.flagSearch = false
+    console.log(this.search);
+
+    this.getEquipmentList()
+  }
+
+  clearSearch() {
+    this.flagSearch = true
+    this.search = ''
+    this.getEquipmentList()
+
+  }
+
   getEquipmentList() {
 
     //Pagination is applied in the backend. just not using in the front end because of design same as category
     this.progress = true
-    this.apiService.getEquipmentList().subscribe(res => {
+    this.apiService.getEquipmentList(this.search, this.filterBy).subscribe(res => {
       console.log(res)
 
       if (res.success) {

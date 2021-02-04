@@ -89,7 +89,7 @@
                                                             (keyup)='geofenceSearch($event.target.value)'
                                                             aria-label="Number">
                                                         <mat-option *ngFor="let item of geofenceList" [value]='item.id'>
-                                                            {{item.name}}
+                                                            {{item.name}}, {{item.city}}, {{item.state}}
                                                         </mat-option>
 
                                                     </mat-select>
@@ -215,7 +215,8 @@
                                 <td>{{item?.foodTruck?.vehicleNumber}}</td>
                                 <td>
                                     <span *ngFor="let item1 of item.geoFence">
-                                        {{item1.name}}<br>
+                                        {{item1.name}} <span *ngIf="item1?.city"> ,{{item1?.city}},</span>
+                                        {{item1?.state}}<br>
                                     </span>
                                 </td>
                                 <td>

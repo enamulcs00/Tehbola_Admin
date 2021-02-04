@@ -69,9 +69,10 @@
                                 <th>Name</th>
                                 <th>Category</th>
                                 <th>Sub Category</th>
+                                <th>Tea Type</th>
                                 <th>Raw Item Needed</th>
                                 <th> Max Purchase Quantity</th>
-                                <th>Price </th>
+                                <th>Size and Price </th>
                                 <th>Product Description</th>
                                 <th class="action_bx">Status</th>
                                 <th>Action</th>
@@ -92,6 +93,7 @@
                                 <td>
                                     <span *ngFor="let item of product.subCategory">{{ item.name }},&nbsp;</span>
                                 </td>
+                                <td><span *ngFor="let item of product.teaType">{{item.name}},&nbsp;</span></td>
                                 <td>
                                     <span *ngFor="let item of product.rawItems; let i=index">
                                         {{item?.rawItem?.name}}-{{item?.quantity}},&nbsp;
@@ -99,7 +101,9 @@
                                 </td>
 
                                 <td>{{ product.purchaseQuantity }}</td>
-                                <td> {{ product.price }}</td>
+                                <td> <span
+                                        *ngFor="let item of product.size">{{item?.id?.name}}-{{item.price}}<br></span>
+                                </td>
                                 <td>{{ product.description.length < 24 ?
                             product.description :
                             product.description.slice(0,24)+ "..." }}</td>
@@ -129,15 +133,15 @@
                                 </td>
                             </tr>
                         </table>
-                        <!-----start pagination-->
-                        <mat-paginator #paginator [length]="length" [pageSize]="pageSize"
-                            [pageSizeOptions]="pageSizeOptions"
-                            (page)="pageEvent = vendorProductListAfterPageSizeChanged($event)">
-                        </mat-paginator>
-                        <!-----end pagination-->
+
                     </div>
 
-
+                    <!-----start pagination-->
+                    <mat-paginator #paginator [length]="length" [pageSize]="pageSize"
+                        [pageSizeOptions]="pageSizeOptions"
+                        (page)="pageEvent = vendorProductListAfterPageSizeChanged($event)">
+                    </mat-paginator>
+                    <!-----end pagination-->
 
                 </div>
             </div>

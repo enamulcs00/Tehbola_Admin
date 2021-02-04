@@ -114,6 +114,11 @@
                             <tr *ngFor="let item of vendorList; index as i ">
                                 <td *ngIf="flagUserList==false">{{i+1}}</td>
                                 <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
+                                <td>
+                                    <figure>
+                                        <img [src]="imageUrl+item.profilePic" height="50px" width="50px" alt="">
+                                    </figure>
+                                </td>
                                 <td>{{item.fullName}}</td>
                                 <td>{{item.gender==='M'?"Male":"Female"}}</td>
                                 <td>{{item.countryCode}}-{{item.phone}}</td>

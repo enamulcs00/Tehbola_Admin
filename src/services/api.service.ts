@@ -88,6 +88,10 @@ export class ApiService {
       getAssignementData: 'admin/assignmentData',
       addAssignment: 'admin/assignment',
       getAssignmentList: 'admin/assignments',
+      SizeList: 'admin/size',
+      teaType: 'admin/teaType',
+      sugarLevel: 'admin/sugarLevel',
+
       //commonApi to change status of any user type
       status: 'common/status',
 
@@ -808,14 +812,14 @@ export class ApiService {
 
   }
 
-  getEquipmentList(): Observable<any> {
+  getEquipmentList(search, filter): Observable<any> {
 
-    return this.http.get<any>(`${this.apiEndPoints.getEquipmentList}?page=1&count=10000`, this.getHeaders()).pipe(catchError(this.handleError()))
+    return this.http.get<any>(`${this.apiEndPoints.getEquipmentList}?page=1&count=10000&search=${search}&category=${filter}`, this.getHeaders()).pipe(catchError(this.handleError()))
 
   }
-  getRawItemList(): Observable<any> {
+  getRawItemList(page, count, search): Observable<any> {
 
-    return this.http.get<any>(`${this.apiEndPoints.getBrandList}?page=1&count=10000`, this.getHeaders()).pipe(catchError(this.handleError()))
+    return this.http.get<any>(`${this.apiEndPoints.getBrandList}?page=${page}&count=${count}&search=${search}`, this.getHeaders()).pipe(catchError(this.handleError()))
 
   }
 
@@ -853,20 +857,58 @@ export class ApiService {
     return this.http.get<any>(`${this.apiEndPoints.getCountry}?page=1&count=10&search=${data}`, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
-  addShippingRate(body): Observable<any> {
-    return this.http.post<any>(this.apiEndPoints.postShippingCharge, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  addSize(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.SizeList, body, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
-  getShippingRateList(): Observable<any> {
-    return this.http.get<any>(this.apiEndPoints.getShippingChargesList, this.getHeaders()).pipe(catchError(this.handleError()))
+
+  addTeaType(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.teaType, body, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
-  getSingleShippingCharge(id): Observable<any> {
-    return this.http.get<any>(`${this.apiEndPoints.getSingleShippingCharges}?id=${id}`, this.getHeaders()).pipe(catchError(this.handleError()))
+
+
+  addSugarLevel(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.sugarLevel, body, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
-  updateShippingRate(body) {
-    return this.http.put<any>(this.apiEndPoints.postShippingCharge, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  getSizeList(): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.SizeList}?page=1&count=100000&search=`, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  getTeaList(): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.teaType}?page=1&count=100000&search=`, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  getSugarLevelList(): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.sugarLevel}?page=1&count=100000&search=`, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+
+
+  getSingleSize(id): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.SizeList}/${id}`, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  getSingleTeaType(id): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.teaType}/${id}`, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  getSingleSugarLevel(id): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.sugarLevel}/${id}`, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  updateSize(body, id) {
+    return this.http.put<any>(`${this.apiEndPoints.SizeList}/${id}`, body, this.getHeaders()).pipe(catchError(this.handleError()))
+
+  }
+  updateTeaType(body, id) {
+    return this.http.put<any>(`${this.apiEndPoints.teaType}/${id}`, body, this.getHeaders()).pipe(catchError(this.handleError()))
+
+  }
+
+  updateSugarLevel(body, id) {
+    return this.http.put<any>(`${this.apiEndPoints.sugarLevel}/${id}`, body, this.getHeaders()).pipe(catchError(this.handleError()))
 
   }
 

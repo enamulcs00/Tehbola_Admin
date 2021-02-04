@@ -17,11 +17,23 @@ table th:first-child {
 
 }
 
+
+th {
+    background: #e0e0e0;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    /* Don't forget this, required for the stickiness */
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+}
+
 @media (max-width:1500px) {
 
     .divAboveTable {
         height: 235px;
         overflow-y: scroll;
     }
+
+
 
 }

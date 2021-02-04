@@ -33,7 +33,7 @@ import { ViewVendorComponent } from './view-vendor/view-vendor.component';
 import { EditVendorComponent } from './edit-vendor/edit-vendor.component';
 import { CategoryComponent } from './category/category.component';
 import { DealsComponent } from './deals/deals.component';
-import { BannerComponent } from './banner/banner.component';
+
 import { EditcategoryComponent } from './editcategory/editcategory.component';
 import { AddcategoryComponent } from './addcategory/addcategory.component';
 import { ViewcategoryComponent } from './viewcategory/viewcategory.component';
@@ -333,11 +333,7 @@ const routes: Routes = [
     component: DealsComponent,
     canActivate: [AuthGuard]
   },
-  {
-    path: 'banner',
-    component: BannerComponent,
-    canActivate: [AuthGuard]
-  },
+
   {
     path: 'editcategory',
     component: EditcategoryComponent,

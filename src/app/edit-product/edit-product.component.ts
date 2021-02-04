@@ -7,6 +7,21 @@ import { ApiService } from 'src/services/api.service';
 import { UrlService } from 'src/services/url.service';
 import { async } from 'rxjs/internal/scheduler/async';
 declare var $: any;
+
+interface teaTypeModel {
+  name: string;
+  id: string;
+}
+
+interface sugarLevelModel {
+  name: string;
+  id: string;
+}
+
+interface sizerModel {
+  name: string;
+  id: string;
+}
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',
@@ -47,6 +62,9 @@ export class EditProductComponent implements OnInit {
   tempSelectedCategoryId: any;
   progress: boolean;
   productData: any;
+  sizeList: Array<sizerModel> = [];
+  teaTypeList: Array<teaTypeModel> = [];
+  sugarLevelList: Array<sugarLevelModel> = [];
 
 
 
@@ -67,7 +85,10 @@ export class EditProductComponent implements OnInit {
 
       });
     this.getRawItemList();
-    this.getAllCategory()
+    this.getAllCategory();
+    this.getTeaList();
+    this.getSizeList();
+    this.getSugarLevelList();
   }
 
   ngOnInit() {
@@ -91,12 +112,15 @@ export class EditProductComponent implements OnInit {
       subCategory: ['', Validators.required],
       purchaseQuantity: ['', [Validators.required, Validators.min(0)]],
       discount: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
+      teaType: [''],
+      sugarLevel: ['', Validators.required],
       highlights: ['',],
       highlights_ar: [''],
-      price: ['', [Validators.required, Validators.min(1)]],
+      // price: ['', [Validators.required, Validators.min(1)]],
       description: ['', [Validators.required,]],
       description_ar: ['', Validators.required],
       image: ['',],
+      sizePrice: this.fb.array([], Validators.required),
       specification: this.fb.array([]),
       aliases: this.fb.array([
         this.fb.control('')
@@ -126,22 +150,34 @@ export class EditProductComponent implements OnInit {
 
   }
   setValue(data: any) {
-    
-    this.productId = data.productId
+
+    this.productId = data.id
     this.editProductForm.get('name').setValue(data.name);
     this.editProductForm.get('name_ar').setValue(data.name_ar);
     this.editProductForm.get('purchaseQuantity').setValue(data.purchaseQuantity);
     this.editProductForm.get('discount').setValue(data.discount);
     this.editProductForm.get('highlights').setValue(data.highlights);
     this.editProductForm.get('highlights_ar').setValue(data.highlights_ar);
-    this.editProductForm.get('price').setValue(data.price);
+    //  this.editProductForm.get('price').setValue(data.price);
     this.editProductForm.get('category').setValue(data.category._id);
+    let temp2 = []
+    data.teaType.forEach(element => {
+      temp2.push(element)
+    });
+
+    this.editProductForm.get('teaType').setValue(temp2);
+    let temp = []
+    data.sugarLevel.forEach(element => {
+      temp.push(element)
+    });
+    this.editProductForm.get('sugarLevel').setValue(temp);
     this.selectedCategory = data.category._id
     this.getAllSubcategory(this.selectedCategory);
     this.editProductForm.get('description').setValue(data.description);
     this.editProductForm.get('description_ar').setValue(data.description_ar);
     this.setSpecifications(data.rawItems)
     this.setSearchKeywords(data.searchKeyword)
+    this.setSizePrize(data.size)
     this.previewImage = data.images;
     this.progress = false
   }
@@ -159,7 +195,7 @@ export class EditProductComponent implements OnInit {
   newSpecifiaction(): FormGroup {
     return this.fb.group({
       rawItem: new FormControl('', Validators.required),
-      quantity: new FormControl('', Validators.required)
+      quantity: new FormControl('', [Validators.required, Validators.min(0)])
     })
   }
   addAlias() {
@@ -202,10 +238,54 @@ export class EditProductComponent implements OnInit {
 
   }
 
+
+  getSizeList() {
+    debugger
+    this.apiService.getSizeList().subscribe(res => {
+      console.log(res);
+      res.data.forEach(element => {
+        this.sizeList.push({
+          id: element._id,
+          name: element.name,
+
+        })
+      });
+
+    })
+  }
+
+  getTeaList() {
+    this.apiService.getTeaList().subscribe(res => {
+      console.log(res);
+      res.data.forEach(element => {
+        this.teaTypeList.push({
+          id: element._id,
+          name: element.name,
+
+        })
+      });
+
+    })
+  }
+
+  getSugarLevelList() {
+    this.apiService.getSugarLevelList().subscribe(res => {
+      console.log(res);
+      res.data.forEach(element => {
+        this.sugarLevelList.push({
+          id: element._id,
+          name: element.name,
+
+        })
+      });
+    })
+  }
+
+
   getRawItemList() {
     //Pagination is applied in the backend. just not using in the front end because of design same as category
     // this.progress = true
-    this.apiService.getRawItemList().subscribe(res => {
+    this.apiService.getRawItemList(1, 10000000, '').subscribe(res => {
       console.log(res)
       if (res.success) {
         this.progress = false
@@ -228,6 +308,42 @@ export class EditProductComponent implements OnInit {
       }));
     }
     this.editProductForm.setControl('specification', formArray)
+  }
+
+
+
+  setSizePrize(specification) {
+    const formArray = new FormArray([]);
+    for (let x of specification) {
+      formArray.push(this.fb.group({
+        id: x.id,
+        price: x.price
+      }));
+    }
+    this.editProductForm.setControl('sizePrice', formArray)
+  }
+
+
+
+  sizePrice(): FormArray {
+    return this.editProductForm.get('sizePrice') as FormArray
+  }
+
+  newSizePrice(): FormGroup {
+    return this.fb.group({
+      id: new FormControl('', Validators.required),
+      price: new FormControl('', [Validators.required, Validators.min(0)])
+    })
+  }
+
+
+  addNewSizePrice() {
+    this.sizePrice().push(this.newSizePrice())
+  }
+
+  removeSize(i: number) {
+    this.sizePrice().removeAt(i);
+    console.log(this.sizePrice().value);
   }
 
 
@@ -258,6 +374,9 @@ export class EditProductComponent implements OnInit {
     }
     );
   }
+
+
+
 
   categorySelected(id) {
 
@@ -331,7 +450,10 @@ export class EditProductComponent implements OnInit {
       body.append('name_ar', this.editProductForm.controls['name_ar'].value);
       body.append('description', this.editProductForm.controls['description'].value);
       body.append('description_ar', this.editProductForm.controls['description_ar'].value);
-      body.append('price', this.editProductForm.controls['price'].value);
+      body.append('teaType', JSON.stringify(this.editProductForm.controls['teaType'].value));
+      body.append('size', JSON.stringify(this.editProductForm.controls['sizePrice'].value));
+      body.append('sugarLevel', JSON.stringify(this.editProductForm.controls['sugarLevel'].value));
+      // body.append('price', this.editProductForm.controls['price'].value);
       body.append('category', this.editProductForm.controls['category'].value);
       body.append('subCategory', JSON.stringify(this.editProductForm.controls['subCategory'].value));
       body.append('purchaseQuantity', this.editProductForm.controls['purchaseQuantity'].value);

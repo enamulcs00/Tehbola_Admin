@@ -24,6 +24,8 @@ interface foodTruck {
 interface goefence {
   id: string;
   name: string;
+  city: string
+  state: string
 }
 
 interface equipement {
@@ -218,7 +220,8 @@ export class AssignmentManagementComponent implements OnInit {
             {
               id: element._id,
               name: element.name,
-
+              city: element.city,
+              state: element.state
             })
         });
 

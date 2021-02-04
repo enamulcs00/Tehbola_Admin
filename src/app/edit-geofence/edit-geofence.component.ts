@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/services/api.service';
 import { CommonService } from 'src/services/common.service';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MapsAPILoader } from '@agm/core';
 
 @Component({
@@ -47,26 +47,24 @@ export class EditGeofenceComponent implements OnInit {
   locationPoints: any;
   progress: any;
   sub: any;
+  geofenceForm: FormGroup;
 
-  constructor(private service: ApiService, private mapsAPILoader: MapsAPILoader, private commonService: CommonService,
+  constructor(private service: ApiService, private mapsAPILoader: MapsAPILoader, private fb: FormBuilder, private commonService: CommonService,
     private ngZone: NgZone, private router: Router, private route: ActivatedRoute) {
     // this.setCurrentLocation();
   }
   ngAfterViewInit() { }
   ngOnInit() {
-
     this.sub = this.route
       .queryParams
       .subscribe(params => {
-        // Defaults to 0 if no query param provided.
         this.geoFenceId = params['id'];
-
       });
-
-    // this.multiple.vacantDrivers.setValue(this.selected);
-
-    // console.log("currentUrl====", this.router.url);
-
+    this.geofenceForm = this.fb.group({
+      geofenceName: ['', Validators.required],
+      geofenceCity: ['', Validators.required],
+      geofenceState: ['', Validators.required],
+    })
 
 
     this.mapsAPILoader.load().then(() => {
@@ -85,13 +83,17 @@ export class EditGeofenceComponent implements OnInit {
 
     this.service.getGeofencing(this.geoFenceId).subscribe((res) => {
       if (res['success'] == true) {
+
         console.log(res);
         this.locationPoints = res['data'].locationPoints;
         console.log(res, this.locationPoints, this.searchString);
         this.searchString = res['data'].name
-
+        this.geofenceForm.get('geofenceName').setValue(res['data'].name)
+        this.geofenceForm.get('geofenceCity').setValue(res['data'].city)
+        this.geofenceForm.get('geofenceState').setValue(res['data'].state)
+        this.onEdit(this.locationPoints, this.geoFenceId)
       }
-      this.onEdit(this.locationPoints, this.geoFenceId)
+
     });
   }
   save() {
@@ -171,11 +173,14 @@ export class EditGeofenceComponent implements OnInit {
     }
     console.log(polyArrayLatLng);
 
-    if (this.searchString) {
+    if (this.geofenceForm.valid && polyArrayLatLng.length) {
       this.addgeofence = false;
       var geofenceData = {
         "id": this.geoFenceId,
-        "name": this.searchString,
+        "name": this.geofenceForm.get('geofenceName').value,
+        "city": this.geofenceForm.get('geofenceCity').value,
+        "state": this.geofenceForm.get('geofenceState').value,
+
         "locationPoints": polyArrayLatLng
       }
       console.log("geofencedata", geofenceData)

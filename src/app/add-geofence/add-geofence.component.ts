@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MapsAPILoader } from '@agm/core';
 import { ApiService } from 'src/services/api.service';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from 'src/services/common.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -21,16 +21,21 @@ export class AddGeofenceComponent implements OnInit {
   geoCoder: google.maps.Geocoder;
   drawingManager: google.maps.drawing.DrawingManager;
   polyarray: any = [];
+  geofenceForm: FormGroup
 
-  geofenceName = new FormControl('', Validators.required);
   progress: boolean;
   sub: any;
 
-  constructor(private mapsAPILoader: MapsAPILoader, private router: Router, private apiService: ApiService, private commonService: CommonService) {
+  constructor(private mapsAPILoader: MapsAPILoader, private router: Router, private fb: FormBuilder, private apiService: ApiService, private commonService: CommonService) {
     this.setCurrentLocation()
   }
 
   ngOnInit() {
+    this.geofenceForm = this.fb.group({
+      geofenceName: ['', Validators.required],
+      geofenceCity: ['', Validators.required],
+      geofenceState: ['', Validators.required],
+    })
 
 
 
@@ -104,12 +109,14 @@ export class AddGeofenceComponent implements OnInit {
 
 
   save() {
-    
-    if (this.geofenceName.valid && this.polyarray.length > 0) {
+
+    if (this.geofenceForm.valid && this.polyarray.length > 0) {
 
       this.progress = true
       var geofenceData = {
-        "name": this.geofenceName.value,
+        "name": this.geofenceForm.get('geofenceName').value,
+        "city": this.geofenceForm.get('geofenceCity').value,
+        "state": this.geofenceForm.get('geofenceState').value,
         "locationPoints": this.polyarray
       }
 

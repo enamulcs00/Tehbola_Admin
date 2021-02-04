@@ -9,6 +9,10 @@
                     <div class="input_divs2 input_button input_button2">
                         <!-- <button class="btn_back" mat-button (click)="back()"><i class="fa fa-long-arrow-left"
                                 aria-hidden="true"></i></button> -->
+                        <button class="" mat-button matRipple [matRippleColor]="'#dbdddf'" [matRippleRadius]="50"
+                            data-toggle="modal" data-target="#Add_State">
+                            <i class="fa fa-plus"></i> Add Raw Item
+                        </button>
                     </div>
                     <!-- <div class="top_subheading_add">
                    <a (click)="goTosubcategory()"><span>+</span>Sub Category</a>
@@ -22,14 +26,34 @@
                                 <!-- <h3>Electronics</h3> -->
                                 <!-- <p><i class="fa fa-compress" aria-hidden="true"></i></p> -->
                             </div>
+                            <div class="search_fields">
+                                <div class="search_inner_fiels">
+                                    <div class="filters Booking_status">
+                                        <div class="search_with_icons">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Search</mat-label>
 
-                            <div class="add_location_name">
+                                                <input matInput type="text" [(ngModel)]="search" placeholder="">
+                                            </mat-form-field>
+                                            <button mat-button matSuffix mat-icon-button> <i *ngIf="flagSearch==true"
+                                                    class="fa fa-search" aria-hidden="true"
+                                                    (click)="searchMethod()"></i>
+                                                <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
+                                                    (click)="clearSearch()"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- <div class="add_location_name">
                                 <a class="button-border add_state" matRipple [matRippleColor]="'#dbdddf'"
                                     [matRippleRadius]="50" data-toggle="modal" data-target="#Add_State">
                                     <i class="fa fa-plus"></i> Add Raw Item</a>
-                            </div>
+                            </div> -->
 
-                            <div class="state-list button-border" *ngFor="let item of brandList; let i=index">
+                            <!-- <div class="state-list button-border" *ngFor="let item of brandList; let i=index">
                                 <div class="state">
                                     <div class="country_name">
                                         <figure><img src={{imageUrl+item.image}}></figure>
@@ -54,6 +78,10 @@
                                                     <p class="m-2">
                                                         Total units: <span>{{item.totalUnits}}</span>
                                                     </p>
+                                                    <p class="m-2">
+                                                        Serving Size:
+                                                        <span>{{item.perServingSize}}{{item.measureTypeServing}}</span>
+                                                    </p>
                                                 </div>
                                             </div>
                                         </span>
@@ -65,12 +93,57 @@
                                     </div>
 
 
-                                    <!-- state-list-->
                                 </div>
 
 
-                                <!--state-->
+                       
+                            </div> -->
+
+
+                            <div class="table-responsive divAboveTable">
+                                <table>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Name</th>
+                                        <th>Category</th>
+                                        <th>Sub-Category</th>
+                                        <th>Unit Price</th>
+                                        <th>Quantity Per Unit</th>
+                                        <th>Total Unit</th>
+                                        <th>Serving Size</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    <tr *ngFor="let item of brandList; let i=index">
+                                        <td>
+                                            <figure><img width="50px" height="50px" src={{imageUrl+item.image}}>
+                                            </figure>
+                                        </td>
+                                        <td>{{ item.name }}</td>
+                                        <td>{{item.category.name}}</td>
+                                        <td>
+                                            <span *ngFor="let item of item.subCategory">{{item.name}}</span>
+                                        </td>
+                                        <td>{{item.unitPrice}}</td>
+                                        <td>{{item.quantityPerUnit}}{{item.measureTypeUnit}}</td>
+                                        <td>{{item.totalUnits}}</td>
+                                        <td>{{item.perServingSize}}{{item.measureTypeServing}}</td>
+                                        <td class="p-2"> <a data-toggle="modal" class="mr-3"
+                                                data-target="#Add_State_delete">
+                                                <i class="fa fa-edit" (click)="editBrand(item._id)"></i>
+                                            </a>
+
+                                            <a>
+                                                <i class="fa fa-trash" (click)="deleteBrand(item._id)"></i>
+                                            </a></td>
+                                    </tr>
+                                </table>
                             </div>
+                            <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
+                                (page)="pageEvent = rawListAfterPageSizeChanged($event)">
+                            </mat-paginator>
+
+
+
                         </div>
                     </div>
                 </div>

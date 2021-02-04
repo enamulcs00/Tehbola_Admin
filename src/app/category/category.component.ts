@@ -133,7 +133,7 @@ export class CategoryComponent implements OnInit {
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (event: any) => {
-        this.flagImage=true
+        this.flagImage = true
         this.subCategoryImage = event.target.result;
         this.addSubcategoryForm.controls['image'].patchValue(this.imageFile);
       };
@@ -382,7 +382,7 @@ export class CategoryComponent implements OnInit {
   }
 
   viewSubCategory(id) {
-    debugger
+
     this.picUploader = false
 
     this.apiService.viewCategory(id).subscribe((res) => {

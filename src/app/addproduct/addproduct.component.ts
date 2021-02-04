@@ -8,6 +8,24 @@ import { UrlService } from 'src/services/url.service';
 import { MoreThan } from 'src/services/moreThanValidator';
 import { validateHorizontalPosition } from '@angular/cdk/overlay';
 declare var $: any;
+interface teaTypeModel {
+  name: string;
+  name_ar: string
+  id: string;
+}
+
+interface sugarLevelModel {
+  name: string;
+  name_ar: string
+  id: string;
+}
+
+interface sizeModel {
+  name: string;
+  name_ar: string
+  id: string;
+}
+
 
 @Component({
   selector: 'app-addproduct',
@@ -15,7 +33,7 @@ declare var $: any;
   styleUrls: ['./addproduct.component.scss']
 })
 export class AddproductComponent implements OnInit {
-  name = 'Angular 4';
+
   urls = [];
   addProductForm: FormGroup
   images = [];
@@ -40,6 +58,9 @@ export class AddproductComponent implements OnInit {
   sellerId: any;
   selectedSubcategory: any;
   productId: string;
+  sizeList: Array<sizeModel> = [];
+  teaTypeList: Array<teaTypeModel> = [];
+  sugarLevelList: Array<sugarLevelModel> = [];
 
 
 
@@ -50,7 +71,10 @@ export class AddproductComponent implements OnInit {
     this.user = JSON.parse(sessionStorage.getItem('Markat_User'))
     console.log(this.user);
     this.getAllCategory()
-    this.getRawItemList()
+    this.getRawItemList();
+    this.getSizeList();
+    this.getSugarLevelList();
+    this.getTeaList();
 
 
   }
@@ -76,13 +100,17 @@ export class AddproductComponent implements OnInit {
       subCategory: ['', Validators.required],
       purchaseQuantity: ['', [Validators.required, Validators.min(0)]],
       discount: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
+      teaType: [''],
+      sugarLevel: ['', Validators.required],
+      //  size: ['', Validators.required],
       highlights: ['',],
       highlights_ar: [''],
-      price: ['', [Validators.required, Validators.min(1)]],
+      // price: ['', [Validators.required, Validators.min(1)]],
       description: ['', [Validators.required,]],
       description_ar: ['', Validators.required],
       image: ['', [Validators.required]],
       specification: this.fb.array([], Validators.required),
+      sizePrice: this.fb.array([], Validators.required),
       aliases: this.fb.array([
         this.fb.control('', Validators.required)
       ])
@@ -106,6 +134,9 @@ export class AddproductComponent implements OnInit {
   specification(): FormArray {
     return this.addProductForm.get('specification') as FormArray;
   }
+
+
+
   get aliases() {
     return this.addProductForm.get('aliases') as FormArray;
   }
@@ -117,9 +148,33 @@ export class AddproductComponent implements OnInit {
       quantity: new FormControl('', Validators.required)
     })
   }
+
+  sizePrice(): FormArray {
+    return this.addProductForm.get('sizePrice') as FormArray
+  }
+
+  newSizePrice(): FormGroup {
+    return this.fb.group({
+      id: new FormControl('', Validators.required),
+      price: new FormControl('', Validators.required)
+    })
+  }
+
+
+  addNewSizePrice() {
+    this.sizePrice().push(this.newSizePrice())
+  }
+
+  removeSize(i: number) {
+    this.sizePrice().removeAt(i);
+    console.log(this.sizePrice().value);
+  }
+
   addAlias() {
     this.aliases.push(this.fb.control(''));
   }
+
+
 
 
   addNewSpecification() {
@@ -132,7 +187,11 @@ export class AddproductComponent implements OnInit {
   removeSpecification(i: number) {
     this.specification().removeAt(i);
 
+
   }
+
+
+
 
   removeSearchKeywords(i: number) {
     this.aliases.removeAt(i);
@@ -171,7 +230,7 @@ export class AddproductComponent implements OnInit {
   getRawItemList() {
     //Pagination is applied in the backend. just not using in the front end because of design same as category
     // this.progress = true
-    this.apiService.getRawItemList().subscribe(res => {
+    this.apiService.getRawItemList(1, 10000000, '').subscribe(res => {
       console.log(res)
       if (res.success) {
         this.progress = false
@@ -181,6 +240,50 @@ export class AddproductComponent implements OnInit {
         this.progress = false
         this.commonService.errorToast(res.message)
       }
+    })
+  }
+
+
+
+  getSizeList() {
+    debugger
+    this.apiService.getSizeList().subscribe(res => {
+      console.log(res);
+      res.data.forEach(element => {
+        this.sizeList.push({
+          id: element._id,
+          name: element.name,
+          name_ar: element.name_ar
+        })
+      });
+
+    })
+  }
+
+  getTeaList() {
+    this.apiService.getTeaList().subscribe(res => {
+      console.log(res);
+      res.data.forEach(element => {
+        this.teaTypeList.push({
+          id: element._id,
+          name: element.name,
+          name_ar: element.name_ar
+        })
+      });
+
+    })
+  }
+
+  getSugarLevelList() {
+    this.apiService.getSugarLevelList().subscribe(res => {
+      console.log(res);
+      res.data.forEach(element => {
+        this.sugarLevelList.push({
+          id: element._id,
+          name: element.name,
+          name_ar: element.name_ar
+        })
+      });
     })
   }
 
@@ -219,27 +322,30 @@ export class AddproductComponent implements OnInit {
     this.submitted = true;
 
     if (this.submitted && this.addProductForm.valid && (this.images.length > 0)) {
-      const body = new FormData();
 
+
+
+
+      const body = new FormData();
       body.append('name', this.addProductForm.controls['name'].value);
       body.append('name_ar', this.addProductForm.controls['name_ar'].value);
       body.append('description', this.addProductForm.controls['description'].value);
       body.append('description_ar', this.addProductForm.controls['description_ar'].value);
-      body.append('price', this.addProductForm.controls['price'].value);
+      body.append('sugarLevel', JSON.stringify(this.addProductForm.controls['sugarLevel'].value));
+      body.append('teaType', JSON.stringify(this.addProductForm.controls['teaType'].value));
+      body.append('size', JSON.stringify(this.addProductForm.controls['sizePrice'].value));
       body.append('category', this.addProductForm.controls['category'].value);
       body.append('subCategory', JSON.stringify(this.addProductForm.controls['subCategory'].value));
       body.append('purchaseQuantity', this.addProductForm.controls['purchaseQuantity'].value);
       body.append('rawItems', JSON.stringify(this.addProductForm.controls['specification'].value));
-
       body.append('searchKeyword', JSON.stringify(this.addProductForm.controls['aliases'].value));
-
       for (let i = 0; i < this.images.length; i++) {
         body.append('images', this.images[i], this.images[i].name);
       }
+      // body.append('price', this.addProductForm.controls['price'].value)
       body.append('highlights', this.addProductForm.controls['highlights'].value)
       body.append('highlights_ar', this.addProductForm.controls['highlights_ar'].value)
       body.append('discount', this.addProductForm.controls['discount'].value)
-
       body.forEach((value, key) => {
         console.log(key + " " + value)
       });
@@ -257,7 +363,6 @@ export class AddproductComponent implements OnInit {
       })
     }
   }
-
   goToproduct() {
     this.router.navigate(['/product'])
   }

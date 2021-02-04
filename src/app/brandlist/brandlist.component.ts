@@ -4,6 +4,7 @@ import { ApiService } from 'src/services/api.service';
 import { CommonService } from 'src/services/common.service';
 import Swal from 'sweetalert2';
 import { UrlService } from 'src/services/url.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-brandlist',
@@ -18,8 +19,13 @@ export class BrandlistComponent implements OnInit {
   brandList = []
   result: import("sweetalert2").SweetAlertResult<unknown>;
   editableBrandId: any;
-  page: any;
+
   count: any;
+  page = 1;
+  length = 100;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageEvent: PageEvent;
   imageUrl: string;
   categoryList: any;
   subcategoryList: any;
@@ -32,6 +38,9 @@ export class BrandlistComponent implements OnInit {
   progress: boolean;
   gram: boolean;
   litre: boolean;
+  search: string = '';
+  flagSearch: boolean = true;
+  flagUserList: boolean;
   constructor(private apiService: ApiService, private fb: FormBuilder, private commonService: CommonService, private urlService: UrlService) {
     this.getBrandList()
     this.getCategoryList()
@@ -69,20 +78,60 @@ export class BrandlistComponent implements OnInit {
     })
   }
 
+
+  searchMethod() {
+    this.flagSearch = false
+    console.log(this.search);
+
+    this.getBrandList()
+  }
+
+  clearSearch() {
+    this.flagSearch = true
+    this.search = ''
+    this.getBrandList()
+
+  }
+
+
   getBrandList() {
     //Pagination is applied in the backend. just not using in the front end because of design same as category
     this.progress = true
-    this.apiService.getRawItemList().subscribe(res => {
+    this.apiService.getRawItemList(this.page, this.pageSize, this.search).subscribe(res => {
       console.log(res)
       if (res.success) {
         this.progress = false
         console.log(res.data);
         this.brandList = res.data
+        this.length = res.total
       } else {
         this.progress = false
         this.commonService.errorToast(res.message)
       }
     })
+  }
+
+  rawListAfterPageSizeChanged(e): any {
+    console.log(e)
+    this.pageSize = e.pageSize
+    if (e.pageIndex == 0) {
+      this.page = 1;
+      // this.page = e.pageIndex;
+      //  this.srNo = e.pageIndex * e.pageSize
+      this.flagUserList = false
+    } else {
+      if (e.previousPageIndex < e.pageIndex) {
+        this.page = e.pageIndex + 1;
+
+        this.flagUserList = true
+      } else {
+        this.page = e.pageIndex;
+
+        this.flagUserList = true
+      }
+
+    }
+    this.getBrandList()
   }
 
 

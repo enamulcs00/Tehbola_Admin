@@ -25,14 +25,18 @@ interface countrylist {
 export class SettingsComponent implements OnInit {
   tax: any;
   zoneName: any
-  zoneFormGroup: FormGroup
-  zoneEditFormGroup: FormGroup;
+  sizeFormGroup: FormGroup;
+  teaTypeGroup: FormGroup;
+  sugarlevelForm: FormGroup
+  sizeEditFormGroup: FormGroup;
+  teaTypeEditForm: FormGroup;
+  sugarLevelEditForm: FormGroup;
   updateSetting: FormGroup
   // applyTax: any = false;
   countryList: countrylist[] = []
   selectedCountry: any;
   browser: any
-  shippingChargesList: any;
+  sizeList: any;
   openEditform: boolean;
   result: any
   id: any;
@@ -42,30 +46,46 @@ export class SettingsComponent implements OnInit {
   selectedStates = []
   filteredOptions: Observable<any[]>;
   showCountryList: any;
+  teaTypeList: any;
+  teaTypeId: any;
+  sugarLevelList: any;
+  sugarLevelId: any;
   constructor(private apiService: ApiService, private fb: FormBuilder, private commonService: CommonService) { }
 
   ngOnInit() {
     this.getTax();
 
-    this.getShippingRateList();
-    this.zoneFormGroup = this.fb.group({
-      rangePrice: ['', Validators.required],
-      selectedCountry: ['', Validators.required],
-      belowMinValue: ['', Validators.required],
-      minValue: ['', Validators.required],
-      maxValue: ['', Validators.required],
-      aboveMaxValue: ['', Validators.required]
+    this.getSizeList();
+    this.getTeaList();
+    this.getSugarLevelList()
+    this.sizeFormGroup = this.fb.group({
+      name: ['', Validators.required],
+      name_ar: ['', Validators.required],
     });
 
-    this.zoneEditFormGroup = this.fb.group({
-      rangePrice: ['', Validators.required],
-      selectedCountry: ['', Validators.required],
-      belowMinValue: ['', Validators.required],
-      minValue: ['', Validators.required],
-      maxValue: ['', Validators.required],
-      aboveMaxValue: ['', Validators.required]
+    this.teaTypeGroup = this.fb.group({
+      name: ['', Validators.required],
+      name_ar: ['', Validators.required],
     });
 
+    this.sugarlevelForm = this.fb.group({
+      name: ['', Validators.required],
+      name_ar: ['', Validators.required],
+    });
+
+    this.sizeEditFormGroup = this.fb.group({
+      name: ['', Validators.required],
+      name_ar: ['', Validators.required],
+    });
+
+    this.teaTypeEditForm = this.fb.group({
+      name: ['', Validators.required],
+      name_ar: ['', Validators.required],
+    });
+    this.sugarLevelEditForm = this.fb.group({
+      name: ['', Validators.required],
+      name_ar: ['', Validators.required],
+    });
     this.updateSetting = this.fb.group({
       facebook: ['', Validators.required],
       twitter: ['', Validators.required],
@@ -74,9 +94,8 @@ export class SettingsComponent implements OnInit {
       appStoreLink: ['', Validators.required],
       googlePlayLink: ['', Validators.required],
       tax: ['', Validators.required],
-      applyTax: ['',]
     })
-    this.openPopUp()
+
   }
   getTax() {
 
@@ -123,84 +142,96 @@ export class SettingsComponent implements OnInit {
     })
   }
 
-  onKey(e) {
-    console.log(e);
-    let search = e
-    this.apiService.getCountryList(search).subscribe((res: any) => {
-      this.showCountryList = res.data;
-    })
 
-  }
 
-  private _filter(value) {
-    const filterValue = value.toLowerCase();
-    const data =
-    {
-      'search': filterValue
-    }
-    this.apiService.getCountryList(data).subscribe((res: any) => {
-      this.countryList = res.data;
-      return this.countryList.filter(option => option.name.toLowerCase().includes(filterValue));
-    })
 
-  }
+  saveSize() {
+    console.log(this.sizeFormGroup.value);
+    if (this.sizeFormGroup.valid) {
 
-  saveZone() {
-    console.log(this.zoneFormGroup.value);
-    if (this.submitted && this.zoneFormGroup.valid) {
-      let selectedCountry = this.zoneFormGroup.controls['selectedCountry'].value;
-      let selectedCountryObject = this.countryList.find(element => element.name === selectedCountry)
       let body = {
-        'country': selectedCountry,
-        'countryCode': selectedCountryObject.code,
-        'countryId': selectedCountryObject._id,
-        'minPrice': this.zoneFormGroup.controls['minValue'].value,
-        'maxPrice': this.zoneFormGroup.controls['maxValue'].value,
-        'rangePrice': this.zoneFormGroup.controls['rangePrice'].value,
-        'belowPrice': this.zoneFormGroup.controls['belowMinValue'].value,
-        'abovePrice': this.zoneFormGroup.controls['aboveMaxValue'].value,
+        'name': this.sizeFormGroup.get('name').value,
+        'name_ar': this.sizeFormGroup.get('name_ar').value,
       }
 
 
-      this.apiService.addShippingRate(body).subscribe(res => {
+      this.apiService.addSize(body).subscribe(res => {
         console.log(res);
         if (res.success) {
           this.commonService.successToast(res.message);
-          this.getShippingRateList()
+          document.getElementById('closeAddSizeForm').click()
+          this.getSizeList()
+
         }
 
       })
     }
 
   }
-  updateShippingRate() {
 
-    console.log(this.zoneEditFormGroup.value);
-    if (this.zoneEditFormGroup) {
-      // let selectedCountry = this.zoneEditFormGroup.controls['selectedCountry'].value;
-      let selectedCountryObject
-      for (let i = 0; i < this.countryList.length; i++) {
-        if (this.countryList[i]._id === this.countryId) {
-          selectedCountryObject = this.countryList[i]
-        }
-      }
+  saveTeaType() {
+    console.log(this.teaTypeGroup.value);
+    if (this.teaTypeGroup.valid) {
+
       let body = {
-        'country': this.zoneEditFormGroup.controls['selectedCountry'].value,
-        'countryCode': selectedCountryObject.code,
-        'id': this.id,
-        'minPrice': this.zoneEditFormGroup.controls['minValue'].value,
-        'maxPrice': this.zoneEditFormGroup.controls['maxValue'].value,
-        'rangePrice': this.zoneEditFormGroup.controls['rangePrice'].value,
-        'belowPrice': this.zoneEditFormGroup.controls['belowMinValue'].value,
-        'abovePrice': this.zoneEditFormGroup.controls['aboveMaxValue'].value,
+        'name': this.teaTypeGroup.get('name').value,
+        'name_ar': this.teaTypeGroup.get('name_ar').value,
       }
 
 
-      this.apiService.updateShippingRate(body).subscribe(res => {
+      this.apiService.addTeaType(body).subscribe(res => {
         console.log(res);
         if (res.success) {
           this.commonService.successToast(res.message);
-          this.getShippingRateList()
+          document.getElementById('closeAddTeaTypeForm').click()
+          this.getTeaList()
+
+        }
+
+      })
+    }
+
+  }
+
+  saveSugarLevel() {
+    console.log(this.sugarlevelForm.value);
+    if (this.sugarlevelForm.valid) {
+
+      let body = {
+        'name': this.sugarlevelForm.get('name').value,
+        'name_ar': this.sugarlevelForm.get('name_ar').value,
+      }
+
+
+      this.apiService.addSugarLevel(body).subscribe(res => {
+        console.log(res);
+        if (res.success) {
+          this.commonService.successToast(res.message);
+          document.getElementById('closeSugarLevelForm').click()
+          this.getSugarLevelList()
+
+        }
+
+      })
+    }
+
+  }
+  updateSize() {
+
+    console.log(this.sizeEditFormGroup.value);
+    if (this.sizeEditFormGroup.valid) {
+      // let selectedCountry = this.sizeEditFormGroup.controls['selectedCountry'].value;
+
+      let body = {
+        'name': this.sizeEditFormGroup.get('name').value,
+        'name_ar': this.sizeEditFormGroup.get('name_ar').value,
+      }
+
+      this.apiService.updateSize(body, this.id).subscribe(res => {
+        console.log(res);
+        if (res.success) {
+          this.commonService.successToast(res.message);
+          this.getSizeList()
 
         }
 
@@ -209,55 +240,128 @@ export class SettingsComponent implements OnInit {
   }
 
 
-  getShippingRateList() {
-    this.apiService.getShippingRateList().subscribe(res => {
+  updateTeaType() {
+
+    console.log(this.teaTypeEditForm.value);
+    if (this.teaTypeEditForm.valid) {
+      // let selectedCountry = this.sizeEditFormGroup.controls['selectedCountry'].value;
+
+      let body = {
+        'name': this.teaTypeEditForm.get('name').value,
+        'name_ar': this.teaTypeEditForm.get('name_ar').value,
+      }
+
+      this.apiService.updateTeaType(body, this.teaTypeId).subscribe(res => {
+        console.log(res);
+        if (res.success) {
+          this.commonService.successToast(res.message);
+          this.getTeaList()
+
+        }
+
+      })
+    }
+  }
+
+  updateSugarLevel() {
+
+    console.log(this.sugarLevelEditForm.value);
+    if (this.sugarLevelEditForm.valid) {
+      // let selectedCountry = this.sizeEditFormGroup.controls['selectedCountry'].value;
+
+      let body = {
+        'name': this.sugarLevelEditForm.get('name').value,
+        'name_ar': this.sugarLevelEditForm.get('name_ar').value,
+      }
+
+      this.apiService.updateSugarLevel(body, this.sugarLevelId).subscribe(res => {
+        console.log(res);
+        if (res.success) {
+          this.commonService.successToast(res.message);
+          this.getSugarLevelList()
+
+        }
+
+      })
+    }
+  }
+
+  getSizeList() {
+    this.apiService.getSizeList().subscribe(res => {
       console.log(res);
-      this.shippingChargesList = res.data
+      this.sizeList = res.data
+
+
+    })
+  }
+
+  getTeaList() {
+    this.apiService.getTeaList().subscribe(res => {
+      console.log(res);
+      this.teaTypeList = res.data
+
+
+    })
+  }
+
+  getSugarLevelList() {
+    this.apiService.getSugarLevelList().subscribe(res => {
+      console.log(res);
+      this.sugarLevelList = res.data
 
 
     })
   }
 
 
-  openPopUp() {
-    const data =
-    {
-      'search': ''
-    }
-    this.apiService.getCountryList(data).subscribe(res => {
-      console.log("countryList", res);
-      for (let i = 0; i < res.data.length; i++) {
-        let body: countrylist = res.data[i];
-        this.countryList.push(body)
-      }
-      // console.log("this", this.countryList);
-    }
-    )
+
+
+
+  editTeaType(id) {
+
+    this.teaTypeId = id
+    console.log(id);
+    this.apiService.getSingleTeaType(id).subscribe(res => {
+      console.log(res);
+      let data = res.data;
+      this.teaTypeEditForm.get('name').setValue(data.name)
+      this.teaTypeEditForm.get('name_ar').setValue(data.name_ar)
+    })
+
   }
 
 
-  editShippingCharge(id) {
+  editSugarLevel(id) {
+
+    this.sugarLevelId = id
+    console.log(id);
+    this.apiService.getSingleSugarLevel(id).subscribe(res => {
+      console.log(res);
+      let data = res.data;
+      this.sugarLevelEditForm.get('name').setValue(data.name)
+      this.sugarLevelEditForm.get('name_ar').setValue(data.name_ar)
+    })
+
+  }
+
+
+  editSize(id) {
 
     this.id = id
     console.log(id);
-    this.apiService.getSingleShippingCharge(id).subscribe(res => {
+    this.apiService.getSingleSize(id).subscribe(res => {
       console.log(res);
       let data = res.data;
-      this.countryId = data.countryId
-      this.zoneEditFormGroup.controls['rangePrice'].setValue(data.rangePrice);
-      this.zoneEditFormGroup.controls['selectedCountry'].setValue(data.country)
-      this.zoneEditFormGroup.controls['belowMinValue'].setValue(data.belowPrice);
-      this.zoneEditFormGroup.controls['minValue'].setValue(data.minPrice);
-      this.zoneEditFormGroup.controls['maxValue'].setValue(data.maxPrice)
-      this.zoneEditFormGroup.controls['aboveMaxValue'].setValue(data.abovePrice)
+      this.sizeEditFormGroup.get('name').setValue(data.name)
+      this.sizeEditFormGroup.get('name_ar').setValue(data.name_ar)
     })
 
   }
 
-  deleteShippingCharge(id) {
+  deleteTeaType(id) {
     Swal.fire({
       title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover  this Shipping rate!!",
+      text: "Once deleted, you will not be able to recover  this Tea Type!!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085D6",
@@ -271,7 +375,7 @@ export class SettingsComponent implements OnInit {
         console.log(id)
         const data = {
           "id": id,
-          "model": "ShippingCharges"
+          "model": "TeaTypes"
         }
 
         this.apiService.delete(data).subscribe(res => {
@@ -279,7 +383,86 @@ export class SettingsComponent implements OnInit {
           if (res.success) {
             //  this.getAllCategories()
             this.commonService.successToast(res.message);
+            this.getTeaList()
+          } else {
+            this.commonService.errorToast(res.message)
+          }
 
+        });
+
+
+      } else {
+        console.log("cancelled");
+      }
+    });
+  }
+
+
+  deleteSize(id) {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover  this Size!!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085D6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+
+      allowOutsideClick: true
+    }).then(result => {
+      if (result.value) {
+        this.result = result;
+        console.log(id)
+        const data = {
+          "id": id,
+          "model": "Sizes"
+        }
+
+        this.apiService.delete(data).subscribe(res => {
+          console.log(res);
+          if (res.success) {
+            //  this.getAllCategories()
+            this.commonService.successToast(res.message);
+            this.getSizeList()
+          } else {
+            this.commonService.errorToast(res.message)
+          }
+
+        });
+
+
+      } else {
+        console.log("cancelled");
+      }
+    });
+  }
+
+  deleteSugarLevel(id) {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover  this Sugar level!!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085D6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+
+      allowOutsideClick: true
+    }).then(result => {
+      if (result.value) {
+        this.result = result;
+        console.log(id)
+        const data = {
+          "id": id,
+          "model": "SugarLevel"
+        }
+
+        this.apiService.delete(data).subscribe(res => {
+          console.log(res);
+          if (res.success) {
+            //  this.getAllCategories()
+            this.commonService.successToast(res.message);
+            this.getSugarLevelList()
           } else {
             this.commonService.errorToast(res.message)
           }
