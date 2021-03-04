@@ -80,6 +80,13 @@ export class EquipmentManagementComponent implements OnInit {
 
   }
 
+  tabClick(tab) {
+    console.log(tab);
+    if (tab.index == 0) {
+      this.getEquipmentList()
+    } else if (tab.index == 1)
+      this.getAllEquipmentCategories()
+  }
 
 
   filterSelected(e) {
@@ -160,9 +167,10 @@ export class EquipmentManagementComponent implements OnInit {
         console.log(res)
         if (res.success == true) {
           this.progress = false
-          this.commonService.successToast('SuccessFully Added')
+          this.commonService.successToast(res.message)
           this.getAllEquipmentCategories()
           this.addEquipmentForm.reset();
+          this.editEquipmentCategory.reset();
           this.imageFile = ''
           this.submitted = false
         } else {
@@ -177,7 +185,7 @@ export class EquipmentManagementComponent implements OnInit {
 
   }
   async profilePic(event) {
-
+    
     this.picUploader = true
     if (event.target.files && event.target.files[0]) {
       this.imageFile = event.target.files[0];
@@ -327,9 +335,10 @@ export class EquipmentManagementComponent implements OnInit {
         console.log(res)
         if (res.success == true) {
           this.progress = false
-          this.commonService.successToast('SuccessFully Added')
+          this.commonService.successToast('Successfully Added')
           this.getAllEquipmentCategories()
           this.addEquipmentForm.reset();
+          this.addEquipmentCategory.reset();
           this.imageFile = ''
           this.submitted = false
         } else {
@@ -364,7 +373,7 @@ export class EquipmentManagementComponent implements OnInit {
         console.log(res)
         if (res.success == true) {
           this.progress = false
-          this.commonService.successToast('SuccessFully Added')
+          this.commonService.successToast(res.message)
           this.getEquipmentList()
           this.addEquipmentForm.reset();
           this.imageFile = ''
@@ -408,7 +417,7 @@ export class EquipmentManagementComponent implements OnInit {
         console.log(res)
         if (res.success == true) {
           this.progress = false
-          this.commonService.successToast('SuccessFully Edited')
+          this.commonService.successToast(res.message)
           this.getEquipmentList()
           this.submitted = false
         } else {

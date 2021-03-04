@@ -91,8 +91,8 @@ export class AddVenderComponent implements OnInit {
 
       email: ['', [Validators.required, Validators.email]],
       countryCode: ['', Validators.required],
-      phone: ['', Validators.required],
-      last4Digits: ['', [Validators.required, Validators.maxLength(4)]],
+      phone: ['', [Validators.required]],
+      last4Digits: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
       //address: ['', Validators.required],
       //   bio: ['',],
       //  Specialities: ['', Validators.required],
@@ -161,7 +161,7 @@ export class AddVenderComponent implements OnInit {
 
     console.log("Form", this.setUpProfile.value);
     console.log("image", this.profileImage);
-    if (this.setUpProfile.valid) {
+    if (this.setUpProfile.valid && this.imageFile) {
       let temp
 
       let formData = new FormData;
@@ -197,6 +197,8 @@ export class AddVenderComponent implements OnInit {
       })
 
 
+    } else {
+      this.commonService.errorToast('Please fill the form')
     }
 
 

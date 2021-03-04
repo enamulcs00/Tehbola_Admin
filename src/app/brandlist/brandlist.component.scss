@@ -1,3 +1,9 @@
+.modal-height {
+    height: 80vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
 .location_name h3 {
     margin: 0;
     font-size: 18px;
@@ -17,7 +23,7 @@
 th {
     background: #e0e0e0;
     position: sticky;
-    top: 0;
+    top: -1px;
     /* Don't forget this, required for the stickiness */
     box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
 }
@@ -192,4 +198,15 @@ input.form-control.file {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+}
+
+.show.modal-box {
+    background-color: rgba(0, 0, 0, 0.60);
+}
+
+
+.disabled {
+    background-color: grey !important;
+    color: black !important;
+    cursor: not-allowed !important;
 }

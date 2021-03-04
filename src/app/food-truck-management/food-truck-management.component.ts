@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/services/api.service';
 import { UrlService } from 'src/services/url.service';
 import { CommonService } from 'src/services/common.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -34,7 +34,7 @@ export class FoodTruckManagementComponent implements OnInit {
   categoryList: any[];
   selectedCategory = [];
   body2: any;
-  flagSearch: any
+  flagSearch: any = true
   flagapproval: boolean;
   foodTruckList: any;
   id: any;
@@ -47,15 +47,15 @@ export class FoodTruckManagementComponent implements OnInit {
   ngOnInit() {
     this.getAllFoodTruck()
     this.addFoodTruckForm = this.fb.group({
-      vehicleNumber: [''],
+      vehicleNumber: ['', Validators.required],
       remark: [''],
-      name: [''],
+      name: ['', Validators.required],
     })
 
     this.editFoodTruckForm = this.fb.group({
-      vehicleNumber: [''],
+      vehicleNumber: ['', Validators.required],
       remark: [''],
-      name: [''],
+      name: ['', Validators.required],
     })
   }
 
@@ -71,6 +71,7 @@ export class FoodTruckManagementComponent implements OnInit {
           this.commonService.successToast(res.message);
           this.getAllFoodTruck()
           this.addFoodTruckForm.reset()
+          document.getElementById('closeAddFoodTruck').click()
         } else {
           this.commonService.errorToast(res.message)
         }
@@ -110,18 +111,14 @@ export class FoodTruckManagementComponent implements OnInit {
   }
   flag: boolean
   filterSelected(e) {
-
-
     if (this.filterBy) {
       this.flag = true
     }
     else {
       this.flag = false
-
     }
     console.log(e.value);
     this.filterBy = e.value;
-
     this.getAllFoodTruck()
   }
 
@@ -228,7 +225,7 @@ export class FoodTruckManagementComponent implements OnInit {
   }
 
   onChangeBlockStatus(status, id) {
-    
+
     let body
     let temp = id
     for (let i = 0; i <= this.foodTruckList.length; i++) {

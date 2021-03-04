@@ -75,13 +75,13 @@
 
                     <div class="row m-3">
                         <div class="col-3" *ngFor="let item of geofenceList;let i=index">
-                            <div class="card item-card card-block m-3">
+                            <div class="card item-card card-block m-3 pl-3 pr-3">
 
-                                <h5 class="item-card-title mt-3 mb-3">{{i+1}} &nbsp;{{item.name}}</h5>
-                                <span>
+                                <h5 class="item-card-title mt-3 mb-3 ml-0">{{i+1}} &nbsp;{{item.name}}</h5>
+                                <div class="">
                                     <p>City: {{item.city}},<br></p>
                                     <p>State:{{item?.state}}</p>
-                                </span>
+                                </div>
                                 <div class="row ml-3">
                                     <span class="card-title text-right" (click)="editGeofence(item._id)"><i
                                             class="material-icons">create</i></span>

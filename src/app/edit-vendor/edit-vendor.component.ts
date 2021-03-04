@@ -97,7 +97,7 @@ export class EditVendorComponent implements OnInit {
       countryCode: ['', Validators.required],
       phone: ['', Validators.required],
       profilePhoto: ['',],
-      last4Digits: ['', [Validators.required, Validators.maxLength(4)]]
+      last4Digits: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(4)]]
 
 
     });

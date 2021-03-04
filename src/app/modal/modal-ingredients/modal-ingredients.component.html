@@ -20,7 +20,7 @@
                                 <td style="width: 40%;">
                                     <mat-form-field class="example-full-width">
                                         <mat-label>Ingredient<span class="red">*</span></mat-label>
-                                        <input type="text" formControlName="name" matInput>
+                                        <input type="text" formControlName="name" matInput readonly>
 
                                     </mat-form-field>
                                 </td>
@@ -40,11 +40,11 @@
                                 <th colspan="2"> Equipment:</th>
 
                             </tr>
-                            <tr *ngFor="let quantity of equipments().controls; let i=index" [formGroupName]="i">
+                            <tr *ngFor="let quantity1 of equipments().controls; let i=index" [formGroupName]="i">
                                 <td style="width: 40%;">
                                     <mat-form-field class="example-full-width">
                                         <mat-label>Ingredient<span class="red">*</span></mat-label>
-                                        <input type="text" formControlName="name" matInput>
+                                        <input type="text" formControlName="name" matInput readonly>
 
                                     </mat-form-field>
                                 </td>
@@ -52,7 +52,11 @@
                                     <mat-form-field class="example-full-width">
                                         <mat-label> Quantity:</mat-label>
                                         <input matInput type="number" min="0" formControlName="assignedQuantity">
+                                        <mat-error *ngIf="quantity1.get('assignedQuantity').hasError('moreThan')">
+                                            Assigned qunatity can not be more than total quantity
+                                        </mat-error>
                                     </mat-form-field>
+
                                 </td>
 
                             </tr>
@@ -75,7 +79,8 @@
 
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-button type="button" [disabled]='dataForm.invalid' (click)="submit()">Confirm</button>
+    <button mat-button type="button" [ngClass]="{disabled: dataForm.invalid==true}" [disabled]='dataForm.invalid'
+        (click)="submit()">Confirm</button>
     <!-- <button mat-button mat-dialog-close>Reset</button> -->
 
 </mat-dialog-actions>

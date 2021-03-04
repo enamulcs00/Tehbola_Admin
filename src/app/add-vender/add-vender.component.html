@@ -18,8 +18,9 @@
                                 <ul class="pt-5">
                                     <li class="input_file P_file">
 
-                                        <input type="file" placeholder="" id="file" (change)="onProfileChange($event) "
-                                            formControlName="profilePhoto" name="documentOne">
+                                        <input type="file" placeholder="" id="file" accept="image/*"
+                                            (change)="onProfileChange($event) " formControlName="profilePhoto"
+                                            name="documentOne">
 
                                         <div class="user_img">
 
@@ -78,6 +79,9 @@
                                                 name="email">
                                             <mat-error *ngIf="setUpProfile.get('email').hasError('required')">
                                                 Email is <strong>required</strong>
+                                            </mat-error>
+                                            <mat-error *ngIf="setUpProfile.get('email').hasError('Email')">
+                                                Email should be <strong>valid</strong>
                                             </mat-error>
                                         </mat-form-field>
 
@@ -138,6 +142,10 @@
                                                 Last Four Digits of DL are <strong>required</strong>
                                             </mat-error>
                                             <mat-error *ngIf="setUpProfile.get('last4Digits').hasError('maxlength') &&
+                                                !setUpProfile.get('last4Digits').hasError('required')">
+                                                Only Last Four Digits of DL is <strong>required</strong>
+                                            </mat-error>
+                                            <mat-error *ngIf="setUpProfile.get('last4Digits').hasError('minlength') &&
                                                 !setUpProfile.get('last4Digits').hasError('required')">
                                                 Only Last Four Digits of DL is <strong>required</strong>
                                             </mat-error>

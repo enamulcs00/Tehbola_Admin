@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/services/api.service';
 import { debug } from 'util';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -32,6 +32,8 @@ export class SettingsComponent implements OnInit {
   teaTypeEditForm: FormGroup;
   sugarLevelEditForm: FormGroup;
   updateSetting: FormGroup
+
+  @ViewChild('wrapper', { static: true }) wrapper: ElementRef
   // applyTax: any = false;
   countryList: countrylist[] = []
   selectedCountry: any;
@@ -59,31 +61,31 @@ export class SettingsComponent implements OnInit {
     this.getTeaList();
     this.getSugarLevelList()
     this.sizeFormGroup = this.fb.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(30)]],
       name_ar: ['', Validators.required],
     });
 
     this.teaTypeGroup = this.fb.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(30)]],
       name_ar: ['', Validators.required],
     });
 
     this.sugarlevelForm = this.fb.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(30)]],
       name_ar: ['', Validators.required],
     });
 
     this.sizeEditFormGroup = this.fb.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(30)]],
       name_ar: ['', Validators.required],
     });
 
     this.teaTypeEditForm = this.fb.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(30)]],
       name_ar: ['', Validators.required],
     });
     this.sugarLevelEditForm = this.fb.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(30)]],
       name_ar: ['', Validators.required],
     });
     this.updateSetting = this.fb.group({
@@ -116,6 +118,15 @@ export class SettingsComponent implements OnInit {
       }
     })
   }
+
+
+  focus() {
+
+    var box = document.getElementById('addSizeButton');
+    console.log(box);
+    box.classList.remove('cdk-program-focused')
+  }
+
 
   updateTax() {
 

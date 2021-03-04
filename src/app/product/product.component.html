@@ -91,12 +91,12 @@
                                 <td>{{ product?.name }}</td>
                                 <td>{{ product.category.name }}</td>
                                 <td>
-                                    <span *ngFor="let item of product.subCategory">{{ item.name }},&nbsp;</span>
+                                    <span *ngFor="let item of product.subCategory">{{ item.name }}<br></span>
                                 </td>
-                                <td><span *ngFor="let item of product.teaType">{{item.name}},&nbsp;</span></td>
+                                <td><span *ngFor="let item of product.teaType">{{item.name}}<br></span></td>
                                 <td>
                                     <span *ngFor="let item of product.rawItems; let i=index">
-                                        {{item?.rawItem?.name}}-{{item?.quantity}},&nbsp;
+                                        {{item?.rawItem?.name}}-{{item?.quantity}}<br>
                                     </span>
                                 </td>
 

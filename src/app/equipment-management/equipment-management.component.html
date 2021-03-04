@@ -4,7 +4,7 @@
         <div id="content">
             <app-sidebar></app-sidebar>
             <div class="container-fluid">
-                <mat-tab-group mat-align-tabs="start">
+                <mat-tab-group mat-align-tabs="start" (selectedTabChange)='tabClick($event)'>
                     <mat-tab label="Equipment List">
 
                         <div class="sub_heading">
@@ -295,7 +295,7 @@
                                     <input matInput type="text" formControlName="name" placeholder="Equipment Name"
                                         name="password">
                                     <mat-error *ngIf="editEquipmentForm.get('name').hasError('required')">
-                                        Item Name is <strong>required</strong>
+                                        Item name is <strong>required</strong>
                                     </mat-error>
 
                                 </mat-form-field>
@@ -308,7 +308,7 @@
                                     <input matInput type="text" formControlName="name_ar" placeholder="Malay  Name"
                                         name="password">
                                     <mat-error *ngIf="editEquipmentForm.get('name_ar').hasError('required')">
-                                        Item Name is <strong>required</strong>
+                                        Item name is <strong>required</strong>
                                     </mat-error>
 
                                 </mat-form-field>
@@ -412,10 +412,10 @@
 
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Name of the Category<span class="red">*</span></mat-label>
-                                    <input matInput type="text" formControlName="name" placeholder="Equipment Name"
+                                    <input matInput type="text" formControlName="name" placeholder="Equipment Category"
                                         name="password">
                                     <mat-error *ngIf="addEquipmentCategory.get('name').hasError('required')">
-                                        Item Name is <strong>required</strong>
+                                        Item name is <strong>required</strong>
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -425,7 +425,7 @@
                                     <input matInput formControlName="name_ar" type="text" placeholder="Malay  Name"
                                         name="password">
                                     <mat-error *ngIf="addEquipmentCategory.get('name_ar').hasError('required')">
-                                        Item Name is <strong>required</strong>
+                                        Item name is <strong>required</strong>
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -472,10 +472,10 @@
 
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Name of the Category<span class="red">*</span></mat-label>
-                                    <input matInput type="text" formControlName="name" placeholder="Brand Name"
+                                    <input matInput type="text" formControlName="name" placeholder="Equipment Category"
                                         name="password">
                                     <mat-error *ngIf="editEquipmentCategory.get('name').hasError('required')">
-                                        Category Name is <strong>required</strong>
+                                        Category name is <strong>required</strong>
                                     </mat-error>
 
                                 </mat-form-field>
@@ -485,10 +485,10 @@
 
                                 <mat-form-field class="example-full-width">
                                     <mat-label> Malay Name of the Category<span class="red">*</span></mat-label>
-                                    <input matInput type="text" formControlName="name_ar" placeholder="Malay  Name"
-                                        name="password">
+                                    <input matInput type="text" formControlName="name_ar"
+                                        placeholder="Malay Equipment Category  Name" name="password">
                                     <mat-error *ngIf="editEquipmentCategory.get('name_ar').hasError('required')">
-                                        Malay Name is <strong>required</strong>
+                                        Category Malay name is <strong>required</strong>
                                     </mat-error>
 
                                 </mat-form-field>

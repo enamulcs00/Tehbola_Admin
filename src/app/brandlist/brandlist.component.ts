@@ -29,7 +29,7 @@ export class BrandlistComponent implements OnInit {
   imageUrl: string;
   categoryList: any;
   subcategoryList: any;
-  imageFile: any;
+  imageFile: any = [];
   id: any;
   flagImage: boolean;
   previewImage: any;
@@ -52,28 +52,28 @@ export class BrandlistComponent implements OnInit {
       name: ['', [Validators.required,]],
       name_ar: ['', [Validators.required,]],
       category: ['', [Validators.required,]],
-      subCategory: ['', [Validators.required,]],
+      subCategory: ['', [Validators.required]],
       image: ['', [Validators.required]],
-      totalUnits: ['', Validators.required],
-      unitPrice: ['', Validators.required],
-      quantityPerUnit: ['', Validators.required],
+      totalUnits: ['', [Validators.required, Validators.min(0)]],
+      unitPrice: ['', [Validators.required, Validators.min(0)]],
+      quantityPerUnit: ['', [Validators.required, Validators.min(0)]],
       measureTypeUnit: ['', Validators.required],
       measureTypeServing: ['', Validators.required],
-      perServingSize: ['', Validators.required],
+      perServingSize: ['', [Validators.required, Validators.min(0)]],
       description: [''],
     });
     this.editBrandForm = this.fb.group({
       name: ['', [Validators.required,]],
       name_ar: ['', [Validators.required,]],
       category: ['', [Validators.required,]],
-      subCategory: ['', [Validators.required,]],
+      subCategory: ['', [Validators.required]],
       image: ['',],
-      totalUnits: ['', Validators.required],
-      unitPrice: ['', Validators.required],
-      quantityPerUnit: ['', Validators.required],
+      totalUnits: ['', [Validators.required, Validators.min(0)]],
+      unitPrice: ['', [Validators.required, Validators.min(0)]],
+      quantityPerUnit: ['', [Validators.required, Validators.min(0)]],
       measureTypeUnit: ['', Validators.required],
       measureTypeServing: ['', Validators.required],
-      perServingSize: ['', Validators.required],
+      perServingSize: ['', [Validators.required, Validators.min(0)]],
       description: [''],
     })
   }
@@ -186,70 +186,127 @@ export class BrandlistComponent implements OnInit {
   }
 
   async profilePic(event) {
-
+    
+    this.imageFile = []
     this.picUploader = true
-    if (event.target.files && event.target.files[0]) {
-      this.imageFile = event.target.files[0];
-      var reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]);
-      reader.onload = (event: any) => {
-        if (this.id) {
-          this.flagImage = true;
-          this.brandImage = ''
-          this.previewImage = event.target.result;
-          this.editBrandForm.controls['image'].setValue(this.imageFile);
-        } else {
-          this.brandImage = event.target.result;
-          this.addBrandForm.controls['image'].setValue(this.brandImage);
 
+    {
+
+      let imageOk: boolean = true
+      var img = new Image;
+      let sefl = this
+      let tempfile: any
+      if (event.target.files && event.target.files[0]) {
+        var filesAmount = event.target.files.length;
+        for (let i = 0; i < filesAmount; i++) {
+          
+          let name = event.target.files[i].name;
+          tempfile = event.target.files[i]
+          console.log("check image", event.target.files[i].size);
+          var reader = new FileReader();
+          let toasterService = this.commonService
+
+          reader.readAsDataURL(event.target.files[i])
+          reader.onload = (event: any) => {
+            img.src = event.target.result;
+            console.log(event.target.result);
+
+            let temp = {
+              name: name,
+              image: event.target.result
+            }
+
+            img.onload = () => {
+
+              if (this.id) {
+
+                var height = img.height;
+                var width = img.width;
+                if (height != width) {
+                  toasterService.errorToast("Image should be a Square size");
+                  imageOk = false
+                  // this.pushImage();
+                  return imageOk
+                } else {
+                  toasterService.successToast("Image Size is Ok");
+                  imageOk = true
+                  this.flagImage = true;
+                  this.brandImage = ''
+                  this.previewImage = temp;
+                  this.imageFile.push(tempfile);
+                  this.editBrandForm.controls['image'].setValue(temp.name);
+                  return imageOk
+                }
+              } else {
+                var height = img.height;
+                var width = img.width;
+                if (height != width) {
+                  toasterService.errorToast("Image should be a Square size");
+                  imageOk = false
+                  // this.pushImage();
+                  return imageOk
+                } else {
+                  toasterService.successToast("Image Size is Ok");
+                  imageOk = true
+                  this.brandImage = temp;
+                  this.imageFile.push(tempfile);
+                  this.addBrandForm.controls['image'].setValue(temp.name);
+                  return imageOk
+                }
+              }
+            };
+          }
         }
-
-      };
+      }
     }
   }
 
   editBrand(id) {
     this.id = id
-
+    this.previewImage = ''
+    this.brandImage = ''
     this.apiService.viewBrand(id).subscribe((res) => {
       if (res.data) {
         this.flagImage = false;
-        this.apiService.getSubcategoryList(res.data.category._id).subscribe(res => {
-          console.log(res)
-          if (res.success == true) {
-            console.log(res.data);
-            this.subcategoryList = res.data
+        this.apiService.getSubcategoryList(res.data.category._id).subscribe(res1 => {
+          console.log(res1)
+
+          if (res1.success == true) {
+            
+            console.log(res1.data);
+            this.subcategoryList = res1.data
+
+            console.log(res)
+            this.editableBrandId = res.data._id
+            this.editBrandForm.controls['name'].setValue(res.data.name);
+
+            this.editBrandForm.controls['name_ar'].setValue(res.data.name_ar);
+            this.editBrandForm.controls['category'].setValue(res.data.category.id);
+            let selectedCategory = []
+            for (let i in res.data.subCategory) {
+
+              selectedCategory.push(res.data.subCategory[i]._id)
+            }
+            this.editBrandForm.controls['subCategory'].setValue(selectedCategory);
+            this.editBrandForm.controls['image'].setValue(res.data.image.name)
+            this.editBrandForm.controls['totalUnits'].setValue(res.data.totalUnits)
+            this.editBrandForm.controls['quantityPerUnit'].setValue(res.data.quantityPerUnit)
+            this.editBrandForm.controls['measureTypeUnit'].setValue(res.data.measureTypeUnit)
+            this.editBrandForm.controls['measureTypeServing'].setValue(res.data.measureTypeServing)
+            this.unitSelected(res.data.measureTypeUnit)
+            this.editBrandForm.controls['unitPrice'].setValue(res.data.unitPrice)
+            this.editBrandForm.controls['perServingSize'].setValue(res.data.perServingSize)
+            this.editBrandForm.controls['description'].setValue(res.data.description)
+
+
+            let data = res.data
+            //  this.image = data.image
+            this.brandImage = data.image;
+            //   this.imageName = data.image.name
+            //  console.log(this.image);
           }
         });
 
-        console.log(res)
-        this.editableBrandId = res.data._id
-        this.editBrandForm.controls['name'].setValue(res.data.name);
-
-        this.editBrandForm.controls['name_ar'].setValue(res.data.name_ar);
-        this.editBrandForm.controls['category'].setValue(res.data.category.id);
-        let selectedCategory = []
-        for (let i in res.data.subCategory) {
-
-          selectedCategory.push(res.data.subCategory[i]._id)
-        }
-        this.editBrandForm.controls['subCategory'].setValue(selectedCategory);
-        this.editBrandForm.controls['image'].setValue(res.data.image.name)
-        this.editBrandForm.controls['totalUnits'].setValue(res.data.totalUnits)
-        this.editBrandForm.controls['quantityPerUnit'].setValue(res.data.quantityPerUnit)
-        this.editBrandForm.controls['measureTypeUnit'].setValue(res.data.measureTypeUnit)
-        this.editBrandForm.controls['measureTypeServing'].setValue(res.data.measureTypeServing)
-        this.unitSelected(res.data.measureTypeUnit)
-        this.editBrandForm.controls['unitPrice'].setValue(res.data.unitPrice)
-        this.editBrandForm.controls['perServingSize'].setValue(res.data.perServingSize)
-        this.editBrandForm.controls['description'].setValue(res.data.description)
-
-
-        let data = res.data
-        //  this.image = data.image
-        this.brandImage = data.image;
-        //   this.imageName = data.image.name
-        //  console.log(this.image);
       }
     })
 
@@ -300,10 +357,10 @@ export class BrandlistComponent implements OnInit {
   onAddBrand() {
 
     this.submitted = true
-    if (this.submitted && this.addBrandForm.valid) {
+    if (this.submitted && this.addBrandForm.valid && this.imageFile.length > 0) {
       let body = this.addBrandForm.value
       console.log(body);
-
+      
       let formData = new FormData();
       formData.append('name', this.addBrandForm.get('name').value);
       formData.append('name_ar', this.addBrandForm.get('name_ar').value);
@@ -316,16 +373,23 @@ export class BrandlistComponent implements OnInit {
       formData.append('measureTypeServing', this.addBrandForm.get('measureTypeServing').value)
       formData.append('perServingSize', this.addBrandForm.get('perServingSize').value)
       formData.append('description', this.addBrandForm.get('description').value);
-      formData.append('image', this.imageFile, this.imageFile.name);
+      for (let i = 0; i < this.imageFile.length; i++) {
+        formData.append('image', this.imageFile[i], this.imageFile[i].name);
+      }
+      formData.forEach((value, key) => {
+        console.log(key + " " + value)
+      });
+      //formData.append('image', new Blob([this.imageFile], { type: 'image/*' }), this.imageFile.name);
       this.progress = true
       this.apiService.addBrand(formData).subscribe(res => {
         console.log(res)
         if (res.success == true) {
           this.progress = false
-          this.commonService.successToast('SuccessFully Added')
+          this.commonService.successToast('Successfully Added')
           this.getBrandList()
           this.addBrandForm.reset();
-          this.imageFile = ''
+          this.imageFile = []
+          this.brandImage = ''
           this.submitted = false
         } else {
           this.progress = false
@@ -344,6 +408,8 @@ export class BrandlistComponent implements OnInit {
     this.editBrandForm.reset();
     this.imageFile = ''
     this.brandImage = ''
+    this.previewImage = ''
+    this.id = ''
 
   }
 
@@ -364,16 +430,18 @@ export class BrandlistComponent implements OnInit {
       formData.append('measureTypeServing', this.editBrandForm.get('measureTypeServing').value)
       formData.append('perServingSize', this.editBrandForm.get('perServingSize').value)
       formData.append('description', this.editBrandForm.get('description').value);
-      if (this.imageFile) {
-        formData.append('image', this.imageFile, this.imageFile.name);
+      for (let i = 0; i < this.imageFile.length; i++) {
+        formData.append('image', this.imageFile[i], this.imageFile[i].name);
       }
       this.progress = true
       this.apiService.editBrand(formData).subscribe(res => {
         console.log(res)
         if (res.success == true) {
           this.progress = false
-          this.commonService.successToast('SuccessFully Edited')
+          this.commonService.successToast('Successfully Edited')
           this.getBrandList()
+          this.imageFile = ''
+          this.brandImage = ''
           this.submitted = false
         } else {
           this.progress = false

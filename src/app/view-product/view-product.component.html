@@ -62,7 +62,7 @@
 
 
                             </div>
-                            <div class="col-6 mt-3">
+                            <div class="col-6">
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Sub Category<span class="red">*</span></mat-label>
                                     <mat-select formControlName="subCategory"
@@ -74,6 +74,41 @@
                                     </mat-select>
                                     <mat-error *ngIf="editProductForm.get('subCategory').hasError('required')">
                                         Sub-Category is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-6">
+
+
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Tea Type</mat-label>
+                                    <mat-select formControlName="teaType" multiple>
+                                        <mat-option *ngFor="let body of teaTypeList" [value]="body.id">
+                                            {{body.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="editProductForm.get('category').hasError('required')">
+                                        Tea Type is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+
+
+                            </div>
+                            <div class="col-6 ">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Sugar level<span class="red">*</span></mat-label>
+                                    <mat-select formControlName="sugarLevel" multiple>
+
+                                        <mat-option *ngFor="let body of sugarLevelList" [value]="body.id">
+                                            {{body.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="editProductForm.get('sugarLevel').hasError('required')">
+                                        Sugar level is <strong>required</strong>
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -130,7 +165,7 @@
 
 
 
-                        <div class="row mt-3">
+                        <!-- <div class="row mt-3">
                             <div class="col-12">
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Base Price<span class="red">*</span></mat-label>
@@ -148,7 +183,56 @@
                                 </mat-form-field>
                             </div>
 
+                        </div> -->
+                        <div class="row mt-3">
+                            <div class="col-12">
+
+                                <table class="table table-bordered" formArrayName="sizePrice">
+                                    <tr>
+                                        <th colspan="2"> Size And Price:</th>
+                                        <th width="20%">
+                                            <div class="input_button input_button2">
+                                                <!-- <button type="button" mat-button (click)="addNewSizePrice()"
+                                                    class="btn btn-primary">Add
+                                                    More</button> -->
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    <tr *ngFor="let quantity of sizePrice().controls; let i=index" [formGroupName]="i">
+                                        <td style="width: 40%;">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Size<span class="red">*</span></mat-label>
+                                                <mat-select formControlName="id">
+
+                                                    <mat-option *ngFor="let body of sizeList" [value]="body.id">
+                                                        {{body.name}}
+                                                    </mat-option>
+                                                </mat-select>
+                                                <mat-error *ngIf="quantity.get('id').hasError('required')">
+                                                    Size is <strong>required</strong>
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </td>
+                                        <td style="width: 40%;">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label> Price:</mat-label>
+                                                <input matInput type="number" min="0" formControlName="price">
+                                                <mat-error *ngIf="quantity.get('price').hasError('required')">
+                                                    Price is <strong>required</strong>
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </td>
+                                        <td style="width: 20%;">
+                                            <!-- <button class="btn_grey" (click)="removeSize(i)">Remove</button> -->
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+
+
                         </div>
+
                         <div class="row mt-3">
                             <div class="col-6">
                                 <mat-form-field class="example-full-width">
@@ -201,9 +285,7 @@
                                         <th colspan="2"> Raw Item:</th>
                                         <th width="20%">
                                             <div class="input_button input_button2">
-                                                <button type="button" disabled='true' mat-button
-                                                    (click)="addNewSpecification()" class="btn btn-primary">Add
-                                                    More</button>
+
                                             </div>
                                         </th>
                                     </tr>
@@ -232,8 +314,7 @@
                                             </mat-form-field>
                                         </td>
                                         <td style="width: 20%;">
-                                            <button disabled='true' class="btn_grey"
-                                                (click)="removeSpecification(i)">Remove</button>
+                                            <!-- <button class="btn_grey" (click)="removeSpecification(i)">Remove</button> -->
                                         </td>
                                     </tr>
                                 </table>
@@ -253,11 +334,6 @@
                                     <tr>
                                         <th>Search Keywords:</th>
                                         <th width="20%">
-                                            <div class="input_button input_button2">
-                                                <button mat-button type="button" disabled='true' (click)="addAlias()"
-                                                    class="btn btn-primary">Add
-                                                    More</button>
-                                            </div>
 
                                         </th>
                                     </tr>
@@ -269,8 +345,7 @@
                                             </mat-form-field>
                                         </td>
                                         <td>
-                                            <button disabled='true' (click)="removeSearchKeywords(i)"
-                                                class="btn_grey">Remove</button>
+                                            <!-- <button (click)="removeSearchKeywords(i)" class="btn_grey">Remove</button> -->
                                         </td>
                                     </tr>
 
@@ -284,17 +359,16 @@
                         <div>
                             <!--  -->
                             <label>Image<span class="red">*</span></label>
-                            <!-- <div class="product_image_upload">
+                            <div class="product_image_upload">
                                 <figure>
-                                    <input disabled='true' type='file' accept="image/*" formControlName="image"
+                                    <input disabled=true type='file' accept="image/*" formControlName="image"
                                         (change)="readUrl($event)" placeholder="choosefile" class="images_uploader"
-                                        multiple>
-                                    </figure>
+                                        multiple></figure>
 
                                 <button class="btn btn-primary"><span style="color: white;"> <i
                                             class="fa fa-plus"></i>Add
                                         image</span></button>
-                            </div> -->
+                            </div>
 
                             <div class="custom-invalid" *ngIf="submitted && previewImage.length==0 && images.length==0">
                                 Image is <strong>required</strong>
@@ -325,8 +399,8 @@
                                 </span>
                             </div>
                         </div>
-
-                        <!-- <div class="update_button">
+                        <!-- 
+                        <div class="update_button">
                             <button mat-button (click)="onSubmit()">
                                 <span><i class="fa fa-window-restore"></i>
                                 </span>

@@ -150,7 +150,9 @@ export class EditProductComponent implements OnInit {
 
   }
   setValue(data: any) {
-
+    
+    this.selectedCategory = data.category._id
+    this.getAllSubcategory(this.selectedCategory);
     this.productId = data.id
     this.editProductForm.get('name').setValue(data.name);
     this.editProductForm.get('name_ar').setValue(data.name_ar);
@@ -171,8 +173,7 @@ export class EditProductComponent implements OnInit {
       temp.push(element)
     });
     this.editProductForm.get('sugarLevel').setValue(temp);
-    this.selectedCategory = data.category._id
-    this.getAllSubcategory(this.selectedCategory);
+
     this.editProductForm.get('description').setValue(data.description);
     this.editProductForm.get('description_ar').setValue(data.description_ar);
     this.setSpecifications(data.rawItems)
@@ -240,7 +241,7 @@ export class EditProductComponent implements OnInit {
 
 
   getSizeList() {
-    debugger
+
     this.apiService.getSizeList().subscribe(res => {
       console.log(res);
       res.data.forEach(element => {
@@ -387,7 +388,8 @@ export class EditProductComponent implements OnInit {
 
 
   getAllSubcategory(id) {
-
+    
+    this.selectedSubcategory = []
     let temp = []
     this.subCategoryList = []
     if (this.selectedCategory) {
@@ -476,6 +478,7 @@ export class EditProductComponent implements OnInit {
           this.progress = false
           this.commonService.successToast("Product Successfully update")
           this.router.navigate(['/product'])
+
           console.log(res)
         } else {
           this.progress = false
@@ -498,42 +501,46 @@ export class EditProductComponent implements OnInit {
     if (event.target.files && event.target.files[0]) {
       var filesAmount = event.target.files.length;
       for (let i = 0; i < filesAmount; i++) {
-        let name = event.target.files[i].name;
-        tempfile = event.target.files[i]
-        console.log("check image", event.target.files[i].size);
-        var reader = new FileReader();
-        let toasterService = this.commonService
+        if (this.images.length <= 4) {
+          let name = event.target.files[i].name;
+          tempfile = event.target.files[i]
+          console.log("check image", event.target.files[i].size);
+          var reader = new FileReader();
+          let toasterService = this.commonService
 
-        reader.readAsDataURL(event.target.files[i])
-        reader.onload = (event: any) => {
-          img.src = event.target.result;
-          console.log(event.target.result);
+          reader.readAsDataURL(event.target.files[i])
+          reader.onload = (event: any) => {
+            img.src = event.target.result;
+            console.log(event.target.result);
 
-          let temp = {
-            name: name,
-            image: event.target.result
-          }
-
-          img.onload = () => {
-
-            var height = img.height;
-            var width = img.width;
-            if (height != width) {
-              toasterService.errorToast("Image should be a Square size");
-              imageOk = false
-              // this.pushImage();
-              return imageOk
-            } else {
-              toasterService.successToast("Image Size is Ok");
-              imageOk = true
-              this.flagImageEditted = true
-              this.urls.push(temp);
-              this.images.push(tempfile);
-              this.editProductForm.controls['image'].patchValue(this.images)
-              return imageOk
+            let temp = {
+              name: name,
+              image: event.target.result
             }
 
-          };
+            img.onload = () => {
+
+              var height = img.height;
+              var width = img.width;
+              if (height != width) {
+                toasterService.errorToast("Image should be a Square size");
+                imageOk = false
+                // this.pushImage();
+                return imageOk
+              } else {
+                toasterService.successToast("Image Size is Ok");
+                imageOk = true
+                this.flagImageEditted = true
+                this.urls.push(temp);
+                this.images.push(tempfile);
+                this.editProductForm.controls['image'].patchValue(this.images)
+                return imageOk
+              }
+
+            };
+          }
+        } else {
+          this.commonService.errorToast('Product image limit has been reached')
         }
       }
     }

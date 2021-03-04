@@ -1,7 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import * as moment from 'moment';
 import { CommonService } from 'src/services/common.service';
+import { MoreThan } from 'src/services/moreThanValidator';
 
 
 @Component({
@@ -42,9 +44,12 @@ export class ModalIngredientsComponent implements OnInit {
     for (let x of specification) {
       formArray.push(this.fb.group({
         id: new FormControl(x.id, Validators.required),
-        name: new FormControl({ value: x.name, disabled: true }, Validators.required),
+        name: new FormControl(x.name, Validators.required),
+        quantity: new FormControl(x.quantity),
         assignedQuantity: new FormControl('', Validators.required),
-      }, Validators.required));
+      }, {
+        validator: MoreThan('quantity', 'assignedQuantity')
+      }));
     }
     this.dataForm.setControl('equipment', formArray)
   }
@@ -54,7 +59,7 @@ export class ModalIngredientsComponent implements OnInit {
     for (let x of specification) {
       formArray.push(this.fb.group({
         rawItem: new FormControl(x.id, Validators.required),
-        name: new FormControl({ value: x.name, disabled: true }, Validators.required),
+        name: new FormControl(x.name, Validators.required),
         assignedQuantity: new FormControl('', Validators.required),
       }, Validators.required));
     }
@@ -74,6 +79,7 @@ export class ModalIngredientsComponent implements OnInit {
       delete data.data.selectedEquipment;
       delete data.data.selectedRawItems
       let data2 = {};
+      data2['date'] = moment(data.data.selectedDate).utc().valueOf()
       data2['vendor'] = data.data.selectedVendor.id;
       data2['foodTruck'] = data.data.selectedFoodTruck.id;
       data2['geoFence'] = data.data.selectedGeofence

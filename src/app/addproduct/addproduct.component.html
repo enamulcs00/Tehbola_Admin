@@ -123,7 +123,7 @@
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Purchase quantity<span class="red">*</span></mat-label>
                                     <input matInput type="number" formControlName="purchaseQuantity"
-                                        placeholder="Max qunatity a customer can buy" name="name">
+                                        placeholder="Max Quantity a customer can buy" name="name">
 
                                     <mat-error *ngIf="addProductForm.get('purchaseQuantity').hasError('required')">
                                         Purchase Quantity is <strong>required</strong>.
@@ -341,7 +341,8 @@
                                         <td style="width: 80%;">
                                             <mat-form-field class="example-full-width">
                                                 <mat-label> Keywords :</mat-label>
-                                                <input type="text" matInput [formControlName]="i">
+                                                <input type="text" (keydown.space)="$event.preventDefault();" matInput
+                                                    [formControlName]="i">
                                             </mat-form-field>
                                         </td>
                                         <td>

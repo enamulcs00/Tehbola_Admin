@@ -14,7 +14,7 @@ export class GeofenceComponent implements OnInit {
 
   lat: any;
   lng: any;
-  count: any = 10
+  count: any = 5
   page = 1
   private geoCoder;
   flagShow: boolean;
@@ -109,7 +109,7 @@ export class GeofenceComponent implements OnInit {
       this.count = event.value
     } else {
       this.flagShow = true
-      this.count = 10
+      this.count = 5
 
     }
     this.getAllGeofence()
@@ -131,7 +131,7 @@ export class GeofenceComponent implements OnInit {
         draggable: true,
         editable: true
       },
-      drawingMode: google.maps.drawing.OverlayType.POLYGON
+      drawingMode: google.maps.drawing.OverlayType.CIRCLE
     });
 
     this.drawingManager.setMap(map);

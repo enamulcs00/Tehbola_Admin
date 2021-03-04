@@ -246,7 +246,7 @@ export class AddproductComponent implements OnInit {
 
 
   getSizeList() {
-    debugger
+
     this.apiService.getSizeList().subscribe(res => {
       console.log(res);
       res.data.forEach(element => {
@@ -332,7 +332,7 @@ export class AddproductComponent implements OnInit {
       body.append('description', this.addProductForm.controls['description'].value);
       body.append('description_ar', this.addProductForm.controls['description_ar'].value);
       body.append('sugarLevel', JSON.stringify(this.addProductForm.controls['sugarLevel'].value));
-      body.append('teaType', JSON.stringify(this.addProductForm.controls['teaType'].value));
+      body.append('teaType', this.addProductForm.controls['teaType'].value ? JSON.stringify(this.addProductForm.controls['teaType'].value) : JSON.stringify([]));
       body.append('size', JSON.stringify(this.addProductForm.controls['sizePrice'].value));
       body.append('category', this.addProductForm.controls['category'].value);
       body.append('subCategory', JSON.stringify(this.addProductForm.controls['subCategory'].value));
@@ -376,41 +376,46 @@ export class AddproductComponent implements OnInit {
     if (event.target.files && event.target.files[0]) {
       var filesAmount = event.target.files.length;
       for (let i = 0; i < filesAmount; i++) {
-        let name = event.target.files[i].name;
-        tempfile = event.target.files[i]
-        console.log("check image", event.target.files[i].size);
-        var reader = new FileReader();
-        let toasterService = this.commonService
+        if (this.images.length <= 4) {
+          let name = event.target.files[i].name;
+          tempfile = event.target.files[i]
 
-        reader.readAsDataURL(event.target.files[i])
-        reader.onload = (event: any) => {
-          img.src = event.target.result;
-          console.log(event.target.result);
+          console.log("check image", event.target.files[i].size);
+          var reader = new FileReader();
+          let toasterService = this.commonService
 
-          let temp = {
-            name: name,
-            image: event.target.result
-          }
+          reader.readAsDataURL(event.target.files[i])
+          reader.onload = (event: any) => {
+            img.src = event.target.result;
+            console.log(event.target.result);
 
-          img.onload = () => {
-
-            var height = img.height;
-            var width = img.width;
-            if (height != width) {
-              toasterService.errorToast("Image should be a Square size");
-              imageOk = false
-              // this.pushImage();
-              return imageOk
-            } else {
-              toasterService.successToast("Image Size is Ok");
-              imageOk = true
-              this.urls.push(temp);
-              this.images.push(tempfile);
-              this.addProductForm.controls['image'].patchValue(this.images)
-              return imageOk
+            let temp = {
+              name: name,
+              image: event.target.result
             }
 
-          };
+            img.onload = () => {
+
+              var height = img.height;
+              var width = img.width;
+              if (height != width) {
+                toasterService.errorToast("Image should be a Square size");
+                imageOk = false
+                // this.pushImage();
+                return imageOk
+              } else {
+                toasterService.successToast("Image Size is Ok");
+                imageOk = true
+                this.urls.push(temp);
+                this.images.push(tempfile);
+                this.addProductForm.controls['image'].patchValue(this.images)
+                return imageOk
+              }
+
+            };
+          }
+        } else {
+          this.commonService.errorToast('Product image limit has been reached')
         }
       }
     }

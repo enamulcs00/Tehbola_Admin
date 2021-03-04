@@ -7,3 +7,14 @@ ul li {
 input:read-only {
     cursor: not-allowed;
 }
+
+.disabled {
+    background-color: grey !important;
+    color: black !important;
+    cursor: not-allowed !important;
+}
+
+.btn-primary.focus,
+.btn-primary:focus {
+    box-shadow: none;
+}

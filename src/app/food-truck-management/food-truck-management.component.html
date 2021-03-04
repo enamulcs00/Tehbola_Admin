@@ -171,7 +171,7 @@
 
                             <mat-form-field class="example-full-width">
                                 <mat-label>Name of the Food Truck<span class="red">*</span></mat-label>
-                                <input matInput type="text" placeholder="Food Truck Number" formControlName="name"
+                                <input matInput type="text" placeholder="Food Truck Name" formControlName="name"
                                     name="password">
                                 <mat-error *ngIf="addFoodTruckForm.get('name').hasError('required')">
                                     Food Truck Name is <strong>required</strong>
@@ -221,10 +221,11 @@
                     </div>
                 </form>
                 <div class="model_buttons">
-                    <button class="mat-raised-button thm_color mr-3" data-dismiss="modal" (click)="onAddFoodTruck()">
+                    <button class="mat-raised-button thm_color mr-3" [disabled]='addFoodTruckForm.invalid'
+                        [ngClass]="{'disabled': addFoodTruckForm.invalid==true}" (click)="onAddFoodTruck()">
                         Save
                     </button>
-                    <button class="mat-raised-button btn_grey" (click)="cancelClicked() "
+                    <button id="closeAddFoodTruck" class="mat-raised-button btn_grey" (click)="cancelClicked() "
                         data-dismiss="modal">Close</button>
                 </div>
             </div>

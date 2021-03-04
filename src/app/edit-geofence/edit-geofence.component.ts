@@ -197,7 +197,7 @@ export class EditGeofenceComponent implements OnInit {
 
       });
     } else {
-      this.commonService.errorToast('Please Select a region')
+      // this.commonService.errorToast('Please Select a region')
     }
   }
 

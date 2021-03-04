@@ -346,7 +346,8 @@
                                         <td style="width: 80%;">
                                             <mat-form-field class="example-full-width">
                                                 <mat-label> Keywords :</mat-label>
-                                                <input type="text" matInput [formControlName]="i">
+                                                <input type="text" (keydown.space)="$event.preventDefault();" matInput
+                                                    [formControlName]="i">
                                             </mat-form-field>
                                         </td>
                                         <td>

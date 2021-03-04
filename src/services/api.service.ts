@@ -60,7 +60,7 @@ export class ApiService {
       getCatByUser: 'admin/getUserCatAndSubCat',
       getBrandBySubcat: 'admin/getBrands',
       viewProduct: 'admin/product',
-      deleteImage: 'admin/deleteImage',
+      deleteImage: 'admin/image',
       endorsementRequest: 'panel/endorseProduct',
       endorsementProduct: 'panel/getSellerEndorsements',
       approveEndorsementRequest: 'panel/approveEndorsement',
@@ -268,7 +268,7 @@ export class ApiService {
   }
 
   deleteImage(body): Observable<any> {
-    return this.http.post<any>(this.apiEndPoints.deleteImage, body, this.getHeaders()).pipe(catchError(this.handleError))
+    return this.http.delete<any>(`${this.apiEndPoints.deleteImage}/${body.imageId}`, this.getHeaders()).pipe(catchError(this.handleError))
   }
 
 

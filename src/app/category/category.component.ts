@@ -30,6 +30,7 @@ export class CategoryComponent implements OnInit {
   count: number = 100
   subCatId: any;
   progress: boolean;
+  newImage: boolean;
 
 
 
@@ -107,7 +108,6 @@ export class CategoryComponent implements OnInit {
 
   picUploader: boolean;
   async profilePic(event) {
-
     this.picUploader = true
     if (event.target.files && event.target.files[0]) {
       this.imageFile = event.target.files[0];
@@ -119,11 +119,10 @@ export class CategoryComponent implements OnInit {
           this.previewImage = event.target.result;
           this.editCategoryForm.controls['image'].setValue(this.imageFile);
         } else {
+          this.newImage = true
           this.categoryImage = event.target.result;
           this.addCategoryForm.controls['image'].setValue(this.categoryImage);
-
         }
-
       };
     }
   }
