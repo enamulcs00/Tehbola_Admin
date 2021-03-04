@@ -113,7 +113,7 @@ export class EditProductComponent implements OnInit {
       purchaseQuantity: ['', [Validators.required, Validators.min(0)]],
       discount: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
       teaType: [''],
-      sugarLevel: ['', Validators.required],
+      sugarLevel: ['',],
       highlights: ['',],
       highlights_ar: [''],
       // price: ['', [Validators.required, Validators.min(1)]],
@@ -150,7 +150,7 @@ export class EditProductComponent implements OnInit {
 
   }
   setValue(data: any) {
-    
+
     this.selectedCategory = data.category._id
     this.getAllSubcategory(this.selectedCategory);
     this.productId = data.id
@@ -388,7 +388,7 @@ export class EditProductComponent implements OnInit {
 
 
   getAllSubcategory(id) {
-    
+
     this.selectedSubcategory = []
     let temp = []
     this.subCategoryList = []

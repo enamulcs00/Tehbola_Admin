@@ -101,7 +101,7 @@ export class AddproductComponent implements OnInit {
       purchaseQuantity: ['', [Validators.required, Validators.min(0)]],
       discount: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
       teaType: [''],
-      sugarLevel: ['', Validators.required],
+      sugarLevel: ['',],
       //  size: ['', Validators.required],
       highlights: ['',],
       highlights_ar: [''],
