@@ -57,6 +57,7 @@
                                         <th>Name</th>
                                         <th>Category</th>
                                         <th>Sub-Category</th>
+                                        <th>Raw Item Type</th>
                                         <th>Unit Price</th>
                                         <th>Quantity Per Unit</th>
                                         <th>Total Unit</th>
@@ -73,6 +74,7 @@
                                         <td>
                                             <span *ngFor="let item of item.subCategory">{{item.name}}</span>
                                         </td>
+                                        <td>{{item.type}}</td>
                                         <td>{{item.unitPrice}}</td>
                                         <td>{{item.quantityPerUnit}}{{item.measureTypeUnit}}</td>
                                         <td>{{item.totalUnits}}</td>
@@ -147,6 +149,26 @@
                                 </mat-form-field>
 
                             </div>
+                        </div>
+
+                        <div class="form-group col-md-12">
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Raw Item Type<span class="red">*</span></mat-label>
+
+                                <mat-select formControlName="type">
+
+                                    <!-- <mat-option>--</mat-option> -->
+                                    <mat-option *ngFor="let item of rawFoodItemType" [value]="item.value">
+                                        {{item.viewValue}}
+                                    </mat-option>
+                                </mat-select>
+
+                                <mat-error *ngIf="addBrandForm.get('type').hasError('required')">
+                                    Raw item type is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+
                         </div>
 
                         <div class="form-group col-md-12">
@@ -378,6 +400,26 @@
                                 </mat-form-field>
 
                             </div>
+                        </div>
+
+                        <div class="form-group col-md-12">
+
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Raw Item Type<span class="red">*</span></mat-label>
+
+                                <mat-select formControlName="type">
+
+                                    <!-- <mat-option>--</mat-option> -->
+                                    <mat-option *ngFor="let item of rawFoodItemType" [value]="item.value">
+                                        {{item.viewValue}}
+                                    </mat-option>
+                                </mat-select>
+
+                                <mat-error *ngIf="addBrandForm.get('type').hasError('required')">
+                                    Raw item type is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+
                         </div>
 
                         <div class="form-group col-md-12">

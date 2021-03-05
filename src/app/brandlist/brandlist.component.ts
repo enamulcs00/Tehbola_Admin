@@ -6,6 +6,13 @@ import Swal from 'sweetalert2';
 import { UrlService } from 'src/services/url.service';
 import { PageEvent } from '@angular/material/paginator';
 
+
+
+interface rawItemtype {
+  value: string,
+  viewValue: string,
+}
+
 @Component({
   selector: 'app-brandlist',
   templateUrl: './brandlist.component.html',
@@ -32,6 +39,24 @@ export class BrandlistComponent implements OnInit {
   imageFile: any = [];
   id: any;
   flagImage: boolean;
+  rawFoodItemType: Array<rawItemtype> = [{
+    value: 'rawFoodItem',
+    viewValue: 'Raw Food Item'
+  },
+  {
+    value: 'toppings',
+    viewValue: 'Toppings'
+  },
+  {
+    value: 'container',
+    viewValue: 'Container'
+  },
+  {
+    value: 'wearable',
+    viewValue: 'Wearable'
+  },
+
+  ]
   previewImage: any;
   brandImage: any;
   picUploader: boolean;
@@ -51,6 +76,8 @@ export class BrandlistComponent implements OnInit {
     this.addBrandForm = this.fb.group({
       name: ['', [Validators.required,]],
       name_ar: ['', [Validators.required,]],
+      type: ['', [Validators.required,]],
+
       category: ['', [Validators.required,]],
       subCategory: ['', [Validators.required]],
       image: ['', [Validators.required]],
@@ -65,6 +92,7 @@ export class BrandlistComponent implements OnInit {
     this.editBrandForm = this.fb.group({
       name: ['', [Validators.required,]],
       name_ar: ['', [Validators.required,]],
+      type: ['', [Validators.required,]],
       category: ['', [Validators.required,]],
       subCategory: ['', [Validators.required]],
       image: ['',],
@@ -186,7 +214,7 @@ export class BrandlistComponent implements OnInit {
   }
 
   async profilePic(event) {
-    
+
     this.imageFile = []
     this.picUploader = true
 
@@ -199,7 +227,7 @@ export class BrandlistComponent implements OnInit {
       if (event.target.files && event.target.files[0]) {
         var filesAmount = event.target.files.length;
         for (let i = 0; i < filesAmount; i++) {
-          
+
           let name = event.target.files[i].name;
           tempfile = event.target.files[i]
           console.log("check image", event.target.files[i].size);
@@ -272,7 +300,7 @@ export class BrandlistComponent implements OnInit {
           console.log(res1)
 
           if (res1.success == true) {
-            
+
             console.log(res1.data);
             this.subcategoryList = res1.data
 
@@ -281,6 +309,7 @@ export class BrandlistComponent implements OnInit {
             this.editBrandForm.controls['name'].setValue(res.data.name);
 
             this.editBrandForm.controls['name_ar'].setValue(res.data.name_ar);
+            this.editBrandForm.controls['type'].setValue(res.data.type);
             this.editBrandForm.controls['category'].setValue(res.data.category.id);
             let selectedCategory = []
             for (let i in res.data.subCategory) {
@@ -360,10 +389,11 @@ export class BrandlistComponent implements OnInit {
     if (this.submitted && this.addBrandForm.valid && this.imageFile.length > 0) {
       let body = this.addBrandForm.value
       console.log(body);
-      
+
       let formData = new FormData();
       formData.append('name', this.addBrandForm.get('name').value);
       formData.append('name_ar', this.addBrandForm.get('name_ar').value);
+      formData.append('type', this.addBrandForm.get('type').value);
       formData.append('category', this.addBrandForm.get('category').value);
       formData.append('subCategory', JSON.stringify(this.addBrandForm.get('subCategory').value));
       formData.append('totalUnits', this.addBrandForm.get('totalUnits').value);
@@ -421,6 +451,7 @@ export class BrandlistComponent implements OnInit {
       formData.append('id', this.editableBrandId)
       formData.append('name', this.editBrandForm.get('name').value);
       formData.append('name_ar', this.editBrandForm.get('name_ar').value);
+      formData.append('type', this.editBrandForm.get('type').value);
       formData.append('category', this.editBrandForm.get('category').value);
       formData.append('subCategory', JSON.stringify(this.editBrandForm.get('subCategory').value));
       formData.append('totalUnits', this.editBrandForm.get('totalUnits').value);
