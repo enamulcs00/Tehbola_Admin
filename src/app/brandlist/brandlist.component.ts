@@ -55,10 +55,7 @@ export class BrandlistComponent implements OnInit {
     value: 'wearable',
     viewValue: 'Wearable'
   },
-  {
-    value: 'toppings',
-    viewValue: 'Toppings'
-  },
+
 
   ]
   previewImage: any;

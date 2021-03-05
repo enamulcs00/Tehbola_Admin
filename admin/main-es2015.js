@@ -5094,10 +5094,6 @@ let BrandlistComponent = class BrandlistComponent {
                 value: 'wearable',
                 viewValue: 'Wearable'
             },
-            {
-                value: 'toppings',
-                viewValue: 'Toppings'
-            },
         ];
         this.search = '';
         this.flagSearch = true;

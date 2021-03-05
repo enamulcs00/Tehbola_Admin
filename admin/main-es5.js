@@ -7488,9 +7488,6 @@
         }, {
           value: 'wearable',
           viewValue: 'Wearable'
-        }, {
-          value: 'toppings',
-          viewValue: 'Toppings'
         }];
         this.search = '';
         this.flagSearch = true;
