@@ -109,7 +109,9 @@ import { EditGeofenceComponent } from './edit-geofence/edit-geofence.component';
 import { AddFoodTruckComponent } from './add-food-truck/add-food-truck.component';
 import { EditFoodTruckComponent } from './edit-food-truck/edit-food-truck.component';
 import { EquipmentManagementComponent } from './equipment-management/equipment-management.component';
-import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { PromoCodeManagementComponent } from './promo-code-management/promo-code-management.component';
+import { AddPromoCodeManagementComponent } from './add-promo-code-management/add-promo-code-management.component'
 
 @NgModule({
   declarations: [
@@ -207,6 +209,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker'
     AddFoodTruckComponent,
     EditFoodTruckComponent,
     EquipmentManagementComponent,
+    PromoCodeManagementComponent,
+    AddPromoCodeManagementComponent,
 
 
 

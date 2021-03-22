@@ -93,6 +93,8 @@ import { EditGeofenceComponent } from './edit-geofence/edit-geofence.component';
 import { AddFoodTruckComponent } from './add-food-truck/add-food-truck.component';
 import { EditFoodTruckComponent } from './edit-food-truck/edit-food-truck.component';
 import { EquipmentManagementComponent } from './equipment-management/equipment-management.component';
+import { PromoCodeManagementComponent } from './promo-code-management/promo-code-management.component';
+import { AddPromoCodeManagementComponent } from './add-promo-code-management/add-promo-code-management.component';
 
 const routes: Routes = [
   // {
@@ -526,8 +528,21 @@ const routes: Routes = [
     path: 'graph',
     component: GraphComponent,
     canActivate: [AuthGuard]
-
-
+  },
+  {
+    path: 'promo-code-management',
+    component: PromoCodeManagementComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'promo-code',
+    component: AddPromoCodeManagementComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'graph',
+    component: GraphComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'push-notification',
@@ -564,7 +579,12 @@ const routes: Routes = [
     path: 'Settings',
     component: SettingsComponent,
     canActivate: [AuthGuard]
-  }
+  },
+  {
+    path: "**",
+    redirectTo: "/login",
+    pathMatch: "full",
+  },
 ];
 
 @NgModule({

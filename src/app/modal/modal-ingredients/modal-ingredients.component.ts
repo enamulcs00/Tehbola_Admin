@@ -61,6 +61,7 @@ export class ModalIngredientsComponent implements OnInit {
         rawItem: new FormControl(x.id, Validators.required),
         name: new FormControl(x.name, Validators.required),
         assignedQuantity: new FormControl('', Validators.required),
+        thresHoldQuantity: new FormControl('', Validators.required),
       }, Validators.required));
     }
     this.dataForm.setControl('rawitems', formArray)

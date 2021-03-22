@@ -72,6 +72,7 @@ export class ApiService {
       getAllCategoryForDiscount: 'admin/categoryByVendor',
       addBanner: 'admin/banner',
       viewBanner: 'admin/banner',
+      getAllPromo:'',
       profile: 'admin/getProfile',
       updateProfile: 'admin/editProfile',
       downloadUserCSV: 'admin/userCsv',
@@ -341,6 +342,27 @@ export class ApiService {
   getToken() {
     return sessionStorage.getItem("token");
   }
+
+
+
+
+  getAllPromoCode(page, count, filter, search): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.getAllPromo}?page=${page}&count=${count}&filter=${filter}&search=${search}`, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+
+  addPromoCode(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.addPromoCode, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  getPromoCode(id): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.getPromoCode}/${id}`, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  updatePromoCode(body, id): Observable<any> {
+    return this.http.put<any>(`${this.apiEndPoints.addPromoCode}/${id}`, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
 
 
   isLoggedIn() {

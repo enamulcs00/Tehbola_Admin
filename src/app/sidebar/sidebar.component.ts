@@ -90,13 +90,13 @@ export class SidebarComponent implements OnInit {
   goTodashboard() {
     this.router.navigate(['dashboard']);
   }
-  goToEndorsement() {
-    this.router.navigate(['endorsement']);
-  }
+  // goToEndorsement() {
+  //   this.router.navigate(['endorsement']);
+  // }
 
-  goToCelebritymanagement() {
-    this.router.navigate(['manageCelebrity'])
-  }
+  // goToCelebritymanagement() {
+  //   this.router.navigate(['manageCelebrity'])
+  // }
 
   goToGeofence() {
     this.router.navigate(['geofence'])
@@ -149,6 +149,13 @@ export class SidebarComponent implements OnInit {
   goToofferdeals() {
     this.router.navigate(['offerdeals'])
   }
+  
+  goToPromoCodeManagement() {
+    debugger
+    this.router.navigate(['promo-code-management'])
+  }
+  
+  
 
   goTosalesreport() {
     this.router.navigate(['salesreport'])

@@ -80,13 +80,13 @@ export class AddGeofenceComponent implements OnInit {
       drawingControl: true,
       drawingControlOptions: {
 
-        drawingModes: [google.maps.drawing.OverlayType.CIRCLE]
+        drawingModes: [google.maps.drawing.OverlayType.POLYGON]
       },
       polygonOptions: {
         draggable: true,
         editable: true
       },
-      drawingMode: google.maps.drawing.OverlayType.CIRCLE
+      drawingMode: google.maps.drawing.OverlayType.POLYGON
     };
 
 
