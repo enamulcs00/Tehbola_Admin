@@ -57,6 +57,7 @@ export class PromoCodeManagementComponent implements OnInit {
 
   flagSearch: boolean = true
   searchMethod() {
+    debugger
     this.flagSearch = false
     console.log(this.search);
 
@@ -218,7 +219,7 @@ export class PromoCodeManagementComponent implements OnInit {
   }
 
   goToAddPromoCode() {
-    this.router.navigate(['addPromoCode'])
+    this.router.navigate(['promo-code'])
   }
 }
 

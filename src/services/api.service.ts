@@ -72,7 +72,7 @@ export class ApiService {
       getAllCategoryForDiscount: 'admin/categoryByVendor',
       addBanner: 'admin/banner',
       viewBanner: 'admin/banner',
-      getAllPromo:'',
+      getAllPromo:'admin/promoCode/',
       profile: 'admin/getProfile',
       updateProfile: 'admin/editProfile',
       downloadUserCSV: 'admin/userCsv',
