@@ -143,11 +143,38 @@ export class AddproductComponent implements OnInit {
 
 
   newSpecifiaction(): FormGroup {
+
     return this.fb.group({
       rawItem: new FormControl('', Validators.required),
-      quantity: new FormControl('', Validators.required)
+      size: this.fb.array(this.loadSize())
+
     })
   }
+
+
+  setSizeArray() { }
+  sizeQuantity(): FormArray {
+    return this.specification().get("size") as FormArray
+  }
+
+
+  loadSize(): any {
+
+    let controls = [];
+
+    let controlsList = this.sizePrice().value
+    console.log(controlsList);
+    for (let y in controlsList) {
+      controls.push(new FormGroup({
+        id: new FormControl(controlsList[y].id),
+        rawitemSizeQuantity: new FormControl('', [Validators.required])
+      }))
+    }
+    return controls;
+  }
+
+
+
 
   sizePrice(): FormArray {
     return this.addProductForm.get('sizePrice') as FormArray
@@ -178,6 +205,7 @@ export class AddproductComponent implements OnInit {
 
 
   addNewSpecification() {
+
     this.specification().push(this.newSpecifiaction())
   }
 
@@ -317,15 +345,11 @@ export class AddproductComponent implements OnInit {
 
   progress: boolean
   onSubmit() {
-
+    debugger
     console.log("check", this.addProductForm)
     this.submitted = true;
 
     if (this.submitted && this.addProductForm.valid && (this.images.length > 0)) {
-
-
-
-
       const body = new FormData();
       body.append('name', this.addProductForm.controls['name'].value);
       body.append('name_ar', this.addProductForm.controls['name_ar'].value);
