@@ -409,7 +409,7 @@
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div id=\"wrapper\">\n    <app-navbar></app-navbar>\n    <div id=\"content-wrapper\" class=\"\">\n        <div id=\"content\">\n            <app-sidebar></app-sidebar>\n            <div class=\"container-fluid\">\n                <div class=\"sub_heading\">\n                    <h1>Add Promo Code</h1>\n                    <div class=\"input_divs2 input_button input_button2\">\n                        <button class=\"btn_back\" mat-button (click)=\"goToinventory()\"><i class=\"fa fa-long-arrow-left\"\n                                aria-hidden=\"true\"></i></button>\n                    </div>\n                </div>\n                <form [formGroup]=\"addPromoCodeForm\">\n                    <!-----start input fields------>\n                    <div class=\"add_user_list\">\n                        <ul>\n                            <li>\n\n                                <mat-form-field class=\"example-full-width\">\n                                    <mat-label>Promo Code <span class=\"red\">*</span></mat-label>\n                                    <input matInput type=\"text\" placeholder=\"Product Id\" formControlName=\"code\"\n                                        name=\"code\">\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('code').hasError('required')\">\n                                        Promo Code Name is <strong>required</strong>\n                                    </mat-error>\n                                </mat-form-field>\n                            </li>\n                            <li>\n                                <!-- <label>Start Date <span class=\"red\">*</span></label> -->\n                                <!-- <mat-form-field>\n                                    <mat-label>Expire Date<span class=\"red\">*</span></mat-label>\n                                    <input matInput [matDatepicker]=\"disabletext\" formControlName=\"expiry\" type=\"date\"\n                                        [min]=\"today\" placeholder=\"Expire Date\" name=\"name\" disabled>\n                                    <mat-datepicker-toggle matSuffix [for]=\"disabletext\">\n                                    </mat-datepicker-toggle>\n                                    <mat-datepicker #disabletext disabled=\"false\">\n                                    </mat-datepicker>\n\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('expiry').hasError('required')\">\n                                        Expire Date is <strong>required</strong>\n                                    </mat-error>\n\n                                </mat-form-field> -->\n                                <mat-form-field>\n                                    <mat-label>Expire Date<span class=\"red\">*</span></mat-label>\n                                    <input matInput [min]='today' [matDatepicker]=\"disabletext\" formControlName=\"expiry\"\n                                        placeholder=\"Please Chose Date\" disabled>\n                                    <mat-datepicker-toggle matSuffix [for]=\"disabletext\">\n                                    </mat-datepicker-toggle>\n                                    <mat-datepicker #disabletext disabled=\"false\">\n                                    </mat-datepicker>\n                                </mat-form-field>\n                            </li>\n\n                            <li>\n                                <mat-form-field class=\"example-full-width\">\n                                    <mat-label>Description <span class=\"red\">*</span></mat-label>\n                                    <input matInput type=\"text\" placeholder=\"Description\" formControlName=\"description\"\n                                        name=\"name\">\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('description').hasError('required')\">\n                                        Description is <strong>required</strong>\n                                    </mat-error>\n                                </mat-form-field>\n                            </li>\n                            <li>\n                                <mat-form-field class=\"example-full-width\">\n                                    <mat-label>Min Cart Value <span class=\"red\">*</span></mat-label>\n                                    <input matInput type=\"number\" min=\"0\" placeholder=\"Min Cart Value\"\n                                        formControlName=\"minCartValue\" name=\"name\">\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('minCartValue').hasError('required')\">\n                                        Min Cart Value is <strong>required</strong>\n                                    </mat-error>\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('minCartValue').hasError('min')\">\n                                        Min Cart Value can not <strong>less then 0</strong>\n                                    </mat-error>\n                                </mat-form-field>\n                            </li>\n                            <li>\n                                <mat-form-field class=\"example-full-width\">\n                                    <mat-label>Discount Type <span class=\"red\">*</span></mat-label>\n                                    <mat-select placeholder=\"Discount Type\" formControlName=\"discountType\">\n\n\n                                        <mat-option value=\"FLAT\">\n                                            Flat\n                                        </mat-option>\n                                        <mat-option value=\"PERCENT\">\n                                            Percentage\n                                        </mat-option>\n\n                                    </mat-select>\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('discountType').hasError('required')\">\n                                        Discount Type is <strong>required</strong>\n                                    </mat-error>\n                                </mat-form-field>\n                            </li>\n                            <li>\n                                <mat-form-field class=\"example-full-width\">\n                                    <mat-label>Discount <span class=\"red\">*</span></mat-label>\n                                    <input matInput type=\"number\" min=\"0\" max=\"100\" placeholder=\"Discount\"\n                                        formControlName=\"discount\" name=\"name\">\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('discount').hasError('required')\">\n                                        Discount is <strong>required</strong>\n                                    </mat-error>\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('discount').hasError('min')\">\n                                        Discount can not <strong>less then 0</strong>\n                                    </mat-error>\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('discount').hasError('max')\">\n                                        Dsicount can not <strong>more then 100</strong>\n                                    </mat-error>\n                                </mat-form-field>\n                            </li>\n                            <li>\n                                <mat-form-field class=\"example-full-width\">\n                                    <mat-label>Max Discount <span class=\"red\">*</span></mat-label>\n                                    <input matInput type=\"number\" placeholder=\"Max Discount\"\n                                        formControlName=\"maxDiscount\" name=\"name\">\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('maxDiscount').hasError('required')\">\n                                        Max Discount is <strong>required</strong>\n                                    </mat-error>\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('maxDiscount').hasError('min')\">\n                                        Max Discount can not <strong>less then 0</strong>\n                                    </mat-error>\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('maxDiscount').hasError('max')\">\n                                        Max Discount can not <strong>more then 100</strong>\n                                    </mat-error>\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('maxDiscount').hasError('moreThan')\">\n                                        Max Discount cannot be more than <strong>Discount</strong>\n                                    </mat-error>\n                                </mat-form-field>\n                            </li>\n\n                            <li>\n                                <mat-form-field class=\"example-full-width\">\n                                    <mat-label>Frequency Per User <span class=\"red\">*</span></mat-label>\n                                    <input matInput type=\"number\" placeholder=\"Frequency Per User\"\n                                        formControlName=\"freqPerUser\" name=\"name\">\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('freqPerUser').hasError('required')\">\n                                        Frequency Per User is <strong>required</strong>\n                                    </mat-error>\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('freqPerUser').hasError('min')\">\n                                        Frequency Per User can not <strong>less then 0</strong>\n                                    </mat-error>\n                                </mat-form-field>\n                            </li>\n\n                            <li>\n                                <mat-form-field class=\"example-full-width\">\n                                    <mat-label>Exhaust Limit <span class=\"red\">*</span></mat-label>\n                                    <input matInput type=\"number\" placeholder=\"Exhaust Limit\"\n                                        formControlName=\"exhaustLimit\" name=\"name\">\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('exhaustLimit').hasError('required')\">\n                                        Exhaust Limit is <strong>required</strong>\n                                    </mat-error>\n                                </mat-form-field>\n                            </li>\n                        </ul>\n                    </div>\n                    <!-----End input fields------>\n                    <div class=\"update_button\">\n                        <button mat-button (click)=\"onSubmit()\">\n                            <span><i class=\"fa fa-window-restore\"></i>\n                            </span>\n                            Add\n                        </button>\n                    </div>\n                </form>\n            </div>\n        </div>\n    </div>\n</div>\n<div class=\"loader_bg\" *ngIf=\"progress\">\n    <div class=\"spinner-grow \" style=\"width: 5rem; height: 5rem; color:#97334b ;\" role=\"status\">\n        <span class=\"sr-only\">Loading...</span>\n    </div>\n</div>\n";
+    __webpack_exports__["default"] = "<div id=\"wrapper\">\n    <app-navbar></app-navbar>\n    <div id=\"content-wrapper\" class=\"\">\n        <div id=\"content\">\n            <app-sidebar></app-sidebar>\n            <div class=\"container-fluid\">\n                <div class=\"sub_heading\">\n                    <h1>{{title}} Promo Code</h1>\n                    <div class=\"input_divs2 input_button input_button2\">\n                        <button class=\"btn_back\" mat-button (click)=\"goToinventory()\"><i class=\"fa fa-long-arrow-left\"\n                                aria-hidden=\"true\"></i></button>\n                    </div>\n                </div>\n                <form [formGroup]=\"addPromoCodeForm\">\n                    <!-----start input fields------>\n                    <div class=\"add_user_list\">\n                        <ul>\n                            <li>\n\n                                <mat-form-field class=\"example-full-width\">\n                                    <mat-label>Promo Code <span class=\"red\">*</span></mat-label>\n                                    <input matInput type=\"text\" placeholder=\"Product Id\" formControlName=\"code\"\n                                        name=\"code\">\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('code').hasError('required')\">\n                                        Promo Code Name is <strong>required</strong>\n                                    </mat-error>\n                                </mat-form-field>\n                            </li>\n                            <li>\n                                <!-- <label>Start Date <span class=\"red\">*</span></label> -->\n                                <!-- <mat-form-field>\n                                    <mat-label>Expire Date<span class=\"red\">*</span></mat-label>\n                                    <input matInput [matDatepicker]=\"disabletext\" formControlName=\"expiry\" type=\"date\"\n                                        [min]=\"today\" placeholder=\"Expire Date\" name=\"name\" disabled>\n                                    <mat-datepicker-toggle matSuffix [for]=\"disabletext\">\n                                    </mat-datepicker-toggle>\n                                    <mat-datepicker #disabletext disabled=\"false\">\n                                    </mat-datepicker>\n\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('expiry').hasError('required')\">\n                                        Expire Date is <strong>required</strong>\n                                    </mat-error>\n\n                                </mat-form-field> -->\n                                <mat-form-field>\n                                    <mat-label>Expire Date<span class=\"red\">*</span></mat-label>\n                                    <input matInput [min]='today' [matDatepicker]=\"disabletext\" formControlName=\"expiry\"\n                                        placeholder=\"Please Chose Date\" disabled>\n                                    <mat-datepicker-toggle matSuffix [for]=\"disabletext\">\n                                    </mat-datepicker-toggle>\n                                    <mat-datepicker #disabletext disabled=\"false\">\n                                    </mat-datepicker>\n                                </mat-form-field>\n                            </li>\n\n                            <li>\n                                <mat-form-field class=\"example-full-width\">\n                                    <mat-label>Description <span class=\"red\">*</span></mat-label>\n                                    <input matInput type=\"text\" placeholder=\"Description\" formControlName=\"description\"\n                                        name=\"name\">\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('description').hasError('required')\">\n                                        Description is <strong>required</strong>\n                                    </mat-error>\n                                </mat-form-field>\n                            </li>\n                            <li>\n                                <mat-form-field class=\"example-full-width\">\n                                    <mat-label>Min Cart Value <span class=\"red\">*</span></mat-label>\n                                    <input matInput type=\"number\" min=\"0\" placeholder=\"Min Cart Value\"\n                                        formControlName=\"minCartValue\" name=\"name\">\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('minCartValue').hasError('required')\">\n                                        Min Cart Value is <strong>required</strong>\n                                    </mat-error>\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('minCartValue').hasError('min')\">\n                                        Min Cart Value can not <strong>less then 0</strong>\n                                    </mat-error>\n                                </mat-form-field>\n                            </li>\n                            <li>\n                                <mat-form-field class=\"example-full-width\">\n                                    <mat-label>Discount Type <span class=\"red\">*</span></mat-label>\n                                    <mat-select placeholder=\"Discount Type\" (selectionChange)='updateValidation($event)' formControlName=\"discountType\">\n\n\n                                        <!-- <mat-option value=\"FLAT\">\n                                            Flat\n                                        </mat-option> -->\n                                        <mat-option value=\"PERCENT\">\n                                            Percentage\n                                        </mat-option>\n\n                                    </mat-select>\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('discountType').hasError('required')\">\n                                        Discount Type is <strong>required</strong>\n                                    </mat-error>\n                                </mat-form-field>\n                            </li>\n                            <li>\n                                <mat-form-field class=\"example-full-width\">\n                                    <mat-label>Discount <span class=\"red\">*</span></mat-label>\n                                    <input matInput type=\"number\" min=\"0\" max=\"100\" placeholder=\"Discount\"\n                                        formControlName=\"discount\" name=\"name\">\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('discount').hasError('required')\">\n                                        Discount is <strong>required</strong>\n                                    </mat-error>\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('discount').hasError('min')\">\n                                        Discount can not <strong>less then 0</strong>\n                                    </mat-error>\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('discount').hasError('max')\">\n                                        Dsicount can not <strong>more then 100</strong>\n                                    </mat-error>\n                                </mat-form-field>\n                            </li>\n                            <li>\n                                <mat-form-field class=\"example-full-width\">\n                                    <mat-label>Max Discount <span class=\"red\">*</span></mat-label>\n                                    <input matInput type=\"number\" placeholder=\"Max Discount\"\n                                        formControlName=\"maxDiscount\" name=\"name\">\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('maxDiscount').hasError('required')\">\n                                        Max Discount is <strong>required</strong>\n                                    </mat-error>\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('maxDiscount').hasError('min')\">\n                                        Max Discount can not <strong>less then 0</strong>\n                                    </mat-error>\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('maxDiscount').hasError('max')\">\n                                        Max Discount can not <strong>more then 100</strong>\n                                    </mat-error>\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('maxDiscount').hasError('moreThan')\">\n                                        Max Discount cannot be more than <strong>Discount</strong>\n                                    </mat-error>\n                                </mat-form-field>\n                            </li>\n\n                            <li>\n                                <mat-form-field class=\"example-full-width\">\n                                    <mat-label>Frequency Per User <span class=\"red\">*</span></mat-label>\n                                    <input matInput type=\"number\" placeholder=\"Frequency Per User\"\n                                        formControlName=\"freqPerUser\" name=\"name\">\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('freqPerUser').hasError('required')\">\n                                        Frequency Per User is <strong>required</strong>\n                                    </mat-error>\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('freqPerUser').hasError('min')\">\n                                        Frequency Per User can not <strong>less then 0</strong>\n                                    </mat-error>\n                                </mat-form-field>\n                            </li>\n\n                            <li>\n                                <mat-form-field class=\"example-full-width\">\n                                    <mat-label>Exhaust Limit <span class=\"red\">*</span></mat-label>\n                                    <input matInput type=\"number\" placeholder=\"Exhaust Limit\"\n                                        formControlName=\"exhaustLimit\" name=\"name\">\n                                    <mat-error *ngIf=\"addPromoCodeForm.get('exhaustLimit').hasError('required')\">\n                                        Exhaust Limit is <strong>required</strong>\n                                    </mat-error>\n                                </mat-form-field>\n                            </li>\n                        </ul>\n                    </div>\n                    <!-----End input fields------>\n                    <div class=\"update_button\">\n                        <button mat-button (click)=\"onSubmit()\">\n                            <span><i class=\"fa fa-window-restore\"></i>\n                            </span>\n                            {{buttonText}}\n                        </button>\n                    </div>\n                </form>\n            </div>\n        </div>\n    </div>\n</div>\n<div class=\"loader_bg\" *ngIf=\"progress\">\n    <div class=\"spinner-grow \" style=\"width: 5rem; height: 5rem; color:#97334b ;\" role=\"status\">\n        <span class=\"sr-only\">Loading...</span>\n    </div>\n</div>\n";
     /***/
   },
 
@@ -3281,11 +3281,25 @@
     "./src/services/moreThanValidator.ts");
 
     let AddPromoCodeManagementComponent = class AddPromoCodeManagementComponent {
-      constructor(fb, apiService, commonService, router) {
+      constructor(fb, apiService, commonService, router, activatedRouter) {
         this.fb = fb;
         this.apiService = apiService;
         this.commonService = commonService;
         this.router = router;
+        this.activatedRouter = activatedRouter;
+        this.title = 'Add';
+        this.buttonText = 'Save';
+        this.sub = this.activatedRouter.queryParams.subscribe(res => {
+          console.log(res);
+          debugger;
+
+          if (res.id) {
+            this.title = 'Edit';
+            this.getSinglePromoCode(res.id);
+            this.id = res.id;
+            this.buttonText = 'Update';
+          }
+        });
       }
 
       ngOnInit() {
@@ -3296,12 +3310,28 @@
           description: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
           minCartValue: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].min(0)]],
           discount: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].min(0), _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].max(100)]],
-          maxDiscount: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].max(100), _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].min(0)]],
+          maxDiscount: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].min(0), _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].max(100)]],
           discountType: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
           freqPerUser: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].min(0)]],
           exhaustLimit: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]
         }, {
           validator: Object(src_services_moreThanValidator__WEBPACK_IMPORTED_MODULE_7__["MoreThan"])('discount', 'maxDiscount')
+        });
+      }
+
+      getSinglePromoCode(id) {
+        console.log(id);
+        this.apiService.getPromoCode(id).subscribe(res => {
+          console.log(res);
+          this.addPromoCodeForm.get('code').setValue(res.data.code);
+          this.addPromoCodeForm.get('expiry').setValue(res.data.expiry);
+          this.addPromoCodeForm.get('description').setValue(res.data.description);
+          this.addPromoCodeForm.get('minCartValue').setValue(res.data.minCartValue);
+          this.addPromoCodeForm.get('discount').setValue(res.data.discount);
+          this.addPromoCodeForm.get('maxDiscount').setValue(res.data.maxDiscount);
+          this.addPromoCodeForm.get('discountType').setValue(res.data.discountType);
+          this.addPromoCodeForm.get('freqPerUser').setValue(res.data.freqPerUser);
+          this.addPromoCodeForm.get('exhaustLimit').setValue(res.data.exhaustLimit);
         });
       }
 
@@ -3312,18 +3342,34 @@
           let body = this.addPromoCodeForm.value; // code:this.addPromoCodeForm.get('').value,
 
           this.progress = true;
-          this.apiService.addPromoCode(body).subscribe(res => {
-            console.log(res);
 
-            if (res.success) {
-              this.progress = false;
-              this.commonService.successToast(res.message);
-              this.router.navigate(['promoCodeList']);
-            } else {
-              this.progress = false;
-              this.commonService.errorToast(res.message);
-            }
-          });
+          if (this.id) {
+            this.apiService.updatePromoCode(body, this.id).subscribe(res => {
+              console.log(res);
+
+              if (res.success) {
+                this.progress = false;
+                this.commonService.successToast(res.message);
+                this.router.navigate(['promo-code-management']);
+              } else {
+                this.progress = false;
+                this.commonService.errorToast(res.message);
+              }
+            });
+          } else {
+            this.apiService.addPromoCode(body).subscribe(res => {
+              console.log(res);
+
+              if (res.success) {
+                this.progress = false;
+                this.commonService.successToast(res.message);
+                this.router.navigate(['promo-code-management']);
+              } else {
+                this.progress = false;
+                this.commonService.errorToast(res.message);
+              }
+            });
+          }
         }
       }
 
@@ -3341,6 +3387,8 @@
       type: src_services_common_service__WEBPACK_IMPORTED_MODULE_6__["CommonService"]
     }, {
       type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
+    }, {
+      type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]
     }];
 
     AddPromoCodeManagementComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -19589,7 +19637,7 @@
 
       gotoUpdatePromoCode(id) {
         console.log(id);
-        this.router.navigate(['editPromoCode'], {
+        this.router.navigate(['promo-code'], {
           queryParams: {
             'id': id
           }
@@ -26284,7 +26332,7 @@
           getAllCategoryForDiscount: 'admin/categoryByVendor',
           addBanner: 'admin/banner',
           viewBanner: 'admin/banner',
-          getAllPromo: 'admin/promoCode/',
+          getAllPromo: 'admin/promoCode',
           profile: 'admin/getProfile',
           updateProfile: 'admin/editProfile',
           downloadUserCSV: 'admin/userCsv',
@@ -26500,15 +26548,15 @@
       }
 
       addPromoCode(body) {
-        return this.http.post(this.apiEndPoints.addPromoCode, body, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError()));
+        return this.http.post(this.apiEndPoints.getAllPromo, body, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError()));
       }
 
       getPromoCode(id) {
-        return this.http.get("".concat(this.apiEndPoints.getPromoCode, "/").concat(id), this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError()));
+        return this.http.get("".concat(this.apiEndPoints.getAllPromo, "/").concat(id), this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError()));
       }
 
       updatePromoCode(body, id) {
-        return this.http.put("".concat(this.apiEndPoints.addPromoCode, "/").concat(id), body, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError()));
+        return this.http.put("".concat(this.apiEndPoints.getAllPromo, "/").concat(id), body, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError()));
       }
 
       isLoggedIn() {

@@ -72,7 +72,7 @@ export class ApiService {
       getAllCategoryForDiscount: 'admin/categoryByVendor',
       addBanner: 'admin/banner',
       viewBanner: 'admin/banner',
-      getAllPromo:'admin/promoCode/',
+      getAllPromo:'admin/promoCode',
       profile: 'admin/getProfile',
       updateProfile: 'admin/editProfile',
       downloadUserCSV: 'admin/userCsv',
@@ -352,15 +352,15 @@ export class ApiService {
 
 
   addPromoCode(body): Observable<any> {
-    return this.http.post<any>(this.apiEndPoints.addPromoCode, body, this.getHeaders()).pipe(catchError(this.handleError()))
+    return this.http.post<any>(this.apiEndPoints.getAllPromo, body, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
   getPromoCode(id): Observable<any> {
-    return this.http.get<any>(`${this.apiEndPoints.getPromoCode}/${id}`, this.getHeaders()).pipe(catchError(this.handleError()))
+    return this.http.get<any>(`${this.apiEndPoints.getAllPromo}/${id}`, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
   updatePromoCode(body, id): Observable<any> {
-    return this.http.put<any>(`${this.apiEndPoints.addPromoCode}/${id}`, body, this.getHeaders()).pipe(catchError(this.handleError()))
+    return this.http.put<any>(`${this.apiEndPoints.getAllPromo}/${id}`, body, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
 

@@ -120,9 +120,6 @@ export class PromoCodeManagementComponent implements OnInit {
       }
 
     })
-
-
-
   }
 
   changeUserStatus(id, status) {
@@ -215,7 +212,7 @@ export class PromoCodeManagementComponent implements OnInit {
   gotoUpdatePromoCode(id) {
 
     console.log(id);
-    this.router.navigate(['editPromoCode'], { queryParams: { 'id': id } });
+    this.router.navigate(['promo-code'], { queryParams: { 'id': id } });
   }
 
   goToAddPromoCode() {

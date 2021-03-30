@@ -213,8 +213,6 @@ import { AddPromoCodeManagementComponent } from './add-promo-code-management/add
     AddPromoCodeManagementComponent,
 
 
-
-
   ],
   imports: [
     BrowserModule,
@@ -222,8 +220,6 @@ import { AddPromoCodeManagementComponent } from './add-promo-code-management/add
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-
-
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAi2sN3aJ2k2P6I04FrQpsLuDKMeOrHpJU',
       libraries: ['places', 'geometry', 'drawing'],

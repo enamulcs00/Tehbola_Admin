@@ -5,7 +5,7 @@
             <app-sidebar></app-sidebar>
             <div class="container-fluid">
                 <div class="sub_heading">
-                    <h1>Add Promo Code</h1>
+                    <h1>{{title}} Promo Code</h1>
                     <div class="input_divs2 input_button input_button2">
                         <button class="btn_back" mat-button (click)="goToinventory()"><i class="fa fa-long-arrow-left"
                                 aria-hidden="true"></i></button>
@@ -79,12 +79,12 @@
                             <li>
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Discount Type <span class="red">*</span></mat-label>
-                                    <mat-select placeholder="Discount Type" formControlName="discountType">
+                                    <mat-select placeholder="Discount Type" (selectionChange)='updateValidation($event)' formControlName="discountType">
 
 
-                                        <mat-option value="FLAT">
+                                        <!-- <mat-option value="FLAT">
                                             Flat
-                                        </mat-option>
+                                        </mat-option> -->
                                         <mat-option value="PERCENT">
                                             Percentage
                                         </mat-option>
@@ -162,7 +162,7 @@
                         <button mat-button (click)="onSubmit()">
                             <span><i class="fa fa-window-restore"></i>
                             </span>
-                            Add
+                            {{buttonText}}
                         </button>
                     </div>
                 </form>
