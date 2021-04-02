@@ -17,24 +17,24 @@ export class AddPromoCodeManagementComponent implements OnInit {
   progress: boolean;
   today: string;
   sub: any;
-  title: string= 'Add';
-  buttonText: string='Save';
+  title: string = 'Add';
+  buttonText: string = 'Save';
   id: any;
-  constructor(private fb: FormBuilder, private apiService: ApiService, private commonService: CommonService, private router: Router, private activatedRouter:ActivatedRoute) {
+  constructor(private fb: FormBuilder, private apiService: ApiService, private commonService: CommonService, private router: Router, private activatedRouter: ActivatedRoute) {
 
 
-    this.sub= this.activatedRouter.queryParams.subscribe(res=>{
-      console.log(res);
-      debugger
-      if(res.id){
-        this.title='Edit'
+    this.sub = this.activatedRouter.queryParams.subscribe(res => {
+
+
+      if (res.id) {
+        this.title = 'Edit'
         this.getSinglePromoCode(res.id)
-        this.id=res.id
-        this.buttonText='Update'
+        this.id = res.id
+        this.buttonText = 'Update'
       }
-      
+
     })
-   }
+  }
 
   ngOnInit() {
     this.today = moment(new Date()).format('YYYY-MM-DD');
@@ -46,8 +46,8 @@ export class AddPromoCodeManagementComponent implements OnInit {
       expiry: ['', Validators.required],
       description: ['', Validators.required],
       minCartValue: ['', [Validators.required, Validators.min(0)]],
-      discount: ['', [Validators.required, Validators.min(0), Validators.max(100) ]],
-      maxDiscount: ['', [Validators.required,  Validators.min(0), Validators.max(100)]],
+      discount: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
+      maxDiscount: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
       discountType: ['', Validators.required],
       freqPerUser: ['', [Validators.required, Validators.min(0)]],
       exhaustLimit: ['', Validators.required]
@@ -60,12 +60,12 @@ export class AddPromoCodeManagementComponent implements OnInit {
 
 
 
-  getSinglePromoCode(id){
-    console.log(id);
-    this.apiService.getPromoCode(id).subscribe(res=>{
-      
-      console.log(res);
-      
+  getSinglePromoCode(id) {
+
+    this.apiService.getPromoCode(id).subscribe(res => {
+
+
+
       this.addPromoCodeForm.get('code').setValue(res.data.code);
       this.addPromoCodeForm.get('expiry').setValue(res.data.expiry)
       this.addPromoCodeForm.get('description').setValue(res.data.description)
@@ -75,24 +75,24 @@ export class AddPromoCodeManagementComponent implements OnInit {
       this.addPromoCodeForm.get('discountType').setValue(res.data.discountType)
       this.addPromoCodeForm.get('freqPerUser').setValue(res.data.freqPerUser)
       this.addPromoCodeForm.get('exhaustLimit').setValue(res.data.exhaustLimit)
-  
-      
+
+
     })
-    
+
   }
 
 
 
   onSubmit() {
-    console.log(this.addPromoCodeForm.value);
+
     if (this.addPromoCodeForm.valid) {
       let body = this.addPromoCodeForm.value;
-// code:this.addPromoCodeForm.get('').value,
-       
+      // code:this.addPromoCodeForm.get('').value,
+
       this.progress = true
-      if(this.id){
+      if (this.id) {
         this.apiService.updatePromoCode(body, this.id).subscribe(res => {
-          console.log(res);
+
           if (res.success) {
             this.progress = false;
             this.commonService.successToast(res.message)
@@ -101,11 +101,11 @@ export class AddPromoCodeManagementComponent implements OnInit {
             this.progress = false;
             this.commonService.errorToast(res.message);
           }
-  
+
         })
-      }else{
+      } else {
         this.apiService.addPromoCode(body).subscribe(res => {
-          console.log(res);
+
           if (res.success) {
             this.progress = false;
             this.commonService.successToast(res.message)
@@ -114,10 +114,10 @@ export class AddPromoCodeManagementComponent implements OnInit {
             this.progress = false;
             this.commonService.errorToast(res.message);
           }
-  
+
         })
       }
-      
+
 
     }
 

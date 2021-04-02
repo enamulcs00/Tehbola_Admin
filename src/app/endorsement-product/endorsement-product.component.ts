@@ -55,7 +55,6 @@ export class EndorsementProductComponent implements OnInit {
 
       });
     this.user = JSON.parse(sessionStorage.getItem('Markat_User'))
-    console.log(this.user);
 
     this.sellerId = this.id
     //alert(this.id)
@@ -79,7 +78,6 @@ export class EndorsementProductComponent implements OnInit {
       this.flag = false
 
     }
-    console.log(e.value);
     this.filterBy = e.value;
 
     this.getAllProducts()

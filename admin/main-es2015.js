@@ -525,7 +525,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"wrapper\">\r\n\t<app-navbar></app-navbar>\r\n\t<div id=\"content-wrapper\" class=\"\">\r\n\t\t<div id=\"content\">\r\n\t\t\t<app-sidebar></app-sidebar>\r\n\t\t\t<div class=\"container-fluid\">\r\n\t\t\t\t<div class=\"sub_heading\">\r\n\t\t\t\t\t<h1>{{name}} Purchase History</h1>\r\n\t\t\t\t\t<div class=\"input_divs2 input_button input_button2\">\r\n\t\t\t\t\t\t<button class=\"btn_back\" mat-button (click)=\"back()\"><i class=\"fa fa-long-arrow-left\"\r\n\t\t\t\t\t\t\t\taria-hidden=\"true\"></i></button>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\t\t\t\t<div class=\"tab-content\">\r\n\t\t\t\t\t<div id=\"allOrders\" class=\"tab-pane fade in active\">\r\n\t\t\t\t\t\t<div class=\"inner_content\">\r\n\t\t\t\t\t\t\t<div class=\"outer_table\">\r\n\t\t\t\t\t\t\t\t<div class=\"search_fields\">\r\n\t\t\t\t\t\t\t\t\t<div class=\"filters Booking_status\">\r\n\t\t\t\t\t\t\t\t\t\t<label>Filter</label>\r\n\t\t\t\t\t\t\t\t\t\t<select [(ngModel)]=\"filter\" (change)=\"filterSelected($event)\">\r\n\t\t\t\t\t\t\t\t\t\t\t<option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n\t\t\t\t\t\t\t\t\t\t\t<option *ngIf=\"flag==false\" value=\"\"></option>\r\n\t\t\t\t\t\t\t\t\t\t\t<option *ngFor=\"let item of optionList\" value=\"{{item}}\">{{item}}</option>\r\n\r\n\t\t\t\t\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t<div class=\"search_inner_fiels\">\r\n\t\t\t\t\t\t\t\t\t\t<div class=\"filters Booking_status\">\r\n\t\t\t\t\t\t\t\t\t\t\t<label>Search</label>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class=\"search_with_icons\">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<mat-form-field [floatLabel]=\"'never'\">\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t<input matInput type=\"text\" name=\"search\" [(ngModel)]=\"search\"\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tplaceholder=\"\">\r\n\t\t\t\t\t\t\t\t\t\t\t\t</mat-form-field>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<a>\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t<i *ngIf=\"flagSearch==true\" class=\"fa fa-search\"\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t(click)=\"searchSubmit()\" aria-hidden=\"true\"></i></a>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<a>\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t<i *ngIf=\"flagSearch==false\" class=\"fa fa-times\"\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t(click)=\"clearSearch()\" aria-hidden=\"true\"></i></a>\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div *ngIf=\"flagData==true\">\r\n\t\t\t\t\t\t\t\t\t<h1>No Data Found</h1>\r\n\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div *ngIf=\"flagData==false\" class=\"table-responsive divAboveTable\">\r\n\t\t\t\t\t\t\t\t\t<table>\r\n\t\t\t\t\t\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t\t\t\t\t\t<th>Sr.no</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th>Order Id</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th>Product Name</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th>Product category</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th>Product sub category</th>\r\n\r\n\t\t\t\t\t\t\t\t\t\t\t<th>ISBN Number</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th>SKU Number</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th>Quantity</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th>Price</th>\r\n\r\n\t\t\t\t\t\t\t\t\t\t\t<th>User Address</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th>Order Date</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th>Delivery Date</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th>Status</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<!-- <th class=\"action_bx\">Action</th> -->\r\n\t\t\t\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t\t\t\t\t<tr *ngFor=\"let item of orderHistoryList;   index as i \">\r\n\t\t\t\t\t\t\t\t\t\t\t<td *ngIf=\"flagUserList==false\">{{i+1}}</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<td *ngIf=\"flagUserList==true\">{{srNo+i+1}}</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<td>{{item.orderId}}</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<td>{{item.productId.name}}</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<td>{{item.productId.category.name}}</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<td>{{item.productId.subCategory.name}}</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<td>{{item.productId.isbn}}</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<td>{{item.productId.sku}}</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<td>{{item.productId.productQuantity}}</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<td>{{item.totalAmount}}</td>\r\n\r\n\t\t\t\t\t\t\t\t\t\t\t<td>{{item.deliveryAddress.address1}},{{item.deliveryAddress.address2}},{{item.deliveryAddress.city}},{{item.deliveryAddress.state}}\r\n\t\t\t\t\t\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<td>{{item.createdAt | date}}</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<td>{{item.deliveryDate}}</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<td>{{item.status}}\r\n\t\t\t\t\t\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<!-- \t\t\t\t\t\r\n\t\t\t\t\t\t<td>\r\n\t\t\t\t\t\t\t<div class=\"action\">\r\n\t\t\t\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t\t\t\t<li class=\"show\" (click)=\"goToviewOrder()\"><i class=\"fa fa-eye\"></i></li>\r\n\t\t\t\t\t\t\t\t\t<li class=\"edit\" (click)=\"goToeditOrder()\"><i class=\"fa fa-pencil fa-fw\"></i></li>\r\n\t\t\t\t\t\t\t\t\t<li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li>\r\n\t\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</td> -->\r\n\t\t\t\t\t\t\t\t\t\t</tr>\r\n\r\n\r\n\r\n\t\t\t\t\t\t\t\t\t</table>\r\n\t\t\t\t\t\t\t\t\t<!-----start pagination-->\r\n\t\t\t\t\t\t\t\t\t<mat-paginator [length]=\"length\" [pageSize]=\"pageSize\"\r\n\t\t\t\t\t\t\t\t\t\t[pageSizeOptions]=\"[5, 10, 25, 100]\"\r\n\t\t\t\t\t\t\t\t\t\t(page)=\"pageEvent = orderHistoryListAfterPageSizeChanged($event)\">\r\n\r\n\t\t\t\t\t\t\t\t\t</mat-paginator>\r\n\t\t\t\t\t\t\t\t\t<!-----end pagination-->\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\r\n\t\t\t\t</div>\r\n\r\n\r\n\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"wrapper\">\r\n\t<app-navbar></app-navbar>\r\n\t<div id=\"content-wrapper\" class=\"\">\r\n\t\t<div id=\"content\">\r\n\t\t\t<app-sidebar></app-sidebar>\r\n\t\t\t<div class=\"container-fluid\">\r\n\t\t\t\t<div class=\"sub_heading\">\r\n\t\t\t\t\t<h1>{{name}} Purchase History</h1>\r\n\t\t\t\t\t<div class=\"input_divs2 input_button input_button2\">\r\n\t\t\t\t\t\t<button class=\"btn_back\" mat-button (click)=\"back()\"><i class=\"fa fa-long-arrow-left\"\r\n\t\t\t\t\t\t\t\taria-hidden=\"true\"></i></button>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\r\n\t\t\t\t<div class=\"tab-content\">\r\n\t\t\t\t\t<div id=\"allOrders\" class=\"tab-pane fade in active\">\r\n\t\t\t\t\t\t<div class=\"inner_content\">\r\n\t\t\t\t\t\t\t<div class=\"outer_table\">\r\n\t\t\t\t\t\t\t\t<div class=\"search_fields\">\r\n\t\t\t\t\t\t\t\t\t<div class=\"filters Booking_status\">\r\n\t\t\t\t\t\t\t\t\t\t<label>Filter</label>\r\n\t\t\t\t\t\t\t\t\t\t<select [(ngModel)]=\"filter\" (change)=\"filterSelected($event)\">\r\n\t\t\t\t\t\t\t\t\t\t\t<option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n\t\t\t\t\t\t\t\t\t\t\t<option *ngIf=\"flag==false\" value=\"\"></option>\r\n\t\t\t\t\t\t\t\t\t\t\t<option *ngFor=\"let item of optionList\" value=\"{{item}}\">{{item}}</option>\r\n\r\n\t\t\t\t\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t<div class=\"search_inner_fiels\">\r\n\t\t\t\t\t\t\t\t\t\t<div class=\"filters Booking_status\">\r\n\t\t\t\t\t\t\t\t\t\t\t<label>Search</label>\r\n\t\t\t\t\t\t\t\t\t\t\t<div class=\"search_with_icons\">\r\n\t\t\t\t\t\t\t\t\t\t\t\t<mat-form-field [floatLabel]=\"'never'\">\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t<input matInput type=\"text\" name=\"search\" [(ngModel)]=\"search\"\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tplaceholder=\"\">\r\n\t\t\t\t\t\t\t\t\t\t\t\t</mat-form-field>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<a>\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t<i *ngIf=\"flagSearch==true\" class=\"fa fa-search\"\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t(click)=\"searchSubmit()\" aria-hidden=\"true\"></i></a>\r\n\t\t\t\t\t\t\t\t\t\t\t\t<a>\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t<i *ngIf=\"flagSearch==false\" class=\"fa fa-times\"\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t(click)=\"clearSearch()\" aria-hidden=\"true\"></i></a>\r\n\t\t\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div *ngIf=\"flagData==true\">\r\n\t\t\t\t\t\t\t\t\t<h1>No Data Found</h1>\r\n\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div *ngIf=\"flagData==false\" class=\"table-responsive divAboveTable\">\r\n\t\t\t\t\t\t\t\t\t<table>\r\n\t\t\t\t\t\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t\t\t\t\t\t<th>Sr.no</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th>Order Id</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th>Product Name</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th>Product category</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th>Product sub category</th>\r\n\r\n\t\t\t\t\t\t\t\t\t\t\t<th>ISBN Number</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th>SKU Number</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th>Quantity</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th>Price</th>\r\n\r\n\t\t\t\t\t\t\t\t\t\t\t<th>User Address</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th>Order Date</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th>Delivery Date</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<th>Status</th>\r\n\t\t\t\t\t\t\t\t\t\t\t<!-- <th class=\"action_bx\">Action</th> -->\r\n\t\t\t\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t\t\t\t\t<tr *ngFor=\"let item of orderHistoryList;   index as i \">\r\n\t\t\t\t\t\t\t\t\t\t\t<td *ngIf=\"flagUserList==false\">{{i+1}}</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<td *ngIf=\"flagUserList==true\">{{srNo+i+1}}</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<td>{{item.orderId}}</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<td>{{item.productId.name}}</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<td>{{item.productId.category.name}}</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<td>{{item.productId.subCategory.name}}</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<td>{{item.productId.isbn}}</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<td>{{item.productId.sku}}</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<td>{{item.productId.productQuantity}}</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<td>{{item.totalAmount}}</td>\r\n\r\n\t\t\t\t\t\t\t\t\t\t\t<td>{{item.deliveryAddress.address1}},{{item.deliveryAddress.address2}},{{item.deliveryAddress.city}},{{item.deliveryAddress.state}}\r\n\t\t\t\t\t\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<td>{{item.createdAt | date}}</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<td>{{item.deliveryDate}}</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<td>{{item.status}}\r\n\t\t\t\t\t\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t\t\t\t\t\t<!-- \t\t\t\t\t\r\n\t\t\t\t\t\t<td>\r\n\t\t\t\t\t\t\t<div class=\"action\">\r\n\t\t\t\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t\t\t\t<li class=\"show\" (click)=\"goToviewOrder()\"><i class=\"fa fa-eye\"></i></li>\r\n\t\t\t\t\t\t\t\t\t<li class=\"edit\" (click)=\"goToeditOrder()\"><i class=\"fa fa-pencil fa-fw\"></i></li>\r\n\t\t\t\t\t\t\t\t\t<li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li>\r\n\t\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t</td> -->\r\n\t\t\t\t\t\t\t\t\t\t</tr>\r\n\r\n\r\n\r\n\t\t\t\t\t\t\t\t\t</table>\r\n\t\t\t\t\t\t\t\t\t<!-----start pagination-->\r\n\t\t\t\t\t\t\t\t\t<mat-paginator [length]=\"length\" [pageSize]=\"pageSize\"\r\n\t\t\t\t\t\t\t\t\t\t[pageSizeOptions]=\"[5, 10, 25, 100]\"\r\n\t\t\t\t\t\t\t\t\t\t(page)=\"pageEvent = orderHistoryListAfterPageSizeChanged($event)\">\r\n\r\n\t\t\t\t\t\t\t\t\t</mat-paginator>\r\n\t\t\t\t\t\t\t\t\t<!-----end pagination-->\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</div>\r\n\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t</div>\r\n\r\n\t\t\t\t</div>\r\n\r\n\r\n\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</div>\r\n</div>");
 
 /***/ }),
 
@@ -1084,7 +1084,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Booking Request Management</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <button class=\"btn_back\" matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\"\r\n                            mat-button>Download CSV</button>\r\n                    </div>\r\n                    <!-- <div class=\"top_subheading_add\">\r\n                        <a (click)=\"goToaddsale()\"><span>+</span>Add Sale</a>\r\n                    </div> -->\r\n                </div>\r\n                <div class=\"tab-content\">\r\n                    <div id=\"allOrders\" class=\"tab-pane fade in active\">\r\n                        <div class=\"inner_content\">\r\n                            <div class=\"outer_table\">\r\n                                <div class=\"search_fields\">\r\n                                    <div class=\"\">\r\n\r\n                                        <mat-form-field class=\"example-full-width\">\r\n                                            <mat-label>Filter<span class=\"red\">*</span></mat-label>\r\n\r\n                                            <mat-select placeholder=\"Filter\" [(ngModel)]=\"filterBy\"\r\n                                                (selectionChange)=\"filterSelected($event)\">\r\n                                                <mat-option *ngIf=\"flag==true\" value=\"\">\r\n                                                    Remove Filter\r\n                                                </mat-option>\r\n                                                <!--  <mat-option *ngIf=\"flag==false\" value=\"\">\r\n\r\n                                    </mat-option> -->\r\n                                                <mat-option value=\"active\">\r\n                                                    Active\r\n                                                </mat-option>\r\n                                                <mat-option value=\"inactive\">\r\n                                                    Inactive\r\n                                                </mat-option>\r\n\r\n                                            </mat-select>\r\n                                        </mat-form-field>\r\n                                    </div>\r\n                                    <div class=\"search_inner_fiels\">\r\n                                        <div class=\"\">\r\n\r\n                                            <div class=\"search_with_icons\">\r\n                                                <mat-form-field class=\"example-full-width\">\r\n                                                    <mat-label>Search</mat-label>\r\n                                                    <input matInput type=\"text\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                                </mat-form-field>\r\n                                                <button mat-button matSuffix mat-icon-button> <i\r\n                                                        *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                                        (click)=\"searchMethod()\"></i>\r\n                                                    <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                                        (click)=\"clearSearch()\"></i>\r\n                                                </button>\r\n                                            </div>\r\n                                        </div>\r\n\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"table-responsive\">\r\n                                    <!-- <table>\r\n                                        <tr>\r\n                                            <th>Order Id</th>\r\n                                            <th>Product Name</th>\r\n                                            <th>Product category</th>\r\n                                            <th>Product sub category</th>\r\n\r\n                                            <th>ISBN Number</th>\r\n                                            <th>SKU Number</th>\r\n                                            <th>Quantity</th>\r\n                                            <th>Price</th>\r\n                                            <th>User name</th>\r\n                                            <th>User Address</th>\r\n                                            <th>Order Date</th>\r\n                                            <th>Expected Delivery Date</th>\r\n                                            <th>Delivery Date</th>\r\n                                            <th>Status</th>\r\n                                            <th class=\"action_bx\">Action</th>\r\n                                        </tr>\r\n\r\n\r\n\r\n                                        <tr *ngFor=\"let item of salesList; let i=index\">\r\n                                            <td>{{item.orderId}}</td>\r\n                                            <td>{{item.productId.name}}</td>\r\n                                            <td>{{item.productId.category.name}}</td>\r\n                                            <td>{{item.productId.subCategory.name}}</td>\r\n                                            <td>{{item.productId.isbn}}</td>\r\n                                            <td>{{item.productId.sku}}</td>\r\n                                            <td>{{item.quantity}}</td>\r\n                                            <td>{{item.totalAmount|number}}</td>\r\n                                            <td>{{item.userId.firstName}} {{item.userId.lastName}}</td>\r\n                                            <td>{{item.deliveryAddress.address1}} {{item.deliveryAddress.address2}}\r\n                                                {{item.deliveryAddress.city}} {{item.deliveryAddress.state}}\r\n                                                {{item.deliveryAddress.postalCode}}</td>\r\n                                            <td>{{item.createdAt|date}}</td>\r\n                                            <td>{{item.deliveryDate==null?\"Date not assigned yet\":item.deliveryDate|date}}\r\n                                            </td>\r\n                                            <td>{{item.deliveredDate==null ?\"Not delivered yet\":item.deliveredDate|date}}\r\n                                            </td>\r\n                                            <td>\r\n                                                {{item.status}}\r\n\r\n                                            </td>\r\n                                            <td>\r\n                                                <div class=\"action\">\r\n                                                    <ul>\r\n                                                        <li class=\"show\" (click)=\"goToviewOrder(item._id)\"><i\r\n                                                                class=\"fa fa-eye\"></i></li>\r\n                                                       <li class=\"edit\" (click)=\"goToeditOrder()\"><i\r\n                                                                class=\"fa fa-pencil fa-fw\"></i></li> \r\n                                                        < <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li> \r\n                                                    </ul>\r\n                                                </div>\r\n                                            </td>\r\n                                        </tr>\r\n                                    </table> -->\r\n                                    <table>\r\n                                        <tr>\r\n                                            <th>Order Id</th>\r\n                                            <th>Customer Name</th>\r\n                                            <th>Order Items</th>\r\n                                            <th>Customer Contact</th>\r\n                                            <th>Booking Status</th>\r\n                                            <th>Booking Address</th>\r\n                                            <th>Booking Notes</th>\r\n                                            <th>Expected Time</th>\r\n                                            <th class=\"action_bx\">Action</th>\r\n                                        </tr>\r\n                                        <tr>\r\n                                            <td>1</td>\r\n                                            <td>John</td>\r\n                                            <td>shake</td>\r\n                                            <td>1234567</td>\r\n                                            <td class=\"Booking_status\">\r\n                                                <select>\r\n                                                    <option value=\"\">ConFirm</option>\r\n                                                    <option value=\"\">Cancel</option>\r\n                                                    <option value=\"\">Ready To Pickup</option>\r\n                                                    <option value=\"\">Completed</option>\r\n                                                </select>\r\n                                            </td>\r\n                                            <td>Phase-5, mohali, punjab, India-160059</td>\r\n                                            <td>\r\n                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.\r\n                                            </td>\r\n                                            <td class=\"Booking_status\">\r\n                                                <select>\r\n                                                    <option value=\"\">5 Days</option>\r\n                                                    <option value=\"\">1 Day</option>\r\n                                                    <option value=\"\">2 Days</option>\r\n                                                    <option value=\"\">3 Days</option>\r\n                                                </select>\r\n                                            </td>\r\n\r\n                                            <td>\r\n                                                <div class=\"action\">\r\n                                                    <ul>\r\n                                                        <li class=\"show\" (click)=\" goToviewOrder()\"><i\r\n                                                                class=\"fa fa-eye\"></i></li>\r\n                                                        <li class=\"edit\" (click)=\"goToeditOrder()\"><i\r\n                                                                class=\"fa fa-pencil fa-fw\"></i></li>\r\n                                                        <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li>\r\n                                                    </ul>\r\n                                                </div>\r\n                                            </td>\r\n                                        </tr>\r\n                                        <tr>\r\n                                            <td>1</td>\r\n                                            <td>John</td>\r\n                                            <td>shake</td>\r\n                                            <td>1234567</td>\r\n                                            <td class=\"Booking_status\">\r\n                                                <select>\r\n                                                    <option value=\"\">ConFirm</option>\r\n                                                    <option value=\"\">Cancel</option>\r\n                                                    <option value=\"\">Ready To Pickup</option>\r\n                                                    <option value=\"\">Completed</option>\r\n                                                </select>\r\n                                            </td>\r\n                                            <td>Phase-5, mohali, punjab, India-160059</td>\r\n                                            <td>\r\n                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.\r\n                                            </td>\r\n                                            <td class=\"Booking_status\">\r\n                                                <select>\r\n                                                    <option value=\"\">5 Days</option>\r\n                                                    <option value=\"\">1 Day</option>\r\n                                                    <option value=\"\">2 Days</option>\r\n                                                    <option value=\"\">3 Days</option>\r\n                                                </select>\r\n                                            </td>\r\n\r\n                                            <td>\r\n                                                <div class=\"action\">\r\n                                                    <ul>\r\n                                                        <li class=\"show\" (click)=\" goToviewOrder()\"><i\r\n                                                                class=\"fa fa-eye\"></i></li>\r\n                                                        <li class=\"edit\" (click)=\"goToeditOrder()\"><i\r\n                                                                class=\"fa fa-pencil fa-fw\"></i></li>\r\n                                                        <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li>\r\n                                                    </ul>\r\n                                                </div>\r\n                                            </td>\r\n                                        </tr>\r\n                                        <tr>\r\n                                            <td>1</td>\r\n                                            <td>John</td>\r\n                                            <td>shake</td>\r\n                                            <td>1234567</td>\r\n                                            <td class=\"Booking_status\">\r\n                                                <select>\r\n                                                    <option value=\"\">ConFirm</option>\r\n                                                    <option value=\"\">Cancel</option>\r\n                                                    <option value=\"\">Ready To Pickup</option>\r\n                                                    <option value=\"\">Completed</option>\r\n                                                </select>\r\n                                            </td>\r\n                                            <td>Phase-5, mohali, punjab, India-160059</td>\r\n                                            <td>\r\n                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.\r\n                                            </td>\r\n                                            <td class=\"Booking_status\">\r\n                                                <select>\r\n                                                    <option value=\"\">5 Days</option>\r\n                                                    <option value=\"\">1 Day</option>\r\n                                                    <option value=\"\">2 Days</option>\r\n                                                    <option value=\"\">3 Days</option>\r\n                                                </select>\r\n                                            </td>\r\n\r\n                                            <td>\r\n                                                <div class=\"action\">\r\n                                                    <ul>\r\n                                                        <li class=\"show\" (click)=\" goToviewOrder()\"><i\r\n                                                                class=\"fa fa-eye\"></i></li>\r\n                                                        <li class=\"edit\" (click)=\"goToeditOrder()\"><i\r\n                                                                class=\"fa fa-pencil fa-fw\"></i></li>\r\n                                                        <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li>\r\n                                                    </ul>\r\n                                                </div>\r\n                                            </td>\r\n                                        </tr>\r\n                                        <tr>\r\n                                            <td>1</td>\r\n                                            <td>John</td>\r\n                                            <td>shake</td>\r\n                                            <td>1234567</td>\r\n                                            <td class=\"Booking_status\">\r\n                                                <select>\r\n                                                    <option value=\"\">ConFirm</option>\r\n                                                    <option value=\"\">Cancel</option>\r\n                                                    <option value=\"\">Ready To Pickup</option>\r\n                                                    <option value=\"\">Completed</option>\r\n                                                </select>\r\n                                            </td>\r\n                                            <td>Phase-5, mohali, punjab, India-160059</td>\r\n                                            <td>\r\n                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.\r\n                                            </td>\r\n                                            <td class=\"Booking_status\">\r\n                                                <select>\r\n                                                    <option value=\"\">5 Days</option>\r\n                                                    <option value=\"\">1 Day</option>\r\n                                                    <option value=\"\">2 Days</option>\r\n                                                    <option value=\"\">3 Days</option>\r\n                                                </select>\r\n                                            </td>\r\n\r\n                                            <td>\r\n                                                <div class=\"action\">\r\n                                                    <ul>\r\n                                                        <li class=\"show\" (click)=\" goToviewOrder()\"><i\r\n                                                                class=\"fa fa-eye\"></i></li>\r\n                                                        <li class=\"edit\" (click)=\"goToeditOrder()\"><i\r\n                                                                class=\"fa fa-pencil fa-fw\"></i></li>\r\n                                                        <li class=\"delete\"><i class=\"fa fa-trash-o fa-fw\"></i></li>\r\n                                                    </ul>\r\n                                                </div>\r\n                                            </td>\r\n                                        </tr>\r\n                                    </table>\r\n                                </div>\r\n                            </div>\r\n                            <!-----start pagination-->\r\n                            <mat-paginator [length]=\"length\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"[5, 10, 25, 100]\"\r\n                                (page)=\"pageEvent = productListAfterPageSizeChanged($event)\">\r\n                            </mat-paginator>\r\n                            <!-----end pagination-->\r\n                        </div>\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Booking Request Management</h1>\r\n                    <div class=\"top_subheading_add\">\r\n                        <button class=\"btn_back\" matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\"\r\n                            mat-button>Download CSV</button>\r\n                    </div>\r\n                    <!-- <div class=\"top_subheading_add\">\r\n                        <a (click)=\"goToaddsale()\"><span>+</span>Add Sale</a>\r\n                    </div> -->\r\n                </div>\r\n                <div class=\"tab-content\">\r\n                    <div id=\"allOrders\" class=\"tab-pane fade in active\">\r\n                        <div class=\"inner_content\">\r\n                            <div class=\"outer_table\">\r\n                                <div class=\"search_fields\">\r\n                                    <div class=\"\">\r\n\r\n                                        <mat-form-field class=\"example-full-width\">\r\n                                            <mat-label>Filter<span class=\"red\">*</span></mat-label>\r\n\r\n                                            <mat-select placeholder=\"Filter\" [(ngModel)]=\"filterBy\"\r\n                                                (selectionChange)=\"filterSelected($event)\">\r\n                                                <mat-option *ngIf=\"flag==true\" value=\"\">\r\n                                                    Remove Filter\r\n                                                </mat-option>\r\n                                                <!--  <mat-option *ngIf=\"flag==false\" value=\"\">\r\n\r\n                                    </mat-option> -->\r\n                                                <mat-option value=\"active\">\r\n                                                    Active\r\n                                                </mat-option>\r\n                                                <mat-option value=\"inactive\">\r\n                                                    Inactive\r\n                                                </mat-option>\r\n\r\n                                            </mat-select>\r\n                                        </mat-form-field>\r\n                                    </div>\r\n                                    <div class=\"search_inner_fiels\">\r\n                                        <div class=\"\">\r\n\r\n                                            <div class=\"search_with_icons\">\r\n                                                <mat-form-field class=\"example-full-width\">\r\n                                                    <mat-label>Search</mat-label>\r\n                                                    <input matInput type=\"text\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                                </mat-form-field>\r\n                                                <button mat-button matSuffix mat-icon-button> <i\r\n                                                        *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                                        (click)=\"searchMethod()\"></i>\r\n                                                    <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                                        (click)=\"clearSearch()\"></i>\r\n                                                </button>\r\n                                            </div>\r\n                                        </div>\r\n\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"table-responsive\">\r\n                                    <table>\r\n                                        <tr>\r\n                                            <th>Order Id</th>\r\n                                            <th>Customer Name</th>\r\n                                            <th>Customer Email</th>\r\n                                            <!-- <th>Customer Contact</th> -->\r\n                                            <th>Total Price</th>\r\n\r\n                                            <th>Order Items</th>\r\n\r\n                                            <th>Booking Status</th>\r\n                                            <th>Booking Address</th>\r\n                                            <th>Booking Notes</th>\r\n                                            <th>Expected Time</th>\r\n                                            <th class=\"action_bx\">Assign Vendor</th>\r\n                                        </tr>\r\n                                        <tr *ngFor=\"let item of salesList; let i=index\">\r\n                                            <td>{{item._id}}</td>\r\n                                            <td>{{item.orderDetails[0].name}}</td>\r\n                                            <td>{{item.orderDetails[0].email}}</td>\r\n                                            <td>{{item.orderDetails[0].totalAmount| number}}</td>\r\n                                            <td>\r\n                                                <ul>\r\n                                                    <li class=\"show\" *ngFor=\"let orderProduct of item.orderDetails\">\r\n                                                        {{orderProduct.product.name}}<br>\r\n                                                    </li>\r\n\r\n                                                </ul>\r\n                                            </td>\r\n                                            <td class=\"Booking_status\">\r\n                                                <select [(ngModel)]=\"item.orderDetails[0].isapproval\"\r\n                                                    (change)=\"approveReject($event.target.value,item._id)\">\r\n\r\n                                                    <option value=\"\"></option>\r\n                                                    <option value=\"true\">ConFirm</option>\r\n                                                    <option value=\"false\">Cancel</option>\r\n\r\n                                                </select>\r\n                                            </td>\r\n                                            <td> {{item.orderDetails[0].deliveryAddress.address }}\r\n                                                {{item.orderDetails[0].deliveryAddress.streetName}}\r\n                                                {{item.orderDetails[0].deliveryAddress.postalCode}}</td>\r\n                                            <td>\r\n                                                {{item.orderDetails[0].deliveryAddress.noteToDriver }}\r\n                                            </td>\r\n\r\n                                            <td>{{item.orderDetails[0].startTIME | date}}-{{item.orderDetails[0].endTime | date}}\r\n                                            </td>\r\n\r\n\r\n                                            <td class=\"Booking_status\">\r\n                                                <select [(ngModel)]=\"item.orderDetails[0].vendorId\"\r\n                                                    (change)=\"AssignVendor($event.target.value,item._id)\">\r\n                                                    <option value=\"\"></option>\r\n                                                    <option [value]=\"item.id\" *ngFor=\"let item of vendorList\">\r\n                                                        {{item.name}} </option>\r\n\r\n                                                </select>\r\n                                            </td>\r\n\r\n\r\n\r\n\r\n                                        </tr>\r\n\r\n\r\n\r\n\r\n                                    </table>\r\n\r\n                                </div>\r\n                            </div>\r\n                            <!-----start pagination-->\r\n                            <mat-paginator [length]=\"length\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"[5, 10, 25, 100]\"\r\n                                (page)=\"pageEvent = productListAfterPageSizeChanged($event)\">\r\n                            </mat-paginator>\r\n                            <!-----end pagination-->\r\n                        </div>\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
 
 /***/ }),
 
@@ -1828,12 +1828,10 @@ let AboutComponent = class AboutComponent {
     getAllCms() {
         let allCms = [];
         this.apiService.getAllCMs().subscribe(res => {
-            console.log(res);
             if (res.success == true) {
                 allCms = res.data;
                 this.termsAndCondition = allCms.find(ele => ele.slugName == this.slugName);
                 this.mycontent = this.termsAndCondition.description;
-                console.log(this.termsAndCondition);
             }
         });
     }
@@ -1848,18 +1846,15 @@ let AboutComponent = class AboutComponent {
     updateTermAndCondition() {
         this.termsAndCondition.description = this.mycontent;
         this.apiService.updateCMS(this.termsAndCondition).subscribe(res => {
-            console.log(res);
             if (res.success == true) {
                 this.commonService.successToast("Updated Successfully");
             }
         });
     }
     onChange($event) {
-        console.log("onChange");
         //this.log += new Date() + "<br />";
     }
     onPaste($event) {
-        console.log("onPaste");
         //this.log += new Date() + "<br />";
     }
 };
@@ -1985,7 +1980,6 @@ let AddGeofenceComponent = class AddGeofenceComponent {
     setCurrentLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
-                // console.log("name", position);
                 this.lat = position.coords.latitude;
                 this.lng = position.coords.longitude;
                 this.zoom = 11;
@@ -2018,7 +2012,6 @@ let AddGeofenceComponent = class AddGeofenceComponent {
         google.maps.event.addListener(this.drawingManager, 'overlaycomplete', (event) => {
             if (event.type === google.maps.drawing.OverlayType.POLYGON) { //this is the coordinate, you can assign it to a variable or pass into another function. 
                 this.polyarray = event.overlay.getPath().getArray();
-                console.log(this.polyarray);
             }
         });
     }
@@ -2034,7 +2027,6 @@ let AddGeofenceComponent = class AddGeofenceComponent {
             this.apiService.createGeoFencing(geofenceData).subscribe((res) => {
                 if (res.success) {
                     this.progress = false;
-                    console.log(res);
                     this.commonService.successToast(res.message);
                     this.router.navigate(['geofence']);
                 }
@@ -2124,8 +2116,6 @@ let AddPromoCodeManagementComponent = class AddPromoCodeManagementComponent {
         this.title = 'Add';
         this.buttonText = 'Save';
         this.sub = this.activatedRouter.queryParams.subscribe(res => {
-            console.log(res);
-            debugger;
             if (res.id) {
                 this.title = 'Edit';
                 this.getSinglePromoCode(res.id);
@@ -2151,9 +2141,7 @@ let AddPromoCodeManagementComponent = class AddPromoCodeManagementComponent {
         });
     }
     getSinglePromoCode(id) {
-        console.log(id);
         this.apiService.getPromoCode(id).subscribe(res => {
-            console.log(res);
             this.addPromoCodeForm.get('code').setValue(res.data.code);
             this.addPromoCodeForm.get('expiry').setValue(res.data.expiry);
             this.addPromoCodeForm.get('description').setValue(res.data.description);
@@ -2166,14 +2154,12 @@ let AddPromoCodeManagementComponent = class AddPromoCodeManagementComponent {
         });
     }
     onSubmit() {
-        console.log(this.addPromoCodeForm.value);
         if (this.addPromoCodeForm.valid) {
             let body = this.addPromoCodeForm.value;
             // code:this.addPromoCodeForm.get('').value,
             this.progress = true;
             if (this.id) {
                 this.apiService.updatePromoCode(body, this.id).subscribe(res => {
-                    console.log(res);
                     if (res.success) {
                         this.progress = false;
                         this.commonService.successToast(res.message);
@@ -2187,7 +2173,6 @@ let AddPromoCodeManagementComponent = class AddPromoCodeManagementComponent {
             }
             else {
                 this.apiService.addPromoCode(body).subscribe(res => {
-                    console.log(res);
                     if (res.success) {
                         this.progress = false;
                         this.commonService.successToast(res.message);
@@ -2280,7 +2265,6 @@ let AddVenderComponent = class AddVenderComponent {
         this.selectedCategoryId = [];
         this.readCountryCode();
         this.userDetails = JSON.parse(sessionStorage.getItem('Markat_User'));
-        console.log("USer", this.userDetails);
     }
     // getCategoryList() {
     //   let temp = []
@@ -2289,7 +2273,7 @@ let AddVenderComponent = class AddVenderComponent {
     //   let count = 200;
     //   this.apiService.getAllCategories().subscribe(res => {
     //     if (res.success) {
-    //       console.log(res)
+    //     
     //       if (res.data) {
     //         for (let i = 0; i < res.data.length; i++) {
     //           let body = {
@@ -2306,7 +2290,6 @@ let AddVenderComponent = class AddVenderComponent {
     // }
     readCountryCode() {
         this.apiService.getCountryCode().subscribe(res => {
-            console.log(res);
             this.countryList = res;
         });
     }
@@ -2327,7 +2310,6 @@ let AddVenderComponent = class AddVenderComponent {
     }
     AddressChange(address) {
         //setting address from API to local variable 
-        console.log(address);
         this.lat = address.geometry.location.lat();
         this.lng = address.geometry.location.lng();
         this.formattedaddress = address.formatted_address;
@@ -2348,20 +2330,13 @@ let AddVenderComponent = class AddVenderComponent {
         }
     }
     deletePhoto(id) {
-        console.log(id);
         let temp = [];
         let tempDoc = [];
-        console.log("beforeDelete", this.urls);
-        console.log("beforeDelete", this.document);
         temp = this.urls.splice(id, 1);
         tempDoc = this.document.splice(id, 1);
-        console.log("Deleted", temp);
-        console.log("Deleted", tempDoc);
     }
     onProfileSetUp() {
         this.submitted = true;
-        console.log("Form", this.setUpProfile.value);
-        console.log("image", this.profileImage);
         if (this.setUpProfile.valid && this.imageFile) {
             let temp;
             let formData = new FormData;
@@ -2374,12 +2349,8 @@ let AddVenderComponent = class AddVenderComponent {
             formData.append('last4Digits', this.setUpProfile.get('last4Digits').value);
             formData.append('countryCode', this.setUpProfile.get('countryCode').value);
             formData.append('gender', this.setUpProfile.get('gender').value);
-            formData.forEach((value, key) => {
-                console.log(key + " " + value);
-            });
             this.progress = true;
             this.apiService.addVendorCelebrity(formData).subscribe(res => {
-                console.log(res);
                 if (res.success) {
                     this.commonService.successToast(res.message);
                     this.progress = false;
@@ -2585,7 +2556,6 @@ let AddinventoryComponent = class AddinventoryComponent {
     }
     getProduct(id) {
         this.apiService.viewProduct(id).subscribe(res => {
-            console.log(res);
             if (res.success) {
                 this.updateInventoryForm.get('productId').setValue(res.data.productId);
                 this.updateInventoryForm.get('productName').setValue(res.data.name);
@@ -2741,7 +2711,6 @@ let AddoffersComponent = class AddoffersComponent {
                 this.addDiscountForm.get('product').enable();
                 this.addDiscountForm.get('vendor').disable();
                 this.addDiscountForm.get('geofence').disable();
-                console.log("product");
                 break;
         }
     }
@@ -2785,11 +2754,8 @@ let AddoffersComponent = class AddoffersComponent {
         let minute = startTime.minute();
         let nextMinute = minute + 1;
         this.limitTime = hours + ':' + nextMinute;
-        console.log(this.limitTime);
-        console.log(hours);
     }
     vendorSearch(value) {
-        console.log(value);
         if (value.length > 0) {
             this.vendorList = this.vendorList.filter((unit) => unit.name.indexOf(value) > -1);
         }
@@ -2799,7 +2765,6 @@ let AddoffersComponent = class AddoffersComponent {
     }
     geofenceSearch(value) {
         this.defaultGeofenceData = this.geofenceList;
-        console.log(value);
         if (value.length > 0) {
             this.geofenceList = this.geofenceList.filter((unit) => unit.name.indexOf(value) > -1);
         }
@@ -2809,7 +2774,6 @@ let AddoffersComponent = class AddoffersComponent {
     }
     productSearch(value) {
         this.defaultProductList = this.productList;
-        console.log(value);
         if (value.length > 0) {
             this.productList = this.productList.filter((unit) => unit.name.indexOf(value) > -1);
         }
@@ -2879,7 +2843,6 @@ let AddoffersComponent = class AddoffersComponent {
     getAssignmentdata() {
         this.progress = true;
         this.apiService.getAssignementData().subscribe(res => {
-            console.log(res);
             this.progress = false;
             if (res.success) {
                 res.data.vendor.forEach(element => {
@@ -2907,7 +2870,6 @@ let AddoffersComponent = class AddoffersComponent {
         this.categoryList = [];
         this.apiService.getAllCategories().subscribe(res => {
             if (res.success) {
-                console.log(res);
                 if (res.data) {
                     for (let i = 0; i < res.data.length; i++) {
                         let body = {
@@ -2925,7 +2887,6 @@ let AddoffersComponent = class AddoffersComponent {
         this.categoryList = [];
         this.apiService.getAllCategoriesForPanel().subscribe(res => {
             if (res.success) {
-                console.log("categoryList", res);
                 if (res.data) {
                     for (let i = 0; i < res.data.length; i++) {
                         let body = {
@@ -2941,7 +2902,6 @@ let AddoffersComponent = class AddoffersComponent {
         this.categoryList = temp;
     }
     categorySelected(id) {
-        console.log("category :", id);
         this.selectedCategory = id;
         this.getAllProduct();
     }
@@ -2951,7 +2911,6 @@ let AddoffersComponent = class AddoffersComponent {
         if (this.selectedCategory) {
             this.apiService.getProductsforBanner(this.selectedCategory).subscribe(res => {
                 if (res.success) {
-                    console.log("ProductList", res);
                     if (res.data) {
                         this.productList = res.data;
                         this.defaultProductList = this.productList;
@@ -2964,16 +2923,13 @@ let AddoffersComponent = class AddoffersComponent {
         }
     }
     productSelected(id) {
-        console.log("product:", id);
         this.selectedProduct = id;
     }
     typeSelected(e) {
-        console.log(e);
         this.addDiscountForm.get('bannerImage').enable();
     }
     checkBanner() {
         this.submitted = true;
-        console.log(this.addDiscountForm);
         let checkOffer = this.addDiscountForm.controls['dicountOn'].value;
         // if (checkOffer == "category") {
         //   if (this.submitted && this.addDiscountForm.valid) {
@@ -3027,7 +2983,6 @@ let AddoffersComponent = class AddoffersComponent {
         let endDate = moment__WEBPACK_IMPORTED_MODULE_6__(this.addDiscountForm.controls['endDate'].value).toLocaleString();
         let startTime = moment__WEBPACK_IMPORTED_MODULE_6__(this.addDiscountForm.get('startTime').value, 'HH:mm').format('HHmm');
         let endTime = moment__WEBPACK_IMPORTED_MODULE_6__(this.addDiscountForm.get('endTime').value, 'HH:mm').format('HHmm');
-        console.log(startDate, endDate, startTime, endTime);
         let offer = {
             'list': [""], 'type': 'ad'
         };
@@ -3092,12 +3047,8 @@ let AddoffersComponent = class AddoffersComponent {
         this.tempArray = [];
         this.tempArray.push(body);
         //  console.log(body)
-        body.forEach((value, key) => {
-            console.log(key + " " + value);
-        });
         this.progress = true;
         this.apiService.addBanner(body).subscribe(res => {
-            console.log(res);
             if (res.success) {
                 this.progress = false;
                 this.router.navigateByUrl('offerdeals');
@@ -3256,7 +3207,6 @@ let AddproductComponent = class AddproductComponent {
         this.teaTypeList = [];
         this.sugarLevelList = [];
         this.user = JSON.parse(sessionStorage.getItem('Markat_User'));
-        console.log(this.user);
         this.getAllCategory();
         this.getRawItemList();
         this.getSizeList();
@@ -3298,7 +3248,6 @@ let AddproductComponent = class AddproductComponent {
     }
     getTax() {
         this.apiService.getTax().subscribe(res => {
-            console.log(res);
             if (res.success) {
                 this.tax = res.data[0].tax;
                 this.taxId = res.data[0]._id;
@@ -3325,7 +3274,6 @@ let AddproductComponent = class AddproductComponent {
     loadSize() {
         let controls = [];
         let controlsList = this.sizePrice().value;
-        console.log(controlsList);
         for (let y in controlsList) {
             controls.push(new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroup"]({
                 id: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](controlsList[y].id),
@@ -3348,7 +3296,6 @@ let AddproductComponent = class AddproductComponent {
     }
     removeSize(i) {
         this.sizePrice().removeAt(i);
-        console.log(this.sizePrice().value);
     }
     addAlias() {
         this.aliases.push(this.fb.control(''));
@@ -3356,9 +3303,6 @@ let AddproductComponent = class AddproductComponent {
     addNewSpecification() {
         this.specification().push(this.newSpecifiaction());
     }
-    // addNewSearchKeywrods() {
-    //   this.seacrhKeywords().push(this.newSearchKeywords())
-    // }
     removeSpecification(i) {
         this.specification().removeAt(i);
     }
@@ -3369,8 +3313,6 @@ let AddproductComponent = class AddproductComponent {
         this.categoryList = [];
         this.apiService.getCategoryList().subscribe(res => {
             if (res.success) {
-                console.log(res);
-                console.log(res);
                 if (res.data) {
                     this.categoryList = res.data;
                 }
@@ -3385,10 +3327,8 @@ let AddproductComponent = class AddproductComponent {
         //Pagination is applied in the backend. just not using in the front end because of design same as category
         // this.progress = true
         this.apiService.getRawItemList(1, 10000000, '').subscribe(res => {
-            console.log(res);
             if (res.success) {
                 this.progress = false;
-                console.log(res.data);
                 this.brandList = res.data;
             }
             else {
@@ -3399,7 +3339,6 @@ let AddproductComponent = class AddproductComponent {
     }
     getSizeList() {
         this.apiService.getSizeList().subscribe(res => {
-            console.log(res);
             res.data.forEach(element => {
                 this.sizeList.push({
                     id: element._id,
@@ -3411,7 +3350,6 @@ let AddproductComponent = class AddproductComponent {
     }
     getTeaList() {
         this.apiService.getTeaList().subscribe(res => {
-            console.log(res);
             res.data.forEach(element => {
                 this.teaTypeList.push({
                     id: element._id,
@@ -3423,7 +3361,6 @@ let AddproductComponent = class AddproductComponent {
     }
     getSugarLevelList() {
         this.apiService.getSugarLevelList().subscribe(res => {
-            console.log(res);
             res.data.forEach(element => {
                 this.sugarLevelList.push({
                     id: element._id,
@@ -3448,12 +3385,9 @@ let AddproductComponent = class AddproductComponent {
         }
     }
     subCategorySelected(id) {
-        console.log(id);
         this.selectedSubcategory = id;
     }
     onSubmit() {
-        debugger;
-        console.log("check", this.addProductForm);
         this.submitted = true;
         if (this.submitted && this.addProductForm.valid && (this.images.length > 0)) {
             const body = new FormData();
@@ -3476,15 +3410,11 @@ let AddproductComponent = class AddproductComponent {
             body.append('highlights', this.addProductForm.controls['highlights'].value);
             body.append('highlights_ar', this.addProductForm.controls['highlights_ar'].value);
             body.append('discount', this.addProductForm.controls['discount'].value);
-            body.forEach((value, key) => {
-                console.log(key + " " + value);
-            });
             this.progress = true;
             this.apiService.AddProduct(body).subscribe((res) => {
                 if (res.success) {
                     this.commonService.successToast("Product Successfully added");
                     this.router.navigate(['/product']);
-                    console.log(res);
                     this.progress = false;
                 }
                 else {
@@ -3508,13 +3438,11 @@ let AddproductComponent = class AddproductComponent {
                 if (this.images.length <= 4) {
                     let name = event.target.files[i].name;
                     tempfile = event.target.files[i];
-                    console.log("check image", event.target.files[i].size);
                     var reader = new FileReader();
                     let toasterService = this.commonService;
                     reader.readAsDataURL(event.target.files[i]);
                     reader.onload = (event) => {
                         img.src = event.target.result;
-                        console.log(event.target.result);
                         let temp = {
                             name: name,
                             image: event.target.result
@@ -4844,7 +4772,6 @@ let AssignmentManagementComponent = class AssignmentManagementComponent {
         this.defaultRawItemList = this.rawItemList;
     }
     ngOnInit() {
-        console.log(this.date);
         this.getAssignmentdata();
         this.assignmentForm = this.fb.group({
             selectedDate: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
@@ -4862,12 +4789,10 @@ let AssignmentManagementComponent = class AssignmentManagementComponent {
         else {
             this.flag = false;
         }
-        console.log(e.value);
         this.isCompleted = e.value;
         this.getAssignmentList();
     }
     vendorSearch(value) {
-        console.log(value);
         if (value.length > 0) {
             this.vendorList = this.vendorList.filter((unit) => unit.name.indexOf(value) > -1);
         }
@@ -4876,7 +4801,6 @@ let AssignmentManagementComponent = class AssignmentManagementComponent {
         }
     }
     foodTruckSearch(value) {
-        console.log(value);
         if (value.length > 0) {
             this.truckList = this.truckList.filter((unit) => unit.name.indexOf(value) > -1);
         }
@@ -4885,7 +4809,6 @@ let AssignmentManagementComponent = class AssignmentManagementComponent {
         }
     }
     geofenceSearch(value) {
-        console.log(value);
         if (value.length > 0) {
             this.geofenceList = this.geofenceList.filter((unit) => unit.name.indexOf(value) > -1);
         }
@@ -4894,7 +4817,6 @@ let AssignmentManagementComponent = class AssignmentManagementComponent {
         }
     }
     equipmentSearch(value) {
-        console.log(value);
         if (value.length > 0) {
             this.equipmentList = this.equipmentList.filter((unit) => unit.name.indexOf(value) > -1);
         }
@@ -4903,7 +4825,6 @@ let AssignmentManagementComponent = class AssignmentManagementComponent {
         }
     }
     rawItemSearch(value) {
-        console.log(value);
         if (value.length > 0) {
             this.rawItemList = this.rawItemList.filter((unit) => unit.name.indexOf(value) > -1);
         }
@@ -4914,19 +4835,16 @@ let AssignmentManagementComponent = class AssignmentManagementComponent {
     getEquipment(equipment) {
         this.equipmentListForModel = '';
         this.equipmentListForModel = equipment;
-        console.log("modal list", this.equipmentListForModel);
         document.getElementById('equipmentButton').click();
     }
     getRawItems(rawItemList) {
         this.rawItemListForModel = '';
         this.rawItemListForModel = rawItemList;
-        console.log("modal list", this.rawItemListForModel);
         document.getElementById('rawItemButton').click();
     }
     getAssignmentdata() {
         this.progress = true;
         this.apiService.getAssignementData().subscribe(res => {
-            console.log(res);
             this.progress = false;
             if (res.success) {
                 res.data.vendor.forEach(element => {
@@ -4974,7 +4892,6 @@ let AssignmentManagementComponent = class AssignmentManagementComponent {
     }
     getAssignmentList() {
         this.apiService.getAssignmentList(this.isCompleted, status).subscribe(res => {
-            console.log(res);
             if (res.success) {
                 this.getAssignmentListData = res.data;
             }
@@ -4984,7 +4901,6 @@ let AssignmentManagementComponent = class AssignmentManagementComponent {
         });
     }
     openDialog() {
-        console.log(this.assignmentForm.value);
         const dialogRef = this.dialog.open(_modal_modal_ingredients_modal_ingredients_component__WEBPACK_IMPORTED_MODULE_7__["ModalIngredientsComponent"], {
             data: { data: this.assignmentForm.value },
         });
@@ -4993,18 +4909,14 @@ let AssignmentManagementComponent = class AssignmentManagementComponent {
             this.backDropClick = true;
         });
         dialogRef.afterClosed().subscribe(result => {
-            console.log(`Dialog result: ${result}`);
             let tmp = result;
-            console.log(tmp);
             if (!this.backDropClick) {
                 this.addAssignment(tmp);
             }
         });
     }
     addAssignment(temp) {
-        console.log("data before request", temp);
         this.apiService.addAssignment(temp).subscribe(res => {
-            console.log(res);
             if (res.success) {
                 this.getAssignmentList();
                 this.commonService.successToast(res.message);
@@ -5028,13 +4940,11 @@ let AssignmentManagementComponent = class AssignmentManagementComponent {
         }).then(result => {
             if (result.value) {
                 // this.result = result;
-                console.log(id);
                 const data = {
                     "id": id,
                     "model": "Assignment"
                 };
                 this.apiService.delete(data).subscribe(res => {
-                    console.log(res);
                     if (res.success) {
                         this.getAssignmentList();
                         this.commonService.successToast(res.message);
@@ -5045,7 +4955,6 @@ let AssignmentManagementComponent = class AssignmentManagementComponent {
                 });
             }
             else {
-                console.log("cancelled");
             }
         });
     }
@@ -5132,7 +5041,6 @@ let BookingRequestHistoryComponent = class BookingRequestHistoryComponent {
                     this.flagData = false;
                     this.orderHistoryList = res.data;
                     this.length = this.orderHistoryList.length;
-                    console.log(res.data);
                 }
                 else {
                     this.flagData = true;
@@ -5147,7 +5055,6 @@ let BookingRequestHistoryComponent = class BookingRequestHistoryComponent {
         else {
             this.flag = false;
         }
-        console.log(e.target.value);
         this.filter = e.target.value;
         this.apiService.viewPurchaseHistory(this.page, this.pageSize, this.id, this.filter, this.search).subscribe((res) => {
             if (res.status) {
@@ -5155,7 +5062,6 @@ let BookingRequestHistoryComponent = class BookingRequestHistoryComponent {
                     this.flagData = false;
                     this.orderHistoryList = res.data;
                     this.length = this.orderHistoryList.length;
-                    console.log(res.data);
                 }
                 else {
                     this.flagData = true;
@@ -5164,7 +5070,6 @@ let BookingRequestHistoryComponent = class BookingRequestHistoryComponent {
         });
     }
     orderHistoryListAfterPageSizeChanged(e) {
-        console.log(e);
         if (e.pageIndex == 0) {
             this.page = 1;
             // this.page = e.pageIndex;
@@ -5189,7 +5094,6 @@ let BookingRequestHistoryComponent = class BookingRequestHistoryComponent {
                     this.flagData = false;
                     this.orderHistoryList = res.data;
                     this.length = this.orderHistoryList.length;
-                    console.log(res.data);
                 }
                 else {
                     this.flagData = true;
@@ -5205,7 +5109,6 @@ let BookingRequestHistoryComponent = class BookingRequestHistoryComponent {
                     this.flagData = false;
                     this.orderHistoryList = res.data;
                     this.length = this.orderHistoryList.length;
-                    console.log(res.data);
                 }
                 else {
                     this.flagData = true;
@@ -5222,7 +5125,6 @@ let BookingRequestHistoryComponent = class BookingRequestHistoryComponent {
                     this.flagData = false;
                     this.orderHistoryList = res.data;
                     this.length = this.orderHistoryList.length;
-                    console.log(res.data);
                 }
                 else {
                     this.flagData = true;
@@ -5358,7 +5260,6 @@ let BrandlistComponent = class BrandlistComponent {
     }
     searchMethod() {
         this.flagSearch = false;
-        console.log(this.search);
         this.getBrandList();
     }
     clearSearch() {
@@ -5370,10 +5271,8 @@ let BrandlistComponent = class BrandlistComponent {
         //Pagination is applied in the backend. just not using in the front end because of design same as category
         this.progress = true;
         this.apiService.getRawItemList(this.page, this.pageSize, this.search).subscribe(res => {
-            console.log(res);
             if (res.success) {
                 this.progress = false;
-                console.log(res.data);
                 this.brandList = res.data;
                 this.length = res.total;
             }
@@ -5384,7 +5283,6 @@ let BrandlistComponent = class BrandlistComponent {
         });
     }
     rawListAfterPageSizeChanged(e) {
-        console.log(e);
         this.pageSize = e.pageSize;
         if (e.pageIndex == 0) {
             this.page = 1;
@@ -5430,21 +5328,16 @@ let BrandlistComponent = class BrandlistComponent {
     }
     getCategoryList() {
         this.apiService.getAllCategories().subscribe(res => {
-            console.log(res);
             if (res.success == true) {
-                console.log(res.data);
                 this.categoryList = res.data;
             }
         });
     }
     categorySelected(e) {
-        console.log(e.value);
         // let id = e
         this.apiService.getSubcategoryList(e).subscribe(res => {
-            console.log(res);
             if (res.success == true) {
                 this.editBrandForm.get('subCategory').reset();
-                console.log(res.data);
                 this.subcategoryList = res.data;
             }
         });
@@ -5463,13 +5356,11 @@ let BrandlistComponent = class BrandlistComponent {
                     for (let i = 0; i < filesAmount; i++) {
                         let name = event.target.files[i].name;
                         tempfile = event.target.files[i];
-                        console.log("check image", event.target.files[i].size);
                         var reader = new FileReader();
                         let toasterService = this.commonService;
                         reader.readAsDataURL(event.target.files[i]);
                         reader.onload = (event) => {
                             img.src = event.target.result;
-                            console.log(event.target.result);
                             let temp = {
                                 name: name,
                                 image: event.target.result
@@ -5528,11 +5419,8 @@ let BrandlistComponent = class BrandlistComponent {
             if (res.data) {
                 this.flagImage = false;
                 this.apiService.getSubcategoryList(res.data.category._id).subscribe(res1 => {
-                    console.log(res1);
                     if (res1.success == true) {
-                        console.log(res1.data);
                         this.subcategoryList = res1.data;
-                        console.log(res);
                         this.editableBrandId = res.data._id;
                         this.editBrandForm.controls['name'].setValue(res.data.name);
                         this.editBrandForm.controls['name_ar'].setValue(res.data.name_ar);
@@ -5556,7 +5444,6 @@ let BrandlistComponent = class BrandlistComponent {
                         //  this.image = data.image
                         this.brandImage = data.image;
                         //   this.imageName = data.image.name
-                        //  console.log(this.image);
                     }
                 });
             }
@@ -5576,14 +5463,11 @@ let BrandlistComponent = class BrandlistComponent {
         }).then(result => {
             if (result.value) {
                 this.result = result;
-                console.log(id);
                 const data = {
                     "id": id,
                     "model": "RawItems"
                 };
-                console.log(data);
                 this.apiService.delete(data).subscribe(res => {
-                    console.log(res);
                     if (res.success) {
                         // this.getAllCategories()
                         this.commonService.successToast(res.message);
@@ -5595,7 +5479,6 @@ let BrandlistComponent = class BrandlistComponent {
                 });
             }
             else {
-                console.log("cancelled");
             }
         });
     }
@@ -5603,7 +5486,6 @@ let BrandlistComponent = class BrandlistComponent {
         this.submitted = true;
         if (this.submitted && this.addBrandForm.valid && this.imageFile.length > 0) {
             let body = this.addBrandForm.value;
-            console.log(body);
             let formData = new FormData();
             formData.append('name', this.addBrandForm.get('name').value);
             formData.append('name_ar', this.addBrandForm.get('name_ar').value);
@@ -5621,12 +5503,10 @@ let BrandlistComponent = class BrandlistComponent {
                 formData.append('image', this.imageFile[i], this.imageFile[i].name);
             }
             formData.forEach((value, key) => {
-                console.log(key + " " + value);
             });
             //formData.append('image', new Blob([this.imageFile], { type: 'image/*' }), this.imageFile.name);
             this.progress = true;
             this.apiService.addBrand(formData).subscribe(res => {
-                console.log(res);
                 if (res.success == true) {
                     this.progress = false;
                     this.commonService.successToast('Successfully Added');
@@ -5677,7 +5557,6 @@ let BrandlistComponent = class BrandlistComponent {
             }
             this.progress = true;
             this.apiService.editBrand(formData).subscribe(res => {
-                console.log(res);
                 if (res.success == true) {
                     this.progress = false;
                     this.commonService.successToast('Successfully Edited');
@@ -5766,10 +5645,8 @@ let BroadcastComponent = class BroadcastComponent {
         });
     }
     sendNotification() {
-        console.log(this.broadcastForm.value);
         let body = this.broadcastForm.value;
         this.apiService.broadcastNotification(body).subscribe(res => {
-            console.log(res);
             if (res.success == true) {
                 this.commonService.successToast("Notification sent successfully");
             }
@@ -5878,7 +5755,6 @@ let CategoryComponent = class CategoryComponent {
             if (res.success) {
                 this.progress = false;
                 this.categories = res.data;
-                console.log(this.categories);
                 this.submitted = false;
             }
             else {
@@ -5973,9 +5849,7 @@ let CategoryComponent = class CategoryComponent {
     }
     onUpdateCategory() {
         this.submitted = true;
-        console.log(this.imageFile);
         if (this.submitted && this.editCategoryForm.valid) {
-            console.log(this.editCategoryForm.value);
             const data = new FormData();
             data.append('id', this.id);
             data.append('name', this.editCategoryForm.get('name').value);
@@ -5984,9 +5858,7 @@ let CategoryComponent = class CategoryComponent {
             if (this.picUploader == true) {
                 data.append('image', this.imageFile, this.imageFile.name);
             }
-            console.log(" form data");
             data.forEach((value, key) => {
-                console.log(key + " " + value);
             });
             this.progress = true;
             this.apiService.editCategory(data).subscribe(res => {
@@ -6041,7 +5913,6 @@ let CategoryComponent = class CategoryComponent {
         this.apiService.viewCategory(id).subscribe((res) => {
             if (res.data) {
                 this.flagImage = false;
-                console.log(res);
                 this.editCategoryForm.controls['name'].setValue(res.data.name);
                 this.editCategoryForm.controls['name_ar'].setValue(res.data.name_ar);
                 this.editCategoryForm.controls['commission'].patchValue(res.data.commission);
@@ -6049,10 +5920,8 @@ let CategoryComponent = class CategoryComponent {
                 this.image = data.image;
                 this.imageFile = data.image;
                 this.imageName = data.image.name;
-                console.log(this.image);
             }
         });
-        console.log(this.image);
     }
     editCategory(id) {
         this.id = id;
@@ -6071,13 +5940,11 @@ let CategoryComponent = class CategoryComponent {
         }).then(result => {
             if (result.value) {
                 this.result = result;
-                console.log(id);
                 const data = {
                     "id": id,
                     "model": "Category"
                 };
                 this.apiService.delete(data).subscribe(res => {
-                    console.log(res);
                     if (res.success) {
                         this.getAllCategories();
                         this.commonService.successToast(res.message);
@@ -6088,12 +5955,10 @@ let CategoryComponent = class CategoryComponent {
                 });
             }
             else {
-                console.log("cancelled");
             }
         });
     }
     cancelClicked() {
-        console.log("hi");
         this.addCategoryForm.reset();
     }
     deleteSubcategory(id) {
@@ -6110,14 +5975,11 @@ let CategoryComponent = class CategoryComponent {
         }).then(result => {
             if (result.value) {
                 this.result = result;
-                console.log(id);
                 const data = {
                     "id": id,
                     "model": "Category"
                 };
-                console.log(data);
                 this.apiService.delete(data).subscribe(res => {
-                    console.log(res);
                     if (res.success) {
                         this.getAllCategories();
                         this.commonService.successToast(res.message);
@@ -6128,14 +5990,12 @@ let CategoryComponent = class CategoryComponent {
                 });
             }
             else {
-                console.log("cancelled");
             }
         });
     }
     deleteFromList(i) {
         this.getAllCategories();
         this.commonService.successToast("Cateogry Deleted");
-        console.log(this.categories);
     }
     onAddSubCategoryBtn(id) {
         this.id = id;
@@ -6150,23 +6010,18 @@ let CategoryComponent = class CategoryComponent {
         this.apiService.viewCategory(id).subscribe((res) => {
             if (res.data) {
                 this.flagImage = false;
-                console.log(res);
                 this.editSubcategoryForm.controls['name'].setValue(res.data.name);
                 this.editSubcategoryForm.controls['name_ar'].setValue(res.data.name_ar);
                 let data = res.data;
                 this.image = data.image;
                 this.subCategoryImage = data.image;
                 this.imageName = data.image.name;
-                console.log(this.image);
             }
         });
-        console.log(this.image);
     }
     updateSubcategory() {
         this.submitted = true;
-        console.log(this.imageFile);
         if (this.submitted && this.editSubcategoryForm.valid) {
-            console.log(this.editSubcategoryForm.value);
             const data = new FormData();
             data.append('id', this.subCatId);
             data.append('name', this.editSubcategoryForm.get('name').value);
@@ -6174,9 +6029,7 @@ let CategoryComponent = class CategoryComponent {
             if (this.picUploader == true) {
                 data.append('image', this.imageFile, this.imageFile.name);
             }
-            console.log(" form data");
             data.forEach((value, key) => {
-                console.log(key + " " + value);
             });
             this.progress = true;
             this.apiService.editCategory(data).subscribe(res => {
@@ -6410,12 +6263,10 @@ let ConsumerprivacypolicyComponent = class ConsumerprivacypolicyComponent {
     getAllCms() {
         let allCms = [];
         this.apiService.getAllCMs().subscribe(res => {
-            console.log(res);
             if (res.success == true) {
                 allCms = res.data;
                 this.termsAndCondition = allCms.find(ele => ele.slugName == this.slugName);
                 this.mycontent = this.termsAndCondition.description;
-                console.log(this.termsAndCondition);
             }
         });
     }
@@ -6430,18 +6281,15 @@ let ConsumerprivacypolicyComponent = class ConsumerprivacypolicyComponent {
     updateTermAndCondition() {
         this.termsAndCondition.description = this.mycontent;
         this.apiService.updateCMS(this.termsAndCondition).subscribe(res => {
-            console.log(res);
             if (res.success == true) {
                 this.commonService.successToast("Updated Successfully");
             }
         });
     }
     onChange($event) {
-        console.log("onChange");
         //this.log += new Date() + "<br />";
     }
     onPaste($event) {
-        console.log("onPaste");
         //this.log += new Date() + "<br />";
     }
     back() {
@@ -6507,12 +6355,10 @@ let ContactusComponent = class ContactusComponent {
     getAllCms() {
         let allCms = [];
         this.apiService.getAllCMs().subscribe(res => {
-            console.log(res);
             if (res.success == true) {
                 allCms = res.data;
                 this.CmsData = allCms.find(ele => ele.slugName == this.slugName);
                 this.mycontent = this.CmsData.description;
-                console.log(this.CmsData);
             }
         });
     }
@@ -6527,18 +6373,15 @@ let ContactusComponent = class ContactusComponent {
     updateTermAndCondition() {
         this.CmsData.description = this.mycontent;
         this.apiService.updateCMS(this.CmsData).subscribe(res => {
-            console.log(res);
             if (res.success == true) {
                 this.commonService.successToast("Updated Successfully");
             }
         });
     }
     onChange($event) {
-        console.log("onChange");
         //this.log += new Date() + "<br />";
     }
     onPaste($event) {
-        console.log("onPaste");
         //this.log += new Date() + "<br />";
     }
     back() {
@@ -6674,12 +6517,10 @@ let DashboardComponent = class DashboardComponent {
     }
     getDashboardData(page, pageSize, search, filterBy, typeSale, typeGraph, revenueFilter) {
         this.apiService.getDashboardData(page, pageSize, search, filterBy, typeSale, typeGraph, revenueFilter).subscribe(res => {
-            console.log("dashboardData", res);
             if (res.success) {
                 this.dashboardData = res;
                 this.salesListData = this.dashboardData.salesList;
                 this.length = this.salesListData.length;
-                console.log("Dashboard Data:", this.dashboardData);
                 this.salesData(this.dashboardData.graph);
                 this.vendorData(this.dashboardData.vendorGraph);
                 this.revenueData(this.dashboardData.revenueGraph);
@@ -6691,7 +6532,6 @@ let DashboardComponent = class DashboardComponent {
     }
     salesData(graphData) {
         let array = [];
-        console.log(graphData);
         let data = graphData.length;
         for (let i = 0; i < data; i++) {
             if (this.periodSale == 'monthly') {
@@ -6711,14 +6551,10 @@ let DashboardComponent = class DashboardComponent {
         //   ];
         this.barChartDataSale = [{ data: graphData, label: this.periodSale + " " + 'Sale', backgroundColor: 'rgba(78,115,223,1)', borderColor: 'rgba(78,115,223,1)', hoverBackgroundColor: 'rgba(78,115,223,1)', hoverBorderColor: 'rgba(78,115,223,1)' }];
         // this.barChartData = this.barChartData;
-        console.log("labels: ", this.barChartLabelSale);
-        console.log("data: ", this.barChartDataSale);
-        console.log("options: ", this.barChartOptionsSale);
         this.chartReady = true;
     }
     vendorData(vendorGraphData) {
         let array = [];
-        console.log(vendorGraphData);
         let data = vendorGraphData.length;
         for (let i = 0; i < data; i++) {
             if (this.vendorFilter == 'monthly') {
@@ -6738,14 +6574,10 @@ let DashboardComponent = class DashboardComponent {
         //   ];
         this.barChartDataVendor = [{ data: vendorGraphData, label: this.periodSale + " " + 'new Vendor', backgroundColor: 'rgba(28,200,138,1)', borderColor: 'rgba(28,200,138,1)', hoverBackgroundColor: 'rgba(28,200,138,1)', hoverBorderColor: 'rgba(28,200,138,1)' }];
         // this.barChartData = this.barChartData;
-        console.log("labels: ", this.barChartLabelVendor);
-        console.log("data: ", this.barChartDataVendor);
-        console.log("options: ", this.barChartOptionsVendor);
         this.chartReady = true;
     }
     revenueData(revenueGraphData) {
         let array = [];
-        console.log(revenueGraphData);
         let data = revenueGraphData.length;
         for (let i = 0; i < data; i++) {
             if (this.revenueFilter == 'monthly') {
@@ -6765,9 +6597,6 @@ let DashboardComponent = class DashboardComponent {
         //   ];
         this.barChartDataRevenue = [{ data: revenueGraphData, label: this.periodSale + " " + 'Revenue', backgroundColor: 'rgba(54,185,204,1)', borderColor: 'rgba(54,185,204,1)', hoverBackgroundColor: 'rgba(54,185,204,1)', hoverBorderColor: 'rgba(54,185,204,1)' }];
         // this.barChartData = this.barChartData;
-        console.log("labels: ", this.barChartLabelVendor);
-        console.log("data: ", this.barChartDataVendor);
-        console.log("options: ", this.barChartOptionsVendor);
         this.chartReady = true;
     }
     periodChanged(e) {
@@ -6783,14 +6612,12 @@ let DashboardComponent = class DashboardComponent {
         this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale, this.vendorFilter, this.revenueFilter);
     }
     filterSelected(e) {
-        console.log(e);
         if (this.filterBy) {
             this.flag = true;
         }
         else {
             this.flag = false;
         }
-        console.log(e.target.value);
         this.filterBy = e.target.value;
         this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale, this.vendorFilter, this.revenueFilter);
     }
@@ -6810,7 +6637,6 @@ let DashboardComponent = class DashboardComponent {
         this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale, this.vendorFilter, this.revenueFilter);
     }
     productListAfterPageSizeChanged(e) {
-        console.log(e);
         if (e.pageIndex == 0) {
             this.page = 1;
             // this.page = e.pageIndex;
@@ -6954,7 +6780,6 @@ let DeliveryAddressComponent = class DeliveryAddressComponent {
     }
     getUserAddresses() {
         this.apiService.getUserAddress(this.id).subscribe((res) => {
-            console.log(res);
             if (res.data.length > 0) {
                 this.flagData = true;
                 this.addressList = res.data;
@@ -6992,7 +6817,6 @@ let DeliveryAddressComponent = class DeliveryAddressComponent {
             'phone': this.phone
         };
         this.apiService.updateAddress(body).subscribe((res) => {
-            console.log(res);
         });
         this.flag = false;
         this.getUserAddresses();
@@ -7073,7 +6897,6 @@ let DocumentComponent = class DocumentComponent {
             userId: this.id
         };
         this.apiService.getDocument(body).subscribe(res => {
-            console.log(res);
             if (res.success) {
                 this.documentList = res.data;
             }
@@ -7221,12 +7044,9 @@ let EditGeofenceComponent = class EditGeofenceComponent {
         history.back();
     }
     getFencing() {
-        console.log(this.geoFenceId);
         this.service.getGeofencing(this.geoFenceId).subscribe((res) => {
             if (res['success'] == true) {
-                console.log(res);
                 this.locationPoints = res['data'].locationPoints;
-                console.log(res, this.locationPoints, this.searchString);
                 this.searchString = res['data'].name;
                 this.geofenceForm.get('geofenceName').setValue(res['data'].name);
                 this.geofenceForm.get('geofenceCity').setValue(res['data'].city);
@@ -7260,7 +7080,6 @@ let EditGeofenceComponent = class EditGeofenceComponent {
         });
     }
     onMapReady(map) {
-        console.log("DATA");
         this.Map = map;
         // this.initDrawingManager(this.Map);
     }
@@ -7295,7 +7114,6 @@ let EditGeofenceComponent = class EditGeofenceComponent {
             const vertexLatLng = { lat: vertex.lat(), lng: vertex.lng() };
             polyArrayLatLng.push(vertexLatLng);
         }
-        console.log(polyArrayLatLng);
         if (this.geofenceForm.valid && polyArrayLatLng.length) {
             this.addgeofence = false;
             var geofenceData = {
@@ -7305,7 +7123,6 @@ let EditGeofenceComponent = class EditGeofenceComponent {
                 "state": this.geofenceForm.get('geofenceState').value,
                 "locationPoints": polyArrayLatLng
             };
-            console.log("geofencedata", geofenceData);
             this.service.updateGeofencing(geofenceData).subscribe((res) => {
                 if (res['success'] == true) {
                     this.addgeofence = false;
@@ -7334,7 +7151,6 @@ let EditGeofenceComponent = class EditGeofenceComponent {
             this.latitude = element.lat;
             this.longitude = element.lng;
         });
-        console.log("drawPolygonArr", drawPolygonArr);
         if (this.constructTriangle) {
             this.constructTriangle.setMap(null);
         }
@@ -7537,7 +7353,6 @@ let EditProductComponent = class EditProductComponent {
         this.teaTypeList = [];
         this.sugarLevelList = [];
         this.user = JSON.parse(sessionStorage.getItem('Markat_User'));
-        console.log(this.user);
         this.imageURl = this.urlService.imageUrl;
         this.sub = this.route
             .queryParams
@@ -7586,7 +7401,6 @@ let EditProductComponent = class EditProductComponent {
     getProduct(id) {
         this.progress = true;
         this.apiService.viewProduct(id).subscribe(res => {
-            console.log(res);
             if (res.success) {
                 this.productData = res.data;
                 this.setValue(this.productData);
@@ -7658,7 +7472,6 @@ let EditProductComponent = class EditProductComponent {
         this.urls.splice(i, 1);
     }
     deletePhoto(imagePath) {
-        console.log(imagePath);
         let body = {
             imageId: imagePath
         };
@@ -7669,7 +7482,6 @@ let EditProductComponent = class EditProductComponent {
     }
     getSizeList() {
         this.apiService.getSizeList().subscribe(res => {
-            console.log(res);
             res.data.forEach(element => {
                 this.sizeList.push({
                     id: element._id,
@@ -7680,7 +7492,6 @@ let EditProductComponent = class EditProductComponent {
     }
     getTeaList() {
         this.apiService.getTeaList().subscribe(res => {
-            console.log(res);
             res.data.forEach(element => {
                 this.teaTypeList.push({
                     id: element._id,
@@ -7691,7 +7502,6 @@ let EditProductComponent = class EditProductComponent {
     }
     getSugarLevelList() {
         this.apiService.getSugarLevelList().subscribe(res => {
-            console.log(res);
             res.data.forEach(element => {
                 this.sugarLevelList.push({
                     id: element._id,
@@ -7704,10 +7514,8 @@ let EditProductComponent = class EditProductComponent {
         //Pagination is applied in the backend. just not using in the front end because of design same as category
         // this.progress = true
         this.apiService.getRawItemList(1, 10000000, '').subscribe(res => {
-            console.log(res);
             if (res.success) {
                 this.progress = false;
-                console.log(res.data);
                 this.brandList = res.data;
             }
             else {
@@ -7750,7 +7558,6 @@ let EditProductComponent = class EditProductComponent {
     }
     removeSize(i) {
         this.sizePrice().removeAt(i);
-        console.log(this.sizePrice().value);
     }
     setSearchKeywords(searchKeywords) {
         this.editProductForm.setControl('aliases', this.fb.array(searchKeywords || []));
@@ -7759,7 +7566,6 @@ let EditProductComponent = class EditProductComponent {
         this.categoryList = [];
         this.apiService.getCategoryList().subscribe(res => {
             if (res.success) {
-                console.log(res);
                 if (res.data) {
                     this.categoryList = res.data;
                 }
@@ -7797,14 +7603,12 @@ let EditProductComponent = class EditProductComponent {
             return false;
     }
     subCategorySelected(id) {
-        console.log(id);
         this.selectedSubcategory = id;
     }
     getBrand(id) {
         this.brandList = [];
         this.apiService.getBrandListBySubcat(id).subscribe(res => {
             if (res.success) {
-                console.log(res);
                 if (res.data) {
                     this.brandList = res.data;
                 }
@@ -7813,10 +7617,8 @@ let EditProductComponent = class EditProductComponent {
     }
     brandSelected(id) {
         this.selectedBrand = id;
-        console.log(id);
     }
     onSubmit() {
-        console.log("check", this.editProductForm);
         this.submitted = true;
         if (this.submitted && this.editProductForm.valid && (this.previewImage.length > 0 || this.images.length > 0)) {
             const body = new FormData();
@@ -7839,16 +7641,12 @@ let EditProductComponent = class EditProductComponent {
             body.append('highlights', this.editProductForm.controls['highlights'].value);
             body.append('highlights_ar', this.editProductForm.controls['highlights_ar'].value);
             body.append('discount', this.editProductForm.controls['discount'].value);
-            body.forEach((value, key) => {
-                console.log(key + " " + value);
-            });
             this.progress = true;
             this.apiService.updateProduct(body, this.id).subscribe((res) => {
                 if (res.success) {
                     this.progress = false;
                     this.commonService.successToast("Product Successfully update");
                     this.router.navigate(['/product']);
-                    console.log(res);
                 }
                 else {
                     this.progress = false;
@@ -7871,13 +7669,11 @@ let EditProductComponent = class EditProductComponent {
                 if (this.images.length <= 4) {
                     let name = event.target.files[i].name;
                     tempfile = event.target.files[i];
-                    console.log("check image", event.target.files[i].size);
                     var reader = new FileReader();
                     let toasterService = this.commonService;
                     reader.readAsDataURL(event.target.files[i]);
                     reader.onload = (event) => {
                         img.src = event.target.result;
-                        console.log(event.target.result);
                         let temp = {
                             name: name,
                             image: event.target.result
@@ -7996,7 +7792,6 @@ let EditUserComponent = class EditUserComponent {
     }
     readCountryCode() {
         this.apiService.getCountryCode().subscribe(res => {
-            console.log(res);
             this.countryList = res;
         });
     }
@@ -8011,7 +7806,6 @@ let EditUserComponent = class EditUserComponent {
         this.apiService.viewUser(this.id).subscribe((res) => {
             if (res.success) {
                 this.progress = false;
-                console.log(res.data);
                 this.editUserForm.controls['firstName'].setValue(res.data.firstName);
                 this.editUserForm.controls['lastName'].setValue(res.data.lastName);
                 this.editUserForm.controls['UserEmail'].setValue(res.data.email);
@@ -8033,7 +7827,6 @@ let EditUserComponent = class EditUserComponent {
     updateUser() {
         let userUpdate = {};
         this.submitted = true;
-        console.log(this.id);
         let temp;
         if (this.status == "active") {
             temp = 1;
@@ -8052,7 +7845,6 @@ let EditUserComponent = class EditUserComponent {
             };
             this.progress = true;
             this.apiService.editUser(userUpdate).subscribe((res) => {
-                console.log(res);
                 if (res.success) {
                     this.progress = false;
                     this.commonService.successToast(res.message);
@@ -8177,7 +7969,6 @@ let EditVendorComponent = class EditVendorComponent {
         this.matchedCategory = [];
         this.dontShowPurpose = false;
         this.userDetails = JSON.parse(sessionStorage.getItem('Markat_User'));
-        console.log("USer", this.userDetails);
         this.roles = this.userDetails.roles;
         this.imageUrl = this.urlService.imageUrl;
         this.getCategoryList();
@@ -8224,12 +8015,10 @@ let EditVendorComponent = class EditVendorComponent {
     }
     readCountryCode() {
         this.apiService.getCountryCode().subscribe(res => {
-            console.log(res);
             this.countryList = res;
         });
     }
     onCategorySelect(e) {
-        console.log(e.id);
         let temp;
         const index = this.selectedCategoryItem.findIndex(o => o.id.toString() == e.id.toString());
         if (index < 0) {
@@ -8242,7 +8031,6 @@ let EditVendorComponent = class EditVendorComponent {
     }
     onSelectAll(e) {
         let temp;
-        console.log(e);
         for (let i = 0; i < e.length; i++) {
             this.selectedCategoryId.push(e[i].id);
         }
@@ -8250,7 +8038,6 @@ let EditVendorComponent = class EditVendorComponent {
     }
     getProfile() {
         this.apiService.viewUser(this.id).subscribe(res => {
-            console.log(res);
             if (res.success) {
                 this.Userid = res.data._id;
                 if (res.data.roles == 'merchant') {
@@ -8284,7 +8071,6 @@ let EditVendorComponent = class EditVendorComponent {
     }
     AddressChange(address) {
         //setting address from API to local variable 
-        console.log(address);
         this.lat = address.geometry.location.lat();
         this.lng = address.geometry.location.lng();
         this.formattedaddress = address.formatted_address;
@@ -8306,8 +8092,6 @@ let EditVendorComponent = class EditVendorComponent {
         }
     }
     onUpdate() {
-        console.log("Form", this.editVendor.value);
-        console.log("image", this.profileImage);
         if (this.editVendor.valid) {
             let temp = [];
             let formData = new FormData;
@@ -8324,11 +8108,9 @@ let EditVendorComponent = class EditVendorComponent {
             formData.append('gender', this.editVendor.get('gender').value);
             formData.append('last4Digits', this.editVendor.get('last4Digits').value);
             formData.forEach((value, key) => {
-                console.log(key + " " + value);
             });
             this.progress = true;
             this.apiService.editUser(formData).subscribe(res => {
-                console.log(res);
                 if (res.success) {
                     this.progress = false;
                     this.commonService.successToast(res.message);
@@ -8570,7 +8352,6 @@ let EditdiscountComponent = class EditdiscountComponent {
                 this.editDiscountForm.get('product').enable();
                 this.editDiscountForm.get('vendor').disable();
                 this.editDiscountForm.get('geofence').disable();
-                console.log("product");
                 break;
         }
     }
@@ -8582,7 +8363,6 @@ let EditdiscountComponent = class EditdiscountComponent {
         let currentDate = new Date().getDate();
         let currentMonth = new Date().getMonth();
         let year = new Date().getFullYear();
-        //console.log(new Date(year, currentMonth, currentDate + 1))
         this.editDiscountForm = this.fb.group({
             // disount: ['', Validators.required],
             startDate: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
@@ -8611,7 +8391,6 @@ let EditdiscountComponent = class EditdiscountComponent {
         let startTime = moment__WEBPACK_IMPORTED_MODULE_4__(this.editDiscountForm.get('startTime').value, 'HH:mm').format('HHmm');
     }
     vendorSearch(value) {
-        console.log(value);
         if (value.length > 0) {
             this.vendorList = this.vendorList.filter((unit) => unit.name.indexOf(value) > -1);
         }
@@ -8621,7 +8400,6 @@ let EditdiscountComponent = class EditdiscountComponent {
     }
     geofenceSearch(value) {
         this.defaultGeofenceData = this.geofenceList;
-        console.log(value);
         if (value.length > 0) {
             this.geofenceList = this.geofenceList.filter((unit) => unit.name.indexOf(value) > -1);
         }
@@ -8631,7 +8409,6 @@ let EditdiscountComponent = class EditdiscountComponent {
     }
     productSearch(value) {
         this.defaultProductList = this.productList;
-        console.log(value);
         if (value.length > 0) {
             this.productList = this.productList.filter((unit) => unit.name.indexOf(value) > -1);
         }
@@ -8703,7 +8480,6 @@ let EditdiscountComponent = class EditdiscountComponent {
     getAssignmentdata() {
         this.progress = true;
         this.apiService.getAssignementData().subscribe(res => {
-            console.log(res);
             this.progress = false;
             if (res.success) {
                 res.data.vendor.forEach(element => {
@@ -8730,7 +8506,6 @@ let EditdiscountComponent = class EditdiscountComponent {
         this.apiService.getDisountDetails(id).subscribe(res => {
             if (res.success) {
                 this.discountDetails = res.data;
-                console.log(this.discountDetails);
                 // this.editDiscountForm.controls['dicountOn'].setValue(this.discountDetails.onModel);
                 if (this.discountDetails.offer.type === "ad") {
                     this.setradio('advertisment');
@@ -8778,7 +8553,6 @@ let EditdiscountComponent = class EditdiscountComponent {
         this.categoryList = [];
         this.apiService.getAllCategories().subscribe(res => {
             if (res.success) {
-                console.log(res);
                 if (res.data) {
                     for (let i = 0; i < res.data.length; i++) {
                         let body = {
@@ -8796,7 +8570,6 @@ let EditdiscountComponent = class EditdiscountComponent {
         this.categoryList = [];
         this.apiService.getAllCategoriesForPanel().subscribe(res => {
             if (res.success) {
-                console.log("categoryList", res);
                 if (res.data) {
                     for (let i = 0; i < res.data.length; i++) {
                         let body = {
@@ -8812,7 +8585,6 @@ let EditdiscountComponent = class EditdiscountComponent {
         this.categoryList = temp;
     }
     categorySelected(id) {
-        console.log("category :", id);
         this.selectedCategory = id;
         this.getAllProduct();
     }
@@ -8822,7 +8594,6 @@ let EditdiscountComponent = class EditdiscountComponent {
         if (this.selectedCategory) {
             this.apiService.getProductsforBanner(this.selectedCategory).subscribe(res => {
                 if (res.success) {
-                    console.log("ProductList", res);
                     if (res.data) {
                         this.productList = res.data;
                         this.defaultProductList = this.productList;
@@ -8835,16 +8606,13 @@ let EditdiscountComponent = class EditdiscountComponent {
         }
     }
     productSelected(id) {
-        console.log("product:", id);
         this.selectedProduct = id;
     }
     typeSelected(e) {
-        console.log(e);
         this.editDiscountForm.get('bannerImage').enable();
     }
     checkBanner() {
         this.submitted = true;
-        console.log(this.editDiscountForm);
         let checkOffer = this.editDiscountForm.controls['dicountOn'].value;
         if (checkOffer == 'advertisment') {
             if (this.submitted && this.editDiscountForm.valid) {
@@ -8863,7 +8631,6 @@ let EditdiscountComponent = class EditdiscountComponent {
         let endDate = moment__WEBPACK_IMPORTED_MODULE_4__(this.editDiscountForm.controls['endDate'].value).toLocaleString();
         let startTime = moment__WEBPACK_IMPORTED_MODULE_4__(this.editDiscountForm.get('startTime').value, 'HH:mm').format('HHmm');
         let endTime = moment__WEBPACK_IMPORTED_MODULE_4__(this.editDiscountForm.get('endTime').value, 'HH:mm').format('HHmm');
-        console.log(startDate, endDate, startTime, endTime);
         let offer = {
             'list': [""], 'type': 'ad'
         };
@@ -8930,13 +8697,8 @@ let EditdiscountComponent = class EditdiscountComponent {
     addbanner(body) {
         this.tempArray = [];
         this.tempArray.push(body);
-        //  console.log(body)
-        body.forEach((value, key) => {
-            console.log(key + " " + value);
-        });
         this.progress = true;
         this.apiService.editBanner(body).subscribe(res => {
-            console.log(res);
             if (res.success) {
                 this.progress = false;
                 this.router.navigateByUrl('offerdeals');
@@ -9022,7 +8784,6 @@ let EditprofileComponent = class EditprofileComponent {
         });
         this.imagePath = this.urlService.imageUrl;
         this.apiService.getProfile().subscribe((res) => {
-            console.log(res.data);
             this.profileData = res.data;
             this.firstname = this.profileData.firstName;
             this.lastName = this.profileData.lastName;
@@ -9082,7 +8843,6 @@ let EditprofileComponent = class EditprofileComponent {
                 data.append('phone', this.updateProfileForm.get('phone').value),
                 this.progress = true;
             this.apiService.updateProfile(data).subscribe((res) => {
-                console.log(res);
                 if (res.success) {
                     this.progress = false;
                     this.commonService.successToast(res.message);
@@ -9222,7 +8982,6 @@ let EndorsedProductComponent = class EndorsedProductComponent {
         this.flag = false;
         this.flagSearch = true;
         this.user = JSON.parse(sessionStorage.getItem('Markat_User'));
-        console.log(this.user);
     }
     ngOnInit() {
         this.getEndorsement();
@@ -9236,7 +8995,6 @@ let EndorsedProductComponent = class EndorsedProductComponent {
         }
     }
     showVendorList() {
-        console.log("inside get vendor");
         let body = {
             roles: 'merchant',
             filter: this.filterBy,
@@ -9248,7 +9006,6 @@ let EndorsedProductComponent = class EndorsedProductComponent {
         this.apiService.getList(body).subscribe((res) => {
             if (res.success) {
                 this.progress = false;
-                console.log(res);
                 this.vendorList = res.data;
                 this.length = res.total;
             }
@@ -9268,7 +9025,6 @@ let EndorsedProductComponent = class EndorsedProductComponent {
         };
         this.progress = true;
         this.apiService.getEndorsedProduct(body).subscribe(res => {
-            console.log(res);
             if (res.success) {
                 this.progress = false;
                 this.endorsementProductList = res.data;
@@ -9303,7 +9059,6 @@ let EndorsedProductComponent = class EndorsedProductComponent {
         }
         this.progress = true;
         this.apiService.changeUserStatus(body).subscribe(res => {
-            console.log(res);
             if (res.success) {
                 this.progress = false;
                 this.commonService.successToast(res.message);
@@ -9316,7 +9071,6 @@ let EndorsedProductComponent = class EndorsedProductComponent {
         });
     }
     vendorListAfterPageSizeChanged(e) {
-        console.log(e);
         if (e.pageIndex == 0) {
             this.page = 1;
             // this.page = e.pageIndex;
@@ -9342,7 +9096,6 @@ let EndorsedProductComponent = class EndorsedProductComponent {
     }
     searchMethod() {
         this.flagSearch = false;
-        console.log(this.search);
         this.getEndorsement();
     }
     clearSearch() {
@@ -9440,7 +9193,6 @@ let EndorsementProductComponent = class EndorsementProductComponent {
             this.id = params['id'];
         });
         this.user = JSON.parse(sessionStorage.getItem('Markat_User'));
-        console.log(this.user);
         this.sellerId = this.id;
         //alert(this.id)
     }
@@ -9456,7 +9208,6 @@ let EndorsementProductComponent = class EndorsementProductComponent {
         else {
             this.flag = false;
         }
-        console.log(e.value);
         this.filterBy = e.value;
         this.getAllProducts();
     }
@@ -9650,7 +9401,6 @@ let EndorsementComponent = class EndorsementComponent {
         this.flag = false;
         this.flagSearch = true;
         this.user = JSON.parse(sessionStorage.getItem('Markat_User'));
-        console.log(this.user);
     }
     ngOnInit() {
         if (this.user.roles == 'celebrity') {
@@ -9685,7 +9435,6 @@ let EndorsementComponent = class EndorsementComponent {
         this.getEndorsement();
     }
     showVendorList() {
-        console.log("inside get vendor");
         let body = {
             roles: 'merchant',
             filter: this.filterBy,
@@ -9698,7 +9447,6 @@ let EndorsementComponent = class EndorsementComponent {
             if (res.success) {
                 this.progress = false;
                 if (res.data.length > 0) {
-                    console.log(res);
                     this.noData = false;
                     this.vendorList = res.data;
                     this.length = res.total;
@@ -9723,7 +9471,6 @@ let EndorsementComponent = class EndorsementComponent {
         };
         this.progress = true;
         this.apiService.getEndorsement(body).subscribe(res => {
-            console.log(res);
             if (res.success) {
                 this.progress = false;
                 if (res.data.length > 0) {
@@ -9751,7 +9498,6 @@ let EndorsementComponent = class EndorsementComponent {
         };
         this.progress = true;
         this.apiService.approveEndorsementRequest(body).subscribe(res => {
-            console.log(res);
             if (res.success) {
                 this.progress = false;
                 this.commonService.successToast(res.message);
@@ -9781,7 +9527,6 @@ let EndorsementComponent = class EndorsementComponent {
         }
         this.progress = true;
         this.apiService.changeUserStatus(body).subscribe(res => {
-            console.log(res);
             if (res.success) {
                 this.progress = false;
                 this.commonService.successToast(res.message);
@@ -9794,7 +9539,6 @@ let EndorsementComponent = class EndorsementComponent {
         });
     }
     vendorListAfterPageSizeChanged(e) {
-        console.log(e);
         if (e.pageIndex == 0) {
             this.page = 1;
             // this.page = e.pageIndex;
@@ -9825,7 +9569,6 @@ let EndorsementComponent = class EndorsementComponent {
     }
     searchMethod() {
         this.flagSearch = false;
-        console.log(this.search);
         if (this.user.roles == 'celebrity') {
             this.showVendorList();
         }
@@ -12953,17 +12696,74 @@ let OrdermanagementComponent = class OrdermanagementComponent {
         this.search = '';
         this.salesList = [];
         this.flagSearch = true;
+        this.vendorList = [];
     }
     ngOnInit() {
         this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy);
+        this.getAssignmentdata();
+    }
+    getAssignmentdata() {
+        this.progress = true;
+        this.apiService.getAssignementData().subscribe(res => {
+            this.progress = false;
+            if (res.success) {
+                res.data.vendor.forEach(element => {
+                    this.vendorList.push({
+                        id: element._id,
+                        name: element.fullName
+                    });
+                });
+                console.log(this.vendorList);
+            }
+            else {
+                this.commonService.errorToast(res.message);
+            }
+        });
+    }
+    approveReject(e, id) {
+        let body = {
+            'orderId': id
+        };
+        console.log(e);
+        if (e === 'true') {
+            this.apiService.approveEvent(body).subscribe(res => {
+                console.log(res);
+                this.commonService.successToast(res.message);
+                this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy);
+            });
+        }
+        else if (e === 'false') {
+            this.apiService.declineEvent(body).subscribe(res => {
+                console.log(res);
+                this.commonService.successToast(res.message);
+                this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy);
+            });
+        }
+    }
+    AssignVendor(e, id) {
+        let body = {
+            'orderId': id,
+            'vendorId': e
+        };
+        console.log(body);
+        this.apiService.assignVendor(body).subscribe(res => {
+            console.log(res);
+            this.commonService.successToast(res.message);
+            this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy);
+        });
     }
     getSaleslist(page, pageSize, search, filterBy) {
-        this.apiService.getSaleList(page, pageSize, search, filterBy).subscribe(res => {
+        let body = {
+            page: page,
+            search: search,
+            count: pageSize
+        };
+        this.apiService.getSaleList(body).subscribe(res => {
             console.log(res);
-            if (res.data) {
+            if (res.success) {
                 this.flagData = false;
                 this.salesList = res.data;
-                this.length = res.total;
+                this.length = res.data.length;
             }
             else {
                 this.flagData = true;
@@ -12984,7 +12784,6 @@ let OrdermanagementComponent = class OrdermanagementComponent {
     }
     searchMethod() {
         this.flagSearch = false;
-        // console.log(this.search);
         this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy);
     }
     clearSearch() {
@@ -15274,17 +15073,16 @@ let SalesreportComponent = class SalesreportComponent {
         this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy);
     }
     getSaleslist(page, pageSize, search, filterBy) {
-        this.apiService.getSaleList(page, pageSize, search, filterBy).subscribe(res => {
-            console.log(res);
-            if (res.data) {
-                this.flagData = false;
-                this.salesList = res.data;
-                this.length = res.total;
-            }
-            else {
-                this.flagData = true;
-            }
-        });
+        // this.apiService.getSaleList(page, pageSize, search, filterBy).subscribe(res => {
+        //   console.log(res)
+        //   if (res.data) {
+        //     this.flagData = false
+        //     this.salesList = res.data;
+        //     this.length = res.total
+        //   } else {
+        //     this.flagData = true
+        //   }
+        // })
     }
     filterSelected(e) {
         console.log(e);
@@ -19057,6 +18855,10 @@ let ApiService = class ApiService {
             SizeList: 'admin/size',
             teaType: 'admin/teaType',
             sugarLevel: 'admin/sugarLevel',
+            onDemandSaleList: 'admin/event',
+            approveEvent: 'admin/eventapprove',
+            declinedEvent: 'admin/eventdisapprove',
+            assignVendor: 'admin/assignVendor',
             //commonApi to change status of any user type
             status: 'common/status',
         };
@@ -19486,8 +19288,8 @@ let ApiService = class ApiService {
         return this.http.get(this.apiEndPoints.downloadVendorCSV, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError()));
     }
     //Sales Module
-    getSaleList(page, pageSize, search, filterBy) {
-        return this.http.get(`${this.apiEndPoints.salesList}?page=${page}&count=${pageSize}&filter=${filterBy}&search=${search}`, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError()));
+    getSaleList(body) {
+        return this.http.post(`${this.apiEndPoints.onDemandSaleList}`, body, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError()));
     }
     updateStatus(body) {
         return this.http.put(this.apiEndPoints.status, body, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
@@ -19593,6 +19395,15 @@ let ApiService = class ApiService {
     }
     getPaymentDaTA(page, count, search, filter) {
         return this.http.get(`${this.apiEndPoints.getPaymentOfvendor}?page=${page}&count=${count}&search=${search}&filter=${filter}`, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError()));
+    }
+    approveEvent(body) {
+        return this.http.post(this.apiEndPoints.approveEvent, body, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError()));
+    }
+    declineEvent(body) {
+        return this.http.post(this.apiEndPoints.declinedEvent, body, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError()));
+    }
+    assignVendor(body) {
+        return this.http.post(this.apiEndPoints.assignVendor, body, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError()));
     }
     // Error handling
     handleError(operation = 'operation', result) {

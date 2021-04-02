@@ -50,7 +50,7 @@ export class BookingRequestHistoryComponent implements OnInit {
           this.flagData = false
           this.orderHistoryList = res.data
           this.length = this.orderHistoryList.length
-          console.log(res.data)
+
         } else {
           this.flagData = true
         }
@@ -69,7 +69,7 @@ export class BookingRequestHistoryComponent implements OnInit {
       this.flag = false
 
     }
-    console.log(e.target.value)
+
     this.filter = e.target.value;
 
     this.apiService.viewPurchaseHistory(this.page, this.pageSize, this.id, this.filter, this.search).subscribe((res) => {
@@ -80,7 +80,7 @@ export class BookingRequestHistoryComponent implements OnInit {
           this.flagData = false
           this.orderHistoryList = res.data
           this.length = this.orderHistoryList.length
-          console.log(res.data)
+
         } else {
           this.flagData = true
         }
@@ -91,7 +91,7 @@ export class BookingRequestHistoryComponent implements OnInit {
 
 
   orderHistoryListAfterPageSizeChanged(e): any {
-    console.log(e);
+
     if (e.pageIndex == 0) {
       this.page = 1;
       // this.page = e.pageIndex;
@@ -116,7 +116,7 @@ export class BookingRequestHistoryComponent implements OnInit {
           this.flagData = false
           this.orderHistoryList = res.data
           this.length = this.orderHistoryList.length
-          console.log(res.data)
+
         } else {
           this.flagData = true
         }
@@ -135,7 +135,7 @@ export class BookingRequestHistoryComponent implements OnInit {
           this.flagData = false
           this.orderHistoryList = res.data
           this.length = this.orderHistoryList.length
-          console.log(res.data)
+
         } else {
           this.flagData = true
         }
@@ -154,7 +154,7 @@ export class BookingRequestHistoryComponent implements OnInit {
           this.flagData = false
           this.orderHistoryList = res.data
           this.length = this.orderHistoryList.length
-          console.log(res.data)
+
         } else {
           this.flagData = true
         }

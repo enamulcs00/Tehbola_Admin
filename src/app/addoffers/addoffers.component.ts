@@ -110,7 +110,7 @@ export class AddoffersComponent implements OnInit, AfterViewChecked {
         this.addDiscountForm.get('vendor').disable()
         this.addDiscountForm.get('geofence').disable()
 
-        console.log("product");
+
         break;
     }
   }
@@ -173,15 +173,13 @@ export class AddoffersComponent implements OnInit, AfterViewChecked {
     let minute = startTime.minute();
     let nextMinute = minute + 1
     this.limitTime = hours + ':' + nextMinute;
-    console.log(this.limitTime);
 
-    console.log(hours);
   }
 
 
   vendorSearch(value) {
 
-    console.log(value);
+
     if (value.length > 0) {
 
       this.vendorList = this.vendorList.filter((unit) => unit.name.indexOf(value) > -1);
@@ -195,7 +193,7 @@ export class AddoffersComponent implements OnInit, AfterViewChecked {
 
   geofenceSearch(value) {
     this.defaultGeofenceData = this.geofenceList
-    console.log(value);
+
     if (value.length > 0) {
       this.geofenceList = this.geofenceList.filter((unit) => unit.name.indexOf(value) > -1);
     } else {
@@ -207,7 +205,7 @@ export class AddoffersComponent implements OnInit, AfterViewChecked {
   productSearch(value) {
 
     this.defaultProductList = this.productList
-    console.log(value);
+
     if (value.length > 0) {
       this.productList = this.productList.filter((unit) => unit.name.indexOf(value) > -1);
     } else {
@@ -285,7 +283,7 @@ export class AddoffersComponent implements OnInit, AfterViewChecked {
   getAssignmentdata() {
     this.progress = true;
     this.apiService.getAssignementData().subscribe(res => {
-      console.log(res);
+
 
 
       this.progress = false
@@ -341,7 +339,7 @@ export class AddoffersComponent implements OnInit, AfterViewChecked {
 
       if (res.success) {
 
-        console.log(res)
+
         if (res.data) {
           for (let i = 0; i < res.data.length; i++) {
             let body = {
@@ -370,7 +368,7 @@ export class AddoffersComponent implements OnInit, AfterViewChecked {
 
       if (res.success) {
 
-        console.log("categoryList", res)
+
         if (res.data) {
           for (let i = 0; i < res.data.length; i++) {
             let body = {
@@ -395,7 +393,7 @@ export class AddoffersComponent implements OnInit, AfterViewChecked {
   selectedCategory = ''
   categorySelected(id) {
 
-    console.log("category :", id);
+
     this.selectedCategory = id;
     this.getAllProduct();
   }
@@ -411,7 +409,7 @@ export class AddoffersComponent implements OnInit, AfterViewChecked {
       this.apiService.getProductsforBanner(this.selectedCategory).subscribe(res => {
 
         if (res.success) {
-          console.log("ProductList", res);
+
 
           if (res.data) {
             this.productList = res.data
@@ -427,13 +425,13 @@ export class AddoffersComponent implements OnInit, AfterViewChecked {
   }
 
   productSelected(id) {
-    console.log("product:", id);
+
     this.selectedProduct = id;
 
   }
 
   typeSelected(e) {
-    console.log(e);
+
     this.addDiscountForm.get('bannerImage').enable()
 
   }
@@ -441,7 +439,7 @@ export class AddoffersComponent implements OnInit, AfterViewChecked {
   checkBanner() {
 
     this.submitted = true
-    console.log(this.addDiscountForm);
+
     let checkOffer = this.addDiscountForm.controls['dicountOn'].value;
     // if (checkOffer == "category") {
 
@@ -512,7 +510,7 @@ export class AddoffersComponent implements OnInit, AfterViewChecked {
     let endDate = moment(this.addDiscountForm.controls['endDate'].value).toLocaleString();
     let startTime = moment(this.addDiscountForm.get('startTime').value, 'HH:mm').format('HHmm')
     let endTime = moment(this.addDiscountForm.get('endTime').value, 'HH:mm').format('HHmm')
-    console.log(startDate, endDate, startTime, endTime);
+
 
     let offer = {
       'list': [""], 'type': 'ad'
@@ -592,12 +590,10 @@ export class AddoffersComponent implements OnInit, AfterViewChecked {
     this.tempArray = []
     this.tempArray.push(body);
     //  console.log(body)
-    body.forEach((value, key) => {
-      console.log(key + " " + value)
-    });
+
     this.progress = true
     this.apiService.addBanner(body).subscribe(res => {
-      console.log(res)
+
       if (res.success) {
         this.progress = false
         this.router.navigateByUrl('offerdeals');

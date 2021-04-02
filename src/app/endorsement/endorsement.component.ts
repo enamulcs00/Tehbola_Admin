@@ -38,7 +38,6 @@ export class EndorsementComponent implements OnInit {
   noData: boolean = false;
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) {
     this.user = JSON.parse(sessionStorage.getItem('Markat_User'));
-    console.log(this.user);
 
 
   }
@@ -88,7 +87,6 @@ export class EndorsementComponent implements OnInit {
 
 
   showVendorList() {
-    console.log("inside get vendor")
     let body = {
       roles: 'merchant',
       filter: this.filterBy,
@@ -101,7 +99,6 @@ export class EndorsementComponent implements OnInit {
       if (res.success) {
         this.progress = false
         if (res.data.length > 0) {
-          console.log(res);
           this.noData = false
           this.vendorList = res.data;
           this.length = res.total;
@@ -126,7 +123,6 @@ export class EndorsementComponent implements OnInit {
     }
     this.progress = true
     this.apiService.getEndorsement(body).subscribe(res => {
-      console.log(res);
       if (res.success) {
         this.progress = false
         if (res.data.length > 0) {
@@ -162,7 +158,6 @@ export class EndorsementComponent implements OnInit {
     }
     this.progress = true
     this.apiService.approveEndorsementRequest(body).subscribe(res => {
-      console.log(res);
       if (res.success) {
         this.progress = false
         this.commonService.successToast(res.message)
@@ -199,7 +194,6 @@ export class EndorsementComponent implements OnInit {
     }
     this.progress = true
     this.apiService.changeUserStatus(body).subscribe(res => {
-      console.log(res);
       if (res.success) {
         this.progress = false
         this.commonService.successToast(res.message)
@@ -215,7 +209,6 @@ export class EndorsementComponent implements OnInit {
   }
 
   vendorListAfterPageSizeChanged(e): any {
-    console.log(e);
     if (e.pageIndex == 0) {
       this.page = 1;
       // this.page = e.pageIndex;
@@ -248,7 +241,6 @@ export class EndorsementComponent implements OnInit {
   flagSearch: boolean = true
   searchMethod() {
     this.flagSearch = false
-    console.log(this.search);
     if (this.user.roles == 'celebrity') {
       this.showVendorList();
     } else {

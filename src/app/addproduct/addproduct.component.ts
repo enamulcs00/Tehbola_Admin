@@ -69,7 +69,7 @@ export class AddproductComponent implements OnInit {
     private commonService: CommonService, private urlService: UrlService, private fb: FormBuilder) {
 
     this.user = JSON.parse(sessionStorage.getItem('Markat_User'))
-    console.log(this.user);
+
     this.getAllCategory()
     this.getRawItemList();
     this.getSizeList();
@@ -123,7 +123,7 @@ export class AddproductComponent implements OnInit {
   getTax() {
 
     this.apiService.getTax().subscribe(res => {
-      console.log(res)
+
       if (res.success) {
         this.tax = res.data[0].tax
         this.taxId = res.data[0]._id
@@ -163,7 +163,7 @@ export class AddproductComponent implements OnInit {
     let controls = [];
 
     let controlsList = this.sizePrice().value
-    console.log(controlsList);
+
     for (let y in controlsList) {
       controls.push(new FormGroup({
         id: new FormControl(controlsList[y].id),
@@ -194,7 +194,7 @@ export class AddproductComponent implements OnInit {
 
   removeSize(i: number) {
     this.sizePrice().removeAt(i);
-    console.log(this.sizePrice().value);
+
   }
 
   addAlias() {
@@ -234,9 +234,7 @@ export class AddproductComponent implements OnInit {
     this.apiService.getCategoryList().subscribe(res => {
 
       if (res.success) {
-        console.log(res);
 
-        console.log(res)
         if (res.data) {
           this.categoryList = res.data
         }
@@ -257,10 +255,10 @@ export class AddproductComponent implements OnInit {
     //Pagination is applied in the backend. just not using in the front end because of design same as category
     // this.progress = true
     this.apiService.getRawItemList(1, 10000000, '').subscribe(res => {
-      console.log(res)
+
       if (res.success) {
         this.progress = false
-        console.log(res.data);
+
         this.brandList = res.data
       } else {
         this.progress = false
@@ -274,7 +272,7 @@ export class AddproductComponent implements OnInit {
   getSizeList() {
 
     this.apiService.getSizeList().subscribe(res => {
-      console.log(res);
+
       res.data.forEach(element => {
         this.sizeList.push({
           id: element._id,
@@ -288,7 +286,7 @@ export class AddproductComponent implements OnInit {
 
   getTeaList() {
     this.apiService.getTeaList().subscribe(res => {
-      console.log(res);
+
       res.data.forEach(element => {
         this.teaTypeList.push({
           id: element._id,
@@ -302,7 +300,7 @@ export class AddproductComponent implements OnInit {
 
   getSugarLevelList() {
     this.apiService.getSugarLevelList().subscribe(res => {
-      console.log(res);
+
       res.data.forEach(element => {
         this.sugarLevelList.push({
           id: element._id,
@@ -334,7 +332,7 @@ export class AddproductComponent implements OnInit {
   subCategorySelected(id) {
 
 
-    console.log(id);
+
     this.selectedSubcategory = id
 
   }
@@ -343,8 +341,8 @@ export class AddproductComponent implements OnInit {
 
   progress: boolean
   onSubmit() {
-    debugger
-    console.log("check", this.addProductForm)
+
+
     this.submitted = true;
 
     if (this.submitted && this.addProductForm.valid && (this.images.length > 0)) {
@@ -368,15 +366,13 @@ export class AddproductComponent implements OnInit {
       body.append('highlights', this.addProductForm.controls['highlights'].value)
       body.append('highlights_ar', this.addProductForm.controls['highlights_ar'].value)
       body.append('discount', this.addProductForm.controls['discount'].value)
-      body.forEach((value, key) => {
-        console.log(key + " " + value)
-      });
+
       this.progress = true
       this.apiService.AddProduct(body).subscribe((res) => {
         if (res.success) {
           this.commonService.successToast("Product Successfully added")
           this.router.navigate(['/product'])
-          console.log(res)
+
           this.progress = false
         } else {
           this.commonService.errorToast(res.message)
@@ -402,14 +398,14 @@ export class AddproductComponent implements OnInit {
           let name = event.target.files[i].name;
           tempfile = event.target.files[i]
 
-          console.log("check image", event.target.files[i].size);
+
           var reader = new FileReader();
           let toasterService = this.commonService
 
           reader.readAsDataURL(event.target.files[i])
           reader.onload = (event: any) => {
             img.src = event.target.result;
-            console.log(event.target.result);
+
 
             let temp = {
               name: name,

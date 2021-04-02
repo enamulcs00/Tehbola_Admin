@@ -51,7 +51,7 @@ export class AddGeofenceComponent implements OnInit {
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        // console.log("name", position);
+
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
         this.zoom = 11;
@@ -99,7 +99,7 @@ export class AddGeofenceComponent implements OnInit {
 
         if (event.type === google.maps.drawing.OverlayType.POLYGON) { //this is the coordinate, you can assign it to a variable or pass into another function. 
           this.polyarray = event.overlay.getPath().getArray();
-          console.log(this.polyarray);
+
 
         }
       });
@@ -123,7 +123,7 @@ export class AddGeofenceComponent implements OnInit {
       this.apiService.createGeoFencing(geofenceData).subscribe((res) => {
         if (res.success) {
           this.progress = false
-          console.log(res);
+
           this.commonService.successToast(res.message)
           this.router.navigate(['geofence'])
         } else {

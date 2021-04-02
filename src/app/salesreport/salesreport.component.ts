@@ -52,16 +52,16 @@ export class SalesreportComponent implements OnInit {
   }
 
   getSaleslist(page, pageSize, search, filterBy) {
-    this.apiService.getSaleList(page, pageSize, search, filterBy).subscribe(res => {
-      console.log(res)
-      if (res.data) {
-        this.flagData = false
-        this.salesList = res.data;
-        this.length = res.total
-      } else {
-        this.flagData = true
-      }
-    })
+    // this.apiService.getSaleList(page, pageSize, search, filterBy).subscribe(res => {
+    //   console.log(res)
+    //   if (res.data) {
+    //     this.flagData = false
+    //     this.salesList = res.data;
+    //     this.length = res.total
+    //   } else {
+    //     this.flagData = true
+    //   }
+    // })
 
   }
 

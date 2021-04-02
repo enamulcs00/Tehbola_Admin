@@ -131,7 +131,6 @@ export class EditdiscountComponent implements OnInit {
         this.editDiscountForm.get('vendor').disable()
         this.editDiscountForm.get('geofence').disable()
 
-        console.log("product");
         break;
     }
   }
@@ -150,7 +149,6 @@ export class EditdiscountComponent implements OnInit {
     let currentDate = new Date().getDate();
     let currentMonth = new Date().getMonth();
     let year = new Date().getFullYear();
-    //console.log(new Date(year, currentMonth, currentDate + 1))
 
 
     this.editDiscountForm = this.fb.group({
@@ -190,7 +188,6 @@ export class EditdiscountComponent implements OnInit {
 
   vendorSearch(value) {
 
-    console.log(value);
     if (value.length > 0) {
 
       this.vendorList = this.vendorList.filter((unit) => unit.name.indexOf(value) > -1);
@@ -204,7 +201,6 @@ export class EditdiscountComponent implements OnInit {
 
   geofenceSearch(value) {
     this.defaultGeofenceData = this.geofenceList
-    console.log(value);
     if (value.length > 0) {
       this.geofenceList = this.geofenceList.filter((unit) => unit.name.indexOf(value) > -1);
     } else {
@@ -216,7 +212,6 @@ export class EditdiscountComponent implements OnInit {
   productSearch(value) {
 
     this.defaultProductList = this.productList
-    console.log(value);
     if (value.length > 0) {
       this.productList = this.productList.filter((unit) => unit.name.indexOf(value) > -1);
     } else {
@@ -296,7 +291,6 @@ export class EditdiscountComponent implements OnInit {
   getAssignmentdata() {
     this.progress = true;
     this.apiService.getAssignementData().subscribe(res => {
-      console.log(res);
 
 
       this.progress = false
@@ -308,9 +302,6 @@ export class EditdiscountComponent implements OnInit {
               name: element.fullName
             })
         });
-
-
-
 
         res.data.geoFence.forEach(element => {
           this.geofenceList.push(
@@ -341,7 +332,6 @@ export class EditdiscountComponent implements OnInit {
       if (res.success) {
 
         this.discountDetails = res.data;
-        console.log(this.discountDetails);
         // this.editDiscountForm.controls['dicountOn'].setValue(this.discountDetails.onModel);
 
         if (this.discountDetails.offer.type === "ad") {
@@ -413,7 +403,6 @@ export class EditdiscountComponent implements OnInit {
 
       if (res.success) {
 
-        console.log(res)
         if (res.data) {
           for (let i = 0; i < res.data.length; i++) {
             let body = {
@@ -442,7 +431,6 @@ export class EditdiscountComponent implements OnInit {
 
       if (res.success) {
 
-        console.log("categoryList", res)
         if (res.data) {
           for (let i = 0; i < res.data.length; i++) {
             let body = {
@@ -467,7 +455,6 @@ export class EditdiscountComponent implements OnInit {
   selectedCategory = ''
   categorySelected(id) {
 
-    console.log("category :", id);
     this.selectedCategory = id;
     this.getAllProduct();
   }
@@ -483,7 +470,6 @@ export class EditdiscountComponent implements OnInit {
       this.apiService.getProductsforBanner(this.selectedCategory).subscribe(res => {
 
         if (res.success) {
-          console.log("ProductList", res);
 
           if (res.data) {
             this.productList = res.data
@@ -499,13 +485,11 @@ export class EditdiscountComponent implements OnInit {
   }
 
   productSelected(id) {
-    console.log("product:", id);
     this.selectedProduct = id;
 
   }
 
   typeSelected(e) {
-    console.log(e);
     this.editDiscountForm.get('bannerImage').enable()
 
   }
@@ -513,7 +497,6 @@ export class EditdiscountComponent implements OnInit {
   checkBanner() {
 
     this.submitted = true
-    console.log(this.editDiscountForm);
     let checkOffer = this.editDiscountForm.controls['dicountOn'].value;
 
 
@@ -540,7 +523,6 @@ export class EditdiscountComponent implements OnInit {
     let endDate = moment(this.editDiscountForm.controls['endDate'].value).toLocaleString();
     let startTime = moment(this.editDiscountForm.get('startTime').value, 'HH:mm').format('HHmm')
     let endTime = moment(this.editDiscountForm.get('endTime').value, 'HH:mm').format('HHmm')
-    console.log(startDate, endDate, startTime, endTime);
 
     let offer = {
       'list': [""], 'type': 'ad'
@@ -623,13 +605,8 @@ export class EditdiscountComponent implements OnInit {
 
     this.tempArray = []
     this.tempArray.push(body);
-    //  console.log(body)
-    body.forEach((value, key) => {
-      console.log(key + " " + value)
-    });
     this.progress = true
     this.apiService.editBanner(body).subscribe(res => {
-      console.log(res)
       if (res.success) {
         this.progress = false
         this.router.navigateByUrl('offerdeals');

@@ -72,7 +72,7 @@ export class ApiService {
       getAllCategoryForDiscount: 'admin/categoryByVendor',
       addBanner: 'admin/banner',
       viewBanner: 'admin/banner',
-      getAllPromo:'admin/promoCode',
+      getAllPromo: 'admin/promoCode',
       profile: 'admin/getProfile',
       updateProfile: 'admin/editProfile',
       downloadUserCSV: 'admin/userCsv',
@@ -92,7 +92,10 @@ export class ApiService {
       SizeList: 'admin/size',
       teaType: 'admin/teaType',
       sugarLevel: 'admin/sugarLevel',
-
+      onDemandSaleList: 'admin/event',
+      approveEvent: 'admin/eventapprove',
+      declinedEvent: 'admin/eventdisapprove',
+      assignVendor:'admin/assignVendor',
       //commonApi to change status of any user type
       status: 'common/status',
 
@@ -792,8 +795,8 @@ export class ApiService {
   }
 
   //Sales Module
-  getSaleList(page, pageSize, search, filterBy): Observable<any> {
-    return this.http.get<any>(`${this.apiEndPoints.salesList}?page=${page}&count=${pageSize}&filter=${filterBy}&search=${search}`, this.getHeaders()).pipe(catchError(this.handleError()))
+  getSaleList(body): Observable<any> {
+    return this.http.post<any>(`${this.apiEndPoints.onDemandSaleList}`, body, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
   updateStatus(body): Observable<any> {
@@ -948,6 +951,21 @@ export class ApiService {
 
   getPaymentDaTA(page, count, search, filter): Observable<any> {
     return this.http.get<any>(`${this.apiEndPoints.getPaymentOfvendor}?page=${page}&count=${count}&search=${search}&filter=${filter}`, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  approveEvent(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.approveEvent, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+
+  declineEvent(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.declinedEvent, body, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+
+
+  assignVendor(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.assignVendor, body, this.getHeaders()).pipe(catchError(this.handleError()))
   }
   // Error handling
   private handleError<T>(operation = 'operation', result?: T) {

@@ -70,7 +70,6 @@ export class EditVendorComponent implements OnInit {
   dontShowPurpose: boolean = false;
   constructor(private route: Router, private router: ActivatedRoute, private commonService: CommonService, private urlService: UrlService, private apiService: ApiService, private fb: FormBuilder) {
     this.userDetails = JSON.parse(sessionStorage.getItem('Markat_User'));
-    console.log("USer", this.userDetails);
     this.roles = this.userDetails.roles
     this.imageUrl = this.urlService.imageUrl
     this.getCategoryList()
@@ -134,14 +133,12 @@ export class EditVendorComponent implements OnInit {
 
   readCountryCode() {
     this.apiService.getCountryCode().subscribe(res => {
-      console.log(res);
       this.countryList = res;
     })
   }
 
   onCategorySelect(e) {
 
-    console.log(e.id);
     let temp
     const index = this.selectedCategoryItem.findIndex(o => o.id.toString() == e.id.toString());
     if (index < 0) {
@@ -156,7 +153,6 @@ export class EditVendorComponent implements OnInit {
   onSelectAll(e) {
 
     let temp
-    console.log(e)
     for (let i = 0; i < e.length; i++) {
       this.selectedCategoryId.push(e[i].id)
     }
@@ -168,7 +164,6 @@ export class EditVendorComponent implements OnInit {
   getProfile() {
 
     this.apiService.viewUser(this.id).subscribe(res => {
-      console.log(res);
       if (res.success) {
 
         this.Userid = res.data._id
@@ -209,7 +204,6 @@ export class EditVendorComponent implements OnInit {
   public AddressChange(address: any) {
 
     //setting address from API to local variable 
-    console.log(address);
     this.lat = address.geometry.location.lat()
     this.lng = address.geometry.location.lng()
     this.formattedaddress = address.formatted_address
@@ -237,8 +231,6 @@ export class EditVendorComponent implements OnInit {
 
   onUpdate() {
 
-    console.log("Form", this.editVendor.value);
-    console.log("image", this.profileImage);
     if (this.editVendor.valid) {
       let temp = []
 
@@ -261,11 +253,9 @@ export class EditVendorComponent implements OnInit {
 
 
       formData.forEach((value, key) => {
-        console.log(key + " " + value)
       });
       this.progress = true
       this.apiService.editUser(formData).subscribe(res => {
-        console.log(res);
         if (res.success) {
           this.progress = false
           this.commonService.successToast(res.message);

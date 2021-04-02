@@ -59,7 +59,6 @@ export class EditUserComponent implements OnInit {
 
   readCountryCode() {
     this.apiService.getCountryCode().subscribe(res => {
-      console.log(res);
       this.countryList = res;
     })
   }
@@ -77,7 +76,6 @@ export class EditUserComponent implements OnInit {
     this.apiService.viewUser(this.id).subscribe((res) => {
       if (res.success) {
         this.progress = false
-        console.log(res.data);
         this.editUserForm.controls['firstName'].setValue(res.data.firstName);
 
         this.editUserForm.controls['lastName'].setValue(res.data.lastName);
@@ -106,7 +104,6 @@ export class EditUserComponent implements OnInit {
 
     let userUpdate = {}
     this.submitted = true
-    console.log(this.id)
     let temp: number
     if (this.status == "active") {
       temp = 1
@@ -126,7 +123,6 @@ export class EditUserComponent implements OnInit {
       }
       this.progress = true
       this.apiService.editUser(userUpdate).subscribe((res) => {
-        console.log(res);
         if (res.success) {
           this.progress = false
           this.commonService.successToast(res.message)

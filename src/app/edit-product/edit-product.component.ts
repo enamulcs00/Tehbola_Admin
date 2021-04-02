@@ -73,7 +73,6 @@ export class EditProductComponent implements OnInit {
     private commonService: CommonService, private urlService: UrlService, private fb: FormBuilder) {
 
     this.user = JSON.parse(sessionStorage.getItem('Markat_User'))
-    console.log(this.user);
     this.imageURl = this.urlService.imageUrl
 
 
@@ -135,7 +134,6 @@ export class EditProductComponent implements OnInit {
   getProduct(id) {
     this.progress = true
     this.apiService.viewProduct(id).subscribe(res => {
-      console.log(res);
       if (res.success) {
 
 
@@ -228,7 +226,6 @@ export class EditProductComponent implements OnInit {
 
   deletePhoto(imagePath) {
 
-    console.log(imagePath);
     let body = {
       imageId: imagePath
     }
@@ -243,7 +240,6 @@ export class EditProductComponent implements OnInit {
   getSizeList() {
 
     this.apiService.getSizeList().subscribe(res => {
-      console.log(res);
       res.data.forEach(element => {
         this.sizeList.push({
           id: element._id,
@@ -257,7 +253,6 @@ export class EditProductComponent implements OnInit {
 
   getTeaList() {
     this.apiService.getTeaList().subscribe(res => {
-      console.log(res);
       res.data.forEach(element => {
         this.teaTypeList.push({
           id: element._id,
@@ -271,7 +266,6 @@ export class EditProductComponent implements OnInit {
 
   getSugarLevelList() {
     this.apiService.getSugarLevelList().subscribe(res => {
-      console.log(res);
       res.data.forEach(element => {
         this.sugarLevelList.push({
           id: element._id,
@@ -287,10 +281,8 @@ export class EditProductComponent implements OnInit {
     //Pagination is applied in the backend. just not using in the front end because of design same as category
     // this.progress = true
     this.apiService.getRawItemList(1, 10000000, '').subscribe(res => {
-      console.log(res)
       if (res.success) {
         this.progress = false
-        console.log(res.data);
         this.brandList = res.data
       } else {
         this.progress = false
@@ -344,7 +336,6 @@ export class EditProductComponent implements OnInit {
 
   removeSize(i: number) {
     this.sizePrice().removeAt(i);
-    console.log(this.sizePrice().value);
   }
 
 
@@ -364,7 +355,6 @@ export class EditProductComponent implements OnInit {
     this.apiService.getCategoryList().subscribe(res => {
 
       if (res.success) {
-        console.log(res);
         if (res.data) {
           this.categoryList = res.data
 
@@ -417,7 +407,6 @@ export class EditProductComponent implements OnInit {
   subCategorySelected(id) {
 
 
-    console.log(id);
     this.selectedSubcategory = id
 
   }
@@ -427,7 +416,6 @@ export class EditProductComponent implements OnInit {
     this.brandList = []
     this.apiService.getBrandListBySubcat(id).subscribe(res => {
       if (res.success) {
-        console.log(res)
         if (res.data) {
           this.brandList = res.data;
         }
@@ -437,13 +425,11 @@ export class EditProductComponent implements OnInit {
 
   brandSelected(id) {
     this.selectedBrand = id;
-    console.log(id);
 
   }
 
   onSubmit() {
 
-    console.log("check", this.editProductForm)
     this.submitted = true;
 
     if (this.submitted && this.editProductForm.valid && (this.previewImage.length > 0 || this.images.length > 0)) {
@@ -469,9 +455,6 @@ export class EditProductComponent implements OnInit {
 
       body.append('discount', this.editProductForm.controls['discount'].value)
 
-      body.forEach((value, key) => {
-        console.log(key + " " + value)
-      });
       this.progress = true
       this.apiService.updateProduct(body, this.id).subscribe((res) => {
         if (res.success) {
@@ -479,7 +462,6 @@ export class EditProductComponent implements OnInit {
           this.commonService.successToast("Product Successfully update")
           this.router.navigate(['/product'])
 
-          console.log(res)
         } else {
           this.progress = false
           this.commonService.errorToast(res.message)
@@ -504,14 +486,12 @@ export class EditProductComponent implements OnInit {
         if (this.images.length <= 4) {
           let name = event.target.files[i].name;
           tempfile = event.target.files[i]
-          console.log("check image", event.target.files[i].size);
           var reader = new FileReader();
           let toasterService = this.commonService
 
           reader.readAsDataURL(event.target.files[i])
           reader.onload = (event: any) => {
             img.src = event.target.result;
-            console.log(event.target.result);
 
             let temp = {
               name: name,

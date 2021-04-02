@@ -37,7 +37,6 @@ export class DocumentComponent implements OnInit {
       userId: this.id
     }
     this.apiService.getDocument(body).subscribe(res => {
-      console.log(res);
       if (res.success) {
         this.documentList = res.data
       }

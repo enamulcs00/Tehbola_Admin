@@ -42,6 +42,8 @@ export class OrdermanagementComponent implements OnInit {
   flag: any
   flagUserList: boolean;
   srNo: number;
+  progress: boolean;
+  vendorList = [];
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) {
 
 
@@ -49,15 +51,93 @@ export class OrdermanagementComponent implements OnInit {
 
   ngOnInit() {
     this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
+    this.getAssignmentdata()
+  }
+
+
+
+  getAssignmentdata() {
+    this.progress = true;
+    this.apiService.getAssignementData().subscribe(res => {
+
+
+
+      this.progress = false
+      if (res.success) {
+        res.data.vendor.forEach(element => {
+          this.vendorList.push(
+            {
+              id: element._id,
+              name: element.fullName
+            })
+        });
+
+        console.log(this.vendorList);
+
+
+      } else {
+        this.commonService.errorToast(res.message)
+      }
+
+    })
+  }
+
+
+  approveReject(e, id) {
+
+    let body = {
+      'orderId': id
+    }
+    console.log(e);
+    if (e === 'true') {
+
+      this.apiService.approveEvent(body).subscribe(res => {
+        console.log(res);
+        this.commonService.successToast(res.message)
+        this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
+      })
+    } else if (e === 'false') {
+      this.apiService.declineEvent(body).subscribe(res => {
+        console.log(res);
+        this.commonService.successToast(res.message)
+        this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
+      })
+    }
+
+
+
+  }
+
+
+  AssignVendor(e, id) {
+
+    let body = {
+      'orderId': id,
+      'vendorId': e
+    }
+    console.log(body);
+
+
+    this.apiService.assignVendor(body).subscribe(res => {
+      console.log(res);
+      this.commonService.successToast(res.message)
+      this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
+    })
   }
 
   getSaleslist(page, pageSize, search, filterBy) {
-    this.apiService.getSaleList(page, pageSize, search, filterBy).subscribe(res => {
+
+    let body = {
+      page: page,
+      search: search,
+      count: pageSize
+    }
+    this.apiService.getSaleList(body).subscribe(res => {
       console.log(res)
-      if (res.data) {
+      if (res.success) {
         this.flagData = false
         this.salesList = res.data;
-        this.length = res.total
+        this.length = res.data.length
       } else {
         this.flagData = true
       }
@@ -74,16 +154,14 @@ export class OrdermanagementComponent implements OnInit {
       this.flag = false
     }
     console.log(e.target.value);
-
     this.filterBy = e.target.value
-
     this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
 
   }
 
   searchMethod() {
     this.flagSearch = false
-    // console.log(this.search);
+
     this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
   }
   clearSearch() {

@@ -110,7 +110,7 @@ export class BrandlistComponent implements OnInit {
 
   searchMethod() {
     this.flagSearch = false
-    console.log(this.search);
+
 
     this.getBrandList()
   }
@@ -127,10 +127,10 @@ export class BrandlistComponent implements OnInit {
     //Pagination is applied in the backend. just not using in the front end because of design same as category
     this.progress = true
     this.apiService.getRawItemList(this.page, this.pageSize, this.search).subscribe(res => {
-      console.log(res)
+
       if (res.success) {
         this.progress = false
-        console.log(res.data);
+
         this.brandList = res.data
         this.length = res.total
       } else {
@@ -141,7 +141,7 @@ export class BrandlistComponent implements OnInit {
   }
 
   rawListAfterPageSizeChanged(e): any {
-    console.log(e)
+
     this.pageSize = e.pageSize
     if (e.pageIndex == 0) {
       this.page = 1;
@@ -190,9 +190,9 @@ export class BrandlistComponent implements OnInit {
 
   getCategoryList() {
     this.apiService.getAllCategories().subscribe(res => {
-      console.log(res)
+
       if (res.success == true) {
-        console.log(res.data);
+
         this.categoryList = res.data
       }
     })
@@ -201,13 +201,13 @@ export class BrandlistComponent implements OnInit {
 
   categorySelected(e) {
 
-    console.log(e.value);
+
     // let id = e
     this.apiService.getSubcategoryList(e).subscribe(res => {
-      console.log(res)
+
       if (res.success == true) {
         this.editBrandForm.get('subCategory').reset()
-        console.log(res.data);
+
         this.subcategoryList = res.data
       }
     })
@@ -231,14 +231,14 @@ export class BrandlistComponent implements OnInit {
 
           let name = event.target.files[i].name;
           tempfile = event.target.files[i]
-          console.log("check image", event.target.files[i].size);
+
           var reader = new FileReader();
           let toasterService = this.commonService
 
           reader.readAsDataURL(event.target.files[i])
           reader.onload = (event: any) => {
             img.src = event.target.result;
-            console.log(event.target.result);
+
 
             let temp = {
               name: name,
@@ -298,14 +298,14 @@ export class BrandlistComponent implements OnInit {
       if (res.data) {
         this.flagImage = false;
         this.apiService.getSubcategoryList(res.data.category._id).subscribe(res1 => {
-          console.log(res1)
+
 
           if (res1.success == true) {
 
-            console.log(res1.data);
+
             this.subcategoryList = res1.data
 
-            console.log(res)
+
             this.editableBrandId = res.data._id
             this.editBrandForm.controls['name'].setValue(res.data.name);
 
@@ -333,7 +333,7 @@ export class BrandlistComponent implements OnInit {
             //  this.image = data.image
             this.brandImage = data.image;
             //   this.imageName = data.image.name
-            //  console.log(this.image);
+
           }
         });
 
@@ -357,15 +357,15 @@ export class BrandlistComponent implements OnInit {
     }).then(result => {
       if (result.value) {
         this.result = result;
-        console.log(id)
+
         const data = {
           "id": id,
           "model": "RawItems"
         }
 
-        console.log(data)
+
         this.apiService.delete(data).subscribe(res => {
-          console.log(res);
+
           if (res.success) {
             // this.getAllCategories()
             this.commonService.successToast(res.message);
@@ -377,7 +377,7 @@ export class BrandlistComponent implements OnInit {
 
         });
       } else {
-        console.log("cancelled");
+
       }
     });
 
@@ -389,7 +389,7 @@ export class BrandlistComponent implements OnInit {
     this.submitted = true
     if (this.submitted && this.addBrandForm.valid && this.imageFile.length > 0) {
       let body = this.addBrandForm.value
-      console.log(body);
+
 
       let formData = new FormData();
       formData.append('name', this.addBrandForm.get('name').value);
@@ -408,12 +408,12 @@ export class BrandlistComponent implements OnInit {
         formData.append('image', this.imageFile[i], this.imageFile[i].name);
       }
       formData.forEach((value, key) => {
-        console.log(key + " " + value)
+
       });
       //formData.append('image', new Blob([this.imageFile], { type: 'image/*' }), this.imageFile.name);
       this.progress = true
       this.apiService.addBrand(formData).subscribe(res => {
-        console.log(res)
+
         if (res.success == true) {
           this.progress = false
           this.commonService.successToast('Successfully Added')
@@ -467,7 +467,7 @@ export class BrandlistComponent implements OnInit {
       }
       this.progress = true
       this.apiService.editBrand(formData).subscribe(res => {
-        console.log(res)
+
         if (res.success == true) {
           this.progress = false
           this.commonService.successToast('Successfully Edited')

@@ -32,7 +32,6 @@ export class EndorsedProductComponent implements OnInit {
   progress: boolean;
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) {
     this.user = JSON.parse(sessionStorage.getItem('Markat_User'));
-    console.log(this.user);
 
 
   }
@@ -60,7 +59,6 @@ export class EndorsedProductComponent implements OnInit {
 
 
   showVendorList() {
-    console.log("inside get vendor")
     let body = {
       roles: 'merchant',
       filter: this.filterBy,
@@ -73,7 +71,6 @@ export class EndorsedProductComponent implements OnInit {
     this.apiService.getList(body).subscribe((res) => {
       if (res.success) {
         this.progress = false
-        console.log(res);
         this.vendorList = res.data;
         this.length = res.total;
       } else {
@@ -93,7 +90,7 @@ export class EndorsedProductComponent implements OnInit {
     }
     this.progress = true
     this.apiService.getEndorsedProduct(body).subscribe(res => {
-      console.log(res);
+
       if (res.success) {
         this.progress = false
         this.endorsementProductList = res.data;
@@ -141,7 +138,7 @@ export class EndorsedProductComponent implements OnInit {
     }
     this.progress = true
     this.apiService.changeUserStatus(body).subscribe(res => {
-      console.log(res);
+
       if (res.success) {
         this.progress = false
         this.commonService.successToast(res.message)
@@ -157,7 +154,6 @@ export class EndorsedProductComponent implements OnInit {
   }
 
   vendorListAfterPageSizeChanged(e): any {
-    console.log(e);
     if (e.pageIndex == 0) {
       this.page = 1;
       // this.page = e.pageIndex;
@@ -188,7 +184,6 @@ export class EndorsedProductComponent implements OnInit {
   flagSearch: boolean = true
   searchMethod() {
     this.flagSearch = false
-    console.log(this.search);
 
     this.getEndorsement()
 

@@ -47,7 +47,7 @@ export class AddinventoryComponent implements OnInit {
 
   getProduct(id) {
     this.apiService.viewProduct(id).subscribe(res => {
-      console.log(res);
+
       if (res.success) {
         this.updateInventoryForm.get('productId').setValue(res.data.productId)
         this.updateInventoryForm.get('productName').setValue(res.data.name)

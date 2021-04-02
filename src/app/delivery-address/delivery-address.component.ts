@@ -38,7 +38,6 @@ export class DeliveryAddressComponent implements OnInit {
   getUserAddresses() {
 
     this.apiService.getUserAddress(this.id).subscribe((res) => {
-      console.log(res);
       if (res.data.length > 0) {
         this.flagData = true
         this.addressList = res.data
@@ -88,7 +87,6 @@ export class DeliveryAddressComponent implements OnInit {
 
 
     this.apiService.updateAddress(body).subscribe((res) => {
-      console.log(res);
     });
     this.flag = false
     this.getUserAddresses()

@@ -42,7 +42,6 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
     this.imagePath = this.urlService.imageUrl;
 
     this.apiService.getProfile().subscribe((res) => {
-      console.log(res.data)
       this.profileData = res.data
 
       this.firstname = this.profileData.firstName
@@ -121,7 +120,6 @@ export class EditprofileComponent implements OnInit, AfterViewInit {
         data.append('phone', this.updateProfileForm.get('phone').value),
         this.progress = true
       this.apiService.updateProfile(data).subscribe((res) => {
-        console.log(res);
         if (res.success) {
           this.progress = false
           this.commonService.successToast(res.message)

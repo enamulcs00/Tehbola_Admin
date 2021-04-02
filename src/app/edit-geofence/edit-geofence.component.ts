@@ -79,14 +79,11 @@ export class EditGeofenceComponent implements OnInit {
   }
   getFencing() {
 
-    console.log(this.geoFenceId);
 
     this.service.getGeofencing(this.geoFenceId).subscribe((res) => {
       if (res['success'] == true) {
 
-        console.log(res);
         this.locationPoints = res['data'].locationPoints;
-        console.log(res, this.locationPoints, this.searchString);
         this.searchString = res['data'].name
         this.geofenceForm.get('geofenceName').setValue(res['data'].name)
         this.geofenceForm.get('geofenceCity').setValue(res['data'].city)
@@ -124,7 +121,6 @@ export class EditGeofenceComponent implements OnInit {
     });
   }
   onMapReady(map) {
-    console.log("DATA")
     this.Map = map;
     // this.initDrawingManager(this.Map);
   }
@@ -171,7 +167,6 @@ export class EditGeofenceComponent implements OnInit {
       const vertexLatLng = { lat: vertex.lat(), lng: vertex.lng() };
       polyArrayLatLng.push(vertexLatLng);
     }
-    console.log(polyArrayLatLng);
 
     if (this.geofenceForm.valid && polyArrayLatLng.length) {
       this.addgeofence = false;
@@ -183,7 +178,6 @@ export class EditGeofenceComponent implements OnInit {
 
         "locationPoints": polyArrayLatLng
       }
-      console.log("geofencedata", geofenceData)
       this.service.updateGeofencing(geofenceData).subscribe((res) => {
 
         if (res['success'] == true) {
@@ -221,7 +215,6 @@ export class EditGeofenceComponent implements OnInit {
       this.latitude = element.lat;
       this.longitude = element.lng;
     });
-    console.log("drawPolygonArr", drawPolygonArr)
     if (this.constructTriangle) {
       this.constructTriangle.setMap(null)
     }

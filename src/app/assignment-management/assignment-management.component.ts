@@ -69,7 +69,7 @@ export class AssignmentManagementComponent implements OnInit {
   constructor(public dialog: MatDialog, private apiService: ApiService, private commonService: CommonService, private fb: FormBuilder) { }
 
   ngOnInit() {
-    console.log(this.date);
+
 
     this.getAssignmentdata()
     this.assignmentForm = this.fb.group({
@@ -95,7 +95,7 @@ export class AssignmentManagementComponent implements OnInit {
       this.flag = false
 
     }
-    console.log(e.value);
+
     this.isCompleted = e.value;
     this.getAssignmentList()
 
@@ -105,7 +105,7 @@ export class AssignmentManagementComponent implements OnInit {
   defaultVendorList = this.vendorList
   vendorSearch(value) {
 
-    console.log(value);
+
     if (value.length > 0) {
 
       this.vendorList = this.vendorList.filter((unit) => unit.name.indexOf(value) > -1);
@@ -118,7 +118,7 @@ export class AssignmentManagementComponent implements OnInit {
   defaultTruckData = this.truckList
   foodTruckSearch(value) {
 
-    console.log(value);
+
     if (value.length > 0) {
       this.truckList = this.truckList.filter((unit) => unit.name.indexOf(value) > -1);
     } else {
@@ -129,7 +129,6 @@ export class AssignmentManagementComponent implements OnInit {
   defaultGeofenceData = this.geofenceList
   geofenceSearch(value) {
 
-    console.log(value);
     if (value.length > 0) {
       this.geofenceList = this.geofenceList.filter((unit) => unit.name.indexOf(value) > -1);
     } else {
@@ -139,7 +138,7 @@ export class AssignmentManagementComponent implements OnInit {
   defaultEquipmentList = this.equipmentList
   equipmentSearch(value) {
 
-    console.log(value);
+
     if (value.length > 0) {
       this.equipmentList = this.equipmentList.filter((unit) => unit.name.indexOf(value) > -1);
     } else {
@@ -151,7 +150,7 @@ export class AssignmentManagementComponent implements OnInit {
   rawItemSearch(value) {
 
 
-    console.log(value);
+
     if (value.length > 0) {
       this.rawItemList = this.rawItemList.filter((unit) => unit.name.indexOf(value) > -1);
     } else {
@@ -163,7 +162,7 @@ export class AssignmentManagementComponent implements OnInit {
   getEquipment(equipment) {
     this.equipmentListForModel = ''
     this.equipmentListForModel = equipment
-    console.log("modal list", this.equipmentListForModel);
+
 
     document.getElementById('equipmentButton').click()
 
@@ -174,7 +173,7 @@ export class AssignmentManagementComponent implements OnInit {
 
     this.rawItemListForModel = ''
     this.rawItemListForModel = rawItemList
-    console.log("modal list", this.rawItemListForModel);
+
 
     document.getElementById('rawItemButton').click()
   }
@@ -185,7 +184,7 @@ export class AssignmentManagementComponent implements OnInit {
   getAssignmentdata() {
     this.progress = true;
     this.apiService.getAssignementData().subscribe(res => {
-      console.log(res);
+
 
 
       this.progress = false
@@ -244,7 +243,7 @@ export class AssignmentManagementComponent implements OnInit {
 
   getAssignmentList() {
     this.apiService.getAssignmentList(this.isCompleted, status).subscribe(res => {
-      console.log(res);
+
       if (res.success) {
         this.getAssignmentListData = res.data;
 
@@ -259,7 +258,7 @@ export class AssignmentManagementComponent implements OnInit {
 
 
   openDialog() {
-    console.log(this.assignmentForm.value);
+
 
     const dialogRef = this.dialog.open(ModalIngredientsComponent, {
       data: { data: this.assignmentForm.value },
@@ -272,9 +271,9 @@ export class AssignmentManagementComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
 
-      console.log(`Dialog result: ${result}`);
+
       let tmp = result;
-      console.log(tmp);
+
       if (!this.backDropClick) {
         this.addAssignment(tmp)
       }
@@ -283,10 +282,10 @@ export class AssignmentManagementComponent implements OnInit {
   }
 
   addAssignment(temp) {
-    console.log("data before request", temp);
+
 
     this.apiService.addAssignment(temp).subscribe(res => {
-      console.log(res);
+
       if (res.success) {
         this.getAssignmentList()
         this.commonService.successToast(res.message)
@@ -315,14 +314,14 @@ export class AssignmentManagementComponent implements OnInit {
     }).then(result => {
       if (result.value) {
         // this.result = result;
-        console.log(id)
+
         const data = {
           "id": id,
           "model": "Assignment"
         }
 
         this.apiService.delete(data).subscribe(res => {
-          console.log(res);
+
           if (res.success) {
             this.getAssignmentList()
             this.commonService.successToast(res.message);
@@ -335,7 +334,7 @@ export class AssignmentManagementComponent implements OnInit {
 
 
       } else {
-        console.log("cancelled");
+
       }
     });
   }

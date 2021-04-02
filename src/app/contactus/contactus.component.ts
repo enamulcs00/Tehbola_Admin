@@ -24,12 +24,12 @@ export class ContactusComponent implements OnInit {
   getAllCms() {
     let allCms = []
     this.apiService.getAllCMs().subscribe(res => {
-      console.log(res);
+
       if (res.success == true) {
         allCms = res.data;
         this.CmsData = allCms.find(ele => ele.slugName == this.slugName);
         this.mycontent = this.CmsData.description;
-        console.log(this.CmsData);
+
       }
     })
   }
@@ -49,7 +49,7 @@ export class ContactusComponent implements OnInit {
 
 
     this.apiService.updateCMS(this.CmsData).subscribe(res => {
-      console.log(res)
+
       if (res.success == true) {
         this.commonService.successToast("Updated Successfully")
       }
@@ -60,12 +60,12 @@ export class ContactusComponent implements OnInit {
 
 
   onChange($event: any): void {
-    console.log("onChange");
+
     //this.log += new Date() + "<br />";
   }
 
   onPaste($event: any): void {
-    console.log("onPaste");
+
     //this.log += new Date() + "<br />";
   }
 
