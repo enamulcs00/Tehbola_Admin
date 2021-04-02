@@ -209,9 +209,7 @@ export class AddproductComponent implements OnInit {
     this.specification().push(this.newSpecifiaction())
   }
 
-  // addNewSearchKeywrods() {
-  //   this.seacrhKeywords().push(this.newSearchKeywords())
-  // }
+
   removeSpecification(i: number) {
     this.specification().removeAt(i);
 
