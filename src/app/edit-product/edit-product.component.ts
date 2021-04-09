@@ -1,3 +1,4 @@
+import { MatSlideToggleChange } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormArray, FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
@@ -123,20 +124,25 @@ export class EditProductComponent implements OnInit {
       specification: this.fb.array([]),
       aliases: this.fb.array([
         this.fb.control('')
-      ])
+      ]),
+      tahbolaSpecial : [false]
     }
     )
 
 
 
   }
-
+  onChange($event: MatSlideToggleChange) {
+    
+    this.editProductForm.controls['tahbolaSpecial'].setValue($event.checked);
+    console.log(this.editProductForm.value);
+}
   getProduct(id) {
     this.progress = true
     this.apiService.viewProduct(id).subscribe(res => {
       if (res.success) {
 
-
+        console.log(res.data);
         this.productData = res.data
         this.setValue(this.productData)
       } else {
@@ -159,6 +165,7 @@ export class EditProductComponent implements OnInit {
     this.editProductForm.get('highlights').setValue(data.highlights);
     this.editProductForm.get('highlights_ar').setValue(data.highlights_ar);
     //  this.editProductForm.get('price').setValue(data.price);
+    this.editProductForm.get('tahbolaSpecial').setValue(data.tahbolaSpecial);
     this.editProductForm.get('category').setValue(data.category._id);
     let temp2 = []
     data.teaType.forEach(element => {
@@ -452,12 +459,14 @@ export class EditProductComponent implements OnInit {
       }
       body.append('highlights', this.editProductForm.controls['highlights'].value)
       body.append('highlights_ar', this.editProductForm.controls['highlights_ar'].value)
-
+      body.append('tahbolaSpecial', JSON.stringify(this.editProductForm.controls['tahbolaSpecial'].value));
+      //body.append('tahbolaSpecial', this.editProductForm.controls['tahbolaSpecial'].value)
       body.append('discount', this.editProductForm.controls['discount'].value)
 
       this.progress = true
       this.apiService.updateProduct(body, this.id).subscribe((res) => {
         if (res.success) {
+          console.log(body);
           this.progress = false
           this.commonService.successToast("Product Successfully update")
           this.router.navigate(['/product'])

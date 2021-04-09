@@ -7,6 +7,7 @@ import { CommonService } from 'src/services/common.service';
 import { UrlService } from 'src/services/url.service';
 import { MoreThan } from 'src/services/moreThanValidator';
 import { validateHorizontalPosition } from '@angular/cdk/overlay';
+import { MatSlideToggleChange } from '@angular/material';
 declare var $: any;
 interface teaTypeModel {
   name: string;
@@ -113,13 +114,19 @@ export class AddproductComponent implements OnInit {
       sizePrice: this.fb.array([], Validators.required),
       aliases: this.fb.array([
         this.fb.control('', Validators.required)
-      ])
+      ]),
+      tabolaSpecial :[false]
     })
 
 
 
   }
-
+  
+  onChange($event: MatSlideToggleChange) {
+    
+    this.addProductForm.controls['tabolaSpecial'].setValue($event.checked);
+    console.log(this.addProductForm.value);
+}
   getTax() {
 
     this.apiService.getTax().subscribe(res => {
@@ -366,6 +373,7 @@ export class AddproductComponent implements OnInit {
       body.append('highlights', this.addProductForm.controls['highlights'].value)
       body.append('highlights_ar', this.addProductForm.controls['highlights_ar'].value)
       body.append('discount', this.addProductForm.controls['discount'].value)
+      body.append('tehbolaSpecial', this.addProductForm.controls['tabolaSpecial'].value)
 
       this.progress = true
       this.apiService.AddProduct(body).subscribe((res) => {

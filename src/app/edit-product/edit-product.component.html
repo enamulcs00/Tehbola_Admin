@@ -361,25 +361,34 @@
                                 </mat-error>
                             </div>
                         </div>
+                        <div class="row">
 
-                        <div>
-                            <!--  -->
-                            <label>Image<span class="red">*</span></label>
+                            <div class="col-md-6">
+                                <!--  -->
+                                <label>Image<span class="red">*</span></label>
                             <div class="product_image_upload">
                                 <figure>
                                     <input type='file' accept="image/*" formControlName="image"
                                         (change)="readUrl($event)" placeholder="choosefile" class="images_uploader"
                                         multiple></figure>
 
-                                <button class="btn btn-primary"><span style="color: white;"> <i
+                                        <button class="btn btn-primary"><span style="color: white;"> <i
                                             class="fa fa-plus"></i>Add
-                                        image</span></button>
-                            </div>
+                                            image</span></button>
+                                        </div>
 
-                            <div class="custom-invalid" *ngIf="submitted && previewImage.length==0 && images.length==0">
-                                Image is <strong>required</strong>
+                                        <div class="custom-invalid" *ngIf="submitted && previewImage.length==0 && images.length==0">
+                                            Image is <strong>required</strong>
                             </div>
-
+                            
+                        </div>
+                        <div class="col-md-6 text-center p-5">
+                            <div class="d-flex">
+                                <label>Tehbola Special</label>
+                                <mat-slide-toggle  (change)="onChange($event)"  [checked]="editProductForm.tahbolaSpecial=='1'? true:false" ></mat-slide-toggle>
+                            </div>
+                        </div>
+                       
                             <div *ngIf=" flagImageEditted===true" class="show_product_imges">
                                 <span *ngFor="let item of urls;let i=index">
                                     <div class="container">
@@ -387,11 +396,11 @@
                                             <img [src]="item.image" alt="use this">
                                         </figure>
                                         <a class="btn" (click)="deleteLocally(i)"> <i
-                                                class="fa fa-trash-o fa-fw"></i></a>
-                                    </div>
-                                </span>
-
-                            </div>
+                                            class="fa fa-trash-o fa-fw"></i></a>
+                                        </div>
+                                    </span>
+                                    
+                                </div>
                             <div class="show_product_imges">
                                 <span *ngFor="let item of previewImage">
                                     <div class="container">
