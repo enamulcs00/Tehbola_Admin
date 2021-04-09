@@ -165,7 +165,8 @@ export class EditProductComponent implements OnInit {
     this.editProductForm.get('highlights').setValue(data.highlights);
     this.editProductForm.get('highlights_ar').setValue(data.highlights_ar);
     //  this.editProductForm.get('price').setValue(data.price);
-    this.editProductForm.get('tahbolaSpecial').setValue(data.tahbolaSpecial);
+    debugger
+    this.editProductForm.get('tahbolaSpecial').setValue(data.tehbolaSpecial);
     this.editProductForm.get('category').setValue(data.category._id);
     let temp2 = []
     data.teaType.forEach(element => {
@@ -459,7 +460,7 @@ export class EditProductComponent implements OnInit {
       }
       body.append('highlights', this.editProductForm.controls['highlights'].value)
       body.append('highlights_ar', this.editProductForm.controls['highlights_ar'].value)
-      body.append('tahbolaSpecial', JSON.stringify(this.editProductForm.controls['tahbolaSpecial'].value));
+      body.append('tehbolaSpecial', JSON.stringify(this.editProductForm.controls['tahbolaSpecial'].value));
       //body.append('tahbolaSpecial', this.editProductForm.controls['tahbolaSpecial'].value)
       body.append('discount', this.editProductForm.controls['discount'].value)
 
