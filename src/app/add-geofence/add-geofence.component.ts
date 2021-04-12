@@ -35,6 +35,7 @@ export class AddGeofenceComponent implements OnInit {
       geofenceName: ['', Validators.required],
       geofenceCity: ['', Validators.required],
       geofenceState: ['', Validators.required],
+      deliverycharges:['',Validators.required]
     })
 
 
@@ -117,6 +118,7 @@ export class AddGeofenceComponent implements OnInit {
         "name": this.geofenceForm.get('geofenceName').value,
         "city": this.geofenceForm.get('geofenceCity').value,
         "state": this.geofenceForm.get('geofenceState').value,
+        "deliveryCharge":this.geofenceForm.get('deliverycharges').value,
         "locationPoints": this.polyarray
       }
 

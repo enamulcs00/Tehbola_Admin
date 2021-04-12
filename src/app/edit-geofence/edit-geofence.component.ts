@@ -64,6 +64,7 @@ export class EditGeofenceComponent implements OnInit {
       geofenceName: ['', Validators.required],
       geofenceCity: ['', Validators.required],
       geofenceState: ['', Validators.required],
+      deliverycharges:['',Validators.required]
     })
 
 
@@ -88,6 +89,7 @@ export class EditGeofenceComponent implements OnInit {
         this.geofenceForm.get('geofenceName').setValue(res['data'].name)
         this.geofenceForm.get('geofenceCity').setValue(res['data'].city)
         this.geofenceForm.get('geofenceState').setValue(res['data'].state)
+        this.geofenceForm.get('deliverycharges').setValue(res['data'].deliveryCharge)
         this.onEdit(this.locationPoints, this.geoFenceId)
       }
 
@@ -175,7 +177,7 @@ export class EditGeofenceComponent implements OnInit {
         "name": this.geofenceForm.get('geofenceName').value,
         "city": this.geofenceForm.get('geofenceCity').value,
         "state": this.geofenceForm.get('geofenceState').value,
-
+        "deliveryCharge":this.geofenceForm.get('deliverycharges').value,
         "locationPoints": polyArrayLatLng
       }
       this.service.updateGeofencing(geofenceData).subscribe((res) => {
