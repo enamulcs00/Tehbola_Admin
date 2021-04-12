@@ -14,6 +14,8 @@
                         <a (click)="goToaddsale()"><span>+</span>Add Sale</a>
                     </div> -->
                 </div>
+                <mat-tab-group>
+                    <mat-tab label="On Demand">
                 <div class="tab-content">
                     <div id="allOrders" class="tab-pane fade in active">
                         <div class="inner_content">
@@ -143,6 +145,11 @@
                     </div>
 
                 </div>
+            </mat-tab>
+            <mat-tab label="Daily Order">
+                <app-dailyorder></app-dailyorder>
+            </mat-tab>
+            </mat-tab-group>
             </div>
         </div>
     </div>

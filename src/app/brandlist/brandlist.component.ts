@@ -48,6 +48,10 @@ export class BrandlistComponent implements OnInit {
     viewValue: 'Toppings'
   },
   {
+    value: 'flavour',
+    viewValue: 'Flavour'
+  },
+  {
     value: 'container',
     viewValue: 'Container'
   },

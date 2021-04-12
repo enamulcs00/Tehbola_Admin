@@ -1,0 +1,129 @@
+<div class="tab-content">
+    <div id="allOrders" class="tab-pane fade in active">
+        <div class="inner_content">
+            <div class="outer_table">
+                <div class="search_fields">
+                    <div class="">
+
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Filter<span class="red">*</span></mat-label>
+
+                            <mat-select placeholder="Filter" [(ngModel)]="filterBy"
+                                (selectionChange)="filterSelected($event)">
+                                <mat-option *ngIf="flag==true" value="">
+                                    Remove Filter
+                                </mat-option>
+                                <!--  <mat-option *ngIf="flag==false" value="">
+
+                    </mat-option> -->
+                                <mat-option value="active">
+                                    Active
+                                </mat-option>
+                                <mat-option value="inactive">
+                                    Inactive
+                                </mat-option>
+
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="search_inner_fiels">
+                        <div class="">
+
+                            <div class="search_with_icons">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Search</mat-label>
+                                    <input matInput type="text" [(ngModel)]="search" placeholder="">
+                                </mat-form-field>
+                                <button mat-button matSuffix mat-icon-button> <i
+                                        *ngIf="flagSearch==true" class="fa fa-search" aria-hidden="true"
+                                        (click)="searchMethod()"></i>
+                                    <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
+                                        (click)="clearSearch()"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <th>Order Id</th>
+                            <th>Customer Name</th>
+                            <th>Customer Email</th>
+                            <!-- <th>Customer Contact</th> -->
+                            <th>Total Price</th>
+
+                            <th>Order Items</th>
+
+                            <th>Booking Status</th>
+                            <th>Booking Address</th>
+                            <th>Booking Notes</th>
+                            <th>Expected Time</th>
+                            <th class="action_bx">Assign Vendor</th>
+                        </tr>
+                        <tr *ngFor="let item of salesList; let i=index">
+                            <td>{{item._id}}</td>
+                            <td>{{item.orderDetails[0].name}}</td>
+                            <td>{{item.orderDetails[0].email}}</td>
+                            <td>{{item.orderDetails[0].totalAmount| number}}</td>
+                            <td>
+                                <ul>
+                                    <li class="show" *ngFor="let orderProduct of item.orderDetails">
+                                        {{orderProduct.product.name}}<br>
+                                    </li>
+
+                                </ul>
+                            </td>
+                            <td class="Booking_status">
+                                <select [(ngModel)]="item.orderDetails[0].isapproval"
+                                    (change)="approveReject($event.target.value,item._id)">
+
+                                    <option value=""></option>
+                                    <option value="true">ConFirm</option>
+                                    <option value="false">Cancel</option>
+
+                                </select>
+                            </td>
+                            <td> {{item.orderDetails[0].deliveryAddress.address }}
+                                {{item.orderDetails[0].deliveryAddress.streetName}}
+                                {{item.orderDetails[0].deliveryAddress.postalCode}}</td>
+                            <td>
+                                {{item.orderDetails[0].deliveryAddress.noteToDriver }}
+                            </td>
+
+                            <td>{{item.orderDetails[0].startTIME | date}}-{{item.orderDetails[0].endTime | date}}
+                            </td>
+
+
+                            <td class="Booking_status">
+                                <select [(ngModel)]="item.orderDetails[0].vendorId"
+                                    (change)="AssignVendor($event.target.value,item._id)">
+                                    <option value=""></option>
+                                    <option [value]="item.id" *ngFor="let item of vendorList">
+                                        {{item.name}} </option>
+
+                                </select>
+                            </td>
+
+
+
+
+                        </tr>
+
+
+
+
+                    </table>
+
+                </div>
+            </div>
+            <!-----start pagination-->
+            <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
+                (page)="pageEvent = productListAfterPageSizeChanged($event)">
+            </mat-paginator>
+            <!-----end pagination-->
+        </div>
+    </div>
+
+</div>

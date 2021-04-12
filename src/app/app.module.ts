@@ -111,7 +111,8 @@ import { EditFoodTruckComponent } from './edit-food-truck/edit-food-truck.compon
 import { EquipmentManagementComponent } from './equipment-management/equipment-management.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { PromoCodeManagementComponent } from './promo-code-management/promo-code-management.component';
-import { AddPromoCodeManagementComponent } from './add-promo-code-management/add-promo-code-management.component'
+import { AddPromoCodeManagementComponent } from './add-promo-code-management/add-promo-code-management.component';
+import { DailyorderComponent } from './dailyorder/dailyorder.component'
 
 @NgModule({
   declarations: [
@@ -211,6 +212,7 @@ import { AddPromoCodeManagementComponent } from './add-promo-code-management/add
     EquipmentManagementComponent,
     PromoCodeManagementComponent,
     AddPromoCodeManagementComponent,
+    DailyorderComponent,
 
 
   ],
