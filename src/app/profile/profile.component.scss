@@ -36,10 +36,22 @@
         display: flex;
         align-items: center;
         text-align: left;
+        form {
+            width: 100%;
+            .add_user_list {
+                width: 100%;
+                ul {
+                    width: 100%;
+                    li {
+                        width: 48%;
+                        margin-bottom: 15px;
+                        font-size: 18px;
+                    }
+                }
+            }
+        }
     }
-    .personal_deatil ul{width: 100%;display: inline-block;vertical-align: middle;}
-    .personal_deatil ul li{width: 50%;display: inline-block;vertical-align: middle ;
-        margin-bottom: 15px;font-size: 18px;}
+
         .personal_deatil ul li.company_logo{width: 100%;display: inline-block;vertical-align: middle ;text-align: center;
           }
           .personal_deatil ul li.company_logo img{padding: 10px 0 25px;}
