@@ -165,7 +165,7 @@ export class EditProductComponent implements OnInit {
     this.editProductForm.get('highlights').setValue(data.highlights);
     this.editProductForm.get('highlights_ar').setValue(data.highlights_ar);
     //  this.editProductForm.get('price').setValue(data.price);
-    debugger
+    
     this.editProductForm.get('tahbolaSpecial').setValue(data.tehbolaSpecial);
     this.editProductForm.get('category').setValue(data.category._id);
     let temp2 = []

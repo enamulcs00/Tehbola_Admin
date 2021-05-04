@@ -14,7 +14,7 @@ export class NotificationComponent implements OnInit {
 
   constructor(private apiService: ApiService, private commonService: CommonService, private notification: NotificationService) {
 
-    this.id = JSON.parse(localStorage.getItem('User'))._id
+    this.id = JSON.parse(apiService.getUser())._id
     console.log(this.id)
 
   }

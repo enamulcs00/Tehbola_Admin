@@ -5,80 +5,136 @@
             <app-sidebar></app-sidebar>
             <div class="container-fluid">
                 <div class="sub_heading">
-                    <h1>Manage Reviews</h1>
-                    <div class="right_side_buttons">
-                        <a (click)="back()">Go Back</a>
-
-                    </div>
+                    <h1>Manage Reviews and Report</h1>
                 </div>
-                <div class="outer_table">
-                    <div class="search_fields">
-                        <div class="filters Booking_status">
-                            <label>Filter</label>
-                            <select [(ngModel)]="filterBy" (change)="filterSelected($event)">
-                                <option *ngIf="flag==true" value="">Remove Filter</option>
-                                <option *ngIf="flag==false" value=""></option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </div>
-                        <div class="search_inner_fiels">
-                            <div class="filters Booking_status">
-                                <label>Search</label>
-                                <div class="search_with_icons">
-                                    <mat-form-field [floatLabel]="'never'">
-                                        <input matInput type="text" [(ngModel)]="search" placeholder="">
+                <mat-tab-group>
+                    <mat-tab label='Reviews'>
+                        <div class="outer_table">
+                            <div class="search_fields">
+                                <div style="padding: 10px 20px;" class="filters Booking_status">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Filter</mat-label>
+                                        <mat-select placeholder="Filter" [(ngModel)]="filterBy"
+                                            (selectionChange)="filterSelected($event.value)">
+                                            <mat-option *ngIf="flag==true" value="">
+                                                Remove Filter
+                                            </mat-option>
+        
+                                            <mat-option value='1'>1 <i class="fa fa-star" aria-hidden="true"></i></mat-option>
+                                            <mat-option value='2'>2 <i class="fa fa-star" aria-hidden="true"></i><i
+                                                    class="fa fa-star" aria-hidden="true"></i></mat-option>
+                                            <mat-option value='3'>3 <i class="fa fa-star" aria-hidden="true"></i><i
+                                                    class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star"
+                                                    aria-hidden="true"></i></mat-option>
+                                            <mat-option value='4'>4 <i class="fa fa-star" aria-hidden="true"></i><i
+                                                    class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star"
+                                                    aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>
+                                            </mat-option>
+                                            <mat-option value='5'>5 <i class="fa fa-star" aria-hidden="true"></i><i
+                                                    class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star"
+                                                    aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i></mat-option>
+                                        </mat-select>
                                     </mat-form-field>
-                                    <i *ngIf="flagSearch==true" class="fa fa-search" aria-hidden="true"
-                                        (click)="searchMethod()"></i>
-                                    <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
-                                        (click)="clearSearch()"></i>
+                                </div>
+                                <div class="search_inner_fiels">
+                                    <div class="filters Booking_status">
+                                        <label>Search</label>
+                                        <div class="search_with_icons">
+                                            <mat-form-field [floatLabel]="'never'">
+                                                <input matInput type="text" [(ngModel)]="search" placeholder="">
+                                            </mat-form-field>
+                                            <i *ngIf="flagSearch==true" class="fa fa-search" aria-hidden="true"
+                                                (click)="searchMethod()"></i>
+                                            <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
+                                                (click)="clearSearch()"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
+                            <div class="table-responsive">
+                                <table>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>User Name</th>
+                                        <th>User Email</th>
+                                        <th>Rating </th>
+                                        <th>Review </th>
+                                        <th>Food Name</th>
+                                        <th>Food Status</th>
+                                        <th>Vendor name</th>
+                                    </tr>
+                                    <tr *ngFor="let item of reviewList; let i=index">
+                                        <td>{{item?.orderId}}</td>
+                                        <td>{{item?.user?.firstName}} {{item?.user?.lastName}}</td>
+                                        <td>{{item?.user?.email}}</td>
+                                        <td><span *ngFor="let items of item?.rating"> 
+                                            <span *ngIf="items===true;else elseBlock"><i class="fa fa-star" aria-hidden="true"></i> </span>
+                                            <ng-template  #elseBlock>
+                                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                                            </ng-template>
+                                        </span></td>
+                                        <td>{{item?.comment}}</td>
+                                        <td> <span *ngFor="let prod of item?.product">{{prod?.name}}</span></td>
+                                        <td>{{item?.foodstatus}}</td>
+                                        <td>{{item?.vendor?.fullName}} </td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table>
-                            <tr>
-
-                                <th>User Name</th>
-                                <th>User Email</th>
-                                <th>Rating </th>
-                                <th>Review </th>
-                                <th>Product Name</th>
-                                <th>Vendor name</th>
-                                <th>Action</th>
-                            </tr>
-                            <tr *ngFor="let item of reviewList; let i=index">
-
-                                <td>{{item.userId.firstName}} {{item.userId.lastName}}</td>
-                                <td>{{item.userId.email}}</td>
-
-                                <td>{{item.rating}}</td>
-                                <td>{{item.review}}</td>
-                                <td>{{item.productId.name}}</td>
-                                <td>{{item.productId.seller.firstName}} {{item.productId.seller.lastName}}</td>
-                                <td>
-                                    <div class="action">
-                                        <ul>
-                                            <li class="delete"><a (click)="deleteReview(item._id)"><i
-                                                        class="fa fa-trash-o fa-fw"></i></a></li>
-                                        </ul>
+                        <!-----start pagination-->
+                        <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                            (page)="pageEvent = reviewListAfterPageSizeChanged($event)">
+                        </mat-paginator>
+                        <!-----end pagination-->
+                    </mat-tab>
+                    <mat-tab label='Report'>
+                        <div class="search_fields">
+                            
+                            <div class="search_inner_fiels">
+                                <div class="filters Booking_status">
+                                    <label>Search</label>
+                                    <div class="search_with_icons">
+                                        <mat-form-field [floatLabel]="'never'">
+                                            <input matInput type="text" [(ngModel)]="searchForReport" placeholder="">
+                                        </mat-form-field>
+                                        <i *ngIf="flagSearchForReport==true" class="fa fa-search" aria-hidden="true"
+                                            (click)="searchMethodForReport()"></i>
+                                        <i *ngIf="flagSearchForReport==false" class="fa fa-times" aria-hidden="true"
+                                            (click)="clearSearchForReport()"></i>
                                     </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <!-----start pagination-->
-                <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-                    (page)="pageEvent = reviewListAfterPageSizeChanged($event)">
-                </mat-paginator>
-                <!-----end pagination-->
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table>
+                                <tr>
+                                    <th>Order Id</th>
+                                    <th>VendorName</th>
+                                    <th>Customer Name</th>
+                                    <!-- <th>Received Payment</th> -->
+                                    <th>Report Reason</th>
+                                </tr>
+                                <tr *ngFor="let item of reportList">
+                                    <td>{{item?.orderId}}</td>
+                                    <td>{{item.vendor.fullName}}</td>
+                                    <td>{{item?.user?.firstName}} {{item?.user?.lastName}}</td>
+
+                                    <td>{{item.comment}}</td>
+
+                                </tr>
+
+                            </table>
+                        </div>
+                        <!-----start pagination-->
+                        <mat-paginator [length]="lengthforReport" [pageSize]="pageSizeForReport" [pageSizeOptions]="pageSizeOptions"
+                        (page)="pageEvent = reportListPageSizeChanged($event)">
+                    </mat-paginator>
+                        <!-----end pagination-->
+                    </mat-tab>
+                </mat-tab-group>
+
 
             </div>
         </div>

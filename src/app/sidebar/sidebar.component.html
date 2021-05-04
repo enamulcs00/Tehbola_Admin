@@ -21,21 +21,21 @@
             In
         </a>
     </li>
-    <li rel="core7" class="nav_item">
+    <!-- <li rel="core7" class="nav_item">
         <a class="nav-link">
             Re
         </a>
-    </li>
+    </li> -->
     <li rel="core4" class="nav_item">
         <a class="nav-link">
             Nt
         </a>
     </li>
-    <li rel="core5" class="nav_item">
+    <!-- <li rel="core5" class="nav_item">
         <a class="nav-link">
             Hc
         </a>
-    </li>
+    </li> -->
     <!-- <li rel="core6" class="nav_item">
         <a class="nav-link">
             Cr
@@ -106,8 +106,9 @@
             </li>
             <!-- <li (click)="goTopayment()">Payment</li> -->
             <!--<li>Analytics</li>-->
-            <li (click)="goToSettings()">Settings</li>
-            <!-- <li (click)="goTomanageReviews()">Reviews</li> -->
+            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToSettings()">Settings</li>
+            <li  matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goTovendorSalesReport()">Vendor Request</li>
+            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goTomanageReviews()">Reviews</li>
         </ul>
     </div>
 
@@ -117,39 +118,39 @@
             <!-- <li (click)="goTowarehouse()">Warehouse</li>
             <li (click)="goToaccounts()">Accounts</li>
             <li (click)="goTooffersync()">offer Sync</li>-->
-            <!-- <li (click)="goToBroadCast()">Broadcast Message</li> -->
-            <!-- <li (click)="goTonotification()">Notifications</li> -->
+            <li (click)="goToBroadCast()">Broadcast Message</li>
+            <li (click)="goTonotification()">Notifications</li>
         </ul>
     </div>
-    <div id="core7" class="core">
+    <!-- <div id="core7" class="core">
         <h3>Report</h3>
         <ul>
-            <!-- <li (click)="goTosalesreport()">Report of sales</li> -->
+            <li (click)="goTosalesreport()">Report of sales</li>
 
-            <!-- <li (click)="goTovendorSalesReport()">Vendor Sales Report</li> -->
+             <li (click)="goTovendorSalesReport()">Vendor Sales Report</li>
 
 
 
         </ul>
-    </div>
-    <div id="core5" class="core">
+    </div> -->
+    <!-- <div id="core5" class="core">
         <h3>Help Center</h3>
         <ul>
 
 
 
-            <!-- <li (click)="goTotermcondition()">Terms and Conditions</li> -->
-            <!-- <li (click)="goTocontactus()">Contact Us</li> -->
-            <!--<li (click)="goToprivacypolicy()">Privacy Policy </li>-->
-            <!-- <li (click)="goToreturnpolicy()">Return Policy </li> -->
-            <!-- <li (click)="goToventorT()">Vendor Terms and Condition </li> -->
+            <li (click)="goTotermcondition()">Terms and Conditions</li>
+            <li (click)="goTocontactus()">Contact Us</li>
+            <li (click)="goToprivacypolicy()">Privacy Policy </li>
+            <li (click)="goToreturnpolicy()">Return Policy </li>
+             <li (click)="goToventorT()">Vendor Terms and Condition </li> 
 
 
 
         </ul>
-    </div>
+    </div> -->
     <div id="core6" class="core">
-        <h3>Consumers Rights</h3>
+        <!-- <h3>Consumers Rights</h3> -->
         <ul>
             <!-- <li (click)="goTotermofuse()">Terms Of Use</li> -->
             <!-- <li (click)="goTotermofsales()">Terms Of Sales</li> -->

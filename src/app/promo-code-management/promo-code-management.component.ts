@@ -41,7 +41,7 @@ export class PromoCodeManagementComponent implements OnInit {
 
   flag = false
   filterSelected(e) {
-    debugger
+    
     this.filterBy = e.value
 
     if (this.filterBy) {
@@ -57,7 +57,7 @@ export class PromoCodeManagementComponent implements OnInit {
 
   flagSearch: boolean = true
   searchMethod() {
-    debugger
+    
     this.flagSearch = false
     console.log(this.search);
 
@@ -65,7 +65,7 @@ export class PromoCodeManagementComponent implements OnInit {
   }
 
   clearSearch() {
-    debugger
+    
     this.flagSearch = true
     this.search = ''
     this.getPromoCode();

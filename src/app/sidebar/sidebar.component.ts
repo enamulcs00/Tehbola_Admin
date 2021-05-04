@@ -151,7 +151,7 @@ export class SidebarComponent implements OnInit {
   }
   
   goToPromoCodeManagement() {
-    debugger
+    
     this.router.navigate(['promo-code-management'])
   }
   
@@ -183,7 +183,7 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['ventorT'])
   }
   goTovendorSalesReport() {
-    this.router.navigate(['vendorSalesReport'])
+    this.router.navigate(['vendorRequest'])
   }
   goTotermofuse() {
     this.router.navigate(['termofuse'])

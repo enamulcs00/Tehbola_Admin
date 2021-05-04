@@ -18,7 +18,8 @@ export class VendorSalesReportComponent implements OnInit {
   page: any = 1;
   search: string = '';
   filterBy: any = '';
-  filterList: readOnly[] = [{ viewValue: 'New', value: 'New' },
+  filterList: readOnly[] = [
+  { viewValue: 'New', value: 'New' },
   { viewValue: 'Accepted', value: 'Accepted' },
   { viewValue: 'Cancelled', value: 'Canceled' },
   { viewValue: 'Rejected', value: 'Rejected' },
@@ -37,77 +38,188 @@ export class VendorSalesReportComponent implements OnInit {
   pageEvent: PageEvent;
   pageSizeOptions = [5, 10, 25, 100]
   flagData: boolean;
+  filterForInventory:string=''
+  searchForInventory:string=''
   vendorList: any;
+  inventoryReqList: any;
+  inventoryPage: any=1;
+  inventortoryuPageSize: any=10;
+  flagFilter: boolean=false;
+  flagSearchInventory=true
+  lengthOfInventory: any;
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) { }
 
   ngOnInit() {
-    this.getVendorSaleReport(this.page, this.pageSize, this.search, this.filterBy)
+    this.getVendorSaleReport(this.page, this.pageSize, )
+    this.getInventoryRequestList(this.inventoryPage,this.inventortoryuPageSize)
   }
 
 
-  getVendorSaleReport(page, pageSize, search, filterBy) {
-    this.apiService.getVendorList(page, pageSize, search, filterBy).subscribe((res) => {
+  getVendorSaleReport(page, pageSize, ) {
+    this.apiService.getVendorRequestList(page,pageSize,this.search,this.filterBy ).subscribe((res) => {
       if (res.success) {
-        if (res.data.length > 0) {
           this.flagData = false
           this.vendorList = res.data;
           this.length = res.total
           console.log(this.vendorList);
-        } else {
-          this.flagData = true
-        }
+      }else{
+        this.commonService.errorToast(res.message)
       }
     });
   }
 
-  flag = false
-  filterSelected(e) {
 
+  
+  getInventoryRequestList(page, pageSize, ) {
+    this.apiService.getInventoryrequestList(page,pageSize,this.searchForInventory,this.filterForInventory ).subscribe((res) => {
+      if (res.success) {
+          this.flagData = false
+          this.inventoryReqList = res.data;
+          this.lengthOfInventory = res.total
+      }else{
+        this.commonService.errorToast(res.message)
+      }
+    });
+  }
+
+
+
+  flag = false
+
+  filterSelectedforEqupiment(e) {
     if (this.filterBy) {
       this.flag = true
     }
     else {
       this.flag = false
-
     }
-    console.log(e.target.value);
-    this.filterBy = e.target.value;
-    this.apiService.getVendorList(this.page, this.pageSize, this.filterBy, this.search).subscribe((res) => {
-      if (res.success) {
-        console.log(res);
-        this.vendorList = res.data;
-        this.length = res.total;
-      }
-    });
+    console.log(e);
+    this.getVendorSaleReport(this.page, this.pageSize )
+  }
+
+// gantner
+
+
+
+  filterSelected(e) {
+    if (this.filterBy) {
+      this.flagFilter = true
+    }
+    else {
+      this.flagFilter = false
+    }
+    console.log(e);
+    this.getInventoryRequestList(this.page, this.pageSize )
   }
 
 
   flagSearch: boolean = true
   searchMethod() {
-
     this.flagSearch = false
     console.log(this.search);
-    this.apiService.getVendorList(this.page, this.pageSize, this.filterBy, this.search).subscribe((res) => {
-      if (res.success) {
-        this.vendorList = res.data;
-        console.log(this.vendorList);
-        this.length = res.total;
-      }
-    })
-
+    this.getVendorSaleReport(this.page, this.pageSize )
   }
 
+
+  searchMethodForInventory() {
+    this.flagSearchInventory = false
+    console.log(this.search);
+    this.getInventoryRequestList(this.page, this.pageSize )
+  }
 
   clearSearch() {
 
     this.flagSearch = true
     this.search = ''
-    this.getVendorSaleReport(this.page, this.pageSize, this.search, this.filterBy)
+    this.getVendorSaleReport(this.page, this.pageSize, )
   }
 
-  statusChnaged(e) {
-    console.log(e)
+
+  clearSearchForInventory() {
+    this.flagSearchInventory = true
+    this.searchForInventory = ''
+    this.getInventoryRequestList(this.page, this.pageSize, )
   }
+
+
+  changeUserStatus(id, status) {
+    let temp = id
+    let body2
+    for (let i = 0; i <= this.vendorList.length; i++) {
+      if (this.vendorList[i]._id == temp) {
+        if (status == 1) {
+          body2 = {
+            "model": "EquipmentIssue",
+            "id": temp,
+            "status": 0
+          }
+        } else {
+          body2 = {
+            "model": "EquipmentIssue",
+            "id": temp,
+            "status": 1
+          }
+        }
+        console.log(body2)
+        // this.progress = false 82186110796
+        this.apiService.changeUserStatus(body2).subscribe((res) => {
+          console.log(res)
+          if (res.success) {
+            // this.progress = false
+            this.commonService.successToast(res.message)
+            this.getVendorSaleReport(this.page,this.pageSize);
+          } else {
+            // this.progress = false
+            this.commonService.errorToast(res.message)
+
+          }
+
+        });
+      }
+
+    }
+  }
+
+  
+  changeInventoryStatus(id, status) {
+    let temp = id
+    let body2
+    for (let i = 0; i <= this.inventoryReqList.length; i++) {
+      if (this.inventoryReqList[i]._id == temp) {
+        if (status == 1) {
+          body2 = {
+            "model": "inventoryRequest",
+            "id": temp,
+            "status": 0
+          }
+        } else {
+          body2 = {
+            "model": "inventoryRequest",
+            "id": temp,
+            "status": 1
+          }
+        }
+        console.log(body2)
+        // this.progress = false 82186110796
+        this.apiService.changeUserStatus(body2).subscribe((res) => {
+          console.log(res)
+          if (res.success) {
+            // this.progress = false
+            this.commonService.successToast(res.message)
+            this.getVendorSaleReport(this.page,this.pageSize);
+          } else {
+            // this.progress = false
+            this.commonService.errorToast(res.message)
+
+          }
+
+        });
+      }
+
+    }
+  }
+
+
 
   vendorSalesReportListAfterPageSizeChanged(e): any {
     //console.log(e);
@@ -130,29 +242,29 @@ export class VendorSalesReportComponent implements OnInit {
 
     }
 
-    this.getVendorSaleReport(this.page, this.pageSize, this.search, this.filterBy)
+    this.getVendorSaleReport(this.page, this.pageSize, )
   }
 
-  goToproduct(i) {
-    let id: any
-    let name: string
-    for (let j = 0; j <= this.vendorList.length; j++) {
-      if (i == j) {
-        id = this.vendorList[j]._id;
-        name = this.vendorList[j].firstName;
-
+  
+  inventoryPageSizeChange(e): any {
+    
+    if (e.pageIndex == 0) {
+      this.page = 1;
+      this.pageSize=e.pageSize
+      this.flagUserList = false
+    } else {
+      if (e.previousPageIndex < e.pageIndex) {
+        this.page = e.pageIndex + 1;
+        this.srNo = e.pageIndex * e.pageSize
+        this.flagUserList = true
+      } else {
+        this.page = e.pageIndex;
+        this.srNo = e.pageIndex * e.pageSize
+        this.flagUserList = true
       }
     }
-
-    this.router.navigate(['product'], { queryParams: { "id": id, "name": name } })
-  }
-
-  goToreportGraph(id) {
-    this.router.navigate(['reportGraph'], { queryParams: { id: id } })
+    this.getInventoryRequestList(this.page, this.pageSize )
   }
 
 
-  back() {
-    window.history.back()
-  }
 }

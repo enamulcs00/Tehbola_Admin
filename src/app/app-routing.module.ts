@@ -475,7 +475,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'vendorSalesReport',
+    path: 'vendorRequest',
     component: VendorSalesReportComponent,
     canActivate: [AuthGuard]
 

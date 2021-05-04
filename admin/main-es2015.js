@@ -1006,7 +1006,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Manage Reviews</h1>\r\n                    <div class=\"right_side_buttons\">\r\n                        <a (click)=\"back()\">Go Back</a>\r\n\r\n                    </div>\r\n                </div>\r\n                <div class=\"outer_table\">\r\n                    <div class=\"search_fields\">\r\n                        <div class=\"filters Booking_status\">\r\n                            <label>Filter</label>\r\n                            <select [(ngModel)]=\"filterBy\" (change)=\"filterSelected($event)\">\r\n                                <option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n                                <option *ngIf=\"flag==false\" value=\"\"></option>\r\n                                <option value=\"1\">1</option>\r\n                                <option value=\"2\">2</option>\r\n                                <option value=\"3\">3</option>\r\n                                <option value=\"4\">4</option>\r\n                                <option value=\"5\">5</option>\r\n                            </select>\r\n                        </div>\r\n                        <div class=\"search_inner_fiels\">\r\n                            <div class=\"filters Booking_status\">\r\n                                <label>Search</label>\r\n                                <div class=\"search_with_icons\">\r\n                                    <mat-form-field [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"text\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                    </mat-form-field>\r\n                                    <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                        (click)=\"searchMethod()\"></i>\r\n                                    <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                        (click)=\"clearSearch()\"></i>\r\n                                </div>\r\n                            </div>\r\n\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-responsive\">\r\n                        <table>\r\n                            <tr>\r\n\r\n                                <th>User Name</th>\r\n                                <th>User Email</th>\r\n                                <th>Rating </th>\r\n                                <th>Review </th>\r\n                                <th>Product Name</th>\r\n                                <th>Vendor name</th>\r\n                                <th>Action</th>\r\n                            </tr>\r\n                            <tr *ngFor=\"let item of reviewList; let i=index\">\r\n\r\n                                <td>{{item.userId.firstName}} {{item.userId.lastName}}</td>\r\n                                <td>{{item.userId.email}}</td>\r\n\r\n                                <td>{{item.rating}}</td>\r\n                                <td>{{item.review}}</td>\r\n                                <td>{{item.productId.name}}</td>\r\n                                <td>{{item.productId.seller.firstName}} {{item.productId.seller.lastName}}</td>\r\n                                <td>\r\n                                    <div class=\"action\">\r\n                                        <ul>\r\n                                            <li class=\"delete\"><a (click)=\"deleteReview(item._id)\"><i\r\n                                                        class=\"fa fa-trash-o fa-fw\"></i></a></li>\r\n                                        </ul>\r\n                                    </div>\r\n                                </td>\r\n                            </tr>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n                <!-----start pagination-->\r\n                <mat-paginator [length]=\"length\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"pageSizeOptions\"\r\n                    (page)=\"pageEvent = reviewListAfterPageSizeChanged($event)\">\r\n                </mat-paginator>\r\n                <!-----end pagination-->\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Manage Reviews and Report</h1>\r\n                </div>\r\n                <mat-tab-group>\r\n                    <mat-tab label='Reviews'>\r\n                        <div class=\"outer_table\">\r\n                            <div class=\"search_fields\">\r\n                                <div style=\"padding: 10px 20px;\" class=\"filters Booking_status\">\r\n                                    <mat-form-field class=\"example-full-width\">\r\n                                        <mat-label>Filter</mat-label>\r\n                                        <mat-select placeholder=\"Filter\" [(ngModel)]=\"filterBy\"\r\n                                            (selectionChange)=\"filterSelected($event.value)\">\r\n                                            <mat-option *ngIf=\"flag==true\" value=\"\">\r\n                                                Remove Filter\r\n                                            </mat-option>\r\n        \r\n                                            <mat-option value='1'>1 <i class=\"fa fa-star\" aria-hidden=\"true\"></i></mat-option>\r\n                                            <mat-option value='2'>2 <i class=\"fa fa-star\" aria-hidden=\"true\"></i><i\r\n                                                    class=\"fa fa-star\" aria-hidden=\"true\"></i></mat-option>\r\n                                            <mat-option value='3'>3 <i class=\"fa fa-star\" aria-hidden=\"true\"></i><i\r\n                                                    class=\"fa fa-star\" aria-hidden=\"true\"></i><i class=\"fa fa-star\"\r\n                                                    aria-hidden=\"true\"></i></mat-option>\r\n                                            <mat-option value='4'>4 <i class=\"fa fa-star\" aria-hidden=\"true\"></i><i\r\n                                                    class=\"fa fa-star\" aria-hidden=\"true\"></i><i class=\"fa fa-star\"\r\n                                                    aria-hidden=\"true\"></i><i class=\"fa fa-star\" aria-hidden=\"true\"></i>\r\n                                            </mat-option>\r\n                                            <mat-option value='5'>5 <i class=\"fa fa-star\" aria-hidden=\"true\"></i><i\r\n                                                    class=\"fa fa-star\" aria-hidden=\"true\"></i><i class=\"fa fa-star\"\r\n                                                    aria-hidden=\"true\"></i><i class=\"fa fa-star\" aria-hidden=\"true\"></i>\r\n                                                <i class=\"fa fa-star\" aria-hidden=\"true\"></i></mat-option>\r\n                                        </mat-select>\r\n                                    </mat-form-field>\r\n                                </div>\r\n                                <div class=\"search_inner_fiels\">\r\n                                    <div class=\"filters Booking_status\">\r\n                                        <label>Search</label>\r\n                                        <div class=\"search_with_icons\">\r\n                                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                                <input matInput type=\"text\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                            </mat-form-field>\r\n                                            <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                                (click)=\"searchMethod()\"></i>\r\n                                            <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                                (click)=\"clearSearch()\"></i>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"table-responsive\">\r\n                                <table>\r\n                                    <tr>\r\n                                        <th>Order ID</th>\r\n                                        <th>User Name</th>\r\n                                        <th>User Email</th>\r\n                                        <th>Rating </th>\r\n                                        <th>Review </th>\r\n                                        <th>Food Name</th>\r\n                                        <th>Food Status</th>\r\n                                        <th>Vendor name</th>\r\n                                    </tr>\r\n                                    <tr *ngFor=\"let item of reviewList; let i=index\">\r\n                                        <td>{{item?.orderId}}</td>\r\n                                        <td>{{item?.user?.firstName}} {{item?.user?.lastName}}</td>\r\n                                        <td>{{item?.user?.email}}</td>\r\n                                        <td><span *ngFor=\"let items of item?.rating\"> \r\n                                            <span *ngIf=\"items===true;else elseBlock\"><i class=\"fa fa-star\" aria-hidden=\"true\"></i> </span>\r\n                                            <ng-template  #elseBlock>\r\n                                                <i class=\"fa fa-star-o\" aria-hidden=\"true\"></i>\r\n                                            </ng-template>\r\n                                        </span></td>\r\n                                        <td>{{item?.comment}}</td>\r\n                                        <td> <span *ngFor=\"let prod of item?.product\">{{prod?.name}}</span></td>\r\n                                        <td>{{item?.foodstatus}}</td>\r\n                                        <td>{{item?.vendor?.fullName}} </td>\r\n                                    </tr>\r\n                                </table>\r\n                            </div>\r\n                        </div>\r\n                        <!-----start pagination-->\r\n                        <mat-paginator [length]=\"length\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"pageSizeOptions\"\r\n                            (page)=\"pageEvent = reviewListAfterPageSizeChanged($event)\">\r\n                        </mat-paginator>\r\n                        <!-----end pagination-->\r\n                    </mat-tab>\r\n                    <mat-tab label='Report'>\r\n                        <div class=\"search_fields\">\r\n                            \r\n                            <div class=\"search_inner_fiels\">\r\n                                <div class=\"filters Booking_status\">\r\n                                    <label>Search</label>\r\n                                    <div class=\"search_with_icons\">\r\n                                        <mat-form-field [floatLabel]=\"'never'\">\r\n                                            <input matInput type=\"text\" [(ngModel)]=\"searchForReport\" placeholder=\"\">\r\n                                        </mat-form-field>\r\n                                        <i *ngIf=\"flagSearchForReport==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                            (click)=\"searchMethodForReport()\"></i>\r\n                                        <i *ngIf=\"flagSearchForReport==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                            (click)=\"clearSearchForReport()\"></i>\r\n                                    </div>\r\n                                </div>\r\n\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"table-responsive\">\r\n                            <table>\r\n                                <tr>\r\n                                    <th>Order Id</th>\r\n                                    <th>VendorName</th>\r\n                                    <th>Customer Name</th>\r\n                                    <!-- <th>Received Payment</th> -->\r\n                                    <th>Report Reason</th>\r\n                                </tr>\r\n                                <tr *ngFor=\"let item of reportList\">\r\n                                    <td>{{item?.orderId}}</td>\r\n                                    <td>{{item.vendor.fullName}}</td>\r\n                                    <td>{{item?.user?.firstName}} {{item?.user?.lastName}}</td>\r\n\r\n                                    <td>{{item.comment}}</td>\r\n\r\n                                </tr>\r\n\r\n                            </table>\r\n                        </div>\r\n                        <!-----start pagination-->\r\n                        <mat-paginator [length]=\"lengthforReport\" [pageSize]=\"pageSizeForReport\" [pageSizeOptions]=\"pageSizeOptions\"\r\n                        (page)=\"pageEvent = reportListPageSizeChanged($event)\">\r\n                    </mat-paginator>\r\n                        <!-----end pagination-->\r\n                    </mat-tab>\r\n                </mat-tab-group>\r\n\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
 
 /***/ }),
 
@@ -1188,7 +1188,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Refund</h1>\r\n                    <div class=\"right_side_buttons\">\r\n                        <a (click)=\"goTopayment()\">Back To List</a> \r\n                    </div>\r\n                </div>\r\n                <div class=\"search_fields\">\r\n                    <div class=\"filters Booking_status\">\r\n                        <label>Filter</label>\r\n                        <select>\r\n                            <option>All</option>\r\n                            <option>Name</option>\r\n                        </select>\r\n                    </div>\r\n                    <div class=\"search_inner_fiels\">\r\n                        <div class=\"filters Booking_status\">\r\n                            <label>Search</label>\r\n                            <div class=\"search_with_icons\">\r\n                                <mat-form-field [floatLabel]=\"'never'\">\r\n                                    <input matInput type=\"text\" name=\"search\" placeholder=\"\">\r\n                                </mat-form-field>\r\n                                <i class=\"fa fa-search\" aria-hidden=\"true\"></i>\r\n                            </div>\r\n                        </div>\r\n                        \r\n                    </div>\r\n                </div>\r\n                <div class=\"table-responsive\">\r\n                    <table>\r\n                        <tr>\r\n                            <th>User Id</th>\r\n                            <th>Name</th>\r\n                            <th>Email</th>\r\n                            <th>Payment Method</th>\r\n                            <th>Received Payment</th>\r\n                            <th>Reason</th>\r\n                            <th>Action</th>\r\n                        </tr>\r\n                        <tr>\r\n                            <td>1</td>\r\n                            <td>Jhon</td>\r\n                            <td>Jhon@gmail.com</td>\r\n                            <td class=\"Booking_status\">\r\n                                Credit Card\r\n                            </td>\r\n                            <td>1000$</td>\r\n                            <td>Size not Fit</td>\r\n                            <td><button>Refund</button></td>\r\n                        </tr>\r\n                        <tr>\r\n                            <td>2</td>\r\n                            <td>Jhon</td>\r\n                            <td>Jhon@gmail.com</td>\r\n                            <td class=\"Booking_status\">\r\n                                Credit Card\r\n                            </td>\r\n                            <td>1000$</td>\r\n                            <td>Size not Fit</td>\r\n                            <td><button>Refund</button></td>\r\n                        </tr>\r\n                        <tr>\r\n                            <td>3</td>\r\n                            <td>Jhon</td>\r\n                            <td>Jhon@gmail.com</td>\r\n                            <td class=\"Booking_status\">\r\n                                Credit Card\r\n                            </td>\r\n                            <td>1000$</td>\r\n                            <td>Size not Fit</td>\r\n                            <td><button>Refund</button></td>\r\n                        </tr>\r\n                        <tr>\r\n                            <td>4</td>\r\n                            <td>Jhon</td>\r\n                            <td>Jhon@gmail.com</td>\r\n                            <td class=\"Booking_status\">\r\n                                Credit Card\r\n                            </td>\r\n                            <td>1000$</td>\r\n                            <td>Size not Fit</td>\r\n                            <td><button>Refund</button></td>\r\n                        </tr>\r\n                    </table>\r\n                </div>\r\n                <!-----start pagination-->\r\n                <mat-paginator [length]=\"100\" [pageSize]=\"10\" [pageSizeOptions]=\"[5, 10, 25, 100]\">\r\n                </mat-paginator>\r\n                <!-----end pagination-->\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Report</h1>\r\n                 \r\n                </div>\r\n             \r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
 
 /***/ }),
 
@@ -1318,7 +1318,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<!-- Sidebar -->\r\n<ul class=\"side_barlist\">\r\n\r\n    <!-- Sidebar - Brand -->\r\n    <a class=\"sidebar-brand\" href=\"index.html\">\r\n        <div class=\"sidebar-brand-icon\">\r\n            <figure><img src=\"../../assets/images/whitesmall_logo.png\"></figure>\r\n        </div>\r\n        <div class=\"sidebar-brand-text\">\r\n            <figure><img src=\"../../assets/images/whitelogo.png\"></figure>\r\n        </div>\r\n    </a>\r\n    <!-- Nav Item - Dashboard -->\r\n    <li rel=\"core1\" class=\"nav_item active\">\r\n        <a class=\"nav-link\">\r\n            Co\r\n        </a>\r\n    </li>\r\n    <li rel=\"core3\" class=\"nav_item\">\r\n        <a class=\"nav-link\">\r\n            In\r\n        </a>\r\n    </li>\r\n    <li rel=\"core7\" class=\"nav_item\">\r\n        <a class=\"nav-link\">\r\n            Re\r\n        </a>\r\n    </li>\r\n    <li rel=\"core4\" class=\"nav_item\">\r\n        <a class=\"nav-link\">\r\n            Nt\r\n        </a>\r\n    </li>\r\n    <li rel=\"core5\" class=\"nav_item\">\r\n        <a class=\"nav-link\">\r\n            Hc\r\n        </a>\r\n    </li>\r\n    <!-- <li rel=\"core6\" class=\"nav_item\">\r\n        <a class=\"nav-link\">\r\n            Cr\r\n        </a>\r\n    </li> -->\r\n\r\n\r\n</ul>\r\n<div class=\"side_pages\">\r\n    <div id=\"core1\" class=\"core active\">\r\n        <h3>Core</h3>\r\n        <ul>\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goTodashboard()\">Dashboard\r\n            </li>\r\n            <!-- <li (click)=\"goToreportpage()\">Reporting</li> -->\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goTomanageUser()\"\r\n                *ngIf=\"roles =='admin'\">User\r\n                Management </li>\r\n\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goToProduct()\">Product Management\r\n            </li>\r\n            <!-- *ngIf=\"roles =='celebrity || merchant'\" -->\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goTovendermanagement()\"\r\n                *ngIf=\"roles =='admin'\">Vendor\r\n                Management</li>\r\n            <!-- <li (click)=\"goToCelebritymanagement()\" *ngIf=\"roles =='admin'\">Celebrity Management</li> -->\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goTocategory()\"\r\n                *ngIf=\"roles=='admin'\">Category Management</li>\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goToBrand()\"\r\n                *ngIf=\"roles=='admin'\">Raw Item Management\r\n            </li>\r\n\r\n\r\n            <!-- <li (click)=\"goTosubcategory()\">Sub-Category</li> -->\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goToinventry()\">Inventory\r\n                Management</li>\r\n\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goToofferdeals()\">Banner\r\n                Manegement</li>\r\n        </ul>\r\n    </div>\r\n    <div id=\"core3\" class=\"core\">\r\n        <h3>Intel</h3>\r\n        <ul>\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goTorevenuereport()\"> Revenue\r\n                Management </li>\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goToGeofence()\"> Geofence\r\n                Management\r\n            </li>\r\n\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goToAssignmentModule()\">\r\n                Assignment</li>\r\n\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goToEquipmentpage()\">\r\n                Equipment Management</li>\r\n\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goToordermanagement()\">\r\n                Booking\r\n                Request </li>\r\n\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goToFoodTruckManagement()\">\r\n                Food Truck management\r\n            </li>\r\n\r\n            \r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goToPromoCodeManagement()\">\r\n                Promo Code Management\r\n            </li>\r\n            <!-- <li (click)=\"goTopayment()\">Payment</li> -->\r\n            <!--<li>Analytics</li>-->\r\n            <li (click)=\"goToSettings()\">Settings</li>\r\n            <!-- <li (click)=\"goTomanageReviews()\">Reviews</li> -->\r\n        </ul>\r\n    </div>\r\n\r\n    <div id=\"core4\" class=\"core\">\r\n        <h3>Notifications</h3>\r\n        <ul>\r\n            <!-- <li (click)=\"goTowarehouse()\">Warehouse</li>\r\n            <li (click)=\"goToaccounts()\">Accounts</li>\r\n            <li (click)=\"goTooffersync()\">offer Sync</li>-->\r\n            <!-- <li (click)=\"goToBroadCast()\">Broadcast Message</li> -->\r\n            <!-- <li (click)=\"goTonotification()\">Notifications</li> -->\r\n        </ul>\r\n    </div>\r\n    <div id=\"core7\" class=\"core\">\r\n        <h3>Report</h3>\r\n        <ul>\r\n            <!-- <li (click)=\"goTosalesreport()\">Report of sales</li> -->\r\n\r\n            <!-- <li (click)=\"goTovendorSalesReport()\">Vendor Sales Report</li> -->\r\n\r\n\r\n\r\n        </ul>\r\n    </div>\r\n    <div id=\"core5\" class=\"core\">\r\n        <h3>Help Center</h3>\r\n        <ul>\r\n\r\n\r\n\r\n            <!-- <li (click)=\"goTotermcondition()\">Terms and Conditions</li> -->\r\n            <!-- <li (click)=\"goTocontactus()\">Contact Us</li> -->\r\n            <!--<li (click)=\"goToprivacypolicy()\">Privacy Policy </li>-->\r\n            <!-- <li (click)=\"goToreturnpolicy()\">Return Policy </li> -->\r\n            <!-- <li (click)=\"goToventorT()\">Vendor Terms and Condition </li> -->\r\n\r\n\r\n\r\n        </ul>\r\n    </div>\r\n    <div id=\"core6\" class=\"core\">\r\n        <h3>Consumers Rights</h3>\r\n        <ul>\r\n            <!-- <li (click)=\"goTotermofuse()\">Terms Of Use</li> -->\r\n            <!-- <li (click)=\"goTotermofsales()\">Terms Of Sales</li> -->\r\n            <!-- <li (click)=\"goToconsumerprivacypolicy()\">Privacy Policy </li> -->\r\n            <!-- <li (click)=\"goTowarrantypolicy()\">Warranty Policy </li> -->\r\n        </ul>\r\n    </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<!-- Sidebar -->\r\n<ul class=\"side_barlist\">\r\n\r\n    <!-- Sidebar - Brand -->\r\n    <a class=\"sidebar-brand\" href=\"index.html\">\r\n        <div class=\"sidebar-brand-icon\">\r\n            <figure><img src=\"../../assets/images/whitesmall_logo.png\"></figure>\r\n        </div>\r\n        <div class=\"sidebar-brand-text\">\r\n            <figure><img src=\"../../assets/images/whitelogo.png\"></figure>\r\n        </div>\r\n    </a>\r\n    <!-- Nav Item - Dashboard -->\r\n    <li rel=\"core1\" class=\"nav_item active\">\r\n        <a class=\"nav-link\">\r\n            Co\r\n        </a>\r\n    </li>\r\n    <li rel=\"core3\" class=\"nav_item\">\r\n        <a class=\"nav-link\">\r\n            In\r\n        </a>\r\n    </li>\r\n    <!-- <li rel=\"core7\" class=\"nav_item\">\r\n        <a class=\"nav-link\">\r\n            Re\r\n        </a>\r\n    </li> -->\r\n    <li rel=\"core4\" class=\"nav_item\">\r\n        <a class=\"nav-link\">\r\n            Nt\r\n        </a>\r\n    </li>\r\n    <!-- <li rel=\"core5\" class=\"nav_item\">\r\n        <a class=\"nav-link\">\r\n            Hc\r\n        </a>\r\n    </li> -->\r\n    <!-- <li rel=\"core6\" class=\"nav_item\">\r\n        <a class=\"nav-link\">\r\n            Cr\r\n        </a>\r\n    </li> -->\r\n\r\n\r\n</ul>\r\n<div class=\"side_pages\">\r\n    <div id=\"core1\" class=\"core active\">\r\n        <h3>Core</h3>\r\n        <ul>\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goTodashboard()\">Dashboard\r\n            </li>\r\n            <!-- <li (click)=\"goToreportpage()\">Reporting</li> -->\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goTomanageUser()\"\r\n                *ngIf=\"roles =='admin'\">User\r\n                Management </li>\r\n\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goToProduct()\">Product Management\r\n            </li>\r\n            <!-- *ngIf=\"roles =='celebrity || merchant'\" -->\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goTovendermanagement()\"\r\n                *ngIf=\"roles =='admin'\">Vendor\r\n                Management</li>\r\n            <!-- <li (click)=\"goToCelebritymanagement()\" *ngIf=\"roles =='admin'\">Celebrity Management</li> -->\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goTocategory()\"\r\n                *ngIf=\"roles=='admin'\">Category Management</li>\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goToBrand()\"\r\n                *ngIf=\"roles=='admin'\">Raw Item Management\r\n            </li>\r\n\r\n\r\n            <!-- <li (click)=\"goTosubcategory()\">Sub-Category</li> -->\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goToinventry()\">Inventory\r\n                Management</li>\r\n\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goToofferdeals()\">Banner\r\n                Manegement</li>\r\n        </ul>\r\n    </div>\r\n    <div id=\"core3\" class=\"core\">\r\n        <h3>Intel</h3>\r\n        <ul>\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goTorevenuereport()\"> Revenue\r\n                Management </li>\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goToGeofence()\"> Geofence\r\n                Management\r\n            </li>\r\n\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goToAssignmentModule()\">\r\n                Assignment</li>\r\n\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goToEquipmentpage()\">\r\n                Equipment Management</li>\r\n\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goToordermanagement()\">\r\n                Booking\r\n                Request </li>\r\n\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goToFoodTruckManagement()\">\r\n                Food Truck management\r\n            </li>\r\n\r\n            \r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goToPromoCodeManagement()\">\r\n                Promo Code Management\r\n            </li>\r\n            <!-- <li (click)=\"goTopayment()\">Payment</li> -->\r\n            <!--<li>Analytics</li>-->\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goToSettings()\">Settings</li>\r\n            <li  matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goTovendorSalesReport()\">Vendor Request</li>\r\n            <li matRipple [matRippleColor]=\"'#9e8221'\" [matRippleRadius]=\"20\" (click)=\"goTomanageReviews()\">Reviews</li>\r\n        </ul>\r\n    </div>\r\n\r\n    <div id=\"core4\" class=\"core\">\r\n        <h3>Notifications</h3>\r\n        <ul>\r\n            <!-- <li (click)=\"goTowarehouse()\">Warehouse</li>\r\n            <li (click)=\"goToaccounts()\">Accounts</li>\r\n            <li (click)=\"goTooffersync()\">offer Sync</li>-->\r\n            <li (click)=\"goToBroadCast()\">Broadcast Message</li>\r\n            <li (click)=\"goTonotification()\">Notifications</li>\r\n        </ul>\r\n    </div>\r\n    <!-- <div id=\"core7\" class=\"core\">\r\n        <h3>Report</h3>\r\n        <ul>\r\n            <li (click)=\"goTosalesreport()\">Report of sales</li>\r\n\r\n             <li (click)=\"goTovendorSalesReport()\">Vendor Sales Report</li>\r\n\r\n\r\n\r\n        </ul>\r\n    </div> -->\r\n    <!-- <div id=\"core5\" class=\"core\">\r\n        <h3>Help Center</h3>\r\n        <ul>\r\n\r\n\r\n\r\n            <li (click)=\"goTotermcondition()\">Terms and Conditions</li>\r\n            <li (click)=\"goTocontactus()\">Contact Us</li>\r\n            <li (click)=\"goToprivacypolicy()\">Privacy Policy </li>\r\n            <li (click)=\"goToreturnpolicy()\">Return Policy </li>\r\n             <li (click)=\"goToventorT()\">Vendor Terms and Condition </li> \r\n\r\n\r\n\r\n        </ul>\r\n    </div> -->\r\n    <div id=\"core6\" class=\"core\">\r\n        <!-- <h3>Consumers Rights</h3> -->\r\n        <ul>\r\n            <!-- <li (click)=\"goTotermofuse()\">Terms Of Use</li> -->\r\n            <!-- <li (click)=\"goTotermofsales()\">Terms Of Sales</li> -->\r\n            <!-- <li (click)=\"goToconsumerprivacypolicy()\">Privacy Policy </li> -->\r\n            <!-- <li (click)=\"goTowarrantypolicy()\">Warranty Policy </li> -->\r\n        </ul>\r\n    </div>\r\n</div>");
 
 /***/ }),
 
@@ -1422,7 +1422,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Vendor Sales Report</h1>\r\n                    <div class=\"right_side_buttons\">\r\n                        <a (click)=\"back()\">Go Back</a>\r\n\r\n                    </div>\r\n                </div>\r\n                <div class=\"outer_table\">\r\n                    <div class=\"search_fields\">\r\n                        <div class=\"filters Booking_status\">\r\n                            <label>Filter</label>\r\n                            <select [(ngModel)]=\"filterBy\" (change)=\"filterSelected($event)\">\r\n                                <option *ngIf=\"flag==true\" value=\"\">Remove Filter</option>\r\n                                <option *ngIf=\"flag==false\" value=\"\"></option>\r\n                                <option value=\"active\">Active</option>\r\n                                <option value=\"inactive\">Inactive</option>\r\n                            </select>\r\n                        </div>\r\n                        <div class=\"search_inner_fiels\">\r\n                            <div class=\"filters Booking_status\">\r\n                                <label>Search</label>\r\n                                <div class=\"search_with_icons\">\r\n                                    <mat-form-field [floatLabel]=\"'never'\">\r\n                                        <input matInput type=\"text\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                    </mat-form-field>\r\n                                    <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                        (click)=\"searchMethod()\"></i>\r\n                                    <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                        (click)=\"clearSearch()\"></i>\r\n                                </div>\r\n                            </div>\r\n\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-responsive\">\r\n                        <table>\r\n                            <tr>\r\n\r\n                                <th>Sr no</th>\r\n                                <th>Vendor Name</th>\r\n                                <th>Vendor Address</th>\r\n                                <th>Vendor Phone Number </th>\r\n                                <th>Vendor Email ID</th>\r\n                                <th>Vendor Product List</th>\r\n                                <th>Total revenue generated</th>\r\n                                <th>Sales Graph</th>\r\n                            </tr>\r\n                            <tr *ngFor=\"let item of vendorList; let i=index\">\r\n\r\n                                <td *ngIf=\"flagUserList==false\">{{i+1}}</td>\r\n                                <td *ngIf=\"flagUserList==true\">{{srNo+i+1}}</td>\r\n                                <td>{{item.firstName}} {{item.lastName}}</td>\r\n                                <td>{{item.address}},{{item.city}},{{item.state}},{{item.country}}</td>\r\n                                <td>{{item.countryCode}}-{{item.phone}}</td>\r\n                                <td>{{item.email}}</td>\r\n                                <td class=\"Booking_status\" (click)=\"goToproduct(i)\">\r\n                                    <a class=\"accept_button\">View List</a></td>\r\n                                <td>{{item.totalRevenue|number}}</td>\r\n                                <td class=\"Booking_status\">\r\n\r\n                                    <a class=\"accept_button\" (click)=\"goToreportGraph(item._id)\">View Report Graph</a>\r\n\r\n                                </td>\r\n                            </tr>\r\n\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n                <!-----start pagination-->\r\n                <mat-paginator [length]=\"length\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"pageSizeOptions\"\r\n                    (page)=\"pageEvent = vendorSalesReportListAfterPageSizeChanged($event)\">\r\n                </mat-paginator>\r\n                <!-----end pagination-->\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"wrapper\">\r\n    <app-navbar></app-navbar>\r\n    <div id=\"content-wrapper\" class=\"\">\r\n        <div id=\"content\">\r\n            <app-sidebar></app-sidebar>\r\n            <div class=\"container-fluid\">\r\n                <div class=\"sub_heading\">\r\n                    <h1>Vendor Request</h1>\r\n                </div>\r\n\r\n                <mat-tab-group>\r\n                    <mat-tab label=\"Equipment Request\">\r\n                        <div class=\"outer_table\">\r\n                            <div class=\"search_fields\">\r\n                                <div style=\"padding: 10px 20px;\" class=\"filters Booking_status\">\r\n                                  \r\n                                    <mat-form-field class=\"example-full-width\">\r\n                                        <mat-label>Filter</mat-label>\r\n                                        <mat-select placeholder=\"Filter\" [(ngModel)]=\"filterBy\"\r\n                                            (selectionChange)=\"filterSelectedforEqupiment($event.value)\">\r\n                                            <mat-option *ngIf=\"flag==true\" value=\"\">Remove Filter</mat-option>\r\n                                            <mat-option *ngIf=\"flag==false\" value=\"\"></mat-option>\r\n                                            <mat-option value=\"1\">Resolved</mat-option>\r\n                                            <mat-option value=\"0\">Not-resolved</mat-option>\r\n                                        </mat-select>\r\n                                    </mat-form-field>\r\n                                </div>\r\n                                <div class=\"search_inner_fiels\">\r\n                                    <div class=\"filters Booking_status\">\r\n                                        <label>Search</label>\r\n                                        <div class=\"search_with_icons\">\r\n                                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                                <input matInput type=\"text\" [(ngModel)]=\"search\" placeholder=\"\">\r\n                                            </mat-form-field>\r\n                                            <i *ngIf=\"flagSearch==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                                (click)=\"searchMethod()\"></i>\r\n                                            <i *ngIf=\"flagSearch==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                                (click)=\"clearSearch()\"></i>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"table-responsive\">\r\n                                <table>\r\n                                    <tr>\r\n        \r\n                                        <th>Sr no</th>\r\n                                        <th>Vendor Name</th>\r\n                                        <th>Vendor Phone Number </th>\r\n                                        <th>Equipment Name</th>\r\n                                        <th>Description</th>\r\n                                        <th>Priority</th>\r\n                                        <th>Action</th>\r\n                                    </tr>\r\n                                    <tr *ngFor=\"let item of vendorList; let i=index\">\r\n        \r\n                                        <td *ngIf=\"flagUserList==false\">{{i+1}}</td>\r\n                                        <td *ngIf=\"flagUserList==true\">{{srNo+i+1}}</td>\r\n                                        <td>{{item.vendorId.fullName}} </td>\r\n                                        <td>{{item.vendorId.countryCode}}-{{item.vendorId.phone}}</td>\r\n                                        <td><div *ngFor=\"let items of item.equipmentId\">\r\n                                            {{items.name}}\r\n                                        </div></td>\r\n                                        <td>{{item.description}}</td>\r\n                                        <td>\r\n                                            {{item.priority==0?'Normal':'High'}}\r\n                                        </td>\r\n                                        <td class=\"Booking_status\">\r\n        \r\n                                            <select [(value)]=\"item.status\"  (change)=\"changeUserStatus(item._id,item.status )\">\r\n                                                <option  value=\"1\">Resolved</option>\r\n                                                <option  value=\"0\">Not-resolved</option>\r\n                                                \r\n                                            </select>\r\n        \r\n                                        </td>\r\n                                    </tr>\r\n        \r\n                                </table>\r\n                            </div>\r\n                        </div>\r\n                        <!-----start pagination-->\r\n                        <mat-paginator [length]=\"length\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"pageSizeOptions\"\r\n                            (page)=\"pageEvent = vendorSalesReportListAfterPageSizeChanged($event)\">\r\n                        </mat-paginator>\r\n                    </mat-tab>\r\n                    <mat-tab label=\"Inventory Request\">\r\n                        <div class=\"outer_table\">\r\n                            <div class=\"search_fields\">\r\n                                <div style=\"padding: 10px 20px;\" class=\"filters Booking_status\">\r\n                                    <mat-form-field class=\"example-full-width\">\r\n                                        <mat-label>Filter</mat-label>\r\n                                        <mat-select placeholder=\"Filter\" [(ngModel)]=\"filterForInventory\"\r\n                                            (selectionChange)=\"filterSelected($event.value)\">\r\n                                            <mat-option *ngIf=\"flagFilter==true\" value=\"\">Remove Filter</mat-option>\r\n                                            <mat-option *ngIf=\"flagFilter==false\" value=\"\"></mat-option>\r\n                                            <mat-option value=\"1\">Completed</mat-option>\r\n                                            <mat-option value=\"0\">Not-resolved</mat-option>\r\n                                        </mat-select>\r\n                                    </mat-form-field>\r\n                                </div>\r\n                                <div class=\"search_inner_fiels\">\r\n                                    <div class=\"filters Booking_status\">\r\n                                        <label>Search</label>\r\n                                        <div class=\"search_with_icons\">\r\n                                            <mat-form-field [floatLabel]=\"'never'\">\r\n                                                <input matInput type=\"text\" [(ngModel)]=\"searchForInventory\" placeholder=\"\">\r\n                                            </mat-form-field>\r\n                                            <i *ngIf=\"flagSearchInventory==true\" class=\"fa fa-search\" aria-hidden=\"true\"\r\n                                                (click)=\"searchMethodForInventory()\"></i>\r\n                                            <i *ngIf=\"flagSearchInventory==false\" class=\"fa fa-times\" aria-hidden=\"true\"\r\n                                                (click)=\"clearSearchForInventory()\"></i>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"table-responsive\">\r\n                                <table>\r\n                                    <tr>\r\n        \r\n                                        <th>Sr no</th>\r\n                                        <th>Vendor Name</th>\r\n                                        <th>Vendor Phone Number </th>\r\n                                        <th>Raw Item List </th>\r\n                                       \r\n                                        <th>Action</th>\r\n                                    </tr>\r\n                                    <tr *ngFor=\"let item of inventoryReqList; let i=index\">\r\n        \r\n                                        <td *ngIf=\"flagUserList==false\">{{i+1}}</td>\r\n                                        <td *ngIf=\"flagUserList==true\">{{srNo+i+1}}</td>\r\n                                        <td>{{item.vendorId.fullName}} </td>\r\n                                        <td>{{item.vendorId.countryCode}}-{{item.vendorId.phone}}</td>\r\n                                        <td><div >\r\n                                            <table>\r\n                                                <tr>\r\n                                                        <td>Raw Item Namw</td>\r\n                                                    <td>Priority</td>\r\n                                                </tr>\r\n                                                <tr *ngFor=\"let items of item.rawItems\">\r\n                                                    <td>{{items.rawItemId.name}}</td>\r\n                                                    <td> {{items.priority==0?'Low':(items.priority==1?'Medium':'High')}}</td>\r\n                                                </tr>\r\n                                            </table>\r\n                                        </div></td>\r\n                                        <td class=\"Booking_status\">\r\n        \r\n                                            <select [(value)]=\"item.status\"  (change)=\"changeInventoryStatus(item._id,item.status )\">\r\n                                                <option  value=\"0\">Pending</option>\r\n                                                <option  value=\"1\">Request-Completed</option>\r\n                                                \r\n                                            </select>\r\n        \r\n                                        </td>\r\n                                    </tr>\r\n        \r\n                                </table>\r\n                            </div>\r\n                        </div>\r\n                        <!-----start pagination-->\r\n                        <mat-paginator [length]=\"lengthOfInventory\" [pageSize]=\"pageSize\" [pageSizeOptions]=\"pageSizeOptions\"\r\n                            (page)=\"pageEvent = inventoryPageSizeChange($event)\">\r\n                        </mat-paginator>\r\n                        <!-----end pagination-->\r\n        \r\n                    </mat-tab>\r\n                </mat-tab-group>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
 
 /***/ }),
 
@@ -4198,7 +4198,7 @@ const routes = [
         canActivate: [src_services_auth_guard__WEBPACK_IMPORTED_MODULE_70__["AuthGuard"]]
     },
     {
-        path: 'vendorSalesReport',
+        path: 'vendorRequest',
         component: _vendor_sales_report_vendor_sales_report_component__WEBPACK_IMPORTED_MODULE_63__["VendorSalesReportComponent"],
         canActivate: [src_services_auth_guard__WEBPACK_IMPORTED_MODULE_70__["AuthGuard"]]
     },
@@ -7687,7 +7687,6 @@ let EditProductComponent = class EditProductComponent {
         this.editProductForm.get('highlights').setValue(data.highlights);
         this.editProductForm.get('highlights_ar').setValue(data.highlights_ar);
         //  this.editProductForm.get('price').setValue(data.price);
-        debugger;
         this.editProductForm.get('tahbolaSpecial').setValue(data.tehbolaSpecial);
         this.editProductForm.get('category').setValue(data.category._id);
         let temp2 = [];
@@ -11800,16 +11799,43 @@ let ManageReviewsComponent = class ManageReviewsComponent {
         this.filterBy = '';
         this.search = '';
         this.flagSearch = true;
+        this.pageForReport = 1;
+        this.pageSizeForReport = 10;
+        this.searchForReport = '';
+        this.flagSearchForReport = true;
     }
     ngOnInit() {
         this.getReview(this.page, this.pageSize, this.search, this.filterBy);
+        this.getReportedIssue();
     }
     getReview(page, pageSize, search, filterBy) {
         this.apiService.getReviewList(page, pageSize, search, filterBy).subscribe(res => {
             if (res.success == true) {
                 console.log(res);
                 this.reviewList = res.data;
+                this.reviewList.forEach(ele => {
+                    let temp = [];
+                    for (let i = 1; i <= 5; i++) {
+                        if (i <= ele.rating) {
+                            temp.push(true);
+                        }
+                        else {
+                            temp.push(false);
+                        }
+                    }
+                    ele.rating = temp;
+                });
                 this.length = res.total;
+                // alert("")
+            }
+        });
+    }
+    getReportedIssue() {
+        this.apiService.getReportedIssue(this.pageForReport, this.pageSizeForReport, this.searchForReport).subscribe(res => {
+            if (res.success == true) {
+                console.log(res);
+                this.reportList = res.data;
+                this.lengthforReport = res.total;
                 // alert("")
             }
         });
@@ -11821,28 +11847,35 @@ let ManageReviewsComponent = class ManageReviewsComponent {
         else {
             this.flag = false;
         }
-        console.log(e.target.value);
-        this.filterBy = e.target.value;
+        console.log(e);
         this.getReview(this.page, this.pageSize, this.search, this.filterBy);
     }
     searchMethod() {
         this.flagSearch = false;
         this.getReview(this.page, this.pageSize, this.search, this.filterBy);
     }
+    searchMethodForReport() {
+        this.flagSearchForReport = false;
+        this.getReportedIssue();
+    }
     clearSearch() {
         this.flagSearch = true;
         this.search = '';
         this.getReview(this.page, this.pageSize, this.search, this.filterBy);
+    }
+    clearSearchForReport() {
+        this.flagSearchForReport = true;
+        this.searchForReport = '';
+        this.getReportedIssue();
     }
     statusChnaged(e) {
         console.log(e);
     }
     reviewListAfterPageSizeChanged(e) {
         console.log(e);
+        this.pageSize = e.pageSize;
         if (e.pageIndex == 0) {
             this.page = 1;
-            // this.page = e.pageIndex;
-            //  this.srNo = e.pageIndex * e.pageSize
             this.flagUserList = false;
         }
         else {
@@ -11858,6 +11891,27 @@ let ManageReviewsComponent = class ManageReviewsComponent {
             }
         }
         this.getReview(this.page, this.pageSize, this.search, this.filterBy);
+    }
+    reportListPageSizeChanged(e) {
+        console.log(e);
+        this.pageSizeForReport = e.pageSize;
+        if (e.pageIndex == 0) {
+            this.page = 1;
+            this.flagUserList = false;
+        }
+        else {
+            if (e.previousPageIndex < e.pageIndex) {
+                this.page = e.pageIndex + 1;
+                this.srNo = e.pageIndex * e.pageSize;
+                this.flagUserList = true;
+            }
+            else {
+                this.page = e.pageIndex;
+                this.srNo = e.pageIndex * e.pageSize;
+                this.flagUserList = true;
+            }
+        }
+        this.getReportedIssue();
     }
     deleteReview(i) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a.fire({
@@ -12598,7 +12652,7 @@ let NotificationComponent = class NotificationComponent {
         this.apiService = apiService;
         this.commonService = commonService;
         this.notification = notification;
-        this.id = JSON.parse(localStorage.getItem('User'))._id;
+        this.id = JSON.parse(apiService.getUser())._id;
         console.log(this.id);
     }
     ngOnInit() {
@@ -14219,7 +14273,6 @@ let PromoCodeManagementComponent = class PromoCodeManagementComponent {
         this.getPromoCode();
     }
     filterSelected(e) {
-        debugger;
         this.filterBy = e.value;
         if (this.filterBy) {
             this.flag = true;
@@ -14230,13 +14283,11 @@ let PromoCodeManagementComponent = class PromoCodeManagementComponent {
         this.getPromoCode();
     }
     searchMethod() {
-        debugger;
         this.flagSearch = false;
         console.log(this.search);
         this.getPromoCode();
     }
     clearSearch() {
-        debugger;
         this.flagSearch = true;
         this.search = '';
         this.getPromoCode();
@@ -16060,7 +16111,6 @@ let SidebarComponent = class SidebarComponent {
         this.router.navigate(['offerdeals']);
     }
     goToPromoCodeManagement() {
-        debugger;
         this.router.navigate(['promo-code-management']);
     }
     goTosalesreport() {
@@ -16088,7 +16138,7 @@ let SidebarComponent = class SidebarComponent {
         this.router.navigate(['ventorT']);
     }
     goTovendorSalesReport() {
-        this.router.navigate(['vendorSalesReport']);
+        this.router.navigate(['vendorRequest']);
     }
     goTotermofuse() {
         this.router.navigate(['termofuse']);
@@ -17086,7 +17136,8 @@ let VendorSalesReportComponent = class VendorSalesReportComponent {
         this.page = 1;
         this.search = '';
         this.filterBy = '';
-        this.filterList = [{ viewValue: 'New', value: 'New' },
+        this.filterList = [
+            { viewValue: 'New', value: 'New' },
             { viewValue: 'Accepted', value: 'Accepted' },
             { viewValue: 'Cancelled', value: 'Canceled' },
             { viewValue: 'Rejected', value: 'Rejected' },
@@ -17098,67 +17149,162 @@ let VendorSalesReportComponent = class VendorSalesReportComponent {
             { viewValue: 'Rescheduled', value: 'Rescheduled' },
             { viewValue: 'Picked For Shipping', value: 'pickedShipping' },
             { viewValue: 'Picked', value: 'Picked' },
-            { viewValue: 'Picked and Delivered', value: 'PickedDelivered' }];
+            { viewValue: 'Picked and Delivered', value: 'PickedDelivered' }
+        ];
         // page = 1;
         this.length = 100;
         this.pageSize = 10;
         this.pageSizeOptions = [5, 10, 25, 100];
+        this.filterForInventory = '';
+        this.searchForInventory = '';
+        this.inventoryPage = 1;
+        this.inventortoryuPageSize = 10;
+        this.flagFilter = false;
+        this.flagSearchInventory = true;
         this.flag = false;
         this.flagSearch = true;
     }
     ngOnInit() {
-        this.getVendorSaleReport(this.page, this.pageSize, this.search, this.filterBy);
+        this.getVendorSaleReport(this.page, this.pageSize);
+        this.getInventoryRequestList(this.inventoryPage, this.inventortoryuPageSize);
     }
-    getVendorSaleReport(page, pageSize, search, filterBy) {
-        this.apiService.getVendorList(page, pageSize, search, filterBy).subscribe((res) => {
+    getVendorSaleReport(page, pageSize) {
+        this.apiService.getVendorRequestList(page, pageSize, this.search, this.filterBy).subscribe((res) => {
             if (res.success) {
-                if (res.data.length > 0) {
-                    this.flagData = false;
-                    this.vendorList = res.data;
-                    this.length = res.total;
-                    console.log(this.vendorList);
-                }
-                else {
-                    this.flagData = true;
-                }
+                this.flagData = false;
+                this.vendorList = res.data;
+                this.length = res.total;
+                console.log(this.vendorList);
+            }
+            else {
+                this.commonService.errorToast(res.message);
             }
         });
     }
-    filterSelected(e) {
+    getInventoryRequestList(page, pageSize) {
+        this.apiService.getInventoryrequestList(page, pageSize, this.searchForInventory, this.filterForInventory).subscribe((res) => {
+            if (res.success) {
+                this.flagData = false;
+                this.inventoryReqList = res.data;
+                this.lengthOfInventory = res.total;
+            }
+            else {
+                this.commonService.errorToast(res.message);
+            }
+        });
+    }
+    filterSelectedforEqupiment(e) {
         if (this.filterBy) {
             this.flag = true;
         }
         else {
             this.flag = false;
         }
-        console.log(e.target.value);
-        this.filterBy = e.target.value;
-        this.apiService.getVendorList(this.page, this.pageSize, this.filterBy, this.search).subscribe((res) => {
-            if (res.success) {
-                console.log(res);
-                this.vendorList = res.data;
-                this.length = res.total;
-            }
-        });
+        console.log(e);
+        this.getVendorSaleReport(this.page, this.pageSize);
+    }
+    // gantner
+    filterSelected(e) {
+        if (this.filterBy) {
+            this.flagFilter = true;
+        }
+        else {
+            this.flagFilter = false;
+        }
+        console.log(e);
+        this.getInventoryRequestList(this.page, this.pageSize);
     }
     searchMethod() {
         this.flagSearch = false;
         console.log(this.search);
-        this.apiService.getVendorList(this.page, this.pageSize, this.filterBy, this.search).subscribe((res) => {
-            if (res.success) {
-                this.vendorList = res.data;
-                console.log(this.vendorList);
-                this.length = res.total;
-            }
-        });
+        this.getVendorSaleReport(this.page, this.pageSize);
+    }
+    searchMethodForInventory() {
+        this.flagSearchInventory = false;
+        console.log(this.search);
+        this.getInventoryRequestList(this.page, this.pageSize);
     }
     clearSearch() {
         this.flagSearch = true;
         this.search = '';
-        this.getVendorSaleReport(this.page, this.pageSize, this.search, this.filterBy);
+        this.getVendorSaleReport(this.page, this.pageSize);
     }
-    statusChnaged(e) {
-        console.log(e);
+    clearSearchForInventory() {
+        this.flagSearchInventory = true;
+        this.searchForInventory = '';
+        this.getInventoryRequestList(this.page, this.pageSize);
+    }
+    changeUserStatus(id, status) {
+        let temp = id;
+        let body2;
+        for (let i = 0; i <= this.vendorList.length; i++) {
+            if (this.vendorList[i]._id == temp) {
+                if (status == 1) {
+                    body2 = {
+                        "model": "EquipmentIssue",
+                        "id": temp,
+                        "status": 0
+                    };
+                }
+                else {
+                    body2 = {
+                        "model": "EquipmentIssue",
+                        "id": temp,
+                        "status": 1
+                    };
+                }
+                console.log(body2);
+                // this.progress = false 82186110796
+                this.apiService.changeUserStatus(body2).subscribe((res) => {
+                    console.log(res);
+                    if (res.success) {
+                        // this.progress = false
+                        this.commonService.successToast(res.message);
+                        this.getVendorSaleReport(this.page, this.pageSize);
+                    }
+                    else {
+                        // this.progress = false
+                        this.commonService.errorToast(res.message);
+                    }
+                });
+            }
+        }
+    }
+    changeInventoryStatus(id, status) {
+        let temp = id;
+        let body2;
+        for (let i = 0; i <= this.inventoryReqList.length; i++) {
+            if (this.inventoryReqList[i]._id == temp) {
+                if (status == 1) {
+                    body2 = {
+                        "model": "inventoryRequest",
+                        "id": temp,
+                        "status": 0
+                    };
+                }
+                else {
+                    body2 = {
+                        "model": "inventoryRequest",
+                        "id": temp,
+                        "status": 1
+                    };
+                }
+                console.log(body2);
+                // this.progress = false 82186110796
+                this.apiService.changeUserStatus(body2).subscribe((res) => {
+                    console.log(res);
+                    if (res.success) {
+                        // this.progress = false
+                        this.commonService.successToast(res.message);
+                        this.getVendorSaleReport(this.page, this.pageSize);
+                    }
+                    else {
+                        // this.progress = false
+                        this.commonService.errorToast(res.message);
+                    }
+                });
+            }
+        }
     }
     vendorSalesReportListAfterPageSizeChanged(e) {
         //console.log(e);
@@ -17180,24 +17326,27 @@ let VendorSalesReportComponent = class VendorSalesReportComponent {
                 this.flagUserList = true;
             }
         }
-        this.getVendorSaleReport(this.page, this.pageSize, this.search, this.filterBy);
+        this.getVendorSaleReport(this.page, this.pageSize);
     }
-    goToproduct(i) {
-        let id;
-        let name;
-        for (let j = 0; j <= this.vendorList.length; j++) {
-            if (i == j) {
-                id = this.vendorList[j]._id;
-                name = this.vendorList[j].firstName;
+    inventoryPageSizeChange(e) {
+        if (e.pageIndex == 0) {
+            this.page = 1;
+            this.pageSize = e.pageSize;
+            this.flagUserList = false;
+        }
+        else {
+            if (e.previousPageIndex < e.pageIndex) {
+                this.page = e.pageIndex + 1;
+                this.srNo = e.pageIndex * e.pageSize;
+                this.flagUserList = true;
+            }
+            else {
+                this.page = e.pageIndex;
+                this.srNo = e.pageIndex * e.pageSize;
+                this.flagUserList = true;
             }
         }
-        this.router.navigate(['product'], { queryParams: { "id": id, "name": name } });
-    }
-    goToreportGraph(id) {
-        this.router.navigate(['reportGraph'], { queryParams: { id: id } });
-    }
-    back() {
-        window.history.back();
+        this.getInventoryRequestList(this.page, this.pageSize);
     }
 };
 VendorSalesReportComponent.ctorParameters = () => [
@@ -19184,6 +19333,10 @@ let ApiService = class ApiService {
             approveEvent: 'admin/eventapprove',
             declinedEvent: 'admin/eventdisapprove',
             assignVendor: 'admin/assignVendor',
+            equipmentRequest: 'admin/equipmentRequests',
+            inventoryReqList: 'admin/inventoryRequests',
+            adminReview: 'admin/ratings',
+            adminGetReportedIssue: 'admin/reports',
             //commonApi to change status of any user type
             status: 'common/status',
         };
@@ -19475,6 +19628,12 @@ let ApiService = class ApiService {
     getVendorList(body, page, count, change) {
         return this.http.post(this.apiEndPoints.getAllVendor, body, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('No user')));
     }
+    getVendorRequestList(page, count, search, filter) {
+        return this.http.get(this.apiEndPoints.equipmentRequest + '?page=' + page + '&count=' + count + '&search=' + search + '&filter=' + filter, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('No user')));
+    }
+    getInventoryrequestList(page, count, search, filter) {
+        return this.http.get(this.apiEndPoints.inventoryReqList + '?page=' + page + '&count=' + count + '&search=' + search + '&filter=' + filter, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('No user')));
+    }
     getProducts(page, count, filter, isApproved, search) {
         // console.log(id);
         return this.http.get(`${this.apiEndPoints.getProducts}?page=${page}&count=${count}&filter=${filter}&isApproved=${isApproved}&search=${search}`, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('Get Vendor Products')));
@@ -19630,6 +19789,9 @@ let ApiService = class ApiService {
     }
     getReviewList(page, pageSize, search, filterBy) {
         return this.http.get(`${this.apiEndPoints.adminReview}?page=${page}&count=${pageSize}&search=${search}&filter=${filterBy}`, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
+    }
+    getReportedIssue(page, pageSize, search) {
+        return this.http.get(`${this.apiEndPoints.adminGetReportedIssue}?page=${page}&count=${pageSize}&search=${search}`, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError));
     }
     updateCMS(body) {
         return this.http.post(this.apiEndPoints.updateCms, body, this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError()));

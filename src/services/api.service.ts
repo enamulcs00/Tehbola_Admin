@@ -96,6 +96,10 @@ export class ApiService {
       approveEvent: 'admin/eventapprove',
       declinedEvent: 'admin/eventdisapprove',
       assignVendor:'admin/assignVendor',
+      equipmentRequest:'admin/equipmentRequests',
+      inventoryReqList:'admin/inventoryRequests',
+      adminReview:'admin/ratings',
+      adminGetReportedIssue:'admin/reports',
       //commonApi to change status of any user type
       status: 'common/status',
 
@@ -544,6 +548,21 @@ export class ApiService {
     );
   }
 
+  getVendorRequestList( page, count, search, filter) {
+    return this.http.get<any>(this.apiEndPoints.equipmentRequest+'?page='+page+'&count='+count+'&search='+search+'&filter='+filter,
+      this.getHeaders()
+    ).pipe(
+      catchError(this.handleError<any>('No user'))
+    );
+  }
+
+  getInventoryrequestList( page, count, search, filter) {
+    return this.http.get<any>(this.apiEndPoints.inventoryReqList+'?page='+page+'&count='+count+'&search='+search+'&filter='+filter,
+      this.getHeaders()
+    ).pipe(
+      catchError(this.handleError<any>('No user'))
+    );
+  }
   getProducts(page, count, filter, isApproved, search,) {
     // console.log(id);
     return this.http.get<any>(`${this.apiEndPoints.getProducts}?page=${page}&count=${count}&filter=${filter}&isApproved=${isApproved}&search=${search}`,
@@ -819,6 +838,10 @@ export class ApiService {
 
   getReviewList(page, pageSize, search, filterBy): Observable<any> {
     return this.http.get<any>(`${this.apiEndPoints.adminReview}?page=${page}&count=${pageSize}&search=${search}&filter=${filterBy}`, this.getHeaders()).pipe(catchError(this.handleError))
+  }
+
+  getReportedIssue(page, pageSize, search, ): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.adminGetReportedIssue}?page=${page}&count=${pageSize}&search=${search}`, this.getHeaders()).pipe(catchError(this.handleError))
   }
 
 

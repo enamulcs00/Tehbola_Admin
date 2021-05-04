@@ -5,79 +5,166 @@
             <app-sidebar></app-sidebar>
             <div class="container-fluid">
                 <div class="sub_heading">
-                    <h1>Vendor Sales Report</h1>
-                    <div class="right_side_buttons">
-                        <a (click)="back()">Go Back</a>
-
-                    </div>
+                    <h1>Vendor Request</h1>
                 </div>
-                <div class="outer_table">
-                    <div class="search_fields">
-                        <div class="filters Booking_status">
-                            <label>Filter</label>
-                            <select [(ngModel)]="filterBy" (change)="filterSelected($event)">
-                                <option *ngIf="flag==true" value="">Remove Filter</option>
-                                <option *ngIf="flag==false" value=""></option>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
-                            </select>
-                        </div>
-                        <div class="search_inner_fiels">
-                            <div class="filters Booking_status">
-                                <label>Search</label>
-                                <div class="search_with_icons">
-                                    <mat-form-field [floatLabel]="'never'">
-                                        <input matInput type="text" [(ngModel)]="search" placeholder="">
+
+                <mat-tab-group>
+                    <mat-tab label="Equipment Request">
+                        <div class="outer_table">
+                            <div class="search_fields">
+                                <div style="padding: 10px 20px;" class="filters Booking_status">
+                                  
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Filter</mat-label>
+                                        <mat-select placeholder="Filter" [(ngModel)]="filterBy"
+                                            (selectionChange)="filterSelectedforEqupiment($event.value)">
+                                            <mat-option *ngIf="flag==true" value="">Remove Filter</mat-option>
+                                            <mat-option *ngIf="flag==false" value=""></mat-option>
+                                            <mat-option value="1">Resolved</mat-option>
+                                            <mat-option value="0">Not-resolved</mat-option>
+                                        </mat-select>
                                     </mat-form-field>
-                                    <i *ngIf="flagSearch==true" class="fa fa-search" aria-hidden="true"
-                                        (click)="searchMethod()"></i>
-                                    <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
-                                        (click)="clearSearch()"></i>
+                                </div>
+                                <div class="search_inner_fiels">
+                                    <div class="filters Booking_status">
+                                        <label>Search</label>
+                                        <div class="search_with_icons">
+                                            <mat-form-field [floatLabel]="'never'">
+                                                <input matInput type="text" [(ngModel)]="search" placeholder="">
+                                            </mat-form-field>
+                                            <i *ngIf="flagSearch==true" class="fa fa-search" aria-hidden="true"
+                                                (click)="searchMethod()"></i>
+                                            <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
+                                                (click)="clearSearch()"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
+                            <div class="table-responsive">
+                                <table>
+                                    <tr>
+        
+                                        <th>Sr no</th>
+                                        <th>Vendor Name</th>
+                                        <th>Vendor Phone Number </th>
+                                        <th>Equipment Name</th>
+                                        <th>Description</th>
+                                        <th>Priority</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    <tr *ngFor="let item of vendorList; let i=index">
+        
+                                        <td *ngIf="flagUserList==false">{{i+1}}</td>
+                                        <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
+                                        <td>{{item.vendorId.fullName}} </td>
+                                        <td>{{item.vendorId.countryCode}}-{{item.vendorId.phone}}</td>
+                                        <td><div *ngFor="let items of item.equipmentId">
+                                            {{items.name}}
+                                        </div></td>
+                                        <td>{{item.description}}</td>
+                                        <td>
+                                            {{item.priority==0?'Normal':'High'}}
+                                        </td>
+                                        <td class="Booking_status">
+        
+                                            <select [(value)]="item.status"  (change)="changeUserStatus(item._id,item.status )">
+                                                <option  value="1">Resolved</option>
+                                                <option  value="0">Not-resolved</option>
+                                                
+                                            </select>
+        
+                                        </td>
+                                    </tr>
+        
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table>
-                            <tr>
-
-                                <th>Sr no</th>
-                                <th>Vendor Name</th>
-                                <th>Vendor Address</th>
-                                <th>Vendor Phone Number </th>
-                                <th>Vendor Email ID</th>
-                                <th>Vendor Product List</th>
-                                <th>Total revenue generated</th>
-                                <th>Sales Graph</th>
-                            </tr>
-                            <tr *ngFor="let item of vendorList; let i=index">
-
-                                <td *ngIf="flagUserList==false">{{i+1}}</td>
-                                <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
-                                <td>{{item.firstName}} {{item.lastName}}</td>
-                                <td>{{item.address}},{{item.city}},{{item.state}},{{item.country}}</td>
-                                <td>{{item.countryCode}}-{{item.phone}}</td>
-                                <td>{{item.email}}</td>
-                                <td class="Booking_status" (click)="goToproduct(i)">
-                                    <a class="accept_button">View List</a></td>
-                                <td>{{item.totalRevenue|number}}</td>
-                                <td class="Booking_status">
-
-                                    <a class="accept_button" (click)="goToreportGraph(item._id)">View Report Graph</a>
-
-                                </td>
-                            </tr>
-
-                        </table>
-                    </div>
-                </div>
-                <!-----start pagination-->
-                <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-                    (page)="pageEvent = vendorSalesReportListAfterPageSizeChanged($event)">
-                </mat-paginator>
-                <!-----end pagination-->
-
+                        <!-----start pagination-->
+                        <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                            (page)="pageEvent = vendorSalesReportListAfterPageSizeChanged($event)">
+                        </mat-paginator>
+                    </mat-tab>
+                    <mat-tab label="Inventory Request">
+                        <div class="outer_table">
+                            <div class="search_fields">
+                                <div style="padding: 10px 20px;" class="filters Booking_status">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Filter</mat-label>
+                                        <mat-select placeholder="Filter" [(ngModel)]="filterForInventory"
+                                            (selectionChange)="filterSelected($event.value)">
+                                            <mat-option *ngIf="flagFilter==true" value="">Remove Filter</mat-option>
+                                            <mat-option *ngIf="flagFilter==false" value=""></mat-option>
+                                            <mat-option value="1">Completed</mat-option>
+                                            <mat-option value="0">Not-resolved</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="search_inner_fiels">
+                                    <div class="filters Booking_status">
+                                        <label>Search</label>
+                                        <div class="search_with_icons">
+                                            <mat-form-field [floatLabel]="'never'">
+                                                <input matInput type="text" [(ngModel)]="searchForInventory" placeholder="">
+                                            </mat-form-field>
+                                            <i *ngIf="flagSearchInventory==true" class="fa fa-search" aria-hidden="true"
+                                                (click)="searchMethodForInventory()"></i>
+                                            <i *ngIf="flagSearchInventory==false" class="fa fa-times" aria-hidden="true"
+                                                (click)="clearSearchForInventory()"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table>
+                                    <tr>
+        
+                                        <th>Sr no</th>
+                                        <th>Vendor Name</th>
+                                        <th>Vendor Phone Number </th>
+                                        <th>Raw Item List </th>
+                                       
+                                        <th>Action</th>
+                                    </tr>
+                                    <tr *ngFor="let item of inventoryReqList; let i=index">
+        
+                                        <td *ngIf="flagUserList==false">{{i+1}}</td>
+                                        <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
+                                        <td>{{item.vendorId.fullName}} </td>
+                                        <td>{{item.vendorId.countryCode}}-{{item.vendorId.phone}}</td>
+                                        <td><div >
+                                            <table>
+                                                <tr>
+                                                        <td>Raw Item Namw</td>
+                                                    <td>Priority</td>
+                                                </tr>
+                                                <tr *ngFor="let items of item.rawItems">
+                                                    <td>{{items.rawItemId.name}}</td>
+                                                    <td> {{items.priority==0?'Low':(items.priority==1?'Medium':'High')}}</td>
+                                                </tr>
+                                            </table>
+                                        </div></td>
+                                        <td class="Booking_status">
+        
+                                            <select [(value)]="item.status"  (change)="changeInventoryStatus(item._id,item.status )">
+                                                <option  value="0">Pending</option>
+                                                <option  value="1">Request-Completed</option>
+                                                
+                                            </select>
+        
+                                        </td>
+                                    </tr>
+        
+                                </table>
+                            </div>
+                        </div>
+                        <!-----start pagination-->
+                        <mat-paginator [length]="lengthOfInventory" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                            (page)="pageEvent = inventoryPageSizeChange($event)">
+                        </mat-paginator>
+                        <!-----end pagination-->
+        
+                    </mat-tab>
+                </mat-tab-group>
             </div>
         </div>
     </div>

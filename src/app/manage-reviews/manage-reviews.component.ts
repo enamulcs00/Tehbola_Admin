@@ -26,10 +26,19 @@ export class ManageReviewsComponent implements OnInit {
   flagUserList: boolean;
   srNo: number;
   reviewList: any;
+  reportList: any;
+  lengthforReport: any;
+  pageForReport: any=1;
+  pageSizeForReport: any=10;
+  searchForReport: any='';
+  filterByForReport: any;
+  flagForReport: boolean;
+  flagSearchForReport: boolean=true;
   constructor(private apiService: ApiService, private commonService: CommonService) { }
 
   ngOnInit() {
     this.getReview(this.page, this.pageSize, this.search, this.filterBy)
+    this.getReportedIssue()
   }
 
   getReview(page, pageSize, search, filterBy) {
@@ -37,6 +46,17 @@ export class ManageReviewsComponent implements OnInit {
       if (res.success == true) {
         console.log(res)
         this.reviewList = res.data;
+        this.reviewList.forEach(ele=>{
+          let temp=[]
+          for(let i=1;i<=5;i++){
+            if(i<=ele.rating){
+              temp.push(true)
+            }else{
+              temp.push(false)
+            }
+          }
+          ele.rating=temp
+        });
         this.length = res.total
         // alert("")
       }
@@ -44,6 +64,24 @@ export class ManageReviewsComponent implements OnInit {
 
 
   }
+
+
+
+  
+  getReportedIssue() {
+    this.apiService.getReportedIssue(this.pageForReport, this.pageSizeForReport, this.searchForReport, ).subscribe(res => {
+      if (res.success == true) {
+        console.log(res)
+        this.reportList = res.data;
+      
+        this.lengthforReport = res.total
+        // alert("")
+      }
+    })
+
+
+  }
+
 
   filterSelected(e) {
     if (this.filterBy) {
@@ -53,16 +91,28 @@ export class ManageReviewsComponent implements OnInit {
       this.flag = false
 
     }
-    console.log(e.target.value);
-    this.filterBy = e.target.value;
+    console.log(e);
+
     this.getReview(this.page, this.pageSize, this.search, this.filterBy)
   }
+
+
+
 
 
   searchMethod() {
 
     this.flagSearch = false
     this.getReview(this.page, this.pageSize, this.search, this.filterBy)
+
+  }
+
+
+  
+  searchMethodForReport() {
+
+    this.flagSearchForReport = false
+    this.getReportedIssue()
 
   }
 
@@ -74,17 +124,23 @@ export class ManageReviewsComponent implements OnInit {
     this.getReview(this.page, this.pageSize, this.search, this.filterBy)
   }
 
+  
+  clearSearchForReport() {
+
+    this.flagSearchForReport = true
+    this.searchForReport = ''
+    this.getReportedIssue()
+  }
+
   statusChnaged(e) {
     console.log(e)
   }
 
   reviewListAfterPageSizeChanged(e): any {
     console.log(e);
-
+    this.pageSize=e.pageSize
     if (e.pageIndex == 0) {
       this.page = 1;
-      // this.page = e.pageIndex;
-      //  this.srNo = e.pageIndex * e.pageSize
       this.flagUserList = false
     } else {
       if (e.previousPageIndex < e.pageIndex) {
@@ -102,6 +158,29 @@ export class ManageReviewsComponent implements OnInit {
     this.getReview(this.page, this.pageSize, this.search, this.filterBy)
   }
 
+
+
+  reportListPageSizeChanged(e): any {
+    console.log(e);
+    this.pageSizeForReport=e.pageSize
+    if (e.pageIndex == 0) {
+      this.page = 1;
+      this.flagUserList = false
+    } else {
+      if (e.previousPageIndex < e.pageIndex) {
+        this.page = e.pageIndex + 1;
+        this.srNo = e.pageIndex * e.pageSize
+        this.flagUserList = true
+      } else {
+        this.page = e.pageIndex;
+        this.srNo = e.pageIndex * e.pageSize
+        this.flagUserList = true
+      }
+
+    }
+
+    this.getReportedIssue()
+  }
   deleteReview(i) {
     Swal.fire({
       title: "Are you sure?",
