@@ -100,6 +100,8 @@ export class ApiService {
       inventoryReqList:'admin/inventoryRequests',
       adminReview:'admin/ratings',
       adminGetReportedIssue:'admin/reports',
+      boradcast:'admin/broadcastNotification',
+      subadmin: 'admin/admin',
       //commonApi to change status of any user type
       status: 'common/status',
 
@@ -899,7 +901,7 @@ export class ApiService {
   }
 
   broadcastNotification(value): Observable<any> {
-    return this.http.post<any>(this.apiEndPoints.broadcast, value, this.getHeaders()).pipe(catchError(this.handleError()))
+    return this.http.post<any>(this.apiEndPoints.boradcast, value, this.getHeaders()).pipe(catchError(this.handleError()))
   }
   getCountryList(data): Observable<any> {
     return this.http.get<any>(`${this.apiEndPoints.getCountry}?page=1&count=10&search=${data}`, this.getHeaders()).pipe(catchError(this.handleError()))
@@ -914,6 +916,21 @@ export class ApiService {
     return this.http.post<any>(this.apiEndPoints.teaType, body, this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
+  postSubAdmin(body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.subadmin, body, this.getHeaders())
+  }
+
+  getSubAdminList(page, count, search, filter): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.subadmin}?page=${page}&count=${count}&search=${search}&filter=${filter}`, this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+  getSingleSubAdmin(id): Observable<any> {
+    return this.http.get<any>(`${this.apiEndPoints.subadmin}/${id}`, this.getHeaders())
+  }
+
+  putSubAdmin(body, id): Observable<any> {
+    return this.http.put<any>(`${this.apiEndPoints.subadmin}/${id}`, body, this.getHeaders())
+  }
 
 
   addSugarLevel(body): Observable<any> {

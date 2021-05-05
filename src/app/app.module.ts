@@ -113,6 +113,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { PromoCodeManagementComponent } from './promo-code-management/promo-code-management.component';
 import { AddPromoCodeManagementComponent } from './add-promo-code-management/add-promo-code-management.component';
 import { DailyorderComponent } from './dailyorder/dailyorder.component'
+import { SubAdminAddComponent } from './sub-admin/sub-admin-add/sub-admin-add.component';
+import { SubAdminListComponent } from './sub-admin/sub-admin-list/sub-admin-list.component';
 
 @NgModule({
   declarations: [
@@ -152,7 +154,8 @@ import { DailyorderComponent } from './dailyorder/dailyorder.component'
     ViewVendorComponent,
     DealsComponent,
     CategoryComponent,
-
+    SubAdminAddComponent,
+    SubAdminListComponent,
     AddcategoryComponent,
     ViewcategoryComponent,
     EditcategoryComponent,

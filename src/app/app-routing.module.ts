@@ -95,6 +95,8 @@ import { EditFoodTruckComponent } from './edit-food-truck/edit-food-truck.compon
 import { EquipmentManagementComponent } from './equipment-management/equipment-management.component';
 import { PromoCodeManagementComponent } from './promo-code-management/promo-code-management.component';
 import { AddPromoCodeManagementComponent } from './add-promo-code-management/add-promo-code-management.component';
+import { SubAdminListComponent } from './sub-admin/sub-admin-list/sub-admin-list.component';
+import { SubAdminAddComponent } from './sub-admin/sub-admin-add/sub-admin-add.component';
 
 const routes: Routes = [
   // {
@@ -477,6 +479,18 @@ const routes: Routes = [
   {
     path: 'vendorRequest',
     component: VendorSalesReportComponent,
+    canActivate: [AuthGuard]
+
+  },
+  {
+    path: 'sub-adminList',
+    component: SubAdminListComponent,
+    canActivate: [AuthGuard]
+
+  },
+  {
+    path: 'sub-admin',
+    component: SubAdminAddComponent,
     canActivate: [AuthGuard]
 
   },

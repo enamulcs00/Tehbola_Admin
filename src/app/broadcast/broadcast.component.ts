@@ -15,7 +15,7 @@ export class BroadcastComponent implements OnInit {
 
   ngOnInit() {
     this.broadcastForm = this.fb.group({
-      type: ['', Validators.required],
+      userType: ['', Validators.required],
       title: ['', Validators.required],
       message: ['', Validators.required],
 
@@ -29,7 +29,9 @@ export class BroadcastComponent implements OnInit {
     this.apiService.broadcastNotification(body).subscribe(res => {
 
       if (res.success == true) {
-        this.commonService.successToast("Notification sent successfully");
+        this.commonService.successToast(res.message);
+      }else{
+        this.commonService.errorToast(res.message);
       }
     })
 
