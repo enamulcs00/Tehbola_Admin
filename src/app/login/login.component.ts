@@ -95,6 +95,11 @@ export class LoginComponent implements OnInit {
             phone: res.data.phone,
             loginType: res.data.loginType,
           }
+          if(res.data.permissions && res.data.roles=='subAdmin'){
+           body['permissions']=res.data.permissions
+          }
+          // console.log(body);
+          
 
           if (this.rememberMe) {
             let userData = this.loginForm.value;

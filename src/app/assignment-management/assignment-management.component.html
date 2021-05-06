@@ -15,162 +15,169 @@
                    <a (click)="goToaddcategory()"><span>+</span>Add Category</a>
                    </div> -->
                 </div>
-                <div>
+                <div *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.AssignmentManagement.write==true)">
                     <div class="card">
                         <div class="card-header">
                             <h2>Daily Assignment</h2> <br>
                         </div>
-
-                        <div class="card-body">
-                            <form [formGroup]="assignmentForm">
-                                <ul>
-
-
-                                    <mat-form-field>
-                                        <mat-label>Choose a date</mat-label>
-                                        <input matInput [min]="date" (onfocus)="picker.open()"
-                                            formControlName="selectedDate" [matDatepicker]="picker" readonly>
-                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                        <mat-datepicker #picker disabled="false"></mat-datepicker>
-                                        <mat-error *ngIf="assignmentForm.get('selectedDate').hasError('required')">
-                                            Please Select a Date
-                                        </mat-error>
-
-                                    </mat-form-field>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <li>
-                                                <!-- <label>Address<span class="red">*</span></label> -->
-                                                <mat-form-field class="example-full-width">
-                                                    <mat-label>Select Vendor<span class="red">*</span></mat-label>
-                                                    <mat-select formControlName="selectedVendor">
-                                                        <input matInput type="text" placeholder="Search"
-                                                            (keyup)='vendorSearch($event.target.value)'
-                                                            aria-label="Number">
-
-                                                        <mat-option *ngFor="let item of vendorList" [value]='item'>
-                                                            {{item.name}}
-                                                        </mat-option>
-                                                    </mat-select>
-
-                                                    <mat-error
-                                                        *ngIf="assignmentForm.get('selectedVendor').hasError('required')">
-                                                        Please Select a vendor
-                                                    </mat-error>
+                        <div
+                            >
+                            <div class="card-body">
+                                <form [formGroup]="assignmentForm">
+                                    <ul>
 
 
-                                                </mat-form-field>
-                                            </li>
-                                        </div>
-                                        <div class="col-6">
-                                            <li>
-                                                <mat-form-field class="example-full-width">
-                                                    <mat-label>Select Food Truck<span class="red">*</span></mat-label>
+                                        <mat-form-field>
+                                            <mat-label>Choose a date</mat-label>
+                                            <input matInput [min]="date" (onfocus)="picker.open()"
+                                                formControlName="selectedDate" [matDatepicker]="picker" readonly>
+                                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker disabled="false"></mat-datepicker>
+                                            <mat-error *ngIf="assignmentForm.get('selectedDate').hasError('required')">
+                                                Please Select a Date
+                                            </mat-error>
 
-                                                    <mat-select formControlName="selectedFoodTruck">
-                                                        <input matInput type="text" placeholder="Search"
-                                                            (keyup)='foodTruckSearch($event.target.value)'
-                                                            aria-label="Number">
-                                                        <mat-option *ngFor="let item of truckList" [value]='item'>
-                                                            {{item.name}}-- {{item.truckNumber}}
-                                                        </mat-option>
+                                        </mat-form-field>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <li>
+                                                    <!-- <label>Address<span class="red">*</span></label> -->
+                                                    <mat-form-field class="example-full-width">
+                                                        <mat-label>Select Vendor<span class="red">*</span></mat-label>
+                                                        <mat-select formControlName="selectedVendor">
+                                                            <input matInput type="text" placeholder="Search"
+                                                                (keyup)='vendorSearch($event.target.value)'
+                                                                aria-label="Number">
 
-                                                    </mat-select>
-                                                    <mat-error
-                                                        *ngIf="assignmentForm.get('selectedFoodTruck').hasError('required')">
-                                                        Please select a Food Truck
-                                                    </mat-error>
-                                                </mat-form-field>
-                                            </li>
-                                        </div>
+                                                            <mat-option *ngFor="let item of vendorList" [value]='item'>
+                                                                {{item.name}}
+                                                            </mat-option>
+                                                        </mat-select>
+
+                                                        <mat-error
+                                                            *ngIf="assignmentForm.get('selectedVendor').hasError('required')">
+                                                            Please Select a vendor
+                                                        </mat-error>
 
 
-                                    </div>
+                                                    </mat-form-field>
+                                                </li>
+                                            </div>
+                                            <div class="col-6">
+                                                <li>
+                                                    <mat-form-field class="example-full-width">
+                                                        <mat-label>Select Food Truck<span class="red">*</span>
+                                                        </mat-label>
 
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <li>
-                                                <mat-form-field class="example-full-width">
-                                                    <mat-label>Select GeoFence<span class="red">*</span></mat-label>
+                                                        <mat-select formControlName="selectedFoodTruck">
+                                                            <input matInput type="text" placeholder="Search"
+                                                                (keyup)='foodTruckSearch($event.target.value)'
+                                                                aria-label="Number">
+                                                            <mat-option *ngFor="let item of truckList" [value]='item'>
+                                                                {{item.name}}-- {{item.truckNumber}}
+                                                            </mat-option>
 
-                                                    <mat-select formControlName="selectedGeofence" multiple>
-                                                        <input matInput type="text" placeholder="Search"
-                                                            (keyup)='geofenceSearch($event.target.value)'
-                                                            aria-label="Number">
-                                                        <mat-option *ngFor="let item of geofenceList" [value]='item.id'>
-                                                            {{item.name}}, {{item.city}}, {{item.state}}
-                                                        </mat-option>
+                                                        </mat-select>
+                                                        <mat-error
+                                                            *ngIf="assignmentForm.get('selectedFoodTruck').hasError('required')">
+                                                            Please select a Food Truck
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </li>
+                                            </div>
 
-                                                    </mat-select>
-                                                    <mat-error
-                                                        *ngIf="assignmentForm.get('selectedGeofence').hasError('required')">
-                                                        Please select atleast one GeoFence
-                                                    </mat-error>
 
-                                                </mat-form-field>
-                                            </li>
                                         </div>
 
-                                        <div class="col-6">
-                                            <li>
-                                                <mat-form-field class="example-full-width">
-                                                    <mat-label>Select Equipment<span class="red">*</span></mat-label>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <li>
+                                                    <mat-form-field class="example-full-width">
+                                                        <mat-label>Select GeoFence<span class="red">*</span></mat-label>
 
-                                                    <mat-select formControlName="selectedEquipment" multiple>
-                                                        <input matInput type="text" placeholder="Search"
-                                                            (keyup)='equipmentSearch($event.target.value)'
-                                                            aria-label="Number">
-                                                        <mat-option *ngFor="let item of equipmentList" [value]='item'>
-                                                            {{item.name}} <b style="float: right;">Quantity Left
-                                                                {{item.quantity}} </b>
-                                                        </mat-option>
+                                                        <mat-select formControlName="selectedGeofence" multiple>
+                                                            <input matInput type="text" placeholder="Search"
+                                                                (keyup)='geofenceSearch($event.target.value)'
+                                                                aria-label="Number">
+                                                            <mat-option *ngFor="let item of geofenceList"
+                                                                [value]='item.id'>
+                                                                {{item.name}}, {{item.city}}, {{item.state}}
+                                                            </mat-option>
 
-                                                    </mat-select>
-                                                    <mat-error
-                                                        *ngIf="assignmentForm.get('selectedEquipment').hasError('required')">
-                                                        Please select atleast one Equipment
-                                                    </mat-error>
+                                                        </mat-select>
+                                                        <mat-error
+                                                            *ngIf="assignmentForm.get('selectedGeofence').hasError('required')">
+                                                            Please select atleast one GeoFence
+                                                        </mat-error>
 
-                                                </mat-form-field>
+                                                    </mat-form-field>
+                                                </li>
+                                            </div>
 
-                                            </li>
+                                            <div class="col-6">
+                                                <li>
+                                                    <mat-form-field class="example-full-width">
+                                                        <mat-label>Select Equipment<span class="red">*</span>
+                                                        </mat-label>
+
+                                                        <mat-select formControlName="selectedEquipment" multiple>
+                                                            <input matInput type="text" placeholder="Search"
+                                                                (keyup)='equipmentSearch($event.target.value)'
+                                                                aria-label="Number">
+                                                            <mat-option *ngFor="let item of equipmentList"
+                                                                [value]='item'>
+                                                                {{item.name}} <b style="float: right;">Quantity Left
+                                                                    {{item.quantity}} </b>
+                                                            </mat-option>
+
+                                                        </mat-select>
+                                                        <mat-error
+                                                            *ngIf="assignmentForm.get('selectedEquipment').hasError('required')">
+                                                            Please select atleast one Equipment
+                                                        </mat-error>
+
+                                                    </mat-form-field>
+
+                                                </li>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <li>
-                                                <mat-form-field class="example-full-width">
-                                                    <mat-label>Select Ingredient<span class="red">*</span></mat-label>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <li>
+                                                    <mat-form-field class="example-full-width">
+                                                        <mat-label>Select Ingredient<span class="red">*</span>
+                                                        </mat-label>
 
-                                                    <mat-select formControlName="selectedRawItems" multiple>
-                                                        <input matInput type="text" placeholder="Search"
-                                                            (keyup)='rawItemSearch($event.target.value)'
-                                                            aria-label="Number">
-                                                        <mat-option *ngFor="let item of rawItemList" [value]='item'>
-                                                            {{item.name}} <b style="float: right;">Please select
-                                                                quantity
-                                                                in multiple of
-                                                                {{item.quantity}}{{item.unit}} </b>
-                                                        </mat-option>
-                                                    </mat-select>
-                                                    <mat-error
-                                                        *ngIf="assignmentForm.get('selectedRawItems').hasError('required')">
-                                                        Please select atleast one Ingredient
-                                                    </mat-error>
-                                                </mat-form-field>
+                                                        <mat-select formControlName="selectedRawItems" multiple>
+                                                            <input matInput type="text" placeholder="Search"
+                                                                (keyup)='rawItemSearch($event.target.value)'
+                                                                aria-label="Number">
+                                                            <mat-option *ngFor="let item of rawItemList" [value]='item'>
+                                                                {{item.name}} <b style="float: right;">Please select
+                                                                    quantity
+                                                                    in multiple of
+                                                                    {{item.quantity}}{{item.unit}} </b>
+                                                            </mat-option>
+                                                        </mat-select>
+                                                        <mat-error
+                                                            *ngIf="assignmentForm.get('selectedRawItems').hasError('required')">
+                                                            Please select atleast one Ingredient
+                                                        </mat-error>
+                                                    </mat-form-field>
 
-                                            </li>
+                                                </li>
+                                            </div>
                                         </div>
-                                    </div>
-                                </ul>
-                            </form>
-                        </div>
-                        <div class="card-footer">
-                            <button mat-button (click)="openDialog()"
-                                [ngClass]="{disabled: assignmentForm.invalid==true}" [disabled]='assignmentForm.invalid'
-                                class="mr-3">Save</button>
-                            <button mat-button (click)="assignmentForm.reset()">Reset</button>
+                                    </ul>
+                                </form>
+                            </div>
+                            <div class="card-footer">
+                                <button mat-button (click)="openDialog()"
+                                    [ngClass]="{disabled: assignmentForm.invalid==true}"
+                                    [disabled]='assignmentForm.invalid' class="mr-3">Save</button>
+                                <button mat-button (click)="assignmentForm.reset()">Reset</button>
+                            </div>
                         </div>
                     </div>
 
@@ -222,7 +229,7 @@
                                 <th>Geofence Name</th>
                                 <th>Equipment Assigned</th>
                                 <th>Ingredient Assigned</th>
-                                <th class="Action">Action</th>
+                                <th *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.AssignmentManagement.write==true)" class="Action">Action</th>
                             </tr>
                             <tr *ngFor="let item of getAssignmentListData; let i=index">
                                 <td>{{i+1}}</td>
@@ -250,13 +257,14 @@
                                     </ul>
                                 </td>
 
-                                <td>
+                                <td *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.AssignmentManagement.write==true)">
                                     <ul>
                                         <li class="show">
 
                                             <a style="margin-left: 20px;" (click)="deleteAssignment(item._id)">
                                                 <i class="fa fa-trash"></i>
-                                            </a></li>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </td>
 

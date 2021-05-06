@@ -38,11 +38,14 @@ export class FoodTruckManagementComponent implements OnInit {
   flagapproval: boolean;
   foodTruckList: any;
   id: any;
+  user: any;
   constructor(private router: Router, private apiService: ApiService,
     private route: ActivatedRoute,
-
     private serverUrl: UrlService,
-    private commonService: CommonService, private fb: FormBuilder) { }
+    private commonService: CommonService, private fb: FormBuilder) { 
+      this.user = JSON.parse(this.apiService.getUser())
+
+    }
 
   ngOnInit() {
     this.getAllFoodTruck()

@@ -45,9 +45,9 @@ export class DailyorderComponent implements OnInit {
   srNo: number;
   progress: boolean;
   vendorList = [];
+  user: any;
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) {
-
-
+    this.user = JSON.parse(this.apiService.getUser())
   }
 
   ngOnInit() {

@@ -20,18 +20,8 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.roles = this.user.roles
-    if (this.roles == 'celebrity') {
-      this.celebrityType = this.user.celebrityType
-    }
-    // if (this.roles == 'admin') {
-    //   alert('Admin')
-
-    // } else if (this.roles == 'merchant') {
-    //   alert('vendor')
-    // } else if (this.roles == 'celebrity') {
-    //   alert('celebrity')
-    // }
+      
+   
     $('.nav_item').click(function () {
       $('.side_pages').css('width', '200')
     });

@@ -31,6 +31,7 @@ export class CategoryComponent implements OnInit {
   subCatId: any;
   progress: boolean;
   newImage: boolean;
+  user: any;
 
 
 
@@ -40,7 +41,7 @@ export class CategoryComponent implements OnInit {
     private commonService: CommonService,
     private formBuilder: FormBuilder, private serverUrl: UrlService) {
     this.imageUrl = this.serverUrl.imageUrl
-
+    this.user = JSON.parse(this.apiService.getUser())
     this.getAllCategories();
   }
 

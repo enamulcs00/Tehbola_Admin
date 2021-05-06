@@ -26,9 +26,13 @@ export class ManageUserComponent implements OnInit {
   flagNumber: boolean = false;
   flagUserList: boolean = false;
   progress: boolean;
+  user: any={};
   constructor(private router: Router,
     private apiService: ApiService,
-    private commonService: CommonService, private urlService: UrlService) { }
+    private commonService: CommonService, private urlService: UrlService) {
+
+      this.user = JSON.parse(this.apiService.getUser())
+     }
   srNo: number
   ngOnInit() {
     this.ShowAllUser()

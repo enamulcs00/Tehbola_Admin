@@ -71,9 +71,12 @@ export class BrandlistComponent implements OnInit {
   search: string = '';
   flagSearch: boolean = true;
   flagUserList: boolean;
+  user: any;
   constructor(private apiService: ApiService, private fb: FormBuilder, private commonService: CommonService, private urlService: UrlService) {
+    this.user = JSON.parse(this.apiService.getUser())
     this.getBrandList()
     this.getCategoryList()
+    
     this.imageUrl = this.urlService.imageUrl;
   }
 

@@ -66,7 +66,11 @@ export class AssignmentManagementComponent implements OnInit {
   equipmentListForModel: any;
   rawItemListForModel: any;
   backDropClick: boolean;
-  constructor(public dialog: MatDialog, private apiService: ApiService, private commonService: CommonService, private fb: FormBuilder) { }
+  user: any;
+  constructor(public dialog: MatDialog, private apiService: ApiService, private commonService: CommonService, private fb: FormBuilder) {
+
+    this.user = JSON.parse(this.apiService.getUser())
+   }
 
   ngOnInit() {
 

@@ -16,7 +16,7 @@
                     <!-- <div class="top_subheading_add">
                         <button class="btn_back" mat-button>Add </button>
                     </div> -->
-                    <div class="top_subheading_add ">
+                    <div *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.foodTruckManagement.write==true)" class="top_subheading_add ">
                         <button data-toggle="modal" data-target="#Add_truck" mat-button matRipple
                             [matRippleColor]="'#9e8221'" [matRippleRadius]="20">Add Food
                             Truck</button>
@@ -95,7 +95,7 @@
                                 <th>Ingredient Status</th>
                                 <th class="action_bx">Requests</th> -->
                                 <th>Status</th>
-                                <th class="action_bx">Actions</th>
+                                <th *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.foodTruckManagement.write==true)" class="action_bx">Actions</th>
                             </tr>
 
                             <tr *ngFor="let item of foodTruckList">
@@ -110,23 +110,18 @@
                                     </div>
 
                                 </td>
-                                <td>
-                                    <div class="action">
+                                <td *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.foodTruckManagement.write==true)">
+                                    <div  class="action">
                                         <ul>
-
-
                                             <li class="edit"><a><i class="fa fa-pencil fa-fw" data-toggle="modal"
                                                         data-target="#edit_truck" (click)="edit(item._id)"></i></a>
                                             </li>
                                             <li class="delete"><i class="fa fa-trash-o fa-fw"
                                                     (click)="delete(item._id)"></i></li>
                                         </ul>
-
-
                                     </div>
                                 </td>
                             </tr>
-
                         </table>
                     </div>
                 </div>

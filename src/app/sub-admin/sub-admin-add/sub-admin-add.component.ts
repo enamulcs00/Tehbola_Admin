@@ -152,7 +152,7 @@ export class SubAdminAddComponent implements OnInit {
       // third section starts
       broadCast: this.fb.group({
         read: [false],
-        write: [false],
+        // write: [false],
       })
     })
   }

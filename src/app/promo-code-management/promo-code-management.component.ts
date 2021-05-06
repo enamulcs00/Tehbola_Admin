@@ -30,7 +30,11 @@ export class PromoCodeManagementComponent implements OnInit {
   imageUrl: string;
   progress: boolean;
   promoCodeList: any;
-  constructor(private router: Router, private apiService: ApiService, private commonService: CommonService, private urlService: UrlService) { }
+  constructor(private router: Router, private apiService: ApiService, private commonService: CommonService, private urlService: UrlService) { 
+
+    this.user = JSON.parse(this.apiService.getUser())
+
+  }
 
   ngOnInit() {
 

@@ -33,18 +33,10 @@ export class OfferdealsComponent implements OnInit {
   bannerType: any;
   isApproved: any;
   progress: boolean;
+  user: any;
   constructor(private router: Router, private apiService: ApiService, private urlService: UrlService, private commonService: CommonService) {
     this.imagePath = this.urlService.imageUrl;
-    this.userDetails = JSON.parse(sessionStorage.getItem('Markat_User'))
-    if (this.userDetails.roles != 'admin') {
-      this.sellerId = this.userDetails._id
-
-      this.bannerType = this.userDetails.roles
-      this.isApproved = ''
-    } else {
-      this.bannerType = ''
-      this.isApproved = ''
-    }
+    this.user = JSON.parse(this.apiService.getUser())
   }
 
   ngOnInit() {

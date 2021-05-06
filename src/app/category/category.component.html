@@ -87,7 +87,8 @@
 
                 <!-----start pagination-->
                 <mat-accordion>
-                    <div class="add_location_name">
+                    <div *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.category.write==true)"
+                        class="add_location_name">
                         <a href="javascript:;" matRipple [matRippleColor]="'#dbdddf'" [matRippleRadius]="50"
                             class="button-border add_state" (click)="clearData()" data-toggle="modal"
                             data-target="#Add_State">
@@ -111,7 +112,8 @@
                                 </div>
                             </mat-panel-title>
                             <mat-panel-description>
-                                <div class="m-3">
+                                <div *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.category.write==true)"
+                                    class="m-3">
                                     <a href="javascript:;" class="p-4" data-toggle="modal"
                                         data-target="#Add_State_delete">
                                         <i class="fa fa-edit" (click)="editCategory(category._id)"></i>
@@ -135,20 +137,23 @@
                                     <span class="sub_category_image">
                                         <figure><img src={{imageUrl+subcategory.image}}></figure>
                                     </span> <span>{{j+1}}. {{subcategory.name}}</span>
-                                    <a style="margin-left:25px ;" href="javascript:;" data-toggle="modal"
-                                        data-target="#EditSubcategory">
-                                        <i class="fa fa-edit" (click)="editSubCategory(subcategory._id)"></i>
-                                    </a>
+                                    <div *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.category.write==true)">
 
-                                    <a style="margin-left: 20px;" href="javascript:;">
-                                        <i class="fa fa-trash" (click)="deleteSubcategory(subcategory._id)"></i>
-                                    </a>
+                                        <a style="margin-left:25px ;" href="javascript:;" data-toggle="modal"
+                                            data-target="#EditSubcategory">
+                                            <i class="fa fa-edit" (click)="editSubCategory(subcategory._id)"></i>
+                                        </a>
+
+                                        <a style="margin-left: 20px;" href="javascript:;">
+                                            <i class="fa fa-trash" (click)="deleteSubcategory(subcategory._id)"></i>
+                                        </a>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
                         <div class="state-list state-list-li">
 
-                            <div class="actions">
+                            <div *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.category.write==true)" class="actions">
                                 <a href="javascript:;" matRipple [matRippleColor]="'#dbdddf'" [matRippleRadius]="50"
                                     class="button-pad add_city" data-toggle="modal" data-target="#Add_city"
                                     (click)="onAddSubCategoryBtn(category._id)">

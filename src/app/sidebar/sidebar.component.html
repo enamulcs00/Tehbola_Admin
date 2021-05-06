@@ -48,68 +48,68 @@
     <div id="core1" class="core active">
         <h3>Core</h3>
         <ul>
-            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goTodashboard()">Dashboard
+            <li  matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goTodashboard()">Dashboard
             </li>
             <!-- <li (click)="goToreportpage()">Reporting</li> -->
-            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goTomanageUser()"
-                *ngIf="roles =='admin'">User
+            <li *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.users.read==true)" matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goTomanageUser()"
+                >User
                 Management </li>
 
-            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToProduct()">Product Management
+            <li *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.product.read==true)" matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToProduct()">Product Management
             </li>
             <!-- *ngIf="roles =='celebrity || merchant'" -->
-            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goTovendermanagement()"
-                *ngIf="roles =='admin'">Vendor
+            <li *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.vendor.read==true)" matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goTovendermanagement()"
+                >Vendor
                 Management</li>
             <!-- <li (click)="goToCelebritymanagement()" *ngIf="roles =='admin'">Celebrity Management</li> -->
-            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goTocategory()"
-                *ngIf="roles=='admin'">Category Management</li>
-            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToBrand()"
-                *ngIf="roles=='admin'">Raw Item Management
+            <li *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.category.read==true)" matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goTocategory()"
+                >Category Management</li>
+            <li *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.rawItemManagent.read==true)" matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToBrand()"
+               >Raw Item Management
             </li>
 
 
             <!-- <li (click)="goTosubcategory()">Sub-Category</li> -->
-            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToinventry()">Inventory
+            <li *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.inventory.read==true)" matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToinventry()">Inventory
                 Management</li>
 
-            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToofferdeals()">Banner
+            <li *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.banner.read==true)" matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToofferdeals()">Banner
                 Manegement</li>
-            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" [routerLink]="['/sub-adminList']" routerLinkActive="router-link-active" >Sub-Admin Management</li>
+            <li *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.subadmin.read==true)" matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" [routerLink]="['/sub-adminList']" routerLinkActive="router-link-active" >Sub-Admin Management</li>
         </ul>
     </div>
     <div id="core3" class="core">
         <h3>Intel</h3>
         <ul>
-            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goTorevenuereport()"> Revenue
+            <li *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.revenue.read==true)" matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goTorevenuereport()"> Revenue
                 Management </li>
-            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToGeofence()"> Geofence
+            <li *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.geofenceManagement.read==true)" matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToGeofence()"> Geofence
                 Management
             </li>
 
-            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToAssignmentModule()">
+            <li *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.AssignmentManagement.read==true)" matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToAssignmentModule()">
                 Assignment</li>
 
-            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToEquipmentpage()">
+            <li *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.EqupmentManagement.read==true)" matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToEquipmentpage()">
                 Equipment Management</li>
 
-            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToordermanagement()">
+            <li *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.orderList.read==true)" matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToordermanagement()">
                 Booking
                 Request </li>
 
-            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToFoodTruckManagement()">
+            <li *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.foodTruckManagement.read==true)" matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToFoodTruckManagement()">
                 Food Truck management
             </li>
 
             
-            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToPromoCodeManagement()">
+            <li *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.discount.read==true)" matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToPromoCodeManagement()">
                 Promo Code Management
             </li>
             <!-- <li (click)="goTopayment()">Payment</li> -->
             <!--<li>Analytics</li>-->
-            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToSettings()">Settings</li>
-            <li  matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goTovendorSalesReport()">Vendor Request</li>
-            <li matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goTomanageReviews()">Reviews</li>
+            <li *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.setting.read==true)" matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goToSettings()">Settings</li>
+            <li  *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.vendorRequestManagement.read==true)" matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goTovendorSalesReport()">Vendor Request</li>
+            <li *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.reviews.read==true)" matRipple [matRippleColor]="'#9e8221'" [matRippleRadius]="20" (click)="goTomanageReviews()">Reviews</li>
         </ul>
     </div>
 
@@ -119,7 +119,7 @@
             <!-- <li (click)="goTowarehouse()">Warehouse</li>
             <li (click)="goToaccounts()">Accounts</li>
             <li (click)="goTooffersync()">offer Sync</li>-->
-            <li (click)="goToBroadCast()">Broadcast Message</li>
+            <li *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.broadCast.read==true)" (click)="goToBroadCast()">Broadcast Message</li>
             <!-- <li (click)="goTonotification()">Notifications</li> -->
         </ul>
     </div>

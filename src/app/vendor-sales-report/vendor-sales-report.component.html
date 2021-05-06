@@ -50,7 +50,7 @@
                                         <th>Equipment Name</th>
                                         <th>Description</th>
                                         <th>Priority</th>
-                                        <th>Action</th>
+                                        <th *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.vendorRequestManagement.write==true)">Action</th>
                                     </tr>
                                     <tr *ngFor="let item of vendorList; let i=index">
         
@@ -65,7 +65,7 @@
                                         <td>
                                             {{item.priority==0?'Normal':'High'}}
                                         </td>
-                                        <td class="Booking_status">
+                                        <td *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.vendorRequestManagement.write==true)" class="Booking_status">
         
                                             <select [(value)]="item.status"  (change)="changeUserStatus(item._id,item.status )">
                                                 <option  value="1">Resolved</option>
@@ -123,7 +123,7 @@
                                         <th>Vendor Phone Number </th>
                                         <th>Raw Item List </th>
                                        
-                                        <th>Action</th>
+                                        <th *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.vendorRequestManagement.write==true)">Action</th>
                                     </tr>
                                     <tr *ngFor="let item of inventoryReqList; let i=index">
         
@@ -143,7 +143,7 @@
                                                 </tr>
                                             </table>
                                         </div></td>
-                                        <td class="Booking_status">
+                                        <td *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.vendorRequestManagement.write==true)" class="Booking_status">
         
                                             <select [(value)]="item.status"  (change)="changeInventoryStatus(item._id,item.status )">
                                                 <option  value="0">Pending</option>

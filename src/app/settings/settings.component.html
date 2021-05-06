@@ -99,7 +99,7 @@
                                 </div>
 
                                 <div class="col-md-2 pb-2">
-                                    <div class="top_subheading_add">
+                                    <div *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.setting.write==true)" class="top_subheading_add">
                                         <button class=" rounded-pill btn btn-primary text-white" data-toggle="modal"
                                             id="addSizeButton" data-target="#largeModal">+ Add
                                             Size
@@ -113,13 +113,13 @@
 
                                         <th>Size Name</th>
                                         <th>Size name malay</th>
-                                        <th>Action</th>
+                                        <th *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.setting.write==true)">Action</th>
 
                                     </tr>
                                     <tr *ngFor="let item of sizeList; let i=index">
                                         <td>{{item.name}}</td>
                                         <td>{{item.name_ar}}</td>
-                                        <td>
+                                        <td *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.setting.write==true)">
                                             <!-- <a href="javascript:;" data-toggle="modal"
                                                 (click)="editShippingCharge(item._id)" data-target=" #editlargeModal">
                                                 <i class="fa fa-edit"></i>
@@ -145,7 +145,7 @@
                                 </div>
 
                                 <div class="col-md-2 pb-2">
-                                    <div class="top_subheading_add">
+                                    <div *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.setting.write==true)" class="top_subheading_add">
                                         <button data-toggle="modal" class=" rounded-pill btn btn-primary text-white"
                                             data-target="#TealargeModal"><i class="fa fa-plus"></i> Add
                                             Tea Type
@@ -158,12 +158,12 @@
                                     <tr>
                                         <th>Tea Name</th>
                                         <th>Tea name malay</th>
-                                        <th>Action</th>
+                                        <th *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.setting.write==true)">Action</th>
                                     </tr>
                                     <tr *ngFor="let item of teaTypeList; let i=index">
                                         <td>{{item.name}}</td>
-                                        <td>{{item.name_ar}}</td>
-                                        <td>
+                                        <td >{{item.name_ar}}</td>
+                                        <td *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.setting.write==true)">
                                             <button style="background-color: transparent !important;"
                                                 (click)=" editTeaType(item._id)" data-toggle="modal"
                                                 data-target="#editTealargeModal"> <i class="fa fa-edit"></i></button>
@@ -186,7 +186,7 @@
                                 </div>
 
                                 <div class="col-md-2 pb-2">
-                                    <div class="top_subheading_add">
+                                    <div *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.setting.write==true)" class="top_subheading_add">
                                         <button class="rounded-pill btn btn-primary text-white" data-toggle="modal"
                                             data-target="#sugarlargeModal"><i class="fa fa-plus"></i> Add
                                             Sugar Level
@@ -199,12 +199,12 @@
                                     <tr>
                                         <th>Sugar Level Name</th>
                                         <th>Sugar Level name malay</th>
-                                        <th>Action</th>
+                                        <th *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.setting.write==true)">Action</th>
                                     </tr>
                                     <tr *ngFor="let item of sugarLevelList; let i=index">
                                         <td>{{item.name}}</td>
                                         <td>{{item.name_ar}}</td>
-                                        <td>
+                                        <td *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.setting.write==true)">
                                             <button style="background-color: transparent !important;"
                                                 (click)=" editSugarLevel(item._id)" data-toggle="modal"
                                                 data-target="#editSugarlargeModal"> <i class="fa fa-edit"></i></button>

@@ -59,7 +59,8 @@
 
                                     </div>
 
-                                    <div class="add_location_name">
+                                    <div *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.EqupmentManagement.write==true)"
+                                        class="add_location_name">
                                         <a class="button-border add_state" matRipple [matRippleColor]="'#dbdddf'"
                                             [matRippleRadius]="50" data-toggle="modal" data-target="#Add_equipment">
                                             <i class="fa fa-plus"></i> Add Equipment</a>
@@ -72,15 +73,18 @@
                                                 <figure><img [src]='imageUrl +item.image'></figure>
                                                 <span>
                                                     <div>
-                                                        <b>1. {{item.name}} </b> <a data-toggle="modal"
-                                                            data-target="#edit_equipment">
-                                                            <i class="fa fa-edit" (click)="editEquipment(item._id)"></i>
-                                                        </a>
-
-                                                        <a>
-                                                            <i class="fa fa-trash"
-                                                                (click)="deleteEquipment(item._id)"></i>
-                                                        </a>
+                                                        <b>1. {{item.name}} </b>
+                                                        <div
+                                                            *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.EqupmentManagement.write==true)">
+                                                            <a data-toggle="modal" data-target="#edit_equipment">
+                                                                <i class="fa fa-edit"
+                                                                    (click)="editEquipment(item._id)"></i>
+                                                            </a>
+                                                            <a>
+                                                                <i class="fa fa-trash"
+                                                                    (click)="deleteEquipment(item._id)"></i>
+                                                            </a>
+                                                        </div>
                                                         <p>Category:{{item.category.name}}</p>
                                                         <p>Quantity:<span>{{item.quantity}}</span>
                                                         </p>
@@ -119,7 +123,8 @@
 
                                     </div>
 
-                                    <div class="add_location_name">
+                                    <div *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.EqupmentManagement.write==true)"
+                                        class="add_location_name">
                                         <a class="button-border add_state" matRipple [matRippleColor]="'#dbdddf'"
                                             [matRippleRadius]="50" data-toggle="modal"
                                             data-target="#Add_equipment_category">
@@ -132,16 +137,20 @@
                                             <div class="country_name">
                                                 <span>
                                                     <div>
-                                                        <b>{{ i+1 }}. {{ item.name }} </b> <a data-toggle="modal"
-                                                            data-target="#edit_equipment_category">
-                                                            <i class="fa fa-edit"
-                                                                (click)="editEquipmentCategoryMethod(item._id, item.name,item.name_ar, item.description)"></i>
-                                                        </a>
+                                                        <b>{{ i+1 }}. {{ item.name }} </b>
+                                                        <div
+                                                            *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.EqupmentManagement.write==true)">
+                                                            <a data-toggle="modal"
+                                                                data-target="#edit_equipment_category">
+                                                                <i class="fa fa-edit"
+                                                                    (click)="editEquipmentCategoryMethod(item._id, item.name,item.name_ar, item.description)"></i>
+                                                            </a>
 
-                                                        <a>
-                                                            <i class="fa fa-trash"
-                                                                (click)="deleteEquipmentCat(item._id)"></i>
-                                                        </a>
+                                                            <a>
+                                                                <i class="fa fa-trash"
+                                                                    (click)="deleteEquipmentCat(item._id)"></i>
+                                                            </a>
+                                                        </div>
 
                                                     </div>
                                                 </span>

@@ -47,7 +47,11 @@ export class VendorSalesReportComponent implements OnInit {
   flagFilter: boolean=false;
   flagSearchInventory=true
   lengthOfInventory: any;
-  constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) { }
+  user: any;
+  constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) { 
+    this.user = JSON.parse(this.apiService.getUser())
+
+  }
 
   ngOnInit() {
     this.getVendorSaleReport(this.page, this.pageSize, )

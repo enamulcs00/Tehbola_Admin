@@ -37,8 +37,9 @@ export class EquipmentManagementComponent implements OnInit {
   search: string = '';
   flagSearch: boolean = true;
   flag: boolean;
+  user: any;
   constructor(private apiService: ApiService, private fb: FormBuilder, private commonService: CommonService, private urlService: UrlService) {
-
+    this.user = JSON.parse(this.apiService.getUser())
     this.imageUrl = this.urlService.imageUrl;
   }
 

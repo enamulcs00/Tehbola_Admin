@@ -33,7 +33,6 @@ export class ProductComponent implements OnInit {
   flagUserList: boolean = false;
   srNo: number;
   user: any;
-  sellerId: any;
   isApproved: any
     ;
   flagapproval: boolean;
@@ -60,12 +59,7 @@ export class ProductComponent implements OnInit {
     this.user = JSON.parse(sessionStorage.getItem('Markat_User'))
     console.log(this.user);
 
-    if (this.user.roles == 'admin') {
-      this.sellerId = null
-    } else {
-      this.sellerId = this.user._id
-
-    }
+  
     //alert(this.id)
   }
 
