@@ -19,13 +19,15 @@
 							<div class="outer_table">
 								<div class="search_fields">
 									<div class="filters Booking_status">
-										<label>Filter</label>
-										<select [(ngModel)]="filter" (change)="filterSelected($event)">
-											<option *ngIf="flag==true" value="">Remove Filter</option>
-											<option *ngIf="flag==false" value=""></option>
-											<option *ngFor="let item of optionList" value="{{item}}">{{item}}</option>
+										<mat-form-field>
+										<mat-label>Filter</mat-label>
+										<mat-select [(ngModel)]="filter" (change)="filterSelected($event)">
+											<mat-option *ngIf="flag==true" value="">Remove Filter</mat-option>
+											<mat-option *ngIf="flag==false" value=""></mat-option>
+											<mat-option *ngFor="let item of optionList" value="{{item}}">{{item}}</mat-option>
 
-										</select>
+										</mat-select>
+									</mat-form-field>
 									</div>
 									<div class="search_inner_fiels">
 										<div class="filters Booking_status">
