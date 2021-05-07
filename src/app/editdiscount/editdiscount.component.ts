@@ -9,6 +9,7 @@ import { IDropdownSettings, } from 'ng-multiselect-dropdown';
 import { ApiService } from 'src/services/api.service';
 import { CommonService } from 'src/services/common.service';
 import { UrlService } from 'src/services/url.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 interface Ready {
@@ -531,7 +532,9 @@ export class EditdiscountComponent implements OnInit {
     body.append('id', this.id);
     body.append('name', this.editDiscountForm.controls['name'].value);
     body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
-    body.append('image', this.images, this.images.name);
+    if (this.images.length>0) {
+      body.append('image', new Blob([this.images], { type: 'image/*' }), this.images.name);
+    }
     body.append('offer', JSON.stringify(offer));
     body.append('type', this.editDiscountForm.controls['type'].value);
     body.append('startDate', JSON.stringify(startDate));
@@ -555,9 +558,9 @@ export class EditdiscountComponent implements OnInit {
     body.append('id', this.id);
     body.append('name', this.editDiscountForm.controls['name'].value);
     body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
-
-    body.append('image', new Blob([this.images], { type: 'image/*' }), this.images.name);
-
+    if (this.images.length>0) {
+      body.append('image', new Blob([this.images], { type: 'image/*' }), this.images.name);
+    }
     body.append('type', this.editDiscountForm.controls['type'].value);
     body.append('offer', JSON.stringify(offer));
     body.append('geoFence', JSON.stringify(this.editDiscountForm.controls['geofence'].value));
@@ -584,8 +587,9 @@ export class EditdiscountComponent implements OnInit {
     body.append('category', this.editDiscountForm.get('category').value);
     body.append('name', this.editDiscountForm.controls['name'].value);
     body.append('name_ar', this.editDiscountForm.controls['name_ar'].value);
-
-    body.append('image', this.images, this.images.name);
+    if (this.images.length>0) {
+      body.append('image', new Blob([this.images], { type: 'image/*' }), this.images.name);
+    }
     body.append('type', this.editDiscountForm.controls['type'].value);
     body.append('offer', JSON.stringify(offer));
     //body.append('product', this.editDiscountForm.controls['product'].value);
@@ -610,7 +614,7 @@ export class EditdiscountComponent implements OnInit {
       if (res.success) {
         this.progress = false
         this.router.navigateByUrl('offerdeals');
-
+        this.commonService.successToast(res.message)
       } else {
         this.commonService.errorToast(res.message)
         this.progress = false

@@ -284,8 +284,6 @@ export class AddoffersComponent implements OnInit, AfterViewChecked {
     this.progress = true;
     this.apiService.getAssignementData().subscribe(res => {
 
-
-
       this.progress = false
       if (res.success) {
         res.data.vendor.forEach(element => {
