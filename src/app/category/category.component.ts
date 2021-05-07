@@ -30,7 +30,7 @@ export class CategoryComponent implements OnInit {
   count: number = 100
   subCatId: any;
   progress: boolean;
-  newImage: boolean;
+  newImage: boolean=false;
   user: any;
 
 
@@ -75,7 +75,6 @@ export class CategoryComponent implements OnInit {
       if (res.success) {
         this.progress = false
         this.categories = res.data;
-
         this.submitted = false;
       } else {
         this.progress = false
@@ -83,8 +82,6 @@ export class CategoryComponent implements OnInit {
       }
     })
   }
-
-
   clearData() {
     this.addCategoryForm.reset();
     this.addSubcategoryForm.reset();
@@ -94,8 +91,8 @@ export class CategoryComponent implements OnInit {
     this.previewImage = ''
     this.categoryImage = '';
     this.subCategoryImage = ''
-
   }
+  
 
   goToaddcategory() {
     this.router.navigate(['addcategory'])
@@ -157,6 +154,7 @@ export class CategoryComponent implements OnInit {
           this.submitted = false;
           this.addCategoryForm.reset();
           this.imageFile = null;
+          this.newImage=false
 
           this.categoryImage = null
 

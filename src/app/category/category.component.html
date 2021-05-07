@@ -238,7 +238,7 @@
 
                             <mat-form-field class="example-full-width">
                                 <mat-label>Commission percentage of the Category<span class="red">*</span></mat-label>
-                                <input matInput type="text" placeholder="Commission" formControlName="commission"
+                                <input matInput type="number" placeholder="Commission" formControlName="commission"
                                     name="commission">
                                 <mat-error *ngIf="addCategoryForm.get('commission').hasError('required')">
                                     Commission is <strong>required</strong>
@@ -329,7 +329,7 @@
 
                             <mat-form-field class="example-full-width">
                                 <mat-label>Commission percentage of the Category<span class="red">*</span></mat-label>
-                                <input matInput type="text" placeholder="Commission" formControlName="commission"
+                                <input matInput type="number" placeholder="Commission" formControlName="commission"
                                     name="commission">
                                 <mat-error *ngIf="editCategoryForm.get('commission').hasError('required')">
                                     Commission is <strong>required</strong>

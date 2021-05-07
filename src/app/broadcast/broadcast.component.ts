@@ -29,7 +29,9 @@ export class BroadcastComponent implements OnInit {
     this.apiService.broadcastNotification(body).subscribe(res => {
 
       if (res.success == true) {
+        this.broadcastForm.reset();
         this.commonService.successToast(res.message);
+        this.broadcastForm.reset();
       }else{
         this.commonService.errorToast(res.message);
       }

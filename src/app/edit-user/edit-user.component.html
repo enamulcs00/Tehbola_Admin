@@ -39,7 +39,7 @@
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Email<span class="red">*</span></mat-label>
                                     <input matInput type="text" placeholder="User Email" formControlName="UserEmail"
-                                        name="name" name="name">
+                                        name="name" name="name" readonly>
                                     <mat-error *ngIf="editUserForm.get('UserEmail').hasError('required')">
                                         Email is <strong>required</strong>
                                     </mat-error>
