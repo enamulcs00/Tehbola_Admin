@@ -212,7 +212,6 @@ export class AddproductComponent implements OnInit {
 
 
   addNewSpecification() {
-
     this.specification().push(this.newSpecifiaction())
   }
 
