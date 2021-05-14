@@ -8288,7 +8288,6 @@
       }
 
       sendNotification() {
-        debugger;
         let body = this.broadcastForm.value;
         this.apiService.broadcastNotification(body).subscribe(res => {
           if (res.success == true) {
