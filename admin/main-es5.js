@@ -27373,6 +27373,7 @@
           adminGetReportedIssue: 'admin/reports',
           boradcast: 'admin/broadcastNotification',
           subadmin: 'admin/admin',
+          userAddress: 'app/address',
           //commonApi to change status of any user type
           status: 'common/status'
         };
@@ -27692,7 +27693,7 @@
       }
 
       getUserAddress(id) {
-        return this.http.get("".concat(this.apiEndPoints.userAddress, "?id=").concat(id), this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('user address')));
+        return this.http.get("".concat(this.apiEndPoints.userAddress, "?page=1&count=999999999&id=").concat(id), this.getHeaders()).pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('user address')));
       }
 
       updateAddress(body) {

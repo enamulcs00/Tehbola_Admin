@@ -102,6 +102,7 @@ export class ApiService {
       adminGetReportedIssue:'admin/reports',
       boradcast:'admin/broadcastNotification',
       subadmin: 'admin/admin',
+      userAddress:'app/address',
       //commonApi to change status of any user type
       status: 'common/status',
 
@@ -528,7 +529,7 @@ export class ApiService {
 
 
   getUserAddress(id) {
-    return this.http.get<any>(`${this.apiEndPoints.userAddress}?id=${id}`, this.getHeaders())
+    return this.http.get<any>(`${this.apiEndPoints.userAddress}?page=1&count=999999999&id=${id}`, this.getHeaders())
       .pipe(
         catchError(this.handleError<any>('user address')))
   }

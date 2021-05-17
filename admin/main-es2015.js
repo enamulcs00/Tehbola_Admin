@@ -19874,6 +19874,7 @@ let ApiService = class ApiService {
             adminGetReportedIssue: 'admin/reports',
             boradcast: 'admin/broadcastNotification',
             subadmin: 'admin/admin',
+            userAddress: 'app/address',
             //commonApi to change status of any user type
             status: 'common/status',
         };
@@ -20155,7 +20156,7 @@ let ApiService = class ApiService {
             .pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('Get Profile')));
     }
     getUserAddress(id) {
-        return this.http.get(`${this.apiEndPoints.userAddress}?id=${id}`, this.getHeaders())
+        return this.http.get(`${this.apiEndPoints.userAddress}?page=1&count=999999999&id=${id}`, this.getHeaders())
             .pipe(Object(rxjs_internal_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.handleError('user address')));
     }
     updateAddress(body) {

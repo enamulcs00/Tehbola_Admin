@@ -24,10 +24,8 @@ export class BroadcastComponent implements OnInit {
 
 
   sendNotification() {
-
     let body = this.broadcastForm.value
     this.apiService.broadcastNotification(body).subscribe(res => {
-
       if (res.success == true) {
         this.broadcastForm.reset();
         this.commonService.successToast(res.message);
@@ -38,9 +36,6 @@ export class BroadcastComponent implements OnInit {
     })
 
   }
-
-
-
 
   back() {
     window.history.back()

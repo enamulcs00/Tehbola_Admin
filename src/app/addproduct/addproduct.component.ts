@@ -166,11 +166,8 @@ export class AddproductComponent implements OnInit {
 
 
   loadSize(): any {
-
     let controls = [];
-
     let controlsList = this.sizePrice().value
-
     for (let y in controlsList) {
       controls.push(new FormGroup({
         id: new FormControl(controlsList[y].id),
