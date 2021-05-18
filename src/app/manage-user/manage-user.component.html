@@ -107,7 +107,7 @@
                                     </td>
                                     <td>{{item?.lastOrderAt | date}}</td>
 
-                                    <td><a class="request_hisrty" (click)="goTobookingRequestHistory()"><i class="fa fa-eye"></i></a></td>
+                                    <td><a class="request_hisrty" (click)="goTobookingRequestHistory(item._id)"><i class="fa fa-eye"></i></a></td>
                                     <td *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.users.write==true)">
                                         <div  class="action">
                                             <ul>

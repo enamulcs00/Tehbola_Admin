@@ -179,19 +179,12 @@ export class ManageUserComponent implements OnInit {
   goToadduser() {
     this.router.navigate(['adduser'])
   };
-  goTobookingRequestHistory(i) {
-    let id: any
-    let name: string
+  goTobookingRequestHistory(id) {
+    
+   
     // console.log(i);
-    for (let j = 0; j <= this.userList.length; j++) {
-      if (i == j) {
-        // console.log(this.userList[j]._id);
-        id = this.userList[j]._id;
-        name = this.userList[j].firstName;
-
-      }
-    }
-    this.router.navigate(['bookingRequestHistory'], { queryParams: { "id": id, "name": name } })
+   
+    this.router.navigate(['bookingRequestHistory'], { queryParams: { "id": id} })
   };
   goToviewUser() {
     this.router.navigate(['viewUser'])

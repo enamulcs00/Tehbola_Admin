@@ -103,6 +103,7 @@ export class ApiService {
       boradcast:'admin/broadcastNotification',
       subadmin: 'admin/admin',
       userAddress:'app/address',
+      viewOrderHistory:'admin/sales',
       //commonApi to change status of any user type
       status: 'common/status',
 
@@ -689,9 +690,9 @@ export class ApiService {
     )
   }
 
-  viewPurchaseHistory(page, count, id, filter, search) {
+  viewPurchaseHistory(page, count, id,  search) {
     console.log(id);
-    return this.http.get<any>(`${this.apiEndPoints.viewOrderHistory}?page=${page}&count=${count}&id=${id}&filter=${filter}&search=${search}`,
+    return this.http.get<any>(`${this.apiEndPoints.viewOrderHistory}?page=${page}&count=${count}&user=${id}&search=${search}`,
       this.getHeaders()
     ).pipe(
       catchError(this.handleError<any>('No user'))

@@ -12,11 +12,8 @@
                                 aria-hidden="true"></i></button>
                     </div>
                 </div>
-
                 <div col-lg-12 *ngIf="flagData==false">
                     <h1>No Data Found</h1>
-
-
                 </div>
                 <div class="row" *ngIf="flagData==true">
                     <div class="col-lg-6">
@@ -28,23 +25,16 @@
                                         Address:- {{item.address}},<br>
                                         Street Name:- {{item.streetName}},<br>
                                         Address Type:- {{item.addressType}},<br>
-                                        <!-- state:-{{item.state}},<br> -->
-                                        <!-- Country:- {{item.country}}<br> -->
-                                        <!-- Phone no;-{{item.phone}}<br> -->
                                         Postal Code:-{{item.postalCode}}
-
                                     </div>
                                     <div>
                                         <a class="edit" (click)="editAddress(item)"><i
                                                 class="fa fa-pencil fa-fw"></i></a>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
                     <div col-lg-4>
                         <div class="card" *ngIf="flag">
                             <h3 style="margin: 10px 10px;"> Edit address</h3>
@@ -53,32 +43,27 @@
                                     <ul>
                                         <li>
                                             <label>Address<span class="red">*</span></label>
-                                          
-                                                <input matInput type="text" name="address" placeholder="" [(ngModel)]="address"
-                                                    name="address1">
+                                            <input matInput type="text" name="address" placeholder=""
+                                                [(ngModel)]="address" name="address1">
                                         </li>
                                         <li>
                                             <label>Street Name<span class="red">*</span></label>
-                                                <input matInput type="text" name="streetName" placeholder="" [(ngModel)]="streetName"
-                                                    name="address2">
+                                            <input matInput type="text" name="streetName" placeholder=""
+                                                [(ngModel)]="streetName" name="address2">
                                         </li>
-                                        
                                         <li>
                                             <label>Postal code<span class="red">*</span></label>
-                                                <input matInput type="text" name="postalCode" placeholder="" [(ngModel)]="postalCode"
-                                                    name="postalCode">
+                                            <input matInput type="text" name="postalCode" placeholder=""
+                                                [(ngModel)]="postalCode" name="postalCode">
                                         </li>
                                         <li hidden="true">
                                             <label>Address Type<span class="red">*</span></label>
-                                               <select name="addressType" [(ngModel)]="addressType" >
+                                            <select name="addressType" [(ngModel)]="addressType">
                                                 <option value="Home">Home</option>
                                                 <option value="Office">Office</option>Other
                                                 <option value="Other">Other</option>
-                                             
-                                               </select>
+                                            </select>
                                         </li>
-
-
                                     </ul>
                                     <div class="update_button">
                                         <button mat-button (click)="UpdateAddress()">
@@ -89,12 +74,9 @@
                                     </div>
                                 </form>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

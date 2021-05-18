@@ -414,9 +414,7 @@ export class BrandlistComponent implements OnInit {
       for (let i = 0; i < this.imageFile.length; i++) {
         formData.append('image', this.imageFile[i], this.imageFile[i].name);
       }
-      formData.forEach((value, key) => {
-
-      });
+      
       //formData.append('image', new Blob([this.imageFile], { type: 'image/*' }), this.imageFile.name);
       this.progress = true
       this.apiService.addBrand(formData).subscribe(res => {
