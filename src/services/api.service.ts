@@ -529,7 +529,7 @@ export class ApiService {
 
 
   getUserAddress(id) {
-    return this.http.get<any>(`${this.apiEndPoints.userAddress}?page=1&count=999999999&id=${id}`, this.getHeaders())
+    return this.http.get<any>(`${this.apiEndPoints.userAddress}?page=1&count=999999999&userId=${id}`, this.getHeaders())
       .pipe(
         catchError(this.handleError<any>('user address')))
   }

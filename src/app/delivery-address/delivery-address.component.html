@@ -25,17 +25,17 @@
                                 <h3>{{item.addressType}} Address</h3>
                                 <div class="row">
                                     <div class="complete_address">
-                                        Apartment:- {{item.address1}},<br>
-                                        Building Name:- {{item.address2}},<br>
-                                        city:- {{item.city}},<br>
-                                        state:-{{item.state}},<br>
+                                        Address:- {{item.address}},<br>
+                                        Street Name:- {{item.streetName}},<br>
+                                        Address Type:- {{item.addressType}},<br>
+                                        <!-- state:-{{item.state}},<br> -->
                                         <!-- Country:- {{item.country}}<br> -->
-                                        Phone no;-{{item.phone}}<br>
+                                        <!-- Phone no;-{{item.phone}}<br> -->
                                         Postal Code:-{{item.postalCode}}
 
                                     </div>
                                     <div>
-                                        <a class="edit" (click)="editAddress(item._id)"><i
+                                        <a class="edit" (click)="editAddress(item)"><i
                                                 class="fa fa-pencil fa-fw"></i></a>
                                     </div>
 
@@ -52,54 +52,30 @@
                                 <form>
                                     <ul>
                                         <li>
-                                            <label>Apartment<span class="red">*</span></label>
-                                            <mat-form-field [floatLabel]="'never'">
-                                                <input matInput type="text" placeholder="" [(ngModel)]="address1"
+                                            <label>Address<span class="red">*</span></label>
+                                          
+                                                <input matInput type="text" name="address" placeholder="" [(ngModel)]="address"
                                                     name="address1">
-                                            </mat-form-field>
                                         </li>
                                         <li>
-                                            <label>Building Name<span class="red">*</span></label>
-                                            <mat-form-field [floatLabel]="'never'">
-                                                <input matInput type="text" placeholder="" [(ngModel)]="address2"
+                                            <label>Street Name<span class="red">*</span></label>
+                                                <input matInput type="text" name="streetName" placeholder="" [(ngModel)]="streetName"
                                                     name="address2">
-                                            </mat-form-field>
                                         </li>
-                                        <li>
-                                            <label>Phone no<span class="red">*</span></label>
-                                            <mat-form-field [floatLabel]="'never'">
-                                                <input matInput type="text" placeholder="" [(ngModel)]="phone"
-                                                    name="phone">
-                                            </mat-form-field>
-                                        </li>
-                                        <li>
-                                            <label>City <span class="red">*</span></label>
-                                            <mat-form-field [floatLabel]="'never'">
-                                                <input matInput type="text" placeholder="" [(ngModel)]="city"
-                                                    name="city">
-                                            </mat-form-field>
-                                        </li>
-                                        <li>
-                                            <label>State<span class="red">*</span></label>
-                                            <mat-form-field [floatLabel]="'never'">
-                                                <input matInput type="email" placeholder="" [(ngModel)]="state"
-                                                    name="state">
-                                            </mat-form-field>
-                                        </li>
-
+                                        
                                         <li>
                                             <label>Postal code<span class="red">*</span></label>
-                                            <mat-form-field [floatLabel]="'never'">
-                                                <input matInput type="text" placeholder="" [(ngModel)]="postalCode"
+                                                <input matInput type="text" name="postalCode" placeholder="" [(ngModel)]="postalCode"
                                                     name="postalCode">
-                                            </mat-form-field>
                                         </li>
                                         <li hidden="true">
-                                            <label>ID<span class="red">*</span></label>
-                                            <mat-form-field [floatLabel]="'never'">
-                                                <input matInput type="text" placeholder="" [(ngModel)]="editId"
-                                                    name="editId">
-                                            </mat-form-field>
+                                            <label>Address Type<span class="red">*</span></label>
+                                               <select name="addressType" [(ngModel)]="addressType" >
+                                                <option value="Home">Home</option>
+                                                <option value="Office">Office</option>Other
+                                                <option value="Other">Other</option>
+                                             
+                                               </select>
                                         </li>
 
 

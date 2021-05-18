@@ -10,26 +10,29 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class DeliveryAddressComponent implements OnInit {
   sub: any;
   id: any
-  constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) {
+
+    this.sub = this.route
+    .queryParams
+    .subscribe(params => {
+      // Defaults to 0 if no query param provided.
+      this.id = params['id'];
+
+    });
+   }
   addressList: any
-  address1: any;
+  address: any;
   city: any;
   country: any;
   postalCode: any;
-  state: any;
-  address2: any;
+  streetName: any;
+  addressType: any;
   flag: boolean = false;
   editId: any;
   phone: any;
   flagData: boolean = false;
   ngOnInit() {
-    this.sub = this.route
-      .queryParams
-      .subscribe(params => {
-        // Defaults to 0 if no query param provided.
-        this.id = params['id'];
-
-      });
+  
 
     this.getUserAddresses();
 
@@ -55,21 +58,16 @@ export class DeliveryAddressComponent implements OnInit {
     window.history.back();
   }
 
-  editAddress(id) {
-    this.editId = id
-    this.flag = !this.flag
-    for (let i = 0; i < this.addressList.length; i++) {
-      if (this.addressList[i]._id == id) {
-        this.address1 = this.addressList[i].address1;
-        this.city = this.addressList[i].city;
+  editAddress(item) {
+    this.flag=true
+    this.editId=item._id;
+    this.address=item.address;
+    this.streetName=item.streetName;
+    this.addressType=item.addressType;
+    this.postalCode=item.postalCode
 
-        this.postalCode = this.addressList[i].postalCode;
-        this.state = this.addressList[i].state;
-        this.address2 = this.addressList[i].address2;
-        this.phone = this.addressList[i].phone
-
-      }
-    }
+      
+    
   }
 
 
@@ -77,19 +75,21 @@ export class DeliveryAddressComponent implements OnInit {
 
     const body = {
       'id': this.editId,
-      'address1': this.address1,
-      'address2': this.address2,
-      'city': this.city,
-      'state': this.state,
+      'address': this.address,
+      'streetName': this.streetName,
+      'addressType': this.addressType,
       'postalCode': this.postalCode,
-      'phone': this.phone
     }
 
 
     this.apiService.updateAddress(body).subscribe((res) => {
+      if(res.success){
+        this.getUserAddresses()
+        this.flag = false
+      }
     });
-    this.flag = false
-    this.getUserAddresses()
+   
+   
 
 
   }
