@@ -11,20 +11,17 @@
                     <div class="filters Booking_status">
                         <mat-form-field class="example-full-width">
                             <mat-label>Filter<span class="red">*</span></mat-label>
-
                             <mat-select placeholder="Filter" [(ngModel)]="filterBy"
                                 (selectionChange)="filterSelected($event)">
                                 <mat-option *ngIf="flag==true" value="">
                                     Remove Filter
                                 </mat-option>
-
                                 <mat-option value="active">
                                     Active
                                 </mat-option>
                                 <mat-option value="inactive">
                                     Inactive
                                 </mat-option>
-
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -33,7 +30,6 @@
                             <div class="search_with_icons">
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Search</mat-label>
-
                                     <input matInput type="text" [(ngModel)]="search" placeholder="">
                                 </mat-form-field>
                                 <button mat-button matSuffix mat-icon-button> <i *ngIf="flagSearch==true"
@@ -43,135 +39,49 @@
                                 </button>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div *ngIf="flagData==true">
                     <h1>No Data Found</h1>
                 </div>
                 <div *ngIf="flagData==false" class="table-responsive divAboveTable">
-                    <table>
+                    <table class="table">
                         <tr>
-                            <th>Sr. No.</th>
-                            <th>Food Id</th>
-                            <th>Food Name</th>
-                            <th>Food Cost</th>
-                            <th>Current Quantity</th>
-                            <th>Food quantity limit for purchase</th>
-                            <th>Total Available Ingredient</th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Sub-Category</th>
+                            <th>Raw Item Type</th>
+                            <th>Unit Price</th>
+                            <th>Quantity Per Unit</th>
+                            <th>Total Unit Initially</th>
+                            <th>Available Unit</th>
+                            <th>Serving Size</th>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>1652443DR</td>
-                            <td>Banana Shake</td>
-                            <td>15</td>
-                            <td>10</td>
-                            <td>2</td>
+                        <tr *ngFor="let item of brandList; let i=index">
                             <td>
-                                <ul>
-                                    <li class="show" (click)="goToViewIngredient()"><i class="fa fa-eye"></i>
-                                    </li>
-
-
-                                </ul>
+                                <figure><img width="50px" height="50px" src={{imageUrl+item.image}}>
+                                </figure>
                             </td>
-
+                            <td>{{ item.name }}</td>
+                            <td>{{item.category.name}}</td>
+                            <td>
+                                <span *ngFor="let item of item.subCategory">{{item.name}}</span>
+                            </td>
+                            <td>{{item.type}}</td>
+                            <td>{{item.unitPrice}}</td>
+                            <td>{{item.quantityPerUnit}}{{item.measureTypeUnit}}</td>
+                            <td>{{item.totalUnits | number}}</td>
+                            <td>
+                                <!-- <div *ngIf="!flagEdit;else elseBlock" (click)='checkClick()'>
+                                {{item.availbaleInventory | number}} </div>
+                                    <ng-template #elseBlock> -->
+                                        <input type="number" (keyup)='inventoryChanged($event,item)' [(ngModel)]="item.availbaleInventory">
+                                    <!-- </ng-template>
+                             -->
+                            </td>
+                            <td>{{item.perServingSize}}{{item.measureTypeServing}}</td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>1652443DR</td>
-                            <td>Oreo Shake</td>
-                            <td>15</td>
-                            <td>10</td>
-                            <td>2</td>
-                            <td>
-                                <ul>
-                                    <li class="show" (click)="goToViewIngredient()"><i class="fa fa-eye"></i>
-                                    </li>
-
-
-                                </ul>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>1652443DR</td>
-                            <td>Pineapple Shake</td>
-                            <td>15</td>
-                            <td>10</td>
-                            <td>2</td>
-                            <td>
-                                <ul>
-                                    <li class="show" (click)="goToViewIngredient()"><i class="fa fa-eye"></i>
-                                    </li>
-
-
-                                </ul>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>1652443DR</td>
-                            <td>Lichi Shake</td>
-                            <td>15</td>
-                            <td>10</td>
-                            <td>2</td>
-                            <td>
-                                <ul>
-                                    <li class="show" (click)="goToViewIngredient()"><i class="fa fa-eye"></i>
-                                    </li>
-
-
-                                </ul>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>1652443DR</td>
-                            <td>Cheery Shake</td>
-                            <td>15</td>
-                            <td>10</td>
-                            <td>2</td>
-                            <td>
-                                <ul>
-                                    <li class="show" (click)="goToViewIngredient()"><i class="fa fa-eye"></i>
-                                    </li>
-
-
-                                </ul>
-                            </td>
-
-                        </tr>
-
-
-                        <!-- <tr *ngFor="let product of productList;  let i = index">
-                            <td *ngIf="flagUserList==false">{{i+1}}</td>
-                            <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
-                            <td>
-                                {{product.productId}}
-                            </td>
-                            <td>{{ product.name }}</td>
-                            <td>{{ product.category.name }}</td>
-                            <td *ngIf="user.roles=='admin'">{{product.seller.firstName}}
-                                {{product.seller.lastName}}
-                            </td>
-                            <td *ngIf="user.roles=='admin'">{{product.seller.view}}
-                            </td>
-                            <td>{{product.normalStock}}</td>
-                            <td>{{product.overStock}}</td>
-                            <td>{{ product.productQuantity }}</td>
-                            <td>{{ product.purchaseQuantity }}</td>
-                            <td>{{ product.price }}</td>
-                            <td *ngIf="user.roles!='admin'">
-                                <ul>
-                                    <li class="edit" (click)="gotoUpdateInventory(product.id)"><i
-                                            class="fa fa-pencil fa-fw"></i></li>
-                                </ul>
-                            </td>
-                        </tr> -->
                     </table>
                     <!-----start pagination-->
                     <mat-paginator #paginator [length]="length" [pageSize]="pageSize"

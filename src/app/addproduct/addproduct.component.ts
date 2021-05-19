@@ -115,18 +115,18 @@ export class AddproductComponent implements OnInit {
       aliases: this.fb.array([
         this.fb.control('', Validators.required)
       ]),
-      tabolaSpecial :[false]
+      tabolaSpecial: [false]
     })
 
 
 
   }
-  
+
   onChange($event: MatSlideToggleChange) {
-    
+
     this.addProductForm.controls['tabolaSpecial'].setValue($event.checked);
     console.log(this.addProductForm.value);
-}
+  }
   getTax() {
 
     this.apiService.getTax().subscribe(res => {
@@ -159,7 +159,9 @@ export class AddproductComponent implements OnInit {
   }
 
 
-  setSizeArray() { }
+  setSizeArray() {
+
+  }
   sizeQuantity(): FormArray {
     return this.specification().get("size") as FormArray
   }
@@ -176,6 +178,9 @@ export class AddproductComponent implements OnInit {
     }
     return controls;
   }
+
+
+
 
 
 

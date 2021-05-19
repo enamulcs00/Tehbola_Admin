@@ -182,7 +182,6 @@ export class BrandlistComponent implements OnInit {
         this.gram = false
         this.addBrandForm.get('perServingSize').reset()
       }
-
     } else {
       if (e == 'kg' || e == 'g') {
         this.gram = true
@@ -192,7 +191,6 @@ export class BrandlistComponent implements OnInit {
         this.gram = false
       }
     }
-
   }
 
   getCategoryList() {
@@ -321,12 +319,25 @@ export class BrandlistComponent implements OnInit {
             this.editBrandForm.controls['category'].setValue(res.data.category.id);
             let selectedCategory = []
             for (let i in res.data.subCategory) {
-
               selectedCategory.push(res.data.subCategory[i]._id)
             }
             this.editBrandForm.controls['subCategory'].setValue(selectedCategory);
             this.editBrandForm.controls['image'].setValue(res.data.image.name)
-            this.editBrandForm.controls['totalUnits'].setValue(res.data.totalUnits)
+            
+            if((res.data.measureTypeUnit==='kg' || res.data.measureTypeUnit==='l')&& res.data.availableQuantityOfUnits){
+                let temp=res.data.availableQuantityOfUnits/1000;
+                  let temp2=temp/res.data.quantityPerUnit;
+                  this.editBrandForm.controls['totalUnits'].setValue(temp2)
+
+            }else if((res.data.measureTypeUnit==='g' || res.data.measureTypeUnit==='ml')&& res.data.availableQuantityOfUnits){
+
+              let temp=res.data.availableQuantityOfUnits;
+              let temp2=temp/res.data.quantityPerUnit;
+              this.editBrandForm.controls['totalUnits'].setValue(temp2)
+            }else{
+              this.editBrandForm.controls['totalUnits'].setValue(res.data.totalUnits)
+            }
+           
             this.editBrandForm.controls['quantityPerUnit'].setValue(res.data.quantityPerUnit)
             this.editBrandForm.controls['measureTypeUnit'].setValue(res.data.measureTypeUnit)
             this.editBrandForm.controls['measureTypeServing'].setValue(res.data.measureTypeServing)
@@ -396,8 +407,6 @@ export class BrandlistComponent implements OnInit {
     this.submitted = true
     if (this.submitted && this.addBrandForm.valid && this.imageFile.length > 0) {
       let body = this.addBrandForm.value
-
-
       let formData = new FormData();
       formData.append('name', this.addBrandForm.get('name').value);
       formData.append('name_ar', this.addBrandForm.get('name_ar').value);
@@ -408,6 +417,15 @@ export class BrandlistComponent implements OnInit {
       formData.append('unitPrice', this.addBrandForm.get('unitPrice').value);
       formData.append('quantityPerUnit', this.addBrandForm.get('quantityPerUnit').value)
       formData.append('measureTypeUnit', this.addBrandForm.get('measureTypeUnit').value)
+      if(this.addBrandForm.get('measureTypeUnit').value==='kg'  ||  this.addBrandForm.get('measureTypeUnit').value==='l' ){
+        let totalQuantityOfUnits= this.addBrandForm.get('totalUnits').value*this.addBrandForm.get('quantityPerUnit').value*1000;
+        formData.append('totalQuantityOfUnits', String(totalQuantityOfUnits));
+        formData.append('availableQuantityOfUnits', String(totalQuantityOfUnits));
+      }else if(this.addBrandForm.get('measureTypeUnit').value==='g'  ||  this.addBrandForm.get('measureTypeUnit').value==='ml'){
+        let totalQuantityOfUnits= this.addBrandForm.get('totalUnits').value*this.addBrandForm.get('quantityPerUnit').value;
+        formData.append('totalQuantityOfUnits', String(totalQuantityOfUnits));
+        formData.append('availableQuantityOfUnits', String(totalQuantityOfUnits));
+      }
       formData.append('measureTypeServing', this.addBrandForm.get('measureTypeServing').value)
       formData.append('perServingSize', this.addBrandForm.get('perServingSize').value)
       formData.append('description', this.addBrandForm.get('description').value);
@@ -450,7 +468,6 @@ export class BrandlistComponent implements OnInit {
   }
 
   onUpdateBrand() {
-
     this.submitted = true
     if (this.submitted && this.editBrandForm.valid) {
       let formData = new FormData();
@@ -465,6 +482,15 @@ export class BrandlistComponent implements OnInit {
       formData.append('quantityPerUnit', this.editBrandForm.get('quantityPerUnit').value)
       formData.append('measureTypeUnit', this.editBrandForm.get('measureTypeUnit').value)
       formData.append('measureTypeServing', this.editBrandForm.get('measureTypeServing').value)
+      if(this.editBrandForm.get('measureTypeUnit').value==='kg'  ||  this.editBrandForm.get('measureTypeUnit').value==='l' ){
+        let totalQuantityOfUnits= this.editBrandForm.get('totalUnits').value*this.editBrandForm.get('quantityPerUnit').value*1000;
+        formData.append('totalQuantityOfUnits', String(totalQuantityOfUnits));
+         formData.append('availableQuantityOfUnits', String(totalQuantityOfUnits));
+      }else if(this.editBrandForm.get('measureTypeUnit').value==='g'  ||  this.editBrandForm.get('measureTypeUnit').value==='ml'){
+        let totalQuantityOfUnits= this.editBrandForm.get('totalUnits').value*this.editBrandForm.get('quantityPerUnit').value;
+        formData.append('totalQuantityOfUnits', String(totalQuantityOfUnits));
+         formData.append('availableQuantityOfUnits', String(totalQuantityOfUnits));
+      }
       formData.append('perServingSize', this.editBrandForm.get('perServingSize').value)
       formData.append('description', this.editBrandForm.get('description').value);
       for (let i = 0; i < this.imageFile.length; i++) {
