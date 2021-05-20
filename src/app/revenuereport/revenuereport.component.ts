@@ -77,7 +77,6 @@ export class RevenuereportComponent implements OnInit {
           this.flagDataForCustomer = false
           this.totalOnlinePayment=res.totalPaymentOnline;
           this.totalOfflinePayment=res.totalPaymentOffline;
-          
           this.customerRevenueReport = res.data
           this.CustomerOrderlength = res.total
         } else {
@@ -107,7 +106,7 @@ export class RevenuereportComponent implements OnInit {
     console.log(e);
     this.customerStartDate=e.value
     if(this.customerEndDate==''){
-      this.customerStartDate=moment(this.startDate).utc()
+      this.customerStartDate=moment(this.customerStartDate).utc()
    
     }else{
       this.customerStartDate=moment(this.customerStartDate).utc()
@@ -136,7 +135,7 @@ export class RevenuereportComponent implements OnInit {
         this.commonService.errorToast('Please select start date')
     }else{
       this.customerEndDate=e.value;
-      this.customerEndDate=moment(this.endDate).utc()
+      this.customerEndDate=moment(this.customerEndDate).utc()
       this.getCustomerReport()
     }
   }
