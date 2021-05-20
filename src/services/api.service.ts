@@ -990,7 +990,7 @@ export class ApiService {
     return this.http.put<any>(this.apiEndPoints.updateTax, body, this.getHeaders()).pipe(catchError(this.handleError))
   }
 
-  getRevenueReport(page, count,startDate, search, endDate): Observable<any> {
+  getRevenueReport(page, count,startDate, endDate, search): Observable<any> {
     let body={
       page:page,
       count:count,
@@ -1004,7 +1004,7 @@ export class ApiService {
 
 
 
-  getCustomerReport(page, count,startDate, search, endDate): Observable<any> {
+  getCustomerReport(page, count,startDate,  endDate,search,): Observable<any> {
     let body={
       page:page,
       count:count,
