@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
 import { CommonService } from 'src/services/common.service';
 import { ApiService } from 'src/services/api.service';
+import * as moment from 'moment';
 @Component({
   selector: 'app-revenuereport',
   templateUrl: './revenuereport.component.html',
@@ -25,60 +26,153 @@ export class RevenuereportComponent implements OnInit {
   revenueReport: any;
   today: any;
   tommorow: any
+  startDate: any='';
+  endDate: any='';
+  maxDate: Date;
+  customerPage: any=1;
+  CustomerPageSize: any=10;
+  customerStartDate: any='';
+  customerEndDate: any='';
+  customerSearch: any='';
+  customerRevenueReport: any;
+  CustomerOrderlength: any;
+  flagDataForCustomer: boolean;
+  totalOfflinePayment: any;
+  totalOnlinePayment: any;
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) { }
 
   ngOnInit() {
 
-    this.getRevenueReport(this.page, this.pageSize, this.search, this.filterBy)
+    this.getRevenueReport()
+    this.getCustomerReport()
+    
+    
 
   }
 
-  getRevenueReport(page, pageSize, search, filterBy) {
-    this.apiService.getRevenueReport(page, pageSize, search, filterBy).subscribe((res) => {
+  getRevenueReport() {
+    
+    this.apiService.getRevenueReport(this.page, this.pageSize, this.startDate, this.endDate, this.search).subscribe((res) => {
       if (res) {
+        
         if (res.data.length > 0) {
           this.flagData = false
           this.revenueReport = res.data
           this.length = res.total
-          console.log(this.revenueReport)
         } else {
           this.flagData = true
+          this.length=res.total
         }
       };
     });
+  }
 
 
+
+
+  getCustomerReport(){
+    this.apiService.getCustomerReport(this.customerPage, this.CustomerPageSize, this.customerStartDate, this.customerEndDate, this.customerSearch).subscribe((res) => {
+      if (res) {
+        if (res.data.length > 0) {
+          this.flagDataForCustomer = false
+          this.totalOnlinePayment=res.totalPaymentOnline;
+          this.totalOfflinePayment=res.totalPaymentOffline;
+          
+          this.customerRevenueReport = res.data
+          this.CustomerOrderlength = res.total
+        } else {
+          this.flagDataForCustomer = true
+          this.CustomerOrderlength=res.total
+        }
+      };
+    });
+  }
+
+
+
+  startDateChanged(e){
+    console.log(e);
+    this.startDate=e.value4
+    if(this.endDate==''){
+      this.startDate=moment(this.startDate).utc()
+   
+    }else{
+      this.startDate=moment(this.startDate).utc()
+      this.getRevenueReport()
+    }
+    
+  }
+
+  startDateChangedForCustomer(e){
+    console.log(e);
+    this.customerStartDate=e.value
+    if(this.customerEndDate==''){
+      this.customerStartDate=moment(this.startDate).utc()
+   
+    }else{
+      this.customerStartDate=moment(this.customerStartDate).utc()
+      this.getCustomerReport()
+    }
+    
+  }
+
+
+  endDateChanged(e){
+    console.log(e);
+    
+    if(this.startDate==''){
+        this.commonService.errorToast('Please select start date')
+    }else{
+      this.endDate=e.value;
+      this.endDate=moment(this.endDate).utc()
+      this.getRevenueReport()
+    }
+  }
+
+  endDateChangedForCustomer(e){
+    console.log(e);
+    
+    if(this.customerStartDate==''){
+        this.commonService.errorToast('Please select start date')
+    }else{
+      this.customerEndDate=e.value;
+      this.customerEndDate=moment(this.endDate).utc()
+      this.getCustomerReport()
+    }
   }
 
   flag = false
-  filterSelected(e) {
-    if (this.filterBy) {
-      this.flag = true
-    }
-    else {
-      this.flag = false
 
-    }
-    console.log(e.target.value);
-    this.filterBy = e.target.value;
-    this.getRevenueReport(this.page, this.pageSize, this.search, this.filterBy)
-
-  }
+ 
 
   flagSearch: boolean = true
   searchMethod() {
     this.page = 1
     this.flagSearch = false
-    this.getRevenueReport(this.page, this.pageSize, this.search, this.filterBy)
-
+    this.getRevenueReport()
   }
 
 
   clearSearch() {
-
     this.flagSearch = true
     this.search = ''
-    this.getRevenueReport(this.page, this.pageSize, this.search, this.filterBy)
+    this.getRevenueReport()
+  }
+
+
+  
+  flagSearchForCustomer: boolean = true
+    searchMethodForCustomer() {
+    this.page = 1
+    this.flagSearchForCustomer = false
+    this.getCustomerReport()
+  }
+
+
+  clearSearchForCustomer() {
+    this.flagSearchForCustomer = true
+    this.customerSearch = ''
+    this.getRevenueReport()
   }
 
   statusChnaged(e) {
@@ -106,9 +200,33 @@ export class RevenuereportComponent implements OnInit {
 
     }
 
-    this.getRevenueReport(this.page, this.pageSize, this.search, this.filterBy)
+    this.getRevenueReport()
   }
 
+
+  cusomterRevenueReportListAfterPageSizeChanged(e): any {
+    //console.log(e);
+
+    if (e.pageIndex == 0) {
+      this.customerPage = 1;
+      // this.page = e.pageIndex;
+      //  this.srNo = e.pageIndex * e.pageSize
+      this.flagUserList = false
+    } else {
+      if (e.previousPageIndex < e.pageIndex) {
+        this.customerPage = e.pageIndex + 1;
+        this.srNo = e.pageIndex * e.pageSize
+        this.flagUserList = true
+      } else {
+        this.customerPage = e.pageIndex;
+        this.srNo = e.pageIndex * e.pageSize
+        this.flagUserList = true
+      }
+
+    }
+
+    this.getCustomerReport()
+  }
 
   goToanalytics() {
     this.router.navigate(['analytics'])

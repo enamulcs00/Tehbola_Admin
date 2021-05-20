@@ -8,7 +8,7 @@
                 <div class="sub_heading">
                     <h1>Dashboard</h1>
                 </div>
-                <div class="inner_data">
+                <div class="inner_data" *ngIf="dashboardData">
                     <div class="dashboard_boxs">
 
 
@@ -19,7 +19,7 @@
                                         <h3>Total Users </h3>
                                     </div>
                                     <div class="bottom_numbers">
-                                        <p>{{dashboardData?.totalVendors}}</p>
+                                        <p>{{dashboardData?.totalUsers}}</p>
                                     </div>
                                 </div>
                                 <div class="right_card">
@@ -37,7 +37,7 @@
                                         <h3>Total Orders</h3>
                                     </div>
                                     <div class="bottom_numbers">
-                                        <p>{{dashboardData?.salesTotal}}</p>
+                                        <p>{{dashboardData?.totalOrders}}</p>
                                     </div>
                                 </div>
                                 <!-- https://gitlab.com/varuntyagi/markat.git
@@ -54,7 +54,7 @@
                                         <h3>New Users</h3>
                                     </div>
                                     <div class="bottom_numbers">
-                                        <p>{{dashboardData?.revenue}}</p>
+                                        <p>{{dashboardData?.newUsers}}</p>
                                     </div>
                                 </div>
                                 <div class="right_card">
@@ -69,7 +69,7 @@
                                         <h3>New Orders</h3>
                                     </div>
                                     <div class="bottom_numbers">
-                                        <p>{{dashboardData?.revenue}}</p>
+                                        <p>{{dashboardData?.newOrders}}</p>
                                     </div>
                                 </div>
                                 <div class="right_card">
@@ -90,37 +90,35 @@
                                     <mat-form-field class="col-6">
                                         <mat-label>Location<span class="red">*</span></mat-label>
 
-                                        <mat-select placeholder="Filter">
-                                            <!-- <mat-option *ngIf="flag==true" value="">
+                                        <mat-select (selectionChange)='geofenceChange($event.value)' placeholder="Filter">
+                                            <mat-option *ngIf="flag==true" >
                                                 Remove Filter
-                                            </mat-option> -->
-
-                                            <mat-option value="active">
-                                                Location 1
                                             </mat-option>
-                                            <mat-option value="inactive">
+
+                                            <mat-option *ngFor='let item of geofenceList' [value]="item._id">
+                                                {{item.name}}
+                                            </mat-option>
+                                            <!-- <mat-option value="inactive">
                                                 Location 2
                                             </mat-option>
                                             <mat-option value="inactive">
                                                 Location 3
-                                            </mat-option>
+                                            </mat-option> -->
                                         </mat-select>
                                     </mat-form-field>
                                     <mat-form-field class="col-6">
                                         <mat-label>Filter<span class="red">*</span></mat-label>
 
-                                        <mat-select placeholder="Filter">
-                                            <!-- <mat-option *ngIf="flag==true" value="">
-                                                Remove Filter
-                                            </mat-option> -->
+                                        <mat-select (selectionChange)='periodChanged($event.value)' placeholder="Filter">
+                                          
 
-                                            <mat-option value="active">
+                                            <mat-option value='weekly' >
                                                 Weekly
                                             </mat-option>
-                                            <mat-option value="inactive">
+                                            <mat-option value="monthly">
                                                 Monthly
                                             </mat-option>
-                                            <mat-option value="inactive">
+                                            <mat-option value="yearly">
                                                 Yearly
                                             </mat-option>
                                         </mat-select>
@@ -136,58 +134,7 @@
                             </div>
                         </li>
 
-                        <li>
-                            <div class="chart_title">
-                                <p>Vendors</p>
-                                <div class="filters Booking_status">
-                                    <mat-form-field class="col-6">
-                                        <mat-label>Location<span class="red">*</span></mat-label>
-
-                                        <mat-select placeholder="Filter">
-                                            <!-- <mat-option *ngIf="flag==true" value="">
-                                                Remove Filter
-                                            </mat-option> -->
-
-                                            <mat-option value="active">
-                                                Location 1
-                                            </mat-option>
-                                            <mat-option value="inactive">
-                                                Location 2
-                                            </mat-option>
-                                            <mat-option value="inactive">
-                                                Location 3
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                    <mat-form-field class="col-6">
-                                        <mat-label>Filter<span class="red">*</span></mat-label>
-
-                                        <mat-select placeholder="Filter">
-                                            <!-- <mat-option *ngIf="flag==true" value="">
-                                                Remove Filter
-                                            </mat-option> -->
-
-                                            <mat-option value="active">
-                                                Weekly
-                                            </mat-option>
-                                            <mat-option value="inactive">
-                                                Monthly
-                                            </mat-option>
-                                            <mat-option value="inactive">
-                                                Yearly
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <div class="user_charts" *ngIf="chartReady">
-                                <!-- <app-graph></app-graph> -->
-                                <canvas baseChart [datasets]="barChartDataVendor" [labels]="barChartLabelVendor"
-                                    [options]="barChartOptionsVendor" [plugins]="barChartPluginsVendor"
-                                    [legend]="barChartLegendVendor" [chartType]="barChartTypeVendor">
-                                </canvas>
-                            </div>
-                        </li>
+                      
                         <li>
                             <div class="chart_title">
                                 <p>Revenue</p>
@@ -196,18 +143,16 @@
                                     <mat-form-field class="col-6">
                                         <mat-label>Filter<span class="red">*</span></mat-label>
 
-                                        <mat-select placeholder="Filter">
-                                            <!-- <mat-option *ngIf="flag==true" value="">
-                                                Remove Filter
-                                            </mat-option> -->
+                                        <mat-select (selectionChange)='revenuePeriodChanged($event.value)' placeholder="Filter">
+                                          
 
-                                            <mat-option value="active">
+                                            <mat-option value='weekly' value="active">
                                                 Weekly
                                             </mat-option>
-                                            <mat-option value="inactive">
+                                            <mat-option value="monthly">
                                                 Monthly
                                             </mat-option>
-                                            <mat-option value="inactive">
+                                            <mat-option value="yearly">
                                                 Yearly
                                             </mat-option>
                                         </mat-select>
@@ -257,13 +202,22 @@
                                             <mat-option *ngIf="flag==true" value="">
                                                 Remove Filter
                                             </mat-option>
-
-                                            <mat-option value="active">
-                                                Active
+                                            <mat-option value='new'>
+                                                New
                                             </mat-option>
-                                            <mat-option value="inactive">
-                                                Inactive
+                                            <mat-option value='onTheWay'>
+                                                On The Way
                                             </mat-option>
+                                            <mat-option value='ready'>
+                                                Ready
+                                            </mat-option>
+                                            <mat-option value='completed'>
+                                                Completed
+                                            </mat-option>
+                                            <mat-option value='cancelled'>
+                                                Cancelled
+                                            </mat-option>
+                                          
 
                                         </mat-select>
                                     </mat-form-field>
@@ -289,48 +243,52 @@
 
                                 </div>
                             </div>
+                        </div>	<div *ngIf="flagData==true">
+                            <h1>No Data Found</h1>
+
                         </div>
-                        <div class="table-responsive">
+                        <div *ngIf="flagData==false" class="table-responsive divAboveTable">
                             <table>
                                 <tr>
-                                    <th>Sr no</th>
-                                    <th>Product Name</th>
-                                    <th>Product category</th>
-                                    <th>Product sub category</th>
-
-
-                                    <th>Quantity</th>
+                                    <th>Sr.no</th>
+                                    <th>Order Id</th>
+                                    <th>Food </th>
                                     <th>Price</th>
-                                    <th>User name</th>
                                     <th>User Address</th>
+                                    <th>Vendor</th>
                                     <th>Order Date</th>
-                                    <th>Except Delivery time</th>
-
+                                    <th>Delivery Time</th>
                                     <th>Status</th>
-
+                                    <!-- <th class="action_bx">Action</th> -->
                                 </tr>
-                                <tr *ngFor="let item of salesListData; let i=index">
-                                    <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
+                                <tr *ngFor="let item of orderHistoryList; index as i ">
                                     <td *ngIf="flagUserList==false">{{i+1}}</td>
-                                    <td>{{item.productId.name}}</td>
-                                    <td>{{item.productId.category.name}}</td>
-                                    <td>{{item.productId.subCategory.name}}</td>
-
-                                    <td>{{item.quantity}}</td>
-                                    <td>{{item.totalAmount|number}}</td>
-                                    <td>{{item.userId.firstName}} {{item.userId.lastName}}</td>
-                                    <td>{{item.deliveryAddress.address1}}, {{item.deliveryAddress.address2}},
-                                        {{item.deliveryAddress.city}}, {{item.deliveryAddress.state}},
-                                        {{item.deliveryAddress.postalCode}}</td>
-                                    <td>{{item.createdAt|date}}</td>
-                                    <td>{{item.deliveredDate==null?"Not Delivered Yet":item.deliveredDate|date}}</td>
+                                    <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
+                                    <td>{{item?._id}}</td>
                                     <td>
-
-                                        {{item.status}}
+                                        <table style="max-width: 100%;" >
+                                            <tr>
+                                                <th>Food Name</th>
+                                                <th>Purchase Quantity</th>
+                                            </tr>
+                                            <tr *ngFor="let item2 of item.orderDetails">
+                                                <td>{{item2?.product?.name}}</td>
+                                                <td>{{item2?.product?.purchaseQuantity}}</td>
+                                            </tr>
+                                        </table>
                                     </td>
+                                    <td>{{item?.orderDetails[0].totalAmount | number}}</td>
 
-
+                                    <td>{{item?.orderDetails[0].deliveryAddress?.address}},{{item?.orderDetails[0].deliveryAddress?.streetName}}{{item?.orderDetails[0].deliveryAddress?.postalCode}}
+                                    </td>
+                                    <td>{{item?.orderDetails[0].seller?.fullName}}</td>
+                                    <td>{{item?.orderDetails[0].createdAt | date}}</td>
+                                    <td>{{item?.orderDetails[0].deliveryTime}}Min</td>
+                                    <td>{{item?.orderDetails[0].status}}
+                                    </td>
+                                
                                 </tr>
+
 
                             </table>
                         </div>

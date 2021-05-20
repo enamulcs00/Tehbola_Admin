@@ -104,6 +104,9 @@ export class ApiService {
       subadmin: 'admin/admin',
       userAddress:'app/address',
       viewOrderHistory:'admin/sales',
+      getDashboard:'admin/dashboard',
+      revenuereport:'admin/revenueVendor',
+      customerRevenuereport:'admin/revenueCustomer',
       //commonApi to change status of any user type
       status: 'common/status',
 
@@ -690,9 +693,9 @@ export class ApiService {
     )
   }
 
-  viewPurchaseHistory(page, count, id,  search) {
+  viewPurchaseHistory(page, count, id,filter,filterBy ,search) {
     console.log(id);
-    return this.http.get<any>(`${this.apiEndPoints.viewOrderHistory}?page=${page}&count=${count}&user=${id}&search=${search}`,
+    return this.http.get<any>(`${this.apiEndPoints.viewOrderHistory}?page=${page}&count=${count}&user=${id}&search=${search}&filter=${filter}&status=${filterBy}`,
       this.getHeaders()
     ).pipe(
       catchError(this.handleError<any>('No user'))
@@ -859,8 +862,8 @@ export class ApiService {
   }
 
 
-  getDashboardData(page, pageSize, search, filterBy, type, typeGraph, revenueFilter): Observable<any> {
-    return this.http.get<any>(`${this.apiEndPoints.getDashboard}?page=${page}&count=${pageSize}&search=${search}&filter=${filterBy}&type=${type}&vendorGraphType=${typeGraph}&revenueType=${revenueFilter}`, this.getHeaders()).pipe(catchError(this.handleError));
+  getDashboardData( body): Observable<any> {
+    return this.http.post<any>(this.apiEndPoints.getDashboard, body,this.getHeaders()).pipe(catchError(this.handleError));
 
   }
 
@@ -987,8 +990,30 @@ export class ApiService {
     return this.http.put<any>(this.apiEndPoints.updateTax, body, this.getHeaders()).pipe(catchError(this.handleError))
   }
 
-  getRevenueReport(page, count, search, filter): Observable<any> {
-    return this.http.get<any>(`${this.apiEndPoints.revenuereport}?page=${page}&count=${count}&search=${search}&filter=${filter}`, this.getHeaders()).pipe(catchError(this.handleError()))
+  getRevenueReport(page, count,startDate, search, endDate): Observable<any> {
+    let body={
+      page:page,
+      count:count,
+      startDate:startDate,
+      endDate:endDate,
+      search:search,
+
+    }
+    return this.http.post<any>(this.apiEndPoints.revenuereport, body,this.getHeaders()).pipe(catchError(this.handleError()))
+  }
+
+
+
+  getCustomerReport(page, count,startDate, search, endDate): Observable<any> {
+    let body={
+      page:page,
+      count:count,
+      startDate:startDate,
+      endDate:endDate,
+      search:search,
+
+    }
+    return this.http.post<any>(this.apiEndPoints.customerRevenuereport, body,this.getHeaders()).pipe(catchError(this.handleError()))
   }
 
   getPaymentDaTA(page, count, search, filter): Observable<any> {

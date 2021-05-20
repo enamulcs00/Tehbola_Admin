@@ -6,6 +6,7 @@ import { Label } from 'ng2-charts';
 import { Router } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
 import { ApiService } from 'src/services/api.service';
+import { CommonService } from 'src/services/common.service';
 declare var $: any;
 
 interface readOnly {
@@ -112,28 +113,67 @@ export class DashboardComponent implements OnInit {
   salesListData: any;
   revenueFilter: string = 'weekly';
   roles: any;
-  constructor(private router: Router, private apiService: ApiService) {
+  geofence: any = '';
+  count: any = 999999999;
+  pageGeofence = 1
+  geofenceList: any;
+  orderHistoryList: any;
+  id: any='';
+  filter: any='currentSales';
+  constructor(private router: Router, private apiService: ApiService, private commonService:CommonService) {
     this.type = "timeseries";
     this.width = "100%";
     this.height = "400";
-    this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale, this.vendorFilter, this.revenueFilter)
-    this.roles=JSON.parse(this.apiService.getUser())
+   
+    this.roles = JSON.parse(this.apiService.getUser())
 
   }
 
-  getDashboardData(page, pageSize, search, filterBy, typeSale, typeGraph, revenueFilter) {
-    this.apiService.getDashboardData(page, pageSize, search, filterBy, typeSale, typeGraph, revenueFilter).subscribe(res => {
-    
+  getAllGeofence() {
+    let body = {
+      page: this.pageGeofence,
+      count: this.count
+    }
 
+    this.apiService.getAllGeofence(body).subscribe(res => {
       if (res.success) {
+        this.geofenceList = res.data
+        console.log(this.geofenceList);
+      }
 
-        this.dashboardData = res;
-        this.salesListData = this.dashboardData.salesList;
-        this.length = this.salesListData.length
-    
+    })
+  }
 
-        this.salesData(this.dashboardData.graph);
-        this.vendorData(this.dashboardData.vendorGraph);
+
+
+  geofenceChange(eve) {
+    console.log(eve);
+    if(eve==''){
+      this.flag=false
+      this.geofence = eve;
+      this.getDashboardData(this.periodSale, this.revenueFilter)
+  
+    }else{
+      this.flag=true
+      this.geofence = eve;
+      this.getDashboardData(this.periodSale, this.revenueFilter)
+  
+    }
+
+  }
+
+
+  getDashboardData(typeSale, revenueFilter) {
+    let body = {
+      salesFilterType: typeSale,
+      geofence: this.geofence,
+      revenueFilterType: revenueFilter
+    }
+    console.log(body);
+    this.apiService.getDashboardData(body).subscribe(res => {
+      if (res.success) {
+        this.dashboardData = res.data;
+        this.salesData(this.dashboardData.salesGraph);
         this.revenueData(this.dashboardData.revenueGraph)
       }
     })
@@ -141,13 +181,33 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     // This is the dataSource of the chart
+    this.getDashboardData(this.periodSale, this.revenueFilter)
+    this.getAllGeofence()
+    this.getbookingHistory()
+
+  }
 
 
+  getbookingHistory() {
+    this.apiService.viewPurchaseHistory(this.page, this.pageSize, this.id,this.filter,this.filterBy ,this.search).subscribe((res) => {
+      if (res.success) {
+        if (res.data.length > 0) {
+          this.flagData = false
+          this.orderHistoryList = res.data
+          this.length = res.total
+        } else {
+          this.flagData = true
+          this.length=res.total
+        }
+      } else {
+        this.commonService.errorToast(res.message)
+      }
+    });
   }
 
   salesData(graphData) {
     let array = []
-    
+
     let data = graphData.length
     for (let i = 0; i < data; i++) {
       if (this.periodSale == 'monthly') {
@@ -177,49 +237,13 @@ export class DashboardComponent implements OnInit {
 
 
     // this.barChartData = this.barChartData;
-    
+
     this.chartReady = true
 
 
   }
 
-  vendorData(vendorGraphData) {
 
-    let array = []
-    
-    let data = vendorGraphData.length
-    for (let i = 0; i < data; i++) {
-      if (this.vendorFilter == 'monthly') {
-
-        array.push('Week' + ' ' + [i + 1]);
-
-      }
-      if (this.vendorFilter == 'weekly') {
-
-        array.push('Day' + ' ' + [i + 1]);
-
-      }
-      if (this.vendorFilter == 'yearly') {
-
-        array.push('Month' + ' ' + [i + 1]);
-
-      }
-
-    }
-    this.barChartLabelVendor = array;
-
-    // public barChartData: ChartDataSets[] = [
-    //     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    //     // { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' } 28,200,138,1
-    //   ];
-    this.barChartDataVendor = [{ data: vendorGraphData, label: this.periodSale + " " + 'new Vendor', backgroundColor: 'rgba(28,200,138,1)', borderColor: 'rgba(28,200,138,1)', hoverBackgroundColor: 'rgba(28,200,138,1)', hoverBorderColor: 'rgba(28,200,138,1)' }]
-
-
-    // this.barChartData = this.barChartData;
-
-    this.chartReady = true
-
-  }
 
   revenueData(revenueGraphData) {
 
@@ -261,19 +285,17 @@ export class DashboardComponent implements OnInit {
 
 
   periodChanged(e) {
-    this.periodSale = e.target.value;
-    this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale, this.vendorFilter, this.revenueFilter)
+    console.log('asdvsdf',e);
+    
+    this.periodSale = e;
+    this.getDashboardData(this.periodSale, this.revenueFilter)
   }
 
-  vendorPeriodChanged(e) {
-
-    this.vendorFilter = e.target.value;
-    this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale, this.vendorFilter, this.revenueFilter)
-  }
+  
 
   revenuePeriodChanged(e) {
-    this.revenueFilter = e.target.value;
-    this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale, this.vendorFilter, this.revenueFilter)
+    this.revenueFilter = e;
+    this.getDashboardData(this.periodSale, this.revenueFilter)
 
 
   }
@@ -286,9 +308,7 @@ export class DashboardComponent implements OnInit {
       this.flag = false
     }
 
-    this.filterBy = e.target.value
-
-    this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale, this.vendorFilter, this.revenueFilter)
+   this.getbookingHistory()     
 
   }
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
@@ -302,12 +322,12 @@ export class DashboardComponent implements OnInit {
 
   searchMethod() {
     this.flagSearch = false
-    this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale, this.vendorFilter, this.revenueFilter)
+     this.getbookingHistory()
   }
   clearSearch() {
     this.flagSearch = true
     this.search = ''
-    this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale, this.vendorFilter, this.revenueFilter)
+     this.getbookingHistory()
   }
 
   productListAfterPageSizeChanged(e): any {
@@ -329,7 +349,7 @@ export class DashboardComponent implements OnInit {
       }
 
     }
-    this.getDashboardData(this.page, this.pageSize, this.search, this.filterBy, this.periodSale, this.vendorFilter, this.revenueFilter)
+    this.getbookingHistory()
   }
 
 

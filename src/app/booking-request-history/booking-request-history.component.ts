@@ -26,6 +26,7 @@ export class BookingRequestHistoryComponent implements OnInit {
   page: number = 1;
   flagUserList: boolean = false;
   srNo: number;
+  status: any='';
   constructor(private router: Router, private route: ActivatedRoute, private apiService: ApiService, private toster: CommonService) { }
 
   ngOnInit() {
@@ -46,7 +47,7 @@ export class BookingRequestHistoryComponent implements OnInit {
 
   getbookingHistory() {
 
-    this.apiService.viewPurchaseHistory(this.page, this.pageSize, this.id, this.search).subscribe((res) => {
+    this.apiService.viewPurchaseHistory(this.page, this.pageSize, this.id, this.filter, this.status, this.search).subscribe((res) => {
       if (res.success) {
         if (res.data.length > 0) {
           this.flagData = false

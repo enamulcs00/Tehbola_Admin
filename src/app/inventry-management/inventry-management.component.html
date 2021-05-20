@@ -83,12 +83,12 @@
                             <td>{{item.perServingSize}}{{item.measureTypeServing}}</td>
                         </tr>
                     </table>
-                    <!-----start pagination-->
-                    <mat-paginator #paginator [length]="length" [pageSize]="pageSize"
-                        [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = ListAfterPageSizeChanged($event)">
-                    </mat-paginator>
-                    <!-----end pagination-->
                 </div>
+                  <!-----start pagination-->
+                  <mat-paginator #paginator [length]="length" [pageSize]="pageSize"
+                  [pageSizeOptions]="pageSizeOptions" (page)="pageEvent = ListAfterPageSizeChanged($event)">
+              </mat-paginator>
+              <!-----end pagination-->
             </div>
         </div>
     </div>

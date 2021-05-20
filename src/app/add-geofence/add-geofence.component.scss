@@ -1,7 +1,17 @@
 agm-map {
-    height: 400px;
+    height: 500px;
 }
 
 .mat-form-field {
     display: block !important;
+}
+
+
+
+.readonly-wrapper {
+    cursor: not-allowed;
+}
+
+.readonly-wrapper .readonly-block {
+    pointer-events: none;
 }

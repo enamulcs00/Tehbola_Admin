@@ -91,6 +91,7 @@ export class ReveuegraphComponent implements OnInit {
   dashboardData: any;
   salesListData: any;
   revenueFilter: string = 'weekly';
+  geofence: any='';
   constructor(private apiService: ApiService) {
 
   }
@@ -102,7 +103,14 @@ export class ReveuegraphComponent implements OnInit {
   }
 
   getDashboardData(page, pageSize, search, filterBy, typeSale, typeGraph, revenueFilter) {
-    this.apiService.getDashboardData(page, pageSize, search, filterBy, typeSale, typeGraph, revenueFilter).subscribe(res => {
+
+    let body={
+      salesFilterType:typeSale,
+      geofence:this.geofence,
+      revenueFilterType:revenueFilter
+    }
+    
+    this.apiService.getDashboardData( body).subscribe(res => {
       console.log("dashboardData", res);
 
       if (res.success) {

@@ -77,11 +77,11 @@
                                 </mat-form-field>
                             </li>
                             <li>
-                                <mat-form-field class="example-full-width">
+                                <mat-form-field class="example-full-width readonly-wrapper">
                                     <mat-label>Discount Type <span class="red">*</span></mat-label>
-                                    <mat-select placeholder="Discount Type" (selectionChange)='updateValidation($event)' formControlName="discountType">
+                                    <mat-select class="readonly-block" placeholder="Discount Type" disable='true' formControlName="discountType">
 
-
+<!-- (selectionChange)='updateValidation($event)' -->
                                         <!-- <mat-option value="FLAT">
                                             Flat
                                         </mat-option> -->

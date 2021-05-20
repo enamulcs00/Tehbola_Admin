@@ -48,7 +48,7 @@ export class AddPromoCodeManagementComponent implements OnInit {
       minCartValue: ['', [Validators.required, Validators.min(0)]],
       discount: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
       maxDiscount: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
-      discountType: ['', Validators.required],
+      discountType: ['PERCENT', Validators.required],
       freqPerUser: ['', [Validators.required, Validators.min(0)]],
       exhaustLimit: ['', Validators.required]
 
