@@ -343,6 +343,8 @@ export class ProductComponent implements OnInit {
     this.router.navigate(['/addproduct'])
   }
   goToeditProduct(id) {
+    console.log(id);
+    
     this.router.navigate(['/editProduct'], { queryParams: { "id": id } })
   }
   goToviewProduct(id: any) {

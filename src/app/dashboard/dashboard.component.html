@@ -13,7 +13,7 @@
 
 
                         <div class="card border-left-success shadow">
-                            <div class="card-body">
+                            <div class="card-body" [routerLink]="['/manageUser']" routerLinkActive="router-link-active" >
                                 <div class="left_card">
                                     <div class="left_heading">
                                         <h3>Total Users </h3>
@@ -30,7 +30,7 @@
                             </div>
                         </div>
                         <div class="card border-left-primary shadow" *ngIf="roles.roles=='admin'">
-                            <div class="card-body">
+                            <div class="card-body" [routerLink]="['/ordermanagement']" routerLinkActive="router-link-active" >
                                 <!-- (click)="goTosalesgraph()" -->
                                 <div class="left_card">
                                     <div class="left_heading">
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                         <div class="card border-left-info shadow">
-                            <div class="card-body">
+                            <div class="card-body"  [routerLink]="['/manageUser']" routerLinkActive="router-link-active">
                                 <div class="left_card">
                                     <div class="left_heading">
                                         <h3>New Users</h3>
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <div class="card border-left-warning shadow">
-                            <div class="card-body">
+                            <div class="card-body" [routerLink]="['/ordermanagement']" routerLinkActive="router-link-active">
                                 <div class="left_card">
                                     <div class="left_heading">
                                         <h3>New Orders</h3>
@@ -216,6 +216,15 @@
                                             </mat-option>
                                             <mat-option value='cancelled'>
                                                 Cancelled
+                                            </mat-option>
+                                            <mat-option value='preparing'>
+                                                Preparing
+                                            </mat-option>
+                                            <mat-option value='ready'>
+                                                Ready
+                                            </mat-option>
+                                            <mat-option value='rejected'>
+                                                Rejected
                                             </mat-option>
                                           
 

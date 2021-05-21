@@ -21,7 +21,7 @@
                                 <div class="inner_content">
                                     <div class="outer_table">
                                         <div class="search_fields">
-                                            <div class="">
+                                            <!-- <div class="">
 
                                                 <mat-form-field class="example-full-width">
                                                     <mat-label>Filter<span class="red">*</span></mat-label>
@@ -31,9 +31,9 @@
                                                         <mat-option *ngIf="flag==true" value="">
                                                             Remove Filter
                                                         </mat-option>
-                                                        <!--  <mat-option *ngIf="flag==false" value="">
+                                                          <mat-option *ngIf="flag==false" value="">
 
-                                    </mat-option> -->
+                                    </mat-option> 
                                                         <mat-option value="active">
                                                             Active
                                                         </mat-option>
@@ -43,7 +43,7 @@
 
                                                     </mat-select>
                                                 </mat-form-field>
-                                            </div>
+                                            </div> -->
                                             <div class="search_inner_fiels">
                                                 <div class="">
 
@@ -78,7 +78,7 @@
                                                     <th>Booking Status</th>
                                                     <th>Booking Address</th>
                                                     <th>Booking Notes</th>
-                                                    <th>Expected Time</th>
+                                                    <!-- <th>Expected Time</th> -->
                                                     <th *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.orderList.write==true)" class="action_bx">Assign Vendor</th>
                                                 </tr>
                                                 <tr *ngFor="let item of salesList; let i=index">
@@ -117,9 +117,9 @@
                                                         {{item.orderDetails[0]?.deliveryAddress?.noteToDriver }}
                                                     </td>
 
-                                                    <td>{{item.orderDetails[0]?.startTIME |
+                                                    <!-- <td>{{item.orderDetails[0]?.date |
                                                         date}}-{{item.orderDetails[0]?.endTime | date}}
-                                                    </td>
+                                                    </td> -->
 
 
                                                     <td class="Booking_status" *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.orderList.write==true)">

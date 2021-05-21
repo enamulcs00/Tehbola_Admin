@@ -87,10 +87,20 @@
                             <td>{{ promoCode.freqPerUser }}</td>
                             <td>{{ promoCode.exhaustLimit }}</td>
                             <td>
-                                <div class="enable_disable">
+                                <!-- <div class="enable_disable">
                                     <mat-slide-toggle (change)="changeUserStatus(promoCode._id,promoCode.status)"
                                         [checked]="promoCode.status=='1'? true:false"></mat-slide-toggle>
-                                </div>
+                                </div> -->
+
+
+                                <div class="enable_disable"
+                                *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.discount.write==true);else elseBlock4">
+                                <mat-slide-toggle (change)="changeUserStatus(promoCode.id,promoCode.status)"
+                                    [checked]="promoCode.status=='1'? true:false"></mat-slide-toggle>
+                            </div>
+                            <ng-template #elseBlock4>
+                                <p>{{promoCode.status=='1'?'Active':'Inactive'}}</p>
+                            </ng-template>
                             </td>
                             <td *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.discount.write==true)">
                                 <ul style="display: flex !important;">

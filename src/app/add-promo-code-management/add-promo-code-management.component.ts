@@ -37,7 +37,9 @@ export class AddPromoCodeManagementComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.today = moment(new Date()).format('YYYY-MM-DD');
+    
+    let todaySet=new Date();
+    this.today = moment(todaySet).add(1,'d').format('YYYY-MM-DD');
 
 
 

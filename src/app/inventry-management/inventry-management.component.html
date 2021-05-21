@@ -8,7 +8,7 @@
                     <h1>Inventory Management</h1>
                 </div>
                 <div class="search_fields">
-                    <div class="filters Booking_status">
+                    <!-- <div class="filters Booking_status">
                         <mat-form-field class="example-full-width">
                             <mat-label>Filter<span class="red">*</span></mat-label>
                             <mat-select placeholder="Filter" [(ngModel)]="filterBy"
@@ -24,7 +24,7 @@
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
-                    </div>
+                    </div> -->
                     <div class="search_inner_fiels">
                         <div class="filters Booking_status">
                             <div class="search_with_icons">
@@ -76,9 +76,15 @@
                                 <!-- <div *ngIf="!flagEdit;else elseBlock" (click)='checkClick()'>
                                 {{item.availbaleInventory | number}} </div>
                                     <ng-template #elseBlock> -->
-                                        <input type="number" (keyup)='inventoryChanged($event,item)' [(ngModel)]="item.availbaleInventory">
+                                        <!-- <input type="number" (keyup)='inventoryChanged($event,item)' [(ngModel)]="item.availbaleInventory"> -->
                                     <!-- </ng-template>
                              -->
+                             <div class="enable_disable" *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.inventory.write==true);else elseBlock4">
+                                <input type="number" (keyup)='inventoryChanged($event,item)' [(ngModel)]="item.availbaleInventory">
+                            </div>
+                            <ng-template #elseBlock4>
+                                <p>{{item.availbaleInventory}}</p>
+                            </ng-template>
                             </td>
                             <td>{{item.perServingSize}}{{item.measureTypeServing}}</td>
                         </tr>

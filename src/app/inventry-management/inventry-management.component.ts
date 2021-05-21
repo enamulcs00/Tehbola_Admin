@@ -122,7 +122,7 @@ this.debounce=setTimeout(()=>{
 
 
 UpdateInventory(value,id){
-debugger
+
   let temp
   if(id.measureTypeUnit==='kg' || id.measureTypeUnit==='l' ){
       temp=value*id.quantityPerUnit*1000

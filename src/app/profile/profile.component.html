@@ -14,13 +14,13 @@
               <div class="profile_image_detail">
                 <figure>
                   <img
-                    *ngIf="!profileData"
+                    *ngIf="!profileData?.profilePic"
                     style="border-radius: 50%; height: 120px; width: 120px"
                     src="assets/images/profileImage.png"
                   />
 
                   <img
-                    *ngIf="profileData"
+                    *ngIf="profileData?.profilePic"
                     style="border-radius: 50%; height: 120px; width: 120px"
                     [src]="imageUrl + profileData.profilePic"
                   />
@@ -108,7 +108,7 @@
             </div>
 
             <!-- Referral -->
-            <div class="tab-content clearfix mt-5">
+            <div *ngIf="user.roles=='admin'" class="tab-content clearfix mt-5">
               <div class="tab-pane active" id="1a">
                 <div class="personal_deatil">
                   <form [formGroup]="updateProfileForm">

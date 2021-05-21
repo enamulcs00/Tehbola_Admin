@@ -26,42 +26,44 @@ export class RevenuereportComponent implements OnInit {
   revenueReport: any;
   today: any;
   tommorow: any
-  startDate: any='';
-  endDate: any='';
+  startDate: any = '';
+  endDate: any = '';
   maxDate: Date;
-  customerPage: any=1;
-  CustomerPageSize: any=10;
-  customerStartDate: any='';
-  customerEndDate: any='';
-  customerSearch: any='';
+  customerPage: any = 1;
+  CustomerPageSize: any = 10;
+  customerStartDate: any = '';
+  customerEndDate: any = '';
+  customerSearch: any = '';
   customerRevenueReport: any;
   CustomerOrderlength: any;
   flagDataForCustomer: boolean;
   totalOfflinePayment: any;
   totalOnlinePayment: any;
+  clearDateFlag: boolean;
+  todayVal: string;
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) { }
 
   ngOnInit() {
 
     this.getRevenueReport()
     this.getCustomerReport()
-    
-    
+this.maxDate =new Date()
+
 
   }
 
   getRevenueReport() {
-    
+
     this.apiService.getRevenueReport(this.page, this.pageSize, this.startDate, this.endDate, this.search).subscribe((res) => {
       if (res) {
-        
+
         if (res.data.length > 0) {
           this.flagData = false
           this.revenueReport = res.data
           this.length = res.total
         } else {
           this.flagData = true
-          this.length=res.total
+          this.length = res.total
         }
       };
     });
@@ -70,18 +72,18 @@ export class RevenuereportComponent implements OnInit {
 
 
 
-  getCustomerReport(){
+  getCustomerReport() {
     this.apiService.getCustomerReport(this.customerPage, this.CustomerPageSize, this.customerStartDate, this.customerEndDate, this.customerSearch).subscribe((res) => {
       if (res) {
         if (res.data.length > 0) {
           this.flagDataForCustomer = false
-          this.totalOnlinePayment=res.totalPaymentOnline;
-          this.totalOfflinePayment=res.totalPaymentOffline;
+          this.totalOnlinePayment = res.totalPaymentOnline;
+          this.totalOfflinePayment = res.totalPaymentOffline;
           this.customerRevenueReport = res.data
           this.CustomerOrderlength = res.total
         } else {
           this.flagDataForCustomer = true
-          this.CustomerOrderlength=res.total
+          this.CustomerOrderlength = res.total
         }
       };
     });
@@ -89,60 +91,85 @@ export class RevenuereportComponent implements OnInit {
 
 
 
-  startDateChanged(e){
+  startDateChanged(e) {
     console.log(e);
-    this.startDate=e.value4
-    if(this.endDate==''){
-      this.startDate=moment(this.startDate).utc()
-   
-    }else{
-      this.startDate=moment(this.startDate).utc()
+    this.startDate = e.value4
+    if (this.endDate == '') {
+      this.startDate = moment(this.startDate).utc()
+
+    } else {
+      this.startDate = moment(this.startDate).utc()
       this.getRevenueReport()
     }
-    
+
   }
 
-  startDateChangedForCustomer(e){
+  startDateChangedForCustomer(e) {
     console.log(e);
-    this.customerStartDate=e.value
-    if(this.customerEndDate==''){
-      this.customerStartDate=moment(this.customerStartDate).utc()
-   
-    }else{
-      this.customerStartDate=moment(this.customerStartDate).utc()
+    this.customerStartDate = e.value
+    if (this.customerEndDate == '') {
+      this.customerStartDate = moment(this.customerStartDate).utc()
+
+    } else {
+      this.customerStartDate = moment(this.customerStartDate).utc()
+      this.clearDateSelectionFlag = true
       this.getCustomerReport()
     }
-    
+
   }
+  clearDateSelectionFlag = false
+  clearDateSelectionCustomer(eve) {
 
+    if (eve == 'customer') {
+      this.customerStartDate = '',
+        this.customerEndDate = '',
+        this.startDateCustomer='',
+        this.endDateCustomer=''
+      this.getCustomerReport()
+    }
 
-  endDateChanged(e){
-    console.log(e);
-    
-    if(this.startDate==''){
-        this.commonService.errorToast('Please select start date')
-    }else{
-      this.endDate=e.value;
-      this.endDate=moment(this.endDate).utc()
+    if(eve=='vendor'){
+      this.startDate='';
+      this.endDate='';
+      this.startDateVendor='';
+      this.endDateVendor='';
       this.getRevenueReport()
     }
   }
 
-  endDateChangedForCustomer(e){
+  startDateCustomer:string
+  endDateCustomer:string;
+  startDateVendor:string;
+  endDateVendor:string;
+
+  endDateChanged(e) {
     console.log(e);
-    
-    if(this.customerStartDate==''){
-        this.commonService.errorToast('Please select start date')
-    }else{
-      this.customerEndDate=e.value;
-      this.customerEndDate=moment(this.customerEndDate).utc()
+
+    if (this.startDate == '') {
+      this.commonService.errorToast('Please select start date')
+    } else {
+      this.endDate = e.value;
+      this.endDate = moment(this.endDate).utc()
+      this.getRevenueReport()
+    }
+  }
+
+  endDateChangedForCustomer(e) {
+    console.log(e);
+
+    if (this.customerStartDate == '') {
+      this.commonService.errorToast('Please select start date')
+    } else {
+      this.customerEndDate = e.value;
+      this.customerEndDate = moment(this.customerEndDate).utc()
+      this.clearDateSelectionFlag = true
       this.getCustomerReport()
     }
   }
 
   flag = false
 
- 
+
 
   flagSearch: boolean = true
   searchMethod() {
@@ -159,9 +186,9 @@ export class RevenuereportComponent implements OnInit {
   }
 
 
-  
+
   flagSearchForCustomer: boolean = true
-    searchMethodForCustomer() {
+  searchMethodForCustomer() {
     this.page = 1
     this.flagSearchForCustomer = false
     this.getCustomerReport()

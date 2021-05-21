@@ -301,16 +301,30 @@ export class EditProductComponent implements OnInit {
 
 
   setSpecifications(specification) {
+    
     const formArray = new FormArray([]);
     for (let x of specification) {
       formArray.push(this.fb.group({
         rawItem: x.rawItem._id,
-        quantity: x.quantity
+        size: this.fb.array(this.loadRawSizeArray(x.size))
       }));
     }
     this.editProductForm.setControl('specification', formArray)
   }
 
+
+
+  loadRawSizeArray(size):any{
+    let controls = [];
+    // let controlsList = this.sizePrice().value
+    for (let y in size) {
+      controls.push(new FormGroup({
+        id: new FormControl(size[y].id),
+        rawitemSizeQuantity: new FormControl(size[y].rawitemSizeQuantity, [Validators.required])
+      }))
+    }
+    return controls;
+  }
 
 
   setSizePrize(specification) {

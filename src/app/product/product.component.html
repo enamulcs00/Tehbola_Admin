@@ -96,7 +96,7 @@
                                 <td><span *ngFor="let item of product.teaType">{{item.name}}<br></span></td>
                                 <td>
                                     <span *ngFor="let item of product.rawItems; let i=index">
-                                        {{item?.rawItem?.name}}-{{item?.quantity}}<br>
+                                        {{item?.rawItem?.name}}<br>
                                     </span>
                                 </td>
 
@@ -111,21 +111,28 @@
 
 
                                 <td>
-                                    <div class="enable_disable">
+                                    <!-- <div class="enable_disable">
                                         <mat-slide-toggle [checked]="product.status=='1'? true:false"
                                             (change)=onChangeBlockStatus(product.id,product.status)>
                                         </mat-slide-toggle>
+                                    </div> -->
+                                    <div class="enable_disable" *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.product.write==true);else elseBlock4">
+                                        <mat-slide-toggle (change)="onChangeBlockStatus(product.id,product.status)"
+                                            [checked]="product.status=='1'? true:false"></mat-slide-toggle>
                                     </div>
+                                    <ng-template #elseBlock4>
+                                        <p>{{product.status=='1'?'Active':'Inactive'}}</p>
+                                    </ng-template>
                                 </td>
                                 <td>
                                     <div class="action">
 
                                         <ul>
-                                            <li class="show" (click)="goToviewProduct(product.id)"><i
+                                            <li class="show" (click)="goToviewProduct(product._id)"><i
                                                     class="fa fa-eye"></i></li>
-                                            <li *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.product.write==true)" class="edit" (click)="goToeditProduct(product.id)"><i
+                                            <li *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.product.write==true)" class="edit" (click)="goToeditProduct(product._id)"><i
                                                     class="fa fa-pencil fa-fw"></i></li>
-                                            <li *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.product.write==true)" class="delete" (click)="deleteProduct(product.id)"><i
+                                            <li *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.product.write==true)" class="delete" (click)="deleteProduct(product._id)"><i
                                                     class="fa fa-trash-o fa-fw"></i></li>
                                         </ul>
 

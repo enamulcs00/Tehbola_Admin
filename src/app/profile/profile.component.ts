@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
   id: any;
 
   showProfilePic;
+  user: any;
 
   constructor(
     private fb: FormBuilder,
@@ -31,6 +32,7 @@ export class ProfileComponent implements OnInit {
     private urlService: UrlService,
     private route: ActivatedRoute
   ) {
+    this.user = JSON.parse(this.apiService.getUser())
     this.sub = this.route.queryParams.subscribe((params) => {
       // Defaults to 0 if no query param provided.
       this.id = params["id"];

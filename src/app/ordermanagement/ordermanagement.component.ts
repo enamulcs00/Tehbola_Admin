@@ -45,6 +45,11 @@ export class OrdermanagementComponent implements OnInit {
   progress: boolean;
   vendorList = [];
   user: any;
+  id: any;
+  filter: any;
+  startDate: any;
+  endDate: any;
+  orderHistoryList: any;
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) {
     this.user = JSON.parse(this.apiService.getUser())
   }
@@ -59,9 +64,6 @@ export class OrdermanagementComponent implements OnInit {
   getAssignmentdata() {
     this.progress = true;
     this.apiService.getAssignementData().subscribe(res => {
-
-
-
       this.progress = false
       if (res.success) {
         res.data.vendor.forEach(element => {
@@ -71,15 +73,30 @@ export class OrdermanagementComponent implements OnInit {
               name: element.fullName
             })
         });
-
         console.log(this.vendorList);
-
-
       } else {
         this.commonService.errorToast(res.message)
       }
 
     })
+  }
+
+  
+  getbookingHistory() {
+
+    this.apiService.viewPurchaseHistory(this.page, this.pageSize, this.id, this.filter, this.status, this.search,this.startDate,this.endDate).subscribe((res) => {
+      if (res.success) {
+        if (res.data.length > 0) {
+          this.flagData = false
+          this.orderHistoryList = res.data
+          this.length = res.total
+        } else {
+          this.flagData = true
+        }
+      } else {
+        this.commonService.errorToast(res.message)
+      }
+    });
   }
 
 
@@ -169,6 +186,7 @@ export class OrdermanagementComponent implements OnInit {
     this.search = ''
     this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
   }
+
   statusChanged(value, id) {
     console.log("value", value, "ID", id);
     let body = {
@@ -189,7 +207,6 @@ export class OrdermanagementComponent implements OnInit {
   }
 
   productListAfterPageSizeChanged(e): any {
-
     console.log(e)
     if (e.pageIndex == 0) {
       this.page = 1;

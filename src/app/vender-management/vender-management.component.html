@@ -116,7 +116,8 @@
                                 <td *ngIf="flagUserList==false">{{i+1}}</td>
                                 <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
                                 <td>
-                                    <figure>
+                                    <ng-template #elseBlock >No Image Found</ng-template>
+                                    <figure *ngIf="item.profilePic;else elseBlock">
                                         <img [src]="imageUrl+item.profilePic" height="50px" width="50px" alt="">
                                     </figure>
                                 </td>
@@ -131,10 +132,13 @@
 
                                 </td> -->
                                 <td>
-                                    <div class="enable_disable">
+                                    <div class="enable_disable" *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.vendor.write==true);else elseBlock4">
                                         <mat-slide-toggle (change)="changeUserStatus(item._id,item.status)"
                                             [checked]="item.status=='1'? true:false"></mat-slide-toggle>
                                     </div>
+                                    <ng-template #elseBlock4>
+                                        <p>{{item.status=='1'?'Active':'Inactive'}}</p>
+                                    </ng-template>
                                 </td>
                                 <td>{{item.createdAt | date}}</td>
                                 <!-- <td class="Booking_status" (click)="goToproduct(item._id)">
@@ -156,7 +160,7 @@
                                                     class="fa fa-trash-o fa-fw"></i></li>
                                         </ul>
                                         <ul *ngIf="item.sellerProfileStatus ==0 || item.sellerProfileStatus ==2">
-                                            <div *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.vendor.write==true);else elseBlock">
+                                            <div style="display: contents;" *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.vendor.write==true);else elseBlock">
                                                 <li  class="show" (click)="acceptVendor(item._id)"><i
                                                     class="fa fa-check"></i></li>
                                             <li class="edit" (click)="declinedVendor(item._id)"><i

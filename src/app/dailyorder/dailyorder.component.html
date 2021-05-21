@@ -8,20 +8,36 @@
                         <mat-form-field class="example-full-width">
                             <mat-label>Filter<span class="red">*</span></mat-label>
 
-                            <mat-select placeholder="Filter" [(ngModel)]="filterBy"
+                            <mat-select placeholder="Filter" [(ngModel)]="status"
                                 (selectionChange)="filterSelected($event)">
                                 <mat-option *ngIf="flag==true" value="">
                                     Remove Filter
                                 </mat-option>
-                                <!--  <mat-option *ngIf="flag==false" value="">
+                                <mat-option value='new'>
+                                    New
+                                </mat-option>
+                                <mat-option value='onTheWay'>
+                                    On The Way
+                                </mat-option>
+                                <mat-option value='ready'>
+                                    Ready
+                                </mat-option>
+                                <mat-option value='completed'>
+                                    Completed
+                                </mat-option>
+                                <mat-option value='cancelled'>
+                                    Cancelled
+                                </mat-option>
+                                <mat-option value='preparing'>
+                                    Preparing
+                                </mat-option>
+                                <mat-option value='ready'>
+                                    Ready
+                                </mat-option>
+                                <mat-option value='rejected'>
+                                    Rejected
+                                </mat-option>
 
-                    </mat-option> -->
-                                <mat-option value="active">
-                                    Active
-                                </mat-option>
-                                <mat-option value="inactive">
-                                    Inactive
-                                </mat-option>
 
                             </mat-select>
                         </mat-form-field>
@@ -36,7 +52,7 @@
                                 </mat-form-field>
                                 <button mat-button matSuffix mat-icon-button> <i
                                         *ngIf="flagSearch==true" class="fa fa-search" aria-hidden="true"
-                                        (click)="searchMethod()"></i>
+                                        (click)="searchSubmit()"></i>
                                     <i *ngIf="flagSearch==false" class="fa fa-times" aria-hidden="true"
                                         (click)="clearSearch()"></i>
                                 </button>
@@ -48,76 +64,44 @@
                 <div class="table-responsive">
                     <table>
                         <tr>
+                            <th>Sr.no</th>
                             <th>Order Id</th>
-                            <th>Customer Name</th>
-                            <th>Customer Email</th>
-                            <!-- <th>Customer Contact</th> -->
-                            <th>Total Price</th>
-
-                            <th>Order Items</th>
-
-                            <th>Booking Status</th>
-                            <th>Booking Address</th>
-                            <th>Booking Notes</th>
-                            <th>Expected Time</th>
-                            <th *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.orderList.write==true)" class="action_bx">Assign Vendor</th>
+                            <th>Food </th>
+                            <th>Price</th>
+                            <th>User Address</th>
+                            <th>Vendor</th>
+                            <th>Order Date</th>
+                            <th>Delivery Time</th>
+                            <th>Status</th>
+                            <!-- <th class="action_bx">Action</th> -->
                         </tr>
-                        <tr *ngFor="let item of salesList; let i=index">
-                            <td>{{item._id}}</td>
-                            <td>{{item.orderDetails[0]?.name}}</td>
-                            <td>{{item.orderDetails[0]?.email}}</td>
-                            <td>{{item.orderDetails[0]?.totalAmount| number}}</td>
+                        <tr *ngFor="let item of orderHistoryList; index as i ">
+                            <td *ngIf="flagUserList==false">{{i+1}}</td>
+                            <td *ngIf="flagUserList==true">{{srNo+i+1}}</td>
+                            <td>{{item?._id}}</td>
                             <td>
-                                <ul>
-                                    <li class="show" *ngFor="let orderProduct of item.orderDetails">
-                                        {{orderProduct?.product?.name}}<br>
-                                    </li>
-
-                                </ul>
+                                <table style="max-width: 100%;" >
+                                    <tr>
+                                        <th>Food Name</th>
+                                        <th>Purchase Quantity</th>
+                                    </tr>
+                                    <tr *ngFor="let item2 of item.orderDetails">
+                                        <td>{{item2?.product?.name}}</td>
+                                        <td>{{item2?.product?.purchaseQuantity}}</td>
+                                    </tr>
+                                </table>
                             </td>
-                            <td class="Booking_status">
-                                <div *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.orderList.write==true);else elseBlock">
-                                    <select [(ngModel)]="item.orderDetails[0].isapproval"
-                                    (change)="approveReject($event.target.value,item._id)">
+                            <td>{{item?.orderDetails[0].totalAmount | number}}</td>
 
-                                    <option value=""></option>
-                                    <option value="true">ConFirm</option>
-                                    <option value="false">Cancel</option>
-
-                                </select>
-                                </div>
-                                <ng-template #elseBlock>
-                                    {{item.orderDetails[0].isapproval==true?'Confirm':'Cancel'}}
-                                </ng-template>
-                              
+                            <td>{{item?.orderDetails[0].deliveryAddress?.address}},{{item?.orderDetails[0].deliveryAddress?.streetName}}{{item?.orderDetails[0].deliveryAddress?.postalCode}}
                             </td>
-                            <td> {{item.orderDetails[0].deliveryAddress?.address }}
-                                {{item.orderDetails[0].deliveryAddress?.streetName}}
-                                {{item.orderDetails[0].deliveryAddress?.postalCode}}</td>
-                            <td>
-                                {{item.orderDetails[0].deliveryAddress?.noteToDriver }}
+                            <td>{{item?.orderDetails[0].seller?.fullName}}</td>
+                            <td>{{item?.orderDetails[0].createdAt | date}}</td>
+                            <td>{{item?.orderDetails[0].deliveryTime}}Min</td>
+                            <td>{{item?.orderDetails[0].status}}
                             </td>
-
-                            <td>{{item.orderDetails[0]?.startTIME | date}}-{{item.orderDetails[0]?.endTime | date}}
-                            </td>
-
-
-                            <td *ngIf="user.roles=='admin' || (user.roles=='subAdmin' && user.permissions.orderList.write==true)" class="Booking_status">
-                                <select [(ngModel)]="item.orderDetails[0].vendorId"
-                                    (change)="AssignVendor($event.target.value,item._id)">
-                                    <option value=""></option>
-                                    <option [value]="item.id" *ngFor="let item of vendorList">
-                                        {{item.name}} </option>
-
-                                </select>
-                            </td>
-
-
-
-
+                        
                         </tr>
-
-
 
 
                     </table>
@@ -126,7 +110,7 @@
             </div>
             <!-----start pagination-->
             <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
-                (page)="pageEvent = productListAfterPageSizeChanged($event)">
+                (page)="pageEvent = orderHistoryListAfterPageSizeChanged($event)">
             </mat-paginator>
             <!-----end pagination-->
         </div>

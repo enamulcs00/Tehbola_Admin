@@ -693,9 +693,20 @@ export class ApiService {
     )
   }
 
-  viewPurchaseHistory(page, count, id,filter,filterBy ,search) {
+  viewPurchaseHistory(page, count, id,filter,filterBy ,search,startDate,endDate) {
+
     console.log(id);
-    return this.http.get<any>(`${this.apiEndPoints.viewOrderHistory}?page=${page}&count=${count}&user=${id}&search=${search}&filter=${filter}&status=${filterBy}`,
+    let body={
+      page:page,
+      count:count,
+      user:id,
+      search:search,
+      filter:filter,
+      status:filterBy,
+      startDate:startDate,
+      endDate:endDate
+    }
+    return this.http.post<any>(this.apiEndPoints.viewOrderHistory ,body,
       this.getHeaders()
     ).pipe(
       catchError(this.handleError<any>('No user'))

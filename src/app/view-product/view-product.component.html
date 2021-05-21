@@ -254,7 +254,7 @@
                             </div>
                         </div>
 
-                        <div class="row mt-3">
+                        <!-- <div class="row mt-3">
                             <div class="col-6">
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Highlights</mat-label>
@@ -275,7 +275,7 @@
 
                                 </mat-form-field>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="row mt-3">
                             <div class="col-12">
@@ -308,10 +308,31 @@
                                             </mat-form-field>
                                         </td>
                                         <td style="width: 40%;">
-                                            <mat-form-field class="example-full-width">
-                                                <mat-label> Quantity:</mat-label>
-                                                <input matInput type="number" min="0" formControlName="quantity">
-                                            </mat-form-field>
+                                            <div formArrayName="size">
+                                                <div *ngFor="let item of  quantity.get('size').controls; let j=index"
+                                                    [formGroupName]="j">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <mat-form-field class="example-full-width">
+                                                                <mat-label> Size:</mat-label>
+                                                                <mat-select formControlName="id" [disabled]=true>
+                                                                    <mat-option *ngFor="let body of sizeList"
+                                                                        [value]="body.id">
+                                                                        {{body.name}}
+                                                                    </mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <mat-form-field class="example-full-width">
+                                                                <mat-label> Quantity:</mat-label>
+                                                                <input matInput type="number" min="0"
+                                                                    formControlName="rawitemSizeQuantity">
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td style="width: 20%;">
                                             <!-- <button class="btn_grey" (click)="removeSpecification(i)">Remove</button> -->

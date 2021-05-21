@@ -120,6 +120,8 @@ export class DashboardComponent implements OnInit {
   orderHistoryList: any;
   id: any='';
   filter: any='currentSales';
+  startDate: any='';
+  endDate: any='';
   constructor(private router: Router, private apiService: ApiService, private commonService:CommonService) {
     this.type = "timeseries";
     this.width = "100%";
@@ -189,7 +191,7 @@ export class DashboardComponent implements OnInit {
 
 
   getbookingHistory() {
-    this.apiService.viewPurchaseHistory(this.page, this.pageSize, this.id,this.filter,this.filterBy ,this.search).subscribe((res) => {
+    this.apiService.viewPurchaseHistory(this.page, this.pageSize, this.id,this.filter,this.filterBy ,this.search,this.startDate,this.endDate).subscribe((res) => {
       if (res.success) {
         if (res.data.length > 0) {
           this.flagData = false

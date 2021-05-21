@@ -38,160 +38,54 @@ export class DailyorderComponent implements OnInit {
   search: string = '';
   salesList = []
   status: number
-  flagSearch: boolean = true;
+ // flagSearch: boolean = true;
   flagData: any;
   flag: any
-  flagUserList: boolean;
+  flagUserList: boolean=false;
   srNo: number;
   progress: boolean;
   vendorList = [];
   user: any;
+  id: any='';
+  filter: any='';
+  startDate: any='';
+  endDate: any='';
+  orderHistoryList: any='';
   constructor(private router: Router, private apiService: ApiService, private commonService: CommonService) {
     this.user = JSON.parse(this.apiService.getUser())
   }
 
   ngOnInit() {
-    this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
-    this.getAssignmentdata()
+   this.getbookingHistory()
   }
 
 
 
-  getAssignmentdata() {
-    this.progress = true;
-    this.apiService.getAssignementData().subscribe(res => {
+   
+  getbookingHistory() {
 
-
-
-      this.progress = false
+    this.apiService.viewPurchaseHistory(this.page, this.pageSize, this.id, this.filter, this.status, this.search,this.startDate,this.endDate).subscribe((res) => {
+   
       if (res.success) {
-        res.data.vendor.forEach(element => {
-          this.vendorList.push(
-            {
-              id: element._id,
-              name: element.fullName
-            })
-        });
-
-        console.log(this.vendorList);
-
-
+        if (res.data.length > 0) {
+          this.flagData = false
+          this.orderHistoryList = res.data
+          this.length = res.total
+        } else {
+          this.flagData = true
+        }
       } else {
         this.commonService.errorToast(res.message)
       }
-
-    })
+    });
   }
 
 
-  approveReject(e, id) {
 
-    let body = {
-      'orderId': id
-    }
-    console.log(e);
-    if (e === 'true') {
+ 
 
-      this.apiService.approveEvent(body).subscribe(res => {
-        console.log(res);
-        this.commonService.successToast(res.message)
-        this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
-      })
-    } else if (e === 'false') {
-      this.apiService.declineEvent(body).subscribe(res => {
-        console.log(res);
-        this.commonService.successToast(res.message)
-        this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
-      })
-    }
+  orderHistoryListAfterPageSizeChanged(e): any {
 
-
-
-  }
-
-
-  AssignVendor(e, id) {
-
-    let body = {
-      'orderId': id,
-      'vendorId': e
-    }
-    console.log(body);
-
-
-    this.apiService.assignVendor(body).subscribe(res => {
-      console.log(res);
-      this.commonService.successToast(res.message)
-      this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
-    })
-  }
-
-  getSaleslist(page, pageSize, search, filterBy) {
-
-    let body = {
-      page: page,
-      search: search,
-      count: pageSize
-    }
-    this.apiService.getSaleList(body).subscribe(res => {
-      console.log(res)
-      if (res.success) {
-        this.flagData = false
-        this.salesList = res.data;
-        this.length = res.data.length
-      } else {
-        this.flagData = true
-      }
-    })
-
-  }
-
-  filterSelected(e) {
-    console.log(e);
-    if (this.filterBy) {
-      this.flag = true
-    }
-    else {
-      this.flag = false
-    }
-    console.log(e.target.value);
-    this.filterBy = e.target.value
-    this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
-
-  }
-
-  searchMethod() {
-    this.flagSearch = false
-
-    this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
-  }
-  clearSearch() {
-    this.flagSearch = true
-    this.search = ''
-    this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
-  }
-  statusChanged(value, id) {
-    console.log("value", value, "ID", id);
-    let body = {
-      id: id,
-      status: value
-    }
-    this.apiService.updateStatus(body).subscribe(res => {
-      console.log(res);
-      if (res.success) {
-        this.commonService.successToast('Updated Succesfully')
-        this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
-      } else {
-        this.commonService.errorToast('Error: Please Try again  after some time')
-        this.getSaleslist(this.page, this.pageSize, this.search, this.filterBy)
-      }
-    })
-
-  }
-
-  productListAfterPageSizeChanged(e): any {
-
-    console.log(e)
     if (e.pageIndex == 0) {
       this.page = 1;
       // this.page = e.pageIndex;
@@ -209,11 +103,38 @@ export class DailyorderComponent implements OnInit {
       }
 
     }
-    this.getSaleslist(this.page, e.pageSize, this.search, this.filterBy)
+    this.getbookingHistory()
+
+  }
+
+  flagSearch: boolean = true
+  searchSubmit() {
+    this.flagSearch = false
+    this.getbookingHistory()
+
   }
 
 
+  clearSearch() {
+    this.search = ''
+    this.flagSearch = true
+    this.getbookingHistory()
 
+
+  }
+
+
+  filterSelected(e) {
+    if (this.status) {
+      this.flag = true
+    }
+    else {
+      this.flag = false
+    }
+
+   this.getbookingHistory()     
+
+  }
 
 
 
