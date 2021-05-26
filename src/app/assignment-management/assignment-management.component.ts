@@ -151,6 +151,7 @@ export class AssignmentManagementComponent implements OnInit {
 
   }
   defaultRawItemList = this.rawItemList
+  
   rawItemSearch(value) {
 
 
