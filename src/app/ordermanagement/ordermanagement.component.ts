@@ -82,22 +82,22 @@ export class OrdermanagementComponent implements OnInit {
   }
 
   
-  getbookingHistory() {
+  // getbookingHistory() {
 
-    this.apiService.viewPurchaseHistory(this.page, this.pageSize, this.id, this.filter, this.status, this.search,this.startDate,this.endDate).subscribe((res) => {
-      if (res.success) {
-        if (res.data.length > 0) {
-          this.flagData = false
-          this.orderHistoryList = res.data
-          this.length = res.total
-        } else {
-          this.flagData = true
-        }
-      } else {
-        this.commonService.errorToast(res.message)
-      }
-    });
-  }
+  //   this.apiService.viewPurchaseHistory(this.page, this.pageSize, this.id, this.filter, this.status, this.search,this.startDate,this.endDate).subscribe((res) => {
+  //     if (res.success) {
+  //       if (res.data.length > 0) {
+  //         this.flagData = false
+  //         this.orderHistoryList = res.data
+  //         this.length = res.total
+  //       } else {
+  //         this.flagData = true
+  //       }
+  //     } else {
+  //       this.commonService.errorToast(res.message)
+  //     }
+  //   });
+  // }
 
 
   approveReject(e, id) {
@@ -154,7 +154,7 @@ export class OrdermanagementComponent implements OnInit {
       if (res.success) {
         this.flagData = false
         this.salesList = res.data;
-        this.length = res.data.length
+        this.length = res.total
       } else {
         this.flagData = true
       }
