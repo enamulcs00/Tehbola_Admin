@@ -231,7 +231,7 @@ export class FoodTruckManagementComponent implements OnInit {
 
     let body
     let temp = id
-    for (let i = 0; i <= this.foodTruckList.length; i++) {
+    for (let i = 0; i < this.foodTruckList.length; i++) {
       if (this.foodTruckList[i]._id == temp) {
         if (status == 1) {
           body = {
