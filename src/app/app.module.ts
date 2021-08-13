@@ -77,7 +77,7 @@ import { ConsumerprivacypolicyComponent } from './consumerprivacypolicy/consumer
 import { WarrantypolicyComponent } from './warrantypolicy/warrantypolicy.component';
 import { ToastrModule } from "ng6-toastr-notifications";
 import { HttpClientModule, HttpClient } from '@angular/common/http'
-import { DatePipe } from '@angular/common';
+import { DatePipe, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { DeliveryAddressComponent } from './delivery-address/delivery-address.component';
 import * as moment from 'moment';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
@@ -236,7 +236,9 @@ import { SubAdminListComponent } from './sub-admin/sub-admin-list/sub-admin-list
     NgMultiSelectDropDownModule.forRoot(),
 
   ],
-  providers: [DatePipe, NotificationService],
+  providers: [DatePipe, NotificationService,
+    {provide: LocationStrategy, useClass: HashLocationStrategy} 
+  ],
   bootstrap: [AppComponent],
   entryComponents: [
     ModalIngredientsComponent

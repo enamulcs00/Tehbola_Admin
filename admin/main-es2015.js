@@ -4769,7 +4769,9 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             ng_otp_input__WEBPACK_IMPORTED_MODULE_92__["NgOtpInputModule"],
             ng_multiselect_dropdown__WEBPACK_IMPORTED_MODULE_81__["NgMultiSelectDropDownModule"].forRoot(),
         ],
-        providers: [_angular_common__WEBPACK_IMPORTED_MODULE_79__["DatePipe"], src_services_notification_service__WEBPACK_IMPORTED_MODULE_87__["NotificationService"]],
+        providers: [_angular_common__WEBPACK_IMPORTED_MODULE_79__["DatePipe"], src_services_notification_service__WEBPACK_IMPORTED_MODULE_87__["NotificationService"],
+            { provide: _angular_common__WEBPACK_IMPORTED_MODULE_79__["LocationStrategy"], useClass: _angular_common__WEBPACK_IMPORTED_MODULE_79__["HashLocationStrategy"] }
+        ],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]],
         entryComponents: [
             _modal_modal_ingredients_modal_ingredients_component__WEBPACK_IMPORTED_MODULE_105__["ModalIngredientsComponent"]
