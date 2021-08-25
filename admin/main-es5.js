@@ -28617,11 +28617,11 @@
     "./node_modules/@angular/core/fesm2015/core.js");
 
     let UrlService = class UrlService {
+      // SERVER_URL = "https://api.tehbola.my"
       constructor() {
         this.baseUrl = "";
-        this.imageUrl = "https://test.webdevelopmentsolution.net:9085/"; // SERVER_URL = "https://test.webdevelopmentsolution.net:9085"
-
-        this.SERVER_URL = "https://api.tehbola.my";
+        this.imageUrl = "https://test.webdevelopmentsolution.net:9085/";
+        this.SERVER_URL = "https://test.webdevelopmentsolution.net:9085";
         this.login = "".concat(this.baseUrl, "/login");
       }
 

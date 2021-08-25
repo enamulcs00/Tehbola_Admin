@@ -20868,11 +20868,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let UrlService = class UrlService {
+    // SERVER_URL = "https://api.tehbola.my"
     constructor() {
         this.baseUrl = "";
         this.imageUrl = "https://test.webdevelopmentsolution.net:9085/";
-        // SERVER_URL = "https://test.webdevelopmentsolution.net:9085"
-        this.SERVER_URL = "https://api.tehbola.my";
+        this.SERVER_URL = "https://test.webdevelopmentsolution.net:9085";
         this.login = `${this.baseUrl}/login`;
     }
 };
