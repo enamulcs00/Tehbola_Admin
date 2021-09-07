@@ -128,6 +128,7 @@ export class CategoryComponent implements OnInit {
   
   async subCategoryPic(event) {
     if (event.target.files && event.target.files[0]) {
+      this.picUploader =true
       this.imageFile = event.target.files[0];
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);

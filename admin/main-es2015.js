@@ -5879,6 +5879,7 @@ let CategoryComponent = class CategoryComponent {
     subCategoryPic(event) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             if (event.target.files && event.target.files[0]) {
+                this.picUploader = true;
                 this.imageFile = event.target.files[0];
                 var reader = new FileReader();
                 reader.readAsDataURL(event.target.files[0]);
@@ -20868,11 +20869,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let UrlService = class UrlService {
-    // SERVER_URL = "https://api.tehbola.my"
     constructor() {
         this.baseUrl = "";
-        this.imageUrl = "https://test.webdevelopmentsolution.net:9085/";
-        this.SERVER_URL = "https://test.webdevelopmentsolution.net:9085";
+        //  imageUrl = "https://test.webdevelopmentsolution.net:9085/";
+        //   SERVER_URL = "https://test.webdevelopmentsolution.net:9085"
+        this.imageUrl = "https://api.tehbola.my";
+        this.SERVER_URL = "https://api.tehbola.my";
         this.login = `${this.baseUrl}/login`;
     }
 };

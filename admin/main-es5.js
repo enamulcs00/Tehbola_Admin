@@ -8541,6 +8541,7 @@
             while (1) switch (_context4.prev = _context4.next) {
               case 0:
                 if (event.target.files && event.target.files[0]) {
+                  this.picUploader = true;
                   this.imageFile = event.target.files[0];
                   reader = new FileReader();
                   reader.readAsDataURL(event.target.files[0]);
@@ -28617,11 +28618,12 @@
     "./node_modules/@angular/core/fesm2015/core.js");
 
     let UrlService = class UrlService {
-      // SERVER_URL = "https://api.tehbola.my"
       constructor() {
-        this.baseUrl = "";
-        this.imageUrl = "https://test.webdevelopmentsolution.net:9085/";
-        this.SERVER_URL = "https://test.webdevelopmentsolution.net:9085";
+        this.baseUrl = ""; //  imageUrl = "https://test.webdevelopmentsolution.net:9085/";
+        //   SERVER_URL = "https://test.webdevelopmentsolution.net:9085"
+
+        this.imageUrl = "https://api.tehbola.my";
+        this.SERVER_URL = "https://api.tehbola.my";
         this.login = "".concat(this.baseUrl, "/login");
       }
 
