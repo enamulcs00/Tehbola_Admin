@@ -28618,12 +28618,12 @@
     "./node_modules/@angular/core/fesm2015/core.js");
 
     let UrlService = class UrlService {
+      // imageUrl = "https://api.tehbola.my"
+      // SERVER_URL = "https://api.tehbola.my"
       constructor() {
-        this.baseUrl = ""; //  imageUrl = "https://test.webdevelopmentsolution.net:9085/";
-        //   SERVER_URL = "https://test.webdevelopmentsolution.net:9085"
-
-        this.imageUrl = "https://api.tehbola.my";
-        this.SERVER_URL = "https://api.tehbola.my";
+        this.baseUrl = "";
+        this.imageUrl = "https://test.webdevelopmentsolution.net:9085/";
+        this.SERVER_URL = "https://test.webdevelopmentsolution.net:9085";
         this.login = "".concat(this.baseUrl, "/login");
       }
 
